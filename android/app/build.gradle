@@ -1,6 +1,5 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
-apply plugin: "de.nanogiants.android-versioning"
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 /**
@@ -81,8 +80,8 @@ android {
         setProperty("archivesBaseName", "OpenDTUApp")
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode = versioning.getVersionCode()
-        versionName = versioning.getVersionName()
+        versionCode 1
+        versionName "0.0.1"
     }
     signingConfigs {
         debug {
