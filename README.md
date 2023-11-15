@@ -11,3 +11,6 @@ I am a OpenDTU user, but I am not affiliated with the original project. However,
 ### Testing
 Stuff that I cannot test myself
 - [ ] Multi-Inverter per DTU
+
+### Devnotes
+- Use `yarn version --patch` to bump version
