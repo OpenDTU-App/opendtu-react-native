@@ -1,0 +1,124 @@
+{
+    "configureGraphs":{
+        "title": "Configure Graphs"
+    },
+    "livedata": {
+        "configureGraphs": "Configure Graphs",
+        "changeTimerangeAndRefreshInterval": "Change time-range and refresh interval",
+        "hintsWarning": "There are some problems with your OpenDTU! Click here to view them.",
+        "todaysYield": "Today's Yield",
+        "power": "Power"
+    },
+    "device": {
+        "deviceName": "Device Name",
+        "changeTheDeviceName": "Change the Device Name?"
+    },
+    "reset": "Reset",
+    "cancel": "Cancel",
+    "rename": "Rename",
+    "database": {
+        "addANewDatabase": "Add a new database",
+        "name": "Name",
+        "baseUrl": "Base URL",
+        "username": "Username",
+        "password": "Password"
+    },
+    "add": "Add",
+    "about": "About",
+    "aboutApp": {
+        "projectHint": "This app is not affiliated with the OpenDTU project. If you find any bugs, please report them on the GitHub page.",
+        "viewOnGithub": "View on GitHub"
+    },
+    "charts": {
+        "acPower": "AC Power",
+        "dcVoltage": "DC Voltage",
+        "acVoltage": "AC Voltage",
+        "acCurrent": "AC Current",
+        "minMaxAvg": "min: {{min}} {{unit}} max: {{max}} {{unit}} avg: {{avg}} {{unit}}",
+        "noDatabaseConfigured": "No database configured",
+        "noDatabaseConfiguredDescription": "To see charts, configure and assign a database to your DTU."
+    },
+    "setup": {
+        "setupComplete": "Setup complete! \uD83C\uDF89",
+        "goToDashboard": "Go to dashboard",
+        "authenticateOpendtuInstance": "Authenticate OpenDTU instance",
+        "username": "Username",
+        "placeholder": {
+            "username": "admin"
+        },
+        "password": "Password",
+        "login": "Login",
+        "addOpendtuInstance": "Add OpenDTU Instance",
+        "opendtuAddress": "OpenDTU Address",
+        "instancesInYourNetwork": "Instances in your network",
+        "connect": "Connect"
+    },
+    "settings": {
+        "general": "General",
+        "theme": "Theme",
+        "themeDescription": "Change the theme of the app",
+        "language": "Language",
+        "languageDescription": "Change the language of the app",
+        "about": "About",
+        "aboutDescription": "Licenses \u2022 Version \u2022 Other information",
+        "selectDatabase": "Select Database",
+        "changeTheTheme": "Change the Theme?",
+        "changeTheLanguage": "Change the Language?",
+        "doYouWantToDeleteThisConfig": "Do you want to delete this config?",
+        "changeTheServerUrl": "Change the Server URL?",
+        "serverUrl": "Server URL",
+        "manageDatabase": "Manage database {{name}}"
+    },
+    "mdns": {
+        "scanning": "Scanning...",
+        "noDevicesFound": "No devices found"
+    },
+    "none": "None",
+    "themes": {
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+    },
+    "change": "Change",
+    "languages": {
+        "english": "English",
+        "german": "Deutsch"
+    },
+    "delete": "Delete",
+    "deviceOfflineWrapper": {
+        "connecting": "Connecting...",
+        "pleaseWait": "Please wait while we try to connect to the device.",
+        "openDeviceList": "Open Device List",
+        "deviceOffline": "Device Offline",
+        "checkIfReachable": "Please check that the device is reachable. As soon as it is reachable, we will automatically reconnect."
+    },
+    "save": "Save",
+    "deviceList": {
+        "devices": "Devices"
+    },
+    "deviceSettings": {
+        "title": "Device Settings",
+        "general": "General",
+        "status": "Status: {{status}}",
+        "serverUrl": "Server URL: {{url}}",
+        "deviceName": "Device Name: {{name}}",
+        "serialNumber": "Serial Number: {{serialNumber}}",
+        "username": "Username: {{username}}",
+        "hints": "Hints",
+        "hint": {
+            "defaultPassword": "You are using the default password for the web interface and the emergency access point. This is potentially insecure.",
+            "timeSync": "The clock has not yet been synchronised. Without a correctly set clock, no requests are made to the inverter. This is normal shortly after the start. However, after a longer runtime (&gt;1 minute), it indicates that the NTP server is not accessible.",
+            "radioProblem": "Could not connect to a configured radio module. Please check the wiring."
+        },
+        "details": "Details",
+        "configureDeviceName": "Device name",
+        "configureServerUrl": "Server URL",
+        "configureDatabase": "Database Config"
+    },
+    "manageDatabases": {
+        "databases": "Databases",
+        "noDatabasesConfigured": "No databases configured",
+        "noDatabasesConfiguredHint": "It looks like you haven't configured any databases yet. Click the plus button to add one!",
+        "addDatabase": "Add Database"
+    }
+}

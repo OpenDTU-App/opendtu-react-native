@@ -1,0 +1,106 @@
+{
+  "env": {
+    "node": true,
+    "react-native/react-native": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:react-hooks/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "no-relative-import-paths",
+    "react",
+    "react-native",
+    "react-hooks",
+    "prettier"
+  ],
+  "rules": {
+    "no-relative-import-paths/no-relative-import-paths": [
+      "warn",
+      { "allowSameFolder": true, "rootDir": "src" }
+    ],
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react-native/no-unused-styles": 2,
+    "react/jsx-closing-bracket-location": ["warn", "tag-aligned"],
+    "react/jsx-closing-tag-location": ["warn", "tag-aligned"],
+    "react/jsx-curly-brace-presence": [
+      "warn",
+      {
+        "props": "never",
+        "children": "never"
+      }
+    ],
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": ["error"],
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        "prefer": "type-imports"
+      }
+    ],
+    "no-console": 0,
+    "indent": "off",
+    "no-duplicate-imports": "off",
+    "@typescript-eslint/no-duplicate-imports": ["error"],
+    "quotes": [
+      "error",
+      "single",
+      { "avoidEscape": true, "allowTemplateLiterals": true }
+    ],
+    "@typescript-eslint/quotes": "off",
+    "semi": [
+      "error",
+      "always"
+    ],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "only-multiline",
+        "objects": "only-multiline",
+        "imports": "only-multiline",
+        "exports": "only-multiline",
+        "functions": "only-multiline"
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "printWidth": 80,
+        "tabWidth": 2,
+        "useTabs": false,
+        "semi": true,
+        "jsxSingleQuote": false,
+        "bracketSpacing": true,
+        "arrowParens": "avoid",
+        "bracketSameLine": false,
+        "endOfLine": "lf",
+        "importOrder": [
+          "^react",
+          "^react-native$",
+          "^@/slices",
+          "^@/types",
+          "^@/components",
+          "^@/hooks",
+          "^@/utils",
+          "^@/assets",
+          "^[./]",
+          "^@/"
+        ],
+        "importOrderSeparation": true
+      }
+    ]
+  }
+}

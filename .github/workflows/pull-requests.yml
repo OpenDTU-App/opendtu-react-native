@@ -1,0 +1,82 @@
+name: Android Dev Build
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  android-build:
+    name: Android Build for Dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Fetch all tags
+        run: git fetch --tags
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3.12.0
+        with:
+          java-version: 11
+          distribution: 'adopt'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: |
+          echo "{dir}={$(yarn cache dir)}" >> $GITHUB_OUTPUT
+          echo "::set-output name=dir::{$(yarn cache dir)}"
+          cat $GITHUB_OUTPUT
+
+      - name: Restore node_modules from cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/android/gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/android/build.gradle') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-caches-
+
+      - name: Cache React Native Android Build
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./android/.gradle
+            ./android/app/build
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/android/app/build.gradle') }}
+          restore-keys:
+            ${{ runner.os }}-gradle-caches-
+
+      - name: Make Gradlew executable
+        run: cd android && chmod +x ./gradlew
+
+      - name: Build Android Dev
+        run: |
+          cd android && ./gradlew assembleRelease --no-daemon
+
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: opendtu-app
+          path: android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error

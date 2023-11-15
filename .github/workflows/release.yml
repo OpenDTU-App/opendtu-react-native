@@ -1,0 +1,102 @@
+name: Android Release Build
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  android-build:
+    name: Android Build for Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Fetch all tags
+        run: git fetch --tags
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3.12.0
+        with:
+          java-version: 11
+          distribution: 'adopt'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: |
+          echo "{dir}={$(yarn cache dir)}" >> $GITHUB_OUTPUT
+          echo "::set-output name=dir::{$(yarn cache dir)}"
+          cat $GITHUB_OUTPUT
+
+      - name: Restore node_modules from cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/android/gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/android/build.gradle') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-caches-
+
+      - name: Cache React Native Android Build
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./android/.gradle
+            ./android/app/build
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/android/app/build.gradle') }}
+          restore-keys:
+            ${{ runner.os }}-gradle-caches-
+
+      - name: Make Gradlew executable
+        run: cd android && chmod +x ./gradlew
+
+      - name: Build Android
+        run: |
+          cd android && ./gradlew bundleRelease --no-daemon --info 
+          
+
+      - name: Sign App Bundle
+        id: sign_app
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: android/app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
+          alias: ${{ secrets.ANDROID_SIGNING_ALIAS }}
+          keyStorePassword: ${{ secrets.ANDROID_SIGNING_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}
+
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: opendtu-app
+          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+          if-no-files-found: error
+
+      # skip release creation if this is not a tag push
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          generate_release_notes: true
+          prerelease: false
+          files: ${{steps.sign_app.outputs.signedReleaseFile}}
