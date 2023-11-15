@@ -68,5 +68,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: opendtu-app
-          path: android/app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
+          path: android/app/build/outputs/apk/release/*.apk
+
