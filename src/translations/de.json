@@ -1,1 +1,124 @@
-{}
+{
+    "livedata": {
+        "changeTimerangeAndRefreshInterval": "Zeitbereich und Aktualisierungsintervall ändern",
+        "configureGraphs": "Graphen konfigurieren",
+        "hintsWarning": "Es gibt einige Probleme mit deiner OpenDTU! Klicke hier, um sie anzuzeigen.",
+        "todaysYield": "Heutiger Ertrag",
+        "power": "Leistung"
+    },
+    "deviceSettings": {
+        "hint": {
+            "defaultPassword": "Du verwendest das Standardpasswort für die Weboberfläche und den Notfallzugangspunkt. Dies ist potenziell unsicher.",
+            "timeSync": "Die Uhr wurde noch nicht synchronisiert. Ohne korrekt eingestellte Uhr werden keine Anfragen an den Wechselrichter gestellt. Das ist kurz nach dem Start normal. Nach einer längeren Laufzeit (&gt;1 Minute) wird jedoch angezeigt, dass der NTP-Server nicht erreichbar ist.",
+            "radioProblem": "Es konnte keine Verbindung zu einem konfigurierten Funkmodul hergestellt werden. Bitte überprüfe die Verkabelung."
+        },
+        "title": "Geräteeinstellungen",
+        "general": "Allgemein",
+        "status": "Status: {{status}}",
+        "serverUrl": "Server-URL: {{url}}",
+        "deviceName": "Gerätename: {{name}}",
+        "serialNumber": "Seriennummer: {{serialNumber}}",
+        "username": "Benutzer: {{username}}",
+        "hints": "Hinweise",
+        "details": "Details",
+        "configureDeviceName": "Gerätename",
+        "configureServerUrl": "Server-URL",
+        "configureDatabase": "Datenbank Konfiguration"
+    },
+    "aboutApp": {
+        "projectHint": "Diese App ist nicht mit dem OpenDTU-Projekt verbunden. Wenn du Fehler findest, melde diesen bitte auf der GitHub-Seite.",
+        "viewOnGithub": "Auf GitHub ansehen"
+    },
+    "charts": {
+        "noDatabaseConfiguredDescription": "Um Diagramme anzuzeigen, konfiguriere deine DTU und weise ihr eine Datenbank zu.",
+        "acPower": "AC Leistung",
+        "dcVoltage": "DC Spannung",
+        "acVoltage": "AC Spannung",
+        "acCurrent": "AC Strom",
+        "minMaxAvg": "min: {{min}} {{unit}} max: {{max}} {{unit}} avg: {{avg}} {{unit}}",
+        "noDatabaseConfigured": "Keine Datenbank konfiguriert"
+    },
+    "settings": {
+        "languageDescription": "App-Sprache ändern",
+        "changeTheTheme": "App-Theme ändern?",
+        "general": "Allgemein",
+        "theme": "Theme",
+        "themeDescription": "App-Theme ändern",
+        "language": "Sprache",
+        "about": "Über",
+        "aboutDescription": "Lizenzen • Version • Sonstige Informationen",
+        "selectDatabase": "Datenbank auswählen",
+        "changeTheLanguage": "App-Sprache ändern?",
+        "doYouWantToDeleteThisConfig": "Möchtest du diese Konfiguration löschen?",
+        "changeTheServerUrl": "Server-URL ändern?",
+        "serverUrl": "Server-URL",
+        "manageDatabase": "Datenbank {{name}} verwalten"
+    },
+    "configureGraphs": {
+        "title": "Graphen konfigurieren"
+    },
+    "device": {
+        "deviceName": "Gerätename",
+        "changeTheDeviceName": "Den Gerätenamen ändern?"
+    },
+    "reset": "Zurücksetzen",
+    "cancel": "Abbrechen",
+    "rename": "Umbenennen",
+    "database": {
+        "addANewDatabase": "Neue Datenbank hinzufügen",
+        "name": "Name",
+        "baseUrl": "URL-Basis",
+        "username": "Benutzer",
+        "password": "Passwort"
+    },
+    "add": "Hinzufügen",
+    "about": "Über",
+    "setup": {
+        "setupComplete": "Einrichtung abgeschlossen! 🎉",
+        "goToDashboard": "Dashboard öffnen",
+        "authenticateOpendtuInstance": "OpenDTU-Instanz authentifizieren",
+        "username": "Benutzer",
+        "placeholder": {
+            "username": "admin"
+        },
+        "password": "Passwort",
+        "login": "Anmelden",
+        "addOpendtuInstance": "OpenDTU-Instanz hinzufügen",
+        "opendtuAddress": "OpenDTU-Adresse",
+        "instancesInYourNetwork": "Instanzen im Netzwerk",
+        "connect": "Verbinden"
+    },
+    "manageDatabases": {
+        "noDatabasesConfiguredHint": "Anscheinend hast du noch keine Datenbanken konfiguriert. Klicke auf die Plus-Schaltfläche, um eine hinzuzufügen!",
+        "addDatabase": "Datenbank hinzufügen",
+        "databases": "Datenbanken",
+        "noDatabasesConfigured": "Keine Datenbank konfiguriert"
+    },
+    "mdns": {
+        "scanning": "Scannen...",
+        "noDevicesFound": "Keine Geräte gefunden"
+    },
+    "none": "Keine",
+    "themes": {
+        "light": "Hell",
+        "dark": "Dunkel",
+        "system": "System"
+    },
+    "change": "Ändern",
+    "languages": {
+        "english": "English",
+        "german": "Deutsch"
+    },
+    "delete": "Löschen",
+    "deviceOfflineWrapper": {
+        "connecting": "Verbinden...",
+        "pleaseWait": "Bitte warte, während wir versuchen, eine Verbindung zum Gerät herzustellen.",
+        "openDeviceList": "Geräteliste öffnen",
+        "deviceOffline": "Gerät nicht erreichbar",
+        "checkIfReachable": "Bitte prüfe, ob das Gerät erreichbar ist. Sobald es erreichbar ist, stellen wir die Verbindung automatisch wieder her."
+    },
+    "save": "Speichern",
+    "deviceList": {
+        "devices": "Geräte"
+    }
+}
