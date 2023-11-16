@@ -62,12 +62,7 @@ const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
             }
           >
             <RadioButton.Item label={t('languages.english')} value="en" />
-            <RadioButton.Item
-              // ToDo: Remove "disabled" once weblate works
-              disabled
-              label={t('languages.german')}
-              value="de"
-            />
+            <RadioButton.Item label={t('languages.german')} value="de" />
           </RadioButton.Group>
           <Box
             mt={16}
