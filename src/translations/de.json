@@ -120,5 +120,9 @@
     "save": "Speichern",
     "deviceList": {
         "devices": "Geräte"
+    },
+    "navigation": {
+        "livedata": "Livedaten",
+        "settings": "Einstellungen"
     }
 }

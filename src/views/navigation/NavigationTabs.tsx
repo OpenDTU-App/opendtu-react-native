@@ -1,5 +1,6 @@
 import type { ComponentProps, FC } from 'react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   BottomNavigation as BottomNavigationPaper,
   useTheme,
@@ -18,8 +19,10 @@ type BaseRoutes = ComponentProps<
 
 const BottomNavigation: FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const [index, setIndex] = useState<number>(0);
-  const [routes] = useState<BaseRoutes>([
+
+  /*const [routes] = useState<BaseRoutes>([
     {
       key: 'livedata',
       title: 'Livedata',
@@ -30,7 +33,23 @@ const BottomNavigation: FC = () => {
       title: 'Settings',
       focusedIcon: 'cog',
     },
-  ]);
+  ]);*/
+
+  const routes = useMemo<BaseRoutes>(
+    () => [
+      {
+        key: 'livedata',
+        title: t('navigation.livedata'),
+        focusedIcon: 'solar-power',
+      },
+      {
+        key: 'settings',
+        title: t('navigation.settings'),
+        focusedIcon: 'cog',
+      },
+    ],
+    [t],
+  );
 
   const renderScene = BottomNavigationPaper.SceneMap({
     livedata: LivedataRoute,

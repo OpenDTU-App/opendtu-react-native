@@ -120,5 +120,9 @@
         "noDatabasesConfigured": "No databases configured",
         "noDatabasesConfiguredHint": "It looks like you haven't configured any databases yet. Click the plus button to add one!",
         "addDatabase": "Add Database"
+    },
+    "navigation": {
+        "livedata": "Livedata",
+        "settings": "Settings"
     }
 }

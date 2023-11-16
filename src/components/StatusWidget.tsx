@@ -36,10 +36,13 @@ const StatusWidget: FC<StatusWidgetProps> = ({
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
+                justifyContent: 'space-between',
                 gap: 8,
               }}
             >
-              <Text variant="titleLarge">{title}</Text>
+              <Text variant="titleLarge" style={{ fontSize: 20 }}>
+                {title}
+              </Text>
               {icon ? <Icon size={iconSize ?? 20} source={icon} /> : null}
             </Box>
           ) : null}
