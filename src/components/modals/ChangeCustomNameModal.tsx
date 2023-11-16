@@ -7,7 +7,7 @@ import { Button, Portal, Text, useTheme } from 'react-native-paper';
 
 import { updateDtuCustomName } from '@/slices/settings';
 
-import StyledModal from '@/components/styled/StyledModal';
+import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
 import { useAppDispatch, useAppSelector } from '@/store';
@@ -60,15 +60,7 @@ const ChangeCustomNameModal: FC<ChangeCustomNameModalProps> = props => {
 
   return (
     <Portal>
-      <StyledModal
-        {...props}
-        contentContainerStyle={{
-          backgroundColor: theme.colors.elevation.level3,
-          padding: 8,
-          borderRadius: 28,
-          margin: 8,
-        }}
-      >
+      <BaseModal {...props}>
         <Box p={16}>
           <Box mb={8}>
             <Text variant="bodyLarge">{t('device.changeTheDeviceName')}</Text>
@@ -108,7 +100,7 @@ const ChangeCustomNameModal: FC<ChangeCustomNameModalProps> = props => {
             {t('rename')}
           </Button>
         </Box>
-      </StyledModal>
+      </BaseModal>
     </Portal>
   );
 };

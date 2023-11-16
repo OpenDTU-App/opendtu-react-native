@@ -3,26 +3,19 @@ import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import type { ModalProps } from 'react-native-paper';
-import {
-  Button,
-  Portal,
-  RadioButton,
-  Text,
-  useTheme,
-} from 'react-native-paper';
+import { Button, Portal, RadioButton, Text } from 'react-native-paper';
 
 import { setLanguage } from '@/slices/settings';
 
 import type { SettingsState } from '@/types/settings';
 
-import StyledModal from '@/components/styled/StyledModal';
+import BaseModal from '@/components/BaseModal';
 
 import { useAppDispatch, useAppSelector } from '@/store';
 
 const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
   const { onDismiss } = props;
   const dispatch = useAppDispatch();
-  const theme = useTheme();
   const { t } = useTranslation();
 
   const language = useAppSelector(state => state.settings.language);
@@ -42,15 +35,7 @@ const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
 
   return (
     <Portal>
-      <StyledModal
-        {...props}
-        contentContainerStyle={{
-          backgroundColor: theme.colors.surface,
-          padding: 8,
-          borderRadius: 24,
-          margin: 8,
-        }}
-      >
+      <BaseModal {...props}>
         <Box p={16}>
           <Box mb={8}>
             <Text variant="bodyLarge">{t('settings.changeTheLanguage')}</Text>
@@ -80,7 +65,7 @@ const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
             </Box>
           </Box>
         </Box>
-      </StyledModal>
+      </BaseModal>
     </Portal>
   );
 };

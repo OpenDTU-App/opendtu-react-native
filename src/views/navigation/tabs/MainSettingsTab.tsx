@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { FC } from 'react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import { List, useTheme } from 'react-native-paper';
 
@@ -12,7 +13,7 @@ import ChangeThemeModal from '@/components/modals/ChangeThemeModal';
 
 import { StyledSafeAreaView } from '@/style';
 
-const MainSettingsScreen: FC = () => {
+const MainSettingsTab: FC = () => {
   const navigation = useNavigation() as NavigationProp<ParamListBase>;
   const { t } = useTranslation();
 
@@ -37,27 +38,29 @@ const MainSettingsScreen: FC = () => {
   return (
     <StyledSafeAreaView theme={theme}>
       <Box style={{ width: '100%', flex: 1 }}>
-        <List.Section>
-          <List.Subheader>{t('settings.general')}</List.Subheader>
-          <List.Item
-            title={t('settings.theme')}
-            description={t('settings.themeDescription')}
-            left={props => <List.Icon {...props} icon="theme-light-dark" />}
-            onPress={openChangeThemeModal}
-          />
-          <List.Item
-            title={t('settings.language')}
-            description={t('settings.languageDescription')}
-            left={props => <List.Icon {...props} icon="translate" />}
-            onPress={openChangeLanguageModal}
-          />
-          <List.Item
-            title={t('settings.about')}
-            description={t('settings.aboutDescription')}
-            left={props => <List.Icon {...props} icon="information" />}
-            onPress={handleAbout}
-          />
-        </List.Section>
+        <ScrollView>
+          <List.Section>
+            <List.Subheader>{t('settings.general')}</List.Subheader>
+            <List.Item
+              title={t('settings.theme')}
+              description={t('settings.themeDescription')}
+              left={props => <List.Icon {...props} icon="theme-light-dark" />}
+              onPress={openChangeThemeModal}
+            />
+            <List.Item
+              title={t('settings.language')}
+              description={t('settings.languageDescription')}
+              left={props => <List.Icon {...props} icon="translate" />}
+              onPress={openChangeLanguageModal}
+            />
+            <List.Item
+              title={t('settings.about')}
+              description={t('settings.aboutDescription')}
+              left={props => <List.Icon {...props} icon="information" />}
+              onPress={handleAbout}
+            />
+          </List.Section>
+        </ScrollView>
       </Box>
       <ChangeThemeModal
         visible={showChangeThemeModal}
@@ -71,4 +74,4 @@ const MainSettingsScreen: FC = () => {
   );
 };
 
-export default MainSettingsScreen;
+export default MainSettingsTab;
