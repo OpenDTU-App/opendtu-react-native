@@ -19,7 +19,7 @@ jobs:
 
       - name: Run Lint
         run: |
-          yarn lint
+          yarn lint --max-warnings=0
 
       - name: Run test
         run: |
