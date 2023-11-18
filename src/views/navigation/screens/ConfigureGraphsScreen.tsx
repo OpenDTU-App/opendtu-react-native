@@ -268,6 +268,7 @@ const ConfigureGraphsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             <Divider style={{ marginVertical: 8 }} bold />
             <Box style={{ gap: 8, paddingVertical: 8 }}>
               <Button
+                mode="contained"
                 onPress={() => setOpenChangeGraphRefreshIntervalModal(true)}
               >
                 {t('configureGraphs.changeRefreshInterval')}

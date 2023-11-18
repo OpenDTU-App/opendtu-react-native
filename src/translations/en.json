@@ -9,7 +9,8 @@
         "setEndToNow": "Set end to now",
         "setLastNSeconds": "Set last N seconds",
         "changeRefreshInterval": "Change refresh interval",
-        "changeRefreshIntervalDescription": "Change the refresh interval of the graphs. This is the time between two data requests."
+        "changeRefreshIntervalDescription": "Change the refresh interval of the graphs. This is the time between two data requests.",
+        "presets": "Presets"
     },
     "livedata": {
         "configureGraphs": "Configure Graphs",

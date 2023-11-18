@@ -8,13 +8,12 @@ const BaseModal: FC<ModalProps> = ({ children, ...rest }) => {
     <Modal
       {...rest}
       contentContainerStyle={{
-        backgroundColor: theme.colors.elevation.level3,
+        backgroundColor: theme.colors.elevation.level4,
         padding: 8,
         borderRadius: 28,
         marginVertical: 8,
         marginHorizontal: 24,
       }}
-      style={{ backgroundColor: 'transparent' }}
     >
       {children}
     </Modal>

@@ -153,6 +153,7 @@
         "setEndToNow": "Endzeit auf jetzt setzen",
         "setLastNSeconds": "Zeitbereich auf letzten N Sekunden setzen",
         "changeRefreshInterval": "Aktualisierungsintervall ändern",
-        "changeRefreshIntervalDescription": "Ändere das Aktualisierungsintervall der Graphen. Dies ist die Zeit zwischen zwei Datenanfragen."
+        "changeRefreshIntervalDescription": "Ändere das Aktualisierungsintervall der Graphen. Dies ist die Zeit zwischen zwei Datenanfragen.",
+        "presets": "Voreinstellungen"
     }
 }
