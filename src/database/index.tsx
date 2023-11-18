@@ -303,6 +303,11 @@ const DatabaseProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
       throw new Error('Invalid database time range');
     }
 
+    // check if to is after from
+    if (to.getTime() < from.getTime()) {
+      throw new Error('Invalid database time range');
+    }
+
     const maxDataPoints = Dimensions.get('window').width;
 
     // calculate step size

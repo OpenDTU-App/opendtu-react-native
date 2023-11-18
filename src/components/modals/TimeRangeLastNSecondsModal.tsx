@@ -14,6 +14,20 @@ export interface TimeRangeLastNSecondsModalProps
   seconds?: number;
 }
 
+// seconds
+const Presets: Record<string, number> = {
+  '5m': 60 * 5,
+  '10m': 60 * 10,
+  '30m': 60 * 30,
+  '1h': 60 * 60,
+  '2h': 60 * 60 * 2,
+  '6h': 60 * 60 * 6,
+  '12h': 60 * 60 * 12,
+  '1d': 60 * 60 * 24,
+  '2d': 60 * 60 * 24 * 2,
+  '7d': 60 * 60 * 24 * 7,
+};
+
 const TimeRangeLastNSecondsModal: FC<TimeRangeLastNSecondsModalProps> = ({
   onConfirm,
   seconds,
@@ -60,6 +74,29 @@ const TimeRangeLastNSecondsModal: FC<TimeRangeLastNSecondsModalProps> = ({
             style={{ backgroundColor: theme.colors.elevation.level3 }}
             right={<StyledTextInput.Affix text="s" />}
           />
+          <Box mt={8}>
+            <Text variant="bodyMedium">{t('configureGraphs.presets')}</Text>
+            <Box
+              style={{
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+              }}
+            >
+              {Object.entries(Presets).map(([key, value]) => (
+                <Button
+                  key={key}
+                  onPress={() => setSecondsState(value.toString())}
+                  mode="contained-tonal"
+                  compact
+                  style={{ marginRight: 8, marginBottom: 8 }}
+                >
+                  {key}
+                </Button>
+              ))}
+            </Box>
+          </Box>
           <Box
             mt={16}
             style={{
