@@ -14,11 +14,18 @@ const DcVoltageChart: FC = () => {
       : undefined,
   );
 
+  const DcVoltageError = useAppSelector(state =>
+    state.database.data?.dcVoltage.success === true
+      ? undefined
+      : state.database.data?.dcVoltage.message,
+  );
+
   return (
     <UnifiedLineChart
       title={t('charts.dcVoltage')}
+      chartData={DcVoltage?.chartData}
+      error={DcVoltageError}
       unit="V"
-      data={DcVoltage?.data}
       yAxisOverride={{
         left: {
           valueFormatter: '##.## V',

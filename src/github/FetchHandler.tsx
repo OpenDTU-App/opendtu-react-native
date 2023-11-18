@@ -42,6 +42,8 @@ const FetchHandler: FC = () => {
           );
 
           dispatch(setLatestRelease({ latest: latestRelease.data as Release }));
+        } else {
+          console.log('SKIP latestReleaseRefetchOk');
         }
 
         if (allReleasesRefetchOk) {
@@ -51,6 +53,8 @@ const FetchHandler: FC = () => {
           );
 
           dispatch(setReleases({ releases: releases.data as Release[] }));
+        } else {
+          console.log('SKIP allReleasesRefetchOk');
         }
       } catch (e) {
         console.warn('GITHUB FETCH ERROR', e);

@@ -34,7 +34,7 @@ const AboutSettingsScreen: FC = () => {
     <>
       <Appbar.Header>
         <Appbar.BackAction onPress={handleBack} />
-        <Appbar.Content title={t('about')} onPress={handleBack} />
+        <Appbar.Content title={t('settings.aboutApp')} onPress={handleBack} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>

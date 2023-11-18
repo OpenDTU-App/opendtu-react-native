@@ -12,6 +12,7 @@ import type {
 
 export const initialTimeRange: DatabaseTimeRange = {
   start: { seconds: 60 * 60 * 6 }, // 6 hours
+  // start: { seconds: 60 },
   end: 'now',
 };
 
@@ -35,10 +36,14 @@ const databaseSlice = createSlice({
     },
     setTimeRangeFrom: (state, action: SetTimeRangeFromAction) => {
       console.log('Setting time range from');
+      if (action.payload.start === undefined) return;
+
       state.timeRange.start = action.payload.start;
     },
     setTimeRangeTo: (state, action: SetTimeRangeToAction) => {
       console.log('Setting time range to');
+      if (action.payload.end === undefined) return;
+
       state.timeRange.end = action.payload.end;
     },
     setTimeRangeLastNSeconds: (
@@ -46,6 +51,8 @@ const databaseSlice = createSlice({
       action: SetTimeRangeLastNSecondsAction,
     ) => {
       console.log('Setting time range last N seconds');
+      if (action.payload.seconds === undefined) return;
+
       state.timeRange.start = { seconds: action.payload.seconds };
       state.timeRange.end = 'now';
     },
@@ -61,6 +68,7 @@ export const {
   setTimeRangeFrom,
   setTimeRangeTo,
   setTimeRangeLastNSeconds,
+  setRefreshInterval,
 } = databaseSlice.actions;
 
 export const { reducer: DatabaseReducer } = databaseSlice;

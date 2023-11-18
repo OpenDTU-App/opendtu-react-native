@@ -13,7 +13,7 @@ const ImportantStatusValues: FC = () => {
   const power = useLivedata(state => state?.total.Power);
 
   return (
-    <Box pv={1} ph={8} mb={4}>
+    <Box ph={8}>
       <Box
         style={{
           display: 'flex',
@@ -21,7 +21,7 @@ const ImportantStatusValues: FC = () => {
           width: '100%',
           flexWrap: 'wrap',
           justifyContent: 'space-evenly',
-          gap: 16,
+          gap: 8,
         }}
       >
         <StatusWidget title={t('livedata.todaysYield')} icon="solar-panel">

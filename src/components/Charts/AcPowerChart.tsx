@@ -14,11 +14,18 @@ const AcPowerChart: FC = () => {
       : undefined,
   );
 
+  const AcPowerError = useAppSelector(state =>
+    state.database.data?.acPower.success === true
+      ? undefined
+      : state.database.data?.acPower.message,
+  );
+
   return (
     <UnifiedLineChart
       title={t('charts.acPower')}
+      chartData={AcPower?.chartData}
+      error={AcPowerError}
       unit="W"
-      data={AcPower?.data}
       yAxisOverride={{
         left: {
           valueFormatter: '#.## W',

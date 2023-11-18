@@ -9,7 +9,7 @@ import { removeDatabaseConfig, updateDatabaseConfig } from '@/slices/settings';
 
 import type { DatabaseConfig } from '@/types/settings';
 
-import StyledModal from '@/components/styled/StyledModal';
+import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
 import { DatabaseType } from '@/database';
@@ -98,15 +98,7 @@ const ManageDatabaseModal: FC<ManageDatabaseModalProps> = props => {
 
   return (
     <Portal>
-      <StyledModal
-        {...props}
-        contentContainerStyle={{
-          backgroundColor: theme.colors.surface,
-          padding: 8,
-          borderRadius: 24,
-          margin: 8,
-        }}
-      >
+      <BaseModal {...props}>
         <Box p={16}>
           <Box mb={8}>
             <Text variant="bodyLarge">
@@ -119,6 +111,7 @@ const ManageDatabaseModal: FC<ManageDatabaseModalProps> = props => {
               mode="outlined"
               value={name}
               onChangeText={setName}
+              style={{ backgroundColor: theme.colors.elevation.level3 }}
             />
           </Box>
           <Box mb={4}>
@@ -128,6 +121,7 @@ const ManageDatabaseModal: FC<ManageDatabaseModalProps> = props => {
               value={baseUrl}
               onChangeText={setBaseUrl}
               placeholder={baseUrlPlaceholder}
+              style={{ backgroundColor: theme.colors.elevation.level3 }}
             />
           </Box>
           <Box mb={4}>
@@ -136,6 +130,7 @@ const ManageDatabaseModal: FC<ManageDatabaseModalProps> = props => {
               mode="outlined"
               value={username}
               onChangeText={setUsername}
+              style={{ backgroundColor: theme.colors.elevation.level3 }}
             />
           </Box>
           <Box mb={4}>
@@ -145,6 +140,7 @@ const ManageDatabaseModal: FC<ManageDatabaseModalProps> = props => {
               value={password}
               onChangeText={setPassword}
               secureTextEntry
+              style={{ backgroundColor: theme.colors.elevation.level3 }}
             />
           </Box>
         </Box>
@@ -171,7 +167,7 @@ const ManageDatabaseModal: FC<ManageDatabaseModalProps> = props => {
             {t('save')}
           </Button>
         </Box>
-      </StyledModal>
+      </BaseModal>
     </Portal>
   );
 };

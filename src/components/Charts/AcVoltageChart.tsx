@@ -14,10 +14,17 @@ const AcVoltageChart: FC = () => {
       : undefined,
   );
 
+  const AcVoltageError = useAppSelector(state =>
+    state.database.data?.acVoltage.success === true
+      ? undefined
+      : state.database.data?.acVoltage.message,
+  );
+
   return (
     <UnifiedLineChart
       title={t('charts.acVoltage')}
-      data={AcVoltage?.data}
+      chartData={AcVoltage?.chartData}
+      error={AcVoltageError}
       unit="V"
       yAxisOverride={{
         left: {

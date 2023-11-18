@@ -6,11 +6,7 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { Box } from 'react-native-flex-layout';
-import {
-  /*Icon,*/
-  Text,
-  TouchableRipple,
-} from 'react-native-paper';
+import { Icon, Text, TouchableRipple } from 'react-native-paper';
 
 import AcPowerChart from '@/components/Charts/AcPowerChart';
 import DcVoltageChart from '@/components/Charts/DcVoltageChart';
@@ -43,9 +39,9 @@ const ImportantCharts: FC = () => {
     navigation.navigate('SelectDatabaseScreen', { index: deviceIndex });
   }, [navigation, deviceIndex]);
 
-  // const handleShowConfigureGraphs = useCallback(() => {
-  //   navigation.navigate('ConfigureGraphsScreen');
-  // }, [navigation]);
+  const handleShowConfigureGraphs = useCallback(() => {
+    navigation.navigate('ConfigureGraphsScreen');
+  }, [navigation]);
 
   if (!hasDatabaseConfig) {
     return (
@@ -72,7 +68,7 @@ const ImportantCharts: FC = () => {
 
   return (
     <View style={{ flex: 1, width: '100%', height: '100%', marginTop: 4 }}>
-      {/*<View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <Box p={8}>
           <StyledSurface mode="flat" elevation={2}>
             <TouchableRipple
@@ -103,8 +99,8 @@ const ImportantCharts: FC = () => {
             </TouchableRipple>
           </StyledSurface>
         </Box>
-      </View>*/}
-      <Box p={8} style={{ gap: 16 }}>
+      </View>
+      <Box p={8} pt={4} style={{ gap: 12 }}>
         <AcPowerChart />
         <DcVoltageChart />
       </Box>

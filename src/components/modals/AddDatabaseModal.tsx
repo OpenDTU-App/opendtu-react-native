@@ -11,7 +11,7 @@ import { addDatabaseConfig } from '@/slices/settings';
 
 import type { DatabaseConfig } from '@/types/settings';
 
-import StyledModal from '@/components/styled/StyledModal';
+import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
 import { DatabaseType } from '@/database';
@@ -67,15 +67,7 @@ const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
 
   return (
     <Portal>
-      <StyledModal
-        {...props}
-        contentContainerStyle={{
-          backgroundColor: theme.colors.elevation.level3,
-          padding: 8,
-          borderRadius: 28,
-          margin: 8,
-        }}
-      >
+      <BaseModal {...props}>
         <Box p={16}>
           <Box mb={8}>
             <Text variant="bodyLarge">{t('database.addANewDatabase')}</Text>
@@ -134,7 +126,7 @@ const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
             {t('add')}
           </Button>
         </Box>
-      </StyledModal>
+      </BaseModal>
     </Portal>
   );
 };

@@ -7,7 +7,7 @@ import { Button, Portal, Text, useTheme } from 'react-native-paper';
 
 import { updateDtuBaseUrl } from '@/slices/settings';
 
-import StyledModal from '@/components/styled/StyledModal';
+import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
 import { useAppDispatch, useAppSelector } from '@/store';
@@ -47,15 +47,7 @@ const ChangeServerUrlModal: FC<ChangeServerUrlModalProps> = props => {
 
   return (
     <Portal>
-      <StyledModal
-        {...props}
-        contentContainerStyle={{
-          backgroundColor: theme.colors.surface,
-          padding: 8,
-          borderRadius: 24,
-          margin: 8,
-        }}
-      >
+      <BaseModal {...props}>
         <Box p={16}>
           <Box mb={8}>
             <Text variant="bodyLarge">{t('settings.changeTheServerUrl')}</Text>
@@ -65,6 +57,7 @@ const ChangeServerUrlModal: FC<ChangeServerUrlModalProps> = props => {
             mode="outlined"
             value={baseUrl}
             onChangeText={setBaseUrl}
+            style={{ backgroundColor: theme.colors.elevation.level3 }}
           />
         </Box>
         <Box
@@ -86,7 +79,7 @@ const ChangeServerUrlModal: FC<ChangeServerUrlModalProps> = props => {
             {t('change')}
           </Button>
         </Box>
-      </StyledModal>
+      </BaseModal>
     </Portal>
   );
 };

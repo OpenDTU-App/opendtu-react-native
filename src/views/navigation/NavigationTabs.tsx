@@ -6,12 +6,12 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-import MainSettingsScreen from '@/views/navigation/screens/MainSettingsScreen';
 import LivedataTab from '@/views/navigation/tabs/LivedataTab';
+import MainSettingsTab from '@/views/navigation/tabs/MainSettingsTab';
 
 const LivedataRoute = () => <LivedataTab />;
 
-const SettingsRoute = () => <MainSettingsScreen />;
+const SettingsRoute = () => <MainSettingsTab />;
 
 type BaseRoutes = ComponentProps<
   typeof BottomNavigationPaper

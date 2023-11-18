@@ -13,7 +13,7 @@ import {
   setSelectedDtuToFirstOrNull,
 } from '@/slices/settings';
 
-import StyledModal from '@/components/styled/StyledModal';
+import BaseModal from '@/components/BaseModal';
 
 import { useAppDispatch } from '@/store';
 
@@ -45,15 +45,7 @@ const ConfirmDeleteDeviceModal: FC<ConfirmDeleteDeviceModalProps> = props => {
 
   return (
     <Portal>
-      <StyledModal
-        {...props}
-        contentContainerStyle={{
-          backgroundColor: theme.colors.surface,
-          padding: 8,
-          borderRadius: 24,
-          margin: 8,
-        }}
-      >
+      <BaseModal {...props}>
         <Box p={16}>
           <Box mb={8}>
             <Text variant="bodyLarge">
@@ -81,7 +73,7 @@ const ConfirmDeleteDeviceModal: FC<ConfirmDeleteDeviceModalProps> = props => {
             {t('delete')}
           </Button>
         </Box>
-      </StyledModal>
+      </BaseModal>
     </Portal>
   );
 };
