@@ -139,9 +139,11 @@ class OpenDtuApi {
       const controller = new AbortController();
 
       const abortTimeout = setTimeout(() => {
+        console.log('Aborting fetch');
         controller.abort();
       }, 5000);
 
+      log.info('getSystemStatusFromUrl', url);
       const response = await fetch(`${url.origin}/api/system/status`, {
         signal: controller.signal,
         method: 'GET',
@@ -247,6 +249,7 @@ class OpenDtuApi {
     };
 
     try {
+      log.info('checkCredentials', baseUrl, requestOptions);
       const response = await fetch(
         `${baseUrl}/api/security/authenticate`,
         requestOptions,

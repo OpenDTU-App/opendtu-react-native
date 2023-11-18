@@ -54,7 +54,7 @@ const MainSettingsTab: FC = () => {
               onPress={openChangeLanguageModal}
             />
             <List.Item
-              title={t('settings.about')}
+              title={t('settings.aboutApp')}
               description={t('settings.aboutDescription')}
               left={props => <List.Icon {...props} icon="information" />}
               onPress={handleAbout}

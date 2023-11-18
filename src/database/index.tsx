@@ -8,12 +8,13 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dimensions } from 'react-native';
-import type { LineData } from 'react-native-charts-wrapper';
 
 import { clearUpdateResult, setUpdateResult } from '@/slices/database';
 
 import type { Inverter } from '@/types/opendtu/status';
 import type { DatabaseConfig } from '@/types/settings';
+
+import type { ChartData } from '@/components/Charts/UnifiedLineChart';
 
 import PrometheusDatabase from '@/database/prometheus';
 import { useAppDispatch, useAppSelector } from '@/store';
@@ -24,7 +25,7 @@ export interface DatabaseError {
 }
 
 export interface DatabaseSuccess {
-  data: LineData;
+  chartData: ChartData;
   timestamp: Date;
   success: true;
 }
@@ -257,6 +258,18 @@ const DatabaseProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
   const handleUpdateData = useCallback(
     async (data: UpdateResult) => {
       console.log('handleUpdateData', data);
+
+      /*console.log(
+        'hui',
+        JSON.stringify(
+          data.acVoltage.success
+            ? data.acVoltage.chartData.data?.dataSets?.[0].values?.map(
+                value => (value as LineValue).x,
+              )
+            : null,
+        ),
+      );*/
+
       dispatch(setUpdateResult({ data }));
       setIsFetching(false);
     },
@@ -290,12 +303,14 @@ const DatabaseProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
       throw new Error('Invalid database time range');
     }
 
-    const width = Dimensions.get('window').width;
+    const maxDataPoints = Dimensions.get('window').width;
 
     // calculate step size
-    const step = Math.floor((to.getTime() - from.getTime()) / width) / 1000;
+    const step = Math.max(
+      Math.ceil((to.getTime() - from.getTime()) / maxDataPoints / 1000),
+    );
 
-    console.log('Step size:', step, 'width:', width);
+    console.log('step', step);
 
     const data: UpdateResult = {
       acVoltage: await database.acVoltage({

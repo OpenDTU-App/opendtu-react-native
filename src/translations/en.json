@@ -1,6 +1,15 @@
 {
-    "configureGraphs":{
-        "title": "Configure Graphs"
+    "configureGraphs": {
+        "title": "Configure Graphs",
+        "save": "Save time range",
+        "changeTimeRange": "Change time range",
+        "changeDateRange": "Change date range",
+        "changeStartTimestamp": "Change start timestamp",
+        "changeEndTimestamp": "Change end timestamp",
+        "setEndToNow": "Set end to now",
+        "setLastNSeconds": "Set last N seconds",
+        "changeRefreshInterval": "Change refresh interval",
+        "changeRefreshIntervalDescription": "Change the refresh interval of the graphs. This is the time between two data requests."
     },
     "livedata": {
         "configureGraphs": "Configure Graphs",
@@ -24,7 +33,6 @@
         "password": "Password"
     },
     "add": "Add",
-    "about": "About",
     "aboutApp": {
         "projectHint": "This app is not affiliated with the OpenDTU project. If you find any bugs, please report them on the GitHub page.",
         "viewOnGithub": "View on GitHub"
@@ -54,12 +62,14 @@
         "connect": "Connect"
     },
     "settings": {
+        "seconds": "Seconds",
+        "milliseconds": "Milliseconds",
         "general": "General",
         "theme": "Theme",
         "themeDescription": "Change the theme of the app",
         "language": "Language",
         "languageDescription": "Change the language of the app",
-        "about": "About",
+        "aboutApp": "About the App",
         "aboutDescription": "Licenses \u2022 Version \u2022 Other information",
         "selectDatabase": "Select Database",
         "changeTheTheme": "Change the Theme?",
@@ -124,5 +134,25 @@
     "navigation": {
         "livedata": "Livedata",
         "settings": "Settings"
+    },
+    "RNPaperDates": {
+        "save": "Save",
+        "selectSingle": "Select date",
+        "selectMultiple": "Select dates",
+        "selectRange": "Select period",
+        "notAccordingToDateFormat": "Date format must be {{inputFormat}}",
+        "mustBeHigherThan": "Must be later then {{date}}",
+        "mustBeLowerThan": "Must be earlier then {{date}}",
+        "mustBeBetween": "Must be between {{startDate}} - {{endDate}}",
+        "dateIsDisabled": "Day is not allowed",
+        "previous": "Previous",
+        "next": "Next",
+        "typeInDate": "Type in date",
+        "pickDateFromCalendar": "Pick date from calendar",
+        "close": "Close"
+    },
+    "time_range": {
+        "from": "From {{value}}",
+        "to": "To {{value}}"
     }
 }

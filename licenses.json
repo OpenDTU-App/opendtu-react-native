@@ -160,6 +160,12 @@
         "licenseUrl": "https://github.com/iamacup/react-native-markdown-display/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
+    "react-native-paper-dates@0.20.4": {
+        "licenses": "MIT",
+        "repository": "https://github.com/web-ridge/react-native-paper-dates",
+        "licenseUrl": "https://github.com/web-ridge/react-native-paper-dates/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
     "react-native-paper@5.11.1": {
         "licenses": "MIT",
         "repository": "https://github.com/callstack/react-native-paper",

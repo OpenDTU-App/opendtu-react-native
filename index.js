@@ -3,6 +3,8 @@
  */
 import { name as appName } from '@root/app.json';
 import { decode, encode } from 'base-64';
+import 'moment/locale/de';
+import 'moment/locale/en-gb';
 
 import { AppRegistry } from 'react-native';
 import 'react-native-get-random-values';

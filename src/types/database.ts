@@ -8,9 +8,12 @@ export interface Ago {
   seconds: number;
 }
 
+export type DatabaseTimeRangeStart = Date | Ago;
+export type DatabaseTimeRangeEnd = Date | Now;
+
 export interface DatabaseTimeRange {
-  start: Date | Ago;
-  end: Date | Now;
+  start: DatabaseTimeRangeStart;
+  end: DatabaseTimeRangeEnd;
 }
 
 export interface DatabaseState {
@@ -25,15 +28,15 @@ export type SetUpdateResultAction = PayloadAction<{
 }>;
 
 export type SetTimeRangeFromAction = PayloadAction<{
-  start: Date | Ago;
+  start?: DatabaseTimeRangeStart;
 }>;
 
 export type SetTimeRangeToAction = PayloadAction<{
-  end: Date | Now;
+  end?: DatabaseTimeRangeEnd;
 }>;
 
 export type SetTimeRangeLastNSecondsAction = PayloadAction<{
-  seconds: number;
+  seconds?: number;
 }>;
 
 export type SetRefreshIntervalAction = PayloadAction<{

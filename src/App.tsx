@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import 'intl-pluralrules';
+import moment from 'moment';
 import { PersistGate as ReduxPersistGate } from 'redux-persist/integration/react';
 
 import type { FC } from 'react';
@@ -8,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { Appearance, StatusBar } from 'react-native';
 import type { MD3Theme } from 'react-native-paper';
 import { MD3DarkTheme, MD3LightTheme, PaperProvider } from 'react-native-paper';
+import { registerTranslation } from 'react-native-paper-dates';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -143,7 +145,7 @@ const DarkTheme: MD3Theme = {
 };
 
 const _App: FC = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const appTheme = useAppSelector(state => state.settings.appTheme);
 
@@ -185,6 +187,12 @@ const _App: FC = () => {
   useEffect(() => {
     setI18nLanguageMatchesSettings(false);
     i18n.changeLanguage(language);
+
+    if (language === 'en') {
+      moment.locale('en-gb');
+    } else {
+      moment.locale(language);
+    }
   }, [i18n, language]);
 
   useEffect(() => {
@@ -192,6 +200,29 @@ const _App: FC = () => {
       SplashScreen.hide();
     }
   }, [i18nLanguageMatchesSettings]);
+
+  useEffect(() => {
+    registerTranslation(i18n.language, {
+      selectSingle: t('RNPaperDates.selectSingle'),
+      selectMultiple: t('RNPaperDates.selectMultiple'),
+      selectRange: t('RNPaperDates.selectRange'),
+      save: t('RNPaperDates.save'),
+      notAccordingToDateFormat: (inputFormat: string) =>
+        t('RNPaperDates.notAccordingToDateFormat', { inputFormat }),
+      mustBeHigherThan: (date: string) =>
+        t('RNPaperDates.mustBeHigherThan', { date }),
+      mustBeLowerThan: (date: string) =>
+        t('RNPaperDates.mustBeLowerThan', { date }),
+      mustBeBetween: (startDate: string, endDate: string) =>
+        t('RNPaperDates.mustBeBetween', { startDate, endDate }),
+      dateIsDisabled: t('RNPaperDates.dateIsDisabled'),
+      previous: t('RNPaperDates.previous'),
+      next: t('RNPaperDates.next'),
+      typeInDate: t('RNPaperDates.typeInDate'),
+      pickDateFromCalendar: t('RNPaperDates.pickDateFromCalendar'),
+      close: t('RNPaperDates.close'),
+    });
+  }, [i18n.language, t]);
 
   if (!i18nLanguageMatchesSettings) {
     return null;

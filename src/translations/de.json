@@ -39,13 +39,15 @@
         "noDatabaseConfigured": "Keine Datenbank konfiguriert"
     },
     "settings": {
+        "seconds": "Sekunden",
+        "milliseconds": "Millisekunden",
         "languageDescription": "App-Sprache ändern",
         "changeTheTheme": "App-Theme ändern?",
         "general": "Allgemein",
         "theme": "Theme",
         "themeDescription": "App-Theme ändern",
         "language": "Sprache",
-        "about": "Über",
+        "aboutApp": "Über die App",
         "aboutDescription": "Lizenzen • Version • Sonstige Informationen",
         "selectDatabase": "Datenbank auswählen",
         "changeTheLanguage": "App-Sprache ändern?",
@@ -53,9 +55,6 @@
         "changeTheServerUrl": "Server-URL ändern?",
         "serverUrl": "Server-URL",
         "manageDatabase": "Datenbank {{name}} verwalten"
-    },
-    "configureGraphs": {
-        "title": "Graphen konfigurieren"
     },
     "device": {
         "deviceName": "Gerätename",
@@ -72,7 +71,6 @@
         "password": "Passwort"
     },
     "add": "Hinzufügen",
-    "about": "Über",
     "setup": {
         "setupComplete": "Einrichtung abgeschlossen! 🎉",
         "goToDashboard": "Dashboard öffnen",
@@ -124,5 +122,37 @@
     "navigation": {
         "livedata": "Livedaten",
         "settings": "Einstellungen"
+    },
+    "RNPaperDates": {
+        "save": "Speichern",
+        "selectSingle": "Wähle Datum",
+        "selectMultiple": "Wähle Daten",
+        "selectRange": "Wähle Zeitspanne",
+        "notAccordingToDateFormat": "Das Format sollte {{inputFormat}} sein",
+        "mustBeHigherThan": "Muss nach dem {{date}} sein",
+        "mustBeLowerThan": "Muss vor dem ${date} sein",
+        "mustBeBetween": "Muss in dieser Zeitspanne liegen {{startDate}} - {{endDate}}",
+        "dateIsDisabled": "Datum nicht wählbar",
+        "previous": "Vorheriges",
+        "next": "Nächstes",
+        "typeInDate": "Datum eingeben",
+        "pickDateFromCalendar": "Datum vom Kalender auswählen",
+        "close": "Schließen"
+    },
+    "time_range": {
+        "from": "Von {{value}}",
+        "to": "Bis {{value}}"
+    },
+    "configureGraphs": {
+        "title": "Graphen konfigurieren",
+        "save": "Zeitbereich speichern",
+        "changeTimeRange": "Zeitbereich ändern",
+        "changeDateRange": "Datumsbereich ändern",
+        "changeStartTimestamp": "Startzeit ändern",
+        "changeEndTimestamp": "Endzeit ändern",
+        "setEndToNow": "Endzeit auf jetzt setzen",
+        "setLastNSeconds": "Zeitbereich auf letzten N Sekunden setzen",
+        "changeRefreshInterval": "Aktualisierungsintervall ändern",
+        "changeRefreshIntervalDescription": "Ändere das Aktualisierungsintervall der Graphen. Dies ist die Zeit zwischen zwei Datenanfragen."
     }
 }

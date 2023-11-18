@@ -29,7 +29,7 @@ const DeviceStatus: FC = () => {
     return null;
 
   return (
-    <Box style={{ marginHorizontal: 8, marginBottom: 16 }}>
+    <Box style={{ marginHorizontal: 8, marginBottom: 12 }}>
       <TouchableRipple
         onPress={handleShowDeviceInfo}
         borderless
