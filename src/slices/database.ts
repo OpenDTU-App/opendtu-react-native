@@ -11,7 +11,7 @@ import type {
 } from '@/types/database';
 
 export const initialTimeRange: DatabaseTimeRange = {
-  start: { seconds: 60 * 60 * 6 }, // 6 hours
+  start: { seconds: 60 * 60 * 12 }, // 12 hours
   // start: { seconds: 60 },
   end: 'now',
 };
