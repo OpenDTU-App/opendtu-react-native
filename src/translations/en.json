@@ -71,7 +71,7 @@
         "language": "Language",
         "languageDescription": "Change the language of the app",
         "aboutApp": "About the App",
-        "aboutDescription": "Licenses \u2022 Version \u2022 Other information",
+        "aboutDescription": "Licenses \u2022 Version",
         "selectDatabase": "Select Database",
         "changeTheTheme": "Change the Theme?",
         "changeTheLanguage": "Change the Language?",
@@ -155,5 +155,42 @@
     "time_range": {
         "from": "From {{value}}",
         "to": "To {{value}}"
-    }
+    },
+    "opendtu": {
+        "title": "OpenDTU",
+        "systemInformation": "System Information",
+        "systemInformationDescription": "Firmware \u2022 Hardware \u2022 Memory \u2022 Radio",
+        "systemInformationScreen": {
+            "firmwareInformation": "Firmware Information",
+            "hostname": "Hostname",
+            "sdkVersion": "SDK Version",
+            "configVersion": "Config Version",
+            "gitHash": "Git Hash",
+            "gitTag": "Git Tag",
+            "pioEnvironment": "PIO Environment",
+            "resetReasonCpu0": "Reset Reason CPU 0",
+            "resetReasonCpu1": "Reset Reason CPU 1",
+            "configSaveCount": "Config save count",
+            "uptime": "Uptime",
+            "hardwareInformation": "Hardware Information",
+            "chipModel": "Chip Model",
+            "chipRevision": "Chip Revision",
+            "chipCores": "Chip Cores",
+            "chipFrequency": "Chip Frequency",
+            "memoryInformation": "Memory Information",
+            "heap": "Heap",
+            "littleFs": "LittleFS",
+            "sketch": "Sketch",
+            "radioInformation": "Radio Information",
+            "nrf24Status": "nRF24 Status",
+            "nrf24ChipStatus": "nRF24 Chip Status",
+            "nrf24ChipType": "nRF24 Chip Type",
+            "cmt2300aStatus": "CMT2300A Status",
+            "cmt2300aChipStatus": "CMT2300A Chip Status"
+        }
+    },
+    "connected": "Connected",
+    "notConnected": "Not connected",
+    "configured": "Configured",
+    "notConfigured": "Not configured"
 }

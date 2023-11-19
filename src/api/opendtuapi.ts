@@ -39,7 +39,7 @@ class OpenDtuApi {
   private ws: WebSocket | null = null;
   // communication
   private wsConnected = false;
-  private wsId = '';
+  private readonly wsId: string = '';
 
   // interval
   private fetchHttpStateInterval: NodeJS.Timeout | null = null;
@@ -139,7 +139,7 @@ class OpenDtuApi {
       const controller = new AbortController();
 
       const abortTimeout = setTimeout(() => {
-        console.log('Aborting fetch');
+        console.log('getSystemStatusFromUrl', 'Aborting fetch');
         controller.abort();
       }, 5000);
 
@@ -470,8 +470,16 @@ class OpenDtuApi {
   ): Promise<Response> {
     const authString = this.getAuthString();
 
+    const controller = new AbortController();
+
+    const abortTimeout = setTimeout(() => {
+      console.log('makeAuthenticatedRequest', 'Aborting fetch');
+      controller.abort();
+    }, 10000);
+
     const requestOptions: RequestInit = {
       method,
+      signal: controller.signal,
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
         Authorization: 'Basic ' + authString,
@@ -486,7 +494,12 @@ class OpenDtuApi {
     const url = `${authString}${this.baseUrl}${route}`;
 
     console.log('makeAuthenticatedRequest', url, requestOptions);
-    return await fetch(url, requestOptions);
+    const res = await fetch(url, requestOptions);
+    if (res.status === 200) {
+      clearTimeout(abortTimeout);
+    }
+
+    return res;
   }
 }
 

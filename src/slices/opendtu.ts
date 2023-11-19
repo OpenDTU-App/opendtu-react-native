@@ -80,6 +80,10 @@ const opendtuSlice = createSlice({
     setTriedToConnect: (state, action: SetTriedToConnectAction) => {
       state.triedToConnect = action.payload.triedToConnect;
     },
+    clearOpenDtuState: state => {
+      state.liveData = null;
+      state.systemStatus = null;
+    },
   },
 });
 
@@ -94,6 +98,7 @@ export const {
   setDeviceState,
   clearDeviceState,
   setTriedToConnect,
+  clearOpenDtuState,
 } = opendtuSlice.actions;
 
 export const { reducer: OpenDTUReducer } = opendtuSlice;

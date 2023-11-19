@@ -11,6 +11,8 @@ import { List, useTheme } from 'react-native-paper';
 import ChangeLanguageModal from '@/components/modals/ChangeLanguageModal';
 import ChangeThemeModal from '@/components/modals/ChangeThemeModal';
 
+import useIsConnected from '@/hooks/useIsConnected';
+
 import { StyledSafeAreaView } from '@/style';
 
 const MainSettingsTab: FC = () => {
@@ -31,8 +33,14 @@ const MainSettingsTab: FC = () => {
   const openChangeLanguageModal = () => setShowChangeLanguageModal(true);
   const closeChangeLanguageModal = () => setShowChangeLanguageModal(false);
 
+  const websocketConnected = useIsConnected();
+
   const handleAbout = useCallback(() => {
     navigation.navigate('AboutSettingsScreen');
+  }, [navigation]);
+
+  const handleAboutOpenDTU = useCallback(() => {
+    navigation.navigate('AboutOpenDTUScreen');
   }, [navigation]);
 
   return (
@@ -58,6 +66,17 @@ const MainSettingsTab: FC = () => {
               description={t('settings.aboutDescription')}
               left={props => <List.Icon {...props} icon="information" />}
               onPress={handleAbout}
+            />
+          </List.Section>
+          <List.Section>
+            <List.Subheader>{t('opendtu.title')}</List.Subheader>
+            <List.Item
+              title={t('opendtu.systemInformation')}
+              description={t('opendtu.systemInformationDescription')}
+              left={props => <List.Icon {...props} icon="information" />}
+              onPress={handleAboutOpenDTU}
+              disabled={!websocketConnected}
+              style={{ opacity: websocketConnected ? 1 : 0.5 }}
             />
           </List.Section>
         </ScrollView>
