@@ -48,7 +48,7 @@
         "noDatabaseConfiguredDescription": "To see charts, configure and assign a database to your DTU."
     },
     "setup": {
-        "setupComplete": "Setup complete! \uD83C\uDF89",
+        "setupComplete": "Setup complete! 🎉",
         "goToDashboard": "Go to dashboard",
         "authenticateOpendtuInstance": "Authenticate OpenDTU instance",
         "username": "Username",
@@ -71,7 +71,7 @@
         "language": "Language",
         "languageDescription": "Change the language of the app",
         "aboutApp": "About the App",
-        "aboutDescription": "Licenses \u2022 Version",
+        "aboutDescription": "Licenses • Version",
         "selectDatabase": "Select Database",
         "changeTheTheme": "Change the Theme?",
         "changeTheLanguage": "Change the Language?",
@@ -81,7 +81,7 @@
         "manageDatabase": "Manage database {{name}}"
     },
     "mdns": {
-        "scanning": "Scanning...",
+        "scanning": "Scanning…",
         "noDevicesFound": "No devices found"
     },
     "none": "None",
@@ -97,7 +97,7 @@
     },
     "delete": "Delete",
     "deviceOfflineWrapper": {
-        "connecting": "Connecting...",
+        "connecting": "Connecting…",
         "pleaseWait": "Please wait while we try to connect to the device.",
         "openDeviceList": "Open Device List",
         "deviceOffline": "Device Offline",
@@ -159,7 +159,7 @@
     "opendtu": {
         "title": "OpenDTU",
         "systemInformation": "System Information",
-        "systemInformationDescription": "Firmware \u2022 Hardware \u2022 Memory \u2022 Radio",
+        "systemInformationDescription": "Firmware • Hardware • Memory • Radio",
         "systemInformationScreen": {
             "firmwareInformation": "Firmware Information",
             "hostname": "Hostname",
