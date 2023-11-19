@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useMemo } from 'react';
 import { logger } from 'react-native-logs';
 
 import {
-  clearLiveData,
+  clearOpenDtuState,
   setDeviceState,
   setIsConnected,
   setLiveData,
@@ -59,7 +59,7 @@ export const ApiProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
       );
 
       api.registerOnDisconnectedHandler(() => {
-        dispatch(clearLiveData());
+        dispatch(clearOpenDtuState());
       });
 
       api.disconnect();

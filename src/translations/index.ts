@@ -26,6 +26,7 @@ if (!i18n.isInitialized) {
         escapeValue: false,
       },
       debug: __DEV__,
+      nonExplicitSupportedLngs: true,
     });
 }
 

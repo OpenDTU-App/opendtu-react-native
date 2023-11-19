@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import type { MD3Theme } from 'react-native-paper';
 import { List } from 'react-native-paper';
 
-const StyledListItem = styled(List.Item)`
+const StyledListItem = styled(List.Item)<{ theme: MD3Theme }>`
   background-color: ${props =>
     (props.theme as MD3Theme).colors.elevation.level2};
   border-radius: 16px;

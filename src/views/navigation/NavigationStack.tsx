@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import type { FC } from 'react';
 
 import { useAppSelector } from '@/store';
+import AboutOpenDTUScreen from '@/views/navigation/screens/AboutOpenDTUScreen';
 import AboutSettingsScreen from '@/views/navigation/screens/AboutSettingsScreen';
 import ConfigureGraphsScreen from '@/views/navigation/screens/ConfigureGraphsScreen';
 import DeviceListScreen from '@/views/navigation/screens/DeviceListScreen';
@@ -87,6 +88,11 @@ const NavigationStack: FC = () => {
       <Stack.Screen
         name="ConfigureGraphsScreen"
         component={ConfigureGraphsScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AboutOpenDTUScreen"
+        component={AboutOpenDTUScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

@@ -39,7 +39,7 @@ class OpenDtuApi {
   private ws: WebSocket | null = null;
   // communication
   private wsConnected = false;
-  private wsId = '';
+  private readonly wsId: string = '';
 
   // interval
   private fetchHttpStateInterval: NodeJS.Timeout | null = null;
