@@ -48,7 +48,7 @@
         "themeDescription": "App-Theme ändern",
         "language": "Sprache",
         "aboutApp": "Über die App",
-        "aboutDescription": "Lizenzen • Version • Sonstige Informationen",
+        "aboutDescription": "Lizenzen • Version",
         "selectDatabase": "Datenbank auswählen",
         "changeTheLanguage": "App-Sprache ändern?",
         "doYouWantToDeleteThisConfig": "Möchtest du diese Konfiguration löschen?",
@@ -93,7 +93,7 @@
         "noDatabasesConfigured": "Keine Datenbank konfiguriert"
     },
     "mdns": {
-        "scanning": "Scannen...",
+        "scanning": "Scannen…",
         "noDevicesFound": "Keine Geräte gefunden"
     },
     "none": "Keine",
@@ -109,7 +109,7 @@
     },
     "delete": "Löschen",
     "deviceOfflineWrapper": {
-        "connecting": "Verbinden...",
+        "connecting": "Verbinden…",
         "pleaseWait": "Bitte warte, während wir versuchen, eine Verbindung zum Gerät herzustellen.",
         "openDeviceList": "Geräteliste öffnen",
         "deviceOffline": "Gerät nicht erreichbar",
@@ -130,7 +130,7 @@
         "selectRange": "Wähle Zeitspanne",
         "notAccordingToDateFormat": "Das Format sollte {{inputFormat}} sein",
         "mustBeHigherThan": "Muss nach dem {{date}} sein",
-        "mustBeLowerThan": "Muss vor dem ${date} sein",
+        "mustBeLowerThan": "Muss vor dem {{date}} sein",
         "mustBeBetween": "Muss in dieser Zeitspanne liegen {{startDate}} - {{endDate}}",
         "dateIsDisabled": "Datum nicht wählbar",
         "previous": "Vorheriges",
@@ -155,5 +155,42 @@
         "changeRefreshInterval": "Aktualisierungsintervall ändern",
         "changeRefreshIntervalDescription": "Ändere das Aktualisierungsintervall der Graphen. Dies ist die Zeit zwischen zwei Datenanfragen.",
         "presets": "Voreinstellungen"
-    }
+    },
+    "opendtu": {
+        "title": "OpenDTU",
+        "systemInformation": "Systeminformationen",
+        "systemInformationDescription": "Firmware • Hardware • Speicher • Radio",
+        "systemInformationScreen": {
+            "firmwareInformation": "Firmware-Informationen",
+            "hostname": "Hostname",
+            "sdkVersion": "SDK-Version",
+            "configVersion": "Konfigurationsversion",
+            "gitHash": "Git-Hash",
+            "gitTag": "Git-Tag",
+            "pioEnvironment": "PIO-Umgebung",
+            "resetReasonCpu0": "Reset-Grund CPU 0",
+            "resetReasonCpu1": "Reset-Grund CPU 1",
+            "configSaveCount": "Anzahl der Konfigurationsspeicherungen",
+            "uptime": "Betriebszeit",
+            "hardwareInformation": "Hardwareinformationen",
+            "chipModel": "Chip-Modell",
+            "chipCores": "Chipkerne",
+            "chipFrequency": "Chipfrequenz",
+            "memoryInformation": "Speicherinformationen",
+            "heap": "Heap",
+            "littleFs": "LittleFS",
+            "sketch": "Sketch",
+            "radioInformation": "Funkmodul-Informationen",
+            "nrf24Status": "nRF24-Status",
+            "nrf24ChipStatus": "nRF24-Chipstatus",
+            "nrf24ChipType": "nRF24-Chiptyp",
+            "cmt2300aStatus": "CMT2300A-Status",
+            "cmt2300aChipStatus": "CMT2300A-Chipstatus",
+            "chipRevision": "Chip-Revision"
+        }
+    },
+    "connected": "Verbunden",
+    "notConnected": "Nicht verbunden",
+    "configured": "Konfiguriert",
+    "notConfigured": "Nicht konfiguriert"
 }
