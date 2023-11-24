@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 import type { FC } from 'react';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, processColor, TouchableOpacity, View } from 'react-native';
 import type { LineChartProps } from 'react-native-charts-wrapper';
@@ -54,6 +54,8 @@ const UnifiedLineChart: FC<UnifiedLineChartProps> = props => {
   const [avgValuePerDataSet, setAvgValuePerDataSet] = useState<number[]>([]);
 
   const [height, setHeight] = useState<number>(HEIGHT);
+
+  const chartRef = useRef<LineChart | null>(null);
 
   useEffect(() => {
     // remove 100px for top and bottom padding
@@ -121,6 +123,13 @@ const UnifiedLineChart: FC<UnifiedLineChartProps> = props => {
 
   const handleToggleLine = useCallback(
     (index: number) => {
+      // remove all markers from chart
+      if (chartRef.current) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        chartRef.current.highlights([]);
+      }
+
       setSelectedLineIndexes(
         selectedLineIndexes.includes(index)
           ? selectedLineIndexes.filter(selectedIndex => selectedIndex !== index)
@@ -221,6 +230,7 @@ const UnifiedLineChart: FC<UnifiedLineChartProps> = props => {
       </Box>
       <View style={{ gap: 5 }}>
         <LineChart
+          ref={chartRef}
           data={modifiedData}
           style={{ width: '100%', height }}
           pinchZoom
