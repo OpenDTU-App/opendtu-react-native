@@ -7,6 +7,9 @@ import {
   setDeviceState,
   setIsConnected,
   setLiveData,
+  setMqttStatus,
+  setNetworkStatus,
+  setNtpStatus,
   setSystemStatus,
   setTriedToConnect,
 } from '@/slices/opendtu';
@@ -81,21 +84,39 @@ export const ApiProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
         dispatch(setDeviceState({ deviceState: DeviceState.Connected, index }));
       });
 
-      api.registerSystemStatusHandler((data, index) => {
-        if (data.systemStatus) {
-          dispatch(setSystemStatus({ data: data.systemStatus }));
-          dispatch(
-            updateDtuHostname({ hostname: data.systemStatus.hostname, index }),
-          );
-          dispatch(
-            updateDtuCustomNameIfEmpty({
-              customName: data.systemStatus.hostname,
-              index,
-            }),
-          );
-        }
-        setDeviceState({ deviceState: DeviceState.Connected, index });
-      });
+      api.registerHttpStatusHandler(
+        ({ systemStatus, networkStatus, ntpStatus, mqttStatus }, index) => {
+          if (systemStatus) {
+            dispatch(setSystemStatus({ data: systemStatus }));
+            dispatch(
+              updateDtuHostname({
+                hostname: systemStatus.hostname,
+                index,
+              }),
+            );
+            dispatch(
+              updateDtuCustomNameIfEmpty({
+                customName: systemStatus.hostname,
+                index,
+              }),
+            );
+          }
+
+          if (networkStatus) {
+            dispatch(setNetworkStatus({ data: networkStatus }));
+          }
+
+          if (ntpStatus) {
+            dispatch(setNtpStatus({ data: ntpStatus }));
+          }
+
+          if (mqttStatus) {
+            dispatch(setMqttStatus({ data: mqttStatus }));
+          }
+
+          setDeviceState({ deviceState: DeviceState.Connected, index });
+        },
+      );
 
       console.log('Connecting API Handler');
 

@@ -141,7 +141,11 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
           <Text variant="bodySmall">{t('setup.instancesInYourNetwork')}</Text>
         </Box>
         <Box mb={8}>
-          <MDNSScan setLoading={setLoading} setError={setError} />
+          <MDNSScan
+            setLoading={setLoading}
+            setError={setError}
+            loading={loading}
+          />
         </Box>
       </Box>
       <Box ph={32} w="100%">

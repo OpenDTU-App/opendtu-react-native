@@ -76,7 +76,6 @@ const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
             <StyledTextInput
               label={t('database.name')}
               mode="outlined"
-              value={name}
               onChangeText={setName}
               style={{ backgroundColor: theme.colors.elevation.level3 }}
             />
@@ -85,7 +84,6 @@ const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
             <StyledTextInput
               label={t('database.baseUrl')}
               mode="outlined"
-              value={baseUrl}
               onChangeText={setBaseUrl}
               placeholder={baseUrlPlaceholder}
               style={{ backgroundColor: theme.colors.elevation.level3 }}
@@ -95,7 +93,6 @@ const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
             <StyledTextInput
               label={t('database.username')}
               mode="outlined"
-              value={username}
               onChangeText={setUsername}
               style={{ backgroundColor: theme.colors.elevation.level3 }}
             />
@@ -104,7 +101,6 @@ const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
             <StyledTextInput
               label={t('database.password')}
               mode="outlined"
-              value={password}
               onChangeText={setPassword}
               style={{ backgroundColor: theme.colors.elevation.level3 }}
               secureTextEntry

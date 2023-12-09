@@ -5,7 +5,7 @@
         "licenseUrl": "git@gitlab.com:os-team/libs/utils",
         "parents": "opendtu-react-native"
     },
-    "@react-native-async-storage/async-storage@1.19.5": {
+    "@react-native-async-storage/async-storage@1.19.8": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-async-storage/async-storage",
         "licenseUrl": "https://github.com/react-native-async-storage/async-storage/raw/master/LICENSE",
@@ -106,7 +106,7 @@
         "licenseUrl": "https://github.com/ds300/postinstall-postinstall/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "prometheus-query@3.3.2": {
+    "prometheus-query@3.3.3": {
         "licenses": "MIT",
         "repository": "https://github.com/samber/prometheus-query-js",
         "licenseUrl": "https://github.com/samber/prometheus-query-js/raw/master/LICENSE",
@@ -136,7 +136,7 @@
         "licenseUrl": "https://github.com/yamankatby/react-native-flex-layout/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-get-random-values@1.9.0": {
+    "react-native-get-random-values@1.10.0": {
         "licenses": "MIT",
         "repository": "https://github.com/LinusU/react-native-get-random-values",
         "licenseUrl": "https://github.com/LinusU/react-native-get-random-values/raw/master/LICENSE",
@@ -166,7 +166,7 @@
         "licenseUrl": "https://github.com/web-ridge/react-native-paper-dates/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-paper@5.11.1": {
+    "react-native-paper@5.11.2": {
         "licenses": "MIT",
         "repository": "https://github.com/callstack/react-native-paper",
         "licenseUrl": "https://github.com/callstack/react-native-paper/raw/master/LICENSE.md",

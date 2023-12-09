@@ -43,6 +43,18 @@ const MainSettingsTab: FC = () => {
     navigation.navigate('AboutOpenDTUScreen');
   }, [navigation]);
 
+  const handleNetworkInformation = useCallback(() => {
+    navigation.navigate('NetworkInformationScreen');
+  }, [navigation]);
+
+  const handleNtpInformation = useCallback(() => {
+    navigation.navigate('NtpInformationScreen');
+  }, [navigation]);
+
+  const handleMqttInformation = useCallback(() => {
+    navigation.navigate('MqttInformationScreen');
+  }, [navigation]);
+
   return (
     <StyledSafeAreaView theme={theme}>
       <Box style={{ width: '100%', flex: 1 }}>
@@ -75,6 +87,30 @@ const MainSettingsTab: FC = () => {
               description={t('opendtu.systemInformationDescription')}
               left={props => <List.Icon {...props} icon="information" />}
               onPress={handleAboutOpenDTU}
+              disabled={!websocketConnected}
+              style={{ opacity: websocketConnected ? 1 : 0.5 }}
+            />
+            <List.Item
+              title={t('opendtu.networkInformation')}
+              description={t('opendtu.networkInformationDescription')}
+              left={props => <List.Icon {...props} icon="wifi" />}
+              onPress={handleNetworkInformation}
+              disabled={!websocketConnected}
+              style={{ opacity: websocketConnected ? 1 : 0.5 }}
+            />
+            <List.Item
+              title={t('opendtu.ntpInformation')}
+              description={t('opendtu.ntpInformationDescription')}
+              left={props => <List.Icon {...props} icon="clock" />}
+              onPress={handleNtpInformation}
+              disabled={!websocketConnected}
+              style={{ opacity: websocketConnected ? 1 : 0.5 }}
+            />
+            <List.Item
+              title={t('opendtu.mqttInformation')}
+              description={t('opendtu.mqttInformationDescription')}
+              left={props => <List.Icon {...props} icon="broadcast" />}
+              onPress={handleMqttInformation}
               disabled={!websocketConnected}
               style={{ opacity: websocketConnected ? 1 : 0.5 }}
             />

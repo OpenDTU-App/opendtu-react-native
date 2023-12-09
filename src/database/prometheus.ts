@@ -68,7 +68,7 @@ class PrometheusDatabase implements Database {
     const { inverters } = args;
 
     if (!this.statusSuccess) {
-      return { message: 'Could not fetch status', success: false };
+      return { message: 'Could not fetch database status', success: false };
     }
 
     const serialList = inverters.map(inverter => inverter.serial).join('|');
@@ -82,7 +82,7 @@ class PrometheusDatabase implements Database {
     const { inverters } = args;
 
     if (!this.statusSuccess) {
-      return { message: 'Could not fetch status', success: false };
+      return { message: 'Could not fetch database status', success: false };
     }
 
     const serialList = inverters.map(inverter => inverter.serial).join('|');
@@ -96,7 +96,7 @@ class PrometheusDatabase implements Database {
     const { inverters } = args;
 
     if (!this.statusSuccess) {
-      return { message: 'Could not fetch status', success: false };
+      return { message: 'Could not fetch database status', success: false };
     }
 
     const serialList = inverters.map(inverter => inverter.serial).join('|');
@@ -110,7 +110,7 @@ class PrometheusDatabase implements Database {
     const { inverters } = args;
 
     if (!this.statusSuccess) {
-      return { message: 'Could not fetch status', success: false };
+      return { message: 'Could not fetch database status', success: false };
     }
 
     const serialList = inverters.map(inverter => inverter.serial).join('|');
@@ -188,7 +188,10 @@ class PrometheusDatabase implements Database {
       const e = error as Error;
       console.log('try catch', e.message);
 
-      return { message: e.message ?? 'Unknown error', success: false };
+      return {
+        message: e.message ?? `Unknown error (${e.name})`,
+        success: false,
+      };
     }
   }
 

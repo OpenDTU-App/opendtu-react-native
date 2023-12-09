@@ -7,7 +7,11 @@ import DeviceOfflineWrapper from '@/components/DeviceOfflineWrapper';
 import DeviceStatus from '@/components/DeviceStatus';
 import ImportantStatusValues from '@/components/ImportantStatusValues';
 
-import { useDatabaseIsFetching, useRefreshDatabase } from '@/database';
+import {
+  useDatabase,
+  useDatabaseIsFetching,
+  useRefreshDatabase,
+} from '@/database';
 import { StyledSafeAreaView, StyledScrollView } from '@/style';
 
 const LivedataTab = () => {
@@ -17,11 +21,14 @@ const LivedataTab = () => {
 
   const refreshing = useDatabaseIsFetching();
   const triggerRefresh = useRefreshDatabase();
+  const database = useDatabase();
 
   const handleRefresh = useCallback(() => {
+    if (!database) return;
+
     triggerRefresh?.();
     setIsRefreshing(true);
-  }, [triggerRefresh]);
+  }, [database, triggerRefresh]);
 
   useEffect(() => {
     if (!refreshing) {
@@ -35,13 +42,15 @@ const LivedataTab = () => {
         <StyledScrollView
           theme={theme}
           refreshControl={
-            <RefreshControl
-              refreshing={isRefreshing}
-              onRefresh={handleRefresh}
-              colors={[theme.colors.primary]}
-              progressBackgroundColor={theme.colors.elevation.level3}
-              tintColor={theme.colors.primary}
-            />
+            database ? (
+              <RefreshControl
+                refreshing={isRefreshing}
+                onRefresh={handleRefresh}
+                colors={[theme.colors.primary]}
+                progressBackgroundColor={theme.colors.elevation.level3}
+                tintColor={theme.colors.primary}
+              />
+            ) : undefined
           }
         >
           <DeviceStatus />

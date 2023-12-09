@@ -1,6 +1,12 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import type { LiveData, SystemStatus } from '@/types/opendtu/status';
+import type {
+  LiveData,
+  MqttStatus,
+  NetworkStatus,
+  NtpStatus,
+  SystemStatus,
+} from '@/types/opendtu/status';
 import type { Index } from '@/types/settings';
 
 export enum DeviceState {
@@ -44,6 +50,18 @@ export type SetTriedToConnectAction = PayloadAction<{
   triedToConnect: boolean;
 }>;
 
+export type SetNetworkStatusAction = PayloadAction<{
+  data: NetworkStatus;
+}>;
+
+export type SetNtpStatusAction = PayloadAction<{
+  data: NtpStatus;
+}>;
+
+export type SetMqttStatusAction = PayloadAction<{
+  data: MqttStatus;
+}>;
+
 export interface OpenDTUSetup {
   baseUrl: string | null;
   userString: string | null;
@@ -52,6 +70,9 @@ export interface OpenDTUSetup {
 export interface OpenDTUState {
   liveData: LiveData | null;
   systemStatus: SystemStatus | null;
+  networkStatus: NetworkStatus | null;
+  ntpStatus: NtpStatus | null;
+  mqttStatus: MqttStatus | null;
   setup: OpenDTUSetup;
   isConnected: boolean;
   deviceState: Record<Index, DeviceState>;

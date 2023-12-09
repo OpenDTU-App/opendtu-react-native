@@ -9,11 +9,17 @@ import type {
   SetIsConnectedAction,
   SetDeviceStateAction,
   SetTriedToConnectAction,
+  SetNetworkStatusAction,
+  SetNtpStatusAction,
+  SetMqttStatusAction,
 } from '@/types/opendtu/state';
 
 const initialState: OpenDTUState = {
   liveData: null,
   systemStatus: null,
+  networkStatus: null,
+  ntpStatus: null,
+  mqttStatus: null,
   setup: {
     userString: null,
     baseUrl: null,
@@ -83,6 +89,18 @@ const opendtuSlice = createSlice({
     clearOpenDtuState: state => {
       state.liveData = null;
       state.systemStatus = null;
+      state.networkStatus = null;
+      state.ntpStatus = null;
+      state.mqttStatus = null;
+    },
+    setNetworkStatus: (state, action: SetNetworkStatusAction) => {
+      state.networkStatus = action.payload.data;
+    },
+    setNtpStatus: (state, action: SetNtpStatusAction) => {
+      state.ntpStatus = action.payload.data;
+    },
+    setMqttStatus: (state, action: SetMqttStatusAction) => {
+      state.mqttStatus = action.payload.data;
     },
   },
 });
@@ -99,6 +117,9 @@ export const {
   clearDeviceState,
   setTriedToConnect,
   clearOpenDtuState,
+  setNetworkStatus,
+  setNtpStatus,
+  setMqttStatus,
 } = opendtuSlice.actions;
 
 export const { reducer: OpenDTUReducer } = opendtuSlice;
