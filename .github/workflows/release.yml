@@ -80,7 +80,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: opendtu-app
-          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+          path: android/app/build/outputs/apk/release/*.apk
           if-no-files-found: error
 
       # skip release creation if this is not a tag push
@@ -91,4 +91,4 @@ jobs:
         with:
           generate_release_notes: true
           prerelease: false
-          files: ${{steps.sign_app.outputs.signedReleaseFile}}
+          files: android/app/build/outputs/apk/release/*.apk
