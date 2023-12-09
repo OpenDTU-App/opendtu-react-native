@@ -53,7 +53,7 @@
         "checkDatabase": "Check if the database is running and reachable."
     },
     "setup": {
-        "setupComplete": "Setup complete! \uD83C\uDF89",
+        "setupComplete": "Setup complete! 🎉",
         "goToDashboard": "Go to dashboard",
         "authenticateOpendtuInstance": "Authenticate OpenDTU instance",
         "username": "Username",
@@ -76,7 +76,7 @@
         "language": "Language",
         "languageDescription": "Change the language of the app",
         "aboutApp": "About the App",
-        "aboutDescription": "Licenses \u2022 Version",
+        "aboutDescription": "Licenses • Version",
         "selectDatabase": "Select Database",
         "changeTheTheme": "Change the Theme?",
         "changeTheLanguage": "Change the Language?",
@@ -86,7 +86,7 @@
         "manageDatabase": "Manage database {{name}}"
     },
     "mdns": {
-        "scanning": "Scanning...",
+        "scanning": "Scanning…",
         "noDevicesFound": "No devices found"
     },
     "none": "None",
@@ -102,7 +102,7 @@
     },
     "delete": "Delete",
     "deviceOfflineWrapper": {
-        "connecting": "Connecting...",
+        "connecting": "Connecting…",
         "pleaseWait": "Please wait while we try to connect to the device.",
         "openDeviceList": "Open Device List",
         "deviceOffline": "Device Offline",
@@ -164,7 +164,7 @@
     "opendtu": {
         "title": "OpenDTU",
         "systemInformation": "System Information",
-        "systemInformationDescription": "Firmware \u2022 Hardware \u2022 Memory \u2022 Radio",
+        "systemInformationDescription": "Firmware • Hardware • Memory • Radio",
         "systemInformationScreen": {
             "firmwareInformation": "Firmware Information",
             "hostname": "Hostname",
@@ -194,7 +194,7 @@
             "cmt2300aChipStatus": "CMT2300A Chip Status"
         },
         "networkInformation": "Network Information",
-        "networkInformationDescription": "WiFi \u2022 Ethernet \u2022 mDNS",
+        "networkInformationDescription": "WiFi • Ethernet • mDNS",
         "networkInformationScreen": {
             "wifiStation": "WiFi Station",
             "wifiAccessPoint": "WiFi Access Point",
@@ -215,7 +215,7 @@
             "macAddress": "MAC Address"
         },
         "ntpInformation": "NTP Information",
-        "ntpInformationDescription": "NTP Configuration \u2022 NTP Status",
+        "ntpInformationDescription": "NTP Configuration • NTP Status",
         "ntpInformationScreen": {
             "configurationSummary": "Configuration Summary",
             "ntpServer": "NTP Server",
@@ -231,7 +231,7 @@
             "night": "Night"
         },
         "mqttInformation": "MQTT Information",
-        "mqttInformationDescription": "MQTT Configuration \u2022 MQTT Status",
+        "mqttInformationDescription": "MQTT Configuration • MQTT Status",
         "mqttInformationScreen": {
             "configurationSummary": "Configuration Summary",
             "status": "Status",
