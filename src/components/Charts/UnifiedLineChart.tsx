@@ -7,7 +7,7 @@ import { Platform, processColor, TouchableOpacity, View } from 'react-native';
 import type { LineChartProps } from 'react-native-charts-wrapper';
 import { LineChart } from 'react-native-charts-wrapper';
 import { Box } from 'react-native-flex-layout';
-import { Text, useTheme } from 'react-native-paper';
+import { Icon, Text, useTheme } from 'react-native-paper';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
 import StyledSurface from '@/components/styled/StyledSurface';
@@ -15,6 +15,7 @@ import StyledSurface from '@/components/styled/StyledSurface';
 import useOrientation from '@/hooks/useOrientation';
 
 import { GrafanaColors, GrafanaTextColors } from '@/database';
+import { useAppSelector } from '@/store';
 
 export interface ChartData {
   data?: LineChartProps['data'];
@@ -56,6 +57,12 @@ const UnifiedLineChart: FC<UnifiedLineChartProps> = props => {
   const [height, setHeight] = useState<number>(HEIGHT);
 
   const chartRef = useRef<LineChart | null>(null);
+
+  const isRelativeTime = useAppSelector(
+    state =>
+      state.database.timeRange.end === 'now' &&
+      typeof state.database.timeRange.start === 'object',
+  );
 
   useEffect(() => {
     // remove 100px for top and bottom padding
@@ -168,6 +175,33 @@ const UnifiedLineChart: FC<UnifiedLineChartProps> = props => {
     setAvgValuePerDataSet(avgValues);
   }, [data]);
 
+  const timeRangeText = useMemo(() => {
+    if (!isRelativeTime) {
+      return `${moment(from).format('L HH:mm:ss')} - ${moment(to).format(
+        'L HH:mm:ss',
+      )}`;
+    }
+
+    // last N {seconds, minutes, hours, days, weeks, months, years}
+    const diff = moment(to).diff(moment(from), 'seconds');
+
+    if (diff < 60) {
+      return t('charts.lastNSeconds', { n: diff });
+    }
+
+    if (diff < 60 * 60) {
+      return t('charts.lastNMinutes', { n: Math.round(diff / 60) });
+    }
+
+    if (diff < 60 * 60 * 24) {
+      return t('charts.lastNHours', { n: Math.round(diff / 60 / 60) });
+    }
+
+    if (diff < 60 * 60 * 24 * 7) {
+      return t('charts.lastNDays', { n: Math.round(diff / 60 / 60 / 24) });
+    }
+  }, [from, isRelativeTime, t, to]);
+
   if (error) {
     return (
       <Box>
@@ -183,6 +217,12 @@ const UnifiedLineChart: FC<UnifiedLineChartProps> = props => {
             style={{ color: theme.colors.onErrorContainer }}
           >
             {title}: {error}
+          </Text>
+          <Text
+            variant="bodySmall"
+            style={{ color: theme.colors.onErrorContainer }}
+          >
+            {t('charts.checkDatabase')}
           </Text>
         </Box>
       </Box>
@@ -212,7 +252,7 @@ const UnifiedLineChart: FC<UnifiedLineChartProps> = props => {
           alignItems: 'center',
           justifyContent: 'space-between',
           marginTop: 10,
-          marginLeft: 4,
+          marginHorizontal: 4,
         }}
       >
         <Text
@@ -223,10 +263,22 @@ const UnifiedLineChart: FC<UnifiedLineChartProps> = props => {
         >
           {title}
         </Text>
-        <Text style={{ color: theme.colors.onBackground }} variant="bodySmall">
-          {moment(from).format('L HH:mm:ss')} -{' '}
-          {moment(to).format('L HH:mm:ss')}
-        </Text>
+        <Box
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 5,
+          }}
+        >
+          <Icon source="clock-time-eight-outline" size={16} />
+          <Text
+            style={{ color: theme.colors.onBackground }}
+            variant="bodySmall"
+          >
+            {timeRangeText}
+          </Text>
+        </Box>
       </Box>
       <View style={{ gap: 5 }}>
         <LineChart
@@ -258,7 +310,7 @@ const UnifiedLineChart: FC<UnifiedLineChartProps> = props => {
             labelRotationAngle: 45,
             valueFormatter: 'date',
             timeUnit: 'MILLISECONDS',
-            valueFormatterPattern: 'd.M.Y HH:mm',
+            valueFormatterPattern: 'HH:mm',
             since:
               Platform.OS === 'android'
                 ? UNIX_TS_FIRST_SECOND_OF_2000

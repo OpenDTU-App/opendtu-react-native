@@ -3,7 +3,13 @@ import { logger } from 'react-native-logs';
 
 import type { OpenDTUAuthenticateResponse } from '@/types/opendtu/authenticate';
 import { DeviceState } from '@/types/opendtu/state';
-import type { LiveData, SystemStatus } from '@/types/opendtu/status';
+import type {
+  LiveData,
+  MqttStatus,
+  NetworkStatus,
+  NtpStatus,
+  SystemStatus,
+} from '@/types/opendtu/status';
 import type { Index, OpenDTUConfig } from '@/types/settings';
 
 const log = logger.createLogger();
@@ -19,10 +25,15 @@ export interface GetSystemStatusReturn {
   deviceState: DeviceState;
 }
 
-export type SystemStatusHandler = (
-  data: GetSystemStatusReturn,
-  index: Index,
-) => void;
+export interface HttpStatusData {
+  systemStatus?: SystemStatus;
+  deviceState: DeviceState;
+  networkStatus: NetworkStatus | null;
+  ntpStatus: NtpStatus | null;
+  mqttStatus: MqttStatus | null;
+}
+
+export type HttpStatusHandler = (data: HttpStatusData, index: Index) => void;
 
 class OpenDtuApi {
   // variables for communication
@@ -32,7 +43,7 @@ class OpenDtuApi {
 
   // handlers
   private liveDataHandler: LiveDataHandler | null = null;
-  private systemStatusHandler: SystemStatusHandler | null = null;
+  private httpStatusHandler: HttpStatusHandler | null = null;
   private onConnectedHandler: ((index: Index) => void) | null = null;
   private onDisconnectedHandler: (() => void) | null = null;
 
@@ -107,12 +118,12 @@ class OpenDtuApi {
     this.liveDataHandler = null;
   }
 
-  public registerSystemStatusHandler(handler: SystemStatusHandler): void {
-    this.systemStatusHandler = handler;
+  public registerHttpStatusHandler(handler: HttpStatusHandler): void {
+    this.httpStatusHandler = handler;
   }
 
-  public unregisterSystemStatusHandler(): void {
-    this.systemStatusHandler = null;
+  public unregisterHttpStatusHandler(): void {
+    this.httpStatusHandler = null;
   }
 
   public registerOnConnectedHandler(handler: (index: Index) => void): void {
@@ -431,20 +442,28 @@ class OpenDtuApi {
   public async updateHttpState(): Promise<void> {
     log.info('OpenDtuApi.updateHttpState()');
 
-    if (this.systemStatusHandler && this.index !== null) {
-      const systemStatus = await this.getSystemStatus();
-
-      if (
-        systemStatus.systemStatus &&
-        'git_hash' in systemStatus.systemStatus
-      ) {
-        this.systemStatusHandler(systemStatus, this.index);
-      } else {
-        console.log('OpenDtuApi.updateHttpState() systemStatus is invalid');
-      }
-    } else {
-      console.log('OpenDtuApi.updateHttpState() systemStatusHandler is null');
+    if (this.index === null) {
+      log.warn('OpenDtuApi.updateHttpState() index is null');
+      return;
     }
+
+    if (!this.httpStatusHandler) {
+      log.warn('OpenDtuApi.updateHttpState() httpStatusHandler is null');
+      return;
+    }
+
+    const systemStatus = await this.getSystemStatus();
+
+    this.httpStatusHandler(
+      {
+        systemStatus: systemStatus.systemStatus,
+        deviceState: systemStatus.deviceState,
+        networkStatus: await this.getNetworkStatus(),
+        ntpStatus: await this.getNtpStatus(),
+        mqttStatus: await this.getMqttStatus(),
+      },
+      this.index,
+    );
   }
 
   private getAuthString(): string {
@@ -461,6 +480,51 @@ class OpenDtuApi {
     }
 
     return '';
+  }
+
+  public async getNetworkStatus(): Promise<NetworkStatus | null> {
+    if (!this.baseUrl) {
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest(
+      '/api/network/status',
+      'GET',
+    );
+
+    if (res.status === 200) {
+      return await res.json();
+    }
+
+    return null;
+  }
+
+  public async getNtpStatus(): Promise<NtpStatus | null> {
+    if (!this.baseUrl) {
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest('/api/ntp/status', 'GET');
+
+    if (res.status === 200) {
+      return await res.json();
+    }
+
+    return null;
+  }
+
+  public async getMqttStatus(): Promise<MqttStatus | null> {
+    if (!this.baseUrl) {
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest('/api/mqtt/status', 'GET');
+
+    if (res.status === 200) {
+      return await res.json();
+    }
+
+    return null;
   }
 
   public async makeAuthenticatedRequest(

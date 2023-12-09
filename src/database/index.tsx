@@ -277,7 +277,10 @@ const DatabaseProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
   );
 
   const refreshFunc = useCallback(async () => {
-    if (typeof database === 'undefined' || inverters === null) return;
+    if (typeof database === 'undefined' || inverters === null) {
+      setIsFetching(false);
+      return;
+    }
 
     setIsFetching(true);
 

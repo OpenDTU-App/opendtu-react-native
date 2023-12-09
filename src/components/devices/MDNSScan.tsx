@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList } from 'react-native';
 import { Box } from 'react-native-flex-layout';
@@ -12,16 +12,18 @@ import MDNSScanItem from '@/components/devices/MDNSScanItem';
 export interface MDNSScanProps {
   setError: (error: string) => void;
   setLoading: (loading: boolean) => void;
+  loading: boolean;
 }
 
-const MDNSScan: FC<MDNSScanProps> = ({ setError, setLoading }) => {
+const MDNSScan: FC<MDNSScanProps> = ({ setError, setLoading, loading }) => {
   const { t } = useTranslation();
-  const zeroconf = useMemo(() => new Zeroconf(), []);
 
-  const [discovering, setDiscovering] = React.useState<boolean>(false);
-  const [services, setServices] = React.useState<Service[]>([]);
+  const [discovering, setDiscovering] = useState<boolean>(false);
+  const [services, setServices] = useState<Service[]>([]);
 
   useEffect(() => {
+    const zeroconf = new Zeroconf();
+
     zeroconf.on('start', () => {
       setDiscovering(true);
     });
@@ -62,26 +64,34 @@ const MDNSScan: FC<MDNSScanProps> = ({ setError, setLoading }) => {
       setDiscovering(false);
       setServices([]);
     };
-  }, [zeroconf]);
+  }, []);
+
+  console.log('services', services);
 
   if (discovering && services.length === 0) {
     return (
       <Box
         style={{
+          marginTop: 16,
+          marginBottom: 8,
           flexDirection: 'row',
-          justifyContent: 'center',
           alignItems: 'center',
-          gap: 8,
+          justifyContent: 'center',
+          gap: 16,
         }}
       >
-        <Text>{t('mdns.scanning')} </Text>
-        <ActivityIndicator size={14} />
+        <Text>{t('mdns.scanning')}</Text>
+        <ActivityIndicator animating={true} />
       </Box>
     );
   }
 
   if (!discovering && services.length === 0) {
-    return <Text>{t('mdns.noDevicesFound')}</Text>;
+    return (
+      <Text style={{ marginTop: 16, marginBottom: 8, textAlign: 'center' }}>
+        {t('mdns.noDevicesFound')}
+      </Text>
+    );
   }
 
   return (
@@ -92,6 +102,7 @@ const MDNSScan: FC<MDNSScanProps> = ({ setError, setLoading }) => {
           service={item}
           setError={setError}
           setLoading={setLoading}
+          loading={loading}
         />
       )}
       keyExtractor={item => item.name}

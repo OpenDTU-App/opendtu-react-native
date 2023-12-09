@@ -54,7 +54,7 @@ const App = () => {
 
 const LightTheme: MD3Theme = {
   ...MD3LightTheme,
-  colors: {
+  /*colors: {
     primary: 'rgb(0, 95, 175)',
     onPrimary: 'rgb(255, 255, 255)',
     primaryContainer: 'rgb(212, 227, 255)',
@@ -95,12 +95,12 @@ const LightTheme: MD3Theme = {
     surfaceDisabled: 'rgba(26, 28, 30, 0.12)',
     onSurfaceDisabled: 'rgba(26, 28, 30, 0.38)',
     backdrop: 'rgba(45, 49, 56, 0.4)',
-  },
+  },*/
 };
 
 const DarkTheme: MD3Theme = {
   ...MD3DarkTheme,
-  colors: {
+  /*colors: {
     primary: 'rgb(165, 200, 255)',
     onPrimary: 'rgb(0, 49, 95)',
     primaryContainer: 'rgb(0, 71, 134)',
@@ -141,7 +141,7 @@ const DarkTheme: MD3Theme = {
     surfaceDisabled: 'rgba(227, 226, 230, 0.12)',
     onSurfaceDisabled: 'rgba(227, 226, 230, 0.38)',
     backdrop: 'rgba(45, 49, 56, 0.4)',
-  },
+  },*/
 };
 
 const _App: FC = () => {
@@ -153,14 +153,21 @@ const _App: FC = () => {
 
   const darkMode = useMemo(() => {
     if (appTheme === 'system') {
+      console.log('systemModeWantsDark', systemModeWantsDark);
       return systemModeWantsDark;
     }
 
+    console.log('appTheme === dark', appTheme === 'dark');
     return appTheme === 'dark';
   }, [appTheme, systemModeWantsDark]);
 
   const theme = useMemo(() => {
-    if (darkMode) return DarkTheme;
+    if (darkMode) {
+      console.log('darkMode');
+      return DarkTheme;
+    }
+
+    console.log('lightMode');
     return LightTheme;
   }, [darkMode]);
 

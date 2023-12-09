@@ -18,6 +18,7 @@ module.exports = {
         shippedProposals: true,
       },
     ],
+    //['@babel/plugin-transform-private-property-in-object', { loose: true }],
     'react-native-reanimated/plugin',
     [
       'module-resolver',

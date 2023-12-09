@@ -15,6 +15,9 @@ import DeviceListScreen from '@/views/navigation/screens/DeviceListScreen';
 import DeviceSettingsScreen from '@/views/navigation/screens/DeviceSettingsScreen';
 import MainScreen from '@/views/navigation/screens/MainScreen';
 import ManageDatabasesScreen from '@/views/navigation/screens/ManageDatabasesScreen';
+import MqttInformationScreen from '@/views/navigation/screens/MqttInformationScreen';
+import NetworkInformationScreen from '@/views/navigation/screens/NetworkInformationScreen';
+import NtpInformationScreen from '@/views/navigation/screens/NtpInformationScreen';
 import SelectDatabaseScreen from '@/views/navigation/screens/SelectDatabaseScreen';
 import SetupAddOpenDTUScreen from '@/views/navigation/screens/SetupAddOpenDTUScreen';
 import SetupAuthenticateOpenDTUInstanceScreen from '@/views/navigation/screens/SetupAuthenticateOpenDTUInstanceScreen';
@@ -94,6 +97,21 @@ const NavigationStack: FC = () => {
         name="AboutOpenDTUScreen"
         component={AboutOpenDTUScreen}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NetworkInformationScreen"
+        component={NetworkInformationScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NtpInformationScreen"
+        component={NtpInformationScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="MqttInformationScreen"
+        component={MqttInformationScreen}
+        options={{ headerBackVisible: true }}
       />
     </Stack.Navigator>
   );

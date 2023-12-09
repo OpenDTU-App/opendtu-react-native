@@ -19,10 +19,10 @@ I am a OpenDTU user, but I am not affiliated with the original project. However,
     - [ ] Firmware Upgrade with Firmware Browser
     - [ ] Device Reboot
   - [ ] Information
-    - [ ] System Information
-    - [ ] Network Information
-    - [ ] NTP Information
-    - [ ] MQTT Information
+    - [x] System Information
+    - [x] Network Information
+    - [x] NTP Information
+    - [x] MQTT Information
     - [ ] tbd if also console
   - [ ] Livedata
     - [x] Today's Yield 

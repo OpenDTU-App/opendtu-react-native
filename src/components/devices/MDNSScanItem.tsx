@@ -17,12 +17,14 @@ export interface MDNSScanItemProps {
   service: Service;
   setError: (error: string) => void;
   setLoading: (loading: boolean) => void;
+  loading: boolean;
 }
 
 const MDNSScanItem: FC<MDNSScanItemProps> = ({
   service,
   setError,
   setLoading,
+  loading,
 }) => {
   const openDtuApi = useApi();
   const dispatch = useAppDispatch();
@@ -34,6 +36,7 @@ const MDNSScanItem: FC<MDNSScanItemProps> = ({
   );
 
   const handlePress = useCallback(async () => {
+    setLoading(true);
     const url = new URL(`http://${service.host}:${service.port}`);
 
     try {
@@ -78,6 +81,7 @@ const MDNSScanItem: FC<MDNSScanItemProps> = ({
     dispatch(setSetupBaseUrl({ baseUrl }));
 
     navigation.navigate('SetupAuthenticateOpenDTUInstanceScreen');
+    setLoading(false);
   }, [
     baseUrls,
     dispatch,
@@ -95,6 +99,7 @@ const MDNSScanItem: FC<MDNSScanItemProps> = ({
       description={service.txt?.model}
       left={props => <List.Icon {...props} icon="wifi" />}
       onPress={handlePress}
+      disabled={loading}
     />
   );
 };

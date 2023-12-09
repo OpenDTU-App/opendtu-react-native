@@ -92,3 +92,63 @@ export interface SystemStatus {
   cmt_configured: boolean;
   cmt_connected: boolean;
 }
+
+export interface NetworkStatus {
+  // WifiStationInfo
+  sta_status: boolean;
+  sta_ssid: string;
+  sta_bssid: string;
+  sta_rssi: number;
+
+  // WifiApInfo
+  ap_status: boolean;
+  ap_ssid: string;
+  ap_stationnum: number;
+
+  // InterfaceNetworkInfo
+  network_hostname: string;
+  network_ip: string;
+  network_netmask: string;
+  network_gateway: string;
+  network_dns1: string;
+  network_dns2: string;
+  network_mac: string;
+  network_mode: string;
+
+  // InterfaceApInfo
+  ap_ip: string;
+  ap_mac: string;
+}
+
+export interface MqttStatus {
+  mqtt_enabled: boolean;
+  mqtt_hostname: string;
+  mqtt_port: number;
+  mqtt_username: string;
+  mqtt_topic: string;
+  mqtt_publish_interval: number;
+  mqtt_clean_session: boolean;
+  mqtt_retain: boolean;
+  mqtt_tls: boolean;
+  mqtt_root_ca_cert_info: string;
+  mqtt_tls_cert_login: boolean;
+  mqtt_client_cert_info: string;
+  mqtt_connected: boolean;
+  mqtt_hass_enabled: boolean;
+  mqtt_hass_expire: boolean;
+  mqtt_hass_retain: boolean;
+  mqtt_hass_topic: string;
+  mqtt_hass_individualpanels: boolean;
+}
+
+export interface NtpStatus {
+  ntp_server: string;
+  ntp_timezone: string;
+  ntp_timezone_descr: string;
+  ntp_status: boolean;
+  ntp_localtime: string;
+  sun_risetime: string;
+  sun_settime: string;
+  sun_isDayPeriod: boolean;
+  sun_isSunsetAvailable: boolean;
+}
