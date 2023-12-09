@@ -7,6 +7,27 @@ I am a OpenDTU user, but I am not affiliated with the original project. However,
 - [x] App Icon
 - [x] Splash Screen
 - [ ] Add iOS support (currently only tested on / implemented for Android)
+- [ ] Original Functionality
+  - [ ] Settings
+    - [ ] Network Settings
+    - [ ] MQTT Settings
+    - [ ] Inverter Settings
+    - [ ] Security Settings
+    - [ ] DTU Settings
+    - [ ] Device Manager
+    - [ ] Config Management
+    - [ ] Firmware Upgrade with Firmware Browser
+    - [ ] Device Reboot
+  - [ ] Information
+    - [ ] System Information
+    - [ ] Network Information
+    - [ ] NTP Information
+    - [ ] MQTT Information
+    - [ ] tbd if also console
+  - [ ] Livedata
+    - [x] Today's Yield 
+    - [x] Power
+    - [ ] Temperature & Other stats (design tbd)
 
 ### Testing
 Stuff that I cannot test myself
