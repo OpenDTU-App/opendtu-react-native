@@ -1,6 +1,6 @@
 {
   "name": "opendtu-react-native",
-  "version": "0.0.1",
+  "version": "0.1.5",
   "private": true,
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
     "test": "jest",
     "postinstall": "yarn run npm-license-crawler -onlyDirectDependencies -json licenses.json && patch-package",
     "postuninstall": "yarn run npm-license-crawler -onlyDirectDependencies -json licenses.json",
-    "build-android": "cd android && ./gradlew assembleRelease",
+    "build-android": "pushd android ; ./gradlew assembleRelease ; popd",
     "postversion": "react-native-version --never-amend"
   },
   "dependencies": {

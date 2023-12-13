@@ -63,8 +63,9 @@ jobs:
 
       - name: Build Android
         run: |
-          cd android && ./gradlew assembleRelease --no-daemon --info 
-          
+          cd android
+          ./gradlew assembleRelease --no-daemon --info
+          for f in app/build/outputs/apk/release/*-unsigned.apk; do mv "$f" "${f%-unsigned.apk}.apk"; done          
 
       - name: Sign App Bundle
         id: sign_app
@@ -75,6 +76,8 @@ jobs:
           alias: ${{ secrets.ANDROID_SIGNING_ALIAS }}
           keyStorePassword: ${{ secrets.ANDROID_SIGNING_STORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}
+        run:
+          rm app/build/outputs/apk/release/*-aligned.apk
 
       - name: Upload APK as artifact
         uses: actions/upload-artifact@v3
