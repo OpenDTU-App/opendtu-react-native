@@ -96,4 +96,4 @@ jobs:
         with:
           generate_release_notes: true
           prerelease: false
-          files: android/app/build/outputs/apk/release/*.apk
+          files: android/app/build/outputs/apk/release/*-signed.apk
