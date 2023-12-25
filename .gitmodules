@@ -1,0 +1,3 @@
+[submodule "src/translations/translation-files"]
+	path = src/translations/translation-files
+	url = git@github.com:OpenDTU-App/opendtu-react-native-translations.git

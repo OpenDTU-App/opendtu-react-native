@@ -3,6 +3,16 @@
 This is a mobile app for the [OpenDTU project by tbnobody](https://github.com/tbnobody/OpenDTU).
 I am a OpenDTU user, but I am not affiliated with the original project. However, for API communication, I inspired my code by the original webapp.
 
+## Installation
+There are signed .apk files inside the "Releases" tab. As of now, the is no plan to publish to Google Play store or F-Droid. However, if you want to help with F-Droid, feel free to contact me.
+
+## Development
+There are two branches. `main` is the stable branch, `dev` is the development branch. If you want to contribute, please create a pull request to `dev`.
+
+## Translations
+Translations are inside a [submodule](https://github.com/OpenDTU-App/opendtu-react-native-translations) located in `src/translations/translation-files`.
+This helps to have a better developer experience when working with Weblate.
+
 ### ToDo
 - [x] App Icon
 - [x] Splash Screen

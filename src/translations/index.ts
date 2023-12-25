@@ -3,8 +3,8 @@ import i18n from 'i18next';
 
 import { initReactI18next } from 'react-i18next';
 
-import de from './de.json';
-import en from './en.json';
+import de from './translation-files/de.json';
+import en from './translation-files/en.json';
 
 if (!i18n.isInitialized) {
   i18n
