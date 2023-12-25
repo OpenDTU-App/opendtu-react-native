@@ -7,20 +7,32 @@ jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      checks: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - uses: actions/setup-node@master
-      - uses: c-hive/gha-yarn-cache@v1
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+
+      - name: Cache node modules
+        uses: c-hive/gha-yarn-cache@v1
 
       - name: Install node modules
         run: |
-          yarn install
+          yarn install --frozen-lockfile --prefer-offline
 
-      - name: Run Lint
+      - name: Run ESLint
         run: |
           yarn lint --max-warnings=0
 
-      - name: Run test
-        run: |
-          yarn test
+      - name: Run tests
+        uses: willcaul/jest-github-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          test-command: "yarn test"
