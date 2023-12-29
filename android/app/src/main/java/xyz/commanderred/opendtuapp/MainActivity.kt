@@ -1,13 +1,13 @@
 package xyz.commanderred.opendtuapp;
 
-import com.facebook.react.ReactActivity;
-import com.facebook.react.ReactActivityDelegate;
-import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
-import com.facebook.react.defaults.DefaultReactActivityDelegate;
+import com.facebook.react.ReactActivity
+import com.facebook.react.ReactActivityDelegate
+import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
+import com.facebook.react.defaults.DefaultReactActivityDelegate
 
-import android.os.Bundle;
+import android.os.Bundle
 
-import org.devio.rn.splashscreen.SplashScreen;
+import org.devio.rn.splashscreen.SplashScreen
 
 public class MainActivity extends ReactActivity {
 

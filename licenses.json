@@ -232,10 +232,10 @@
         "licenseUrl": "https://github.com/Apercu/react-native-zeroconf/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native@0.72.6": {
+    "react-native@0.73.1": {
         "licenses": "MIT",
-        "repository": "github:facebook/react-native",
-        "licenseUrl": "github:facebook/react-native",
+        "repository": "https://github.com/facebook/react-native",
+        "licenseUrl": "https://github.com/facebook/react-native/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
     "react-redux@8.1.3": {
