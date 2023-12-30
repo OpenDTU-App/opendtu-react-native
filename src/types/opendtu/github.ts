@@ -17,4 +17,7 @@ export interface WithTimestamp<T> {
 export interface GithubState {
   latestRelease: WithTimestamp<Release | null>;
   releases: WithTimestamp<Release[]>;
+
+  // Maybe at a later point: https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#generate-release-notes-content-for-a-release
+  latestAppRelease: WithTimestamp<Release | null>;
 }

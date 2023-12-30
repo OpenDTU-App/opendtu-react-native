@@ -15,6 +15,10 @@ const initialState: GithubState = {
     data: null,
     lastUpdate: null,
   },
+  latestAppRelease: {
+    data: null,
+    lastUpdate: null,
+  },
 };
 
 const githubSlice = createSlice({
@@ -33,10 +37,41 @@ const githubSlice = createSlice({
         lastUpdate: new Date(),
       };
     },
+    setLatestAppRelease: (state, action: SetGithubLatestReleaseAction) => {
+      state.latestAppRelease = {
+        data: action.payload.latest,
+        lastUpdate: new Date(),
+      };
+    },
+    clearReleases: state => {
+      state.releases = {
+        data: [],
+        lastUpdate: null,
+      };
+    },
+    clearLatestRelease: state => {
+      state.latestRelease = {
+        data: null,
+        lastUpdate: null,
+      };
+    },
+    clearLatestAppRelease: state => {
+      state.latestAppRelease = {
+        data: null,
+        lastUpdate: null,
+      };
+    },
   },
 });
 
-export const { setReleases, setLatestRelease } = githubSlice.actions;
+export const {
+  setReleases,
+  setLatestRelease,
+  setLatestAppRelease,
+  clearReleases,
+  clearLatestRelease,
+  clearLatestAppRelease,
+} = githubSlice.actions;
 
 export const { reducer: GithubReducer } = githubSlice;
 

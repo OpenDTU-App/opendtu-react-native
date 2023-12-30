@@ -3,11 +3,15 @@ import type { Release } from '@octokit/webhooks-types';
 import type { FC } from 'react';
 import { useEffect } from 'react';
 
-import { setLatestRelease, setReleases } from '@/slices/github';
+import {
+  setLatestAppRelease,
+  setLatestRelease,
+  setReleases,
+} from '@/slices/github';
 
 import ago from '@/utils/ago';
 
-import { GithubBaseConfig, useGithub } from '@/github/index';
+import { AppGithubBaseConfig, OpenDTUGithubBaseConfig, useGithub } from '@/github/index';
 import { useAppDispatch, useAppSelector } from '@/store';
 
 const FetchHandler: FC = () => {
@@ -26,6 +30,12 @@ const FetchHandler: FC = () => {
       : true,
   );
 
+  const latestAppReleaseRefetchOk = useAppSelector(state =>
+    state.github.latestAppRelease.lastUpdate
+      ? ago(state.github.latestAppRelease.lastUpdate) > 1000 * 60 * 10 // 10 minutes
+      : true,
+  );
+
   const githubApi = useGithub();
 
   useEffect(() => {
@@ -38,7 +48,7 @@ const FetchHandler: FC = () => {
         if (latestReleaseRefetchOk) {
           const latestRelease = await githubApi.request(
             'GET /repos/{owner}/{repo}/releases/latest',
-            GithubBaseConfig,
+            OpenDTUGithubBaseConfig,
           );
 
           dispatch(setLatestRelease({ latest: latestRelease.data as Release }));
@@ -49,12 +59,23 @@ const FetchHandler: FC = () => {
         if (allReleasesRefetchOk) {
           const releases = await githubApi.request(
             'GET /repos/{owner}/{repo}/releases',
-            GithubBaseConfig,
+            OpenDTUGithubBaseConfig,
           );
 
           dispatch(setReleases({ releases: releases.data as Release[] }));
         } else {
           console.log('SKIP allReleasesRefetchOk');
+        }
+
+        if (latestAppReleaseRefetchOk) {
+          const appRelease = await githubApi.request(
+            'GET /repos/{owner}/{repo}/releases/latest',
+            AppGithubBaseConfig,
+          );
+
+          dispatch(setLatestAppRelease({ latest: appRelease.data as Release }));
+        } else {
+          console.log('SKIP latestAppReleaseRefetchOk');
         }
       } catch (e) {
         console.warn('GITHUB FETCH ERROR', e);
@@ -68,6 +89,7 @@ const FetchHandler: FC = () => {
     githubApi,
     latestReleaseRefetchOk,
     allReleasesRefetchOk,
+    latestAppReleaseRefetchOk,
   ]);
 
   return null;

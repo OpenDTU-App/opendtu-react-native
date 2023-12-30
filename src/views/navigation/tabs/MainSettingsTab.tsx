@@ -6,11 +6,12 @@ import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
-import { List, useTheme } from 'react-native-paper';
+import { Badge, List, useTheme } from 'react-native-paper';
 
 import ChangeLanguageModal from '@/components/modals/ChangeLanguageModal';
 import ChangeThemeModal from '@/components/modals/ChangeThemeModal';
 
+import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 import useIsConnected from '@/hooks/useIsConnected';
 
 import { StyledSafeAreaView } from '@/style';
@@ -34,6 +35,7 @@ const MainSettingsTab: FC = () => {
   const closeChangeLanguageModal = () => setShowChangeLanguageModal(false);
 
   const websocketConnected = useIsConnected();
+  const [hasNewAppVersion] = useHasNewAppVersion();
 
   const handleAbout = useCallback(() => {
     navigation.navigate('AboutSettingsScreen');
@@ -77,6 +79,13 @@ const MainSettingsTab: FC = () => {
               title={t('settings.aboutApp')}
               description={t('settings.aboutDescription')}
               left={props => <List.Icon {...props} icon="information" />}
+              right={props =>
+                hasNewAppVersion ? (
+                  <Badge visible={true} style={{ marginTop: 8 }} {...props}>
+                    {t('settings.newAppRelease')}
+                  </Badge>
+                ) : null
+              }
               onPress={handleAbout}
             />
           </List.Section>
