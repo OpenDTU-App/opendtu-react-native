@@ -4,7 +4,11 @@ This is a mobile app for the [OpenDTU project by tbnobody](https://github.com/tb
 I am a OpenDTU user, but I am not affiliated with the original project. However, for API communication, I inspired my code by the original webapp.
 
 ## Installation
-There are signed .apk files inside the "Releases" tab. As of now, the is no plan to publish to Google Play store or F-Droid. However, if you want to help with F-Droid, feel free to contact me.
+There are signed .apk files inside the "Releases" tab. As of now, the is no plan to publish to Google Play store ~or F-Droid~.
+<br>
+~However, if you want to help with F-Droid, feel free to contact me.~ Thanks to @IzzySoft for [having the app in their repo](https://apt.izzysoft.de/fdroid/index/apk/xyz.commanderred.opendtuapp/)!
+
+![IzzyOnDroid Badge](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/xyz.commanderred.opendtuapp)
 
 ## Development
 There are two branches. `main` is the stable branch, `dev` is the development branch. If you want to contribute, please create a pull request to `dev`.
