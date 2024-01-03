@@ -13,6 +13,7 @@ import AboutSettingsScreen from '@/views/navigation/screens/AboutSettingsScreen'
 import ConfigureGraphsScreen from '@/views/navigation/screens/ConfigureGraphsScreen';
 import DeviceListScreen from '@/views/navigation/screens/DeviceListScreen';
 import DeviceSettingsScreen from '@/views/navigation/screens/DeviceSettingsScreen';
+import LicensesScreen from '@/views/navigation/screens/LicensesScreen';
 import MainScreen from '@/views/navigation/screens/MainScreen';
 import ManageDatabasesScreen from '@/views/navigation/screens/ManageDatabasesScreen';
 import MqttInformationScreen from '@/views/navigation/screens/MqttInformationScreen';
@@ -111,6 +112,11 @@ const NavigationStack: FC = () => {
       <Stack.Screen
         name="MqttInformationScreen"
         component={MqttInformationScreen}
+        options={{ headerBackVisible: true }}
+      />
+      <Stack.Screen
+        name="LicensesScreen"
+        component={LicensesScreen}
         options={{ headerBackVisible: true }}
       />
     </Stack.Navigator>

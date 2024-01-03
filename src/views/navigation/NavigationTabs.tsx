@@ -6,6 +6,8 @@ import {
   useTheme,
 } from 'react-native-paper';
 
+import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
+
 import LivedataTab from '@/views/navigation/tabs/LivedataTab';
 import MainSettingsTab from '@/views/navigation/tabs/MainSettingsTab';
 
@@ -22,18 +24,9 @@ const BottomNavigation: FC = () => {
   const { t } = useTranslation();
   const [index, setIndex] = useState<number>(0);
 
-  /*const [routes] = useState<BaseRoutes>([
-    {
-      key: 'livedata',
-      title: 'Livedata',
-      focusedIcon: 'solar-power',
-    },
-    {
-      key: 'settings',
-      title: 'Settings',
-      focusedIcon: 'cog',
-    },
-  ]);*/
+  const [hasNewAppVersion] = useHasNewAppVersion({
+    usedForIndicatorOnly: true,
+  });
 
   const routes = useMemo<BaseRoutes>(
     () => [
@@ -46,9 +39,10 @@ const BottomNavigation: FC = () => {
         key: 'settings',
         title: t('navigation.settings'),
         focusedIcon: 'cog',
+        badge: hasNewAppVersion,
       },
     ],
-    [t],
+    [t, hasNewAppVersion],
   );
 
   const renderScene = BottomNavigationPaper.SceneMap({

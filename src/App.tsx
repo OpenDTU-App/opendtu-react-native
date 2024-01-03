@@ -14,6 +14,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider as ReduxProvider } from 'react-redux';
 
+import EnableAppUpdatesModal from '@/components/modals/EnableAppUpdatesModal';
+
 import ApiProvider from '@/api/ApiHandler';
 import DatabaseProvider from '@/database';
 import GithubProvider from '@/github';
@@ -231,6 +233,10 @@ const _App: FC = () => {
     });
   }, [i18n.language, t]);
 
+  const showEnableAppUpdatesModal = useAppSelector(
+    state => state.settings.enableAppUpdates === null,
+  );
+
   if (!i18nLanguageMatchesSettings) {
     return null;
   }
@@ -245,6 +251,13 @@ const _App: FC = () => {
       <NavigationContainer theme={navigationTheme}>
         <NavigationStack />
       </NavigationContainer>
+      <EnableAppUpdatesModal
+        visible={showEnableAppUpdatesModal}
+        /* eslint-disable-next-line @typescript-eslint/no-empty-function */
+        onDismiss={() => {}}
+        dismissable={false}
+        dismissableBackButton={false}
+      />
     </PaperProvider>
   );
 };

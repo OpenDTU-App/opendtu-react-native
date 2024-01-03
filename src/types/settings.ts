@@ -28,6 +28,7 @@ export interface SettingsState {
   // app specific
   appTheme: 'light' | 'dark' | 'system';
   language: 'en' | 'de';
+  enableAppUpdates: boolean | null;
 
   // opendtu
   dtuConfigs: OpenDTUConfig[];
@@ -99,4 +100,8 @@ export type UpdateDatabaseConfigAction = PayloadAction<{
 export type UpdateDTUDatabaseUuidAction = PayloadAction<{
   index: Index;
   databaseUuid: string | 'none';
+}>;
+
+export type EnableAppUpdatesAction = PayloadAction<{
+  enable: boolean;
 }>;
