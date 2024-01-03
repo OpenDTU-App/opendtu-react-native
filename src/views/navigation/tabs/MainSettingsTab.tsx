@@ -35,7 +35,9 @@ const MainSettingsTab: FC = () => {
   const closeChangeLanguageModal = () => setShowChangeLanguageModal(false);
 
   const websocketConnected = useIsConnected();
-  const [hasNewAppVersion] = useHasNewAppVersion();
+  const [hasNewAppVersion] = useHasNewAppVersion({
+    usedForIndicatorOnly: true,
+  });
 
   const handleAbout = useCallback(() => {
     navigation.navigate('AboutSettingsScreen');
@@ -43,6 +45,10 @@ const MainSettingsTab: FC = () => {
 
   const handleAboutOpenDTU = useCallback(() => {
     navigation.navigate('AboutOpenDTUScreen');
+  }, [navigation]);
+
+  const handleLicenses = useCallback(() => {
+    navigation.navigate('LicensesScreen');
   }, [navigation]);
 
   const handleNetworkInformation = useCallback(() => {
@@ -61,34 +67,6 @@ const MainSettingsTab: FC = () => {
     <StyledSafeAreaView theme={theme}>
       <Box style={{ width: '100%', flex: 1 }}>
         <ScrollView>
-          <List.Section>
-            <List.Subheader>{t('settings.general')}</List.Subheader>
-            <List.Item
-              title={t('settings.theme')}
-              description={t('settings.themeDescription')}
-              left={props => <List.Icon {...props} icon="theme-light-dark" />}
-              onPress={openChangeThemeModal}
-            />
-            <List.Item
-              title={t('settings.language')}
-              description={t('settings.languageDescription')}
-              left={props => <List.Icon {...props} icon="translate" />}
-              onPress={openChangeLanguageModal}
-            />
-            <List.Item
-              title={t('settings.aboutApp')}
-              description={t('settings.aboutDescription')}
-              left={props => <List.Icon {...props} icon="information" />}
-              right={props =>
-                hasNewAppVersion ? (
-                  <Badge visible={true} style={{ marginTop: 8 }} {...props}>
-                    {t('settings.newAppRelease')}
-                  </Badge>
-                ) : null
-              }
-              onPress={handleAbout}
-            />
-          </List.Section>
           <List.Section>
             <List.Subheader>{t('opendtu.title')}</List.Subheader>
             <List.Item
@@ -122,6 +100,40 @@ const MainSettingsTab: FC = () => {
               onPress={handleMqttInformation}
               disabled={!websocketConnected}
               style={{ opacity: websocketConnected ? 1 : 0.5 }}
+            />
+          </List.Section>
+          <List.Section>
+            <List.Subheader>{t('settings.general')}</List.Subheader>
+            <List.Item
+              title={t('settings.theme')}
+              description={t('settings.themeDescription')}
+              left={props => <List.Icon {...props} icon="theme-light-dark" />}
+              onPress={openChangeThemeModal}
+            />
+            <List.Item
+              title={t('settings.language')}
+              description={t('settings.languageDescription')}
+              left={props => <List.Icon {...props} icon="translate" />}
+              onPress={openChangeLanguageModal}
+            />
+            <List.Item
+              title={t('settings.aboutApp')}
+              description={t('settings.aboutDescription')}
+              left={props => <List.Icon {...props} icon="information" />}
+              right={props =>
+                hasNewAppVersion ? (
+                  <Badge visible={true} style={{ marginTop: 8 }} {...props}>
+                    {t('settings.newAppRelease')}
+                  </Badge>
+                ) : null
+              }
+              onPress={handleAbout}
+            />
+            <List.Item
+              title={t('settings.licenses')}
+              description={t('settings.licensesDescription')}
+              left={props => <List.Icon {...props} icon="file-document" />}
+              onPress={handleLicenses}
             />
           </List.Section>
         </ScrollView>

@@ -24,7 +24,9 @@ const BottomNavigation: FC = () => {
   const { t } = useTranslation();
   const [index, setIndex] = useState<number>(0);
 
-  const [hasNewAppVersion] = useHasNewAppVersion();
+  const [hasNewAppVersion] = useHasNewAppVersion({
+    usedForIndicatorOnly: true,
+  });
 
   const routes = useMemo<BaseRoutes>(
     () => [

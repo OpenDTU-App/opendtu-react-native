@@ -11,7 +11,11 @@ import {
 
 import ago from '@/utils/ago';
 
-import { AppGithubBaseConfig, OpenDTUGithubBaseConfig, useGithub } from '@/github/index';
+import {
+  AppGithubBaseConfig,
+  OpenDTUGithubBaseConfig,
+  useGithub,
+} from '@/github/index';
 import { useAppDispatch, useAppSelector } from '@/store';
 
 const FetchHandler: FC = () => {
@@ -34,6 +38,10 @@ const FetchHandler: FC = () => {
     state.github.latestAppRelease.lastUpdate
       ? ago(state.github.latestAppRelease.lastUpdate) > 1000 * 60 * 10 // 10 minutes
       : true,
+  );
+
+  const enableAppUpdates = useAppSelector(
+    state => !!state.settings.enableAppUpdates,
   );
 
   const githubApi = useGithub();
@@ -67,7 +75,7 @@ const FetchHandler: FC = () => {
           console.log('SKIP allReleasesRefetchOk');
         }
 
-        if (latestAppReleaseRefetchOk) {
+        if (latestAppReleaseRefetchOk && enableAppUpdates) {
           const appRelease = await githubApi.request(
             'GET /repos/{owner}/{repo}/releases/latest',
             AppGithubBaseConfig,
@@ -90,6 +98,7 @@ const FetchHandler: FC = () => {
     latestReleaseRefetchOk,
     allReleasesRefetchOk,
     latestAppReleaseRefetchOk,
+    enableAppUpdates,
   ]);
 
   return null;

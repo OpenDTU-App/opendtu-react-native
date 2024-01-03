@@ -154,7 +154,7 @@
         "licenseUrl": "https://github.com/onubo/react-native-logs/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-markdown-display@7.0.0-alpha.2": {
+    "react-native-markdown-display@7.0.2": {
         "licenses": "MIT",
         "repository": "https://github.com/iamacup/react-native-markdown-display",
         "licenseUrl": "https://github.com/iamacup/react-native-markdown-display/raw/master/LICENSE",

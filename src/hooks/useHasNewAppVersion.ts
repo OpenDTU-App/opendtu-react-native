@@ -5,9 +5,15 @@ import { useMemo } from 'react';
 
 import { useAppSelector } from '@/store';
 
-const useHasNewAppVersion = () => {
+const useHasNewAppVersion = (options?: { usedForIndicatorOnly: boolean }) => {
+  const { usedForIndicatorOnly = false } = options ?? {};
+
   const appRelease = useAppSelector(
     state => state.github.latestAppRelease?.data,
+  );
+
+  const showIndicator = useAppSelector(
+    state => !!state.settings.enableAppUpdates,
   );
 
   return useMemo(() => {
@@ -19,8 +25,11 @@ const useHasNewAppVersion = () => {
       '>',
     );
 
-    return [newAppVersionAvailable, appRelease] as const;
-  }, [appRelease]);
+    return [
+      !showIndicator && usedForIndicatorOnly ? false : newAppVersionAvailable,
+      appRelease,
+    ] as const;
+  }, [appRelease, showIndicator, usedForIndicatorOnly]);
 };
 
 export default useHasNewAppVersion;
