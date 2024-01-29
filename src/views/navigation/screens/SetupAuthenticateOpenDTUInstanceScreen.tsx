@@ -31,7 +31,7 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
 
   const openDtuApi = useApi();
 
-  const address = useAppSelector(state => state.opendtu.setup.baseUrl);
+  const address = useAppSelector(state => state.opendtu.setup?.baseUrl);
 
   const previousStepValid = address !== null;
 
