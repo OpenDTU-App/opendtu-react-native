@@ -59,7 +59,7 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     try {
       url = new URL(ourAddress);
     } catch {
-      setError('Invalid address');
+      setError(t('setup.errors.invalidAddress'));
       return;
     }
 
@@ -110,7 +110,7 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     navigation.navigate('SetupAuthenticateOpenDTUInstanceScreen');
 
     setLoading(false);
-  }, [address, baseUrls, dispatch, navigation, openDtuApi]);
+  }, [t, address, baseUrls, dispatch, navigation, openDtuApi]);
 
   const valid = !!address;
 

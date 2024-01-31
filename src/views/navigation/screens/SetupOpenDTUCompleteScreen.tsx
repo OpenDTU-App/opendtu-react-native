@@ -21,7 +21,7 @@ const SetupOpenDTUCompleteScreen: FC<PropsWithNavigation> = ({
   const setupConfig = useAppSelector(state => state.opendtu.setup);
 
   const handleFinishSetup = useCallback(() => {
-    if (!setupConfig.userString || !setupConfig.baseUrl) return;
+    if (!setupConfig.baseUrl) return;
 
     dispatch(
       addDtuConfig({

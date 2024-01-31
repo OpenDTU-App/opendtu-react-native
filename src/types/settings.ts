@@ -7,7 +7,7 @@ export type Index = number;
 export interface OpenDTUConfig {
   // Config to connect to OpenDTU. It will be possible to configure multiple
   baseUrl: string;
-  userString: string; // same as 'user' from webinterface localstorage
+  userString: string | null; // same as 'user' from webinterface localstorage (null means no auth, so read-only)
   serialNumber: string | null; // null means never connected
   hostname: string | null; // null means never connected
   customName: string | null; // null means customName is not set

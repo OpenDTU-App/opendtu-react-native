@@ -5,6 +5,7 @@ import { Box } from 'react-native-flex-layout';
 import { logger } from 'react-native-logs';
 import {
   Button,
+  Divider,
   HelperText,
   TextInput,
   Title,
@@ -12,6 +13,8 @@ import {
 } from 'react-native-paper';
 
 import { setSetupUserString } from '@/slices/opendtu';
+
+import { DeviceState } from '@/types/opendtu/state';
 
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
@@ -57,7 +60,7 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
     );
 
     if (result === false) {
-      setError('Invalid credentials');
+      setError(t('setup.errors.invalidCredentials'));
       log.info('Invalid credentials');
       setLoading(false);
       return;
@@ -70,12 +73,40 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
 
       return;
     } else {
-      setError('Something went wrong! Please try again.');
+      setError(t('setup.errors.genericError'));
       log.info('Something went wrong! Please try again.');
     }
 
     setLoading(false);
-  }, [address, username, password, openDtuApi, dispatch, navigation]);
+  }, [t, address, username, password, openDtuApi, dispatch, navigation]);
+
+  const handleAnonymous = useCallback(async () => {
+    if (!address) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const result = await openDtuApi.getSystemStatusFromUrl(new URL(address));
+
+      if (result.deviceState !== DeviceState.Reachable) {
+        setError('Invalid credentials');
+        log.info('Invalid credentials');
+        setLoading(false);
+        return;
+      }
+
+      dispatch(setSetupUserString({ userString: null }));
+      navigation.navigate('SetupOpenDTUCompleteScreen');
+      setLoading(false);
+
+      setLoading(false);
+    } catch (e) {
+      setError(t('setup.errors.genericError'));
+      log.info('Error while connecting to OpenDTU instance', e);
+      setLoading(false);
+    }
+  }, [address, openDtuApi, dispatch, navigation, t]);
 
   return (
     <StyledSafeAreaView theme={theme} style={{ justifyContent: 'center' }}>
@@ -130,6 +161,15 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
           buttonColor={theme.colors.primary}
         >
           {t('setup.login')}
+        </Button>
+        <Divider />
+        <Button
+          // anonymous button
+          mode="text"
+          onPress={handleAnonymous}
+          disabled={loading || !previousStepValid}
+        >
+          {t('setup.anonymous')}
         </Button>
       </Box>
     </StyledSafeAreaView>

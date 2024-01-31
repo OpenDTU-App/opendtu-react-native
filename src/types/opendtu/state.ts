@@ -32,7 +32,7 @@ export type SetSystemStatusAction = PayloadAction<{
 }>;
 
 export type SetSetupUserStringAction = PayloadAction<{
-  userString: string;
+  userString: string | null;
 }>;
 
 export type SetSetupBaseUrlAction = PayloadAction<{

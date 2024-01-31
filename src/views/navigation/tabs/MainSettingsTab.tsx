@@ -2,7 +2,7 @@ import type { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 
 import type { FC } from 'react';
-import { useCallback, useState } from 'react';
+import { useMemo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
@@ -11,6 +11,7 @@ import { Badge, List, useTheme } from 'react-native-paper';
 import ChangeLanguageModal from '@/components/modals/ChangeLanguageModal';
 import ChangeThemeModal from '@/components/modals/ChangeThemeModal';
 
+import useDtuState from '@/hooks/useDtuState';
 import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 import useIsConnected from '@/hooks/useIsConnected';
 
@@ -38,6 +39,28 @@ const MainSettingsTab: FC = () => {
   const [hasNewAppVersion] = useHasNewAppVersion({
     usedForIndicatorOnly: true,
   });
+
+  const hasSystemInformation = !!useDtuState(state => !!state?.systemStatus);
+  const hasNetworkInformation = !!useDtuState(state => !!state?.networkStatus);
+  const hasNtpInformation = !!useDtuState(state => !!state?.ntpStatus);
+  const hasMqttInformation = !!useDtuState(state => !!state?.mqttStatus);
+
+  const systemInformationDisabled = useMemo(
+    () => !hasSystemInformation || !websocketConnected,
+    [hasSystemInformation, websocketConnected],
+  );
+  const networkInformationDisabled = useMemo(
+    () => !hasNetworkInformation || !websocketConnected,
+    [hasNetworkInformation, websocketConnected],
+  );
+  const ntpInformationDisabled = useMemo(
+    () => !hasNtpInformation || !websocketConnected,
+    [hasNtpInformation, websocketConnected],
+  );
+  const mqttInformationDisabled = useMemo(
+    () => !hasMqttInformation || !websocketConnected,
+    [hasMqttInformation, websocketConnected],
+  );
 
   const handleAbout = useCallback(() => {
     navigation.navigate('AboutSettingsScreen');
@@ -74,32 +97,32 @@ const MainSettingsTab: FC = () => {
               description={t('opendtu.systemInformationDescription')}
               left={props => <List.Icon {...props} icon="information" />}
               onPress={handleAboutOpenDTU}
-              disabled={!websocketConnected}
-              style={{ opacity: websocketConnected ? 1 : 0.5 }}
+              disabled={systemInformationDisabled}
+              style={{ opacity: systemInformationDisabled ? 0.5 : 1 }}
             />
             <List.Item
               title={t('opendtu.networkInformation')}
               description={t('opendtu.networkInformationDescription')}
               left={props => <List.Icon {...props} icon="wifi" />}
               onPress={handleNetworkInformation}
-              disabled={!websocketConnected}
-              style={{ opacity: websocketConnected ? 1 : 0.5 }}
+              disabled={networkInformationDisabled}
+              style={{ opacity: networkInformationDisabled ? 0.5 : 1 }}
             />
             <List.Item
               title={t('opendtu.ntpInformation')}
               description={t('opendtu.ntpInformationDescription')}
               left={props => <List.Icon {...props} icon="clock" />}
               onPress={handleNtpInformation}
-              disabled={!websocketConnected}
-              style={{ opacity: websocketConnected ? 1 : 0.5 }}
+              disabled={ntpInformationDisabled}
+              style={{ opacity: ntpInformationDisabled ? 0.5 : 1 }}
             />
             <List.Item
               title={t('opendtu.mqttInformation')}
               description={t('opendtu.mqttInformationDescription')}
               left={props => <List.Icon {...props} icon="broadcast" />}
               onPress={handleMqttInformation}
-              disabled={!websocketConnected}
-              style={{ opacity: websocketConnected ? 1 : 0.5 }}
+              disabled={mqttInformationDisabled}
+              style={{ opacity: mqttInformationDisabled ? 0.5 : 1 }}
             />
           </List.Section>
           <List.Section>
