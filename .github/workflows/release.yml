@@ -63,11 +63,18 @@ jobs:
       - name: Make Gradlew executable
         run: cd android && chmod +x ./gradlew
 
+      - name: Setup build tool version variable
+        shell: bash
+        run: |
+          BUILD_TOOL_VERSION=$(ls /usr/local/lib/android/sdk/build-tools/ | tail -n 1)
+          echo "BUILD_TOOL_VERSION=$BUILD_TOOL_VERSION" >> $GITHUB_ENV
+          echo Last build tool version is: $BUILD_TOOL_VERSION
+
       - name: Build Android
         run: |
           cd android
           ./gradlew assembleRelease --no-daemon --info
-          for f in app/build/outputs/apk/release/*-unsigned.apk; do mv "$f" "${f%-unsigned.apk}.apk"; done          
+          for f in app/build/outputs/apk/release/*-unsigned.apk; do mv "$f" "${f%-unsigned.apk}.apk"; done
 
       - name: Sign App Bundle
         id: sign_app
@@ -78,6 +85,8 @@ jobs:
           alias: ${{ secrets.ANDROID_SIGNING_ALIAS }}
           keyStorePassword: ${{ secrets.ANDROID_SIGNING_STORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOL_VERSION }}
 
       - name: Remove unuseful files
         run:
