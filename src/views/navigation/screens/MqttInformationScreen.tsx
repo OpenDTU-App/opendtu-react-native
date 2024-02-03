@@ -10,7 +10,8 @@ import { Appbar, List, useTheme } from 'react-native-paper';
 
 import SettingsSurface from '@/components/styled/SettingsSurface';
 
-import { useAppSelector } from '@/store';
+import useDtuState from '@/hooks/useDtuState';
+
 import { StyledSafeAreaView } from '@/style';
 
 const MqttInformationScreen: FC = () => {
@@ -23,7 +24,7 @@ const MqttInformationScreen: FC = () => {
     navigation.goBack();
   }, [navigation]);
 
-  const mqttStatus = useAppSelector(state => state.opendtu.mqttStatus);
+  const mqttStatus = useDtuState(state => state?.mqttStatus);
 
   return (
     <>

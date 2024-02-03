@@ -69,7 +69,7 @@ class OpenDtuApi {
     this.baseUrl = baseUrl;
   }
 
-  public setUserString(userString: string): void {
+  public setUserString(userString: string | null): void {
     this.userString = userString;
   }
 
@@ -142,7 +142,7 @@ class OpenDtuApi {
     this.onDisconnectedHandler = null;
   }
 
-  private async getSystemStatusFromUrl(
+  public async getSystemStatusFromUrl(
     url: URL,
   ): Promise<GetSystemStatusReturn> {
     // GET <url>/api/system/status
@@ -288,13 +288,15 @@ class OpenDtuApi {
       return;
     }
 
-    if (this.baseUrl && this.userString) {
+    if (this.baseUrl) {
       const urlObject = new URL(this.baseUrl);
       const authString = this.getAuthString();
       const protocol = urlObject.protocol === 'https:' ? 'wss' : 'ws';
       const host = urlObject.host;
 
-      const url = `${protocol}://${authString}${host}/livedata`;
+      const url = `${protocol}://${authString ?? ''}${host}/livedata`;
+
+      console.log(`Connecting websocket to ${url}`);
 
       this.ws = new WebSocket(url);
 
@@ -466,8 +468,12 @@ class OpenDtuApi {
     );
   }
 
-  private getAuthString(): string {
+  private getAuthString(): string | null {
     let user = null;
+
+    if (!this.userString) {
+      return null;
+    }
 
     try {
       user = JSON.parse(this.userString || '');
@@ -492,6 +498,10 @@ class OpenDtuApi {
       'GET',
     );
 
+    if (!res) {
+      return null;
+    }
+
     if (res.status === 200) {
       return await res.json();
     }
@@ -505,6 +515,10 @@ class OpenDtuApi {
     }
 
     const res = await this.makeAuthenticatedRequest('/api/ntp/status', 'GET');
+
+    if (!res) {
+      return null;
+    }
 
     if (res.status === 200) {
       return await res.json();
@@ -520,6 +534,10 @@ class OpenDtuApi {
 
     const res = await this.makeAuthenticatedRequest('/api/mqtt/status', 'GET');
 
+    if (!res) {
+      return null;
+    }
+
     if (res.status === 200) {
       return await res.json();
     }
@@ -531,7 +549,7 @@ class OpenDtuApi {
     route: string,
     method: string,
     body: string | null = null,
-  ): Promise<Response> {
+  ): Promise<Response | null> {
     const authString = this.getAuthString();
 
     const controller = new AbortController();
@@ -546,8 +564,8 @@ class OpenDtuApi {
       signal: controller.signal,
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
-        Authorization: 'Basic ' + authString,
         'Content-Type': 'application/json',
+        ...(authString ? { Authorization: 'Basic ' + authString } : {}),
       },
     };
 
@@ -558,12 +576,16 @@ class OpenDtuApi {
     const url = `${authString}${this.baseUrl}${route}`;
 
     console.log('makeAuthenticatedRequest', url, requestOptions);
-    const res = await fetch(url, requestOptions);
-    if (res.status === 200) {
-      clearTimeout(abortTimeout);
-    }
 
-    return res;
+    try {
+      const res = await fetch(url, requestOptions);
+      clearTimeout(abortTimeout);
+
+      return res;
+    } catch (error) {
+      console.log('makeAuthenticatedRequest error', error);
+      return null;
+    }
   }
 }
 

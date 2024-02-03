@@ -12,6 +12,8 @@ import { Appbar, List, useTheme } from 'react-native-paper';
 
 import SettingsSurface from '@/components/styled/SettingsSurface';
 
+import useDtuState from '@/hooks/useDtuState';
+
 import formatBytes from '@/utils/formatBytes';
 import percentage from '@/utils/percentage';
 
@@ -28,7 +30,7 @@ const AboutOpenDTUScreen: FC = () => {
     navigation.goBack();
   }, [navigation]);
 
-  const systemStatus = useAppSelector(state => state.opendtu.systemStatus);
+  const systemStatus = useDtuState(state => state?.systemStatus);
 
   const latestVersion = useAppSelector(
     state => state.github.latestRelease.data?.tag_name,

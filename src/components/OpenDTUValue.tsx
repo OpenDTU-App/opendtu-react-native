@@ -5,7 +5,7 @@ import { Text, useTheme } from 'react-native-paper';
 import type { ValueObject } from '@/types/opendtu/status';
 
 export interface OpenDTUValueProps {
-  statusValue?: ValueObject;
+  statusValue?: ValueObject | null;
   textWhenInvalid?: string;
   textProps?: Omit<TextProps<unknown>, 'children'>;
 }

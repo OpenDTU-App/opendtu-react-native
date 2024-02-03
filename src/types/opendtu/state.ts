@@ -21,16 +21,18 @@ export enum DeviceState {
 }
 
 export type SetLiveDataAction = PayloadAction<{
+  index: Index;
   valid: boolean;
   data: LiveData;
 }>;
 
 export type SetSystemStatusAction = PayloadAction<{
+  index: Index;
   data: SystemStatus;
 }>;
 
 export type SetSetupUserStringAction = PayloadAction<{
-  userString: string;
+  userString: string | null;
 }>;
 
 export type SetSetupBaseUrlAction = PayloadAction<{
@@ -38,6 +40,7 @@ export type SetSetupBaseUrlAction = PayloadAction<{
 }>;
 
 export type SetIsConnectedAction = PayloadAction<{
+  index: Index;
   isConnected: boolean;
 }>;
 
@@ -47,18 +50,26 @@ export type SetDeviceStateAction = PayloadAction<{
 }>;
 
 export type SetTriedToConnectAction = PayloadAction<{
+  index: Index;
   triedToConnect: boolean;
 }>;
 
+export type ClearOpenDtuStateAction = PayloadAction<{
+  index: Index;
+}>;
+
 export type SetNetworkStatusAction = PayloadAction<{
+  index: Index;
   data: NetworkStatus;
 }>;
 
 export type SetNtpStatusAction = PayloadAction<{
+  index: Index;
   data: NtpStatus;
 }>;
 
 export type SetMqttStatusAction = PayloadAction<{
+  index: Index;
   data: MqttStatus;
 }>;
 
@@ -67,14 +78,18 @@ export interface OpenDTUSetup {
   userString: string | null;
 }
 
-export interface OpenDTUState {
-  liveData: LiveData | null;
-  systemStatus: SystemStatus | null;
-  networkStatus: NetworkStatus | null;
-  ntpStatus: NtpStatus | null;
-  mqttStatus: MqttStatus | null;
+export interface OpenDTUDeviceState {
+  liveData?: LiveData;
+  systemStatus?: SystemStatus;
+  networkStatus?: NetworkStatus;
+  ntpStatus?: NtpStatus;
+  mqttStatus?: MqttStatus;
+  isConnected?: boolean;
+  triedToConnect?: boolean;
+}
+
+export interface OpenDTUReduxState {
+  dtuStates: Record<Index, OpenDTUDeviceState | undefined>;
   setup: OpenDTUSetup;
-  isConnected: boolean;
   deviceState: Record<Index, DeviceState>;
-  triedToConnect: boolean;
 }

@@ -10,7 +10,8 @@ import { Appbar, List, useTheme } from 'react-native-paper';
 
 import SettingsSurface from '@/components/styled/SettingsSurface';
 
-import { useAppSelector } from '@/store';
+import useDtuState from '@/hooks/useDtuState';
+
 import { StyledSafeAreaView } from '@/style';
 
 const NtpInformationScreen: FC = () => {
@@ -23,7 +24,7 @@ const NtpInformationScreen: FC = () => {
     navigation.goBack();
   }, [navigation]);
 
-  const ntpStatus = useAppSelector(state => state.opendtu.ntpStatus);
+  const ntpStatus = useDtuState(state => state?.ntpStatus);
 
   return (
     <>

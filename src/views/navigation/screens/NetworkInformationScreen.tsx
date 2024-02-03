@@ -10,7 +10,8 @@ import { Appbar, List, useTheme } from 'react-native-paper';
 
 import SettingsSurface from '@/components/styled/SettingsSurface';
 
-import { useAppSelector } from '@/store';
+import useDtuState from '@/hooks/useDtuState';
+
 import { StyledSafeAreaView } from '@/style';
 
 const NetworkInformationScreen: FC = () => {
@@ -23,7 +24,7 @@ const NetworkInformationScreen: FC = () => {
     navigation.goBack();
   }, [navigation]);
 
-  const networkStatus = useAppSelector(state => state.opendtu.networkStatus);
+  const networkStatus = useDtuState(state => state?.networkStatus);
 
   const wifiQuality = useMemo(() => {
     let quality = 0;

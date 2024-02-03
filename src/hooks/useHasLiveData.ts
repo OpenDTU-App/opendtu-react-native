@@ -13,13 +13,20 @@ const useHasLiveData = (): boolean => {
   );*/
 
   return useAppSelector(state => {
-    const liveData = state.opendtu.liveData;
+    const index = state.settings.selectedDtuConfig;
+
+    if (index === null) {
+      console.log('index is null');
+      return false;
+    }
+
+    const liveData = state.opendtu.dtuStates[index]?.liveData ?? null;
     if (liveData === null) {
       console.log('liveData is null');
       return false;
     }
 
-    const lastUpdate = liveData.lastUpdate;
+    const lastUpdate = liveData?.lastUpdate ?? null;
     if (lastUpdate === null) {
       console.log('lastUpdate is null');
       return false;

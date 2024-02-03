@@ -52,9 +52,15 @@ export const ApiProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
   console.log('new Api');
 
   useEffect(() => {
-    dispatch(setTriedToConnect({ triedToConnect: false }));
+    if (configIndex === null) {
+      console.log('ApiProvider - configIndex is null');
 
-    if (currentConfiguration && configIndex !== null) {
+      return;
+    }
+
+    dispatch(setTriedToConnect({ triedToConnect: false, index: configIndex }));
+
+    if (currentConfiguration) {
       console.info(
         'Initializing API Handler',
         currentConfiguration,
@@ -62,7 +68,7 @@ export const ApiProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
       );
 
       api.registerOnDisconnectedHandler(() => {
-        dispatch(clearOpenDtuState());
+        dispatch(clearOpenDtuState({ index: configIndex }));
       });
 
       api.disconnect();
@@ -70,24 +76,28 @@ export const ApiProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
       api.setConfig(currentConfiguration, configIndex);
 
       api.registerOnConnectedHandler(index => {
-        dispatch(setIsConnected({ isConnected: true }));
+        dispatch(setIsConnected({ isConnected: true, index: configIndex }));
         dispatch(setDeviceState({ deviceState: DeviceState.Connected, index }));
       });
 
       api.registerOnDisconnectedHandler(() => {
-        dispatch(setIsConnected({ isConnected: false }));
+        dispatch(setIsConnected({ isConnected: false, index: configIndex }));
       });
 
       api.registerLiveDataHandler((data, valid, index) => {
-        dispatch(setTriedToConnect({ triedToConnect: true }));
-        dispatch(setLiveData({ data, valid }));
+        dispatch(
+          setTriedToConnect({ triedToConnect: true, index: configIndex }),
+        );
+        dispatch(setLiveData({ data, valid, index: configIndex }));
         dispatch(setDeviceState({ deviceState: DeviceState.Connected, index }));
       });
 
       api.registerHttpStatusHandler(
         ({ systemStatus, networkStatus, ntpStatus, mqttStatus }, index) => {
           if (systemStatus) {
-            dispatch(setSystemStatus({ data: systemStatus }));
+            dispatch(
+              setSystemStatus({ data: systemStatus, index: configIndex }),
+            );
             dispatch(
               updateDtuHostname({
                 hostname: systemStatus.hostname,
@@ -103,15 +113,17 @@ export const ApiProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
           }
 
           if (networkStatus) {
-            dispatch(setNetworkStatus({ data: networkStatus }));
+            dispatch(
+              setNetworkStatus({ data: networkStatus, index: configIndex }),
+            );
           }
 
           if (ntpStatus) {
-            dispatch(setNtpStatus({ data: ntpStatus }));
+            dispatch(setNtpStatus({ data: ntpStatus, index: configIndex }));
           }
 
           if (mqttStatus) {
-            dispatch(setMqttStatus({ data: mqttStatus }));
+            dispatch(setMqttStatus({ data: mqttStatus, index: configIndex }));
           }
 
           setDeviceState({ deviceState: DeviceState.Connected, index });
