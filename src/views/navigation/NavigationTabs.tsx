@@ -8,12 +8,13 @@ import {
 
 import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 
+import GraphTab from '@/views/navigation/tabs/GraphTab';
 import LivedataTab from '@/views/navigation/tabs/LivedataTab';
 import MainSettingsTab from '@/views/navigation/tabs/MainSettingsTab';
 
 const LivedataRoute = () => <LivedataTab />;
-
 const SettingsRoute = () => <MainSettingsTab />;
+const GraphRoute = () => <GraphTab />;
 
 type BaseRoutes = ComponentProps<
   typeof BottomNavigationPaper
@@ -36,6 +37,11 @@ const BottomNavigation: FC = () => {
         focusedIcon: 'solar-power',
       },
       {
+        key: 'graph',
+        title: t('navigation.graph'),
+        focusedIcon: 'chart-line',
+      },
+      {
         key: 'settings',
         title: t('navigation.settings'),
         focusedIcon: 'cog',
@@ -47,6 +53,7 @@ const BottomNavigation: FC = () => {
 
   const renderScene = BottomNavigationPaper.SceneMap({
     livedata: LivedataRoute,
+    graph: GraphRoute,
     settings: SettingsRoute,
   });
 
