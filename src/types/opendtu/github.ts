@@ -15,6 +15,7 @@ export interface WithTimestamp<T> {
 }
 
 export interface GithubState {
+  // OpenDTU releases
   latestRelease: WithTimestamp<Release | null>;
   releases: WithTimestamp<Release[]>;
 

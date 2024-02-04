@@ -185,7 +185,7 @@ const MainSettingsTab: FC = () => {
             ) : null}
           </List.Section>
           <Text style={{ textAlign: 'center' }} onPress={handleUnlockDebug}>
-            Version {packageJson.version}
+            {t('version')} {packageJson.version}
           </Text>
         </ScrollView>
       </Box>
