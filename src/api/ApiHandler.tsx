@@ -39,10 +39,7 @@ export const ApiProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 
   const currentConfiguration = useAppSelector(
     state =>
-      typeof state.settings.selectedDtuConfig === 'number' &&
-      configIndex !== null
-        ? state.settings.dtuConfigs[configIndex]
-        : null,
+      configIndex !== null ? state.settings.dtuConfigs[configIndex] : null,
     // ToDo: Validate this, might be causing bugs
     (left, right) =>
       left?.baseUrl === right?.baseUrl &&
