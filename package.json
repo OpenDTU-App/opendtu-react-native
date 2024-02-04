@@ -22,7 +22,8 @@
     "postinstall": "yarn run npm-license-crawler -onlyDirectDependencies -json licenses.json && patch-package",
     "postuninstall": "yarn run npm-license-crawler -onlyDirectDependencies -json licenses.json",
     "build-android": "pushd android ; ./gradlew assembleRelease ; popd",
-    "postversion": "react-native-version --never-amend"
+    "postversion": "react-native-version --never-amend",
+    "prepare": "node-git-hooks"
   },
   "dependencies": {
     "@os-team/i18next-react-native-language-detector": "^1.0.30",
@@ -39,6 +40,7 @@
     "intl-pluralrules": "^2.0.1",
     "ip-regex": "^5.0.0",
     "moment": "^2.29.4",
+    "node-git-hooks": "^1.0.7",
     "npm-license-crawler": "^0.2.1",
     "octokit": "^3.1.1",
     "patch-package": "^8.0.0",

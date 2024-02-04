@@ -46,6 +46,10 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile --prefer-offline
 
+      - name: Check if tagged correctly
+        run: |
+          ./.githooks/pre-commit
+
       - name: Cache Gradle Wrapper
         uses: actions/cache@v3
         with:

@@ -82,6 +82,12 @@
         "licenseUrl": "https://github.com/moment/moment/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
+    "node-git-hooks@1.0.7": {
+        "licenses": "ISC",
+        "repository": "https://github.com/peacechen/node-git-hooks",
+        "licenseUrl": "https://github.com/peacechen/node-git-hooks/raw/master/LICENSE.md",
+        "parents": "opendtu-react-native"
+    },
     "npm-license-crawler@0.2.1": {
         "licenses": "BSD-3-Clause",
         "repository": "http://github.com/mwittig/npm-license-crawler",
