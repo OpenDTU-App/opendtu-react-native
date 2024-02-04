@@ -11,6 +11,7 @@ import { useAppSelector } from '@/store';
 import AboutOpenDTUScreen from '@/views/navigation/screens/AboutOpenDTUScreen';
 import AboutSettingsScreen from '@/views/navigation/screens/AboutSettingsScreen';
 import ConfigureGraphsScreen from '@/views/navigation/screens/ConfigureGraphsScreen';
+import DebugScreen from '@/views/navigation/screens/DebugScreen';
 import DeviceListScreen from '@/views/navigation/screens/DeviceListScreen';
 import DeviceSettingsScreen from '@/views/navigation/screens/DeviceSettingsScreen';
 import LicensesScreen from '@/views/navigation/screens/LicensesScreen';
@@ -117,6 +118,11 @@ const NavigationStack: FC = () => {
       <Stack.Screen
         name="LicensesScreen"
         component={LicensesScreen}
+        options={{ headerBackVisible: true }}
+      />
+      <Stack.Screen
+        name="DebugScreen"
+        component={DebugScreen}
         options={{ headerBackVisible: true }}
       />
     </Stack.Navigator>

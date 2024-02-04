@@ -19,6 +19,7 @@ import type {
   UpdateDtuSerialNumberAction,
   SetLanguageAction,
   EnableAppUpdatesAction,
+  DebugEnabledAction,
 } from '@/types/settings';
 
 const initialState: SettingsState = {
@@ -28,6 +29,7 @@ const initialState: SettingsState = {
   selectedDtuConfig: null,
   databaseConfigs: [],
   enableAppUpdates: null,
+  debugEnabled: false,
 };
 
 const log = logger.createLogger();
@@ -209,6 +211,9 @@ const settingsSlice = createSlice({
     setEnableAppUpdates: (state, action: EnableAppUpdatesAction) => {
       state.enableAppUpdates = action.payload.enable;
     },
+    setDebugEnabled: (state, action: DebugEnabledAction) => {
+      state.debugEnabled = action.payload.debugEnabled;
+    },
   },
 });
 
@@ -231,6 +236,7 @@ export const {
   updateDatabaseConfig,
   updateDTUDatabaseUuid,
   setEnableAppUpdates,
+  setDebugEnabled,
 } = settingsSlice.actions;
 
 export const { reducer: SettingsReducer } = settingsSlice;

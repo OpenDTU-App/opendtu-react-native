@@ -1,12 +1,16 @@
 import type { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
+import packageJson from '@root/package.json';
 
 import type { FC } from 'react';
 import { useMemo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
-import { Badge, List, useTheme } from 'react-native-paper';
+import { Badge, List, Text, useTheme } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+
+import { setDebugEnabled } from '@/slices/settings';
 
 import ChangeLanguageModal from '@/components/modals/ChangeLanguageModal';
 import ChangeThemeModal from '@/components/modals/ChangeThemeModal';
@@ -14,12 +18,15 @@ import ChangeThemeModal from '@/components/modals/ChangeThemeModal';
 import useDtuState from '@/hooks/useDtuState';
 import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 import useIsConnected from '@/hooks/useIsConnected';
+import useRequireMultiplePresses from '@/hooks/useRequireMultiplePresses';
+import useSettings from '@/hooks/useSettings';
 
 import { StyledSafeAreaView } from '@/style';
 
 const MainSettingsTab: FC = () => {
   const navigation = useNavigation() as NavigationProp<ParamListBase>;
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const theme = useTheme();
 
@@ -39,6 +46,8 @@ const MainSettingsTab: FC = () => {
   const [hasNewAppVersion] = useHasNewAppVersion({
     usedForIndicatorOnly: true,
   });
+
+  const showDebugScreen = useSettings(state => state?.debugEnabled);
 
   const hasSystemInformation = !!useDtuState(state => !!state?.systemStatus);
   const hasNetworkInformation = !!useDtuState(state => !!state?.networkStatus);
@@ -85,6 +94,15 @@ const MainSettingsTab: FC = () => {
   const handleMqttInformation = useCallback(() => {
     navigation.navigate('MqttInformationScreen');
   }, [navigation]);
+
+  const handleDebugScreen = useCallback(() => {
+    navigation.navigate('DebugScreen');
+  }, [navigation]);
+
+  const enableDebugMode = useCallback(() => {
+    dispatch(setDebugEnabled({ debugEnabled: true }));
+  }, [dispatch]);
+  const handleUnlockDebug = useRequireMultiplePresses(enableDebugMode);
 
   return (
     <StyledSafeAreaView theme={theme}>
@@ -158,7 +176,17 @@ const MainSettingsTab: FC = () => {
               left={props => <List.Icon {...props} icon="file-document" />}
               onPress={handleLicenses}
             />
+            {showDebugScreen ? (
+              <List.Item
+                title={t('settings.debug')}
+                left={props => <List.Icon {...props} icon="bug" />}
+                onPress={handleDebugScreen}
+              />
+            ) : null}
           </List.Section>
+          <Text style={{ textAlign: 'center' }} onPress={handleUnlockDebug}>
+            {t('version')} {packageJson.version}
+          </Text>
         </ScrollView>
       </Box>
       <ChangeThemeModal
