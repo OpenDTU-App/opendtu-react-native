@@ -29,6 +29,7 @@ export interface SettingsState {
   appTheme: 'light' | 'dark' | 'system';
   language: 'en' | 'de';
   enableAppUpdates: boolean | null;
+  debugEnabled: boolean;
 
   // opendtu
   dtuConfigs: OpenDTUConfig[];
@@ -104,4 +105,8 @@ export type UpdateDTUDatabaseUuidAction = PayloadAction<{
 
 export type EnableAppUpdatesAction = PayloadAction<{
   enable: boolean;
+}>;
+
+export type DebugEnabledAction = PayloadAction<{
+  debugEnabled: boolean;
 }>;

@@ -23,6 +23,7 @@ import SelectDatabaseScreen from '@/views/navigation/screens/SelectDatabaseScree
 import SetupAddOpenDTUScreen from '@/views/navigation/screens/SetupAddOpenDTUScreen';
 import SetupAuthenticateOpenDTUInstanceScreen from '@/views/navigation/screens/SetupAuthenticateOpenDTUInstanceScreen';
 import SetupOpenDTUCompleteScreen from '@/views/navigation/screens/SetupOpenDTUCompleteScreen';
+import DebugScreen from '@/views/navigation/screens/DebugScreen';
 
 export type PropsWithNavigation = {
   navigation: NavigationProp<ParamListBase>;
@@ -117,6 +118,11 @@ const NavigationStack: FC = () => {
       <Stack.Screen
         name="LicensesScreen"
         component={LicensesScreen}
+        options={{ headerBackVisible: true }}
+      />
+      <Stack.Screen
+        name="DebugScreen"
+        component={DebugScreen}
         options={{ headerBackVisible: true }}
       />
     </Stack.Navigator>
