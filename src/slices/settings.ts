@@ -18,7 +18,8 @@ import type {
   UpdateDtuHostnameAction,
   UpdateDtuSerialNumberAction,
   SetLanguageAction,
-  EnableAppUpdatesAction, DebugEnabledAction,
+  EnableAppUpdatesAction,
+  DebugEnabledAction,
 } from '@/types/settings';
 
 const initialState: SettingsState = {

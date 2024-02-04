@@ -11,6 +11,7 @@ import { useAppSelector } from '@/store';
 import AboutOpenDTUScreen from '@/views/navigation/screens/AboutOpenDTUScreen';
 import AboutSettingsScreen from '@/views/navigation/screens/AboutSettingsScreen';
 import ConfigureGraphsScreen from '@/views/navigation/screens/ConfigureGraphsScreen';
+import DebugScreen from '@/views/navigation/screens/DebugScreen';
 import DeviceListScreen from '@/views/navigation/screens/DeviceListScreen';
 import DeviceSettingsScreen from '@/views/navigation/screens/DeviceSettingsScreen';
 import LicensesScreen from '@/views/navigation/screens/LicensesScreen';
@@ -23,7 +24,6 @@ import SelectDatabaseScreen from '@/views/navigation/screens/SelectDatabaseScree
 import SetupAddOpenDTUScreen from '@/views/navigation/screens/SetupAddOpenDTUScreen';
 import SetupAuthenticateOpenDTUInstanceScreen from '@/views/navigation/screens/SetupAuthenticateOpenDTUInstanceScreen';
 import SetupOpenDTUCompleteScreen from '@/views/navigation/screens/SetupOpenDTUCompleteScreen';
-import DebugScreen from '@/views/navigation/screens/DebugScreen';
 
 export type PropsWithNavigation = {
   navigation: NavigationProp<ParamListBase>;

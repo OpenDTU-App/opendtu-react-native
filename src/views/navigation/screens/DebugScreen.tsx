@@ -5,13 +5,9 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
-import { Appbar, IconButton, List, Text, useTheme } from 'react-native-paper';
+import { Appbar, IconButton, List, useTheme } from 'react-native-paper';
 
-import {
-  clearLatestAppRelease,
-  clearLatestRelease,
-  setLatestAppRelease,
-} from '@/slices/github';
+import { clearLatestAppRelease, clearLatestRelease } from '@/slices/github';
 import { setDebugEnabled } from '@/slices/settings';
 
 import { useAppDispatch, useAppSelector } from '@/store';
