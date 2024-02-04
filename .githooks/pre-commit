@@ -1,12 +1,13 @@
 #!/bin/bash
 # Get latest git tag
 latest_tag=$(git describe --tags --abbrev=0)
-version_from_tag=$(echo "$latest_tag" | grep -o -E '[0-9]+\.[0-9]+\.[0-9]+')
+latest_tag_without_v=${latest_tag#"v"}
+version_from_tag=$(echo "$latest_tag_without_v" | grep -P '^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$')
 
 # Get the version from package.json
 version=$(jq -r '.version' package.json)
 
-echo "Latest tag: $latest_tag"
+echo "Latest tag: $latest_tag_without_v"
 echo "Version from tag: $version_from_tag"
 echo "Version from package.json: $version"
 
@@ -15,3 +16,5 @@ if [ "$version" != "$version_from_tag" ]; then
   echo "Version in package.json and tag are not the same"
   exit 1
 fi
+
+echo "Version in package.json and tag are the same"
