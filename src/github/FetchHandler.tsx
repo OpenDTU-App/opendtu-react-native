@@ -9,8 +9,7 @@ import {
   setReleases,
 } from '@/slices/github';
 
-import useDeviceIndex from '@/hooks/useDeviceIndex';
-
+// import useDeviceIndex from '@/hooks/useDeviceIndex';
 import ago from '@/utils/ago';
 
 import {
@@ -22,11 +21,11 @@ import { useAppDispatch, useAppSelector } from '@/store';
 
 const FetchHandler: FC = () => {
   const dispatch = useAppDispatch();
-  const index = useDeviceIndex();
+  // const index = useDeviceIndex();
 
-  const isConnected = useAppSelector(state =>
+  /*const isConnected = useAppSelector(state =>
     index === null ? undefined : state.opendtu.dtuStates[index]?.isConnected,
-  );
+  );*/
   const latestReleaseRefetchOk = useAppSelector(state =>
     state.github.latestRelease.lastUpdate
       ? ago(state.github.latestRelease.lastUpdate) > 1000 * 60 * 10 // 10 minutes
@@ -52,7 +51,7 @@ const FetchHandler: FC = () => {
   const githubApi = useGithub();
 
   useEffect(() => {
-    if (!isConnected || !githubApi) return;
+    if (/*!isConnected || */ !githubApi) return;
 
     console.log('fetching latest github data');
 
@@ -98,7 +97,7 @@ const FetchHandler: FC = () => {
     func();
   }, [
     dispatch,
-    isConnected,
+    // isConnected,
     githubApi,
     latestReleaseRefetchOk,
     allReleasesRefetchOk,
