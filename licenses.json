@@ -16,6 +16,12 @@
         "licenseUrl": "https://github.com/react-native-community/react-native-art",
         "parents": "opendtu-react-native"
     },
+    "@react-native-community/netinfo@11.2.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-netinfo/react-native-netinfo",
+        "licenseUrl": "https://github.com/react-native-netinfo/react-native-netinfo/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
     "@react-native-masked-view/masked-view@0.3.0": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-masked-view/masked-view",

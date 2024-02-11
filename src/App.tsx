@@ -14,6 +14,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider as ReduxProvider } from 'react-redux';
 
+import AppOfflineModal from '@/components/modals/AppOfflineModal';
 import EnableAppUpdatesModal from '@/components/modals/EnableAppUpdatesModal';
 
 import ApiProvider from '@/api/ApiHandler';
@@ -243,6 +244,7 @@ const _App: FC = () => {
 
   return (
     <PaperProvider theme={theme}>
+      <AppOfflineModal />
       <StatusBar
         backgroundColor={theme.colors.background}
         barStyle={theme.dark ? 'light-content' : 'dark-content'}
