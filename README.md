@@ -48,7 +48,7 @@ Stuff that I cannot test myself
 - [ ] Multi-Inverter per DTU
 
 ### Devnotes
-- Use `yarn version --patch` to bump version
+- Use `yarn version --patch --no-commit-hooks --no-git-tag-version` to bump version
 
 ### Early Screenshots
 <img alt="Screenshot_1702075921" src="https://github.com/OpenDTU-App/opendtu-react-native/assets/43087936/1475799f-881d-4eb4-8b1f-1065c64a85c1" width="250">
