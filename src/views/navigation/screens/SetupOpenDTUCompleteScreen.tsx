@@ -21,6 +21,8 @@ const SetupOpenDTUCompleteScreen: FC<PropsWithNavigation> = ({
   const setupConfig = useAppSelector(state => state.opendtu.setup);
 
   useEffect(() => {
+    if (!navigation.isFocused()) return;
+
     return navigation.addListener('beforeRemove', e => {
       console.log('beforeRemove', e);
       const action = e.data.action;

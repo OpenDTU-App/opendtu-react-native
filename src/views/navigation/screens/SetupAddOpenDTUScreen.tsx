@@ -108,6 +108,8 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   }, [t, address, baseUrls, dispatch, navigation, openDtuApi]);
 
   useEffect(() => {
+    if (!navigation.isFocused()) return;
+
     return navigation.addListener('beforeRemove', e => {
       if (!loading && hasConfigs) {
         return;
