@@ -1,5 +1,3 @@
-import type { NavigationProp, ParamListBase } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
 import { compare } from 'compare-versions';
 import moment from 'moment';
 
@@ -23,12 +21,6 @@ import { StyledSafeAreaView } from '@/style';
 const AboutOpenDTUScreen: FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
-
-  const navigation = useNavigation() as NavigationProp<ParamListBase>;
-
-  const handleBack = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
 
   const systemStatus = useDtuState(state => state?.systemStatus);
 
@@ -70,11 +62,7 @@ const AboutOpenDTUScreen: FC = () => {
   return (
     <>
       <Appbar.Header>
-        <Appbar.BackAction onPress={handleBack} />
-        <Appbar.Content
-          title={t('opendtu.systemInformation')}
-          onPress={handleBack}
-        />
+        <Appbar.Content title={t('opendtu.systemInformation')} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>

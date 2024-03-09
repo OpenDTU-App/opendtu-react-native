@@ -53,6 +53,17 @@ const settingsSlice = createSlice({
       state.selectedDtuConfig = action.payload.index;
     },
     addDtuConfig: (state, action: AddDtuConfigAction) => {
+      if (
+        state.dtuConfigs.find(
+          config => config.baseUrl === action.payload.config.baseUrl,
+        )
+      ) {
+        log.warn(
+          `addDtuConfig: dtuConfigs.find(config => config.baseUrl === ${action.payload.config.baseUrl})`,
+        );
+        return;
+      }
+
       state.dtuConfigs.push(action.payload.config);
       state.selectedDtuConfig = state.dtuConfigs.length - 1;
     },

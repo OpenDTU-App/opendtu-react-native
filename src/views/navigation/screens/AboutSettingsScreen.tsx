@@ -32,12 +32,6 @@ const AboutSettingsScreen: FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const navigation = useNavigation() as NavigationProp<ParamListBase>;
-
-  const handleBack = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
-
   const [hasNewAppVersion, releaseInfo] = useHasNewAppVersion();
 
   const prettyTagName = useMemo(() => {
@@ -59,8 +53,7 @@ const AboutSettingsScreen: FC = () => {
   return (
     <>
       <Appbar.Header>
-        <Appbar.BackAction onPress={handleBack} />
-        <Appbar.Content title={t('settings.aboutApp')} onPress={handleBack} />
+        <Appbar.Content title={t('settings.aboutApp')} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>

@@ -1,8 +1,5 @@
-import type { NavigationProp, ParamListBase } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
-
 import type { FC } from 'react';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
@@ -17,12 +14,6 @@ import { StyledSafeAreaView } from '@/style';
 const NetworkInformationScreen: FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
-
-  const navigation = useNavigation() as NavigationProp<ParamListBase>;
-
-  const handleBack = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
 
   const networkStatus = useDtuState(state => state?.networkStatus);
 
@@ -47,11 +38,7 @@ const NetworkInformationScreen: FC = () => {
   return (
     <>
       <Appbar.Header>
-        <Appbar.BackAction onPress={handleBack} />
-        <Appbar.Content
-          title={t('opendtu.networkInformation')}
-          onPress={handleBack}
-        />
+        <Appbar.Content title={t('opendtu.networkInformation')} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>

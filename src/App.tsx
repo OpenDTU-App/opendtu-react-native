@@ -4,7 +4,7 @@ import moment from 'moment';
 import { PersistGate as ReduxPersistGate } from 'redux-persist/integration/react';
 
 import type { FC } from 'react';
-import React, { useEffect, useMemo, useState } from 'react';
+import { StrictMode, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Appearance, StatusBar } from 'react-native';
 import type { MD3Theme } from 'react-native-paper';
@@ -34,24 +34,26 @@ const App = () => {
   }, []);*/
 
   return (
-    <SafeAreaProvider>
-      <ReduxProvider store={store}>
-        <ReduxPersistGate
-          persistor={persistor}
-          loading={null}
-          // onBeforeLift={onBeforeLift}
-        >
-          <GithubProvider>
-            <ApiProvider>
-              <DatabaseProvider>
-                <_App />
-                <FetchHandler />
-              </DatabaseProvider>
-            </ApiProvider>
-          </GithubProvider>
-        </ReduxPersistGate>
-      </ReduxProvider>
-    </SafeAreaProvider>
+    <StrictMode>
+      <SafeAreaProvider>
+        <ReduxProvider store={store}>
+          <ReduxPersistGate
+            persistor={persistor}
+            loading={null}
+            // onBeforeLift={onBeforeLift}
+          >
+            <GithubProvider>
+              <ApiProvider>
+                <DatabaseProvider>
+                  <_App />
+                  <FetchHandler />
+                </DatabaseProvider>
+              </ApiProvider>
+            </GithubProvider>
+          </ReduxPersistGate>
+        </ReduxProvider>
+      </SafeAreaProvider>
+    </StrictMode>
   );
 };
 

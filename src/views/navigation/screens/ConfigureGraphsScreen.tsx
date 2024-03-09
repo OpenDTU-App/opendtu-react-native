@@ -19,16 +19,11 @@ import TimeRangeLastNSecondsModal from '@/components/modals/TimeRangeLastNSecond
 
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
-import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const ConfigureGraphsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
+const ConfigureGraphsScreen: FC = () => {
   const theme = useTheme();
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
-
-  const handleBack = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
 
   const timeRangeStart = useAppSelector(
     state => state.database.timeRange.start,
@@ -205,11 +200,7 @@ const ConfigureGraphsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   return (
     <>
       <Appbar.Header>
-        <Appbar.BackAction onPress={handleBack} />
-        <Appbar.Content
-          title={t('configureGraphs.title')}
-          onPress={handleBack}
-        />
+        <Appbar.Content title={t('configureGraphs.title')} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>

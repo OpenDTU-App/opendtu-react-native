@@ -1,11 +1,13 @@
 import type { FC } from 'react';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { logger } from 'react-native-logs';
-import { Button, HelperText, Text, Title, useTheme } from 'react-native-paper';
+import { Appbar, Button, HelperText, Text, useTheme } from 'react-native-paper';
 
 import { setSetupBaseUrl } from '@/slices/opendtu';
+
+import { DeviceState } from '@/types/opendtu/state';
 
 import MDNSScan from '@/components/devices/MDNSScan';
 import StyledTextInput from '@/components/styled/StyledTextInput';
@@ -63,7 +65,7 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
       return;
     }
 
-    log.info('url', url);
+    log.info(`url=${url}`);
 
     if (!url) return;
 
@@ -72,14 +74,7 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     try {
       const res = await openDtuApi.isOpenDtuInstance(url);
 
-      if (res === null) {
-        setError('Could not connect to OpenDTU!');
-        setLoading(false);
-
-        return;
-      }
-
-      if (!res) {
+      if (res !== DeviceState.Reachable) {
         setError('Not an OpenDTU instance!');
         setLoading(false);
 
@@ -112,67 +107,85 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     setLoading(false);
   }, [t, address, baseUrls, dispatch, navigation, openDtuApi]);
 
+  useEffect(() => {
+    return navigation.addListener('beforeRemove', e => {
+      if (!loading && hasConfigs) {
+        return;
+      }
+
+      e.preventDefault();
+    });
+  }, [navigation, hasConfigs, loading]);
+
   const valid = !!address;
 
   return (
-    <StyledSafeAreaView theme={theme} style={{ justifyContent: 'center' }}>
-      <Box ph={32} w="100%" mb={16}>
-        <Title>{t('setup.addOpendtuInstance')}</Title>
-      </Box>
-      <Box ph={32} w="100%">
-        <StyledTextInput
-          label={t('setup.opendtuAddress')}
-          value={address ?? undefined}
-          onChangeText={(text: string) => {
-            setAddress(text);
-            setError(null);
-          }}
-          mode="outlined"
-          placeholder="http://192.168.4.1"
-          error={!!error}
-          disabled={loading}
-        />
-        <HelperText type="error" visible={!!error}>
-          {error}
-        </HelperText>
-      </Box>
-      <Box ph={32} w="100%" mb={16}>
-        <Box mb={8}>
-          <Text variant="bodySmall">{t('setup.instancesInYourNetwork')}</Text>
-        </Box>
-        <Box mb={8}>
-          <MDNSScan
-            setLoading={setLoading}
-            setError={setError}
-            loading={loading}
+    <>
+      <Appbar.Header>
+        {hasConfigs ? (
+          <Appbar.BackAction onPress={() => navigation.goBack()} />
+        ) : null}
+        <Appbar.Content title={t('setup.addOpendtuInstance')} />
+      </Appbar.Header>
+      <StyledSafeAreaView theme={theme} style={{ justifyContent: 'center' }}>
+        <Box ph={32} w="100%">
+          <StyledTextInput
+            label={t('setup.opendtuAddress')}
+            value={address ?? undefined}
+            onChangeText={(text: string) => {
+              setAddress(text);
+              setError(null);
+            }}
+            mode="outlined"
+            placeholder="http://192.168.4.1"
+            autoCapitalize="none"
+            textContentType="URL"
+            keyboardType="url"
+            error={!!error}
+            disabled={loading}
           />
+          <HelperText type="error" visible={!!error}>
+            {error}
+          </HelperText>
         </Box>
-      </Box>
-      <Box ph={32} w="100%">
-        <Box mb={8}>
-          <Button
-            mode="contained"
-            onPress={handleConnectCheck}
-            loading={loading}
-            disabled={loading || !valid}
-          >
-            {t('setup.connect')}
-          </Button>
+        <Box ph={32} w="100%" mb={16}>
+          <Box mb={8}>
+            <Text variant="bodySmall">{t('setup.instancesInYourNetwork')}</Text>
+          </Box>
+          <Box mb={8}>
+            <MDNSScan
+              setLoading={setLoading}
+              setError={setError}
+              loading={loading}
+            />
+          </Box>
         </Box>
-        <Box mb={8}>
-          {hasConfigs ? (
+        <Box ph={32} w="100%">
+          <Box mb={8}>
             <Button
               mode="contained"
-              onPress={handleAbort}
-              buttonColor={theme.colors.error}
-              textColor={theme.colors.onError}
+              onPress={handleConnectCheck}
+              loading={loading}
+              disabled={loading || !valid}
             >
-              {t('cancel')}
+              {t('setup.connect')}
             </Button>
-          ) : null}
+          </Box>
+          <Box mb={8}>
+            {hasConfigs ? (
+              <Button
+                mode="contained"
+                onPress={handleAbort}
+                buttonColor={theme.colors.error}
+                textColor={theme.colors.onError}
+              >
+                {t('cancel')}
+              </Button>
+            ) : null}
+          </Box>
         </Box>
-      </Box>
-    </StyledSafeAreaView>
+      </StyledSafeAreaView>
+    </>
   );
 };
 
