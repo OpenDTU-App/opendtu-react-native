@@ -1,5 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
-import type { NavigationProp, ParamListBase } from '@react-navigation/native';
 import packageJson from 'package.json';
 
 import type { FC } from 'react';

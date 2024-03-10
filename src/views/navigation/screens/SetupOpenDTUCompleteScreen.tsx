@@ -60,7 +60,7 @@ const SetupOpenDTUCompleteScreen: FC<PropsWithNavigation> = ({
         },
       }),
     );
-    // dispatch(clearSetup());
+    dispatch(clearSetup());
 
     // clear the navigation stack
     navigation.reset({
