@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const DebugScreen: FC<PropsWithNavigation> = () => {
+const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const dispatch = useAppDispatch();
@@ -41,6 +41,7 @@ const DebugScreen: FC<PropsWithNavigation> = () => {
   return (
     <>
       <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('settings.debug')} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>

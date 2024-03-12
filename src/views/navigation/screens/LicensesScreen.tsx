@@ -1,32 +1,24 @@
-import type { NavigationProp, ParamListBase } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
 import licenses from '@root/licenses.json';
 import type { Licenses } from 'npm-license-crawler';
 
 import type { FC } from 'react';
-import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Linking, ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, List, useTheme } from 'react-native-paper';
 
 import { StyledSafeAreaView } from '@/style';
+import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const LicensesScreen: FC = () => {
+const LicensesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const { t } = useTranslation();
   const theme = useTheme();
-
-  const navigation = useNavigation() as NavigationProp<ParamListBase>;
-
-  const handleBack = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
 
   return (
     <>
       <Appbar.Header>
-        <Appbar.BackAction onPress={handleBack} />
-        <Appbar.Content title={t('aboutApp.licenses')} onPress={handleBack} />
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.Content title={t('aboutApp.licenses')} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>

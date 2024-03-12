@@ -39,10 +39,7 @@ const DeviceListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     <>
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
-        <Appbar.Content
-          title={t('deviceList.devices')}
-          onPress={() => navigation.goBack()}
-        />
+        <Appbar.Content title={t('deviceList.devices')} />
         <Appbar.Action icon="plus" onPress={handleClickAdd} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>

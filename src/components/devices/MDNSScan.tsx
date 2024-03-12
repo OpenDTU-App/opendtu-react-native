@@ -66,8 +66,6 @@ const MDNSScan: FC<MDNSScanProps> = ({ setError, setLoading, loading }) => {
     };
   }, []);
 
-  console.log('services', services);
-
   if (discovering && services.length === 0) {
     return (
       <Box

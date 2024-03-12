@@ -23,6 +23,7 @@ const MainScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
   useEffect(() => {
     if (!hasConfigs) {
+      console.warn('No configs found');
       navigation.navigate('SetupAddOpenDTUScreen');
     }
   }, [hasConfigs, navigation]);

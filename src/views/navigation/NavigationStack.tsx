@@ -41,30 +41,21 @@ const NavigationStack: FC = () => {
     <Stack.Navigator
       initialRouteName={hasConfigs ? 'MainScreen' : 'SetupAddOpenDTUScreen'}
       screenOptions={{
+        headerShown: false,
         headerBackVisible: false,
         headerTitle: '',
         headerTransparent: true,
       }}
     >
-      <Stack.Screen
-        name="MainScreen"
-        component={MainScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="DeviceListScreen"
-        component={DeviceListScreen}
-        options={{ headerShown: false }}
-      />
+      <Stack.Screen name="MainScreen" component={MainScreen} />
+      <Stack.Screen name="DeviceListScreen" component={DeviceListScreen} />
       <Stack.Screen
         name="SetupAddOpenDTUScreen"
         component={SetupAddOpenDTUScreen}
-        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="SetupAuthenticateOpenDTUInstanceScreen"
         component={SetupAuthenticateOpenDTUInstanceScreen}
-        options={{ headerBackVisible: true }}
       />
       <Stack.Screen
         name="SetupOpenDTUCompleteScreen"
@@ -73,58 +64,38 @@ const NavigationStack: FC = () => {
       <Stack.Screen
         name="DeviceSettingsScreen"
         component={DeviceSettingsScreen}
-        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="SelectDatabaseScreen"
         component={SelectDatabaseScreen}
-        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="ManageDatabasesScreen"
         component={ManageDatabasesScreen}
-        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="AboutSettingsScreen"
         component={AboutSettingsScreen}
-        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="ConfigureGraphsScreen"
         component={ConfigureGraphsScreen}
-        options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="AboutOpenDTUScreen"
-        component={AboutOpenDTUScreen}
-        options={{ headerShown: false }}
-      />
+      <Stack.Screen name="AboutOpenDTUScreen" component={AboutOpenDTUScreen} />
       <Stack.Screen
         name="NetworkInformationScreen"
         component={NetworkInformationScreen}
-        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="NtpInformationScreen"
         component={NtpInformationScreen}
-        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="MqttInformationScreen"
         component={MqttInformationScreen}
-        options={{ headerBackVisible: true }}
       />
-      <Stack.Screen
-        name="LicensesScreen"
-        component={LicensesScreen}
-        options={{ headerBackVisible: true }}
-      />
-      <Stack.Screen
-        name="DebugScreen"
-        component={DebugScreen}
-        options={{ headerBackVisible: true }}
-      />
+      <Stack.Screen name="LicensesScreen" component={LicensesScreen} />
+      <Stack.Screen name="DebugScreen" component={DebugScreen} />
     </Stack.Navigator>
   );
 };

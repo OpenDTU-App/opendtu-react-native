@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Button, Title, useTheme } from 'react-native-paper';
@@ -20,8 +20,33 @@ const SetupOpenDTUCompleteScreen: FC<PropsWithNavigation> = ({
 
   const setupConfig = useAppSelector(state => state.opendtu.setup);
 
+  useEffect(() => {
+    if (!navigation.isFocused()) return;
+
+    return navigation.addListener('beforeRemove', e => {
+      console.log('beforeRemove', e);
+      const action = e.data.action;
+
+      if (action.type !== 'GO_BACK') {
+        console.log('Other action', action);
+        return;
+      }
+
+      e.preventDefault();
+    });
+  }, [navigation]);
+
   const handleFinishSetup = useCallback(() => {
-    if (!setupConfig.baseUrl) return;
+    if (!setupConfig.baseUrl) {
+      console.warn('No base url set in setup config');
+      return;
+    }
+
+    console.log(
+      'Adding DTU config',
+      setupConfig.userString,
+      setupConfig.baseUrl,
+    );
 
     dispatch(
       addDtuConfig({
@@ -37,11 +62,10 @@ const SetupOpenDTUCompleteScreen: FC<PropsWithNavigation> = ({
     );
     dispatch(clearSetup());
 
-    // navigation.navigate('MainScreen');
     // clear the navigation stack
     navigation.reset({
       index: 0,
-      routes: [{ name: 'MainScreen' }],
+      routes: [{ name: 'MainScreen', params: {} }],
     });
   }, [dispatch, navigation, setupConfig.baseUrl, setupConfig.userString]);
 

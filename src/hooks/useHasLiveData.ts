@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 import ago from '@/utils/ago';
 
 import { useAppSelector } from '@/store';
@@ -39,7 +37,6 @@ const useHasLiveData = (): boolean => {
     }
 
     if (lastUpdateAgo >= 30000) {
-      console.log('lastUpdateAgo', moment(lastUpdate).fromNow());
       console.log('lastUpdateAgo older than 30000 ms');
       return false;
     }

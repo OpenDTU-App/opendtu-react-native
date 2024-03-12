@@ -174,7 +174,7 @@ class OpenDtuApi {
       return { deviceState: DeviceState.NotInstance };
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      log.error('getSystemStatusFromUrl error', error);
+      log.error('getSystemStatusFromUrl error', error, error.name);
 
       if (error.name === 'AbortError') {
         return { deviceState: DeviceState.Unreachable };
