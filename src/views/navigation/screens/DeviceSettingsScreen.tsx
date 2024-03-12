@@ -90,6 +90,7 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
   return (
     <>
       <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('deviceSettings.title')} />
       </Appbar.Header>
       <StyledScrollView theme={theme}>

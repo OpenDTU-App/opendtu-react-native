@@ -61,6 +61,7 @@ const SelectDatabaseScreen: FC<PropsWithNavigation> = ({
   return (
     <>
       <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('settings.selectDatabase')} />
         <Appbar.Action icon="cog" onPress={handleClickManage} />
       </Appbar.Header>

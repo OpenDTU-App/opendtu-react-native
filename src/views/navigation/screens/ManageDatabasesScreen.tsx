@@ -11,8 +11,9 @@ import StyledListItem from '@/components/styled/StyledListItem';
 
 import { useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
+import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const ManageDatabasesScreen: FC = () => {
+const ManageDatabasesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -37,6 +38,7 @@ const ManageDatabasesScreen: FC = () => {
   return (
     <>
       <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('manageDatabases.databases')} />
         <Appbar.Action icon="plus" onPress={handleClickAdd} />
       </Appbar.Header>

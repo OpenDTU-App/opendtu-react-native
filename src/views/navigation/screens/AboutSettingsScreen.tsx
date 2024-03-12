@@ -24,8 +24,9 @@ import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
+import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const AboutSettingsScreen: FC = () => {
+const AboutSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -51,6 +52,7 @@ const AboutSettingsScreen: FC = () => {
   return (
     <>
       <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('settings.aboutApp')} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>

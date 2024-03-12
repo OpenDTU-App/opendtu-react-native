@@ -17,8 +17,9 @@ import percentage from '@/utils/percentage';
 
 import { useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
+import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const AboutOpenDTUScreen: FC = () => {
+const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -62,6 +63,7 @@ const AboutOpenDTUScreen: FC = () => {
   return (
     <>
       <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('opendtu.systemInformation')} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>

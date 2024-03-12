@@ -10,8 +10,9 @@ import SettingsSurface from '@/components/styled/SettingsSurface';
 import useDtuState from '@/hooks/useDtuState';
 
 import { StyledSafeAreaView } from '@/style';
+import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const NetworkInformationScreen: FC = () => {
+const NetworkInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -38,6 +39,7 @@ const NetworkInformationScreen: FC = () => {
   return (
     <>
       <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('opendtu.networkInformation')} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>

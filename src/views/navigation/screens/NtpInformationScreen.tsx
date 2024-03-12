@@ -9,8 +9,9 @@ import SettingsSurface from '@/components/styled/SettingsSurface';
 import useDtuState from '@/hooks/useDtuState';
 
 import { StyledSafeAreaView } from '@/style';
+import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const NtpInformationScreen: FC = () => {
+const NtpInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -19,6 +20,7 @@ const NtpInformationScreen: FC = () => {
   return (
     <>
       <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('opendtu.ntpInformation')} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>

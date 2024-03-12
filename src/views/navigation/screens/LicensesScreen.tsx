@@ -8,14 +8,16 @@ import { Box } from 'react-native-flex-layout';
 import { Appbar, List, useTheme } from 'react-native-paper';
 
 import { StyledSafeAreaView } from '@/style';
+import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const LicensesScreen: FC = () => {
+const LicensesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const { t } = useTranslation();
   const theme = useTheme();
 
   return (
     <>
       <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('aboutApp.licenses')} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>
