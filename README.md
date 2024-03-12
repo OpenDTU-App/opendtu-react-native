@@ -50,6 +50,7 @@ Stuff that I cannot test myself
 ### Devnotes
 - Creating new release
   - Use `yarn version --patch --no-commit-hooks --no-git-tag-version` to bump version
+  - Commit the changes `git commit -m "Bump version to vX.Y.Z" --no-verify`
   - Push to GitHub
   - Tag the commit with `vX.Y.Z`
   - Push the tag to GitHub
