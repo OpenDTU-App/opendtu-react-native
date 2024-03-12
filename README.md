@@ -11,7 +11,7 @@ There are signed .apk files inside the "Releases" tab. As of now, the is no plan
 ![IzzyOnDroid Badge](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/xyz.commanderred.opendtuapp)
 
 ## Development
-There are two branches. `main` is the stable branch, `dev` is the development branch. If you want to contribute, please create a pull request to `dev`.
+There are two branches. `main` is the stable branch, `develop` is the development branch. If you want to contribute, please create a pull request to `develop`.
 
 ## Translations
 Translations are inside a [submodule](https://github.com/OpenDTU-App/opendtu-react-native-translations) located in `src/translations/translation-files`.
@@ -48,7 +48,12 @@ Stuff that I cannot test myself
 - [ ] Multi-Inverter per DTU
 
 ### Devnotes
-- Use `yarn version --patch --no-commit-hooks --no-git-tag-version` to bump version
+- Creating new release
+  - Use `yarn version --patch --no-commit-hooks --no-git-tag-version` to bump version
+  - Push to GitHub
+  - Tag the commit with `vX.Y.Z`
+  - Push the tag to GitHub
+  - Merge `develop` into `main`
 
 ### Early Screenshots
 <img alt="Screenshot_1702075921" src="https://github.com/OpenDTU-App/opendtu-react-native/assets/43087936/1475799f-881d-4eb4-8b1f-1065c64a85c1" width="250">
