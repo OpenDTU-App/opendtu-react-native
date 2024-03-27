@@ -8,7 +8,7 @@ import StyledSurface from '@/components/styled/StyledSurface';
 
 import useHasLiveData from '@/hooks/useHasLiveData';
 
-export interface StatusWidgetProps extends PropsWithChildren<unknown> {
+export interface StatusWidgetProps extends PropsWithChildren {
   title?: string;
   maxWidth?: number;
   icon?: string;

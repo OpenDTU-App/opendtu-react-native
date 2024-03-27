@@ -179,7 +179,7 @@ const DatabaseContext = createContext<DatabaseContextData | undefined>(
   undefined,
 );
 
-const DatabaseProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
+const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 

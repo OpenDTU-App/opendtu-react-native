@@ -21,9 +21,7 @@ export const AppGithubBaseConfig = {
   },
 };
 
-export const GithubProvider: FC<PropsWithChildren<unknown>> = ({
-  children,
-}) => {
+export const GithubProvider: FC<PropsWithChildren> = ({ children }) => {
   const github = useMemo(() => new Octokit({ request: { fetch: fetch } }), []);
 
   return (

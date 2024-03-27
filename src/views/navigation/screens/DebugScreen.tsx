@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 import type { FC } from 'react';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
@@ -10,6 +10,8 @@ import { Appbar, IconButton, List, useTheme } from 'react-native-paper';
 import { clearLatestAppRelease, clearLatestRelease } from '@/slices/github';
 import { setDebugEnabled } from '@/slices/settings';
 
+import { useApi } from '@/api/ApiHandler';
+import type { DebugInfo } from '@/api/opendtuapi';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
@@ -37,6 +39,19 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const handleDisableDebugMode = useCallback(() => {
     dispatch(setDebugEnabled({ debugEnabled: false }));
   }, [dispatch]);
+
+  const api = useApi();
+
+  const [apiDebugInfo, setApiDebugInfo] = useState<DebugInfo | null>(null);
+
+  useEffect(() => {
+    const fetchApiDebugInfo = async () => {
+      const response = api.getDebugInfo();
+      setApiDebugInfo(response);
+    };
+
+    fetchApiDebugInfo();
+  }, [api]);
 
   return (
     <>
@@ -79,6 +94,18 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   />
                 )}
               />
+            </List.Section>
+            <List.Section>
+              <List.Subheader>{t('debug.websocket')}</List.Subheader>
+              {apiDebugInfo
+                ? Object.entries(apiDebugInfo).map(([key, value]) => (
+                    <List.Item
+                      key={`apiDebugInfo-${key}`}
+                      title={key}
+                      description={JSON.stringify(value)}
+                    />
+                  ))
+                : null}
             </List.Section>
             <List.Section>
               <List.Subheader>{t('debug.other')}</List.Subheader>

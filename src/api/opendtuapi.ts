@@ -51,6 +51,7 @@ class OpenDtuApi {
   // communication
   private wsConnected = false;
   private readonly wsId: string = '';
+  private wsUrl: string | null = null;
 
   // interval
   private fetchHttpStateInterval: NodeJS.Timeout | null = null;
@@ -301,6 +302,7 @@ class OpenDtuApi {
       this.ws = new WebSocket(url);
 
       this.ws.onopen = () => {
+        this.wsUrl = url;
         log.info('OpenDtuApi.onopen()');
 
         if (!noInterval) {
@@ -357,6 +359,7 @@ class OpenDtuApi {
       };
 
       this.ws.onclose = () => {
+        this.wsUrl = null;
         log.warn('OpenDtuApi.onclose()', { baseUrl: this.baseUrl });
 
         this.wsConnected = false;
@@ -587,6 +590,20 @@ class OpenDtuApi {
       return null;
     }
   }
+
+  public getDebugInfo() {
+    return {
+      baseUrl: this.baseUrl,
+      userString: this.userString,
+      index: this.index,
+      wsConnected: this.wsConnected,
+      wsId: this.wsId,
+      wsUrl: this.wsUrl,
+      wsReadyState: this.ws?.readyState ?? 'undefined',
+    };
+  }
 }
+
+export type DebugInfo = ReturnType<OpenDtuApi['getDebugInfo']>;
 
 export default OpenDtuApi;
