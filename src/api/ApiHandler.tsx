@@ -30,7 +30,7 @@ const log = logger.createLogger();
 export const ApiContext = createContext<OpenDtuApi | undefined>(undefined);
 
 // create provider for the api handler
-export const ApiProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
+export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
   const api = useMemo(() => new OpenDtuApi(false), []);
 
   const dispatch = useAppDispatch();

@@ -10,7 +10,7 @@ import { Button, Icon, Text } from 'react-native-paper';
 import useIsConnected from '@/hooks/useIsConnected';
 import useTriedToConnect from '@/hooks/useTriedToConnect';
 
-const DeviceOfflineWrapper: FC<PropsWithChildren<unknown>> = ({ children }) => {
+const DeviceOfflineWrapper: FC<PropsWithChildren> = ({ children }) => {
   const { t } = useTranslation();
   const isConnected = useIsConnected();
   const triedToConnect = useTriedToConnect();

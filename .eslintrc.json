@@ -22,7 +22,8 @@
     "react",
     "react-native",
     "react-hooks",
-    "prettier"
+    "prettier",
+    "import"
   ],
   "rules": {
     "no-relative-import-paths/no-relative-import-paths": [
@@ -46,9 +47,12 @@
     "@typescript-eslint/consistent-type-imports": [
       "error",
       {
-        "prefer": "type-imports"
+        "prefer": "type-imports",
+        "fixStyle": "separate-type-imports",
+        "disallowTypeAnnotations": true
       }
     ],
+    "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
     "no-console": 0,
     "indent": "off",
     "no-duplicate-imports": "off",
