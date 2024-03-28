@@ -57,98 +57,102 @@ export interface LiveData {
 
 export interface SystemStatus {
   // HardwareInfo
-  chipmodel: string;
-  chiprevision: number;
-  chipcores: number;
-  cpufreq: number;
+  chipmodel?: string;
+  chiprevision?: number;
+  chipcores?: number;
+  cpufreq?: number;
 
   // FirmwareInfo
-  hostname: string;
-  sdkversion: string;
-  config_version: string;
-  git_hash: string;
-  git_is_hash: boolean;
-  pioenv: string;
-  resetreason_0: string;
-  resetreason_1: string;
-  cfgsavecount: number;
-  uptime: number;
-  update_text: string;
-  update_url: string;
-  update_status: string;
+  hostname?: string;
+  sdkversion?: string;
+  config_version?: string;
+  git_hash?: string;
+  git_is_hash?: boolean;
+  pioenv?: string;
+  resetreason_0?: string;
+  resetreason_1?: string;
+  cfgsavecount?: number;
+  uptime?: number;
+  update_text?: string;
+  update_url?: string;
+  update_status?: string;
 
   // MemoryInfo
-  heap_total: number;
-  heap_used: number;
-  littlefs_total: number;
-  littlefs_used: number;
-  sketch_total: number;
-  sketch_used: number;
+  heap_total?: number;
+  heap_used?: number;
+  heap_max_block?: number;
+  heap_min_free?: number;
+  littlefs_total?: number;
+  littlefs_used?: number;
+  sketch_total?: number;
+  sketch_used?: number;
+  psram_total?: number;
+  psram_used?: number;
 
   // RadioInfo
-  nrf_configured: boolean;
-  nrf_connected: boolean;
-  nrf_pvariant: boolean;
-  cmt_configured: boolean;
-  cmt_connected: boolean;
+  nrf_configured?: boolean;
+  nrf_connected?: boolean;
+  nrf_pvariant?: boolean;
+  cmt_configured?: boolean;
+  cmt_connected?: boolean;
 }
 
 export interface NetworkStatus {
   // WifiStationInfo
-  sta_status: boolean;
-  sta_ssid: string;
-  sta_bssid: string;
-  sta_rssi: number;
+  sta_status?: boolean;
+  sta_ssid?: string;
+  sta_bssid?: string;
+  sta_rssi?: number;
 
   // WifiApInfo
-  ap_status: boolean;
-  ap_ssid: string;
-  ap_stationnum: number;
+  ap_status?: boolean;
+  ap_ssid?: string;
+  ap_stationnum?: number;
 
   // InterfaceNetworkInfo
-  network_hostname: string;
-  network_ip: string;
-  network_netmask: string;
-  network_gateway: string;
-  network_dns1: string;
-  network_dns2: string;
-  network_mac: string;
-  network_mode: string;
+  network_hostname?: string;
+  network_ip?: string;
+  network_netmask?: string;
+  network_gateway?: string;
+  network_dns1?: string;
+  network_dns2?: string;
+  network_mac?: string;
+  network_mode?: string;
 
   // InterfaceApInfo
-  ap_ip: string;
-  ap_mac: string;
+  ap_ip?: string;
+  ap_mac?: string;
 }
 
 export interface MqttStatus {
-  mqtt_enabled: boolean;
-  mqtt_hostname: string;
-  mqtt_port: number;
-  mqtt_username: string;
-  mqtt_topic: string;
-  mqtt_publish_interval: number;
-  mqtt_clean_session: boolean;
-  mqtt_retain: boolean;
-  mqtt_tls: boolean;
-  mqtt_root_ca_cert_info: string;
-  mqtt_tls_cert_login: boolean;
-  mqtt_client_cert_info: string;
-  mqtt_connected: boolean;
-  mqtt_hass_enabled: boolean;
-  mqtt_hass_expire: boolean;
-  mqtt_hass_retain: boolean;
-  mqtt_hass_topic: string;
-  mqtt_hass_individualpanels: boolean;
+  mqtt_enabled?: boolean;
+  mqtt_hostname?: string;
+  mqtt_port?: number;
+  mqtt_username?: string;
+  mqtt_topic?: string;
+  mqtt_publish_interval?: number;
+  mqtt_clean_session?: boolean;
+  mqtt_retain?: boolean;
+  mqtt_tls?: boolean;
+  mqtt_root_ca_cert_info?: string;
+  mqtt_tls_cert_login?: boolean;
+  mqtt_client_cert_info?: string;
+  mqtt_connected?: boolean;
+  mqtt_hass_enabled?: boolean;
+  mqtt_hass_expire?: boolean;
+  mqtt_hass_retain?: boolean;
+  mqtt_hass_topic?: string;
+  mqtt_hass_individualpanels?: boolean;
 }
 
 export interface NtpStatus {
-  ntp_server: string;
-  ntp_timezone: string;
-  ntp_timezone_descr: string;
-  ntp_status: boolean;
-  ntp_localtime: string;
-  sun_risetime: string;
-  sun_settime: string;
-  sun_isDayPeriod: boolean;
-  sun_isSunsetAvailable: boolean;
+  ntp_server?: string;
+  ntp_timezone?: string;
+  ntp_timezone_descr?: string;
+  ntp_status?: boolean;
+  ntp_localtime?: string;
+  sun_risetime?: string;
+  sun_settime?: string;
+  sun_isDayPeriod?: boolean;
+  sun_isSunsetAvailable?: boolean;
 }
