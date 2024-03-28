@@ -95,18 +95,21 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
             dispatch(
               setSystemStatus({ data: systemStatus, index: configIndex }),
             );
-            dispatch(
-              updateDtuHostname({
-                hostname: systemStatus.hostname,
-                index,
-              }),
-            );
-            dispatch(
-              updateDtuCustomNameIfEmpty({
-                customName: systemStatus.hostname,
-                index,
-              }),
-            );
+
+            if (systemStatus.hostname) {
+              dispatch(
+                updateDtuHostname({
+                  hostname: systemStatus.hostname,
+                  index,
+                }),
+              );
+              dispatch(
+                updateDtuCustomNameIfEmpty({
+                  customName: systemStatus.hostname,
+                  index,
+                }),
+              );
+            }
           }
 
           if (networkStatus) {

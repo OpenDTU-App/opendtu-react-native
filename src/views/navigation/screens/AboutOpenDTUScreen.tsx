@@ -60,6 +60,44 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
       : `${systemStatus.git_hash} (outdated)`;
   }, [latestVersion, systemStatus?.git_hash, systemStatus?.git_is_hash]);
 
+  const calculatedFreeHeap = useMemo(
+    () =>
+      typeof systemStatus?.heap_total !== 'undefined' &&
+      typeof systemStatus?.heap_used !== 'undefined'
+        ? systemStatus?.heap_total - systemStatus?.heap_used
+        : undefined,
+    [systemStatus?.heap_total, systemStatus?.heap_used],
+  );
+
+  const calculatedHeapMaxUsage = useMemo(
+    () =>
+      typeof systemStatus?.heap_total !== 'undefined' &&
+      typeof systemStatus?.heap_min_free !== 'undefined'
+        ? systemStatus?.heap_total - systemStatus?.heap_min_free
+        : undefined,
+    [systemStatus?.heap_total, systemStatus?.heap_min_free],
+  );
+
+  const calculatedHeapMaxUsagePercentage = useMemo(() => {
+    if (
+      typeof calculatedHeapMaxUsage !== 'number' ||
+      typeof systemStatus?.heap_total !== 'number'
+    )
+      return undefined;
+
+    return percentage(calculatedHeapMaxUsage, systemStatus.heap_total);
+  }, [calculatedHeapMaxUsage, systemStatus?.heap_total]);
+
+  const calculatedHeapFragmentation = useMemo(() => {
+    if (
+      typeof calculatedFreeHeap !== 'number' ||
+      typeof systemStatus?.heap_max_block !== 'number'
+    )
+      return undefined;
+
+    return 1 - systemStatus.heap_max_block / calculatedFreeHeap;
+  }, [calculatedFreeHeap, systemStatus?.heap_max_block]);
+
   return (
     <>
       <Appbar.Header>
@@ -174,8 +212,47 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     systemStatus?.sketch_total,
                   )})`}
                 />
+                {systemStatus?.psram_used ? (
+                  <List.Item
+                    title={t('opendtu.systemInformationScreen.psram')}
+                    description={`${formatBytes(
+                      systemStatus?.psram_used,
+                    )} / ${formatBytes(
+                      systemStatus?.psram_total,
+                    )} (${percentage(
+                      systemStatus?.psram_used,
+                      systemStatus?.psram_total,
+                    )})`}
+                  />
+                ) : null}
               </List.Section>
             </SettingsSurface>
+            {systemStatus?.heap_max_block ? (
+              <SettingsSurface>
+                <List.Section
+                  title={t('opendtu.systemInformationScreen.heapDetails')}
+                >
+                  <List.Item
+                    title={t('opendtu.systemInformationScreen.totalFree')}
+                    description={formatBytes(calculatedFreeHeap)}
+                  />
+                  <List.Item
+                    title={t('opendtu.systemInformationScreen.biggestBlock')}
+                    description={formatBytes(systemStatus?.heap_max_block)}
+                  />
+                  <List.Item
+                    title={t('opendtu.systemInformationScreen.fragmentation')}
+                    description={percentage(calculatedHeapFragmentation, 1)}
+                  />
+                  <List.Item
+                    title={t('opendtu.systemInformationScreen.maxUsage')}
+                    description={`${formatBytes(
+                      calculatedHeapMaxUsage,
+                    )} (${calculatedHeapMaxUsagePercentage})`}
+                  />
+                </List.Section>
+              </SettingsSurface>
+            ) : null}
             <SettingsSurface>
               <List.Section
                 title={t('opendtu.systemInformationScreen.radioInformation')}

@@ -109,11 +109,20 @@ const NetworkInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 />
                 <List.Item
                   title={t('opendtu.networkInformationScreen.numberOfStations')}
-                  description={networkStatus?.ap_stationnum ?? 0}
+                  description={
+                    networkStatus?.ap_stationnum
+                      ? networkStatus.ap_stationnum
+                      : '0'
+                  }
                 />
-                <List.Subheader>
-                  {t('opendtu.networkInformationScreen.wifiStationInterface')}
-                </List.Subheader>
+              </List.Section>
+            </SettingsSurface>
+            <SettingsSurface>
+              <List.Section
+                title={t(
+                  'opendtu.networkInformationScreen.wifiStationInterface',
+                )}
+              >
                 <List.Item
                   title={t('opendtu.networkInformationScreen.hostname')}
                   description={networkStatus?.network_hostname}
