@@ -21,7 +21,6 @@ const EnableAppUpdatesModal: FC<Omit<ModalProps, 'children'>> = props => {
   }, [onDismiss]);
 
   const handleEnable = useCallback(() => {
-    console.log('handleEnable');
     dispatch(setEnableAppUpdates({ enable: true }));
     handleAbort();
   }, [dispatch, handleAbort]);

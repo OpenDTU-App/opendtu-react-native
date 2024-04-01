@@ -39,7 +39,6 @@ const ChangeCustomNameModal: FC<ChangeCustomNameModalProps> = props => {
   }, [currentCustomName]);
 
   const handleAbort = useCallback(() => {
-    setCustomName('');
     onDismiss?.();
   }, [onDismiss]);
 
