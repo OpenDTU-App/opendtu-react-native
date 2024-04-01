@@ -34,7 +34,6 @@ const ChangeServerUrlModal: FC<ChangeServerUrlModalProps> = props => {
   }, [currentBaseUrl]);
 
   const handleAbort = useCallback(() => {
-    setBaseUrl('');
     onDismiss?.();
   }, [onDismiss]);
 

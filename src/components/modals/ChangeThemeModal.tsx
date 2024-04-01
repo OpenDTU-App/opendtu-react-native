@@ -28,7 +28,6 @@ const ChangeThemeModal: FC<Omit<ModalProps, 'children'>> = props => {
   }, [onDismiss]);
 
   const handleChangeTheme = useCallback(() => {
-    console.log('selectedTheme', selectedTheme);
     dispatch(setAppTheme({ appTheme: selectedTheme }));
     onDismiss?.();
   }, [dispatch, onDismiss, selectedTheme]);
