@@ -8,6 +8,7 @@ import SettingsSurface from '@/components/styled/SettingsSurface';
 
 import useDtuState from '@/hooks/useDtuState';
 
+import { colors } from '@/constants';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
@@ -42,7 +43,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           ? 'check-circle'
                           : 'close-circle'
                       }
-                      color={mqttStatus?.mqtt_enabled ? '#4caf50' : '#f44336'}
+                      color={
+                        mqttStatus?.mqtt_enabled ? colors.success : colors.error
+                      }
                     />
                   )}
                 />
@@ -85,7 +88,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           : 'close-circle'
                       }
                       color={
-                        mqttStatus?.mqtt_clean_session ? '#4caf50' : '#f44336'
+                        mqttStatus?.mqtt_clean_session
+                          ? colors.success
+                          : colors.error
                       }
                     />
                   )}
@@ -102,7 +107,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           ? 'check-circle'
                           : 'close-circle'
                       }
-                      color={mqttStatus?.mqtt_retain ? '#4caf50' : '#f44336'}
+                      color={
+                        mqttStatus?.mqtt_retain ? colors.success : colors.error
+                      }
                     />
                   )}
                 />
@@ -116,7 +123,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       icon={
                         mqttStatus?.mqtt_tls ? 'check-circle' : 'close-circle'
                       }
-                      color={mqttStatus?.mqtt_tls ? '#4caf50' : '#f44336'}
+                      color={
+                        mqttStatus?.mqtt_tls ? colors.success : colors.error
+                      }
                     />
                   )}
                 />
@@ -137,7 +146,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           : 'close-circle'
                       }
                       color={
-                        mqttStatus?.mqtt_tls_cert_login ? '#4caf50' : '#f44336'
+                        mqttStatus?.mqtt_tls_cert_login
+                          ? colors.success
+                          : colors.error
                       }
                     />
                   )}
@@ -163,7 +174,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           : 'close-circle'
                       }
                       color={
-                        mqttStatus?.mqtt_hass_enabled ? '#4caf50' : '#f44336'
+                        mqttStatus?.mqtt_hass_enabled
+                          ? colors.success
+                          : colors.error
                       }
                     />
                   )}
@@ -185,7 +198,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           : 'close-circle'
                       }
                       color={
-                        mqttStatus?.mqtt_hass_retain ? '#4caf50' : '#f44336'
+                        mqttStatus?.mqtt_hass_retain
+                          ? colors.success
+                          : colors.error
                       }
                     />
                   )}
@@ -203,7 +218,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           : 'close-circle'
                       }
                       color={
-                        mqttStatus?.mqtt_hass_expire ? '#4caf50' : '#f44336'
+                        mqttStatus?.mqtt_hass_expire
+                          ? colors.success
+                          : colors.error
                       }
                     />
                   )}
@@ -224,8 +241,8 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       }
                       color={
                         mqttStatus?.mqtt_hass_individualpanels
-                          ? '#4caf50'
-                          : '#f44336'
+                          ? colors.success
+                          : colors.error
                       }
                     />
                   )}
@@ -250,7 +267,11 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           ? 'check-circle'
                           : 'close-circle'
                       }
-                      color={mqttStatus?.mqtt_connected ? '#4caf50' : '#f44336'}
+                      color={
+                        mqttStatus?.mqtt_connected
+                          ? colors.success
+                          : colors.error
+                      }
                     />
                   )}
                 />
