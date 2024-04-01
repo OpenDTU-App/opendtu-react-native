@@ -15,6 +15,7 @@ import useDtuState from '@/hooks/useDtuState';
 import formatBytes from '@/utils/formatBytes';
 import percentage from '@/utils/percentage';
 
+import { colors } from '@/constants';
 import { useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
@@ -272,7 +273,9 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           : 'close-circle'
                       }
                       color={
-                        systemStatus?.nrf_configured ? '#4caf50' : '#f44336'
+                        systemStatus?.nrf_configured
+                          ? colors.success
+                          : colors.error
                       }
                     />
                   )}
@@ -292,7 +295,9 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           : 'close-circle'
                       }
                       color={
-                        systemStatus?.nrf_connected ? '#4caf50' : '#f44336'
+                        systemStatus?.nrf_connected
+                          ? colors.success
+                          : colors.error
                       }
                     />
                   )}
@@ -309,7 +314,11 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           ? 'check-circle'
                           : 'close-circle'
                       }
-                      color={systemStatus?.nrf_pvariant ? '#4caf50' : '#f44336'}
+                      color={
+                        systemStatus?.nrf_pvariant
+                          ? colors.success
+                          : colors.error
+                      }
                     />
                   )}
                 />
@@ -328,7 +337,9 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           : 'close-circle'
                       }
                       color={
-                        systemStatus?.cmt_configured ? '#4caf50' : '#f44336'
+                        systemStatus?.cmt_configured
+                          ? colors.success
+                          : colors.error
                       }
                     />
                   )}
@@ -350,7 +361,9 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           : 'close-circle'
                       }
                       color={
-                        systemStatus?.cmt_connected ? '#4caf50' : '#f44336'
+                        systemStatus?.cmt_connected
+                          ? colors.success
+                          : colors.error
                       }
                     />
                   )}

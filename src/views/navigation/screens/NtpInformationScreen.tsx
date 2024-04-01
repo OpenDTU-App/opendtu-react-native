@@ -8,6 +8,7 @@ import SettingsSurface from '@/components/styled/SettingsSurface';
 
 import useDtuState from '@/hooks/useDtuState';
 
+import { colors } from '@/constants';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
@@ -60,7 +61,9 @@ const NtpInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       icon={
                         ntpStatus?.ntp_status ? 'check-circle' : 'close-circle'
                       }
-                      color={ntpStatus?.ntp_status ? '#4caf50' : '#f44336'}
+                      color={
+                        ntpStatus?.ntp_status ? colors.success : colors.error
+                      }
                     />
                   )}
                 />
@@ -107,7 +110,7 @@ const NtpInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           ? ntpStatus?.sun_isDayPeriod
                             ? '#2196f3'
                             : '#ffc107'
-                          : '#f44336'
+                          : colors.error
                       }
                     />
                   )}

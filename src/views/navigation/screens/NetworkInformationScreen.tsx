@@ -9,6 +9,7 @@ import SettingsSurface from '@/components/styled/SettingsSurface';
 
 import useDtuState from '@/hooks/useDtuState';
 
+import { colors } from '@/constants';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
@@ -61,7 +62,11 @@ const NetworkInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           ? 'check-circle'
                           : 'close-circle'
                       }
-                      color={networkStatus?.sta_status ? '#4caf50' : '#f44336'}
+                      color={
+                        networkStatus?.sta_status
+                          ? colors.success
+                          : colors.error
+                      }
                     />
                   )}
                 />
@@ -99,7 +104,9 @@ const NetworkInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           ? 'check-circle'
                           : 'close-circle'
                       }
-                      color={networkStatus?.ap_status ? '#4caf50' : '#f44336'}
+                      color={
+                        networkStatus?.ap_status ? colors.success : colors.error
+                      }
                     />
                   )}
                 />
