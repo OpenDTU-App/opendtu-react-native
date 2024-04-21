@@ -1,5 +1,5 @@
 // ago: Returns the number of milliseconds since the given date.
-const ago = (date: Date | number): number => {
+const ago = (date: Date | number | unknown): number => {
   if (!date) return -1;
 
   const now = new Date();
@@ -8,7 +8,11 @@ const ago = (date: Date | number): number => {
     return now.getTime() - date;
   }
 
-  return now.getTime() - date.getTime();
+  if (date instanceof Date) {
+    return now.getTime() - date.getTime();
+  }
+
+  return -1;
 };
 
 export default ago;
