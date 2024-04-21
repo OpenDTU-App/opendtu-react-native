@@ -55,8 +55,9 @@ const NetworkInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   description={
                     networkStatus?.sta_status ? t('enabled') : t('disabled')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         networkStatus?.sta_status
                           ? 'check-circle'
@@ -97,8 +98,9 @@ const NetworkInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   description={
                     networkStatus?.ap_status ? t('enabled') : t('disabled')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         networkStatus?.ap_status
                           ? 'check-circle'

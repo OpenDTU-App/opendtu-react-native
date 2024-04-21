@@ -20,7 +20,9 @@ import type {
   SetLanguageAction,
   EnableAppUpdatesAction,
   DebugEnabledAction,
+  EnableFetchOpenDTUReleasesAction,
 } from '@/types/settings';
+import { DidNotAskYet } from '@/types/settings';
 
 const initialState: SettingsState = {
   appTheme: 'system',
@@ -28,7 +30,8 @@ const initialState: SettingsState = {
   dtuConfigs: [],
   selectedDtuConfig: null,
   databaseConfigs: [],
-  enableAppUpdates: null,
+  enableAppUpdates: DidNotAskYet,
+  enableFetchOpenDTUReleases: DidNotAskYet,
   debugEnabled: false,
 };
 
@@ -225,6 +228,12 @@ const settingsSlice = createSlice({
     setDebugEnabled: (state, action: DebugEnabledAction) => {
       state.debugEnabled = action.payload.debugEnabled;
     },
+    setEnableFetchOpenDTUReleases: (
+      state,
+      action: EnableFetchOpenDTUReleasesAction,
+    ) => {
+      state.enableFetchOpenDTUReleases = action.payload.enable;
+    },
   },
 });
 
@@ -248,6 +257,7 @@ export const {
   updateDTUDatabaseUuid,
   setEnableAppUpdates,
   setDebugEnabled,
+  setEnableFetchOpenDTUReleases,
 } = settingsSlice.actions;
 
 export const { reducer: SettingsReducer } = settingsSlice;

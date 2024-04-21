@@ -8,6 +8,7 @@ import {
 
 import useHasAuthConfigured from '@/hooks/useHasAuthConfigured';
 import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
+import useHasNewOpenDtuVersion from '@/hooks/useHasNewOpenDtuVersion';
 
 import GraphTab from '@/views/navigation/tabs/GraphTab';
 import InverterListTab from '@/views/navigation/tabs/InverterListTab';
@@ -29,6 +30,10 @@ const BottomNavigation: FC = () => {
   const [index, setIndex] = useState<number>(0);
 
   const [hasNewAppVersion] = useHasNewAppVersion({
+    usedForIndicatorOnly: true,
+  });
+
+  const [hasNewOpenDtuVersion] = useHasNewOpenDtuVersion({
     usedForIndicatorOnly: true,
   });
 
@@ -59,10 +64,10 @@ const BottomNavigation: FC = () => {
         key: 'settings',
         title: t('navigation.settings'),
         focusedIcon: 'cog',
-        badge: hasNewAppVersion,
+        badge: hasNewAppVersion || hasNewOpenDtuVersion,
       },
     ],
-    [t, hasNewAppVersion, authStringConfigured],
+    [t, authStringConfigured, hasNewAppVersion, hasNewOpenDtuVersion],
   );
 
   const renderScene = BottomNavigationPaper.SceneMap({

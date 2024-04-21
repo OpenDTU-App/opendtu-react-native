@@ -5,7 +5,7 @@ import { Box } from 'react-native-flex-layout';
 import type { ModalProps } from 'react-native-paper';
 import { Button, Portal, Text } from 'react-native-paper';
 
-import { setEnableAppUpdates } from '@/slices/settings';
+import { setEnableFetchOpenDTUReleases } from '@/slices/settings';
 
 import BaseModal from '@/components/BaseModal';
 
@@ -21,12 +21,12 @@ const EnableAppUpdatesModal: FC<Omit<ModalProps, 'children'>> = props => {
   }, [onDismiss]);
 
   const handleEnable = useCallback(() => {
-    dispatch(setEnableAppUpdates({ enable: true }));
+    dispatch(setEnableFetchOpenDTUReleases({ enable: true }));
     handleAbort();
   }, [dispatch, handleAbort]);
 
   const handleDisable = useCallback(() => {
-    dispatch(setEnableAppUpdates({ enable: false }));
+    dispatch(setEnableFetchOpenDTUReleases({ enable: false }));
     handleAbort();
   }, [dispatch, handleAbort]);
 
@@ -36,9 +36,9 @@ const EnableAppUpdatesModal: FC<Omit<ModalProps, 'children'>> = props => {
         <Box p={16}>
           <Box mb={8}>
             <Text variant="bodyLarge">
-              {t('settings.doYouWantToEnableAppUpdates')}
+              {t('settings.doYouWantToEnableOpenDtuUpdates')}
             </Text>
-            <Text variant="bodyMedium" style={{ opacity: 0.75 }}>
+            <Text variant="bodySmall" style={{ opacity: 0.75 }}>
               {t('settings.thisWillMakeRequestsToGithub')}
             </Text>
           </Box>

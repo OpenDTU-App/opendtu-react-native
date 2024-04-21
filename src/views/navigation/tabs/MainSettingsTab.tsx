@@ -17,6 +17,7 @@ import ChangeThemeModal from '@/components/modals/ChangeThemeModal';
 
 import useDtuState from '@/hooks/useDtuState';
 import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
+import useHasNewOpenDtuVersion from '@/hooks/useHasNewOpenDtuVersion';
 import useIsConnected from '@/hooks/useIsConnected';
 import useRequireMultiplePresses from '@/hooks/useRequireMultiplePresses';
 import useSettings from '@/hooks/useSettings';
@@ -43,7 +44,12 @@ const MainSettingsTab: FC = () => {
   const closeChangeLanguageModal = () => setShowChangeLanguageModal(false);
 
   const websocketConnected = useIsConnected();
+
   const [hasNewAppVersion] = useHasNewAppVersion({
+    usedForIndicatorOnly: true,
+  });
+
+  const [hasNewOpenDtuVersion] = useHasNewOpenDtuVersion({
     usedForIndicatorOnly: true,
   });
 
@@ -102,6 +108,7 @@ const MainSettingsTab: FC = () => {
   const enableDebugMode = useCallback(() => {
     dispatch(setDebugEnabled({ debugEnabled: true }));
   }, [dispatch]);
+
   const handleUnlockDebug = useRequireMultiplePresses(enableDebugMode);
 
   return (
@@ -117,6 +124,13 @@ const MainSettingsTab: FC = () => {
               onPress={handleAboutOpenDTU}
               disabled={systemInformationDisabled}
               style={{ opacity: systemInformationDisabled ? 0.5 : 1 }}
+              right={props =>
+                hasNewOpenDtuVersion ? (
+                  <Badge visible={true} style={{ marginTop: 8 }} {...props}>
+                    {t('settings.newOpenDtuRelease')}
+                  </Badge>
+                ) : null
+              }
             />
             <List.Item
               title={t('opendtu.networkInformation')}

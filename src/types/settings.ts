@@ -24,11 +24,15 @@ export interface DatabaseConfig {
   password: string;
 }
 
+export const DidNotAskYet = null;
+export type DidNotAskYet = null;
+
 export interface SettingsState {
   // app specific
   appTheme: 'light' | 'dark' | 'system';
   language: 'en' | 'de';
-  enableAppUpdates: boolean | null;
+  enableAppUpdates: boolean | DidNotAskYet;
+  enableFetchOpenDTUReleases: boolean | DidNotAskYet;
   debugEnabled: boolean;
 
   // opendtu
@@ -109,4 +113,8 @@ export type EnableAppUpdatesAction = PayloadAction<{
 
 export type DebugEnabledAction = PayloadAction<{
   debugEnabled: boolean;
+}>;
+
+export type EnableFetchOpenDTUReleasesAction = PayloadAction<{
+  enable: boolean;
 }>;

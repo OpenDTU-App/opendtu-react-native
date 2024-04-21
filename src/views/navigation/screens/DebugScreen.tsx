@@ -80,13 +80,14 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 description={`${
                   latestAppRelease
                     ? moment(latestAppRelease).toLocaleString()
-                    : ''
+                    : JSON.stringify(latestAppRelease)
                 } (${typeof latestAppRelease})`}
                 right={props => (
                   <IconButton
                     {...props}
                     icon="delete"
                     onPress={handleClearLatestAppRelease}
+                    disabled={!latestAppRelease}
                   />
                 )}
               />
@@ -95,13 +96,14 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 description={`${
                   opendtuReleases
                     ? moment(opendtuReleases).toLocaleString()
-                    : ''
+                    : JSON.stringify(opendtuReleases)
                 } (${typeof opendtuReleases})`}
                 right={props => (
                   <IconButton
                     {...props}
                     icon="delete"
                     onPress={handleClearOpenDtuReleases}
+                    disabled={!opendtuReleases}
                   />
                 )}
               />
@@ -110,13 +112,14 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 description={`${
                   latestOpenDtuRelease
                     ? moment(latestOpenDtuRelease).toLocaleString()
-                    : ''
+                    : JSON.stringify(latestOpenDtuRelease)
                 } (${typeof latestOpenDtuRelease})`}
                 right={props => (
                   <IconButton
                     {...props}
                     icon="delete"
                     onPress={handleClearLatestOpenDtuRelease}
+                    disabled={!latestOpenDtuRelease}
                   />
                 )}
               />

@@ -56,8 +56,9 @@ const NtpInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   description={
                     ntpStatus?.ntp_status ? t('synced') : t('notSynced')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         ntpStatus?.ntp_status ? 'check-circle' : 'close-circle'
                       }
@@ -96,8 +97,9 @@ const NtpInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                         : t('opendtu.ntpInformationScreen.night')
                       : t('unavailable')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         ntpStatus?.sun_isSunsetAvailable
                           ? ntpStatus?.sun_isDayPeriod
