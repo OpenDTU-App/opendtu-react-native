@@ -28,20 +28,29 @@ const githubSlice = createSlice({
     setReleases: (state, action: SetGithubReleasesAction) => {
       state.releases = {
         data: action.payload.releases,
-        lastUpdate: new Date(),
+        lastUpdate: new Date().getTime(),
       };
     },
     setLatestRelease: (state, action: SetGithubLatestReleaseAction) => {
       state.latestRelease = {
         data: action.payload.latest,
-        lastUpdate: new Date(),
+        lastUpdate: new Date().getTime(),
       };
     },
     setLatestAppRelease: (state, action: SetGithubLatestReleaseAction) => {
       state.latestAppRelease = {
         data: action.payload.latest,
-        lastUpdate: new Date(),
+        lastUpdate: new Date().getTime(),
       };
+    },
+    setReleasesTimeout: state => {
+      state.releases.lastUpdate = new Date().getTime();
+    },
+    setLatestReleaseTimeout: state => {
+      state.latestRelease.lastUpdate = new Date().getTime();
+    },
+    setLatestAppReleaseTimeout: state => {
+      state.latestAppRelease.lastUpdate = new Date().getTime();
     },
     clearReleases: state => {
       state.releases = {
@@ -71,6 +80,9 @@ export const {
   clearReleases,
   clearLatestRelease,
   clearLatestAppRelease,
+  setReleasesTimeout,
+  setLatestReleaseTimeout,
+  setLatestAppReleaseTimeout,
 } = githubSlice.actions;
 
 export const { reducer: GithubReducer } = githubSlice;

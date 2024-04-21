@@ -5,8 +5,11 @@ import { useEffect } from 'react';
 
 import {
   setLatestAppRelease,
+  setLatestAppReleaseTimeout,
   setLatestRelease,
+  setLatestReleaseTimeout,
   setReleases,
+  setReleasesTimeout,
 } from '@/slices/github';
 
 // import useDeviceIndex from '@/hooks/useDeviceIndex';
@@ -33,7 +36,10 @@ const FetchHandler: FC = () => {
         ? ago(state.github.latestRelease.lastUpdate)
         : -1;
 
-    if (result === -1) return true;
+    if (result === -1) {
+      console.warn('latestReleaseRefetch is -1');
+      return true;
+    }
 
     return result > 1000 * 60 * 10; // 10 minutes
   });
@@ -44,7 +50,10 @@ const FetchHandler: FC = () => {
         ? ago(state.github.releases.lastUpdate)
         : -1;
 
-    if (result === -1) return true;
+    if (result === -1) {
+      console.warn('allReleasesRefetch is -1');
+      return true;
+    }
 
     return result > 1000 * 60 * 10; // 10 minutes
   });
@@ -55,7 +64,10 @@ const FetchHandler: FC = () => {
         ? ago(state.github.latestAppRelease.lastUpdate)
         : -1;
 
-    if (result === -1) return true;
+    if (result === -1) {
+      console.warn('latestAppReleaseRefetch is -1');
+      return true;
+    }
 
     return result > 1000 * 60 * 10; // 10 minutes
   });
@@ -74,6 +86,8 @@ const FetchHandler: FC = () => {
     const func = async () => {
       try {
         if (latestReleaseRefetchOk) {
+          dispatch(setLatestReleaseTimeout());
+
           const latestRelease = await githubApi.request(
             'GET /repos/{owner}/{repo}/releases/latest',
             OpenDTUGithubBaseConfig,
@@ -85,6 +99,8 @@ const FetchHandler: FC = () => {
         }
 
         if (allReleasesRefetchOk) {
+          dispatch(setReleasesTimeout());
+
           const releases = await githubApi.request(
             'GET /repos/{owner}/{repo}/releases',
             OpenDTUGithubBaseConfig,
@@ -96,6 +112,8 @@ const FetchHandler: FC = () => {
         }
 
         if (latestAppReleaseRefetchOk && enableAppUpdates) {
+          dispatch(setLatestAppReleaseTimeout());
+
           const appRelease = await githubApi.request(
             'GET /repos/{owner}/{repo}/releases/latest',
             AppGithubBaseConfig,

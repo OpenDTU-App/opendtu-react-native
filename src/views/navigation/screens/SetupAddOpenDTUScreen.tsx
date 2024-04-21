@@ -42,7 +42,9 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleAbort = useCallback(() => {
-    navigation.goBack();
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    }
   }, [navigation]);
 
   const handleConnectCheck = useCallback(async () => {

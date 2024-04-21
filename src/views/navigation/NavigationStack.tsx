@@ -14,6 +14,8 @@ import ConfigureGraphsScreen from '@/views/navigation/screens/ConfigureGraphsScr
 import DebugScreen from '@/views/navigation/screens/DebugScreen';
 import DeviceListScreen from '@/views/navigation/screens/DeviceListScreen';
 import DeviceSettingsScreen from '@/views/navigation/screens/DeviceSettingsScreen';
+import InverterEventLogScreen from '@/views/navigation/screens/InverterEventLogScreen';
+import InverterInfoScreen from '@/views/navigation/screens/InverterInfoScreen';
 import LicensesScreen from '@/views/navigation/screens/LicensesScreen';
 import MainScreen from '@/views/navigation/screens/MainScreen';
 import ManageDatabasesScreen from '@/views/navigation/screens/ManageDatabasesScreen';
@@ -96,6 +98,11 @@ const NavigationStack: FC = () => {
       />
       <Stack.Screen name="LicensesScreen" component={LicensesScreen} />
       <Stack.Screen name="DebugScreen" component={DebugScreen} />
+      <Stack.Screen name="InverterInfoScreen" component={InverterInfoScreen} />
+      <Stack.Screen
+        name="InverterEventLogScreen"
+        component={InverterEventLogScreen}
+      />
     </Stack.Navigator>
   );
 };

@@ -5,6 +5,8 @@ import { logger } from 'react-native-logs';
 import {
   clearOpenDtuState,
   setDeviceState,
+  setEventLog,
+  setInverters,
   setIsConnected,
   setLiveData,
   setMqttStatus,
@@ -36,6 +38,12 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useAppDispatch();
 
   const configIndex = useAppSelector(state => state.settings.selectedDtuConfig);
+
+  const language = useAppSelector(state => state.settings.language);
+
+  useEffect(() => {
+    api.setLocale(language);
+  }, [api, language]);
 
   const currentConfiguration = useAppSelector(
     state =>
@@ -90,7 +98,10 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
       });
 
       api.registerHttpStatusHandler(
-        ({ systemStatus, networkStatus, ntpStatus, mqttStatus }, index) => {
+        (
+          { systemStatus, networkStatus, ntpStatus, mqttStatus, inverters },
+          index,
+        ) => {
           if (systemStatus) {
             dispatch(
               setSystemStatus({ data: systemStatus, index: configIndex }),
@@ -126,9 +137,17 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
             dispatch(setMqttStatus({ data: mqttStatus, index: configIndex }));
           }
 
+          if (inverters) {
+            dispatch(setInverters({ inverters, index: configIndex }));
+          }
+
           setDeviceState({ deviceState: DeviceState.Connected, index });
         },
       );
+
+      api.registerOnEventLogHandler((data, index, inverterSerial) => {
+        dispatch(setEventLog({ data, index, inverterSerial }));
+      });
 
       console.log('Connecting API Handler');
 

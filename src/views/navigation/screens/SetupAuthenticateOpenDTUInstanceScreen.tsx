@@ -113,7 +113,9 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
       <Appbar.Header>
         <Appbar.BackAction
           onPress={() => {
-            navigation.goBack();
+            if (navigation.canGoBack()) {
+              navigation.goBack();
+            }
           }}
         />
         <Appbar.Content title={t('setup.authenticateOpendtuInstance')} />

@@ -77,11 +77,11 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               <List.Subheader>{t('debug.cache')}</List.Subheader>
               <List.Item
                 title={t('debug.latestAppReleaseCacheCreated')}
-                description={
+                description={`${
                   latestAppRelease
                     ? moment(latestAppRelease).toLocaleString()
                     : ''
-                }
+                } (${typeof latestAppRelease})`}
                 right={props => (
                   <IconButton
                     {...props}
@@ -92,11 +92,11 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               />
               <List.Item
                 title={t('debug.openDtuReleasesCacheCreated')}
-                description={
+                description={`${
                   opendtuReleases
                     ? moment(opendtuReleases).toLocaleString()
                     : ''
-                }
+                } (${typeof opendtuReleases})`}
                 right={props => (
                   <IconButton
                     {...props}
@@ -107,11 +107,11 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               />
               <List.Item
                 title={t('debug.latestOpenDtuReleaseCacheCreated')}
-                description={
+                description={`${
                   latestOpenDtuRelease
                     ? moment(latestOpenDtuRelease).toLocaleString()
                     : ''
-                }
+                } (${typeof latestOpenDtuRelease})`}
                 right={props => (
                   <IconButton
                     {...props}

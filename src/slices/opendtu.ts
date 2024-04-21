@@ -14,6 +14,9 @@ import type {
   SetMqttStatusAction,
   ClearOpenDtuStateAction,
   OpenDTUDeviceState,
+  SetInvertersAction,
+  SetEventLogAction,
+  InverterData,
 } from '@/types/opendtu/state';
 
 const initialState: OpenDTUReduxState = {
@@ -130,6 +133,41 @@ const opendtuSlice = createSlice({
       (state.dtuStates[action.payload.index] as OpenDTUDeviceState).mqttStatus =
         action.payload.data;
     },
+    setInverters: (state, action: SetInvertersAction) => {
+      if (!state.dtuStates[action.payload.index]) {
+        state.dtuStates[action.payload.index] = {};
+      }
+
+      (state.dtuStates[action.payload.index] as OpenDTUDeviceState).inverters =
+        action.payload.inverters;
+    },
+    setEventLog: (state, action: SetEventLogAction) => {
+      const { index, data, inverterSerial } = action.payload;
+
+      if (!state.dtuStates[index]) {
+        state.dtuStates[index] = {};
+      }
+
+      if (!state.dtuStates[index]?.inverterData) {
+        (state.dtuStates[index] as OpenDTUDeviceState).inverterData = {};
+      }
+
+      if (
+        !(state.dtuStates[index] as OpenDTUDeviceState).inverterData?.[
+          inverterSerial
+        ]
+      ) {
+        (
+          (state.dtuStates[index] as OpenDTUDeviceState)
+            .inverterData as InverterData
+        )[inverterSerial] = {};
+      }
+
+      (
+        (state.dtuStates[index] as OpenDTUDeviceState)
+          .inverterData as InverterData
+      )[inverterSerial] = { eventLog: data };
+    },
   },
 });
 
@@ -147,6 +185,8 @@ export const {
   setNetworkStatus,
   setNtpStatus,
   setMqttStatus,
+  setInverters,
+  setEventLog,
 } = opendtuSlice.actions;
 
 export const { reducer: OpenDTUReducer } = opendtuSlice;
