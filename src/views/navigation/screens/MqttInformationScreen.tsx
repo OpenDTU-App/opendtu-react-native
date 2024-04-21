@@ -36,8 +36,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   description={
                     mqttStatus?.mqtt_enabled ? t('enabled') : t('disabled')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         mqttStatus?.mqtt_enabled
                           ? 'check-circle'
@@ -80,8 +81,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       ? t('enabled')
                       : t('disabled')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         mqttStatus?.mqtt_clean_session
                           ? 'check-circle'
@@ -100,8 +102,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   description={
                     mqttStatus?.mqtt_retain ? t('enabled') : t('disabled')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         mqttStatus?.mqtt_retain
                           ? 'check-circle'
@@ -118,8 +121,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   description={
                     mqttStatus?.mqtt_tls ? t('enabled') : t('disabled')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         mqttStatus?.mqtt_tls ? 'check-circle' : 'close-circle'
                       }
@@ -138,8 +142,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       ? t('enabled')
                       : t('disabled')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         mqttStatus?.mqtt_tls_cert_login
                           ? 'check-circle'
@@ -166,8 +171,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   description={
                     mqttStatus?.mqtt_hass_enabled ? t('enabled') : t('disabled')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         mqttStatus?.mqtt_hass_enabled
                           ? 'check-circle'
@@ -190,8 +196,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   description={
                     mqttStatus?.mqtt_hass_retain ? t('enabled') : t('disabled')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         mqttStatus?.mqtt_hass_retain
                           ? 'check-circle'
@@ -210,8 +217,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   description={
                     mqttStatus?.mqtt_hass_expire ? t('enabled') : t('disabled')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         mqttStatus?.mqtt_hass_expire
                           ? 'check-circle'
@@ -232,8 +240,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       ? t('enabled')
                       : t('disabled')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         mqttStatus?.mqtt_hass_individualpanels
                           ? 'check-circle'
@@ -260,8 +269,9 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       ? t('connected')
                       : t('notConnected')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         mqttStatus?.mqtt_connected
                           ? 'check-circle'

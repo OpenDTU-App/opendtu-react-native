@@ -6,23 +6,27 @@ import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Linking, ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
-import { Appbar, List, useTheme } from 'react-native-paper';
+import { Appbar, Badge, List, Switch, useTheme } from 'react-native-paper';
+
+import { setEnableFetchOpenDTUReleases } from '@/slices/settings';
 
 import SettingsSurface from '@/components/styled/SettingsSurface';
 
 import useDtuState from '@/hooks/useDtuState';
+import useHasNewOpenDtuVersion from '@/hooks/useHasNewOpenDtuVersion';
 
 import formatBytes from '@/utils/formatBytes';
 import percentage from '@/utils/percentage';
 
 import { colors } from '@/constants';
-import { useAppSelector } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
 
   const systemStatus = useDtuState(state => state?.systemStatus);
 
@@ -99,6 +103,20 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     return 1 - systemStatus.heap_max_block / calculatedFreeHeap;
   }, [calculatedFreeHeap, systemStatus?.heap_max_block]);
 
+  const fetchFromGithubEnabled = useAppSelector(
+    state => state.settings.enableFetchOpenDTUReleases,
+  );
+
+  const handleToggleFetchFromGithub = useCallback(() => {
+    dispatch(
+      setEnableFetchOpenDTUReleases({ enable: !fetchFromGithubEnabled }),
+    );
+  }, [dispatch, fetchFromGithubEnabled]);
+
+  const [hasNewOpenDtuVersion] = useHasNewOpenDtuVersion({
+    usedForIndicatorOnly: true,
+  });
+
   return (
     <>
       <Appbar.Header>
@@ -108,6 +126,37 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
       <StyledSafeAreaView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView>
+            <SettingsSurface>
+              <List.Item
+                title={t(
+                  'opendtu.systemInformationScreen.activateFetchFromGithub',
+                )}
+                description={t(
+                  'opendtu.systemInformationScreen.activateFetchFromGithubDescription',
+                )}
+                right={() => (
+                  <Switch
+                    value={!!fetchFromGithubEnabled}
+                    onValueChange={handleToggleFetchFromGithub}
+                  />
+                )}
+              />
+              <List.Item
+                title={t('opendtu.changelog.updatesChangelog')}
+                description={t('opendtu.changelog.updatesChangelogDescription')}
+                right={props =>
+                  hasNewOpenDtuVersion ? (
+                    <Badge visible={true} style={{ marginTop: 8 }} {...props}>
+                      {t('settings.newOpenDtuRelease')}
+                    </Badge>
+                  ) : (
+                    <List.Icon {...props} icon="arrow-right" />
+                  )
+                }
+                disabled
+                style={{ opacity: 0.5 }}
+              />
+            </SettingsSurface>
             <SettingsSurface>
               <List.Section
                 title={t('opendtu.systemInformationScreen.firmwareInformation')}
@@ -265,8 +314,9 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       ? t('configured')
                       : t('notConfigured')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         systemStatus?.nrf_configured
                           ? 'check-circle'
@@ -287,8 +337,9 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       ? t('connected')
                       : t('notConnected')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         systemStatus?.nrf_connected
                           ? 'check-circle'
@@ -307,8 +358,9 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   description={
                     systemStatus?.nrf_pvariant ? 'nRF24L01+' : 'nRF24L01'
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         systemStatus?.nrf_pvariant
                           ? 'check-circle'
@@ -329,8 +381,9 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       ? t('configured')
                       : t('notConfigured')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         systemStatus?.cmt_configured
                           ? 'check-circle'
@@ -353,8 +406,9 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       ? t('connected')
                       : t('notConnected')
                   }
-                  right={() => (
+                  right={props => (
                     <List.Icon
+                      {...props}
                       icon={
                         systemStatus?.cmt_connected
                           ? 'check-circle'

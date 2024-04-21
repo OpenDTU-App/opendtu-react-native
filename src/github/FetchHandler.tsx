@@ -37,7 +37,6 @@ const FetchHandler: FC = () => {
         : -1;
 
     if (result === -1) {
-      console.warn('latestReleaseRefetch is -1');
       return true;
     }
 
@@ -51,7 +50,6 @@ const FetchHandler: FC = () => {
         : -1;
 
     if (result === -1) {
-      console.warn('allReleasesRefetch is -1');
       return true;
     }
 
@@ -65,7 +63,6 @@ const FetchHandler: FC = () => {
         : -1;
 
     if (result === -1) {
-      console.warn('latestAppReleaseRefetch is -1');
       return true;
     }
 
@@ -74,6 +71,10 @@ const FetchHandler: FC = () => {
 
   const enableAppUpdates = useAppSelector(
     state => !!state.settings.enableAppUpdates,
+  );
+
+  const enableFetchOpenDTUReleases = useAppSelector(
+    state => !!state.settings.enableFetchOpenDTUReleases,
   );
 
   const githubApi = useGithub();
@@ -85,7 +86,7 @@ const FetchHandler: FC = () => {
 
     const func = async () => {
       try {
-        if (latestReleaseRefetchOk) {
+        if (latestReleaseRefetchOk && enableFetchOpenDTUReleases) {
           dispatch(setLatestReleaseTimeout());
 
           const latestRelease = await githubApi.request(
@@ -98,7 +99,7 @@ const FetchHandler: FC = () => {
           console.log('SKIP latestReleaseRefetchOk');
         }
 
-        if (allReleasesRefetchOk) {
+        if (allReleasesRefetchOk && enableFetchOpenDTUReleases) {
           dispatch(setReleasesTimeout());
 
           const releases = await githubApi.request(
@@ -137,6 +138,7 @@ const FetchHandler: FC = () => {
     allReleasesRefetchOk,
     latestAppReleaseRefetchOk,
     enableAppUpdates,
+    enableFetchOpenDTUReleases,
   ]);
 
   return null;

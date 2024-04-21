@@ -16,6 +16,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 
 import AppOfflineModal from '@/components/modals/AppOfflineModal';
 import EnableAppUpdatesModal from '@/components/modals/EnableAppUpdatesModal';
+import EnableFetchOpenDtuUpdatesModal from '@/components/modals/EnableFetchOpenDtuUpdatesModal';
 
 import ApiProvider from '@/api/ApiHandler';
 import DatabaseProvider from '@/database';
@@ -240,6 +241,10 @@ const _App: FC = () => {
     state => state.settings.enableAppUpdates === null,
   );
 
+  const showEnableFetchOpenDTUReleasesModal = useAppSelector(
+    state => state.settings.enableFetchOpenDTUReleases === null,
+  );
+
   if (!i18nLanguageMatchesSettings) {
     return null;
   }
@@ -257,6 +262,13 @@ const _App: FC = () => {
       </NavigationContainer>
       <EnableAppUpdatesModal
         visible={showEnableAppUpdatesModal}
+        /* eslint-disable-next-line @typescript-eslint/no-empty-function */
+        onDismiss={() => {}}
+        dismissable={false}
+        dismissableBackButton={false}
+      />
+      <EnableFetchOpenDtuUpdatesModal
+        visible={showEnableFetchOpenDTUReleasesModal}
         /* eslint-disable-next-line @typescript-eslint/no-empty-function */
         onDismiss={() => {}}
         dismissable={false}
