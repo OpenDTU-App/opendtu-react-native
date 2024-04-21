@@ -11,7 +11,7 @@ const DeviceList: FC = () => {
 
   return (
     <ScrollView style={{ marginBottom: 16 }}>
-      <Box style={{ gap: 8 }}>
+      <Box style={{ gap: 8, marginHorizontal: 8 }}>
         {configs.map((config, index) => (
           <DeviceListItem
             key={`DeviceListItem-${config.baseUrl}-${index}`}
