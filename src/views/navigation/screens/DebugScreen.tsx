@@ -7,7 +7,11 @@ import { ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, IconButton, List, useTheme } from 'react-native-paper';
 
-import { clearLatestAppRelease, clearLatestRelease } from '@/slices/github';
+import {
+  clearLatestAppRelease,
+  clearLatestRelease,
+  clearReleases,
+} from '@/slices/github';
 import { setDebugEnabled } from '@/slices/settings';
 
 import { useApi } from '@/api/ApiHandler';
@@ -24,12 +28,19 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const latestAppRelease = useAppSelector(
     state => state.github.latestAppRelease.lastUpdate,
   );
+  const opendtuReleases = useAppSelector(
+    state => state.github.releases.lastUpdate,
+  );
   const latestOpenDtuRelease = useAppSelector(
     state => state.github.latestRelease.lastUpdate,
   );
 
   const handleClearLatestAppRelease = useCallback(() => {
     dispatch(clearLatestAppRelease());
+  }, [dispatch]);
+
+  const handleClearOpenDtuReleases = useCallback(() => {
+    dispatch(clearReleases());
   }, [dispatch]);
 
   const handleClearLatestOpenDtuRelease = useCallback(() => {
@@ -66,11 +77,11 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               <List.Subheader>{t('debug.cache')}</List.Subheader>
               <List.Item
                 title={t('debug.latestAppReleaseCacheCreated')}
-                description={
+                description={`${
                   latestAppRelease
                     ? moment(latestAppRelease).toLocaleString()
                     : ''
-                }
+                } (${typeof latestAppRelease})`}
                 right={props => (
                   <IconButton
                     {...props}
@@ -80,12 +91,27 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 )}
               />
               <List.Item
+                title={t('debug.openDtuReleasesCacheCreated')}
+                description={`${
+                  opendtuReleases
+                    ? moment(opendtuReleases).toLocaleString()
+                    : ''
+                } (${typeof opendtuReleases})`}
+                right={props => (
+                  <IconButton
+                    {...props}
+                    icon="delete"
+                    onPress={handleClearOpenDtuReleases}
+                  />
+                )}
+              />
+              <List.Item
                 title={t('debug.latestOpenDtuReleaseCacheCreated')}
-                description={
+                description={`${
                   latestOpenDtuRelease
                     ? moment(latestOpenDtuRelease).toLocaleString()
                     : ''
-                }
+                } (${typeof latestOpenDtuRelease})`}
                 right={props => (
                   <IconButton
                     {...props}

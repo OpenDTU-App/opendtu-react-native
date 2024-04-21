@@ -6,13 +6,16 @@ import {
   useTheme,
 } from 'react-native-paper';
 
+import useHasAuthConfigured from '@/hooks/useHasAuthConfigured';
 import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 
 import GraphTab from '@/views/navigation/tabs/GraphTab';
+import InverterListTab from '@/views/navigation/tabs/InverterListTab';
 import LivedataTab from '@/views/navigation/tabs/LivedataTab';
 import MainSettingsTab from '@/views/navigation/tabs/MainSettingsTab';
 
 const LivedataRoute = () => <LivedataTab />;
+const InverterListRoute = () => <InverterListTab />;
 const SettingsRoute = () => <MainSettingsTab />;
 const GraphRoute = () => <GraphTab />;
 
@@ -29,6 +32,8 @@ const BottomNavigation: FC = () => {
     usedForIndicatorOnly: true,
   });
 
+  const authStringConfigured = useHasAuthConfigured();
+
   const routes = useMemo<BaseRoutes>(
     () => [
       {
@@ -36,6 +41,15 @@ const BottomNavigation: FC = () => {
         title: t('navigation.livedata'),
         focusedIcon: 'solar-power',
       },
+      ...(authStringConfigured
+        ? [
+            {
+              key: 'inverterList',
+              title: t('navigation.inverterList'),
+              focusedIcon: 'current-ac',
+            },
+          ]
+        : []),
       {
         key: 'graph',
         title: t('navigation.graph'),
@@ -48,11 +62,12 @@ const BottomNavigation: FC = () => {
         badge: hasNewAppVersion,
       },
     ],
-    [t, hasNewAppVersion],
+    [t, hasNewAppVersion, authStringConfigured],
   );
 
   const renderScene = BottomNavigationPaper.SceneMap({
     livedata: LivedataRoute,
+    inverterList: InverterListRoute,
     graph: GraphRoute,
     settings: SettingsRoute,
   });

@@ -1,3 +1,5 @@
+export type InverterSerial = string;
+
 export interface ValueObject {
   v: number; // value
   u: string; // unit (e.g. "W")
@@ -21,7 +23,7 @@ export interface InverterStatistics {
 }
 
 export interface Inverter {
-  serial: number;
+  serial: InverterSerial;
   name: string;
   order: number;
   data_age: number;

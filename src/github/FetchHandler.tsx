@@ -5,8 +5,11 @@ import { useEffect } from 'react';
 
 import {
   setLatestAppRelease,
+  setLatestAppReleaseTimeout,
   setLatestRelease,
+  setLatestReleaseTimeout,
   setReleases,
+  setReleasesTimeout,
 } from '@/slices/github';
 
 // import useDeviceIndex from '@/hooks/useDeviceIndex';
@@ -26,23 +29,48 @@ const FetchHandler: FC = () => {
   /*const isConnected = useAppSelector(state =>
     index === null ? undefined : state.opendtu.dtuStates[index]?.isConnected,
   );*/
-  const latestReleaseRefetchOk = useAppSelector(state =>
-    state.github.latestRelease.lastUpdate
-      ? ago(state.github.latestRelease.lastUpdate) > 1000 * 60 * 10 // 10 minutes
-      : true,
-  );
 
-  const allReleasesRefetchOk = useAppSelector(state =>
-    state.github.releases.lastUpdate
-      ? ago(state.github.releases.lastUpdate) > 1000 * 60 * 10 // 10 minutes
-      : true,
-  );
+  const latestReleaseRefetchOk = useAppSelector(state => {
+    const result =
+      state.github.latestRelease.lastUpdate !== null
+        ? ago(state.github.latestRelease.lastUpdate)
+        : -1;
 
-  const latestAppReleaseRefetchOk = useAppSelector(state =>
-    state.github.latestAppRelease.lastUpdate
-      ? ago(state.github.latestAppRelease.lastUpdate) > 1000 * 60 * 10 // 10 minutes
-      : true,
-  );
+    if (result === -1) {
+      console.warn('latestReleaseRefetch is -1');
+      return true;
+    }
+
+    return result > 1000 * 60 * 10; // 10 minutes
+  });
+
+  const allReleasesRefetchOk = useAppSelector(state => {
+    const result =
+      state.github.releases.lastUpdate !== null
+        ? ago(state.github.releases.lastUpdate)
+        : -1;
+
+    if (result === -1) {
+      console.warn('allReleasesRefetch is -1');
+      return true;
+    }
+
+    return result > 1000 * 60 * 10; // 10 minutes
+  });
+
+  const latestAppReleaseRefetchOk = useAppSelector(state => {
+    const result =
+      state.github.latestAppRelease.lastUpdate !== null
+        ? ago(state.github.latestAppRelease.lastUpdate)
+        : -1;
+
+    if (result === -1) {
+      console.warn('latestAppReleaseRefetch is -1');
+      return true;
+    }
+
+    return result > 1000 * 60 * 10; // 10 minutes
+  });
 
   const enableAppUpdates = useAppSelector(
     state => !!state.settings.enableAppUpdates,
@@ -58,6 +86,8 @@ const FetchHandler: FC = () => {
     const func = async () => {
       try {
         if (latestReleaseRefetchOk) {
+          dispatch(setLatestReleaseTimeout());
+
           const latestRelease = await githubApi.request(
             'GET /repos/{owner}/{repo}/releases/latest',
             OpenDTUGithubBaseConfig,
@@ -69,6 +99,8 @@ const FetchHandler: FC = () => {
         }
 
         if (allReleasesRefetchOk) {
+          dispatch(setReleasesTimeout());
+
           const releases = await githubApi.request(
             'GET /repos/{owner}/{repo}/releases',
             OpenDTUGithubBaseConfig,
@@ -80,6 +112,8 @@ const FetchHandler: FC = () => {
         }
 
         if (latestAppReleaseRefetchOk && enableAppUpdates) {
+          dispatch(setLatestAppReleaseTimeout());
+
           const appRelease = await githubApi.request(
             'GET /repos/{owner}/{repo}/releases/latest',
             AppGithubBaseConfig,

@@ -2,6 +2,7 @@
 import { logger } from 'react-native-logs';
 
 import type { OpenDTUAuthenticateResponse } from '@/types/opendtu/authenticate';
+import type { InverterItem } from '@/types/opendtu/state';
 import { DeviceState } from '@/types/opendtu/state';
 import type {
   LiveData,
@@ -31,6 +32,17 @@ export interface HttpStatusData {
   networkStatus: NetworkStatus | null;
   ntpStatus: NtpStatus | null;
   mqttStatus: MqttStatus | null;
+  inverters: InverterItem[] | null;
+}
+
+export interface EventLogData {
+  count: number;
+  events: {
+    message_id: number;
+    message: string;
+    start_time: number;
+    end_time: number;
+  }[];
 }
 
 export type HttpStatusHandler = (data: HttpStatusData, index: Index) => void;
@@ -40,12 +52,16 @@ class OpenDtuApi {
   private baseUrl: string | null = null;
   private userString: string | null = null;
   private index: Index | null = null;
+  private locale = 'en';
 
   // handlers
   private liveDataHandler: LiveDataHandler | null = null;
   private httpStatusHandler: HttpStatusHandler | null = null;
   private onConnectedHandler: ((index: Index) => void) | null = null;
   private onDisconnectedHandler: (() => void) | null = null;
+  private onEventLogHandler:
+    | ((data: EventLogData, index: Index, inverterSerial: string) => void)
+    | null = null;
 
   private ws: WebSocket | null = null;
   // communication
@@ -64,6 +80,10 @@ class OpenDtuApi {
     }
 
     log.info('OpenDtuApi.constructor()');
+  }
+
+  public setLocale(locale: string): void {
+    this.locale = locale;
   }
 
   public setBaseUrl(baseUrl: string): void {
@@ -141,6 +161,16 @@ class OpenDtuApi {
 
   public unregisterOnDisconnectedHandler(): void {
     this.onDisconnectedHandler = null;
+  }
+
+  public registerOnEventLogHandler(
+    handler: (data: EventLogData, index: Index, inverterSerial: string) => void,
+  ): void {
+    this.onEventLogHandler = handler;
+  }
+
+  public unregisterOnEventLogHandler(): void {
+    this.onEventLogHandler = null;
   }
 
   public async getSystemStatusFromUrl(
@@ -466,6 +496,7 @@ class OpenDtuApi {
         networkStatus: await this.getNetworkStatus(),
         ntpStatus: await this.getNtpStatus(),
         mqttStatus: await this.getMqttStatus(),
+        inverters: await this.getInverters(),
       },
       this.index,
     );
@@ -512,6 +543,35 @@ class OpenDtuApi {
     return null;
   }
 
+  public async getEventLog(
+    inverterId: string,
+    overrideLocale?: string,
+  ): Promise<EventLogData | null> {
+    if (!this.baseUrl) {
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest(
+      '/api/eventlog/status',
+      'GET',
+      { query: { inv: inverterId, locale: overrideLocale ?? this.locale } },
+    );
+
+    if (!res) {
+      return null;
+    }
+
+    if (res.status === 200) {
+      const json = await res.json();
+
+      if (this.onEventLogHandler && this.index !== null) {
+        this.onEventLogHandler(json, this.index, inverterId);
+      }
+    }
+
+    return null;
+  }
+
   public async getNtpStatus(): Promise<NtpStatus | null> {
     if (!this.baseUrl) {
       return null;
@@ -548,13 +608,35 @@ class OpenDtuApi {
     return null;
   }
 
+  public async getInverters(): Promise<InverterItem[] | null> {
+    if (!this.baseUrl) {
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest(
+      '/api/inverter/list',
+      'GET',
+    );
+
+    if (!res) {
+      return null;
+    }
+
+    if (res.status === 200) {
+      return (await res.json()).inverter;
+    }
+
+    return null;
+  }
+
   public async makeAuthenticatedRequest(
     route: string,
     method: string,
-    body: string | null = null,
+    options?: {
+      body?: string;
+      query?: string[][] | Record<string, string> | string | URLSearchParams;
+    },
   ): Promise<Response | null> {
-    const authString = this.getAuthString();
-
     const controller = new AbortController();
 
     const abortTimeout = setTimeout(() => {
@@ -568,21 +650,36 @@ class OpenDtuApi {
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
         'Content-Type': 'application/json',
-        ...(authString ? { Authorization: 'Basic ' + authString } : {}),
+        ...(this.userString
+          ? { Authorization: 'Basic ' + this.userString }
+          : {}),
       },
     };
 
-    if (body) {
-      requestOptions.body = body;
+    if (options?.body) {
+      requestOptions.body = options.body;
     }
+
+    if (options?.query) {
+      route += '?' + new URLSearchParams(options.query).toString();
+    }
+
+    const authString = this.getAuthString();
 
     const url = `${authString}${this.baseUrl}${route}`;
 
-    console.log('makeAuthenticatedRequest', url, requestOptions);
+    // console.log('makeAuthenticatedRequest', url, requestOptions);
 
     try {
       const res = await fetch(url, requestOptions);
       clearTimeout(abortTimeout);
+
+      /*
+      console.log(
+        'makeAuthenticatedRequest',
+        `url=${url}, status=${res.status}`,
+      );
+      */
 
       return res;
     } catch (error) {

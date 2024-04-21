@@ -10,7 +10,7 @@ export type SetGithubLatestReleaseAction = PayloadAction<{
 }>;
 
 export interface WithTimestamp<T> {
-  lastUpdate: Date | null;
+  lastUpdate: number | null;
   data: T;
 }
 
