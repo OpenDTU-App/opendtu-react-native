@@ -114,7 +114,7 @@ class OpenDtuApi {
         this.index,
         this.isConnected(),
       );
-    }, 10000); // 10 seconds
+    }, 5000); // 10 seconds
 
     this.updateHttpState();
   }
@@ -274,12 +274,21 @@ class OpenDtuApi {
     };
   }
 
-  public async checkCredentials(
-    baseUrl: string,
-    username: string,
-    password: string,
-  ): Promise<false | OpenDTUAuthenticateResponse> {
+  public async checkCredentials({
+    username,
+    password,
+    baseUrl = this.baseUrl as string,
+  }: {
+    username: string;
+    password: string;
+    baseUrl?: string;
+  }): Promise<false | OpenDTUAuthenticateResponse> {
     // GET <url>/api/security/authenticate
+    if (!baseUrl) {
+      log.warn('checkCredentials', 'baseUrl is null');
+      return false;
+    }
+
     const authData = this.encodeCredentials(username, password);
 
     const requestOptions = {
@@ -666,7 +675,7 @@ class OpenDtuApi {
 
     const authString = this.getAuthString();
 
-    const url = `${authString}${this.baseUrl}${route}`;
+    const url = `${authString ?? ''}${this.baseUrl}${route}`;
 
     // console.log('makeAuthenticatedRequest', url, requestOptions);
 
