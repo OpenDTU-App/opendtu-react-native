@@ -9,6 +9,7 @@ import { setSelectedDtuConfig } from '@/slices/settings';
 import { DeviceState } from '@/types/opendtu/state';
 
 import ChangeCustomNameModal from '@/components/modals/ChangeCustomNameModal';
+import ChangeOpendtuCredentialsModal from '@/components/modals/ChangeOpendtuCredentialsModal';
 import ChangeServerUrlModal from '@/components/modals/ChangeServerUrlModal';
 import ConfirmDeleteDeviceModal from '@/components/modals/ConfirmDeleteDeviceModal';
 
@@ -43,6 +44,9 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
 
   const [openServerUrlModal, setOpenServerUrlModal] = useState<boolean>(false);
 
+  const [openCredentialsModal, setOpenCredentialsModal] =
+    useState<boolean>(false);
+
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
 
   useEffect(() => {
@@ -67,6 +71,11 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
     if (!config.userString) return null;
 
     return atob(config.userString).split(':')[0];
+  }, [config.userString]);
+
+  const hasPassword = useMemo(() => {
+    if (!config.userString) return false;
+    return atob(config.userString).split(':')[1] !== '';
   }, [config.userString]);
 
   const deviceState = useAppSelector(state => state.opendtu.deviceState[index]);
@@ -198,6 +207,14 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
               onPress={() => setOpenServerUrlModal(true)}
             />
             <List.Item
+              title={t('deviceSettings.opendtuCredentials')}
+              description={hasPassword ? '********' : t('deviceSettings.none')}
+              left={props => <List.Icon {...props} icon="lock" />}
+              borderless
+              style={{ borderRadius: 8 }}
+              onPress={() => setOpenCredentialsModal(true)}
+            />
+            <List.Item
               title={t('deviceSettings.configureDatabase')}
               description={databaseName ?? 'Not configured'}
               left={props => <List.Icon {...props} icon="database" />}
@@ -242,6 +259,11 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
         <ChangeServerUrlModal
           visible={openServerUrlModal}
           onDismiss={() => setOpenServerUrlModal(false)}
+          index={index}
+        />
+        <ChangeOpendtuCredentialsModal
+          visible={openCredentialsModal}
+          onDismiss={() => setOpenCredentialsModal(false)}
           index={index}
         />
         <ConfirmDeleteDeviceModal

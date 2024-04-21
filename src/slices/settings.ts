@@ -21,6 +21,7 @@ import type {
   EnableAppUpdatesAction,
   DebugEnabledAction,
   EnableFetchOpenDTUReleasesAction,
+  UpdateDtuUserStringAction,
 } from '@/types/settings';
 import { DidNotAskYet } from '@/types/settings';
 
@@ -174,6 +175,22 @@ const settingsSlice = createSlice({
 
       state.dtuConfigs[action.payload.index].baseUrl = action.payload.baseUrl;
     },
+    updateDtuUserString: (state, action: UpdateDtuUserStringAction) => {
+      if (state.dtuConfigs.length === 0) {
+        log.warn('updateDtuUserString: dtuConfigs.length === 0');
+        return;
+      }
+
+      if (state.dtuConfigs[action.payload.index] === undefined) {
+        log.warn(
+          `updateDtuUserString: dtuConfigs[${action.payload.index}] === undefined`,
+        );
+        return;
+      }
+
+      state.dtuConfigs[action.payload.index].userString =
+        action.payload.userString;
+    },
     clearSettings: () => initialState,
     setSelectedDtuToFirstOrNull: state => {
       if (state.dtuConfigs.length > 0) {
@@ -249,6 +266,7 @@ export const {
   updateDtuCustomName,
   updateDtuCustomNameIfEmpty,
   updateDtuBaseUrl,
+  updateDtuUserString,
   clearSettings,
   setSelectedDtuToFirstOrNull,
   addDatabaseConfig,

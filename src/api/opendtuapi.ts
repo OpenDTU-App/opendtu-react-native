@@ -274,12 +274,21 @@ class OpenDtuApi {
     };
   }
 
-  public async checkCredentials(
-    baseUrl: string,
-    username: string,
-    password: string,
-  ): Promise<false | OpenDTUAuthenticateResponse> {
+  public async checkCredentials({
+    username,
+    password,
+    baseUrl = this.baseUrl as string,
+  }: {
+    username: string;
+    password: string;
+    baseUrl?: string;
+  }): Promise<false | OpenDTUAuthenticateResponse> {
     // GET <url>/api/security/authenticate
+    if (!baseUrl) {
+      log.warn('checkCredentials', 'baseUrl is null');
+      return false;
+    }
+
     const authData = this.encodeCredentials(username, password);
 
     const requestOptions = {

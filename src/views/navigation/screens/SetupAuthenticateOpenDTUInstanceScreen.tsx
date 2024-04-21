@@ -19,6 +19,7 @@ import { DeviceState } from '@/types/opendtu/state';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
 import { useApi } from '@/api/ApiHandler';
+import { defaultUser } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
@@ -38,7 +39,7 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
 
   const previousStepValid = address !== null;
 
-  const [username, setUsername] = useState<string | null>('admin');
+  const [username, setUsername] = useState<string | null>(defaultUser);
   const [password, setPassword] = useState<string | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -53,11 +54,11 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
     setLoading(true);
     setError(null);
 
-    const result = await openDtuApi.checkCredentials(
-      address,
+    const result = await openDtuApi.checkCredentials({
+      baseUrl: address,
       username,
       password,
-    );
+    });
 
     if (result === false) {
       setError(t('setup.errors.invalidCredentials'));

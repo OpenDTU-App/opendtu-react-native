@@ -89,6 +89,11 @@ export type UpdateDtuBaseURLAction = PayloadAction<{
   baseUrl: string;
 }>;
 
+export type UpdateDtuUserStringAction = PayloadAction<{
+  index: Index;
+  userString: string | null;
+}>;
+
 export type AddDatabaseConfigAction = PayloadAction<{
   config: DatabaseConfig;
 }>;
