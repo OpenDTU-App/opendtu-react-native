@@ -666,7 +666,7 @@ class OpenDtuApi {
 
     const authString = this.getAuthString();
 
-    const url = `${authString}${this.baseUrl}${route}`;
+    const url = `${authString ?? ''}${this.baseUrl}${route}`;
 
     // console.log('makeAuthenticatedRequest', url, requestOptions);
 
