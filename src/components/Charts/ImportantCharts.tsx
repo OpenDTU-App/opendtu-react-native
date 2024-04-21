@@ -69,7 +69,7 @@ const ImportantCharts: FC = () => {
   return (
     <View style={{ flex: 1, width: '100%', height: '100%', marginTop: 4 }}>
       <View style={{ flex: 1 }}>
-        <Box p={8} pt={0} style={{ backgroundColor: 'red' }}>
+        <Box p={8} pt={0}>
           <StyledSurface mode="flat" elevation={2}>
             <TouchableRipple
               onPress={handleShowConfigureGraphs}
