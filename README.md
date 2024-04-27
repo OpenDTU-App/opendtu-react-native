@@ -17,6 +17,10 @@ There are two branches. `main` is the stable branch, `develop` is the developmen
 Translations are inside a [submodule](https://github.com/OpenDTU-App/opendtu-react-native-translations) located in `src/translations/translation-files`.
 This helps to have a better developer experience when working with Weblate.
 
+<a href="https://weblate.commanderred.xyz/engage/opendtu-react-native/">
+<img src="https://weblate.commanderred.xyz/widget/opendtu-react-native/multi-auto.svg" alt="Translation status" />
+</a>
+
 ### ToDo
 - [x] App Icon
 - [x] Splash Screen
