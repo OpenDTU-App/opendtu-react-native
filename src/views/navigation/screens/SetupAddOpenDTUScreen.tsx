@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import { logger } from 'react-native-logs';
 import { Appbar, Button, HelperText, Text, useTheme } from 'react-native-paper';
 
 import { setSetupBaseUrl } from '@/slices/opendtu';
