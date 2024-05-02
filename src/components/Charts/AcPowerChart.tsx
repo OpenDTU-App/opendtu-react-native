@@ -9,7 +9,7 @@ const AcPowerChart: FC = () => {
   const { t } = useTranslation();
 
   const AcPower = useAppSelector(state =>
-    state.database.data?.acPower.success
+    state.database.data?.acPower.success === true
       ? state.database.data?.acPower
       : undefined,
   );
@@ -17,7 +17,9 @@ const AcPowerChart: FC = () => {
   const AcPowerError = useAppSelector(state =>
     state.database.data?.acPower.success === true
       ? undefined
-      : state.database.data?.acPower.message,
+      : state.database.data?.acPower.loading === false
+      ? state.database.data?.acPower.message
+      : undefined,
   );
 
   return (

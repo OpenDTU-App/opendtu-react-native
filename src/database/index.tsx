@@ -16,21 +16,37 @@ import type { DatabaseConfig } from '@/types/settings';
 
 import type { ChartData } from '@/components/Charts/UnifiedLineChart';
 
+import { rootLogger } from '@/utils/log';
+
 import PrometheusDatabase from '@/database/prometheus';
 import { useAppDispatch, useAppSelector } from '@/store';
+
+const log = rootLogger.extend('DatabaseProvider');
 
 export interface DatabaseError {
   message: string;
   success: false;
+  loading: false;
 }
 
 export interface DatabaseSuccess {
   chartData: ChartData;
   timestamp: Date;
   success: true;
+  loading: false;
 }
 
-export type DatabaseAwaitReturnType = DatabaseSuccess | DatabaseError;
+export interface DatabaseLoading {
+  chartData?: ChartData;
+  timestamp?: Date;
+  success: boolean;
+  loading: true;
+}
+
+export type DatabaseAwaitReturnType =
+  | DatabaseSuccess
+  | DatabaseError
+  | DatabaseLoading;
 
 export type DatabaseReturnType = Promise<DatabaseAwaitReturnType>;
 
@@ -225,20 +241,20 @@ const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
   }, [dispatch, database, databaseConfig]);
 
   useEffect(() => {
-    console.log('debug0');
+    log.debug('debug0');
     handleChangeDatabase();
   }, [databaseConfig, handleChangeDatabase]);
 
   useEffect(() => {
-    console.log('debug1', database);
+    log.debug('debug1', database);
   }, [database]);
 
   useEffect(() => {
-    console.log('debug2');
+    log.debug('debug2');
   }, [databaseConfig]);
 
   useEffect(() => {
-    console.log('debug3');
+    log.debug('debug3');
   }, [databaseUuid]);
 
   const inverters = useAppSelector(
@@ -248,29 +264,12 @@ const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
             ?.inverters ?? null
         : null,
     (left, right) =>
-      left === null && right === null
-        ? true
-        : left !== null &&
-          right !== null &&
-          left.length === right.length &&
-          left.every((value, index) => value.serial === right[index].serial),
+      left?.map(inverter => inverter.serial).join() ===
+      right?.map(inverter => inverter.serial).join(),
   );
 
   const handleUpdateData = useCallback(
     async (data: UpdateResult) => {
-      console.log('handleUpdateData', data);
-
-      /*console.log(
-        'hui',
-        JSON.stringify(
-          data.acVoltage.success
-            ? data.acVoltage.chartData.data?.dataSets?.[0].values?.map(
-                value => (value as LineValue).x,
-              )
-            : null,
-        ),
-      );*/
-
       dispatch(setUpdateResult({ data }));
       setIsFetching(false);
     },
@@ -278,7 +277,7 @@ const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 
   const refreshFunc = useCallback(async () => {
-    if (typeof database === 'undefined' || inverters === null) {
+    if (typeof database === 'undefined' || !inverters) {
       setIsFetching(false);
       return;
     }
@@ -318,8 +317,6 @@ const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
     const step = Math.max(
       Math.ceil((to.getTime() - from.getTime()) / maxDataPoints / 1000),
     );
-
-    console.log('step', step);
 
     const data: UpdateResult = {
       acVoltage: await database.acVoltage({
@@ -368,22 +365,22 @@ const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
   ]);
 
   useEffect(() => {
-    console.log('Starting interval');
+    log.debug('Starting interval');
     const updateInterval = setInterval(refreshFunc, refreshInterval);
 
     return () => {
-      console.log('Clearing interval');
+      log.debug('Clearing interval');
       clearInterval(updateInterval);
     };
   }, [refreshFunc, refreshInterval]);
 
   useEffect(() => {
-    console.log('debug4');
+    log.debug('debug4');
     refreshFunc();
   }, [inverters, refreshFunc]);
 
   useEffect(() => {
-    console.log('debug5');
+    log.debug('debug5');
   }, [handleUpdateData]);
 
   return (

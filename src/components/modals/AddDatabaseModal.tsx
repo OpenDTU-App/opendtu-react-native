@@ -45,8 +45,6 @@ const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
       uuid: uuidv4(),
     } as DatabaseConfig;
 
-    console.log('new DB config', config);
-
     dispatch(addDatabaseConfig({ config }));
     onDismiss?.();
   }, [baseUrl, dbType, dispatch, name, onDismiss, password, username]);

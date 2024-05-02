@@ -11,7 +11,11 @@ import type { SettingsState } from '@/types/settings';
 
 import BaseModal from '@/components/BaseModal';
 
+import { rootLogger } from '@/utils/log';
+
 import { useAppDispatch, useAppSelector } from '@/store';
+
+const log = rootLogger.extend('ChangeLanguageModal');
 
 const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
   const { onDismiss } = props;
@@ -28,7 +32,7 @@ const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
   }, [onDismiss]);
 
   const handleChangeLanguage = useCallback(() => {
-    console.log('selectedLanguage', selectedLanguage);
+    log.debug('selectedLanguage', selectedLanguage);
     dispatch(setLanguage({ language: selectedLanguage }));
     onDismiss?.();
   }, [dispatch, onDismiss, selectedLanguage]);

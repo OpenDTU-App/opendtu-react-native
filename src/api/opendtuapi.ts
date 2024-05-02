@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { logger } from 'react-native-logs';
-
 import type { OpenDTUAuthenticateResponse } from '@/types/opendtu/authenticate';
 import type { InverterItem } from '@/types/opendtu/state';
 import { DeviceState } from '@/types/opendtu/state';
@@ -13,7 +11,9 @@ import type {
 } from '@/types/opendtu/status';
 import type { Index, OpenDTUConfig } from '@/types/settings';
 
-const log = logger.createLogger();
+import { rootLogger } from '@/utils/log';
+
+const log = rootLogger.extend('OpenDtuApi');
 
 export type LiveDataHandler = (
   data: LiveData,
@@ -72,12 +72,8 @@ class OpenDtuApi {
   // interval
   private fetchHttpStateInterval: NodeJS.Timeout | null = null;
 
-  constructor(debug = false) {
+  constructor() {
     this.wsId = Math.random().toString(36).substring(2, 9);
-    if (!debug) {
-      // only allow warnings and errors
-      log.setSeverity('warn');
-    }
 
     log.info('OpenDtuApi.constructor()');
   }
@@ -181,7 +177,7 @@ class OpenDtuApi {
       const controller = new AbortController();
 
       const abortTimeout = setTimeout(() => {
-        console.log('getSystemStatusFromUrl', 'Aborting fetch');
+        log.debug('getSystemStatusFromUrl', 'Aborting fetch');
         controller.abort();
       }, 5000);
 
@@ -324,7 +320,7 @@ class OpenDtuApi {
   public connect(noInterval = false): void {
     // connect websocket
     if (this.ws !== null) {
-      console.warn('ws not null, abort!!!');
+      log.warn('OpenDtuApi.connect() ws not null, aborting!');
       return;
     }
 
@@ -336,7 +332,7 @@ class OpenDtuApi {
 
       const url = `${protocol}://${authString ?? ''}${host}/livedata`;
 
-      console.log(`Connecting websocket to ${url}`);
+      log.info('OpenDtuApi.connect()', url);
 
       this.ws = new WebSocket(url);
 
@@ -368,7 +364,7 @@ class OpenDtuApi {
         }
 
         if (this.liveDataHandler) {
-          console.log('Got data from websocket', {
+          log.debug('Got data from websocket', {
             wsHost: host,
             currentUrl: this.baseUrl,
             wsId: this.wsId,
@@ -388,7 +384,7 @@ class OpenDtuApi {
               this.index,
             );
           } else {
-            console.log('OpenDtuApi.onmessage() invalid data', {
+            log.debug('OpenDtuApi.onmessage() invalid data', {
               parsedData,
               index: this.index,
               wsConnected: this.wsConnected,
@@ -410,7 +406,7 @@ class OpenDtuApi {
         }
 
         setTimeout(() => {
-          console.log('Reconnecting websocket', {
+          log.debug('Reconnecting websocket', {
             wsHost: host,
             currentUrl: this.baseUrl,
             wsId: this.wsId,
@@ -438,25 +434,25 @@ class OpenDtuApi {
       // stupid hack to kill the websocket
       this.ws.onclose = function () {
         // @ts-ignore: TS2683 because of stupid hack
-        console.log('kill gschissener websocket', this);
+        log.debug('kill gschissener websocket', this);
         // @ts-ignore: TS2683 because of stupid hack
         this.close();
       }.bind(this.ws);
       this.ws.onmessage = function () {
         // @ts-ignore: TS2683 because of stupid hack
-        console.log('kill gschissener websocket', this);
+        log.debug('kill gschissener websocket', this);
         // @ts-ignore: TS2683 because of stupid hack
         this.close();
       }.bind(this.ws);
       this.ws.onopen = function () {
         // @ts-ignore: TS2683 because of stupid hack
-        console.log('kill gschissener websocket', this);
+        log.debug('kill gschissener websocket', this);
         // @ts-ignore: TS2683 because of stupid hack
         this.close();
       }.bind(this.ws);
       this.ws.onerror = function () {
         // @ts-ignore: TS2683 because of stupid hack
-        console.log('kill gschissener websocket', this);
+        log.debug('kill gschissener websocket', this);
         // @ts-ignore: TS2683 because of stupid hack
         this.close();
       }.bind(this.ws);
@@ -649,7 +645,7 @@ class OpenDtuApi {
     const controller = new AbortController();
 
     const abortTimeout = setTimeout(() => {
-      console.log('makeAuthenticatedRequest', 'Aborting fetch');
+      log.warn('makeAuthenticatedRequest', 'Aborting fetch');
       controller.abort();
     }, 10000);
 
@@ -692,7 +688,7 @@ class OpenDtuApi {
 
       return res;
     } catch (error) {
-      console.log('makeAuthenticatedRequest error', error);
+      log.error('makeAuthenticatedRequest error', error);
       return null;
     }
   }

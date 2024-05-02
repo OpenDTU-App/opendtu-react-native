@@ -10,6 +10,8 @@ import { setSetupBaseUrl } from '@/slices/opendtu';
 
 import { DeviceState } from '@/types/opendtu/state';
 
+import { rootLogger } from '@/utils/log';
+
 import { useApi } from '@/api/ApiHandler';
 import { useAppDispatch, useAppSelector } from '@/store';
 
@@ -19,6 +21,8 @@ export interface MDNSScanItemProps {
   setLoading: (loading: boolean) => void;
   loading: boolean;
 }
+
+const log = rootLogger.extend('MDNSScanItem');
 
 const MDNSScanItem: FC<MDNSScanItemProps> = ({
   service,
@@ -41,7 +45,7 @@ const MDNSScanItem: FC<MDNSScanItemProps> = ({
 
     try {
       const res = await openDtuApi.isOpenDtuInstance(url);
-      console.log('res', res, DeviceState[res], url.toString());
+      log.debug('res', res, DeviceState[res], url.toString());
 
       if (res === null) {
         setError('Could not connect to OpenDTU!');
@@ -57,7 +61,7 @@ const MDNSScanItem: FC<MDNSScanItemProps> = ({
         return;
       }
     } catch (e) {
-      console.log(e);
+      log.error(e);
 
       setError('Could not connect to OpenDTU!');
       setLoading(false);
@@ -76,7 +80,7 @@ const MDNSScanItem: FC<MDNSScanItemProps> = ({
       return;
     }
 
-    console.log('setup', baseUrl);
+    log.debug('setup', baseUrl);
 
     dispatch(setSetupBaseUrl({ baseUrl }));
 

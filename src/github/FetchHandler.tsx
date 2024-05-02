@@ -14,6 +14,7 @@ import {
 
 // import useDeviceIndex from '@/hooks/useDeviceIndex';
 import ago from '@/utils/ago';
+import { rootLogger } from '@/utils/log';
 
 import {
   AppGithubBaseConfig,
@@ -21,6 +22,8 @@ import {
   useGithub,
 } from '@/github/index';
 import { useAppDispatch, useAppSelector } from '@/store';
+
+const log = rootLogger.extend('FetchHandler');
 
 const FetchHandler: FC = () => {
   const dispatch = useAppDispatch();
@@ -82,7 +85,7 @@ const FetchHandler: FC = () => {
   useEffect(() => {
     if (/*!isConnected || */ !githubApi) return;
 
-    console.log('fetching latest github data');
+    log.info('fetching latest github data');
 
     const func = async () => {
       try {
@@ -96,7 +99,7 @@ const FetchHandler: FC = () => {
 
           dispatch(setLatestRelease({ latest: latestRelease.data as Release }));
         } else {
-          console.log('SKIP latestReleaseRefetchOk');
+          log.info('SKIP latestReleaseRefetchOk');
         }
 
         if (allReleasesRefetchOk && enableFetchOpenDTUReleases) {
@@ -109,7 +112,7 @@ const FetchHandler: FC = () => {
 
           dispatch(setReleases({ releases: releases.data as Release[] }));
         } else {
-          console.log('SKIP allReleasesRefetchOk');
+          log.info('SKIP allReleasesRefetchOk');
         }
 
         if (latestAppReleaseRefetchOk && enableAppUpdates) {
@@ -122,10 +125,10 @@ const FetchHandler: FC = () => {
 
           dispatch(setLatestAppRelease({ latest: appRelease.data as Release }));
         } else {
-          console.log('SKIP latestAppReleaseRefetchOk');
+          log.info('SKIP latestAppReleaseRefetchOk');
         }
       } catch (e) {
-        console.warn('GITHUB FETCH ERROR', e);
+        log.error('GITHUB FETCH ERROR', e);
       }
     };
 

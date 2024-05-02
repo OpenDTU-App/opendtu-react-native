@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import { logger } from 'react-native-logs';
 import { Appbar, Button, HelperText, Text, useTheme } from 'react-native-paper';
 
 import { setSetupBaseUrl } from '@/slices/opendtu';
@@ -13,13 +12,14 @@ import MDNSScan from '@/components/devices/MDNSScan';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
 import isIP from '@/utils/isIP';
+import { rootLogger } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const log = logger.createLogger();
+const log = rootLogger.extend('SetupAddOpenDTUScreen');
 
 const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
@@ -83,7 +83,7 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         return;
       }
     } catch (e) {
-      console.log(e);
+      log.error('Could not connect to OpenDTU', e);
 
       setError('Could not connect to OpenDTU!');
       setLoading(false);
