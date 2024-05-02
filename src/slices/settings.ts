@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { logger } from 'react-native-logs';
-
 import type {
   AddDatabaseConfigAction,
   AddDtuConfigAction,
@@ -25,6 +23,8 @@ import type {
 } from '@/types/settings';
 import { DidNotAskYet } from '@/types/settings';
 
+import { rootLogger } from '@/utils/log';
+
 const initialState: SettingsState = {
   appTheme: 'system',
   language: 'en',
@@ -36,7 +36,7 @@ const initialState: SettingsState = {
   debugEnabled: false,
 };
 
-const log = logger.createLogger();
+const log = rootLogger.extend('SettingsSlice');
 
 const settingsSlice = createSlice({
   name: 'settings',

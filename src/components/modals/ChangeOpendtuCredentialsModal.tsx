@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import { useMemo, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import { logger } from 'react-native-logs';
 import type { ModalProps } from 'react-native-paper';
 import { Button, Portal, Text, useTheme } from 'react-native-paper';
 
@@ -10,6 +9,8 @@ import { updateDtuUserString } from '@/slices/settings';
 
 import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
+
+import { rootLogger } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
 import { defaultUser } from '@/constants';
@@ -20,7 +21,7 @@ export interface ChangeOpendtuCredentialsModalProps
   index: number;
 }
 
-const log = logger.createLogger();
+const log = rootLogger.extend('ChangeOpendtuCredentialsModal');
 
 const ChangeOpendtuCredentialsModal: FC<
   ChangeOpendtuCredentialsModalProps

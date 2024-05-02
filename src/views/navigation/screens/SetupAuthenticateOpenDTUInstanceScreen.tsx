@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import { logger } from 'react-native-logs';
 import {
   Appbar,
   Button,
@@ -18,13 +17,15 @@ import { DeviceState } from '@/types/opendtu/state';
 
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
+import { rootLogger } from '@/utils/log';
+
 import { useApi } from '@/api/ApiHandler';
 import { defaultUser } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const log = logger.createLogger();
+const log = rootLogger.extend('SetupAuthenticateOpenDTUInstanceScreen');
 
 const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
   navigation,

@@ -10,6 +10,10 @@ import type {
   SetRefreshIntervalAction,
 } from '@/types/database';
 
+import { rootLogger } from '@/utils/log';
+
+const log = rootLogger.extend('databaseSlice');
+
 export const initialTimeRange: DatabaseTimeRange = {
   start: { seconds: 60 * 60 * 12 }, // 12 hours
   // start: { seconds: 60 },
@@ -27,21 +31,21 @@ const databaseSlice = createSlice({
   initialState,
   reducers: {
     setUpdateResult: (state, action: SetUpdateResultAction) => {
-      console.log('Setting update result');
+      log.debug('Setting update result');
       state.data = action.payload.data as never;
     },
     clearUpdateResult: state => {
-      console.log('Clearing update result');
+      log.debug('Clearing update result');
       state.data = null;
     },
     setTimeRangeFrom: (state, action: SetTimeRangeFromAction) => {
-      console.log('Setting time range from');
+      log.debug('Setting time range from');
       if (action.payload.start === undefined) return;
 
       state.timeRange.start = action.payload.start;
     },
     setTimeRangeTo: (state, action: SetTimeRangeToAction) => {
-      console.log('Setting time range to');
+      log.debug('Setting time range to');
       if (action.payload.end === undefined) return;
 
       state.timeRange.end = action.payload.end;
@@ -50,7 +54,7 @@ const databaseSlice = createSlice({
       state,
       action: SetTimeRangeLastNSecondsAction,
     ) => {
-      console.log('Setting time range last N seconds');
+      log.debug('Setting time range last N seconds');
       if (action.payload.seconds === undefined) return;
 
       state.timeRange.start = { seconds: action.payload.seconds };

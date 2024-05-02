@@ -9,11 +9,15 @@ import Zeroconf from 'react-native-zeroconf';
 
 import MDNSScanItem from '@/components/devices/MDNSScanItem';
 
+import { rootLogger } from '@/utils/log';
+
 export interface MDNSScanProps {
   setError: (error: string) => void;
   setLoading: (loading: boolean) => void;
   loading: boolean;
 }
+
+const log = rootLogger.extend('MDNSScan');
 
 const MDNSScan: FC<MDNSScanProps> = ({ setError, setLoading, loading }) => {
   const { t } = useTranslation();
@@ -33,26 +37,26 @@ const MDNSScan: FC<MDNSScanProps> = ({ setError, setLoading, loading }) => {
     });
 
     zeroconf.on('error', (error: Error) => {
-      console.log('error', error);
+      log.error('error', error);
     });
 
     zeroconf.on('found', (service: string) => {
-      console.log('found', service);
+      log.debug('found', service);
     });
 
     zeroconf.on('remove', (service: string) => {
-      console.log('remove', service);
+      log.debug('remove', service);
       setServices(prevServices =>
         prevServices.filter(prevService => prevService.name !== service),
       );
     });
 
     zeroconf.on('update', () => {
-      console.log('update');
+      log.debug('update');
     });
 
     zeroconf.on('resolved', (service: Service) => {
-      console.log('resolved', service);
+      log.debug('resolved', service);
       setServices(prevServices => [...prevServices, service]);
     });
 

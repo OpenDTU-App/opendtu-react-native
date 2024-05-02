@@ -8,6 +8,7 @@ import type { DatabaseConfig } from '@/types/settings';
 import { UNIX_TS_FIRST_SECOND_OF_2000 } from '@/components/Charts/UnifiedLineChart';
 
 import capitalize from '@/utils/capitalize';
+import { rootLogger } from '@/utils/log';
 
 import type {
   Database,
@@ -22,6 +23,8 @@ export interface PrometheusResult {
   value: number;
 }
 
+const log = rootLogger.extend('PrometheusDatabase');
+
 class PrometheusDatabase implements Database {
   readonly type: DatabaseType = DatabaseType.Prometheus;
   lastUpdate: Date | undefined;
@@ -33,7 +36,7 @@ class PrometheusDatabase implements Database {
   private db: PrometheusDriver;
 
   constructor(config: DatabaseConfig) {
-    console.log('PrometheusDatabase constructor', config);
+    log.debug('PrometheusDatabase constructor', config);
 
     this.config = config;
     this.db = new PrometheusDriver({
@@ -51,7 +54,7 @@ class PrometheusDatabase implements Database {
         this.statusSuccess = true;
       })
       .catch(error => {
-        console.log('PrometheusDatabase status error', error);
+        log.error('PrometheusDatabase status error', error);
         this.statusSuccess = false;
       });
   }
@@ -68,7 +71,12 @@ class PrometheusDatabase implements Database {
     const { inverters } = args;
 
     if (!this.statusSuccess) {
-      return { message: 'Could not fetch database status', success: false };
+      log.warn('Could not fetch database status (!statusSuccess)');
+      return {
+        message: 'Could not fetch database status (!statusSuccess)',
+        success: false,
+        loading: false,
+      };
     }
 
     const serialList = inverters.map(inverter => inverter.serial).join('|');
@@ -82,7 +90,12 @@ class PrometheusDatabase implements Database {
     const { inverters } = args;
 
     if (!this.statusSuccess) {
-      return { message: 'Could not fetch database status', success: false };
+      log.warn('Could not fetch database status (!statusSuccess)');
+      return {
+        message: 'Could not fetch database status (!statusSuccess)',
+        success: false,
+        loading: false,
+      };
     }
 
     const serialList = inverters.map(inverter => inverter.serial).join('|');
@@ -96,7 +109,12 @@ class PrometheusDatabase implements Database {
     const { inverters } = args;
 
     if (!this.statusSuccess) {
-      return { message: 'Could not fetch database status', success: false };
+      log.warn('Could not fetch database status (!statusSuccess)');
+      return {
+        message: 'Could not fetch database status (!statusSuccess)',
+        success: false,
+        loading: false,
+      };
     }
 
     const serialList = inverters.map(inverter => inverter.serial).join('|');
@@ -110,7 +128,12 @@ class PrometheusDatabase implements Database {
     const { inverters } = args;
 
     if (!this.statusSuccess) {
-      return { message: 'Could not fetch database status', success: false };
+      log.warn('Could not fetch database status (!statusSuccess)');
+      return {
+        message: 'Could not fetch database status (!statusSuccess)',
+        success: false,
+        loading: false,
+      };
     }
 
     const serialList = inverters.map(inverter => inverter.serial).join('|');
@@ -127,14 +150,19 @@ class PrometheusDatabase implements Database {
     try {
       const { from, to, step, label, unit, labelName } = args;
 
-      console.log('Performing query', query, from, to, step);
+      log.warn('Performing query', { query, from, to, step });
 
       const result = await this.db.rangeQuery(query, from, to, step);
 
       if (result.result.length === 0) {
-        return { message: 'No data', success: false };
+        log.warn('No data (result.length === 0)');
+        return {
+          message: 'No data (result.length === 0)',
+          success: false,
+          loading: false,
+        };
       } else {
-        console.log('Got result', result.result[0].values.length);
+        log.debug('Got result', result.result[0].values.length);
       }
 
       // above works with single data set, but not with multiple data sets
@@ -186,11 +214,12 @@ class PrometheusDatabase implements Database {
       } as DatabaseAwaitReturnType;
     } catch (error) {
       const e = error as Error;
-      console.log('try catch', e.message);
+      log.error('PrometheusDatabase performQuery error', e);
 
       return {
         message: e.message ?? `Unknown error (${e.name})`,
         success: false,
+        loading: false,
       };
     }
   }

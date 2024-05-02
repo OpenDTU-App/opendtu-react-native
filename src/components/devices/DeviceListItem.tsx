@@ -12,6 +12,8 @@ import type { OpenDTUConfig } from '@/types/settings';
 
 import StyledListItem from '@/components/styled/StyledListItem';
 
+import { rootLogger } from '@/utils/log';
+
 import { useApi } from '@/api/ApiHandler';
 import { useAppDispatch, useAppSelector } from '@/store';
 
@@ -19,6 +21,8 @@ export interface DeviceListItemProps {
   config: OpenDTUConfig;
   index: number;
 }
+
+const log = rootLogger.extend('DeviceListItem');
 
 const DeviceListItem: FC<DeviceListItemProps> = ({ config, index }) => {
   const api = useApi();
@@ -54,7 +58,7 @@ const DeviceListItem: FC<DeviceListItemProps> = ({ config, index }) => {
     const interval = setInterval(func, 10000);
 
     return () => {
-      console.log('DeviceListItem - clearing interval', config.baseUrl);
+      log.debug('DeviceListItem - clearing interval', config.baseUrl);
       clearInterval(interval);
     };
   }, [api, config.baseUrl, dispatch, index]);

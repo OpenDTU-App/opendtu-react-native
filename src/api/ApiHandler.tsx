@@ -1,6 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
 import { createContext, useContext, useEffect, useMemo } from 'react';
-import { logger } from 'react-native-logs';
 
 import {
   clearOpenDtuState,
@@ -23,17 +22,19 @@ import {
 
 import { DeviceState } from '@/types/opendtu/state';
 
+import { rootLogger } from '@/utils/log';
+
 import OpenDtuApi from '@/api/opendtuapi';
 import { useAppDispatch, useAppSelector } from '@/store';
 
-const log = logger.createLogger();
+const log = rootLogger.extend('ApiHandler');
 
 // create context for the api handler
 export const ApiContext = createContext<OpenDtuApi | undefined>(undefined);
 
 // create provider for the api handler
 export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
-  const api = useMemo(() => new OpenDtuApi(false), []);
+  const api = useMemo(() => new OpenDtuApi(), []);
 
   const dispatch = useAppDispatch();
 
@@ -54,11 +55,11 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
       left?.userString === right?.userString,
   );
 
-  console.log('new Api');
+  log.info('ApiProvider - currentConfiguration', currentConfiguration);
 
   useEffect(() => {
     if (configIndex === null) {
-      console.log('ApiProvider - configIndex is null');
+      log.info('ApiProvider - configIndex is null');
 
       return;
     }
@@ -66,11 +67,7 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
     dispatch(setTriedToConnect({ triedToConnect: false, index: configIndex }));
 
     if (currentConfiguration) {
-      console.info(
-        'Initializing API Handler',
-        currentConfiguration,
-        configIndex,
-      );
+      log.debug('Initializing API Handler', currentConfiguration, configIndex);
 
       api.registerOnDisconnectedHandler(() => {
         dispatch(clearOpenDtuState({ index: configIndex }));
@@ -149,11 +146,11 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
         dispatch(setEventLog({ data, index, inverterSerial }));
       });
 
-      console.log('Connecting API Handler');
+      log.debug('Connecting API Handler');
 
       api.connect();
     } else {
-      console.log('Disconnecting API Handler');
+      log.debug('Disconnecting API Handler');
 
       dispatch(setSelectedDtuToFirstOrNull());
 
@@ -161,7 +158,7 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
     }
 
     return () => {
-      console.log('ApiProvider - clearing api');
+      log.debug('ApiProvider - clearing api');
       api.disconnect();
     };
   }, [currentConfiguration, configIndex, dispatch, api]);

@@ -10,7 +10,11 @@ import { setRefreshInterval } from '@/slices/database';
 import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
+import { rootLogger } from '@/utils/log';
+
 import { useAppDispatch, useAppSelector } from '@/store';
+
+const log = rootLogger.extend('ChangeGraphRefreshIntervalModal');
 
 const ChangeGraphRefreshIntervalModal: FC<
   Omit<ModalProps, 'children'>
@@ -37,7 +41,7 @@ const ChangeGraphRefreshIntervalModal: FC<
       dispatch(setRefreshInterval({ refreshInterval }));
       onDismiss?.();
     } catch (error) {
-      console.log(error);
+      log.error(error);
     }
   }, [dispatch, intervalState, onDismiss]);
 

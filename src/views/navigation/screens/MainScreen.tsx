@@ -2,9 +2,13 @@ import type { FC } from 'react';
 import { useEffect } from 'react';
 import { Appbar } from 'react-native-paper';
 
+import { rootLogger } from '@/utils/log';
+
 import { useAppSelector } from '@/store';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 import NavigationTabs from '@/views/navigation/NavigationTabs';
+
+const log = rootLogger.extend('MainScreen');
 
 const MainScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const hasConfigs = useAppSelector(
@@ -23,7 +27,7 @@ const MainScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
   useEffect(() => {
     if (!hasConfigs) {
-      console.warn('No configs found');
+      log.warn('No configs found');
       navigation.navigate('SetupAddOpenDTUScreen');
     }
   }, [hasConfigs, navigation]);

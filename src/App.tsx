@@ -18,6 +18,8 @@ import AppOfflineModal from '@/components/modals/AppOfflineModal';
 import EnableAppUpdatesModal from '@/components/modals/EnableAppUpdatesModal';
 import EnableFetchOpenDtuUpdatesModal from '@/components/modals/EnableFetchOpenDtuUpdatesModal';
 
+import { rootLogger } from '@/utils/log';
+
 import ApiProvider from '@/api/ApiHandler';
 import DatabaseProvider from '@/database';
 import GithubProvider from '@/github';
@@ -26,6 +28,8 @@ import { store, persistor, useAppSelector } from '@/store';
 import { ReactNavigationDarkTheme, ReactNavigationLightTheme } from '@/style';
 import '@/translations';
 import NavigationStack from '@/views/navigation/NavigationStack';
+
+const log = rootLogger.extend('App');
 
 const App = () => {
   /*const onBeforeLift = useCallback(() => {
@@ -159,21 +163,21 @@ const _App: FC = () => {
 
   const darkMode = useMemo(() => {
     if (appTheme === 'system') {
-      console.log('systemModeWantsDark', systemModeWantsDark);
+      log.debug('systemModeWantsDark', systemModeWantsDark);
       return systemModeWantsDark;
     }
 
-    console.log('appTheme === dark', appTheme === 'dark');
+    log.debug('appTheme === dark', appTheme === 'dark');
     return appTheme === 'dark';
   }, [appTheme, systemModeWantsDark]);
 
   const theme = useMemo(() => {
     if (darkMode) {
-      console.log('darkMode');
+      log.debug('darkMode');
       return DarkTheme;
     }
 
-    console.log('lightMode');
+    log.debug('lightMode');
     return LightTheme;
   }, [darkMode]);
 
