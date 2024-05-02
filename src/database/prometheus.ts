@@ -79,7 +79,7 @@ class PrometheusDatabase implements Database {
       };
     }
 
-    const serialList = inverters.map(inverter => inverter.serial).join('|');
+    const serialList = inverters.map(i => i.serial).join('|');
 
     const query = `opendtu_Current{serial=~"${serialList}", type="AC"}`;
 
@@ -98,7 +98,7 @@ class PrometheusDatabase implements Database {
       };
     }
 
-    const serialList = inverters.map(inverter => inverter.serial).join('|');
+    const serialList = inverters.map(i => i.serial).join('|');
 
     const query = `opendtu_Voltage{serial=~"${serialList}", type="AC"}`;
 
@@ -117,7 +117,7 @@ class PrometheusDatabase implements Database {
       };
     }
 
-    const serialList = inverters.map(inverter => inverter.serial).join('|');
+    const serialList = inverters.map(i => i.serial).join('|');
 
     const query = `opendtu_Power{serial=~"${serialList}", type="AC"}`;
 
@@ -136,7 +136,7 @@ class PrometheusDatabase implements Database {
       };
     }
 
-    const serialList = inverters.map(inverter => inverter.serial).join('|');
+    const serialList = inverters.map(i => i.serial).join('|');
 
     const query = `opendtu_Voltage{serial=~"${serialList}", type="DC"}`;
 

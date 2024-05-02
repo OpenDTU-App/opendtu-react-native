@@ -7,7 +7,7 @@ import {
   setEventLog,
   setInverters,
   setIsConnected,
-  setLiveData,
+  setLiveDataFromWebsocket,
   setMqttStatus,
   setNetworkStatus,
   setNtpStatus,
@@ -90,7 +90,7 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
         dispatch(
           setTriedToConnect({ triedToConnect: true, index: configIndex }),
         );
-        dispatch(setLiveData({ data, valid, index: configIndex }));
+        dispatch(setLiveDataFromWebsocket({ data, valid, index: configIndex }));
         dispatch(setDeviceState({ deviceState: DeviceState.Connected, index }));
       });
 

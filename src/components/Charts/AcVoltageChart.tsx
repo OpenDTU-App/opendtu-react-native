@@ -15,9 +15,9 @@ const AcVoltageChart: FC = () => {
   );
 
   const AcVoltageError = useAppSelector(state =>
-    state.database.data?.acVoltage.success === true
-      ? undefined
-      : state.database.data?.acVoltage.message,
+    state.database.data?.acVoltage && 'message' in state.database.data.acVoltage
+      ? state.database.data?.acVoltage.message
+      : undefined,
   );
 
   return (

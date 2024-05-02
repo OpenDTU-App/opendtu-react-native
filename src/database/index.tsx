@@ -11,7 +11,7 @@ import { Dimensions } from 'react-native';
 
 import { clearUpdateResult, setUpdateResult } from '@/slices/database';
 
-import type { Inverter } from '@/types/opendtu/status';
+import type { InverterFromStatus } from '@/types/opendtu/status';
 import type { DatabaseConfig } from '@/types/settings';
 
 import type { ChartData } from '@/components/Charts/UnifiedLineChart';
@@ -60,7 +60,7 @@ export interface RangeQueryArgs {
 }
 
 export interface InverterRangeQueryArgs extends RangeQueryArgs {
-  inverters: Inverter[];
+  inverters: InverterFromStatus[];
 }
 
 export enum DatabaseType {
@@ -264,8 +264,7 @@ const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
             ?.inverters ?? null
         : null,
     (left, right) =>
-      left?.map(inverter => inverter.serial).join() ===
-      right?.map(inverter => inverter.serial).join(),
+      left?.map(i => i.serial).join() === right?.map(i => i.serial).join(),
   );
 
   const handleUpdateData = useCallback(

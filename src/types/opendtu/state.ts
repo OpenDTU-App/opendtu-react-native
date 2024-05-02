@@ -3,6 +3,8 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type {
   InverterSerial,
   LiveData,
+  LiveDataFromStatus,
+  LiveDataFromWebsocket,
   MqttStatus,
   NetworkStatus,
   NtpStatus,
@@ -23,10 +25,16 @@ export enum DeviceState {
   Connected,
 }
 
-export type SetLiveDataAction = PayloadAction<{
+export type SetLiveDataFromStatusAction = PayloadAction<{
   index: Index;
   valid: boolean;
-  data: LiveData;
+  data: LiveDataFromStatus;
+}>;
+
+export type SetLiveDataFromWebsocketAction = PayloadAction<{
+  index: Index;
+  valid: boolean;
+  data: LiveDataFromWebsocket;
 }>;
 
 export type SetSystemStatusAction = PayloadAction<{

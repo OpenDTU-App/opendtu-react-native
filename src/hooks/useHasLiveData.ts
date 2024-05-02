@@ -21,13 +21,19 @@ const useHasLiveData = (): boolean => {
       return false;
     }
 
-    const liveData = state.opendtu.dtuStates[index]?.liveData ?? null;
+    const liveData = state.opendtu.dtuStates[index]?.liveData;
+
+    if (liveData === undefined) {
+      log.debug('liveData is undefined');
+      return false;
+    }
+
     if (liveData === null) {
       log.debug('liveData is null');
       return false;
     }
 
-    const lastUpdate = liveData?.lastUpdate ?? null;
+    const lastUpdate = liveData.lastUpdate ?? null;
     if (lastUpdate === null) {
       log.debug('lastUpdate is null');
       return false;
