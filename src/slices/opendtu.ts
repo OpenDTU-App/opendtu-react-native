@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import type {
   OpenDTUReduxState,
-  SetLiveDataAction,
+  SetLiveDataFromStatusAction,
   SetSetupBaseUrlAction,
   SetSetupUserStringAction,
   SetSystemStatusAction,
@@ -17,7 +17,9 @@ import type {
   SetInvertersAction,
   SetEventLogAction,
   InverterData,
+  SetLiveDataFromWebsocketAction,
 } from '@/types/opendtu/state';
+import type { LiveData } from '@/types/opendtu/status';
 
 const initialState: OpenDTUReduxState = {
   dtuStates: {},
@@ -32,14 +34,81 @@ const opendtuSlice = createSlice({
   name: 'opendtu',
   initialState,
   reducers: {
-    setLiveData: (state, action: SetLiveDataAction) => {
+    setLiveDataFromStatus: (state, action: SetLiveDataFromStatusAction) => {
       if (action.payload.valid) {
         if (!state.dtuStates[action.payload.index]) {
           state.dtuStates[action.payload.index] = {};
         }
 
         (state.dtuStates[action.payload.index] as OpenDTUDeviceState).liveData =
-          action.payload.data;
+          {
+            ...action.payload.data,
+            from: 'status',
+          };
+      }
+    },
+    setLiveDataFromWebsocket: (
+      state,
+      action: SetLiveDataFromWebsocketAction,
+    ) => {
+      if (action.payload.valid) {
+        if (!state.dtuStates[action.payload.index]) {
+          state.dtuStates[action.payload.index] = {};
+        }
+
+        const currentStatus = state.dtuStates[action.payload.index]?.liveData;
+
+        if (!state.dtuStates[action.payload.index]?.liveData) {
+          (
+            state.dtuStates[action.payload.index] as OpenDTUDeviceState
+          ).liveData = { ...action.payload.data, from: 'websocket' };
+        }
+
+        // update total
+        (
+          (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
+            .liveData as LiveData
+        ).total = {
+          ...currentStatus?.total,
+          ...action.payload.data.total,
+        };
+
+        // update hints
+        (
+          (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
+            .liveData as LiveData
+        ).hints = {
+          ...currentStatus?.hints,
+          ...action.payload.data.hints,
+        };
+
+        // update inverters
+        const newInverters = action.payload.data.inverters;
+        const oldInverters = currentStatus?.inverters ?? [];
+
+        newInverters.forEach(newInverter => {
+          const foundIdx = oldInverters.findIndex(
+            element => element.serial === newInverter.serial,
+          );
+
+          if (foundIdx === -1) {
+            oldInverters.push(newInverter);
+          } else {
+            oldInverters[foundIdx] = newInverter;
+          }
+        });
+
+        // update lastUpdate
+        (
+          (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
+            .liveData as LiveData
+        ).lastUpdate = action.payload.data.lastUpdate;
+
+        // update from
+        (
+          (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
+            .liveData as LiveData
+        ).from = 'websocket';
       }
     },
     setSystemStatus: (state, action: SetSystemStatusAction) => {
@@ -172,7 +241,8 @@ const opendtuSlice = createSlice({
 });
 
 export const {
-  setLiveData,
+  setLiveDataFromStatus,
+  setLiveDataFromWebsocket,
   setSystemStatus,
   setSetupUserString,
   setSetupBaseUrl,

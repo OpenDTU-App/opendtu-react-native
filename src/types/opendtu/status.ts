@@ -38,24 +38,56 @@ export interface Inverter {
   INV: InverterStatistics[];
 }
 
-export interface Total {
+export type InverterFromStatus = Pick<
+  Inverter,
+  | 'serial'
+  | 'name'
+  | 'order'
+  | 'data_age'
+  | 'poll_enabled'
+  | 'reachable'
+  | 'producing'
+  | 'limit_relative'
+  | 'limit_absolute'
+>;
+
+export interface StatusTotal {
   Power: ValueObject;
   YieldDay: ValueObject;
   YieldTotal: ValueObject;
 }
 
-export interface Hints {
+export interface StatusHints {
   time_sync: boolean;
   default_password: boolean;
   radio_problem: boolean;
 }
 
-export interface LiveData {
+export interface LiveDataFromWebsocket {
   inverters: Inverter[];
-  total: Total;
-  hints: Hints;
+  total: StatusTotal;
+  hints: StatusHints;
   lastUpdate: Date | null;
 }
+
+export interface LiveDataFromStatus {
+  inverters: InverterFromStatus[];
+  total: StatusTotal;
+  hints: StatusHints;
+  lastUpdate: Date | null;
+}
+
+export interface LiveDataFromWebsocketWithFrom extends LiveDataFromWebsocket {
+  from: 'websocket';
+}
+
+export interface LiveDataFromStatusWithFrom extends LiveDataFromStatus {
+  from: 'status';
+}
+
+export type LiveData =
+  | LiveDataFromWebsocketWithFrom
+  | LiveDataFromStatusWithFrom;
 
 export interface SystemStatus {
   // HardwareInfo

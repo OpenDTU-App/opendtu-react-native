@@ -3,7 +3,7 @@ import type { OpenDTUAuthenticateResponse } from '@/types/opendtu/authenticate';
 import type { InverterItem } from '@/types/opendtu/state';
 import { DeviceState } from '@/types/opendtu/state';
 import type {
-  LiveData,
+  LiveDataFromWebsocket,
   MqttStatus,
   NetworkStatus,
   NtpStatus,
@@ -16,7 +16,7 @@ import { rootLogger } from '@/utils/log';
 const log = rootLogger.extend('OpenDtuApi');
 
 export type LiveDataHandler = (
-  data: LiveData,
+  data: LiveDataFromWebsocket,
   valid: boolean,
   index: Index,
 ) => void;
@@ -354,7 +354,7 @@ class OpenDtuApi {
       this.ws.onmessage = evt => {
         log.info('OpenDtuApi.onmessage()');
 
-        let parsedData: LiveData | null = null;
+        let parsedData: LiveDataFromWebsocket | null = null;
 
         try {
           parsedData = JSON.parse(evt.data);
