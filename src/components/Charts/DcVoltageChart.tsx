@@ -15,9 +15,11 @@ const DcVoltageChart: FC = () => {
   );
 
   const DcVoltageError = useAppSelector(state =>
-    state.database.data?.dcVoltage && 'message' in state.database.data.dcVoltage
-      ? state.database.data?.dcVoltage.message
-      : undefined,
+    state.database.data?.dcVoltage.success === true
+      ? undefined
+      : state.database.data?.dcVoltage.loading === false
+        ? state.database.data?.dcVoltage.message
+        : undefined,
   );
 
   return (
