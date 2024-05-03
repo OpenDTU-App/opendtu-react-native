@@ -18,8 +18,8 @@ const AcPowerChart: FC = () => {
     state.database.data?.acPower.success === true
       ? undefined
       : state.database.data?.acPower.loading === false
-      ? state.database.data?.acPower.message
-      : undefined,
+        ? state.database.data?.acPower.message
+        : undefined,
   );
 
   return (

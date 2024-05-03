@@ -5,10 +5,21 @@
   },
   "extends": [
     "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended",
     "prettier",
     "plugin:react-hooks/recommended"
   ],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": true,
+      "node": true
+    }
+  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
@@ -26,6 +37,8 @@
     "import"
   ],
   "rules": {
+    "import/no-named-as-default-member": "off",
+    "import/no-named-as-default": "off",
     "no-relative-import-paths/no-relative-import-paths": [
       "warn",
       { "allowSameFolder": true, "rootDir": "src" }
@@ -55,8 +68,6 @@
     "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
     "no-console": 0,
     "indent": "off",
-    "no-duplicate-imports": "off",
-    "@typescript-eslint/no-duplicate-imports": ["error"],
     "quotes": [
       "error",
       "single",
