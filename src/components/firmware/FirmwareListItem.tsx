@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useCallback } from 'react';
+import { useMemo, useCallback } from 'react';
 import type { Release } from '@octokit/webhooks-types';
 import moment from 'moment/moment';
 import { Badge, Divider, List, Text } from 'react-native-paper';
@@ -14,6 +14,10 @@ import Markdown from 'react-native-markdown-display';
 import SettingsSurface, {
   settingsSurfaceBorderRadius,
 } from '@/components/styled/SettingsSurface';
+import useHasAuthConfigured from '@/hooks/useHasAuthConfigured';
+import capitalize from '@/utils/capitalize';
+import type { SettingsState } from '@/types/settings';
+import useAppLanguage from '@/hooks/useAppLanguage';
 
 export interface FirmwareListItemProps {
   release: Release;
@@ -24,6 +28,11 @@ const rules: RenderRules = {
   link: (node, children) => <RNText key={node.key}>{children}</RNText>,
 };
 
+const needsCapitalization: Record<SettingsState['language'], boolean> = {
+  en: false,
+  de: true,
+};
+
 const FirmwareListItem: FC<FirmwareListItemProps> = ({
   release,
   latestReleaseTag,
@@ -31,6 +40,9 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
   const { t } = useTranslation();
   const currentRelease = useDtuState(state => state?.systemStatus?.git_hash);
   // const navigation = useNavigation() as NavigationProp<ParamListBase>;
+
+  const authStringConfigured = useHasAuthConfigured();
+  const language = useAppLanguage();
 
   const handleOpenGithub = useCallback(async () => {
     const url = release.html_url;
@@ -43,6 +55,20 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
   /*const handleInstallFirmware = useCallback(() => {
 
   }, []);*/
+
+  const downloadDisabled = useMemo(
+    () => true || release.tag_name === currentRelease || !authStringConfigured,
+    [authStringConfigured, currentRelease, release.tag_name],
+  );
+
+  const description = useMemo(() => {
+    const date = moment(release.published_at).format('LLLL');
+    const timeAgo = moment(release.published_at).fromNow();
+    const capitalized = needsCapitalization[language]
+      ? capitalize(timeAgo)
+      : timeAgo;
+    return `${t('firmwares.publishedAgo', { timeAgo: capitalized })}\n${date}`;
+  }, [release.published_at, language, t]);
 
   return (
     <List.Accordion
@@ -63,7 +89,7 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
           ) : null}
         </View>
       }
-      description={moment(release.published_at).format('lll')}
+      description={description}
     >
       <SettingsSurface style={{ marginHorizontal: 8, flex: 1 }}>
         <View style={{ padding: 8, flex: 1 }}>
@@ -90,9 +116,9 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
           style={{
             borderBottomLeftRadius: settingsSurfaceBorderRadius,
             borderBottomRightRadius: settingsSurfaceBorderRadius,
-            opacity: 0.5,
+            opacity: downloadDisabled ? 0.5 : 1,
           }}
-          disabled={true || release.tag_name === currentRelease}
+          disabled={downloadDisabled}
         />
       </SettingsSurface>
     </List.Accordion>
