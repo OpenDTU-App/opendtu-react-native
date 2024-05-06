@@ -18,9 +18,9 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v4
-
-      - name: Cache node modules
-        uses: c-hive/gha-yarn-cache@v1
+        with:
+          node-version: '18'
+          cache: 'yarn'
 
       - name: Install node modules
         run: |
