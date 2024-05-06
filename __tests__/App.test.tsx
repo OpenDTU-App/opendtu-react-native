@@ -1,7 +1,7 @@
 /**
  * @format
  */
-// Note: import explicitly to use the types shiped with jest.
+// Note: import explicitly to use the types shipped with jest.
 import { it } from '@jest/globals';
 
 import React from 'react';
