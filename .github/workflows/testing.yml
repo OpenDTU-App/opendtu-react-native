@@ -24,7 +24,7 @@ jobs:
 
       - name: Install node modules
         run: |
-          yarn install --frozen-lockfile --prefer-offline
+          yarn install --frozen-lockfile --check-cache
 
       - name: Run ESLint
         run: |
