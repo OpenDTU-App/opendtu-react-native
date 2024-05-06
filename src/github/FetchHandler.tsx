@@ -105,12 +105,12 @@ const FetchHandler: FC = () => {
         if (allReleasesRefetchOk && enableFetchOpenDTUReleases) {
           dispatch(setReleasesTimeout());
 
-          const releases = await githubApi.request(
+          const releases = await githubApi.paginate(
             'GET /repos/{owner}/{repo}/releases',
             OpenDTUGithubBaseConfig,
           );
 
-          dispatch(setReleases({ releases: releases.data as Release[] }));
+          dispatch(setReleases({ releases: releases as Release[] }));
         } else {
           log.info('SKIP allReleasesRefetchOk');
         }
