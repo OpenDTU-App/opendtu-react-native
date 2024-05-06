@@ -24,7 +24,7 @@ jobs:
 
       - name: Install node modules
         run: |
-          yarn install --immutable --immutable-cache --check-cache
+          yarn install --immutable --immutable-cache
 
       - name: Run ESLint
         run: |
