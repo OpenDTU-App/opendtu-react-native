@@ -4,13 +4,15 @@ import moment from 'moment';
 import type { FC } from 'react';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Linking, ScrollView } from 'react-native';
+import { Linking, ScrollView, View } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, Badge, List, Switch, useTheme } from 'react-native-paper';
 
 import { setEnableFetchOpenDTUReleases } from '@/slices/settings';
 
-import SettingsSurface from '@/components/styled/SettingsSurface';
+import SettingsSurface, {
+  settingsSurfaceBorderRadius,
+} from '@/components/styled/SettingsSurface';
 
 import useDtuState from '@/hooks/useDtuState';
 import useHasNewOpenDtuVersion from '@/hooks/useHasNewOpenDtuVersion';
@@ -117,6 +119,10 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     usedForIndicatorOnly: true,
   });
 
+  const handleNavigateToFirmwareList = useCallback(() => {
+    navigation.navigate('FirmwareListScreen');
+  }, [navigation]);
+
   return (
     <>
       <Appbar.Header>
@@ -140,22 +146,43 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     onValueChange={handleToggleFetchFromGithub}
                   />
                 )}
+                onPress={handleToggleFetchFromGithub}
+                style={{
+                  borderTopLeftRadius: settingsSurfaceBorderRadius,
+                  borderTopRightRadius: settingsSurfaceBorderRadius,
+                }}
+                borderless
               />
-              <List.Item
-                title={t('opendtu.changelog.updatesChangelog')}
-                description={t('opendtu.changelog.updatesChangelogDescription')}
-                right={props =>
-                  hasNewOpenDtuVersion ? (
-                    <Badge visible={true} style={{ marginTop: 8 }} {...props}>
-                      {t('settings.newOpenDtuRelease')}
-                    </Badge>
-                  ) : (
-                    <List.Icon {...props} icon="arrow-right" />
-                  )
-                }
-                disabled
-                style={{ opacity: 0.5 }}
-              />
+              {fetchFromGithubEnabled ? (
+                <List.Item
+                  title={t('opendtu.changelog.updatesChangelog')}
+                  description={t(
+                    'opendtu.changelog.updatesChangelogDescription',
+                  )}
+                  right={props =>
+                    hasNewOpenDtuVersion ? (
+                      <View
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <Badge visible={true} {...props}>
+                          {t('settings.newOpenDtuRelease')}
+                        </Badge>
+                      </View>
+                    ) : (
+                      <List.Icon {...props} icon="arrow-right" />
+                    )
+                  }
+                  onPress={handleNavigateToFirmwareList}
+                  style={{
+                    borderBottomLeftRadius: settingsSurfaceBorderRadius,
+                    borderBottomRightRadius: settingsSurfaceBorderRadius,
+                  }}
+                  borderless
+                />
+              ) : null}
             </SettingsSurface>
             <SettingsSurface>
               <List.Section
