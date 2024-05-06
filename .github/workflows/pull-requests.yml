@@ -34,7 +34,7 @@ jobs:
 
       - name: Install node modules
         run: |
-          yarn install --immutable --immutable-cache
+          yarn install --immutable --check-cache
 
       - name: Cache Gradle Wrapper
         uses: actions/cache@v3
