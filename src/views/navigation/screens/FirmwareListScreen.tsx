@@ -5,7 +5,7 @@ import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 import { StyledSafeAreaView } from '@/style';
 import { Box } from 'react-native-flex-layout';
 import { useAppSelector } from '@/store';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import FirmwareListItem from '@/components/firmware/FirmwareListItem';
 import { useTranslation } from 'react-i18next';
 import useDtuState from '@/hooks/useDtuState';
@@ -53,7 +53,7 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             style={{ width: '100%' }}
           >
             {newReleases.length ? (
-              <>
+              <View style={{ marginBottom: 16 }}>
                 <Box style={{ marginHorizontal: 4 }}>
                   <Text variant="titleLarge">{t('firmwares.newReleases')}</Text>
                 </Box>
@@ -64,10 +64,10 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     latestReleaseTag={latestReleaseTag}
                   />
                 ))}
-              </>
+              </View>
             ) : null}
             {outdatedReleases.length ? (
-              <>
+              <View>
                 <Box style={{ marginHorizontal: 4 }}>
                   <Text variant="titleLarge">
                     {t('firmwares.outdatedReleases')}
@@ -80,7 +80,7 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     latestReleaseTag={latestReleaseTag}
                   />
                 ))}
-              </>
+              </View>
             ) : null}
             {newReleases.length === 0 && outdatedReleases.length === 0 ? (
               <Box style={{ marginHorizontal: 4, flex: 1 }}>
