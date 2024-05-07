@@ -22,7 +22,7 @@
     "postinstall": "yarn run npm-license-crawler -onlyDirectDependencies -json licenses.json && patch-package",
     "postuninstall": "yarn run npm-license-crawler -onlyDirectDependencies -json licenses.json",
     "build-android": "pushd android ; ./gradlew assembleRelease ; popd",
-    "postversion": "react-native-version --never-amend",
+    "postversion": "react-native-version --never-amend --skip-tag",
     "prepare": "node-git-hooks",
     "clean:android": "pushd android ; ./gradlew clean ; popd"
   },
