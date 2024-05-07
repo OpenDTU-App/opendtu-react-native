@@ -95,7 +95,7 @@
         "licenseUrl": "http://github.com/mwittig/npm-license-crawler/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "octokit@3.2.0": {
+    "octokit@3.2.1": {
         "licenses": "MIT",
         "repository": "github:octokit/octokit.js",
         "licenseUrl": "github:octokit/octokit.js",
@@ -111,6 +111,12 @@
         "licenses": "MIT",
         "repository": "https://github.com/ds300/postinstall-postinstall",
         "licenseUrl": "https://github.com/ds300/postinstall-postinstall/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
+    "pretty-bytes@6.1.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/sindresorhus/pretty-bytes",
+        "licenseUrl": "https://github.com/sindresorhus/pretty-bytes/raw/master/license",
         "parents": "opendtu-react-native"
     },
     "prometheus-query@3.4.0": {
@@ -141,6 +147,12 @@
         "licenses": "MIT",
         "repository": "https://github.com/yamankatby/react-native-flex-layout",
         "licenseUrl": "https://github.com/yamankatby/react-native-flex-layout/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
+    "react-native-fs@2.20.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/itinance/react-native-fs",
+        "licenseUrl": "https://github.com/itinance/react-native-fs/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
     "react-native-get-random-values@1.11.0": {

@@ -159,7 +159,7 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   description={t(
                     'opendtu.changelog.updatesChangelogDescription',
                   )}
-                  right={props =>
+                  right={() =>
                     hasNewOpenDtuVersion ? (
                       <View
                         style={{
@@ -167,12 +167,12 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           justifyContent: 'center',
                         }}
                       >
-                        <Badge visible={true} {...props}>
+                        <Badge visible={true}>
                           {t('settings.newOpenDtuRelease')}
                         </Badge>
                       </View>
                     ) : (
-                      <List.Icon {...props} icon="arrow-right" />
+                      <List.Icon icon="arrow-right" />
                     )
                   }
                   onPress={handleNavigateToFirmwareList}

@@ -3,7 +3,7 @@ import { logger, consoleTransport } from 'react-native-logs';
 
 const config: configLoggerType = {
   transport: consoleTransport,
-  severity: __DEV__ ? 'warn' : 'error',
+  severity: __DEV__ ? 'info' : 'warn',
   transportOptions: {
     colors: {
       debug: 'gray',

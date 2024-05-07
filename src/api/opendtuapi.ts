@@ -12,6 +12,7 @@ import type {
 import type { Index, OpenDTUConfig } from '@/types/settings';
 
 import { rootLogger } from '@/utils/log';
+import { downloadFirmware, uploadFirmware } from '@/firmware';
 
 const log = rootLogger.extend('OpenDtuApi');
 
@@ -75,7 +76,7 @@ class OpenDtuApi {
   constructor() {
     this.wsId = Math.random().toString(36).substring(2, 9);
 
-    log.info('OpenDtuApi.constructor()');
+    log.debug('OpenDtuApi.constructor()');
   }
 
   public setLocale(locale: string): void {
@@ -95,7 +96,7 @@ class OpenDtuApi {
   }
 
   public startFetchHttpStateInterval(): void {
-    log.info('OpenDtuApi.startFetchHttpStateInterval()');
+    log.debug('OpenDtuApi.startFetchHttpStateInterval()');
 
     if (this.fetchHttpStateInterval) {
       clearInterval(this.fetchHttpStateInterval);
@@ -104,7 +105,7 @@ class OpenDtuApi {
     this.fetchHttpStateInterval = setInterval(() => {
       this.updateHttpState();
 
-      log.info(
+      log.debug(
         'interval -> OpenDtuApi.updateHttpState()',
         new Date(),
         this.index,
@@ -181,8 +182,10 @@ class OpenDtuApi {
         controller.abort();
       }, 5000);
 
-      log.info('getSystemStatusFromUrl', url);
-      const response = await fetch(`${url.origin}/api/system/status`, {
+      log.debug('getSystemStatusFromUrl', url);
+      const path = `${url.origin}/api/system/status`;
+
+      const response = await fetch(path, {
         signal: controller.signal,
         method: 'GET',
         headers: {
@@ -296,7 +299,7 @@ class OpenDtuApi {
     };
 
     try {
-      log.info('checkCredentials', baseUrl, requestOptions);
+      log.debug('checkCredentials', baseUrl, requestOptions);
       const response = await fetch(
         `${baseUrl}/api/security/authenticate`,
         requestOptions,
@@ -317,7 +320,7 @@ class OpenDtuApi {
     }
   }
 
-  public connect(noInterval = false): void {
+  public connect(): void {
     // connect websocket
     if (this.ws !== null) {
       log.warn('OpenDtuApi.connect() ws not null, aborting!');
@@ -332,17 +335,15 @@ class OpenDtuApi {
 
       const url = `${protocol}://${authString ?? ''}${host}/livedata`;
 
-      log.info('OpenDtuApi.connect()', url);
+      log.debug('OpenDtuApi.connect()', url);
 
       this.ws = new WebSocket(url);
 
       this.ws.onopen = () => {
         this.wsUrl = url;
-        log.info('OpenDtuApi.onopen()');
+        log.debug('OpenDtuApi.onopen()');
 
-        if (!noInterval) {
-          this.startFetchHttpStateInterval();
-        }
+        this.startFetchHttpStateInterval();
 
         this.wsConnected = true;
 
@@ -352,7 +353,7 @@ class OpenDtuApi {
       };
 
       this.ws.onmessage = evt => {
-        log.info('OpenDtuApi.onmessage()');
+        log.debug('OpenDtuApi.onmessage()');
 
         let parsedData: LiveDataFromWebsocket | null = null;
 
@@ -406,12 +407,12 @@ class OpenDtuApi {
         }
 
         setTimeout(() => {
-          log.debug('Reconnecting websocket', {
+          log.info('Reconnecting websocket', {
             wsHost: host,
             currentUrl: this.baseUrl,
             wsId: this.wsId,
           });
-          this.connect(true);
+          this.connect();
         }, 1000);
       };
 
@@ -419,7 +420,7 @@ class OpenDtuApi {
         log.error('OpenDtuApi.onerror()', evt.message);
       };
 
-      log.info('OpenDtuApi.connect()', url);
+      log.debug('OpenDtuApi.connect()', url);
     }
   }
 
@@ -472,7 +473,7 @@ class OpenDtuApi {
   }
 
   public setConfig(config: OpenDTUConfig, index: Index): void {
-    log.info('OpenDtuApi.setConfig()', { config, index });
+    log.debug('OpenDtuApi.setConfig()', { config, index });
 
     this.setBaseUrl(config.baseUrl);
     this.setUserString(config.userString);
@@ -480,7 +481,7 @@ class OpenDtuApi {
   }
 
   public async updateHttpState(): Promise<void> {
-    log.info('OpenDtuApi.updateHttpState()');
+    log.debug('OpenDtuApi.updateHttpState()');
 
     if (this.index === null) {
       log.warn('OpenDtuApi.updateHttpState() index is null');
@@ -703,6 +704,107 @@ class OpenDtuApi {
       wsUrl: this.wsUrl,
       wsReadyState: this.ws?.readyState ?? 'undefined',
     };
+  }
+
+  public async downloadOTA(
+    version: string,
+    downloadUrl: string,
+    onDownloadProgressEvent: (progress: number) => void,
+  ): Promise<string | null> {
+    return await downloadFirmware(
+      version,
+      downloadUrl,
+      onDownloadProgressEvent,
+    );
+  }
+
+  public async handleOTA(
+    version: string,
+    path: string | null,
+    onUploadProgressEvent: (progress: number) => void,
+  ): Promise<boolean> {
+    if (!path) {
+      log.error('handleOTA', 'download failed');
+      return false;
+    }
+
+    const headers = {
+      ...(this.userString ? { Authorization: 'Basic ' + this.userString } : {}),
+    };
+
+    const authString = this.getAuthString();
+
+    const url = `${authString ?? ''}${this.baseUrl}/api/firmware/update`;
+
+    const res = await uploadFirmware(
+      version,
+      path,
+      url,
+      headers,
+      onUploadProgressEvent,
+    );
+
+    return res?.statusCode === 200;
+  }
+
+  public awaitForUpdateFinish(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      // fetch from /api/system/status using HTTP HEAD. if okay, resolve. after 1 minute, reject.
+      let fetchInterval: NodeJS.Timeout | null = null;
+
+      const rejectTimeout = setTimeout(() => {
+        log.warn('waiting took too long');
+
+        if (fetchInterval) {
+          clearInterval(fetchInterval);
+        }
+
+        reject();
+      }, 60 * 1000);
+
+      const authString = this.getAuthString();
+
+      const url = `${authString ?? ''}${this.baseUrl}/api/system/status`;
+
+      const execFetch = () => {
+        const controller = new AbortController();
+
+        const requestOptions = {
+          method: 'HEAD',
+          signal: controller.signal,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Content-Type': 'application/json',
+            ...(this.userString
+              ? { Authorization: 'Basic ' + this.userString }
+              : {}),
+          },
+        };
+
+        const abortTimeout = setTimeout(() => {
+          controller.abort();
+        }, 1000 * 3);
+
+        fetch(url, requestOptions)
+          .then(response => {
+            if (response.status === 200) {
+              clearTimeout(abortTimeout);
+              clearTimeout(rejectTimeout);
+
+              if (fetchInterval) {
+                clearInterval(fetchInterval);
+              }
+
+              resolve();
+            }
+          })
+          .catch(() => {});
+      };
+
+      fetchInterval = setInterval(() => {
+        execFetch();
+      }, 3000);
+    });
   }
 }
 

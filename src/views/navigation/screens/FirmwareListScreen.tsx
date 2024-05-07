@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Appbar, Text, useTheme } from 'react-native-paper';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 import { StyledSafeAreaView } from '@/style';
@@ -10,6 +10,8 @@ import FirmwareListItem from '@/components/firmware/FirmwareListItem';
 import { useTranslation } from 'react-i18next';
 import useDtuState from '@/hooks/useDtuState';
 import { compare } from 'compare-versions';
+import SelectFirmwareModal from '@/components/modals/SelectFirmwareModal';
+import type { Release } from '@octokit/webhooks-types';
 
 const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
@@ -40,6 +42,8 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
   const latestReleaseTag = releases[0]?.tag_name;
 
+  const [selectedRelease, setSelectedRelease] = useState<Release | null>(null);
+
   return (
     <>
       <Appbar.Header>
@@ -62,6 +66,7 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     key={`firmware-${release.id}`}
                     release={release}
                     latestReleaseTag={latestReleaseTag}
+                    selectRelease={setSelectedRelease}
                   />
                 ))}
               </View>
@@ -70,7 +75,9 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               <View>
                 <Box style={{ marginHorizontal: 4 }}>
                   <Text variant="titleLarge">
-                    {t('firmwares.outdatedReleases')}
+                    {newReleases.length
+                      ? t('firmwares.outdatedReleases')
+                      : t('firmwares.releases')}
                   </Text>
                 </Box>
                 {outdatedReleases.map(release => (
@@ -78,6 +85,7 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     key={`firmware-${release.id}`}
                     release={release}
                     latestReleaseTag={latestReleaseTag}
+                    selectRelease={setSelectedRelease}
                   />
                 ))}
               </View>
@@ -91,6 +99,11 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             ) : null}
           </ScrollView>
         </Box>
+        <SelectFirmwareModal
+          visible={selectedRelease !== null}
+          release={selectedRelease}
+          onDismiss={() => setSelectedRelease(null)}
+        />
       </StyledSafeAreaView>
     </>
   );
