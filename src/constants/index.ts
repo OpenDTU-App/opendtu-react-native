@@ -4,3 +4,5 @@ export const colors = {
 };
 
 export const defaultUser = 'admin';
+
+export const minimumOpenDtuFirmwareVersion = 'v23.11.16';

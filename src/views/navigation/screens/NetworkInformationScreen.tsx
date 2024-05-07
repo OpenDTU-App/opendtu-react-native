@@ -85,7 +85,13 @@ const NetworkInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 />
                 <List.Item
                   title={t('opendtu.networkInformationScreen.rssi')}
-                  description={networkStatus?.sta_rssi}
+                  description={
+                    typeof networkStatus?.sta_rssi === 'number'
+                      ? t('opendtu.networkInformationScreen.dBm', {
+                          rssi: networkStatus.sta_rssi,
+                        })
+                      : ''
+                  }
                 />
               </List.Section>
             </SettingsSurface>

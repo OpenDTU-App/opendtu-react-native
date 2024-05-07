@@ -2,13 +2,21 @@ import type { FC } from 'react';
 import type { ModalProps } from 'react-native-paper';
 import { Modal, useTheme } from 'react-native-paper';
 
-const BaseModal: FC<ModalProps> = ({ children, ...rest }) => {
+export interface BaseModalProps extends ModalProps {
+  backgroundColor?: string;
+}
+
+const BaseModal: FC<BaseModalProps> = ({
+  children,
+  backgroundColor,
+  ...rest
+}) => {
   const theme = useTheme();
   return (
     <Modal
       {...rest}
       contentContainerStyle={{
-        backgroundColor: theme.colors.elevation.level4,
+        backgroundColor: backgroundColor ?? theme.colors.elevation.level4,
         padding: 8,
         borderRadius: 28,
         marginVertical: 8,

@@ -28,6 +28,7 @@ import { store, persistor, useAppSelector } from '@/store';
 import { ReactNavigationDarkTheme, ReactNavigationLightTheme } from '@/style';
 import '@/translations';
 import NavigationStack from '@/views/navigation/NavigationStack';
+import type { TranslationsType } from 'react-native-paper-dates';
 
 const log = rootLogger.extend('App');
 
@@ -219,7 +220,7 @@ const _App: FC = () => {
   }, [i18nLanguageMatchesSettings]);
 
   useEffect(() => {
-    registerTranslation(i18n.language, {
+    const translation: TranslationsType = {
       selectSingle: t('RNPaperDates.selectSingle'),
       selectMultiple: t('RNPaperDates.selectMultiple'),
       selectRange: t('RNPaperDates.selectRange'),
@@ -238,7 +239,11 @@ const _App: FC = () => {
       typeInDate: t('RNPaperDates.typeInDate'),
       pickDateFromCalendar: t('RNPaperDates.pickDateFromCalendar'),
       close: t('RNPaperDates.close'),
-    });
+      hour: t('RNPaperDates.hour'),
+      minute: t('RNPaperDates.minute'),
+    };
+
+    registerTranslation(i18n.language, translation);
   }, [i18n.language, t]);
 
   const showEnableAppUpdatesModal = useAppSelector(

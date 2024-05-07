@@ -26,6 +26,7 @@ import SelectDatabaseScreen from '@/views/navigation/screens/SelectDatabaseScree
 import SetupAddOpenDTUScreen from '@/views/navigation/screens/SetupAddOpenDTUScreen';
 import SetupAuthenticateOpenDTUInstanceScreen from '@/views/navigation/screens/SetupAuthenticateOpenDTUInstanceScreen';
 import SetupOpenDTUCompleteScreen from '@/views/navigation/screens/SetupOpenDTUCompleteScreen';
+import FirmwareListScreen from '@/views/navigation/screens/FirmwareListScreen';
 
 export type PropsWithNavigation = {
   navigation: NavigationProp<ParamListBase>;
@@ -103,6 +104,7 @@ const NavigationStack: FC = () => {
         name="InverterEventLogScreen"
         component={InverterEventLogScreen}
       />
+      <Stack.Screen name="FirmwareListScreen" component={FirmwareListScreen} />
     </Stack.Navigator>
   );
 };

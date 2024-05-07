@@ -150,7 +150,7 @@ class PrometheusDatabase implements Database {
     try {
       const { from, to, step, label, unit, labelName } = args;
 
-      log.warn('Performing query', { query, from, to, step });
+      log.debug('Performing query', { query, from, to, step });
 
       const result = await this.db.rangeQuery(query, from, to, step);
 
