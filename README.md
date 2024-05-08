@@ -3,6 +3,12 @@
 This is a mobile app for the [OpenDTU project by tbnobody](https://github.com/tbnobody/OpenDTU).
 I am a OpenDTU user, but I am not affiliated with the original project. However, for API communication, I inspired my code by the original webapp.
 
+## Features
+- All the features of the original webapp
+- In-App updates (Update OpenDTU firmware without leaving the app)
+- Multi-Language support (Currently English and German, feel free to [contribute more](#translations))
+- Dark Mode
+
 ## Installation
 There are signed .apk files inside the "Releases" tab. As of now, the is no plan to publish to Google Play store ~or F-Droid~.
 <br>
@@ -51,14 +57,6 @@ This helps to have a better developer experience when working with Weblate.
 Stuff that I cannot test myself
 - [ ] Multi-Inverter per DTU
 
-### Devnotes
-- Creating new release
-  - Use `yarn version --patch --no-commit-hooks --no-git-tag-version` to bump version
-  - Commit the changes `git commit -m "Bump version to vX.Y.Z" --no-verify`
-  - Push to GitHub
-  - Tag the commit with `vX.Y.Z`
-  - Push the tag to GitHub
-  - Merge `develop` into `main`
 
 ### Early Screenshots
 <img alt="Screenshot_1702075921" src="https://github.com/OpenDTU-App/opendtu-react-native/assets/43087936/1475799f-881d-4eb4-8b1f-1065c64a85c1" width="250">
