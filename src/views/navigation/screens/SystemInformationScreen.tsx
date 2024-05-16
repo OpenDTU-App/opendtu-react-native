@@ -25,7 +25,7 @@ import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
+const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -39,7 +39,12 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const uptime = useMemo(() => {
     if (typeof systemStatus?.uptime !== 'number') return undefined;
 
-    return moment.utc(systemStatus?.uptime * 1000).format('HH:mm:ss');
+    const now = moment.now();
+    const timestamp = now - systemStatus.uptime * 1000;
+
+    return `${moment(timestamp).fromNow()} (${moment(timestamp).format(
+      'lll',
+    )})`;
   }, [systemStatus?.uptime]);
 
   const openGitHub = useCallback(async () => {
@@ -269,6 +274,19 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     systemStatus?.heap_total,
                   )})`}
                 />
+                {systemStatus?.psram_used ? (
+                  <List.Item
+                    title={t('opendtu.systemInformationScreen.psram')}
+                    description={`${formatBytes(
+                      systemStatus?.psram_used,
+                    )} / ${formatBytes(
+                      systemStatus?.psram_total,
+                    )} (${percentage(
+                      systemStatus?.psram_used,
+                      systemStatus?.psram_total,
+                    )})`}
+                  />
+                ) : null}
                 <List.Item
                   title={t('opendtu.systemInformationScreen.littleFs')}
                   description={`${formatBytes(
@@ -289,19 +307,6 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     systemStatus?.sketch_total,
                   )})`}
                 />
-                {systemStatus?.psram_used ? (
-                  <List.Item
-                    title={t('opendtu.systemInformationScreen.psram')}
-                    description={`${formatBytes(
-                      systemStatus?.psram_used,
-                    )} / ${formatBytes(
-                      systemStatus?.psram_total,
-                    )} (${percentage(
-                      systemStatus?.psram_used,
-                      systemStatus?.psram_total,
-                    )})`}
-                  />
-                ) : null}
               </List.Section>
             </SettingsSurface>
             {systemStatus?.heap_max_block ? (
@@ -364,42 +369,29 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       ? t('connected')
                       : t('notConnected')
                   }
-                  right={props => (
-                    <List.Icon
-                      {...props}
-                      icon={
-                        systemStatus?.nrf_connected
-                          ? 'check-circle'
-                          : 'close-circle'
-                      }
-                      color={
-                        systemStatus?.nrf_connected
-                          ? colors.success
-                          : colors.error
-                      }
-                    />
-                  )}
+                  right={props =>
+                    systemStatus?.nrf_configured ? (
+                      <List.Icon
+                        {...props}
+                        icon={
+                          systemStatus?.nrf_connected
+                            ? 'check-circle'
+                            : 'close-circle'
+                        }
+                        color={
+                          systemStatus?.nrf_connected
+                            ? colors.success
+                            : colors.error
+                        }
+                      />
+                    ) : null
+                  }
                 />
                 <List.Item
                   title={t('opendtu.systemInformationScreen.nrf24ChipType')}
                   description={
                     systemStatus?.nrf_pvariant ? 'nRF24L01+' : 'nRF24L01'
                   }
-                  right={props => (
-                    <List.Icon
-                      {...props}
-                      icon={
-                        systemStatus?.nrf_pvariant
-                          ? 'check-circle'
-                          : 'close-circle'
-                      }
-                      color={
-                        systemStatus?.nrf_pvariant
-                          ? colors.success
-                          : colors.error
-                      }
-                    />
-                  )}
                 />
                 <List.Item
                   title={t('opendtu.systemInformationScreen.cmt2300aStatus')}
@@ -433,21 +425,23 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       ? t('connected')
                       : t('notConnected')
                   }
-                  right={props => (
-                    <List.Icon
-                      {...props}
-                      icon={
-                        systemStatus?.cmt_connected
-                          ? 'check-circle'
-                          : 'close-circle'
-                      }
-                      color={
-                        systemStatus?.cmt_connected
-                          ? colors.success
-                          : colors.error
-                      }
-                    />
-                  )}
+                  right={props =>
+                    systemStatus?.cmt_configured ? (
+                      <List.Icon
+                        {...props}
+                        icon={
+                          systemStatus?.cmt_connected
+                            ? 'check-circle'
+                            : 'close-circle'
+                        }
+                        color={
+                          systemStatus?.cmt_connected
+                            ? colors.success
+                            : colors.error
+                        }
+                      />
+                    ) : null
+                  }
                 />
               </List.Section>
             </SettingsSurface>
@@ -458,4 +452,4 @@ const AboutOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   );
 };
 
-export default AboutOpenDTUScreen;
+export default SystemInformationScreen;

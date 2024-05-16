@@ -110,8 +110,8 @@ const NtpInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       color={
                         ntpStatus?.sun_isSunsetAvailable
                           ? ntpStatus?.sun_isDayPeriod
-                            ? '#2196f3'
-                            : '#ffc107'
+                            ? '#ffc107'
+                            : '#2196f3'
                           : colors.error
                       }
                     />
