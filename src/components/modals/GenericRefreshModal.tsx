@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useCallback } from 'react';
 import { Box } from 'react-native-flex-layout';
 import type { ModalProps } from 'react-native-paper';
-import { Button, Portal, Text, useTheme } from 'react-native-paper';
+import { Button, Portal, Text } from 'react-native-paper';
 
 import BaseModal from '@/components/BaseModal';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +15,6 @@ export interface GenericRefreshModalProps extends Omit<ModalProps, 'children'> {
 
 const GenericRefreshModal: FC<GenericRefreshModalProps> = props => {
   const { onDismiss, onConfirm, title, warningText } = props;
-  const theme = useTheme();
   const { t } = useTranslation();
 
   const handleAbort = useCallback(() => {
