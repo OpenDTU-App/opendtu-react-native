@@ -26,6 +26,7 @@ import { rootLogger } from '@/utils/log';
 
 import OpenDtuApi from '@/api/opendtuapi';
 import { useAppDispatch, useAppSelector } from '@/store';
+import useAppLanguage from '@/hooks/useAppLanguage.ts';
 
 const log = rootLogger.extend('ApiHandler');
 
@@ -37,10 +38,9 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
   const api = useMemo(() => new OpenDtuApi(), []);
 
   const dispatch = useAppDispatch();
+  const language = useAppLanguage();
 
   const configIndex = useAppSelector(state => state.settings.selectedDtuConfig);
-
-  const language = useAppSelector(state => state.settings.language);
 
   useEffect(() => {
     api.setLocale(language);

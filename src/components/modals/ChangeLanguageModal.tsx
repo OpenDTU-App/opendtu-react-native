@@ -11,9 +11,10 @@ import BaseModal from '@/components/BaseModal';
 
 import { rootLogger } from '@/utils/log';
 
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppDispatch } from '@/store';
 import type { SupportedLanguage } from '@/translations';
 import { supportedLanguages } from '@/translations';
+import useAppLanguage from '@/hooks/useAppLanguage.ts';
 
 const log = rootLogger.extend('ChangeLanguageModal');
 
@@ -22,7 +23,7 @@ const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  const language = useAppSelector(state => state.settings.language ?? 'en');
+  const language = useAppLanguage();
 
   const [selectedLanguage, setSelectedLanguage] =
     useState<SupportedLanguage>(language);

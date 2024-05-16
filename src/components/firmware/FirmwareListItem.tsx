@@ -14,10 +14,10 @@ import SettingsSurface, {
 } from '@/components/styled/SettingsSurface';
 import useHasAuthConfigured from '@/hooks/useHasAuthConfigured';
 import capitalize from '@/utils/capitalize';
-import type { SettingsState } from '@/types/settings';
 import useAppLanguage from '@/hooks/useAppLanguage';
 import { compare } from 'compare-versions';
 import { minimumOpenDtuFirmwareVersion } from '@/constants';
+import type { SupportedLanguage } from '@/translations';
 
 export interface FirmwareListItemProps {
   release: Release;
@@ -29,7 +29,7 @@ const rules: RenderRules = {
   link: (node, children) => <RNText key={node.key}>{children}</RNText>,
 };
 
-const needsCapitalization: Record<SettingsState['language'], boolean> = {
+const needsCapitalization: Record<SupportedLanguage, boolean> = {
   en: false,
   de: true,
 };

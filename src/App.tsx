@@ -1,5 +1,4 @@
 import { NavigationContainer } from '@react-navigation/native';
-import 'intl-pluralrules';
 import moment from 'moment';
 import { PersistGate as ReduxPersistGate } from 'redux-persist/integration/react';
 
@@ -26,11 +25,11 @@ import GithubProvider from '@/github';
 import FetchHandler from '@/github/FetchHandler';
 import { store, persistor, useAppSelector, useAppDispatch } from '@/store';
 import { ReactNavigationDarkTheme, ReactNavigationLightTheme } from '@/style';
-import type { SupportedLanguage } from '@/translations';
 import NavigationStack from '@/views/navigation/NavigationStack';
 import type { TranslationsType } from 'react-native-paper-dates';
 import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';
-import { setLanguage } from '@/slices/settings';
+import { setLanguage } from '@/slices/settings.ts';
+import type { SupportedLanguage } from '@/translations';
 
 const log = rootLogger.extend('App');
 
@@ -227,6 +226,7 @@ const _App: FC = () => {
 
   useEffect(() => {
     if (language === null) {
+      log.warn('language === null');
       return;
     }
 
