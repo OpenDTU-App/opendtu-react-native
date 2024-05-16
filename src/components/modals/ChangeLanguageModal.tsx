@@ -7,13 +7,13 @@ import { Button, Portal, RadioButton, Text } from 'react-native-paper';
 
 import { setLanguage } from '@/slices/settings';
 
-import type { SettingsState } from '@/types/settings';
-
 import BaseModal from '@/components/BaseModal';
 
 import { rootLogger } from '@/utils/log';
 
 import { useAppDispatch, useAppSelector } from '@/store';
+import type { SupportedLanguage } from '@/translations';
+import { supportedLanguages } from '@/translations';
 
 const log = rootLogger.extend('ChangeLanguageModal');
 
@@ -22,10 +22,10 @@ const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  const language = useAppSelector(state => state.settings.language);
+  const language = useAppSelector(state => state.settings.language ?? 'en');
 
   const [selectedLanguage, setSelectedLanguage] =
-    useState<SettingsState['language']>(language);
+    useState<SupportedLanguage>(language);
 
   const handleAbort = useCallback(() => {
     onDismiss?.();
@@ -47,11 +47,16 @@ const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
           <RadioButton.Group
             value={selectedLanguage}
             onValueChange={value =>
-              setSelectedLanguage(value as SettingsState['language'])
+              setSelectedLanguage(value as SupportedLanguage)
             }
           >
-            <RadioButton.Item label={t('languages.english')} value="en" />
-            <RadioButton.Item label={t('languages.german')} value="de" />
+            {supportedLanguages.map(language => (
+              <RadioButton.Item
+                key={language}
+                label={t(`languages.${language}`)}
+                value={language}
+              />
+            ))}
           </RadioButton.Group>
           <Box
             mt={16}

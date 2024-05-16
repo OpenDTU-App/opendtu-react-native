@@ -6,6 +6,10 @@ import { initReactI18next } from 'react-i18next';
 import de from './translation-files/de.json';
 import en from './translation-files/en.json';
 
+export const supportedLanguages = ['en', 'de'];
+
+export type SupportedLanguage = (typeof supportedLanguages)[number];
+
 if (!i18n.isInitialized) {
   i18n
     .use(RNLanguageDetector)
@@ -20,13 +24,14 @@ if (!i18n.isInitialized) {
         },
       },
       defaultNS: 'translation',
-      lng: 'en',
       fallbackLng: 'en',
+      fallbackNS: 'translation',
       interpolation: {
         escapeValue: false,
       },
       debug: __DEV__,
       nonExplicitSupportedLngs: true,
+      supportedLngs: supportedLanguages,
     });
 }
 
