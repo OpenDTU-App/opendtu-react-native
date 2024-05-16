@@ -703,6 +703,7 @@ class OpenDtuApi {
       wsId: this.wsId,
       wsUrl: this.wsUrl,
       wsReadyState: this.ws?.readyState ?? 'undefined',
+      locale: this.locale,
     };
   }
 

@@ -1,7 +1,7 @@
 import type { Release } from '@octokit/webhooks-types';
 
 import type { FC } from 'react';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import {
   setLatestAppRelease,
@@ -82,66 +82,88 @@ const FetchHandler: FC = () => {
 
   const githubApi = useGithub();
 
+  const fetchHandler = useCallback(async () => {
+    if (!githubApi) return;
+
+    log.info('Fetching latest information from Github api...');
+
+    try {
+      if (latestReleaseRefetchOk && enableFetchOpenDTUReleases) {
+        dispatch(setLatestReleaseTimeout());
+
+        const latestRelease = await githubApi.request(
+          'GET /repos/{owner}/{repo}/releases/latest',
+          OpenDTUGithubBaseConfig,
+        );
+
+        dispatch(setLatestRelease({ latest: latestRelease.data as Release }));
+      } else {
+        log.info(
+          `SKIP latestReleaseRefetchOk=${latestReleaseRefetchOk} enableFetchOpenDTUReleases=${enableFetchOpenDTUReleases}`,
+        );
+      }
+
+      if (allReleasesRefetchOk && enableFetchOpenDTUReleases) {
+        dispatch(setReleasesTimeout());
+
+        const releases = await githubApi.paginate(
+          'GET /repos/{owner}/{repo}/releases',
+          OpenDTUGithubBaseConfig,
+        );
+
+        dispatch(setReleases({ releases: releases as Release[] }));
+      } else {
+        log.info(
+          `SKIP allReleasesRefetchOk=${allReleasesRefetchOk} enableFetchOpenDTUReleases=${enableFetchOpenDTUReleases}`,
+        );
+      }
+
+      if (latestAppReleaseRefetchOk && enableAppUpdates) {
+        dispatch(setLatestAppReleaseTimeout());
+
+        const appRelease = await githubApi.request(
+          'GET /repos/{owner}/{repo}/releases/latest',
+          AppGithubBaseConfig,
+        );
+
+        dispatch(setLatestAppRelease({ latest: appRelease.data as Release }));
+      } else {
+        log.info(
+          `SKIP latestAppReleaseRefetchOk=${latestAppReleaseRefetchOk} enableAppUpdates=${enableAppUpdates}`,
+        );
+      }
+    } catch (e) {
+      log.error('GITHUB FETCH ERROR', e);
+    }
+  }, [
+    allReleasesRefetchOk,
+    dispatch,
+    enableAppUpdates,
+    enableFetchOpenDTUReleases,
+    githubApi,
+    latestAppReleaseRefetchOk,
+    latestReleaseRefetchOk,
+  ]);
+
   useEffect(() => {
     if (/*!isConnected || */ !githubApi) return;
 
-    log.info('fetching latest github data');
+    fetchHandler();
 
-    const func = async () => {
-      try {
-        if (latestReleaseRefetchOk && enableFetchOpenDTUReleases) {
-          dispatch(setLatestReleaseTimeout());
+    const interval = setInterval(
+      () => {
+        fetchHandler();
+      },
+      1000 * 60 * 10,
+    ); // 10 minutes
 
-          const latestRelease = await githubApi.request(
-            'GET /repos/{owner}/{repo}/releases/latest',
-            OpenDTUGithubBaseConfig,
-          );
-
-          dispatch(setLatestRelease({ latest: latestRelease.data as Release }));
-        } else {
-          log.info('SKIP latestReleaseRefetchOk');
-        }
-
-        if (allReleasesRefetchOk && enableFetchOpenDTUReleases) {
-          dispatch(setReleasesTimeout());
-
-          const releases = await githubApi.paginate(
-            'GET /repos/{owner}/{repo}/releases',
-            OpenDTUGithubBaseConfig,
-          );
-
-          dispatch(setReleases({ releases: releases as Release[] }));
-        } else {
-          log.info('SKIP allReleasesRefetchOk');
-        }
-
-        if (latestAppReleaseRefetchOk && enableAppUpdates) {
-          dispatch(setLatestAppReleaseTimeout());
-
-          const appRelease = await githubApi.request(
-            'GET /repos/{owner}/{repo}/releases/latest',
-            AppGithubBaseConfig,
-          );
-
-          dispatch(setLatestAppRelease({ latest: appRelease.data as Release }));
-        } else {
-          log.info('SKIP latestAppReleaseRefetchOk');
-        }
-      } catch (e) {
-        log.error('GITHUB FETCH ERROR', e);
-      }
+    return () => {
+      clearInterval(interval);
     };
-
-    func();
   }, [
-    dispatch,
+    fetchHandler,
     // isConnected,
     githubApi,
-    latestReleaseRefetchOk,
-    allReleasesRefetchOk,
-    latestAppReleaseRefetchOk,
-    enableAppUpdates,
-    enableFetchOpenDTUReleases,
   ]);
 
   return null;
