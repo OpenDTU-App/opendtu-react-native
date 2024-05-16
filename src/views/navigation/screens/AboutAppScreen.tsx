@@ -26,7 +26,7 @@ import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const AboutSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
+const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -137,4 +137,4 @@ const AboutSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   );
 };
 
-export default AboutSettingsScreen;
+export default AboutAppScreen;
