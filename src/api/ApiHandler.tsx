@@ -26,7 +26,7 @@ import { rootLogger } from '@/utils/log';
 
 import OpenDtuApi from '@/api/opendtuapi';
 import { useAppDispatch, useAppSelector } from '@/store';
-import useAppLanguage from '@/hooks/useAppLanguage.ts';
+import useAppLanguage from '@/hooks/useAppLanguage';
 
 const log = rootLogger.extend('ApiHandler');
 

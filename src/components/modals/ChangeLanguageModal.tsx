@@ -14,7 +14,7 @@ import { rootLogger } from '@/utils/log';
 import { useAppDispatch } from '@/store';
 import type { SupportedLanguage } from '@/translations';
 import { supportedLanguages } from '@/translations';
-import useAppLanguage from '@/hooks/useAppLanguage.ts';
+import useAppLanguage from '@/hooks/useAppLanguage';
 
 const log = rootLogger.extend('ChangeLanguageModal');
 

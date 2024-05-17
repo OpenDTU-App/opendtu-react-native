@@ -28,7 +28,7 @@ import { ReactNavigationDarkTheme, ReactNavigationLightTheme } from '@/style';
 import NavigationStack from '@/views/navigation/NavigationStack';
 import type { TranslationsType } from 'react-native-paper-dates';
 import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';
-import { setLanguage } from '@/slices/settings.ts';
+import { setLanguage } from '@/slices/settings';
 import type { SupportedLanguage } from '@/translations';
 
 const log = rootLogger.extend('App');
