@@ -104,9 +104,6 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
       </Appbar.Header>
       <StyledScrollView theme={theme}>
         <Box style={{ flex: 1, width: '100%' }} ph={16} mt={16}>
-          {/*<Box mb={32}>
-            <Text variant="headlineLarge">Device Settings</Text>
-          </Box>*/}
           <Box>
             <Text variant="titleMedium">{t('deviceSettings.general')}</Text>
           </Box>
@@ -208,7 +205,7 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
             />
             <List.Item
               title={t('deviceSettings.opendtuCredentials')}
-              description={hasPassword ? '********' : t('deviceSettings.none')}
+              description={hasPassword ? '********' : t('notConfigured')}
               left={props => <List.Icon {...props} icon="lock" />}
               borderless
               style={{ borderRadius: 8 }}
@@ -216,7 +213,7 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
             />
             <List.Item
               title={t('deviceSettings.configureDatabase')}
-              description={databaseName ?? 'Not configured'}
+              description={databaseName ?? t('notConfigured')}
               left={props => <List.Icon {...props} icon="database" />}
               borderless
               style={{ borderRadius: 8 }}
@@ -235,8 +232,8 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
               >
                 {deviceState === DeviceState.Connected &&
                 index === selectedDtuConfig
-                  ? 'Already Connected'
-                  : 'Connect'}
+                  ? t('deviceSettings.alreadyConnected')
+                  : t('deviceSettings.connect')}
               </Button>
             </Box>
             <Box>

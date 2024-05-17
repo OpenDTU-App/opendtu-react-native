@@ -1,5 +1,7 @@
 export type InverterSerial = string;
 
+type NumericString = `${number}`;
+
 export interface ValueObject {
   v: number; // value
   u: string; // unit (e.g. "W")
@@ -33,9 +35,9 @@ export interface Inverter {
   limit_relative: number;
   limit_absolute: number;
   events: number;
-  AC: InverterStatistics[];
-  DC: InverterStatistics[];
-  INV: InverterStatistics[];
+  AC: Record<NumericString, InverterStatistics>;
+  DC: Record<NumericString, InverterStatistics>;
+  INV: Record<NumericString, InverterStatistics>;
 }
 
 export type InverterFromStatus = Pick<
