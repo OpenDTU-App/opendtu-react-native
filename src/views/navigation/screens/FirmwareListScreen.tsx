@@ -14,21 +14,22 @@ import SelectFirmwareModal from '@/components/modals/SelectFirmwareModal';
 import type { Release } from '@octokit/webhooks-types';
 import GenericRefreshModal from '@/components/modals/GenericRefreshModal';
 import { useFetchControl } from '@/github/FetchHandler';
+import moment from 'moment/moment';
 
 const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const { refreshLatestRelease, refreshReleases } = useFetchControl();
 
-  const releases = useAppSelector(state => state.github.releases.data);
+  const releases = useAppSelector(state => state.github.releases);
   const currentRelease = useDtuState(state => state?.systemStatus?.git_hash);
 
   const newReleases = useMemo(() => {
     if (!currentRelease) {
-      return releases;
+      return releases.data;
     }
 
-    return releases.filter(release =>
+    return releases.data.filter(release =>
       compare(release.tag_name, currentRelease, '>'),
     );
   }, [currentRelease, releases]);
@@ -38,10 +39,18 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
       return [];
     }
 
-    return releases.filter(release =>
+    return releases.data.filter(release =>
       compare(release.tag_name, currentRelease, '<='),
     );
   }, [currentRelease, releases]);
+
+  const formattedReleaseFetchTime = useMemo(() => {
+    if (!releases.lastUpdate) {
+      return '';
+    }
+
+    return moment(releases.lastUpdate).fromNow();
+  }, [releases.lastUpdate]);
 
   const handleRefreshReleases = useCallback(() => {
     refreshReleases(true);
@@ -58,7 +67,7 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     setShowRefreshModal(false);
   }, []);
 
-  const latestReleaseTag = releases[0]?.tag_name;
+  const latestReleaseTag = releases.data[0]?.tag_name;
 
   const [selectedRelease, setSelectedRelease] = useState<Release | null>(null);
 
@@ -89,7 +98,8 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             <Box mb={16} style={{ alignItems: 'center' }}>
               <Icon size={64} source="alert-circle-outline" />
               <Text variant="titleLarge" style={{ textAlign: 'center' }}>
-                {t('firmwares.noReleases')}
+                {t('firmwares.noReleases')} (
+                {t('fetchedWithTime', { time: formattedReleaseFetchTime })})
               </Text>
             </Box>
           </Box>
@@ -104,6 +114,11 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   <Box style={{ paddingHorizontal: 4, marginHorizontal: 4 }}>
                     <Text variant="titleLarge">
                       {t('firmwares.newReleases')}
+                    </Text>
+                    <Text>
+                      {t('fetchedWithTime', {
+                        time: formattedReleaseFetchTime,
+                      })}
                     </Text>
                   </Box>
                   {newReleases.map(release => (
@@ -124,6 +139,13 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                         ? t('firmwares.outdatedReleases')
                         : t('firmwares.releases')}
                     </Text>
+                    {!newReleases.length ? (
+                      <Text>
+                        {t('fetchedWithTime', {
+                          time: formattedReleaseFetchTime,
+                        })}
+                      </Text>
+                    ) : null}
                   </Box>
                   {outdatedReleases.map(release => (
                     <FirmwareListItem
