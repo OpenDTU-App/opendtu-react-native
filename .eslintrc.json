@@ -39,6 +39,13 @@
   "rules": {
     "import/no-named-as-default-member": "off",
     "import/no-named-as-default": "off",
+    "import/extensions": [
+      "error",
+      "never",
+      {
+        "json": "always"
+      }
+    ],
     "no-relative-import-paths/no-relative-import-paths": [
       "warn",
       { "allowSameFolder": true, "rootDir": "src" }
