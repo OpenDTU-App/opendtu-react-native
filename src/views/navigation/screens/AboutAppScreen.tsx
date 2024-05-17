@@ -3,9 +3,10 @@ import packageJson from '@root/package.json';
 import type { FC } from 'react';
 import { useState, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Linking, ScrollView } from 'react-native';
+import { Linking, ScrollView, Text as RNText } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import Markdown from 'react-native-markdown-display';
+import type { RenderRules } from 'react-native-markdown-display';
 import {
   Appbar,
   Badge,
@@ -28,13 +29,20 @@ import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 import GenericRefreshModal from '@/components/modals/GenericRefreshModal';
 import { useFetchControl } from '@/github/FetchHandler';
 
+import moment from 'moment';
+
+const rules: RenderRules = {
+  link: (node, children) => <RNText key={node.key}>{children}</RNText>,
+};
+
 const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { refreshAppReleases } = useFetchControl();
 
-  const [hasNewAppVersion, releaseInfo] = useHasNewAppVersion();
+  const [hasNewAppVersion, releaseInfo, releaseFetchTime] =
+    useHasNewAppVersion();
 
   const prettyTagName = useMemo(() => {
     if (!releaseInfo?.tag_name) {
@@ -43,6 +51,14 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
     return releaseInfo.tag_name.replace(/^v/, '');
   }, [releaseInfo]);
+
+  const formattedReleaseFetchTime = useMemo(() => {
+    if (!releaseFetchTime) {
+      return '';
+    }
+
+    return moment(releaseFetchTime).fromNow();
+  }, [releaseFetchTime]);
 
   const inAppUpdatesEnabled = useAppSelector(
     state => state.settings.enableAppUpdates,
@@ -103,46 +119,48 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 </Box>
               </Box>
             </Box>
-            {hasNewAppVersion ? (
-              <>
-                <Divider />
-                <Box p={8}>
-                  <Box
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'center',
-                      gap: 4,
-                    }}
-                  >
-                    <Text variant="titleLarge" style={{ textAlign: 'center' }}>
-                      {t('aboutApp.newVersionAvailable')}
-                    </Text>
-                    <Badge style={{ alignSelf: 'center' }}>
-                      {prettyTagName}
-                    </Badge>
-                  </Box>
-                  <Surface
-                    style={{ padding: 8, marginTop: 8, borderRadius: 8 }}
-                  >
-                    <Markdown>{releaseInfo?.body || ''}</Markdown>
-                  </Surface>
-                  <Box mt={16} mb={8}>
-                    <Button
-                      buttonColor="#24292e"
-                      textColor="#ffffff"
-                      icon="github"
-                      onPress={() =>
-                        Linking.openURL(releaseInfo?.html_url || '')
-                      }
-                      disabled={!releaseInfo?.html_url}
-                    >
-                      {t('aboutApp.viewMore')}
-                    </Button>
-                  </Box>
-                </Box>
-              </>
-            ) : null}
+            <Divider />
+            <Box p={8}>
+              <Box
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  gap: 4,
+                }}
+              >
+                <Text variant="titleLarge" style={{ textAlign: 'center' }}>
+                  {hasNewAppVersion
+                    ? t('aboutApp.newVersionAvailable')
+                    : t('aboutApp.latestAppRelease')}
+                </Text>
+                <Badge style={{ alignSelf: 'center' }}>{prettyTagName}</Badge>
+              </Box>
+              <Box>
+                <Text variant="bodySmall" style={{ textAlign: 'center' }}>
+                  {t('fetchedWithTime', { time: formattedReleaseFetchTime })}
+                </Text>
+              </Box>
+              <Surface style={{ padding: 8, marginTop: 8, borderRadius: 8 }}>
+                <Markdown
+                  style={{ link: { textDecorationLine: 'none' } }}
+                  rules={rules}
+                >
+                  {releaseInfo?.body || ''}
+                </Markdown>
+              </Surface>
+              <Box mt={16} mb={8}>
+                <Button
+                  buttonColor="#24292e"
+                  textColor="#ffffff"
+                  icon="github"
+                  onPress={() => Linking.openURL(releaseInfo?.html_url || '')}
+                  disabled={!releaseInfo?.html_url}
+                >
+                  {t('aboutApp.viewMore')}
+                </Button>
+              </Box>
+            </Box>
             <Divider />
             <List.Item
               title={t('settings.activateInappUpdates')}
