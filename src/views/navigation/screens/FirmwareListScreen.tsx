@@ -4,7 +4,7 @@ import { Appbar, Icon, Text, useTheme } from 'react-native-paper';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 import { StyledSafeAreaView } from '@/style';
 import { Box } from 'react-native-flex-layout';
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppSelector } from '@/store';
 import { ScrollView, View } from 'react-native';
 import FirmwareListItem from '@/components/firmware/FirmwareListItem';
 import { useTranslation } from 'react-i18next';
@@ -18,7 +18,7 @@ import { useFetchControl } from '@/github/FetchHandler';
 const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
+  const { refreshLatestRelease, refreshReleases } = useFetchControl();
 
   const releases = useAppSelector(state => state.github.releases.data);
   const currentRelease = useDtuState(state => state?.systemStatus?.git_hash);
@@ -44,9 +44,9 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   }, [currentRelease, releases]);
 
   const handleRefreshReleases = useCallback(() => {
-    dispatch(clearReleases());
-    dispatch(clearLatestRelease());
-  }, [dispatch]);
+    refreshReleases(true);
+    refreshLatestRelease(true);
+  }, [refreshLatestRelease, refreshReleases]);
 
   const [showRefreshModal, setShowRefreshModal] = useState<boolean>(false);
 
