@@ -1,5 +1,4 @@
 import { NavigationContainer } from '@react-navigation/native';
-import 'intl-pluralrules';
 import moment from 'moment';
 import { PersistGate as ReduxPersistGate } from 'redux-persist/integration/react';
 
@@ -24,11 +23,13 @@ import ApiProvider from '@/api/ApiHandler';
 import DatabaseProvider from '@/database';
 import GithubProvider from '@/github';
 import FetchHandler from '@/github/FetchHandler';
-import { store, persistor, useAppSelector } from '@/store';
+import { store, persistor, useAppSelector, useAppDispatch } from '@/store';
 import { ReactNavigationDarkTheme, ReactNavigationLightTheme } from '@/style';
-import '@/translations';
 import NavigationStack from '@/views/navigation/NavigationStack';
 import type { TranslationsType } from 'react-native-paper-dates';
+import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';
+import { setLanguage } from '@/slices/settings';
+import type { SupportedLanguage } from '@/translations';
 
 const log = rootLogger.extend('App');
 
@@ -158,6 +159,7 @@ const DarkTheme: MD3Theme = {
 
 const _App: FC = () => {
   const { t, i18n } = useTranslation();
+  const dispatch = useAppDispatch();
 
   const appTheme = useAppSelector(state => state.settings.appTheme);
 
@@ -204,6 +206,30 @@ const _App: FC = () => {
   }, [i18n]);
 
   useEffect(() => {
+    if (language === null) {
+      const res = RNLanguageDetector.detect();
+      log.debug('RNLanguageDetector.detect()', res);
+
+      let language = 'en';
+
+      if (Array.isArray(res)) {
+        language = res[0].language;
+      }
+
+      log.debug('language', language);
+
+      setI18nLanguageMatchesSettings(false);
+      dispatch(setLanguage({ language: language as SupportedLanguage }));
+      i18n.changeLanguage(language);
+    }
+  }, [i18n, language, dispatch]);
+
+  useEffect(() => {
+    if (language === null) {
+      log.warn('language === null');
+      return;
+    }
+
     setI18nLanguageMatchesSettings(false);
     i18n.changeLanguage(language);
 

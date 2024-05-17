@@ -27,7 +27,7 @@ import { rootLogger } from '@/utils/log';
 
 const initialState: SettingsState = {
   appTheme: 'system',
-  language: 'en',
+  language: null,
   dtuConfigs: [],
   selectedDtuConfig: null,
   databaseConfigs: [],

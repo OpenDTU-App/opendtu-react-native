@@ -1,5 +1,8 @@
 import { useAppSelector } from '@/store';
+import type { SupportedLanguage } from '@/translations';
+import { defaultLanguage } from '@/translations';
 
-const useAppLanguage = () => useAppSelector(state => state.settings.language);
+const useAppLanguage = (): SupportedLanguage =>
+  useAppSelector(state => state.settings.language ?? defaultLanguage);
 
 export default useAppLanguage;

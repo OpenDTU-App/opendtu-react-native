@@ -11,6 +11,7 @@ import 'react-native-get-random-values';
 import 'react-native-url-polyfill/auto';
 
 import '@/utils/rsplit';
+import '@/translations';
 
 import App from '@/App';
 

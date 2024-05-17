@@ -81,8 +81,8 @@ const MainSettingsTab: FC = () => {
     navigation.navigate('AboutSettingsScreen');
   }, [navigation]);
 
-  const handleAboutOpenDTU = useCallback(() => {
-    navigation.navigate('AboutOpenDTUScreen');
+  const handleSystemInformation = useCallback(() => {
+    navigation.navigate('SystemInformationScreen');
   }, [navigation]);
 
   const handleLicenses = useCallback(() => {
@@ -121,7 +121,7 @@ const MainSettingsTab: FC = () => {
               title={t('opendtu.systemInformation')}
               description={t('opendtu.systemInformationDescription')}
               left={props => <List.Icon {...props} icon="information" />}
-              onPress={handleAboutOpenDTU}
+              onPress={handleSystemInformation}
               disabled={systemInformationDisabled}
               style={{ opacity: systemInformationDisabled ? 0.5 : 1 }}
               right={props =>

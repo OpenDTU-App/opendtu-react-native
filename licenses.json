@@ -11,7 +11,7 @@
         "licenseUrl": "https://github.com/react-native-async-storage/async-storage/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-native-community/netinfo@11.3.1": {
+    "@react-native-community/netinfo@11.3.2": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-netinfo/react-native-netinfo",
         "licenseUrl": "https://github.com/react-native-netinfo/react-native-netinfo/raw/master/LICENSE",
@@ -41,7 +41,7 @@
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@reduxjs/toolkit@2.2.3": {
+    "@reduxjs/toolkit@2.2.5": {
         "licenses": "MIT",
         "repository": "https://github.com/reduxjs/redux-toolkit",
         "licenseUrl": "https://github.com/reduxjs/redux-toolkit/raw/master/LICENSE",
@@ -59,7 +59,7 @@
         "licenseUrl": "https://github.com/omichelsen/compare-versions/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "i18next@23.11.3": {
+    "i18next@23.11.4": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
@@ -179,7 +179,7 @@
         "licenseUrl": "https://github.com/iamacup/react-native-markdown-display/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-paper-dates@0.22.7": {
+    "react-native-paper-dates@0.22.9": {
         "licenses": "MIT",
         "repository": "https://github.com/web-ridge/react-native-paper-dates",
         "licenseUrl": "https://github.com/web-ridge/react-native-paper-dates/raw/master/LICENSE",
@@ -227,7 +227,7 @@
         "licenseUrl": "https://github.com/crazycodeboy/react-native-splash-screen/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-svg@15.2.0": {
+    "react-native-svg@15.3.0": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-community/react-native-svg",
         "licenseUrl": "https://github.com/react-native-community/react-native-svg/raw/master/LICENSE",
@@ -263,7 +263,7 @@
         "licenseUrl": "github:reduxjs/react-redux",
         "parents": "opendtu-react-native"
     },
-    "react@18.2.0": {
+    "react@18.3.1": {
         "licenses": "MIT",
         "repository": "https://github.com/facebook/react",
         "licenseUrl": "https://github.com/facebook/react/raw/master/LICENSE",
@@ -281,7 +281,7 @@
         "licenseUrl": "github:reduxjs/redux",
         "parents": "opendtu-react-native"
     },
-    "styled-components@6.1.9": {
+    "styled-components@6.1.11": {
         "licenses": "MIT",
         "repository": "https://github.com/styled-components/styled-components",
         "licenseUrl": "https://github.com/styled-components/styled-components/raw/master/LICENSE",
