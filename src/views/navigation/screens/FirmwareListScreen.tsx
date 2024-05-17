@@ -12,8 +12,8 @@ import useDtuState from '@/hooks/useDtuState';
 import { compare } from 'compare-versions';
 import SelectFirmwareModal from '@/components/modals/SelectFirmwareModal';
 import type { Release } from '@octokit/webhooks-types';
-import { clearLatestRelease, clearReleases } from '@/slices/github.ts';
-import GenericRefreshModal from '@/components/modals/GenericRefreshModal.tsx';
+import GenericRefreshModal from '@/components/modals/GenericRefreshModal';
+import { useFetchControl } from '@/github/FetchHandler';
 
 const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();

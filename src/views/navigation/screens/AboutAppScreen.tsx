@@ -1,4 +1,4 @@
-import packageJson from 'package.json';
+import packageJson from '@root/package.json';
 
 import type { FC } from 'react';
 import { useCallback, useMemo } from 'react';
