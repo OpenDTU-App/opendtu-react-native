@@ -46,6 +46,27 @@ const InverterListItem: FC<InverterListItemProps> = ({ inverter }) => {
     return `${powerDC.v.toFixed(powerDC.d)} ${powerDC.u}`;
   });
 
+  const inverterYieldToday = useLivedata(state => {
+    if (state?.from !== 'websocket') {
+      return null;
+    }
+
+    const inv = state?.inverters.find(i => i.serial === inverter.serial);
+
+    if (!inv?.INV || Object.keys(inv?.INV).length < 1) {
+      return null;
+    }
+
+    const data = inv.INV['0'];
+    const yieldToday = data?.YieldDay;
+
+    if (!yieldToday || !yieldToday.v) {
+      return null;
+    }
+
+    return `${yieldToday.v.toFixed(yieldToday.d)} ${yieldToday.u}`;
+  });
+
   const handlePress = useCallback(() => {
     navigation.navigate('InverterInfoScreen', {
       inverterSerial: inverter.serial,
@@ -57,12 +78,22 @@ const InverterListItem: FC<InverterListItemProps> = ({ inverter }) => {
       return '';
     } // •
 
-    if (!inverterIsProducing || !inverterPower) {
-      return `${inverter.serial} • ${t('notProducing')}`;
+    if (!inverterIsProducing && !inverterYieldToday) {
+      return t('notProducing');
     }
 
-    return `${inverter.serial} • ${t('producing', { power: inverterPower })} (DC)`;
-  }, [inverter.name, inverter.serial, inverterIsProducing, inverterPower, t]);
+    if (!inverterIsProducing || !inverterPower) {
+      return `${t('producedToday', { energy: inverterYieldToday })}`;
+    }
+
+    return `${inverterPower} (DC) • ${t('producedToday', { energy: inverterYieldToday })}`;
+  }, [
+    inverter.name,
+    inverterIsProducing,
+    inverterPower,
+    inverterYieldToday,
+    t,
+  ]);
 
   return (
     <StyledListItem
