@@ -1,7 +1,7 @@
 import type { Release } from '@octokit/webhooks-types';
 
-import type { FC } from 'react';
-import { useEffect } from 'react';
+import type { FC, PropsWithChildren } from 'react';
+import { useContext, createContext, useCallback, useEffect } from 'react';
 
 import {
   setLatestAppRelease,
@@ -25,7 +25,17 @@ import { useAppDispatch, useAppSelector } from '@/store';
 
 const log = rootLogger.extend('FetchHandler');
 
-const FetchHandler: FC = () => {
+export const FetchHandlerContext = createContext<{
+  refreshReleases: (force?: boolean) => Promise<boolean>;
+  refreshLatestRelease: (force?: boolean) => Promise<boolean>;
+  refreshAppReleases: (force?: boolean) => Promise<boolean>;
+}>({
+  refreshAppReleases: async () => false,
+  refreshLatestRelease: async () => false,
+  refreshReleases: async () => false,
+});
+
+const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useAppDispatch();
   // const index = useDeviceIndex();
 
@@ -82,15 +92,15 @@ const FetchHandler: FC = () => {
 
   const githubApi = useGithub();
 
-  useEffect(() => {
-    if (/*!isConnected || */ !githubApi) return;
+  const fetchLatestReleaseHandler = useCallback(
+    async (force?: boolean): Promise<boolean> => {
+      if (!githubApi) return false;
 
-    log.info('fetching latest github data');
-
-    const func = async () => {
       try {
-        if (latestReleaseRefetchOk && enableFetchOpenDTUReleases) {
+        if ((latestReleaseRefetchOk || force) && enableFetchOpenDTUReleases) {
           dispatch(setLatestReleaseTimeout());
+
+          log.info('Fetching latest release from Github api...');
 
           const latestRelease = await githubApi.request(
             'GET /repos/{owner}/{repo}/releases/latest',
@@ -98,12 +108,31 @@ const FetchHandler: FC = () => {
           );
 
           dispatch(setLatestRelease({ latest: latestRelease.data as Release }));
-        } else {
-          log.info('SKIP latestReleaseRefetchOk');
-        }
 
-        if (allReleasesRefetchOk && enableFetchOpenDTUReleases) {
+          return true;
+        } else {
+          log.info(
+            `SKIP latestReleaseRefetchOk=${latestReleaseRefetchOk} enableFetchOpenDTUReleases=${enableFetchOpenDTUReleases}`,
+          );
+        }
+      } catch (e) {
+        log.error('GITHUB FETCH ERROR', e);
+      }
+
+      return false;
+    },
+    [dispatch, enableFetchOpenDTUReleases, githubApi, latestReleaseRefetchOk],
+  );
+
+  const fetchAllReleasesHandler = useCallback(
+    async (force?: boolean): Promise<boolean> => {
+      if (!githubApi) return false;
+
+      try {
+        if ((allReleasesRefetchOk || force) && enableFetchOpenDTUReleases) {
           dispatch(setReleasesTimeout());
+
+          log.info('Fetching all releases from Github api...');
 
           const releases = await githubApi.paginate(
             'GET /repos/{owner}/{repo}/releases',
@@ -111,12 +140,31 @@ const FetchHandler: FC = () => {
           );
 
           dispatch(setReleases({ releases: releases as Release[] }));
-        } else {
-          log.info('SKIP allReleasesRefetchOk');
-        }
 
-        if (latestAppReleaseRefetchOk && enableAppUpdates) {
+          return true;
+        } else {
+          log.info(
+            `SKIP allReleasesRefetchOk=${allReleasesRefetchOk} enableFetchOpenDTUReleases=${enableFetchOpenDTUReleases}`,
+          );
+        }
+      } catch (e) {
+        log.error('GITHUB FETCH ERROR', e);
+      }
+
+      return false;
+    },
+    [allReleasesRefetchOk, dispatch, enableFetchOpenDTUReleases, githubApi],
+  );
+
+  const fetchLatestAppReleaseHandler = useCallback(
+    async (force?: boolean): Promise<boolean> => {
+      if (!githubApi) return false;
+
+      try {
+        if ((latestAppReleaseRefetchOk || force) && enableAppUpdates) {
           dispatch(setLatestAppReleaseTimeout());
+
+          log.info('Fetching latest app release from Github api...');
 
           const appRelease = await githubApi.request(
             'GET /repos/{owner}/{repo}/releases/latest',
@@ -124,27 +172,81 @@ const FetchHandler: FC = () => {
           );
 
           dispatch(setLatestAppRelease({ latest: appRelease.data as Release }));
+
+          return true;
         } else {
-          log.info('SKIP latestAppReleaseRefetchOk');
+          log.info(
+            `SKIP latestAppReleaseRefetchOk=${latestAppReleaseRefetchOk} enableAppUpdates=${enableAppUpdates}`,
+          );
         }
       } catch (e) {
         log.error('GITHUB FETCH ERROR', e);
       }
-    };
 
-    func();
+      return false;
+    },
+    [dispatch, enableAppUpdates, githubApi, latestAppReleaseRefetchOk],
+  );
+
+  const fetchHandler = useCallback(async () => {
+    if (!githubApi) return;
+
+    log.info('Fetching latest information from Github api...');
+
+    const latestReleaseSuccess = await fetchLatestReleaseHandler();
+    const allReleasesSuccess = await fetchAllReleasesHandler();
+    const latestAppReleaseSuccess = await fetchLatestAppReleaseHandler();
+
+    if (latestReleaseSuccess || allReleasesSuccess || latestAppReleaseSuccess) {
+      log.info(
+        `Github fetch successful latestReleaseSuccess=${latestReleaseSuccess} allReleasesSuccess=${allReleasesSuccess} latestAppReleaseSuccess=${latestAppReleaseSuccess}`,
+      );
+    } else {
+      log.info(
+        `Github fetch failed latestReleaseSuccess=${latestReleaseSuccess} allReleasesSuccess=${allReleasesSuccess} latestAppReleaseSuccess=${latestAppReleaseSuccess}`,
+      );
+    }
   }, [
-    dispatch,
-    // isConnected,
+    fetchAllReleasesHandler,
+    fetchLatestAppReleaseHandler,
+    fetchLatestReleaseHandler,
     githubApi,
-    latestReleaseRefetchOk,
-    allReleasesRefetchOk,
-    latestAppReleaseRefetchOk,
-    enableAppUpdates,
-    enableFetchOpenDTUReleases,
   ]);
 
-  return null;
+  useEffect(() => {
+    if (/*!isConnected || */ !githubApi) return;
+
+    fetchHandler();
+
+    const interval = setInterval(
+      () => {
+        fetchHandler();
+      },
+      1000 * 60 * 10,
+    ); // 10 minutes
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [
+    fetchHandler,
+    // isConnected,
+    githubApi,
+  ]);
+
+  return (
+    <FetchHandlerContext.Provider
+      value={{
+        refreshReleases: fetchAllReleasesHandler,
+        refreshLatestRelease: fetchLatestReleaseHandler,
+        refreshAppReleases: fetchLatestAppReleaseHandler,
+      }}
+    >
+      {children}
+    </FetchHandlerContext.Provider>
+  );
 };
+
+export const useFetchControl = () => useContext(FetchHandlerContext);
 
 export default FetchHandler;

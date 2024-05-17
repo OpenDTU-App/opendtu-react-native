@@ -1,7 +1,7 @@
-import packageJson from 'package.json';
+import packageJson from '@root/package.json';
 
 import type { FC } from 'react';
-import { useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Linking, ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
@@ -25,11 +25,14 @@ import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
+import GenericRefreshModal from '@/components/modals/GenericRefreshModal';
+import { useFetchControl } from '@/github/FetchHandler';
 
-const AboutSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
+const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const { refreshAppReleases } = useFetchControl();
 
   const [hasNewAppVersion, releaseInfo] = useHasNewAppVersion();
 
@@ -49,13 +52,35 @@ const AboutSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     dispatch(setEnableAppUpdates({ enable: !inAppUpdatesEnabled }));
   }, [dispatch, inAppUpdatesEnabled]);
 
+  const handleRefreshRelease = useCallback(() => {
+    refreshAppReleases(true);
+  }, [refreshAppReleases]);
+
+  const [showRefreshModal, setShowRefreshModal] = useState<boolean>(false);
+
+  const handleShowRefreshModal = useCallback(() => {
+    setShowRefreshModal(true);
+  }, []);
+
+  const handleHideRefreshModal = useCallback(() => {
+    setShowRefreshModal(false);
+  }, []);
+
   return (
     <>
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('settings.aboutApp')} />
+        <Appbar.Action icon="refresh" onPress={handleShowRefreshModal} />
       </Appbar.Header>
       <StyledSafeAreaView theme={theme}>
+        <GenericRefreshModal
+          visible={showRefreshModal}
+          onDismiss={handleHideRefreshModal}
+          onConfirm={handleRefreshRelease}
+          title={t('aboutApp.refreshModal.title')}
+          warningText={t('aboutApp.refreshModal.warningText')}
+        />
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView>
             <Box>
@@ -137,4 +162,4 @@ const AboutSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   );
 };
 
-export default AboutSettingsScreen;
+export default AboutAppScreen;

@@ -51,8 +51,9 @@ const App = () => {
             <GithubProvider>
               <ApiProvider>
                 <DatabaseProvider>
-                  <_App />
-                  <FetchHandler />
+                  <FetchHandler>
+                    <_App />
+                  </FetchHandler>
                 </DatabaseProvider>
               </ApiProvider>
             </GithubProvider>

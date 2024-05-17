@@ -9,7 +9,7 @@ import type { FC } from 'react';
 
 import { useAppSelector } from '@/store';
 import AboutOpenDTUScreen from '@/views/navigation/screens/AboutOpenDTUScreen';
-import AboutSettingsScreen from '@/views/navigation/screens/AboutSettingsScreen';
+import AboutAppScreen from '@/views/navigation/screens/AboutAppScreen';
 import ConfigureGraphsScreen from '@/views/navigation/screens/ConfigureGraphsScreen';
 import DebugScreen from '@/views/navigation/screens/DebugScreen';
 import DeviceListScreen from '@/views/navigation/screens/DeviceListScreen';
@@ -76,10 +76,7 @@ const NavigationStack: FC = () => {
         name="ManageDatabasesScreen"
         component={ManageDatabasesScreen}
       />
-      <Stack.Screen
-        name="AboutSettingsScreen"
-        component={AboutSettingsScreen}
-      />
+      <Stack.Screen name="AboutSettingsScreen" component={AboutAppScreen} />
       <Stack.Screen
         name="ConfigureGraphsScreen"
         component={ConfigureGraphsScreen}

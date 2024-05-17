@@ -1,6 +1,6 @@
 import type { UploadResult } from 'react-native-fs';
 import RNFS from 'react-native-fs';
-import { rootLogger } from '@/utils/log.ts';
+import { rootLogger } from '@/utils/log';
 
 // implement functions to download the firmware to storage.
 
