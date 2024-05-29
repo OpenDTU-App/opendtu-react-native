@@ -5,6 +5,12 @@
         "licenseUrl": "git@gitlab.com:os-team/libs/utils",
         "parents": "opendtu-react-native"
     },
+    "@pchmn/expo-material3-theme@1.3.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/pchmn/expo-material3-theme",
+        "licenseUrl": "https://github.com/pchmn/expo-material3-theme/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
     "@react-native-async-storage/async-storage@1.23.1": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-async-storage/async-storage",
@@ -57,6 +63,12 @@
         "licenses": "MIT",
         "repository": "https://github.com/omichelsen/compare-versions",
         "licenseUrl": "https://github.com/omichelsen/compare-versions/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
+    "expo@51.0.8": {
+        "licenses": "MIT",
+        "repository": "https://github.com/expo/expo",
+        "licenseUrl": "https://github.com/expo/expo",
         "parents": "opendtu-react-native"
     },
     "i18next@23.11.4": {

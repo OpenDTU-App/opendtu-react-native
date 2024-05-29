@@ -10,6 +10,7 @@ import Zeroconf from 'react-native-zeroconf';
 import MDNSScanItem from '@/components/devices/MDNSScanItem';
 
 import { rootLogger } from '@/utils/log';
+import { spacing } from '@/constants';
 
 export interface MDNSScanProps {
   setError: (error: string) => void;
@@ -79,7 +80,7 @@ const MDNSScan: FC<MDNSScanProps> = ({ setError, setLoading, loading }) => {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: 16,
+          gap: spacing * 2,
         }}
       >
         <Text>{t('mdns.scanning')}</Text>

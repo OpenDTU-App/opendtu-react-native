@@ -16,7 +16,7 @@ import useHasAuthConfigured from '@/hooks/useHasAuthConfigured';
 import capitalize from '@/utils/capitalize';
 import useAppLanguage from '@/hooks/useAppLanguage';
 import { compare } from 'compare-versions';
-import { minimumOpenDtuFirmwareVersion } from '@/constants';
+import { minimumOpenDtuFirmwareVersion, spacing } from '@/constants';
 import type { SupportedLanguage } from '@/translations';
 
 export interface FirmwareListItemProps {
@@ -83,7 +83,7 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
         <View
           style={{
             flexDirection: 'row',
-            gap: 4,
+            gap: spacing,
           }}
         >
           <Text variant="titleMedium" numberOfLines={1}>

@@ -10,24 +10,24 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const ReactNavigationDarkTheme = {
   ...DarkTheme,
-  colors: {
+  /*colors: {
     ...DarkTheme.colors,
     background: '#000',
     text: '#fff',
     border: '#ccc',
     notification: '#fff',
-  },
+  }*/
 };
 
 export const ReactNavigationLightTheme = {
   ...DefaultTheme,
-  colors: {
+  /*colors: {
     ...DefaultTheme.colors,
     background: '#fff',
     text: '#000',
     border: '#ccc',
     notification: '#000',
-  },
+  },*/
 };
 
 export const StyledView = styled(View)`

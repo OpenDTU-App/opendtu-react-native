@@ -12,6 +12,7 @@ import StyledListItem from '@/components/styled/StyledListItem';
 import { useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
+import { spacing } from '@/constants';
 
 const ManageDatabasesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
@@ -68,7 +69,7 @@ const ManageDatabasesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             </Box>
           ) : (
             <ScrollView style={{ marginTop: 16, marginBottom: 16 }}>
-              <Box style={{ gap: 8, marginHorizontal: 8 }}>
+              <Box style={{ gap: spacing, marginHorizontal: 8 }}>
                 {databases.map((config, index) => (
                   <StyledListItem
                     theme={theme}

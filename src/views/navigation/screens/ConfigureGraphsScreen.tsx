@@ -20,6 +20,7 @@ import TimeRangeLastNSecondsModal from '@/components/modals/TimeRangeLastNSecond
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
+import { spacing } from '@/constants';
 
 const ConfigureGraphsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
@@ -224,7 +225,7 @@ const ConfigureGraphsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               endDateState={endDateState}
             />
             <Divider style={{ marginVertical: 8 }} bold />
-            <Box style={{ gap: 8, paddingVertical: 8 }}>
+            <Box style={{ gap: spacing, paddingVertical: 8 }}>
               <Button onPress={() => setOpenDateSelector(true)}>
                 {t('configureGraphs.changeTimeRange')}
               </Button>
@@ -259,7 +260,7 @@ const ConfigureGraphsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               {t('configureGraphs.changeRefreshInterval')}
             </Text>
             <Divider style={{ marginVertical: 8 }} bold />
-            <Box style={{ gap: 8, paddingVertical: 8 }}>
+            <Box style={{ gap: spacing, paddingVertical: 8 }}>
               <Button
                 mode="contained"
                 onPress={() => setOpenChangeGraphRefreshIntervalModal(true)}

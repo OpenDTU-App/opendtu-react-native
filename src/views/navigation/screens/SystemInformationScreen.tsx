@@ -42,7 +42,7 @@ const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     const now = moment.now();
     const timestamp = now - systemStatus.uptime * 1000;
 
-    return `${moment(timestamp).fromNow()} (${moment(timestamp).format(
+    return `${moment(timestamp).fromNow(true)} (${moment(timestamp).format(
       'lll',
     )})`;
   }, [systemStatus?.uptime]);

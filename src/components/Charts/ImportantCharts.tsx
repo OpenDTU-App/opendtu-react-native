@@ -13,6 +13,7 @@ import DcVoltageChart from '@/components/Charts/DcVoltageChart';
 import StyledSurface from '@/components/styled/StyledSurface';
 
 import { useAppSelector } from '@/store';
+import { spacing } from '@/constants';
 
 const ImportantCharts: FC = () => {
   const { t } = useTranslation();
@@ -100,7 +101,7 @@ const ImportantCharts: FC = () => {
           </StyledSurface>
         </Box>
       </View>
-      <Box p={8} pt={4} style={{ gap: 12 }}>
+      <Box p={8} pt={4} style={{ gap: spacing }}>
         <AcPowerChart />
         <DcVoltageChart />
       </Box>

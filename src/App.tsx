@@ -5,9 +5,14 @@ import { PersistGate as ReduxPersistGate } from 'redux-persist/integration/react
 import type { FC } from 'react';
 import { StrictMode, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Appearance, StatusBar } from 'react-native';
+import { StatusBar, useColorScheme } from 'react-native';
 import type { MD3Theme } from 'react-native-paper';
-import { MD3DarkTheme, MD3LightTheme, PaperProvider } from 'react-native-paper';
+import {
+  adaptNavigationTheme,
+  MD3DarkTheme,
+  MD3LightTheme,
+  PaperProvider,
+} from 'react-native-paper';
 import { registerTranslation } from 'react-native-paper-dates';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
@@ -30,6 +35,7 @@ import type { TranslationsType } from 'react-native-paper-dates';
 import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';
 import { setLanguage } from '@/slices/settings';
 import type { SupportedLanguage } from '@/translations';
+import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
 
 const log = rootLogger.extend('App');
 
@@ -157,13 +163,23 @@ const DarkTheme: MD3Theme = {
   },*/
 };
 
+const {
+  LightTheme: AdaptedNavigationLightTheme,
+  DarkTheme: AdaptedNavigationDarkTheme,
+} = adaptNavigationTheme({
+  reactNavigationLight: ReactNavigationLightTheme,
+  reactNavigationDark: ReactNavigationDarkTheme,
+});
+
 const _App: FC = () => {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
+  const colorScheme = useColorScheme();
+  const { theme: m3theme } = useMaterial3Theme();
 
   const appTheme = useAppSelector(state => state.settings.appTheme);
 
-  const systemModeWantsDark = Appearance.getColorScheme() === 'dark';
+  const systemModeWantsDark = colorScheme === 'dark';
 
   const darkMode = useMemo(() => {
     if (appTheme === 'system') {
@@ -178,16 +194,16 @@ const _App: FC = () => {
   const theme = useMemo(() => {
     if (darkMode) {
       log.debug('darkMode');
-      return DarkTheme;
+      return { ...DarkTheme, colors: m3theme.dark };
     }
 
     log.debug('lightMode');
-    return LightTheme;
-  }, [darkMode]);
+    return { ...LightTheme, colors: m3theme.light };
+  }, [darkMode, m3theme.dark, m3theme.light]);
 
   const navigationTheme = useMemo(() => {
-    if (darkMode) return ReactNavigationDarkTheme;
-    return ReactNavigationLightTheme;
+    if (darkMode) return AdaptedNavigationDarkTheme;
+    return AdaptedNavigationLightTheme;
   }, [darkMode]);
 
   const language = useAppSelector(state => state.settings.language);

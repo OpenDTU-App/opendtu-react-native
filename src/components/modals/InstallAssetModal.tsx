@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import type { ReleaseAsset } from '@octokit/webhooks-types';
 import { rootLogger } from '@/utils/log';
 import { useApi } from '@/api/ApiHandler';
+import { spacing } from '@/constants';
 
 const log = rootLogger.extend('InstallAssetModal');
 
@@ -216,7 +217,7 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
-                    gap: 8,
+                    gap: spacing,
                     alignItems: 'center',
                   }}
                 >
@@ -230,7 +231,7 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
-                    gap: 8,
+                    gap: spacing,
                     alignItems: 'center',
                   }}
                 >
@@ -251,7 +252,7 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
                 p={4}
                 style={{
                   flexDirection: 'column',
-                  gap: 8,
+                  gap: spacing,
                 }}
               >
                 <Button onPress={() => handleAbort()} disabled={!isDismissible}>

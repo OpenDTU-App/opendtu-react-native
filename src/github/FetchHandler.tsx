@@ -226,6 +226,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
     ); // 10 minutes
 
     return () => {
+      log.info('Clearing interval...');
       clearInterval(interval);
     };
   }, [
