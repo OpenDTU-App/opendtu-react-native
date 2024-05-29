@@ -4,11 +4,13 @@ import { Modal, useTheme } from 'react-native-paper';
 
 export interface BaseModalProps extends ModalProps {
   backgroundColor?: string;
+  disableSidePadding?: boolean;
 }
 
 const BaseModal: FC<BaseModalProps> = ({
   children,
   backgroundColor,
+  disableSidePadding,
   ...rest
 }) => {
   const theme = useTheme();
@@ -17,7 +19,9 @@ const BaseModal: FC<BaseModalProps> = ({
       {...rest}
       contentContainerStyle={{
         backgroundColor: backgroundColor ?? theme.colors.elevation.level4,
-        padding: 8,
+        ...(disableSidePadding
+          ? { paddingTop: 8, paddingBottom: 8 }
+          : { padding: 8 }),
         borderRadius: 28,
         marginVertical: 8,
         marginHorizontal: 24,

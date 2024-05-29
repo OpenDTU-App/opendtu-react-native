@@ -7,6 +7,7 @@ import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import StyledSurface from '@/components/styled/StyledSurface';
 
 import useHasLiveData from '@/hooks/useHasLiveData';
+import { spacing } from '@/constants';
 
 export interface StatusWidgetProps extends PropsWithChildren {
   title?: string;
@@ -26,7 +27,7 @@ const StatusWidget: FC<StatusWidgetProps> = ({
   const theme = useTheme();
 
   return (
-    <StyledSurface elevation={2} mode="flat">
+    <StyledSurface mode="elevated">
       {hasLiveData ? (
         <Box style={{ margin: 12 }}>
           {title ? (
@@ -37,7 +38,7 @@ const StatusWidget: FC<StatusWidgetProps> = ({
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                gap: 8,
+                gap: spacing,
               }}
             >
               <Text variant="titleLarge" style={{ fontSize: 20 }}>

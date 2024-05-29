@@ -5,13 +5,14 @@ import { Box } from 'react-native-flex-layout';
 import DeviceListItem from '@/components/devices/DeviceListItem';
 
 import { useAppSelector } from '@/store';
+import { spacing } from '@/constants';
 
 const DeviceList: FC = () => {
   const configs = useAppSelector(state => state.settings.dtuConfigs);
 
   return (
     <ScrollView style={{ marginBottom: 16 }}>
-      <Box style={{ gap: 8, marginHorizontal: 8 }}>
+      <Box style={{ gap: spacing, marginHorizontal: 8 }}>
         {configs.map((config, index) => (
           <DeviceListItem
             key={`DeviceListItem-${config.baseUrl}-${index}`}

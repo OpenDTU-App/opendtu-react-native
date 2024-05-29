@@ -6,6 +6,7 @@ import OpenDTUValue from '@/components/OpenDTUValue';
 import StatusWidget from '@/components/StatusWidget';
 
 import useLivedata from '@/hooks/useLivedata';
+import { spacing } from '@/constants';
 
 const ImportantStatusValues: FC = () => {
   const { t } = useTranslation();
@@ -21,7 +22,7 @@ const ImportantStatusValues: FC = () => {
           width: '100%',
           flexWrap: 'wrap',
           justifyContent: 'space-evenly',
-          gap: 8,
+          gap: spacing,
         }}
       >
         <StatusWidget title={t('livedata.todaysYield')} icon="solar-panel">

@@ -1,13 +1,16 @@
-import styled from 'styled-components';
+import type { ListItemProps } from 'react-native-paper';
+import { Surface, List } from 'react-native-paper';
+import type { FC } from 'react';
 
-import type { MD3Theme } from 'react-native-paper';
-import { List } from 'react-native-paper';
-
-const StyledListItem = styled(List.Item)<{ theme: MD3Theme }>`
-  background-color: ${props =>
-    (props.theme as MD3Theme).colors.elevation.level2};
-  border-radius: 16px;
-  padding: 12px 8px;
-`;
+const StyledListItem: FC<ListItemProps> = props => {
+  return (
+    <Surface elevation={5} style={{ borderRadius: 16 }}>
+      <List.Item
+        {...props}
+        style={{ paddingVertical: 12, paddingHorizontal: 8 }}
+      />
+    </Surface>
+  );
+};
 
 export default StyledListItem;
