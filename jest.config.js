@@ -1,4 +1,5 @@
-module.exports = {
+/** @type import('jest').Config **/
+const config = {
   preset: 'react-native',
   transform: {
     '^.+\\.(ts|tsx|js|jsx)$': 'babel-jest',
@@ -12,4 +13,7 @@ module.exports = {
     'ip-regex': require.resolve('ip-regex'),
   },
   setupFilesAfterEnv: ['./jest.setup.js'],
+  reporters: [['github-actions', { silent: false }], 'summary'],
 };
+
+module.exports = config;
