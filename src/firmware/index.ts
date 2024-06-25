@@ -1,10 +1,11 @@
 import type { UploadResult } from 'react-native-fs';
 import RNFS from 'react-native-fs';
-import { rootLogger } from '@/utils/log';
+
+import { rootLogging } from '@/utils/log';
 
 // implement functions to download the firmware to storage.
 
-const log = rootLogger.extend('FirmwareUtils');
+const log = rootLogging.extend('FirmwareUtils');
 
 // check if ios
 const base = RNFS.TemporaryDirectoryPath;

@@ -1,3 +1,5 @@
+import { DeviceState } from '@/types/opendtu/state';
+
 import useDeviceIndex from '@/hooks/useDeviceIndex';
 
 import { useAppSelector } from '@/store';
@@ -8,7 +10,7 @@ const useIsConnected = (): boolean => {
   return useAppSelector(state =>
     index === null
       ? false
-      : state.opendtu.dtuStates[index]?.isConnected ?? false,
+      : state.opendtu.deviceState[index] === DeviceState.Connected,
   );
 };
 

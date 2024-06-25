@@ -5,12 +5,17 @@ import {
   clearOpenDtuState,
   setDeviceState,
   setEventLog,
+  setGridProfile,
+  setInverterDevice,
   setInverters,
   setIsConnected,
+  setLimitStatus,
+  setLiveDataFromStatus,
   setLiveDataFromWebsocket,
   setMqttStatus,
   setNetworkStatus,
   setNtpStatus,
+  setPowerStatus,
   setSystemStatus,
   setTriedToConnect,
 } from '@/slices/opendtu';
@@ -22,13 +27,14 @@ import {
 
 import { DeviceState } from '@/types/opendtu/state';
 
-import { rootLogger } from '@/utils/log';
+import useAppLanguage from '@/hooks/useAppLanguage';
+
+import { rootLogging } from '@/utils/log';
 
 import OpenDtuApi from '@/api/opendtuapi';
 import { useAppDispatch, useAppSelector } from '@/store';
-import useAppLanguage from '@/hooks/useAppLanguage';
 
-const log = rootLogger.extend('ApiHandler');
+const log = rootLogging.extend('ApiHandler');
 
 // create context for the api handler
 export const ApiContext = createContext<OpenDtuApi | undefined>(undefined);
@@ -94,6 +100,14 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
         dispatch(setDeviceState({ deviceState: DeviceState.Connected, index }));
       });
 
+      api.registerLiveDataFromStatusHandler((data, valid, index) => {
+        dispatch(
+          setTriedToConnect({ triedToConnect: true, index: configIndex }),
+        );
+        dispatch(setLiveDataFromStatus({ data, valid, index: configIndex }));
+        dispatch(setDeviceState({ deviceState: DeviceState.Connected, index }));
+      });
+
       api.registerHttpStatusHandler(
         (
           { systemStatus, networkStatus, ntpStatus, mqttStatus, inverters },
@@ -146,9 +160,27 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
         dispatch(setEventLog({ data, index, inverterSerial }));
       });
 
+      api.registerOnPowerStatusHandler((data, index) => {
+        dispatch(setPowerStatus({ data, index }));
+      });
+
+      api.registerOnLimitStatusHandler((data, index) => {
+        dispatch(setLimitStatus({ data, index }));
+      });
+
+      api.registerOnInverterDeviceHandler((data, index, inverterSerial) => {
+        dispatch(setInverterDevice({ data, index, inverterSerial }));
+      });
+
+      api.registerOnGridProfileHandler((data, index, inverterSerial) => {
+        dispatch(setGridProfile({ data, index, inverterSerial }));
+      });
+
       log.debug('Connecting API Handler');
 
       api.connect();
+
+      api.getLiveData();
     } else {
       log.debug('Disconnecting API Handler');
 
@@ -162,6 +194,22 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
       api.disconnect();
     };
   }, [currentConfiguration, configIndex, dispatch, api]);
+
+  useEffect(() => {
+    const func = (): void => {
+      if (configIndex === null) {
+        return;
+      }
+
+      api.handle();
+    };
+
+    const interval = setInterval(func, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [api, configIndex]);
 
   return <ApiContext.Provider value={api}>{children}</ApiContext.Provider>;
 };

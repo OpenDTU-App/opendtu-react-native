@@ -1,20 +1,27 @@
 #!/bin/bash
-# Get latest git tag
-latest_tag=$(git describe --tags --abbrev=0)
-latest_tag_without_v=${latest_tag#"v"}
-version_from_tag=$(echo "$latest_tag_without_v" | grep -P '^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$')
+# This script is ./pre-commit
+# Execute all scripts in ./pre-commit.d in order (0-foo before 10-bar)
 
-# Get the version from package.json
-version=$(jq -r '.version' package.json)
+# Get the directory of this script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+error=0
 
-echo "Latest tag: $latest_tag_without_v"
-echo "Version from tag: $version_from_tag"
-echo "Version from package.json: $version"
+echo "Running pre-commit hooks in $DIR/pre-commit.d"
 
-# Check if the version from the tag and package.json are the same
-if [ "$version" != "$version_from_tag" ]; then
-  echo "Version in package.json and tag are not the same"
-  exit 1
-fi
+# Run all scripts in ./pre-commit.d
+for script in $DIR/pre-commit.d/*; do
+  if [ -x $script ]; then
+    echo "> Running $script"
+    $script
+    err=$?
+    if [ $err -ne 0 ]; then
+      echo "Error in $script: $err"
+      if [ $error -eq 0 ]; then
+        error=$err
+      fi
+    fi
+    printf "\n"
+  fi
+done
 
-echo "Version in package.json and tag are the same"
+exit $error

@@ -1,17 +1,23 @@
 import type { FC } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { RefreshControl, ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, List, Text, useTheme } from 'react-native-paper';
 
+import { RefreshControl, ScrollView } from 'react-native';
+
+import StyledSurface from '@/components/styled/StyledSurface';
+
 import useEventLog from '@/hooks/useEventLog';
 
-import { timestampToString } from '@/utils/time';
+import { rootLogging } from '@/utils/log';
+import { durationToString, timestampToString } from '@/utils/time';
 
 import { useApi } from '@/api/ApiHandler';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
+
+const log = rootLogging.extend('InverterEventLogScreen');
 
 const InverterEventLogScreen: FC<PropsWithNavigation> = ({
   navigation,
@@ -42,6 +48,7 @@ const InverterEventLogScreen: FC<PropsWithNavigation> = ({
 
   if (!inverterSerial) {
     if (navigation.canGoBack()) {
+      log.warn('Inverter not found, going back', inverterSerial);
       navigation.goBack();
     }
 
@@ -67,34 +74,42 @@ const InverterEventLogScreen: FC<PropsWithNavigation> = ({
               />
             }
           >
-            {eventLog?.length !== 0 ? (
-              <List.Section>
-                {eventLog?.map((event, index) => (
-                  <List.Item
-                    key={`eventlog-event-${event.message_id}-${event.start_time}-${event.end_time}-${index}`}
-                    title={`ID ${event.message_id} - ${event.message}`}
-                    description={`${timestampToString(
-                      event.start_time,
-                    )} - ${timestampToString(event.end_time)}`}
-                  />
-                ))}
-              </List.Section>
-            ) : (
-              <Box
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: 16,
-                  paddingTop: 32,
-                  height: '100%',
-                  flex: 1,
-                }}
-              >
-                <Text>{t('inverter.eventLog.noEvents')}</Text>
-                <Text>{t('inverter.eventLog.noEventsDescription')}</Text>
-              </Box>
-            )}
+            <StyledSurface theme={theme} style={{ marginHorizontal: 8 }}>
+              {(eventLog?.length ?? 0) > 0 ? (
+                <List.Section>
+                  {eventLog?.map((event, index) => (
+                    <List.Item
+                      key={`eventlog-event-${event.message_id}-${event.start_time}-${event.end_time}-${index}`}
+                      title={`ID ${event.message_id} - ${event.message}`}
+                      description={`${timestampToString(
+                        event.start_time,
+                      )} - ${timestampToString(event.end_time)} (${durationToString(
+                        event.start_time,
+                        event.end_time,
+                      )})`}
+                    />
+                  ))}
+                </List.Section>
+              ) : (
+                <Box
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: 16,
+                    height: '100%',
+                    flex: 1,
+                  }}
+                >
+                  <Text variant="titleMedium">
+                    {t('inverter.eventLog.noEvents')}
+                  </Text>
+                  <Text variant="bodyMedium">
+                    {t('inverter.eventLog.noEventsDescription')}
+                  </Text>
+                </Box>
+              )}
+            </StyledSurface>
           </ScrollView>
         </Box>
       </StyledSafeAreaView>

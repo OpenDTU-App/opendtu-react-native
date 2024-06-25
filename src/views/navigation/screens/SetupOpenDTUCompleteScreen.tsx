@@ -7,13 +7,13 @@ import { Button, Title, useTheme } from 'react-native-paper';
 import { clearSetup } from '@/slices/opendtu';
 import { addDtuConfig } from '@/slices/settings';
 
-import { rootLogger } from '@/utils/log';
+import { rootLogging } from '@/utils/log';
 
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const log = rootLogger.extend('SetupOpenDTUCompleteScreen');
+const log = rootLogging.extend('SetupOpenDTUCompleteScreen');
 
 const SetupOpenDTUCompleteScreen: FC<PropsWithNavigation> = ({
   navigation,

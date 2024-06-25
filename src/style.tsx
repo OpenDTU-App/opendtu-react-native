@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { DefaultTheme, DarkTheme } from '@react-navigation/native';
-import styled from 'styled-components';
-
 import type { FC } from 'react';
 import type { ScrollViewProps } from 'react-native';
-import { View, ScrollView } from 'react-native';
 import type { MD3Theme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
+import type { SafeAreaViewProps } from 'react-native-safe-area-context';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { ScrollView, View } from 'react-native';
+
+import styled from 'styled-components';
+
+import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 
 export const ReactNavigationDarkTheme = {
   ...DarkTheme,
@@ -43,19 +47,28 @@ export interface StyledScrollViewProps extends ScrollViewProps {
   theme: MD3Theme;
 }
 
-export const StyledScrollView: FC<StyledScrollViewProps> = props => (
-  <ScrollView
-    {...props}
-    style={{
-      backgroundColor: props.theme.colors.background,
-      // @ts-ignore
-      color: props.theme.colors.onBackground,
-      width: '100%',
-    }}
-  />
-);
+export const StyledScrollView: FC<StyledScrollViewProps> = props => {
+  const rnpTheme = useTheme();
+  const theme = props.theme ?? rnpTheme;
 
-export const StyledSafeAreaView = styled(SafeAreaView)<{ theme: MD3Theme }>`
+  return (
+    <ScrollView
+      {...props}
+      style={{
+        backgroundColor: theme.colors.background,
+        // @ts-ignore
+        color: theme.colors.onBackground,
+        width: '100%',
+      }}
+    />
+  );
+};
+
+export type StyledSafeAreaViewProps = {
+  theme?: MD3Theme;
+} & SafeAreaViewProps;
+
+const InternalStyledSafeAreaView = styled(SafeAreaView)<{ theme: MD3Theme }>`
   height: 100%;
   flex: 1;
   align-items: center;
@@ -63,3 +76,10 @@ export const StyledSafeAreaView = styled(SafeAreaView)<{ theme: MD3Theme }>`
   display: flex;
   color: ${props => props.theme.colors.onBackground};
 `;
+
+export const StyledSafeAreaView: FC<StyledSafeAreaViewProps> = props => {
+  const rnpTheme = useTheme();
+  const theme = props.theme ?? rnpTheme;
+
+  return <InternalStyledSafeAreaView theme={theme} {...props} />;
+};

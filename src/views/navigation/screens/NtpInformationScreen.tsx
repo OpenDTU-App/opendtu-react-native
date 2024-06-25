@@ -1,8 +1,9 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, List, useTheme } from 'react-native-paper';
+
+import { ScrollView } from 'react-native';
 
 import SettingsSurface from '@/components/styled/SettingsSurface';
 

@@ -1,24 +1,28 @@
 import type { FC } from 'react';
-import { useMemo, useEffect, useState, useCallback } from 'react';
-import {
-  ProgressBar,
-  Button,
-  Portal,
-  Text,
-  ActivityIndicator,
-  useTheme,
-  Divider,
-} from 'react-native-paper';
-import type { ModalProps } from 'react-native-paper';
-import BaseModal from '@/components/BaseModal';
-import { Box } from 'react-native-flex-layout';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { ReleaseAsset } from '@octokit/webhooks-types';
-import { rootLogger } from '@/utils/log';
+import { Box } from 'react-native-flex-layout';
+import type { ModalProps } from 'react-native-paper';
+import {
+  ActivityIndicator,
+  Button,
+  Divider,
+  Portal,
+  ProgressBar,
+  Text,
+  useTheme,
+} from 'react-native-paper';
+
+import BaseModal from '@/components/BaseModal';
+
+import { rootLogging } from '@/utils/log';
+
 import { useApi } from '@/api/ApiHandler';
 import { spacing } from '@/constants';
 
-const log = rootLogger.extend('InstallAssetModal');
+import type { ReleaseAsset } from '@octokit/webhooks-types';
+
+const log = rootLogging.extend('InstallAssetModal');
 
 export interface InstallFirmwareModalProps
   extends Omit<ModalProps, 'children'> {
@@ -151,10 +155,6 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
       setError('Timeout waiting for update to finish');
     }
   }, [api, closeAll, handleAbort, path, version]);
-
-  useEffect(() => {
-    console.log('installProgress', installProgress);
-  }, [installProgress]);
 
   useEffect(() => {
     if (

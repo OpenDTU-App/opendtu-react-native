@@ -1,6 +1,3 @@
-import type { NavigationProp, ParamListBase } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
-
 import type { FC, PropsWithChildren } from 'react';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +6,9 @@ import { Button, Icon, Text } from 'react-native-paper';
 
 import useIsConnected from '@/hooks/useIsConnected';
 import useTriedToConnect from '@/hooks/useTriedToConnect';
+
+import type { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const DeviceOfflineWrapper: FC<PropsWithChildren> = ({ children }) => {
   const { t } = useTranslation();

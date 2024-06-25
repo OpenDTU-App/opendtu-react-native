@@ -1,11 +1,11 @@
 import type { FC } from 'react';
 import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import type { ModalProps } from 'react-native-paper';
 import { Button, Portal, Text } from 'react-native-paper';
 
 import BaseModal from '@/components/BaseModal';
-import { useTranslation } from 'react-i18next';
 
 export interface GenericRefreshModalProps extends Omit<ModalProps, 'children'> {
   onConfirm: () => void;

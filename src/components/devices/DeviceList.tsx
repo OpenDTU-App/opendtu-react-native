@@ -1,11 +1,12 @@
 import type { FC } from 'react';
-import { ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
+
+import { ScrollView } from 'react-native';
 
 import DeviceListItem from '@/components/devices/DeviceListItem';
 
-import { useAppSelector } from '@/store';
 import { spacing } from '@/constants';
+import { useAppSelector } from '@/store';
 
 const DeviceList: FC = () => {
   const configs = useAppSelector(state => state.settings.dtuConfigs);

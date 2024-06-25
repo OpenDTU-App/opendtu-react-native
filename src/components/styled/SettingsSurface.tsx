@@ -1,12 +1,30 @@
+import type { FC } from 'react';
+import type { SurfaceProps, ThemeBase } from 'react-native-paper';
+import { Surface, useTheme } from 'react-native-paper';
+
 import styled from 'styled-components';
 
-import { Surface } from 'react-native-paper';
+const settingsSurfaceBorderRadiusFactor = 3;
 
-export const settingsSurfaceBorderRadius = 16;
+export const settingsSurfaceRoundness = (theme: ThemeBase) => {
+  return theme.roundness! * settingsSurfaceBorderRadiusFactor;
+};
 
-const SettingsSurface = styled(Surface)`
+const InternalSettingsSurface = styled(Surface)`
   margin: 4px 8px 12px;
-  border-radius: ${settingsSurfaceBorderRadius}px;
+  border-radius: ${props =>
+    (props.theme.roundness ?? 0) * settingsSurfaceBorderRadiusFactor}px;
 `;
+
+const SettingsSurface: FC<SurfaceProps> = ({ children, ...props }) => {
+  const rnpTheme = useTheme();
+  const theme = props.theme ?? rnpTheme;
+
+  return (
+    <InternalSettingsSurface theme={theme} {...props}>
+      {children}
+    </InternalSettingsSurface>
+  );
+};
 
 export default SettingsSurface;

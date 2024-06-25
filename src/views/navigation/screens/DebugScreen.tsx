@@ -1,11 +1,12 @@
-import moment from 'moment';
-
 import type { FC } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, IconButton, List, useTheme } from 'react-native-paper';
+
+import { ScrollView } from 'react-native';
+
+import moment from 'moment';
 
 import {
   clearLatestAppRelease,
@@ -141,6 +142,10 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               <List.Item
                 title={t('debug.disableDebugMode')}
                 onPress={handleDisableDebugMode}
+              />
+              <List.Item
+                title={t('debug.debugColors')}
+                onPress={() => navigation.navigate('DebugColorsScreen')}
               />
             </List.Section>
           </ScrollView>

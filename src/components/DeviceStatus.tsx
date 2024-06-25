@@ -1,6 +1,3 @@
-import type { NavigationProp, ParamListBase } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
-
 import type { FC } from 'react';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +7,9 @@ import { Icon, Text, TouchableRipple, useTheme } from 'react-native-paper';
 import useLivedata from '@/hooks/useLivedata';
 
 import { useAppSelector } from '@/store';
+
+import type { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const DeviceStatus: FC = () => {
   const theme = useTheme();
@@ -33,8 +33,6 @@ const DeviceStatus: FC = () => {
       <TouchableRipple
         onPress={handleShowDeviceInfo}
         borderless
-        rippleColor={theme.colors.onErrorContainer}
-        underlayColor={theme.colors.onErrorContainer}
         style={{
           borderRadius: 16,
           maxWidth: '100%',

@@ -1,25 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit';
-
 import type {
+  ClearOpenDtuStateAction,
+  InverterData,
+  OpenDTUDeviceState,
   OpenDTUReduxState,
+  SetDeviceStateAction,
+  SetEventLogAction,
+  SetGridProfileAction,
+  SetInverterDeviceAction,
+  SetInvertersAction,
+  SetIsConnectedAction,
+  SetLimitStatusAction,
   SetLiveDataFromStatusAction,
+  SetLiveDataFromWebsocketAction,
+  SetMqttStatusAction,
+  SetNetworkStatusAction,
+  SetNtpStatusAction,
+  SetPowerStatusAction,
   SetSetupBaseUrlAction,
   SetSetupUserStringAction,
   SetSystemStatusAction,
-  SetIsConnectedAction,
-  SetDeviceStateAction,
   SetTriedToConnectAction,
-  SetNetworkStatusAction,
-  SetNtpStatusAction,
-  SetMqttStatusAction,
-  ClearOpenDtuStateAction,
-  OpenDTUDeviceState,
-  SetInvertersAction,
-  SetEventLogAction,
-  InverterData,
-  SetLiveDataFromWebsocketAction,
 } from '@/types/opendtu/state';
-import type { LiveData } from '@/types/opendtu/status';
+import type { LiveData, LiveDataFromWebsocket } from '@/types/opendtu/status';
+
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: OpenDTUReduxState = {
   dtuStates: {},
@@ -28,6 +32,31 @@ const initialState: OpenDTUReduxState = {
     baseUrl: null,
   },
   deviceState: {},
+};
+
+const prepareInverterData = (
+  state: OpenDTUReduxState,
+  index: number,
+  inverterSerial: string,
+) => {
+  if (!state.dtuStates[index]) {
+    state.dtuStates[index] = {};
+  }
+
+  if (!state.dtuStates[index]?.inverterData) {
+    (state.dtuStates[index] as OpenDTUDeviceState).inverterData = {};
+  }
+
+  if (
+    !(state.dtuStates[index] as OpenDTUDeviceState).inverterData?.[
+      inverterSerial
+    ]
+  ) {
+    (
+      (state.dtuStates[index] as OpenDTUDeviceState)
+        .inverterData as InverterData
+    )[inverterSerial] = {};
+  }
 };
 
 const opendtuSlice = createSlice({
@@ -45,6 +74,12 @@ const opendtuSlice = createSlice({
             ...action.payload.data,
             from: 'status',
           };
+
+        // update from
+        (
+          (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
+            .liveData as LiveData
+        ).from = 'status';
       }
     },
     setLiveDataFromWebsocket: (
@@ -101,7 +136,7 @@ const opendtuSlice = createSlice({
         // update lastUpdate
         (
           (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
-            .liveData as LiveData
+            .liveData as LiveDataFromWebsocket
         ).lastUpdate = action.payload.data.lastUpdate;
 
         // update from
@@ -213,29 +248,86 @@ const opendtuSlice = createSlice({
     setEventLog: (state, action: SetEventLogAction) => {
       const { index, data, inverterSerial } = action.payload;
 
-      if (!state.dtuStates[index]) {
-        state.dtuStates[index] = {};
-      }
-
-      if (!state.dtuStates[index]?.inverterData) {
-        (state.dtuStates[index] as OpenDTUDeviceState).inverterData = {};
-      }
-
-      if (
-        !(state.dtuStates[index] as OpenDTUDeviceState).inverterData?.[
-          inverterSerial
-        ]
-      ) {
-        (
-          (state.dtuStates[index] as OpenDTUDeviceState)
-            .inverterData as InverterData
-        )[inverterSerial] = {};
-      }
+      prepareInverterData(state, index, inverterSerial);
 
       (
         (state.dtuStates[index] as OpenDTUDeviceState)
           .inverterData as InverterData
-      )[inverterSerial] = { eventLog: data };
+      )[inverterSerial] = {
+        ...(
+          (state.dtuStates[index] as OpenDTUDeviceState)
+            .inverterData as InverterData
+        )[inverterSerial],
+        eventLog: data,
+      };
+    },
+    setGridProfile: (state, action: SetGridProfileAction) => {
+      const { index, data, inverterSerial } = action.payload;
+
+      prepareInverterData(state, index, inverterSerial);
+
+      (
+        (state.dtuStates[index] as OpenDTUDeviceState)
+          .inverterData as InverterData
+      )[inverterSerial] = {
+        ...(
+          (state.dtuStates[index] as OpenDTUDeviceState)
+            .inverterData as InverterData
+        )[inverterSerial],
+        gridProfile: data,
+      };
+    },
+    setInverterDevice: (state, action: SetInverterDeviceAction) => {
+      const { index, data, inverterSerial } = action.payload;
+
+      prepareInverterData(state, index, inverterSerial);
+
+      (
+        (state.dtuStates[index] as OpenDTUDeviceState)
+          .inverterData as InverterData
+      )[inverterSerial] = {
+        ...(
+          (state.dtuStates[index] as OpenDTUDeviceState)
+            .inverterData as InverterData
+        )[inverterSerial],
+        device: data,
+      };
+    },
+    setPowerStatus: (state, action: SetPowerStatusAction) => {
+      const { index, data } = action.payload;
+
+      for (const inverterSerial in data) {
+        prepareInverterData(state, index, inverterSerial);
+
+        (
+          (state.dtuStates[index] as OpenDTUDeviceState)
+            .inverterData as InverterData
+        )[inverterSerial] = {
+          ...(
+            (state.dtuStates[index] as OpenDTUDeviceState)
+              .inverterData as InverterData
+          )[inverterSerial],
+          power: data,
+        };
+      }
+    },
+    setLimitStatus: (state, action: SetLimitStatusAction) => {
+      const { index, data } = action.payload;
+
+      for (const inverterSerial in data) {
+        prepareInverterData(state, index, inverterSerial);
+
+        (
+          (state.dtuStates[index] as OpenDTUDeviceState)
+            .inverterData as InverterData
+        )[inverterSerial] = {
+          ...(
+            (state.dtuStates[index] as OpenDTUDeviceState)
+              .inverterData as InverterData
+          )[inverterSerial],
+          limit: data,
+        };
+      }
     },
   },
 });
@@ -257,6 +349,10 @@ export const {
   setMqttStatus,
   setInverters,
   setEventLog,
+  setGridProfile,
+  setInverterDevice,
+  setPowerStatus,
+  setLimitStatus,
 } = opendtuSlice.actions;
 
 export const { reducer: OpenDTUReducer } = opendtuSlice;

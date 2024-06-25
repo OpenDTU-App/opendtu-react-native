@@ -1,11 +1,6 @@
-import { NavigationContainer } from '@react-navigation/native';
-import moment from 'moment';
-import { PersistGate as ReduxPersistGate } from 'redux-persist/integration/react';
-
 import type { FC } from 'react';
 import { StrictMode, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StatusBar, useColorScheme } from 'react-native';
 import type { MD3Theme } from 'react-native-paper';
 import {
   adaptNavigationTheme,
@@ -13,31 +8,39 @@ import {
   MD3LightTheme,
   PaperProvider,
 } from 'react-native-paper';
+import type { TranslationsType } from 'react-native-paper-dates';
 import { registerTranslation } from 'react-native-paper-dates';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider as ReduxProvider } from 'react-redux';
 
+import { StatusBar, useColorScheme } from 'react-native';
+
+import moment from 'moment';
+import { PersistGate as ReduxPersistGate } from 'redux-persist/integration/react';
+
+import { setLanguage } from '@/slices/settings';
+
 import AppOfflineModal from '@/components/modals/AppOfflineModal';
 import EnableAppUpdatesModal from '@/components/modals/EnableAppUpdatesModal';
 import EnableFetchOpenDtuUpdatesModal from '@/components/modals/EnableFetchOpenDtuUpdatesModal';
 
-import { rootLogger } from '@/utils/log';
+import { rootLogging } from '@/utils/log';
 
 import ApiProvider from '@/api/ApiHandler';
 import DatabaseProvider from '@/database';
 import GithubProvider from '@/github';
 import FetchHandler from '@/github/FetchHandler';
-import { store, persistor, useAppSelector, useAppDispatch } from '@/store';
+import { persistor, store, useAppDispatch, useAppSelector } from '@/store';
 import { ReactNavigationDarkTheme, ReactNavigationLightTheme } from '@/style';
-import NavigationStack from '@/views/navigation/NavigationStack';
-import type { TranslationsType } from 'react-native-paper-dates';
-import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';
-import { setLanguage } from '@/slices/settings';
 import type { SupportedLanguage } from '@/translations';
-import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
+import NavigationStack from '@/views/navigation/NavigationStack';
 
-const log = rootLogger.extend('App');
+import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';
+import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
+import { NavigationContainer } from '@react-navigation/native';
+
+const log = rootLogging.extend('App');
 
 const App = () => {
   /*const onBeforeLift = useCallback(() => {
@@ -178,6 +181,9 @@ const _App: FC = () => {
   const { theme: m3theme } = useMaterial3Theme();
 
   const appTheme = useAppSelector(state => state.settings.appTheme);
+  const allowMaterialYou = useAppSelector(
+    state => state.settings.allowMaterialYou,
+  );
 
   const systemModeWantsDark = colorScheme === 'dark';
 
@@ -194,12 +200,22 @@ const _App: FC = () => {
   const theme = useMemo(() => {
     if (darkMode) {
       log.debug('darkMode');
-      return { ...DarkTheme, colors: m3theme.dark };
+
+      if (allowMaterialYou) {
+        return { ...DarkTheme, colors: m3theme.dark };
+      } else {
+        return DarkTheme;
+      }
     }
 
     log.debug('lightMode');
-    return { ...LightTheme, colors: m3theme.light };
-  }, [darkMode, m3theme.dark, m3theme.light]);
+
+    if (allowMaterialYou) {
+      return { ...LightTheme, colors: m3theme.light };
+    } else {
+      return LightTheme;
+    }
+  }, [allowMaterialYou, darkMode, m3theme.dark, m3theme.light]);
 
   const navigationTheme = useMemo(() => {
     if (darkMode) return AdaptedNavigationDarkTheme;

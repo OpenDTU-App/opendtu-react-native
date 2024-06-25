@@ -1,16 +1,29 @@
-import styled from 'styled-components';
-
+import type { FC } from 'react';
 import type { SurfaceProps } from 'react-native-paper';
 import { Surface } from 'react-native-paper';
-import type { FC } from 'react';
+import type { ThemeProp } from 'react-native-paper/lib/typescript/types';
 
-const InternalStyledSurface = styled(Surface)`
-  border-radius: 16px;
+import styled from 'styled-components';
+
+const InternalStyledSurface = styled(Surface)<ExtraProps>`
+  border-radius: ${({ theme, roundness }) =>
+    theme.roundness! * (roundness ?? 4)}px;
   flex: 1;
+  box-shadow: ${({ theme, disableShadow }) =>
+    disableShadow ? 'none' : theme.shadow};
 `;
 
-const StyledSurface: FC<SurfaceProps> = props => (
-  <InternalStyledSurface elevation={5} {...props} />
+interface ExtraProps {
+  roundness?: number;
+  disableShadow?: boolean;
+}
+
+export type StyledSurfaceProps = SurfaceProps & {
+  theme: ThemeProp;
+} & ExtraProps;
+
+const StyledSurface: FC<StyledSurfaceProps> = props => (
+  <InternalStyledSurface elevation={5} mode="flat" disableShadow {...props} />
 );
 
 export default StyledSurface;

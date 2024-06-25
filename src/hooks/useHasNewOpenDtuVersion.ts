@@ -1,6 +1,6 @@
-import { compare } from 'compare-versions';
-
 import { useMemo } from 'react';
+
+import { compare } from 'compare-versions';
 
 import useDtuState from '@/hooks/useDtuState';
 

@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
-
 import type {
   GithubState,
   SetGithubLatestReleaseAction,
   SetGithubReleasesAction,
-} from '@/types/opendtu/github';
+} from '@/types/github';
+
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: GithubState = {
   releases: {

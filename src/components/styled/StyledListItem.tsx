@@ -1,13 +1,21 @@
-import type { ListItemProps } from 'react-native-paper';
-import { Surface, List } from 'react-native-paper';
 import type { FC } from 'react';
+import type { ListItemProps } from 'react-native-paper';
+import { List, Surface } from 'react-native-paper';
 
 const StyledListItem: FC<ListItemProps> = props => {
   return (
-    <Surface elevation={5} style={{ borderRadius: 16 }}>
+    <Surface
+      mode="flat"
+      elevation={props.disabled ? 1 : 5}
+      style={{
+        borderRadius: 16,
+        ...(props.disabled && { opacity: 0.5 }),
+      }}
+    >
       <List.Item
         {...props}
-        style={{ paddingVertical: 12, paddingHorizontal: 8 }}
+        borderless
+        style={{ paddingVertical: 12, paddingHorizontal: 8, borderRadius: 16 }}
       />
     </Surface>
   );

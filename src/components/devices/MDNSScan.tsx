@@ -1,15 +1,17 @@
 import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import { ActivityIndicator, Text } from 'react-native-paper';
 import type { Service } from 'react-native-zeroconf';
 import Zeroconf from 'react-native-zeroconf';
 
+import { FlatList } from 'react-native';
+
 import MDNSScanItem from '@/components/devices/MDNSScanItem';
 
-import { rootLogger } from '@/utils/log';
+import { rootLogging } from '@/utils/log';
+
 import { spacing } from '@/constants';
 
 export interface MDNSScanProps {
@@ -18,7 +20,7 @@ export interface MDNSScanProps {
   loading: boolean;
 }
 
-const log = rootLogger.extend('MDNSScan');
+const log = rootLogging.extend('MDNSScan');
 
 const MDNSScan: FC<MDNSScanProps> = ({ setError, setLoading, loading }) => {
   const { t } = useTranslation();

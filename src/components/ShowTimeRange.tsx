@@ -1,10 +1,11 @@
-import moment from 'moment/moment';
-
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
 import { Text } from 'react-native-paper';
+
+import { View } from 'react-native';
+
+import moment from 'moment/moment';
 
 import type {
   DatabaseTimeRangeEnd,

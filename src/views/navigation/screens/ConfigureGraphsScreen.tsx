@@ -13,14 +13,14 @@ import type {
   DatabaseTimeRangeStart,
 } from '@/types/database';
 
-import ShowTimeRange from '@/components/ShowTimeRange';
 import ChangeGraphRefreshIntervalModal from '@/components/modals/ChangeGraphRefreshIntervalModal';
 import TimeRangeLastNSecondsModal from '@/components/modals/TimeRangeLastNSecondsModal';
+import ShowTimeRange from '@/components/ShowTimeRange';
 
+import { spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
-import { spacing } from '@/constants';
 
 const ConfigureGraphsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();

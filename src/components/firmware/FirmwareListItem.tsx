@@ -1,23 +1,29 @@
 import type { FC } from 'react';
-import { useMemo, useCallback } from 'react';
-import type { Release } from '@octokit/webhooks-types';
-import moment from 'moment/moment';
-import { Badge, Divider, List, Text } from 'react-native-paper';
-import useDtuState from '@/hooks/useDtuState';
-import { Linking, Text as RNText, View } from 'react-native';
+import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import type { RenderRules } from 'react-native-markdown-display';
 import Markdown from 'react-native-markdown-display';
-import SettingsSurface, {
-  settingsSurfaceBorderRadius,
-} from '@/components/styled/SettingsSurface';
-import useHasAuthConfigured from '@/hooks/useHasAuthConfigured';
-import capitalize from '@/utils/capitalize';
-import useAppLanguage from '@/hooks/useAppLanguage';
+import { Badge, Divider, List, Text, useTheme } from 'react-native-paper';
+
+import { Linking, Text as RNText, View } from 'react-native';
+
 import { compare } from 'compare-versions';
+import moment from 'moment/moment';
+
+import SettingsSurface, {
+  settingsSurfaceRoundness,
+} from '@/components/styled/SettingsSurface';
+
+import useAppLanguage from '@/hooks/useAppLanguage';
+import useDtuState from '@/hooks/useDtuState';
+import useHasAuthConfigured from '@/hooks/useHasAuthConfigured';
+
+import capitalize from '@/utils/capitalize';
+
 import { minimumOpenDtuFirmwareVersion, spacing } from '@/constants';
 import type { SupportedLanguage } from '@/translations';
+
+import type { Release } from '@octokit/webhooks-types';
 
 export interface FirmwareListItemProps {
   release: Release;
@@ -40,6 +46,8 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
   latestReleaseTag,
 }) => {
   const { t } = useTranslation();
+  const theme = useTheme();
+
   const installedFirmware = useDtuState(state => state?.systemStatus?.git_hash);
 
   const authStringConfigured = useHasAuthConfigured();
@@ -90,16 +98,31 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
             {release.name}
           </Text>
           {release.tag_name === installedFirmware ? (
-            <Badge style={{ alignSelf: 'center' }}>
+            <Badge
+              style={{
+                alignSelf: 'center',
+                backgroundColor: theme.colors.primary,
+              }}
+            >
               {t('firmwares.installedFirmware')}
             </Badge>
           ) : release.tag_name === latestReleaseTag ? (
-            <Badge style={{ alignSelf: 'center' }}>
+            <Badge
+              style={{
+                alignSelf: 'center',
+                backgroundColor: theme.colors.primary,
+              }}
+            >
               {t('firmwares.latestFirmware')}
             </Badge>
           ) : null}
           {isMinimumRecommendedVersion ? (
-            <Badge style={{ alignSelf: 'center' }}>
+            <Badge
+              style={{
+                alignSelf: 'center',
+                backgroundColor: theme.colors.primary,
+              }}
+            >
               {t('firmwares.recommendedFirmware')}
             </Badge>
           ) : null}
@@ -128,8 +151,8 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
           left={props => <List.Icon {...props} icon="download" />}
           borderless
           style={{
-            borderBottomLeftRadius: settingsSurfaceBorderRadius,
-            borderBottomRightRadius: settingsSurfaceBorderRadius,
+            borderBottomLeftRadius: settingsSurfaceRoundness(theme),
+            borderBottomRightRadius: settingsSurfaceRoundness(theme),
             opacity: downloadDisabled ? 0.5 : 1,
           }}
           disabled={downloadDisabled}

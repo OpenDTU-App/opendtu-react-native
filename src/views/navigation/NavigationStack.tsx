@@ -1,20 +1,17 @@
-import type {
-  NavigationProp,
-  ParamListBase,
-  RouteProp,
-} from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import type { FC } from 'react';
 
 import { useAppSelector } from '@/store';
-import SystemInformationScreen from '@/views/navigation/screens/SystemInformationScreen';
 import AboutAppScreen from '@/views/navigation/screens/AboutAppScreen';
 import ConfigureGraphsScreen from '@/views/navigation/screens/ConfigureGraphsScreen';
+import DebugColorsScreen from '@/views/navigation/screens/DebugColorsScreen';
 import DebugScreen from '@/views/navigation/screens/DebugScreen';
 import DeviceListScreen from '@/views/navigation/screens/DeviceListScreen';
 import DeviceSettingsScreen from '@/views/navigation/screens/DeviceSettingsScreen';
+import FirmwareListScreen from '@/views/navigation/screens/FirmwareListScreen';
+import InverterDataScreen from '@/views/navigation/screens/InverterDataScreen';
+import InverterDeviceInfoScreen from '@/views/navigation/screens/InverterDeviceInfoScreen';
 import InverterEventLogScreen from '@/views/navigation/screens/InverterEventLogScreen';
+import InverterGridProfileScreen from '@/views/navigation/screens/InverterGridProfileScreen';
 import InverterInfoScreen from '@/views/navigation/screens/InverterInfoScreen';
 import LicensesScreen from '@/views/navigation/screens/LicensesScreen';
 import MainScreen from '@/views/navigation/screens/MainScreen';
@@ -26,7 +23,14 @@ import SelectDatabaseScreen from '@/views/navigation/screens/SelectDatabaseScree
 import SetupAddOpenDTUScreen from '@/views/navigation/screens/SetupAddOpenDTUScreen';
 import SetupAuthenticateOpenDTUInstanceScreen from '@/views/navigation/screens/SetupAuthenticateOpenDTUInstanceScreen';
 import SetupOpenDTUCompleteScreen from '@/views/navigation/screens/SetupOpenDTUCompleteScreen';
-import FirmwareListScreen from '@/views/navigation/screens/FirmwareListScreen';
+import SystemInformationScreen from '@/views/navigation/screens/SystemInformationScreen';
+
+import type {
+  NavigationProp,
+  ParamListBase,
+  RouteProp,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export type PropsWithNavigation = {
   navigation: NavigationProp<ParamListBase>;
@@ -105,6 +109,16 @@ const NavigationStack: FC = () => {
         component={InverterEventLogScreen}
       />
       <Stack.Screen name="FirmwareListScreen" component={FirmwareListScreen} />
+      <Stack.Screen name="DebugColorsScreen" component={DebugColorsScreen} />
+      <Stack.Screen
+        name="InverterDeviceInfoScreen"
+        component={InverterDeviceInfoScreen}
+      />
+      <Stack.Screen
+        name="InverterGridProfileScreen"
+        component={InverterGridProfileScreen}
+      />
+      <Stack.Screen name="InverterDataScreen" component={InverterDataScreen} />
     </Stack.Navigator>
   );
 };

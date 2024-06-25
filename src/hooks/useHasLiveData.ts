@@ -1,18 +1,13 @@
 import ago from '@/utils/ago';
-import { rootLogger } from '@/utils/log';
+import { rootLogging } from '@/utils/log';
 
 import { useAppSelector } from '@/store';
 
-const log = rootLogger.extend('useHasLiveData');
+const log = rootLogging.extend('useHasLiveData');
+
+export const maximumTimeUntilInvalid = 30000;
 
 const useHasLiveData = (): boolean => {
-  /*return useAppSelector(
-    state =>
-      state.opendtu.liveData !== null &&
-      state.opendtu.liveData.lastUpdate !== null &&
-      ago(state.opendtu.liveData.lastUpdate) < 10000,
-  );*/
-
   return useAppSelector(state => {
     const index = state.settings.selectedDtuConfig;
 
@@ -33,7 +28,11 @@ const useHasLiveData = (): boolean => {
       return false;
     }
 
-    const lastUpdate = liveData.lastUpdate ?? null;
+    if (liveData.from === 'status') {
+      return true;
+    }
+
+    const lastUpdate = 'lastUpdate' in liveData ? liveData.lastUpdate : null;
     if (lastUpdate === null) {
       log.debug('lastUpdate is null');
       return false;
@@ -45,7 +44,7 @@ const useHasLiveData = (): boolean => {
       return false;
     }
 
-    if (lastUpdateAgo >= 30000) {
+    if (lastUpdateAgo >= maximumTimeUntilInvalid) {
       log.debug('lastUpdateAgo older than 30000 ms');
       return false;
     }

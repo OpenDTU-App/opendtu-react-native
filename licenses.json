@@ -17,6 +17,12 @@
         "licenseUrl": "https://github.com/react-native-async-storage/async-storage/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
+    "@react-native-clipboard/clipboard@1.14.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-clipboard/clipboard",
+        "licenseUrl": "https://github.com/react-native-clipboard/clipboard/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
     "@react-native-community/netinfo@11.3.2": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-netinfo/react-native-netinfo",
@@ -65,7 +71,7 @@
         "licenseUrl": "https://github.com/omichelsen/compare-versions/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "expo@51.0.8": {
+    "expo@51.0.9": {
         "licenses": "MIT",
         "repository": "https://github.com/expo/expo",
         "licenseUrl": "https://github.com/expo/expo",
@@ -263,7 +269,7 @@
         "licenseUrl": "https://github.com/Apercu/react-native-zeroconf/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native@0.74.1": {
+    "react-native@0.74.2": {
         "licenses": "MIT",
         "repository": "https://github.com/facebook/react-native",
         "licenseUrl": "https://github.com/facebook/react-native/raw/master/LICENSE",

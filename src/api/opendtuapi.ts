@@ -1,8 +1,19 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { OpenDTUAuthenticateResponse } from '@/types/opendtu/authenticate';
+import type {
+  LimitConfig,
+  LimitStatusData,
+  PowerSetAction,
+  PowerStatusData,
+} from '@/types/opendtu/control';
+import type { EventLogData } from '@/types/opendtu/eventlog';
+import type { GridProfileData } from '@/types/opendtu/gridprofile';
+import type { InverterDeviceData } from '@/types/opendtu/inverterDevice';
 import type { InverterItem } from '@/types/opendtu/state';
 import { DeviceState } from '@/types/opendtu/state';
 import type {
+  InverterSerial,
+  LiveDataFromStatus,
   LiveDataFromWebsocket,
   MqttStatus,
   NetworkStatus,
@@ -11,13 +22,23 @@ import type {
 } from '@/types/opendtu/status';
 import type { Index, OpenDTUConfig } from '@/types/settings';
 
-import { rootLogger } from '@/utils/log';
+import { maximumTimeUntilInvalid } from '@/hooks/useHasLiveData';
+
+import ago from '@/utils/ago';
+import { rootLogging } from '@/utils/log';
+
 import { downloadFirmware, uploadFirmware } from '@/firmware';
 
-const log = rootLogger.extend('OpenDtuApi');
+const log = rootLogging.extend('OpenDtuApi');
 
 export type LiveDataHandler = (
   data: LiveDataFromWebsocket,
+  valid: boolean,
+  index: Index,
+) => void;
+
+export type LiveDataFromStatusHandler = (
+  data: LiveDataFromStatus,
   valid: boolean,
   index: Index,
 ) => void;
@@ -36,16 +57,6 @@ export interface HttpStatusData {
   inverters: InverterItem[] | null;
 }
 
-export interface EventLogData {
-  count: number;
-  events: {
-    message_id: number;
-    message: string;
-    start_time: number;
-    end_time: number;
-  }[];
-}
-
 export type HttpStatusHandler = (data: HttpStatusData, index: Index) => void;
 
 class OpenDtuApi {
@@ -57,11 +68,36 @@ class OpenDtuApi {
 
   // handlers
   private liveDataHandler: LiveDataHandler | null = null;
+  private liveDataFromStatusHandler: LiveDataFromStatusHandler | null = null;
   private httpStatusHandler: HttpStatusHandler | null = null;
   private onConnectedHandler: ((index: Index) => void) | null = null;
   private onDisconnectedHandler: (() => void) | null = null;
   private onEventLogHandler:
-    | ((data: EventLogData, index: Index, inverterSerial: string) => void)
+    | ((
+        data: EventLogData,
+        index: Index,
+        inverterSerial: InverterSerial,
+      ) => void)
+    | null = null;
+  private onPowerStatusHandler:
+    | ((data: PowerStatusData, index: Index) => void)
+    | null = null;
+  private onLimitStatusHandler:
+    | ((data: LimitStatusData, index: Index) => void)
+    | null = null;
+  private onInverterDeviceHandler:
+    | ((
+        data: InverterDeviceData,
+        index: Index,
+        inverterSerial: InverterSerial,
+      ) => void)
+    | null = null;
+  private onGridProfileHandler:
+    | ((
+        data: GridProfileData,
+        index: Index,
+        inverterSerial: InverterSerial,
+      ) => void)
     | null = null;
 
   private ws: WebSocket | null = null;
@@ -69,6 +105,7 @@ class OpenDtuApi {
   private wsConnected = false;
   private readonly wsId: string = '';
   private wsUrl: string | null = null;
+  private lastMessageTimestamp: Date | null = null;
 
   // interval
   private fetchHttpStateInterval: NodeJS.Timeout | null = null;
@@ -77,6 +114,18 @@ class OpenDtuApi {
     this.wsId = Math.random().toString(36).substring(2, 9);
 
     log.debug('OpenDtuApi.constructor()');
+  }
+
+  public handle(): void {
+    log.debug('OpenDtuApi.handle()');
+
+    if (
+      this.wsConnected &&
+      ago(this.lastMessageTimestamp) > maximumTimeUntilInvalid
+    ) {
+      this.disconnect();
+      this.connect();
+    }
   }
 
   public setLocale(locale: string): void {
@@ -136,6 +185,16 @@ class OpenDtuApi {
     this.liveDataHandler = null;
   }
 
+  public registerLiveDataFromStatusHandler(
+    handler: LiveDataFromStatusHandler,
+  ): void {
+    this.liveDataFromStatusHandler = handler;
+  }
+
+  public unregisterLiveDataFromStatusHandler(): void {
+    this.liveDataFromStatusHandler = null;
+  }
+
   public registerHttpStatusHandler(handler: HttpStatusHandler): void {
     this.httpStatusHandler = handler;
   }
@@ -161,13 +220,65 @@ class OpenDtuApi {
   }
 
   public registerOnEventLogHandler(
-    handler: (data: EventLogData, index: Index, inverterSerial: string) => void,
+    handler: (
+      data: EventLogData,
+      index: Index,
+      inverterSerial: InverterSerial,
+    ) => void,
   ): void {
     this.onEventLogHandler = handler;
   }
 
   public unregisterOnEventLogHandler(): void {
     this.onEventLogHandler = null;
+  }
+
+  public registerOnPowerStatusHandler(
+    handler: (data: PowerStatusData, index: Index) => void,
+  ): void {
+    this.onPowerStatusHandler = handler;
+  }
+
+  public unregisterOnPowerStatusHandler(): void {
+    this.onPowerStatusHandler = null;
+  }
+
+  public registerOnLimitStatusHandler(
+    handler: (data: LimitStatusData, index: Index) => void,
+  ): void {
+    this.onLimitStatusHandler = handler;
+  }
+
+  public unregisterOnLimitStatusHandler(): void {
+    this.onLimitStatusHandler = null;
+  }
+
+  public registerOnInverterDeviceHandler(
+    handler: (
+      data: InverterDeviceData,
+      index: Index,
+      inverterSerial: InverterSerial,
+    ) => void,
+  ): void {
+    this.onInverterDeviceHandler = handler;
+  }
+
+  public unregisterOnInverterDeviceHandler(): void {
+    this.onInverterDeviceHandler = null;
+  }
+
+  public registerOnGridProfileHandler(
+    handler: (
+      data: GridProfileData,
+      index: Index,
+      inverterSerial: InverterSerial,
+    ) => void,
+  ): void {
+    this.onGridProfileHandler = handler;
+  }
+
+  public unregisterOnGridProfileHandler(): void {
+    this.onGridProfileHandler = null;
   }
 
   public async getSystemStatusFromUrl(
@@ -191,9 +302,9 @@ class OpenDtuApi {
         headers: {
           'Content-Type': 'application/json',
         },
-      });
+      }).catch(() => null);
 
-      if (response.status === 200) {
+      if (response?.status === 200) {
         clearTimeout(abortTimeout);
         return {
           systemStatus: await response.json(),
@@ -303,7 +414,11 @@ class OpenDtuApi {
       const response = await fetch(
         `${baseUrl}/api/security/authenticate`,
         requestOptions,
-      );
+      ).catch(() => null);
+
+      if (!response) {
+        return false;
+      }
 
       if (response.status === 200) {
         const returnValue = { ...(await response.json()) };
@@ -359,6 +474,7 @@ class OpenDtuApi {
 
         try {
           parsedData = JSON.parse(evt.data);
+          this.lastMessageTimestamp = new Date();
         } catch {
           // continue regardless of error
           log.warn('OpenDtuApi.onmessage() failed to parse data');
@@ -528,6 +644,40 @@ class OpenDtuApi {
     return '';
   }
 
+  public isAuthenticated(): boolean {
+    return Boolean(this.getAuthString());
+  }
+
+  public async getLiveData(): Promise<LiveDataFromStatus | null> {
+    if (!this.baseUrl) {
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest(
+      '/api/livedata/status',
+      'GET',
+    );
+
+    if (!res) {
+      log.error('getLiveData', 'no response');
+      return null;
+    }
+
+    if (res.status === 200) {
+      const json = await res.json();
+
+      if (this.liveDataFromStatusHandler && this.index !== null) {
+        this.liveDataFromStatusHandler(json, true, this.index);
+      }
+
+      return json;
+    }
+
+    log.error('getLiveData', 'invalid status');
+
+    return null;
+  }
+
   public async getNetworkStatus(): Promise<NetworkStatus | null> {
     if (!this.baseUrl) {
       return null;
@@ -539,12 +689,15 @@ class OpenDtuApi {
     );
 
     if (!res) {
+      log.error('getNetworkStatus', 'no response');
       return null;
     }
 
     if (res.status === 200) {
       return await res.json();
     }
+
+    log.error('getNetworkStatus', 'invalid status');
 
     return null;
   }
@@ -564,6 +717,7 @@ class OpenDtuApi {
     );
 
     if (!res) {
+      log.error('getEventLog', 'no response');
       return null;
     }
 
@@ -573,7 +727,11 @@ class OpenDtuApi {
       if (this.onEventLogHandler && this.index !== null) {
         this.onEventLogHandler(json, this.index, inverterId);
       }
+
+      return json;
     }
+
+    log.error('getEventLog', 'invalid status');
 
     return null;
   }
@@ -586,12 +744,15 @@ class OpenDtuApi {
     const res = await this.makeAuthenticatedRequest('/api/ntp/status', 'GET');
 
     if (!res) {
+      log.error('getNtpStatus', 'no response');
       return null;
     }
 
     if (res.status === 200) {
       return await res.json();
     }
+
+    log.error('getNtpStatus', 'invalid status');
 
     return null;
   }
@@ -604,12 +765,15 @@ class OpenDtuApi {
     const res = await this.makeAuthenticatedRequest('/api/mqtt/status', 'GET');
 
     if (!res) {
+      log.error('getMqttStatus', 'no response');
       return null;
     }
 
     if (res.status === 200) {
       return await res.json();
     }
+
+    log.error('getMqttStatus', 'invalid status');
 
     return null;
   }
@@ -619,12 +783,17 @@ class OpenDtuApi {
       return null;
     }
 
+    if (!this.isAuthenticated()) {
+      return null;
+    }
+
     const res = await this.makeAuthenticatedRequest(
       '/api/inverter/list',
       'GET',
     );
 
     if (!res) {
+      log.error('getInverters', 'no response');
       return null;
     }
 
@@ -632,14 +801,217 @@ class OpenDtuApi {
       return (await res.json()).inverter;
     }
 
+    log.error('getInverters', 'invalid status');
+
     return null;
+  }
+
+  public async getInverterDeviceInfo(
+    serial: InverterSerial,
+  ): Promise<InverterDeviceData | null> {
+    if (!this.baseUrl) {
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest(
+      '/api/devinfo/status',
+      'GET',
+      { query: { inv: serial } },
+    );
+
+    if (!res) {
+      log.error('getInverterDeviceInfo', 'no response');
+
+      return null;
+    }
+
+    if (res.status === 200) {
+      const json = await res.json();
+
+      if (this.onInverterDeviceHandler && this.index !== null) {
+        this.onInverterDeviceHandler(json, this.index, serial);
+      }
+
+      return json;
+    }
+
+    log.error('getInverterDeviceInfo', 'invalid status');
+
+    return null;
+  }
+
+  public async getGridProfile(
+    serial: InverterSerial,
+    excludeRaw: boolean,
+  ): Promise<GridProfileData | null> {
+    if (!this.baseUrl) {
+      return null;
+    }
+
+    const parsedRes = await this.makeAuthenticatedRequest(
+      '/api/gridprofile/status',
+      'GET',
+      { query: { inv: serial } },
+    );
+
+    const rawRes = excludeRaw
+      ? null
+      : await this.makeAuthenticatedRequest('/api/gridprofile/rawdata', 'GET', {
+          query: { inv: serial },
+        });
+
+    if (!parsedRes || (!excludeRaw && !rawRes)) {
+      log.error('getGridProfile', 'no or invalid response');
+      return null;
+    }
+
+    if (parsedRes.status === 200 && (!excludeRaw || rawRes?.status === 200)) {
+      const parsedResJson = await parsedRes.json();
+      const rawResJson = excludeRaw ? null : (await rawRes?.json())?.raw;
+
+      const gridProfileData: GridProfileData = {
+        parsed: parsedResJson,
+        raw: rawResJson,
+      };
+
+      if (this.onGridProfileHandler && this.index !== null) {
+        this.onGridProfileHandler(gridProfileData, this.index, serial);
+      }
+
+      return gridProfileData;
+    }
+
+    log.error('getGridProfile', 'invalid status');
+
+    return null;
+  }
+
+  public async getPowerConfig(): Promise<PowerStatusData | null> {
+    if (!this.baseUrl) {
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest('/api/power/status', 'GET');
+
+    if (!res) {
+      log.error('getPowerConfig', 'no response');
+      return null;
+    }
+
+    if (res.status === 200) {
+      const json = await res.json();
+
+      if (this.onPowerStatusHandler && this.index !== null) {
+        this.onPowerStatusHandler(json, this.index);
+      }
+
+      return json;
+    }
+
+    log.error('getPowerConfig', 'invalid status');
+
+    return null;
+  }
+
+  public async setPowerConfig(
+    serial: InverterSerial,
+    action: PowerSetAction,
+  ): Promise<boolean> {
+    if (!this.baseUrl) {
+      return false;
+    }
+
+    const data = {
+      serial,
+      ...(action === 'restart'
+        ? { restart: true }
+        : {
+            power: action === 'on',
+          }),
+    };
+
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(data));
+
+    const res = await this.makeAuthenticatedRequest(
+      '/api/power/config',
+      'POST',
+      {
+        body: formData,
+      },
+    );
+
+    if (!res) {
+      log.error('setPowerConfig', 'no response');
+      return false;
+    }
+
+    const parsed = await res.json();
+
+    return res.status === 200 && parsed.type === 'success';
+  }
+
+  public async getLimitConfig(): Promise<LimitStatusData | null> {
+    if (!this.baseUrl) {
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest('/api/limit/status', 'GET');
+
+    if (!res) {
+      log.error('getLimitConfig', 'no response');
+      return null;
+    }
+
+    if (res.status === 200) {
+      const json = await res.json();
+
+      if (this.onLimitStatusHandler && this.index !== null) {
+        this.onLimitStatusHandler(json, this.index);
+      }
+
+      return json;
+    }
+
+    log.error('getLimitConfig', 'invalid status');
+
+    return null;
+  }
+
+  public async setLimitConfig(
+    serial: InverterSerial,
+    config: LimitConfig,
+  ): Promise<boolean> {
+    if (!this.baseUrl) {
+      return false;
+    }
+
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(config));
+
+    const res = await this.makeAuthenticatedRequest(
+      '/api/limit/config',
+      'POST',
+      {
+        body: formData,
+      },
+    );
+
+    if (!res) {
+      log.error('setLimitConfig', 'no response');
+      return false;
+    }
+
+    const parsed = await res.json();
+
+    return res.status === 200 && parsed.type === 'success';
   }
 
   public async makeAuthenticatedRequest(
     route: string,
-    method: string,
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'HEAD' | 'OPTIONS' | 'PATCH',
     options?: {
-      body?: string;
+      body?: string | FormData;
       query?: string[][] | Record<string, string> | string | URLSearchParams;
     },
   ): Promise<Response | null> {
@@ -655,7 +1027,10 @@ class OpenDtuApi {
       signal: controller.signal,
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
-        'Content-Type': 'application/json',
+        'Content-Type':
+          options?.body instanceof FormData
+            ? 'multipart/form-data'
+            : 'application/json',
         ...(this.userString
           ? { Authorization: 'Basic ' + this.userString }
           : {}),
@@ -677,7 +1052,7 @@ class OpenDtuApi {
     // console.log('makeAuthenticatedRequest', url, requestOptions);
 
     try {
-      const res = await fetch(url, requestOptions);
+      const res = await fetch(url, requestOptions).catch(() => null);
       clearTimeout(abortTimeout);
 
       /*
@@ -689,7 +1064,10 @@ class OpenDtuApi {
 
       return res;
     } catch (error) {
-      log.error('makeAuthenticatedRequest error', error);
+      log.error('makeAuthenticatedRequest error', error, {
+        url,
+        requestOptions: JSON.stringify(requestOptions),
+      });
       return null;
     }
   }
@@ -799,7 +1177,7 @@ class OpenDtuApi {
               resolve();
             }
           })
-          .catch(() => {});
+          .catch(() => null);
       };
 
       fetchInterval = setInterval(() => {
