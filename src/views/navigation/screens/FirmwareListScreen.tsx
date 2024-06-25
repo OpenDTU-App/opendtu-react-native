@@ -1,20 +1,28 @@
-import { useCallback, useState, useMemo } from 'react';
 import type { FC } from 'react';
-import { Appbar, Icon, Text, useTheme } from 'react-native-paper';
-import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
-import { StyledSafeAreaView } from '@/style';
-import { Box } from 'react-native-flex-layout';
-import { useAppSelector } from '@/store';
-import { ScrollView, View } from 'react-native';
-import FirmwareListItem from '@/components/firmware/FirmwareListItem';
+import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import useDtuState from '@/hooks/useDtuState';
+import { Box } from 'react-native-flex-layout';
+import { Appbar, Icon, Text, useTheme } from 'react-native-paper';
+
+import { ScrollView, View } from 'react-native';
+
 import { compare } from 'compare-versions';
-import SelectFirmwareModal from '@/components/modals/SelectFirmwareModal';
-import type { Release } from '@octokit/webhooks-types';
-import GenericRefreshModal from '@/components/modals/GenericRefreshModal';
-import { useFetchControl } from '@/github/FetchHandler';
 import moment from 'moment/moment';
+
+import FirmwareListItem from '@/components/firmware/FirmwareListItem';
+import GenericRefreshModal from '@/components/modals/GenericRefreshModal';
+import SelectFirmwareModal from '@/components/modals/SelectFirmwareModal';
+import SettingsSurface from '@/components/styled/SettingsSurface';
+
+import useDtuState from '@/hooks/useDtuState';
+
+import { minimumOpenDtuFirmwareVersion } from '@/constants';
+import { useFetchControl } from '@/github/FetchHandler';
+import { useAppSelector } from '@/store';
+import { StyledSafeAreaView } from '@/style';
+import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
+
+import type { Release } from '@octokit/webhooks-types';
 
 const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
@@ -111,7 +119,13 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             >
               {newReleases.length ? (
                 <View style={{ marginBottom: 16 }}>
-                  <Box style={{ paddingHorizontal: 4, marginHorizontal: 4 }}>
+                  <Box
+                    style={{
+                      paddingHorizontal: 4,
+                      marginHorizontal: 4,
+                      marginBottom: 12,
+                    }}
+                  >
                     <Text variant="titleLarge">
                       {t('firmwares.newReleases')}
                     </Text>
@@ -121,6 +135,16 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       })}
                     </Text>
                   </Box>
+                  <SettingsSurface
+                    elevation={2}
+                    style={{ paddingVertical: 8, paddingHorizontal: 12 }}
+                  >
+                    <Text variant="bodyMedium">
+                      {t('firmwares.updateNote', {
+                        minimumVersion: minimumOpenDtuFirmwareVersion,
+                      })}
+                    </Text>
+                  </SettingsSurface>
                   {newReleases.map(release => (
                     <FirmwareListItem
                       key={`firmware-${release.id}`}
@@ -133,7 +157,13 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               ) : null}
               {outdatedReleases.length ? (
                 <View>
-                  <Box style={{ paddingHorizontal: 4, marginHorizontal: 4 }}>
+                  <Box
+                    style={{
+                      paddingHorizontal: 4,
+                      marginHorizontal: 4,
+                      marginBottom: newReleases.length ? undefined : 12,
+                    }}
+                  >
                     <Text variant="titleLarge">
                       {newReleases.length
                         ? t('firmwares.outdatedReleases')
@@ -147,6 +177,18 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       </Text>
                     ) : null}
                   </Box>
+                  {!newReleases.length ? (
+                    <SettingsSurface
+                      elevation={2}
+                      style={{ paddingVertical: 8, paddingHorizontal: 12 }}
+                    >
+                      <Text variant="bodyMedium">
+                        {t('firmwares.updateNote', {
+                          minimumVersion: minimumOpenDtuFirmwareVersion,
+                        })}
+                      </Text>
+                    </SettingsSurface>
+                  ) : null}
                   {outdatedReleases.map(release => (
                     <FirmwareListItem
                       key={`firmware-${release.id}`}

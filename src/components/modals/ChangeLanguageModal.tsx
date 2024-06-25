@@ -9,14 +9,15 @@ import { setLanguage } from '@/slices/settings';
 
 import BaseModal from '@/components/BaseModal';
 
-import { rootLogger } from '@/utils/log';
+import useAppLanguage from '@/hooks/useAppLanguage';
+
+import { rootLogging } from '@/utils/log';
 
 import { useAppDispatch } from '@/store';
 import type { SupportedLanguage } from '@/translations';
 import { supportedLanguages } from '@/translations';
-import useAppLanguage from '@/hooks/useAppLanguage';
 
-const log = rootLogger.extend('ChangeLanguageModal');
+const log = rootLogging.extend('ChangeLanguageModal');
 
 const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
   const { onDismiss } = props;

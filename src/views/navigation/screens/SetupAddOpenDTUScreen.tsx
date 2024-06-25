@@ -12,14 +12,14 @@ import MDNSScan from '@/components/devices/MDNSScan';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
 import isIP from '@/utils/isIP';
-import { rootLogger } from '@/utils/log';
+import { rootLogging } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
-const log = rootLogger.extend('SetupAddOpenDTUScreen');
+const log = rootLogging.extend('SetupAddOpenDTUScreen');
 
 const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();

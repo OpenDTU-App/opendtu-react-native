@@ -1,18 +1,19 @@
 import type { FC } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, Button, List, Text, useTheme } from 'react-native-paper';
+
+import { ScrollView } from 'react-native';
 
 import AddDatabaseModal from '@/components/modals/AddDatabaseModal';
 import ManageDatabaseModal from '@/components/modals/ManageDatabaseModal';
 import StyledListItem from '@/components/styled/StyledListItem';
 
+import { spacing } from '@/constants';
 import { useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
-import { spacing } from '@/constants';
 
 const ManageDatabasesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();

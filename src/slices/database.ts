@@ -1,18 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
-
 import type {
   DatabaseState,
   DatabaseTimeRange,
+  SetRefreshIntervalAction,
   SetTimeRangeFromAction,
-  SetUpdateResultAction,
   SetTimeRangeLastNSecondsAction,
   SetTimeRangeToAction,
-  SetRefreshIntervalAction,
+  SetUpdateResultAction,
 } from '@/types/database';
 
-import { rootLogger } from '@/utils/log';
+import { rootLogging } from '@/utils/log';
 
-const log = rootLogger.extend('databaseSlice');
+import { createSlice } from '@reduxjs/toolkit';
+
+const log = rootLogging.extend('databaseSlice');
 
 export const initialTimeRange: DatabaseTimeRange = {
   start: { seconds: 60 * 60 * 12 }, // 12 hours

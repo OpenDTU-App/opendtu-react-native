@@ -1,14 +1,18 @@
 import type { FC } from 'react';
-import { useMemo, useCallback, useState } from 'react';
-import type { ModalProps } from 'react-native-paper';
-import { Divider, RadioButton, Button, Portal, Text } from 'react-native-paper';
-import BaseModal from '@/components/BaseModal';
-import { Box } from 'react-native-flex-layout';
+import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { Release, ReleaseAsset } from '@octokit/webhooks-types';
+import { Box } from 'react-native-flex-layout';
+import type { ModalProps } from 'react-native-paper';
+import { Button, Divider, Portal, RadioButton, Text } from 'react-native-paper';
+
 import { ScrollView } from 'react-native';
-import InstallAssetModal from '@/components/modals/InstallAssetModal';
+
 import prettyBytes from 'pretty-bytes';
+
+import BaseModal from '@/components/BaseModal';
+import InstallAssetModal from '@/components/modals/InstallAssetModal';
+
+import type { Release, ReleaseAsset } from '@octokit/webhooks-types';
 
 export interface SelectFirmwareModalProps extends Omit<ModalProps, 'children'> {
   release: Release | null;

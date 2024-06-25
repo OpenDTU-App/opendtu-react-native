@@ -1,6 +1,7 @@
 import type { EqualityFn } from 'react-redux';
 
-import type { EventLogData } from '@/api/opendtuapi';
+import type { EventLogData } from '@/types/opendtu/eventlog';
+
 import { useAppSelector } from '@/store';
 
 const useEventLog = <T>(

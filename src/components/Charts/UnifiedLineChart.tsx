@@ -1,14 +1,15 @@
-import moment from 'moment';
-
 import type { FC } from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Platform, processColor, TouchableOpacity, View } from 'react-native';
 import type { LineChartProps } from 'react-native-charts-wrapper';
 import { LineChart } from 'react-native-charts-wrapper';
 import { Box } from 'react-native-flex-layout';
 import { Icon, Text, useTheme } from 'react-native-paper';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+
+import { Platform, processColor, TouchableOpacity, View } from 'react-native';
+
+import moment from 'moment';
 
 import StyledSurface from '@/components/styled/StyledSurface';
 
@@ -245,7 +246,12 @@ const UnifiedLineChart: FC<UnifiedLineChartProps> = props => {
   }
 
   return (
-    <StyledSurface style={{ paddingHorizontal: 8 }} elevation={2} mode="flat">
+    <StyledSurface
+      theme={theme}
+      style={{ paddingHorizontal: 8 }}
+      elevation={2}
+      mode="flat"
+    >
       <Box
         style={{
           flexDirection: 'row',

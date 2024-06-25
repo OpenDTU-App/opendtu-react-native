@@ -1,22 +1,24 @@
-import type { NavigationProp, ParamListBase } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
-
 import type { FC } from 'react';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
 import { Box } from 'react-native-flex-layout';
-import { Icon, Text, TouchableRipple } from 'react-native-paper';
+import { Icon, Text, TouchableRipple, useTheme } from 'react-native-paper';
+
+import { View } from 'react-native';
 
 import AcPowerChart from '@/components/Charts/AcPowerChart';
 import DcVoltageChart from '@/components/Charts/DcVoltageChart';
 import StyledSurface from '@/components/styled/StyledSurface';
 
-import { useAppSelector } from '@/store';
 import { spacing } from '@/constants';
+import { useAppSelector } from '@/store';
+
+import type { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const ImportantCharts: FC = () => {
   const { t } = useTranslation();
+  const theme = useTheme();
   const navigation = useNavigation() as NavigationProp<ParamListBase>;
 
   const deviceIndex = useAppSelector(state => state.settings.selectedDtuConfig);
@@ -47,7 +49,7 @@ const ImportantCharts: FC = () => {
   if (!hasDatabaseConfig) {
     return (
       <Box p={8} mt={4}>
-        <StyledSurface>
+        <StyledSurface theme={theme}>
           <TouchableRipple
             onPress={handleShowDatabaseConfig}
             borderless
@@ -71,7 +73,7 @@ const ImportantCharts: FC = () => {
     <View style={{ flex: 1, width: '100%', height: '100%', marginTop: 4 }}>
       <View style={{ flex: 1 }}>
         <Box p={8} pt={0}>
-          <StyledSurface mode="flat" elevation={2}>
+          <StyledSurface theme={theme} mode="flat" elevation={2}>
             <TouchableRipple
               onPress={handleShowConfigureGraphs}
               borderless

@@ -1,6 +1,3 @@
-import type { NavigationProp, ParamListBase } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
-
 import type { FC } from 'react';
 import { useCallback, useEffect, useMemo } from 'react';
 import { List, useTheme } from 'react-native-paper';
@@ -12,17 +9,22 @@ import type { OpenDTUConfig } from '@/types/settings';
 
 import StyledListItem from '@/components/styled/StyledListItem';
 
-import { rootLogger } from '@/utils/log';
+import useLivedata from '@/hooks/useLivedata';
+
+import { rootLogging } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
 import { useAppDispatch, useAppSelector } from '@/store';
+
+import type { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 export interface DeviceListItemProps {
   config: OpenDTUConfig;
   index: number;
 }
 
-const log = rootLogger.extend('DeviceListItem');
+const log = rootLogging.extend('DeviceListItem');
 
 const DeviceListItem: FC<DeviceListItemProps> = ({ config, index }) => {
   const api = useApi();
@@ -64,6 +66,12 @@ const DeviceListItem: FC<DeviceListItemProps> = ({ config, index }) => {
   }, [api, config.baseUrl, dispatch, index]);
 
   const deviceState = useAppSelector(state => state.opendtu.deviceState[index]);
+
+  const hints = useLivedata(state => state?.hints, undefined, index);
+  const showWarning = hints
+    ? hints?.default_password || hints?.radio_problem || hints?.time_sync
+    : false;
+
   const showConnected =
     deviceState === DeviceState.Reachable ||
     deviceState === DeviceState.Connected;
@@ -93,6 +101,13 @@ const DeviceListItem: FC<DeviceListItemProps> = ({ config, index }) => {
       left={(props: object) => (
         <List.Icon {...props} icon={icon} color={color} />
       )}
+      right={
+        showWarning
+          ? (props: object) => (
+              <List.Icon {...props} icon="alert" color={theme.colors.error} />
+            )
+          : undefined
+      }
     />
   );
 };

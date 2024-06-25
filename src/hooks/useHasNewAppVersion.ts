@@ -1,10 +1,11 @@
-import packageJson from '@root/package.json';
-import { compare } from 'compare-versions';
-
 import { useMemo } from 'react';
 
+import { compare } from 'compare-versions';
+
 import { useAppSelector } from '@/store';
+
 import type { Release } from '@octokit/webhooks-types';
+import packageJson from '@root/package.json';
 
 type UseHasNewAppVersion = (options?: {
   usedForIndicatorOnly: boolean;

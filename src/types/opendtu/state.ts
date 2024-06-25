@@ -1,5 +1,7 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
-
+import type { LimitStatusData, PowerStatusData } from '@/types/opendtu/control';
+import type { EventLogData } from '@/types/opendtu/eventlog';
+import type { GridProfileData } from '@/types/opendtu/gridprofile';
+import type { InverterDeviceData } from '@/types/opendtu/inverterDevice';
 import type {
   InverterSerial,
   LiveData,
@@ -12,7 +14,7 @@ import type {
 } from '@/types/opendtu/status';
 import type { Index } from '@/types/settings';
 
-import type { EventLogData } from '@/api/opendtuapi';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export enum DeviceState {
   Unknown,
@@ -95,6 +97,28 @@ export type SetEventLogAction = PayloadAction<{
   data: EventLogData;
 }>;
 
+export type SetGridProfileAction = PayloadAction<{
+  index: Index;
+  inverterSerial: InverterSerial;
+  data: GridProfileData;
+}>;
+
+export type SetInverterDeviceAction = PayloadAction<{
+  index: Index;
+  inverterSerial: InverterSerial;
+  data: InverterDeviceData;
+}>;
+
+export type SetPowerStatusAction = PayloadAction<{
+  index: Index;
+  data: PowerStatusData;
+}>;
+
+export type SetLimitStatusAction = PayloadAction<{
+  index: Index;
+  data: LimitStatusData;
+}>;
+
 export interface OpenDTUSetup {
   baseUrl: string | null;
   userString: string | null;
@@ -102,6 +126,10 @@ export interface OpenDTUSetup {
 
 export interface InverterDataItem {
   eventLog?: EventLogData;
+  gridProfile?: GridProfileData;
+  device?: InverterDeviceData;
+  power?: PowerStatusData;
+  limit?: LimitStatusData;
 }
 
 export type InverterData = Record<InverterSerial, InverterDataItem>;

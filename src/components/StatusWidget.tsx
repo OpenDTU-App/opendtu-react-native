@@ -1,12 +1,14 @@
 import type { FC, PropsWithChildren } from 'react';
-import { View } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import { Icon, Text, useTheme } from 'react-native-paper';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
+import { View } from 'react-native';
+
 import StyledSurface from '@/components/styled/StyledSurface';
 
 import useHasLiveData from '@/hooks/useHasLiveData';
+
 import { spacing } from '@/constants';
 
 export interface StatusWidgetProps extends PropsWithChildren {
@@ -27,7 +29,7 @@ const StatusWidget: FC<StatusWidgetProps> = ({
   const theme = useTheme();
 
   return (
-    <StyledSurface mode="elevated">
+    <StyledSurface theme={theme}>
       {hasLiveData ? (
         <Box style={{ margin: 12 }}>
           {title ? (

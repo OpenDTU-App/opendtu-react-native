@@ -1,14 +1,11 @@
-import type { NavigationProp, ParamListBase } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
-import packageJson from '@root/package.json';
-
 import type { FC } from 'react';
-import { useMemo, useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import { Badge, List, Text, useTheme } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
+
+import { ScrollView } from 'react-native';
 
 import { setDebugEnabled } from '@/slices/settings';
 
@@ -23,6 +20,10 @@ import useRequireMultiplePresses from '@/hooks/useRequireMultiplePresses';
 import useSettings from '@/hooks/useSettings';
 
 import { StyledSafeAreaView } from '@/style';
+
+import type { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import packageJson from '@root/package.json';
 
 const MainSettingsTab: FC = () => {
   const navigation = useNavigation() as NavigationProp<ParamListBase>;
@@ -126,7 +127,14 @@ const MainSettingsTab: FC = () => {
               style={{ opacity: systemInformationDisabled ? 0.5 : 1 }}
               right={props =>
                 hasNewOpenDtuVersion ? (
-                  <Badge visible={true} style={{ marginTop: 8 }} {...props}>
+                  <Badge
+                    visible={true}
+                    style={{
+                      marginTop: 8,
+                      backgroundColor: theme.colors.primary,
+                    }}
+                    {...props}
+                  >
                     {t('settings.newOpenDtuRelease')}
                   </Badge>
                 ) : null
@@ -177,7 +185,14 @@ const MainSettingsTab: FC = () => {
               left={props => <List.Icon {...props} icon="information" />}
               right={props =>
                 hasNewAppVersion ? (
-                  <Badge visible={true} style={{ marginTop: 8 }} {...props}>
+                  <Badge
+                    visible={true}
+                    style={{
+                      marginTop: 8,
+                      backgroundColor: theme.colors.primary,
+                    }}
+                    {...props}
+                  >
                     {t('settings.newAppRelease')}
                   </Badge>
                 ) : null

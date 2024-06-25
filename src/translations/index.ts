@@ -1,12 +1,12 @@
-import 'intl-pluralrules';
-
-import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';
-import i18n from 'i18next';
-
 import { initReactI18next } from 'react-i18next';
+
+import i18n from 'i18next';
 
 import de from './translation-files/de.json';
 import en from './translation-files/en.json';
+
+import 'intl-pluralrules';
+import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';
 
 export const supportedLanguages = ['en', 'de'];
 

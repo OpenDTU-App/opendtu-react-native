@@ -1,7 +1,7 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
-
 import type { DatabaseType } from '@/database';
 import type { SupportedLanguage } from '@/translations';
+
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export type Index = number;
 
@@ -26,12 +26,19 @@ export interface DatabaseConfig {
 }
 
 export const DidNotAskYet = null;
-export type DidNotAskYet = null;
-export type DefaultLanguage = null;
+export declare type DidNotAskYet = null;
+export declare type DefaultLanguage = null;
+
+export enum AppTheme {
+  Light = 'light',
+  Dark = 'dark',
+  System = 'system',
+}
 
 export interface SettingsState {
   // app specific
-  appTheme: 'light' | 'dark' | 'system';
+  appTheme: AppTheme;
+  allowMaterialYou: boolean;
   language: SupportedLanguage | DefaultLanguage;
   enableAppUpdates: boolean | DidNotAskYet;
   enableFetchOpenDTUReleases: boolean | DidNotAskYet;
@@ -48,6 +55,10 @@ export interface SettingsState {
 // Redux Actions
 export type SetAppThemeModeAction = PayloadAction<{
   appTheme: SettingsState['appTheme'];
+}>;
+
+export type EnableMaterialYouAction = PayloadAction<{
+  enable: boolean;
 }>;
 
 export type SetLanguageAction = PayloadAction<{

@@ -1,5 +1,7 @@
 import type { configLoggerType } from 'react-native-logs';
-import { logger, consoleTransport } from 'react-native-logs';
+import { consoleTransport, logger } from 'react-native-logs';
+
+import moment from 'moment';
 
 const config: configLoggerType = {
   transport: consoleTransport,
@@ -12,6 +14,7 @@ const config: configLoggerType = {
       error: 'red',
     },
   },
+  dateFormat: date => moment(date).format('DD.MM.YYYY HH:mm:ss.SSS | '),
 };
 
-export const rootLogger = logger.createLogger(config);
+export const rootLogging = logger.createLogger(config);

@@ -1,6 +1,3 @@
-import type { NavigationProp, ParamListBase } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
-
 import type { FC } from 'react';
 import { useCallback } from 'react';
 import { List } from 'react-native-paper';
@@ -10,10 +7,13 @@ import { setSetupBaseUrl } from '@/slices/opendtu';
 
 import { DeviceState } from '@/types/opendtu/state';
 
-import { rootLogger } from '@/utils/log';
+import { rootLogging } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
 import { useAppDispatch, useAppSelector } from '@/store';
+
+import type { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 export interface MDNSScanItemProps {
   service: Service;
@@ -22,7 +22,7 @@ export interface MDNSScanItemProps {
   loading: boolean;
 }
 
-const log = rootLogger.extend('MDNSScanItem');
+const log = rootLogging.extend('MDNSScanItem');
 
 const MDNSScanItem: FC<MDNSScanItemProps> = ({
   service,

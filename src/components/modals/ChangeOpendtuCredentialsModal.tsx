@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useMemo, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import type { ModalProps } from 'react-native-paper';
@@ -10,7 +10,7 @@ import { updateDtuUserString } from '@/slices/settings';
 import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
-import { rootLogger } from '@/utils/log';
+import { rootLogging } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
 import { defaultUser } from '@/constants';
@@ -21,7 +21,7 @@ export interface ChangeOpendtuCredentialsModalProps
   index: number;
 }
 
-const log = rootLogger.extend('ChangeOpendtuCredentialsModal');
+const log = rootLogging.extend('ChangeOpendtuCredentialsModal');
 
 const ChangeOpendtuCredentialsModal: FC<
   ChangeOpendtuCredentialsModalProps
@@ -148,6 +148,7 @@ const ChangeOpendtuCredentialsModal: FC<
             onPress={handleClearCredentials}
             style={{ marginRight: 8 }}
             disabled={loading}
+            textColor={theme.colors.error}
           >
             {t('clear')}
           </Button>
@@ -160,7 +161,7 @@ const ChangeOpendtuCredentialsModal: FC<
             {t('cancel')}
           </Button>
           <Button
-            mode="text"
+            mode="contained"
             onPress={handleSave}
             disabled={loading}
             loading={loading}

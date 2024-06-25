@@ -1,11 +1,11 @@
-import { useNetInfo } from '@react-native-community/netinfo';
-
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Portal, Text } from 'react-native-paper';
 
 import BaseModal from '@/components/BaseModal';
+
+import { useNetInfo } from '@react-native-community/netinfo';
 
 const AppOfflineModal: FC = () => {
   const { t } = useTranslation();

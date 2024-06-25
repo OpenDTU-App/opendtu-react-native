@@ -1,20 +1,21 @@
-import { PrometheusDriver } from 'prometheus-query';
+import type { LineData } from 'react-native-charts-wrapper';
 
 import { Platform, processColor } from 'react-native';
-import type { LineData } from 'react-native-charts-wrapper';
+
+import { PrometheusDriver } from 'prometheus-query';
 
 import type { DatabaseConfig } from '@/types/settings';
 
 import { UNIX_TS_FIRST_SECOND_OF_2000 } from '@/components/Charts/UnifiedLineChart';
 
 import capitalize from '@/utils/capitalize';
-import { rootLogger } from '@/utils/log';
+import { rootLogging } from '@/utils/log';
 
 import type {
   Database,
-  InverterRangeQueryArgs,
-  DatabaseReturnType,
   DatabaseAwaitReturnType,
+  DatabaseReturnType,
+  InverterRangeQueryArgs,
 } from '@/database/index';
 import { DatabaseType, GrafanaColors } from '@/database/index';
 
@@ -23,7 +24,7 @@ export interface PrometheusResult {
   value: number;
 }
 
-const log = rootLogger.extend('PrometheusDatabase');
+const log = rootLogging.extend('PrometheusDatabase');
 
 class PrometheusDatabase implements Database {
   readonly type: DatabaseType = DatabaseType.Prometheus;

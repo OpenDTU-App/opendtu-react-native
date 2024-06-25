@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { Dimensions } from 'react-native';
 
 import { clearUpdateResult, setUpdateResult } from '@/slices/database';
@@ -16,12 +17,12 @@ import type { DatabaseConfig } from '@/types/settings';
 
 import type { ChartData } from '@/components/Charts/UnifiedLineChart';
 
-import { rootLogger } from '@/utils/log';
+import { rootLogging } from '@/utils/log';
 
 import PrometheusDatabase from '@/database/prometheus';
 import { useAppDispatch, useAppSelector } from '@/store';
 
-const log = rootLogger.extend('DatabaseProvider');
+const log = rootLogging.extend('DatabaseProvider');
 
 export interface DatabaseError {
   message: string;

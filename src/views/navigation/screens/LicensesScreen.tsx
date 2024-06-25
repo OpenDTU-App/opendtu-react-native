@@ -1,14 +1,16 @@
-import licenses from '@root/licenses.json';
-import type { Licenses } from 'npm-license-crawler';
-
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Linking, ScrollView } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, List, useTheme } from 'react-native-paper';
 
+import { Linking, ScrollView } from 'react-native';
+
+import type { Licenses } from 'npm-license-crawler';
+
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
+
+import licenses from '@root/licenses.json';
 
 const LicensesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const { t } = useTranslation();

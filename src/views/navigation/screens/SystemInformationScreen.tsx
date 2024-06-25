@@ -1,17 +1,18 @@
-import { compare } from 'compare-versions';
-import moment from 'moment';
-
 import type { FC } from 'react';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Linking, ScrollView, View } from 'react-native';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, Badge, List, Switch, useTheme } from 'react-native-paper';
+
+import { Linking, ScrollView, View } from 'react-native';
+
+import { compare } from 'compare-versions';
+import moment from 'moment';
 
 import { setEnableFetchOpenDTUReleases } from '@/slices/settings';
 
 import SettingsSurface, {
-  settingsSurfaceBorderRadius,
+  settingsSurfaceRoundness,
 } from '@/components/styled/SettingsSurface';
 
 import useDtuState from '@/hooks/useDtuState';
@@ -134,7 +135,7 @@ const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('opendtu.systemInformation')} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledSafeAreaView>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView>
             <SettingsSurface>
@@ -153,8 +154,8 @@ const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 )}
                 onPress={handleToggleFetchFromGithub}
                 style={{
-                  borderTopLeftRadius: settingsSurfaceBorderRadius,
-                  borderTopRightRadius: settingsSurfaceBorderRadius,
+                  borderTopLeftRadius: settingsSurfaceRoundness(theme),
+                  borderTopRightRadius: settingsSurfaceRoundness(theme),
                 }}
                 borderless
               />
@@ -172,7 +173,10 @@ const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                           justifyContent: 'center',
                         }}
                       >
-                        <Badge visible={true}>
+                        <Badge
+                          visible={true}
+                          style={{ backgroundColor: theme.colors.primary }}
+                        >
                           {t('settings.newOpenDtuRelease')}
                         </Badge>
                       </View>
@@ -182,8 +186,8 @@ const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   }
                   onPress={handleNavigateToFirmwareList}
                   style={{
-                    borderBottomLeftRadius: settingsSurfaceBorderRadius,
-                    borderBottomRightRadius: settingsSurfaceBorderRadius,
+                    borderBottomLeftRadius: settingsSurfaceRoundness(theme),
+                    borderBottomRightRadius: settingsSurfaceRoundness(theme),
                   }}
                   borderless
                 />

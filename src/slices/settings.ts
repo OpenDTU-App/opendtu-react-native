@@ -1,11 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
-
 import type {
   AddDatabaseConfigAction,
   AddDtuConfigAction,
+  DebugEnabledAction,
+  EnableAppUpdatesAction,
+  EnableFetchOpenDTUReleasesAction,
+  EnableMaterialYouAction,
   RemoveDatabaseConfigAction,
   RemoveDtuConfigAction,
   SetAppThemeModeAction,
+  SetLanguageAction,
   SetSelectedDtuConfigAction,
   SettingsState,
   UpdateDatabaseConfigAction,
@@ -15,18 +18,17 @@ import type {
   UpdateDTUDatabaseUuidAction,
   UpdateDtuHostnameAction,
   UpdateDtuSerialNumberAction,
-  SetLanguageAction,
-  EnableAppUpdatesAction,
-  DebugEnabledAction,
-  EnableFetchOpenDTUReleasesAction,
   UpdateDtuUserStringAction,
 } from '@/types/settings';
-import { DidNotAskYet } from '@/types/settings';
+import { AppTheme, DidNotAskYet } from '@/types/settings';
 
-import { rootLogger } from '@/utils/log';
+import { rootLogging } from '@/utils/log';
+
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: SettingsState = {
-  appTheme: 'system',
+  appTheme: AppTheme.System,
+  allowMaterialYou: true,
   language: null,
   dtuConfigs: [],
   selectedDtuConfig: null,
@@ -36,7 +38,7 @@ const initialState: SettingsState = {
   debugEnabled: false,
 };
 
-const log = rootLogger.extend('SettingsSlice');
+const log = rootLogging.extend('SettingsSlice');
 
 const settingsSlice = createSlice({
   name: 'settings',
@@ -44,6 +46,9 @@ const settingsSlice = createSlice({
   reducers: {
     setAppTheme: (state, action: SetAppThemeModeAction) => {
       state.appTheme = action.payload.appTheme;
+    },
+    setAllowMaterialYou: (state, action: EnableMaterialYouAction) => {
+      state.allowMaterialYou = action.payload.enable;
     },
     setLanguage: (state, action: SetLanguageAction) => {
       state.language = action.payload.language;
@@ -256,6 +261,7 @@ const settingsSlice = createSlice({
 
 export const {
   setAppTheme,
+  setAllowMaterialYou,
   setLanguage,
   setSelectedDtuConfig,
   addDtuConfig,

@@ -1,7 +1,5 @@
-import type { Release } from '@octokit/webhooks-types';
-
 import type { FC, PropsWithChildren } from 'react';
-import { useContext, createContext, useCallback, useEffect } from 'react';
+import { createContext, useCallback, useContext, useEffect } from 'react';
 
 import {
   setLatestAppRelease,
@@ -12,9 +10,8 @@ import {
   setReleasesTimeout,
 } from '@/slices/github';
 
-// import useDeviceIndex from '@/hooks/useDeviceIndex';
 import ago from '@/utils/ago';
-import { rootLogger } from '@/utils/log';
+import { rootLogging } from '@/utils/log';
 
 import {
   AppGithubBaseConfig,
@@ -23,7 +20,9 @@ import {
 } from '@/github/index';
 import { useAppDispatch, useAppSelector } from '@/store';
 
-const log = rootLogger.extend('FetchHandler');
+import type { Release } from '@octokit/webhooks-types';
+
+const log = rootLogging.extend('FetchHandler');
 
 export const FetchHandlerContext = createContext<{
   refreshReleases: (force?: boolean) => Promise<boolean>;
@@ -37,11 +36,6 @@ export const FetchHandlerContext = createContext<{
 
 const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useAppDispatch();
-  // const index = useDeviceIndex();
-
-  /*const isConnected = useAppSelector(state =>
-    index === null ? undefined : state.opendtu.dtuStates[index]?.isConnected,
-  );*/
 
   const latestReleaseRefetchOk = useAppSelector(state => {
     const result =
@@ -214,7 +208,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
   ]);
 
   useEffect(() => {
-    if (/*!isConnected || */ !githubApi) return;
+    if (!githubApi) return;
 
     fetchHandler();
 
@@ -229,11 +223,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
       log.info('Clearing interval...');
       clearInterval(interval);
     };
-  }, [
-    fetchHandler,
-    // isConnected,
-    githubApi,
-  ]);
+  }, [fetchHandler, githubApi]);
 
   return (
     <FetchHandlerContext.Provider

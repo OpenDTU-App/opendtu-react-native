@@ -14,9 +14,13 @@ const BaseModal: FC<BaseModalProps> = ({
   ...rest
 }) => {
   const theme = useTheme();
+
+  const { visible } = rest;
+
   return (
     <Modal
       {...rest}
+      style={{ backgroundColor: visible ? 'rgba(0, 0, 0, 0.5)' : undefined }}
       contentContainerStyle={{
         backgroundColor: backgroundColor ?? theme.colors.elevation.level4,
         ...(disableSidePadding

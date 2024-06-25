@@ -1,6 +1,6 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
-
 import type { UpdateResult } from '@/database';
+
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export type Now = 'now';
 

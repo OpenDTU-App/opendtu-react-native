@@ -3,9 +3,16 @@ import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import type { ModalProps } from 'react-native-paper';
-import { Button, Portal, RadioButton, Text } from 'react-native-paper';
+import {
+  Button,
+  Portal,
+  RadioButton,
+  Switch,
+  Text,
+  TouchableRipple,
+} from 'react-native-paper';
 
-import { setAppTheme } from '@/slices/settings';
+import { setAllowMaterialYou, setAppTheme } from '@/slices/settings';
 
 import type { SettingsState } from '@/types/settings';
 
@@ -19,6 +26,9 @@ const ChangeThemeModal: FC<Omit<ModalProps, 'children'>> = props => {
   const { t } = useTranslation();
 
   const appTheme = useAppSelector(state => state.settings.appTheme);
+  const allowMaterialYou = useAppSelector(
+    state => state.settings.allowMaterialYou,
+  );
 
   const [selectedTheme, setSelectedTheme] =
     useState<SettingsState['appTheme']>(appTheme);
@@ -31,6 +41,10 @@ const ChangeThemeModal: FC<Omit<ModalProps, 'children'>> = props => {
     dispatch(setAppTheme({ appTheme: selectedTheme }));
     onDismiss?.();
   }, [dispatch, onDismiss, selectedTheme]);
+
+  const handleMaterialYouChange = useCallback(() => {
+    dispatch(setAllowMaterialYou({ enable: !allowMaterialYou }));
+  }, [allowMaterialYou, dispatch]);
 
   return (
     <Portal>
@@ -49,6 +63,24 @@ const ChangeThemeModal: FC<Omit<ModalProps, 'children'>> = props => {
             <RadioButton.Item label={t('themes.dark')} value="dark" />
             <RadioButton.Item label={t('themes.system')} value="system" />
           </RadioButton.Group>
+          <TouchableRipple
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingVertical: 8,
+              paddingHorizontal: 16,
+            }}
+            onPress={handleMaterialYouChange}
+          >
+            <>
+              <Text variant="bodyLarge">{t('themes.allowMaterialYou')}</Text>
+              <Switch
+                value={allowMaterialYou}
+                onValueChange={handleMaterialYouChange}
+              />
+            </>
+          </TouchableRipple>
           <Box
             mt={16}
             style={{

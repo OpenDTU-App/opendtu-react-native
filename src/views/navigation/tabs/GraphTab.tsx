@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { RefreshControl } from 'react-native';
 import { useTheme } from 'react-native-paper';
+
+import { RefreshControl } from 'react-native';
 
 import ImportantCharts from '@/components/Charts/ImportantCharts';
 import DeviceOfflineWrapper from '@/components/DeviceOfflineWrapper';

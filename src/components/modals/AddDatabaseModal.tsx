@@ -1,11 +1,11 @@
-import { v4 as uuidv4 } from 'uuid';
-
 import type { FC } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import type { ModalProps } from 'react-native-paper';
 import { Button, Portal, Text, useTheme } from 'react-native-paper';
+
+import { v4 as uuidv4 } from 'uuid';
 
 import { addDatabaseConfig } from '@/slices/settings';
 

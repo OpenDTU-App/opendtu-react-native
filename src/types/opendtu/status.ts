@@ -1,6 +1,6 @@
 export type InverterSerial = string;
 
-type NumericString = `${number}`;
+export type NumericString = `${number}`;
 
 export interface ValueObject {
   v: number; // value
@@ -24,6 +24,8 @@ export interface InverterStatistics {
   Irradiation?: ValueObject;
 }
 
+export type InverterStatisticsWithoutName = Omit<InverterStatistics, 'name'>;
+
 export interface Inverter {
   serial: InverterSerial;
   name: string;
@@ -35,9 +37,9 @@ export interface Inverter {
   limit_relative: number;
   limit_absolute: number;
   events: number;
-  AC: Record<NumericString, InverterStatistics>;
+  AC: Record<NumericString, InverterStatisticsWithoutName>;
   DC: Record<NumericString, InverterStatistics>;
-  INV: Record<NumericString, InverterStatistics>;
+  INV: Record<NumericString, InverterStatisticsWithoutName>;
 }
 
 export type InverterFromStatus = Pick<
@@ -76,7 +78,6 @@ export interface LiveDataFromStatus {
   inverters: InverterFromStatus[];
   total: StatusTotal;
   hints: StatusHints;
-  lastUpdate: Date | null;
 }
 
 export interface LiveDataFromWebsocketWithFrom extends LiveDataFromWebsocket {

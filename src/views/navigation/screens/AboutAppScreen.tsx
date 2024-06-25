@@ -1,12 +1,9 @@
-import packageJson from '@root/package.json';
-
 import type { FC } from 'react';
-import { useState, useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Linking, ScrollView, Text as RNText } from 'react-native';
 import { Box } from 'react-native-flex-layout';
-import Markdown from 'react-native-markdown-display';
 import type { RenderRules } from 'react-native-markdown-display';
+import Markdown from 'react-native-markdown-display';
 import {
   Appbar,
   Badge,
@@ -19,17 +16,22 @@ import {
   useTheme,
 } from 'react-native-paper';
 
+import { Linking, ScrollView, Text as RNText } from 'react-native';
+
+import moment from 'moment';
+
 import { setEnableAppUpdates } from '@/slices/settings';
+
+import GenericRefreshModal from '@/components/modals/GenericRefreshModal';
 
 import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 
+import { useFetchControl } from '@/github/FetchHandler';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
-import GenericRefreshModal from '@/components/modals/GenericRefreshModal';
-import { useFetchControl } from '@/github/FetchHandler';
 
-import moment from 'moment';
+import packageJson from '@root/package.json';
 
 const rules: RenderRules = {
   link: (node, children) => <RNText key={node.key}>{children}</RNText>,
@@ -134,14 +136,21 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     ? t('aboutApp.newVersionAvailable')
                     : t('aboutApp.latestAppRelease')}
                 </Text>
-                <Badge style={{ alignSelf: 'center' }}>{prettyTagName}</Badge>
+                <Badge
+                  style={{
+                    alignSelf: 'center',
+                    backgroundColor: theme.colors.primary,
+                  }}
+                >
+                  {prettyTagName}
+                </Badge>
               </Box>
               <Box>
                 <Text variant="bodySmall" style={{ textAlign: 'center' }}>
                   {t('fetchedWithTime', { time: formattedReleaseFetchTime })}
                 </Text>
               </Box>
-              <Surface style={{ padding: 8, marginTop: 8, borderRadius: 8 }}>
+              <Surface style={{ padding: 16, marginTop: 8, borderRadius: 16 }}>
                 <Markdown
                   style={{ link: { textDecorationLine: 'none' } }}
                   rules={rules}
@@ -164,6 +173,8 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             <Divider />
             <List.Item
               title={t('settings.activateInappUpdates')}
+              onPress={handleToggleInAppUpdates}
+              borderless
               right={props => (
                 <Switch
                   {...props}

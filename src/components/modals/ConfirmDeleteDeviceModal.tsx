@@ -1,6 +1,3 @@
-import type { NavigationProp, ParamListBase } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
-
 import type { FC } from 'react';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -16,6 +13,9 @@ import {
 import BaseModal from '@/components/BaseModal';
 
 import { useAppDispatch } from '@/store';
+
+import type { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 export interface ConfirmDeleteDeviceModalProps
   extends Omit<ModalProps, 'children'> {
