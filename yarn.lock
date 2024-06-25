@@ -3468,6 +3468,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-clipboard/clipboard@npm:^1.14.1":
+  version: 1.14.1
+  resolution: "@react-native-clipboard/clipboard@npm:1.14.1"
+  peerDependencies:
+    react: 16.9.0 || 16.11.0 || 16.13.1 || 17.0.1 || 17.0.2 || 18.0.0 || 18.1.0 || 18.2.0
+    react-native: ^0.61.5 || ^0.62.3 || ^0.63.2 || ^0.64.2 || ^0.65.0 || ^0.66.0 || ^0.67.0 || ^0.68.0 || ^0.69.0 || ^0.70.0 || ^0.71.0 || ^0.72.0 || ^0.73.0
+    react-native-macos: ^0.61.0 || ^0.62.0 || ^0.63.0 || ^0.64.0 || ^0.65.0 || ^0.66.0 || ^0.67.0 || ^0.68.0 || ^0.69.0 || ^0.70.0 || ^0.71.0 || ^0.72.0 || ^0.73.0
+    react-native-windows: ^0.61.0 || ^0.62.0 || ^0.63.0 || ^0.64.0 || ^0.65.0 || ^0.66.0 || ^0.67.0 || ^0.68.0 || ^0.69.0 || ^0.70.0 || ^0.71.0 || ^0.72.0 || ^0.73.0
+  checksum: 005ce2bee4d6e30b2a6b11be0d0ee169ab108d24f2a9b518b0ba8e5b96616c6dfb089c28644c1b5e3c1b9aa786c92cbf781e525223f56ab8589da1df79cae31f
+  languageName: node
+  linkType: hard
+
 "@react-native-community/cli-clean@npm:13.6.6":
   version: 13.6.6
   resolution: "@react-native-community/cli-clean@npm:13.6.6"
@@ -7084,6 +7096,15 @@ __metadata:
   peerDependencies:
     eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
   checksum: 82f391c5a093235c3bc2f664c54e009c49460778ee7d1b86c1536df9ac4d2a80d1dedc9241ac797df4a9dced936e955d9c89042fb3ac8d017b5359d1320d3c0f
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-simple-import-sort@npm:^12.1.0":
+  version: 12.1.0
+  resolution: "eslint-plugin-simple-import-sort@npm:12.1.0"
+  peerDependencies:
+    eslint: ">=5.0.0"
+  checksum: 8ba651c8d86359107130e99d11a839fe2b66647731c9582b74657fcfab2ea61fdf85621651f26aab5f8cbfe7516ea0c5d4d8fdcd68c3f9b7115d292f16ed3dde
   languageName: node
   linkType: hard
 
@@ -10965,12 +10986,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-git-hooks@npm:^1.0.7":
+"node-git-hooks@npm:1.0.7":
   version: 1.0.7
   resolution: "node-git-hooks@npm:1.0.7"
   bin:
     node-git-hooks: bin/install.js
   checksum: bfe34de15389d3626a5d056df4aa5fde27c43376d6390817a993f12cb6731fd88c526fc366c027c232f3c76854b23d39cb347c650c330b3cca6ec334c8f408b5
+  languageName: node
+  linkType: hard
+
+"node-git-hooks@patch:node-git-hooks@npm%3A1.0.7#./.yarn/patches/node-git-hooks-npm-1.0.7-618e27eb9b.patch::locator=opendtu-react-native%40workspace%3A.":
+  version: 1.0.7
+  resolution: "node-git-hooks@patch:node-git-hooks@npm%3A1.0.7#./.yarn/patches/node-git-hooks-npm-1.0.7-618e27eb9b.patch::version=1.0.7&hash=e139c9&locator=opendtu-react-native%40workspace%3A."
+  bin:
+    node-git-hooks: bin/install.js
+  checksum: 47e9a72c0ccf5a199f0a9f6b8e02d9916af633e79b7934f6e2ad6608151e593a614e5771cf3c795d930498cbb1d41286653fc0e8fbe800b1b855e4157fc137c4
   languageName: node
   linkType: hard
 
@@ -11353,6 +11383,7 @@ __metadata:
     "@os-team/i18next-react-native-language-detector": ^1.0.33
     "@pchmn/expo-material3-theme": ^1.3.2
     "@react-native-async-storage/async-storage": ^1.23.1
+    "@react-native-clipboard/clipboard": ^1.14.1
     "@react-native-community/netinfo": ^11.3.2
     "@react-native-masked-view/masked-view": ^0.3.1
     "@react-native/babel-preset": 0.74.83
@@ -11382,6 +11413,7 @@ __metadata:
     eslint-plugin-no-relative-import-paths: ^1.5.4
     eslint-plugin-prettier: 5.1.3
     eslint-plugin-react-hooks: ^4.6.2
+    eslint-plugin-simple-import-sort: ^12.1.0
     expo: ^51.0.0
     i18next: ^23.11.4
     intl-pluralrules: ^2.0.1
@@ -11393,7 +11425,7 @@ __metadata:
     octokit: ^3.2.1
     patch-package: ^8.0.0
     postinstall-postinstall: ^2.1.0
-    prettier: ^3.2.5
+    prettier: ^3.3.2
     pretty-bytes: ^6.1.1
     prometheus-query: ^3.4.0
     react: 18.3.1
@@ -11861,12 +11893,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.2.5":
-  version: 3.2.5
-  resolution: "prettier@npm:3.2.5"
+"prettier@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "prettier@npm:3.3.2"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 2ee4e1417572372afb7a13bb446b34f20f1bf1747db77cf6ccaf57a9be005f2f15c40f903d41a6b79eec3f57fff14d32a20fb6dee1f126da48908926fe43c311
+  checksum: 5557d8caed0b182f68123c2e1e370ef105251d1dd75800fadaece3d061daf96b1389141634febf776050f9d732c7ae8fd444ff0b4a61b20535e7610552f32c69
   languageName: node
   linkType: hard
 

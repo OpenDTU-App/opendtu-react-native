@@ -34,11 +34,16 @@
     "react-native",
     "react-hooks",
     "prettier",
-    "import"
+    "import",
+    "simple-import-sort"
   ],
   "rules": {
     "import/no-named-as-default-member": "off",
     "import/no-named-as-default": "off",
+    "import/first": "error",
+    "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
     "import/extensions": [
       "error",
       "never",
@@ -72,7 +77,6 @@
         "disallowTypeAnnotations": true
       }
     ],
-    "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
     "no-console": 0,
     "indent": "off",
     "quotes": [
@@ -108,21 +112,24 @@
         "bracketSpacing": true,
         "arrowParens": "avoid",
         "bracketSameLine": false,
-        "endOfLine": "lf",
-        "importOrder": [
-          "^react",
-          "^react-native$",
-          "^@/slices",
-          "^@/types",
-          "^@/components",
-          "^@/hooks",
-          "^@/utils",
-          "^@/assets",
-          "^[./]",
-          "^@/"
-        ],
-        "importOrderSeparation": true
+        "endOfLine": "lf"
       }
-    ]
+    ],
+    "simple-import-sort/imports": ["error", {
+        "groups": [
+          ["^react"],
+          ["^react-native$"],
+          ["^\\w"],
+          ["^@/slices"],
+          ["^@/types"],
+          ["^@/components"],
+          ["^@/hooks"],
+          ["^@/utils"],
+          ["^@/assets"],
+          ["^@/"],
+          ["^[./]"]
+        ]
+    }],
+    "simple-import-sort/exports": "error"
   }
 }
