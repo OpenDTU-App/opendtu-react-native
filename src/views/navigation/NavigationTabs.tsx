@@ -30,7 +30,7 @@ const renderScene = BottomNavigationPaper.SceneMap({
   settings: SettingsRoute,
 });
 
-const BottomNavigation: FC = () => {
+const NavigationTabs: FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   const [index, setIndex] = useState<number>(0);
@@ -80,4 +80,4 @@ const BottomNavigation: FC = () => {
   );
 };
 
-export default BottomNavigation;
+export default NavigationTabs;
