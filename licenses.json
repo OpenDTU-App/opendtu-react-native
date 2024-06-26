@@ -1,5 +1,5 @@
 {
-    "@os-team/i18next-react-native-language-detector@1.0.33": {
+    "@os-team/i18next-react-native-language-detector@1.0.34": {
         "licenses": "MIT",
         "repository": "git@gitlab.com:os-team/libs/utils",
         "licenseUrl": "git@gitlab.com:os-team/libs/utils",
@@ -77,7 +77,7 @@
         "licenseUrl": "https://github.com/expo/expo",
         "parents": "opendtu-react-native"
     },
-    "i18next@23.11.4": {
+    "i18next@23.11.5": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
@@ -305,7 +305,7 @@
         "licenseUrl": "https://github.com/styled-components/styled-components/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "uuid@9.0.1": {
+    "uuid@10.0.0": {
         "licenses": "MIT",
         "repository": "https://github.com/uuidjs/uuid",
         "licenseUrl": "https://github.com/uuidjs/uuid/raw/master/LICENSE.md",
