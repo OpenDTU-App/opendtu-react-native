@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Box } from 'react-native-flex-layout';
 
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import DeviceListItem from '@/components/devices/DeviceListItem';
 
@@ -22,6 +22,7 @@ const DeviceList: FC = () => {
           />
         ))}
       </Box>
+      <View style={{ height: spacing * 2 }} />
     </ScrollView>
   );
 };

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, Button, List, Text, useTheme } from 'react-native-paper';
 
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { setSelectedDtuConfig } from '@/slices/settings';
 
@@ -17,6 +17,7 @@ import ConfirmDeleteDeviceModal from '@/components/modals/ConfirmDeleteDeviceMod
 
 import useLivedata from '@/hooks/useLivedata';
 
+import { spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
@@ -270,28 +271,29 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
                 </Box>
               </Box>
             </Box>
-            <ChangeCustomNameModal
-              visible={openCustomNameModal}
-              onDismiss={() => setOpenCustomNameModal(false)}
-              index={index}
-            />
-            <ChangeServerUrlModal
-              visible={openServerUrlModal}
-              onDismiss={() => setOpenServerUrlModal(false)}
-              index={index}
-            />
-            <ChangeOpendtuCredentialsModal
-              visible={openCredentialsModal}
-              onDismiss={() => setOpenCredentialsModal(false)}
-              index={index}
-            />
-            <ConfirmDeleteDeviceModal
-              visible={openDeleteModal}
-              onDismiss={() => setOpenDeleteModal(false)}
-              index={index}
-            />
+            <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
+        <ChangeCustomNameModal
+          visible={openCustomNameModal}
+          onDismiss={() => setOpenCustomNameModal(false)}
+          index={index}
+        />
+        <ChangeServerUrlModal
+          visible={openServerUrlModal}
+          onDismiss={() => setOpenServerUrlModal(false)}
+          index={index}
+        />
+        <ChangeOpendtuCredentialsModal
+          visible={openCredentialsModal}
+          onDismiss={() => setOpenCredentialsModal(false)}
+          index={index}
+        />
+        <ConfirmDeleteDeviceModal
+          visible={openDeleteModal}
+          onDismiss={() => setOpenDeleteModal(false)}
+          index={index}
+        />
       </StyledSafeAreaView>
     </>
   );

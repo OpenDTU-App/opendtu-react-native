@@ -11,7 +11,7 @@ const InverterListTab: FC = () => {
   const theme = useTheme();
 
   return (
-    <StyledSafeAreaView theme={theme} disableSafeBottomMargin>
+    <StyledSafeAreaView theme={theme}>
       <DeviceOfflineWrapper>
         <Box style={{ flex: 1, justifyContent: 'flex-start', width: '100%' }}>
           <InverterList />

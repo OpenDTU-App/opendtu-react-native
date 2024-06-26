@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Box } from 'react-native-flex-layout';
 
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import InverterListItem from '@/components/inverters/InverterListItem';
 
@@ -43,6 +43,7 @@ const InverterList: FC = () => {
           />
         ))}
       </Box>
+      <View style={{ height: spacing * 2 }} />
     </ScrollView>
   );
 };

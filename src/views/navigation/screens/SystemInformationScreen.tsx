@@ -21,7 +21,7 @@ import useHasNewOpenDtuVersion from '@/hooks/useHasNewOpenDtuVersion';
 import formatBytes from '@/utils/formatBytes';
 import percentage from '@/utils/percentage';
 
-import { colors } from '@/constants';
+import { colors, spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
@@ -449,6 +449,7 @@ const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 />
               </List.Section>
             </SettingsSurface>
+            <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
       </StyledSafeAreaView>

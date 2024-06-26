@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, List, useTheme } from 'react-native-paper';
 
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import type { Inverter, InverterFromStatus } from '@/types/opendtu/status';
 
@@ -14,6 +14,7 @@ import useLivedata from '@/hooks/useLivedata';
 
 import { rootLogging } from '@/utils/log';
 
+import { spacing } from '@/constants';
 import { StyledScrollView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 import type { DataKeys } from '@/views/navigation/screens/InverterInfoScreen';
@@ -98,6 +99,7 @@ const InverterDataScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
                 ))}
               </StyledSurface>
             ) : null}
+            <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
       </StyledScrollView>

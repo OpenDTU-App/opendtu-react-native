@@ -5,7 +5,7 @@ import { Box } from 'react-native-flex-layout';
 import { Badge, List, Text, useTheme } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { setDebugEnabled } from '@/slices/settings';
 
@@ -19,6 +19,7 @@ import useIsConnected from '@/hooks/useIsConnected';
 import useRequireMultiplePresses from '@/hooks/useRequireMultiplePresses';
 import useSettings from '@/hooks/useSettings';
 
+import { spacing } from '@/constants';
 import { StyledSafeAreaView } from '@/style';
 
 import type { NavigationProp, ParamListBase } from '@react-navigation/native';
@@ -113,7 +114,7 @@ const MainSettingsTab: FC = () => {
   const handleUnlockDebug = useRequireMultiplePresses(enableDebugMode);
 
   return (
-    <StyledSafeAreaView theme={theme} disableSafeBottomMargin>
+    <StyledSafeAreaView theme={theme}>
       <Box style={{ width: '100%', flex: 1 }}>
         <ScrollView>
           <List.Section>
@@ -216,6 +217,7 @@ const MainSettingsTab: FC = () => {
           <Text style={{ textAlign: 'center' }} onPress={handleUnlockDebug}>
             {t('version')} {packageJson.version}
           </Text>
+          <View style={{ height: spacing * 2 }} />
         </ScrollView>
       </Box>
       <ChangeThemeModal

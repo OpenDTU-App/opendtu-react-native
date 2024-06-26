@@ -3,10 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, List, useTheme } from 'react-native-paper';
 
-import { Linking, ScrollView } from 'react-native';
+import { Linking, ScrollView, View } from 'react-native';
 
 import type { Licenses } from 'npm-license-crawler';
 
+import { spacing } from '@/constants';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
@@ -48,6 +49,7 @@ const LicensesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 );
               },
             )}
+            <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
       </StyledSafeAreaView>

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, List, useTheme } from 'react-native-paper';
 
-import { RefreshControl, ScrollView } from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 
 import SettingsSurface from '@/components/styled/SettingsSurface';
 
@@ -15,6 +15,7 @@ import formatVersion from '@/utils/formatVersion';
 import { rootLogging } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
+import { spacing } from '@/constants';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
@@ -160,6 +161,7 @@ const InverterDeviceInfoScreen: FC<PropsWithNavigation> = ({
                 </>
               )}
             </SettingsSurface>
+            <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
       </StyledSafeAreaView>

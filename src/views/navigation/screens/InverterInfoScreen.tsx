@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, IconButton, List, Text, useTheme } from 'react-native-paper';
 
-import { RefreshControl, ScrollView } from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 
 import type { Moment } from 'moment';
 import moment from 'moment';
@@ -362,6 +362,7 @@ const InverterInfoScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
                 description={t('inverter.control.description')}
               />
             </Box>
+            <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
         <PowerConfigModal

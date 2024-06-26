@@ -3,13 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, List, useTheme } from 'react-native-paper';
 
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import SettingsSurface from '@/components/styled/SettingsSurface';
 
 import useDtuState from '@/hooks/useDtuState';
 
-import { colors } from '@/constants';
+import { colors, spacing } from '@/constants';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
@@ -288,6 +288,7 @@ const MqttInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 />
               </List.Section>
             </SettingsSurface>
+            <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
       </StyledSafeAreaView>

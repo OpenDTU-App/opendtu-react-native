@@ -10,7 +10,7 @@ import { ScrollView, View } from 'react-native';
 
 import styled from 'styled-components';
 
-import { spacing } from '@/constants.ts';
+import { spacing } from '@/constants';
 
 import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 
@@ -68,12 +68,12 @@ export const StyledScrollView: FC<StyledScrollViewProps> = ({
 
 export type StyledSafeAreaViewProps = {
   theme?: MD3Theme;
-  disableSafeBottomMargin?: boolean;
+  enableSafeBottomMargin?: boolean;
 } & SafeAreaViewProps;
 
 const InternalStyledSafeAreaView = styled(SafeAreaView)<{
   theme: MD3Theme;
-  disableSafeBottomMargin?: boolean;
+  enableSafeBottomMargin?: boolean;
 }>`
   height: 100%;
   flex: 1;
@@ -82,7 +82,7 @@ const InternalStyledSafeAreaView = styled(SafeAreaView)<{
   display: flex;
   color: ${props => props.theme.colors.onBackground};
   padding-bottom: ${props =>
-    props.disableSafeBottomMargin ? 0 : spacing * 2}px;
+    props.enableSafeBottomMargin ? spacing * 2 : 0}px;
 `;
 
 export const StyledSafeAreaView: FC<StyledSafeAreaViewProps> = props => {

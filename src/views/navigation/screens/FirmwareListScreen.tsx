@@ -86,7 +86,7 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.Content title={t('firmwares.title')} />
         <Appbar.Action icon="refresh" onPress={handleShowRefreshModal} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme} disableSafeBottomMargin>
+      <StyledSafeAreaView theme={theme}>
         <GenericRefreshModal
           visible={showRefreshModal}
           onDismiss={handleHideRefreshModal}
