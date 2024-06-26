@@ -1,8 +1,13 @@
 import type { FC } from 'react';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import { Icon, Text, TouchableRipple, useTheme } from 'react-native-paper';
+import {
+  IconButton,
+  Text,
+  TouchableRipple,
+  useTheme,
+} from 'react-native-paper';
 
 import { View } from 'react-native';
 
@@ -11,6 +16,11 @@ import DcVoltageChart from '@/components/Charts/DcVoltageChart';
 import StyledSurface from '@/components/styled/StyledSurface';
 
 import { spacing } from '@/constants';
+import {
+  useDatabase,
+  useDatabaseIsFetching,
+  useRefreshDatabase,
+} from '@/database';
 import { useAppSelector } from '@/store';
 
 import type { NavigationProp, ParamListBase } from '@react-navigation/native';
@@ -45,6 +55,25 @@ const ImportantCharts: FC = () => {
   const handleShowConfigureGraphs = useCallback(() => {
     navigation.navigate('ConfigureGraphsScreen');
   }, [navigation]);
+
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+
+  const refreshing = useDatabaseIsFetching();
+  const triggerRefresh = useRefreshDatabase();
+  const database = useDatabase();
+
+  const handleRefresh = useCallback(() => {
+    if (!database) return;
+
+    triggerRefresh?.();
+    setIsRefreshing(true);
+  }, [database, triggerRefresh]);
+
+  useEffect(() => {
+    if (!refreshing) {
+      setIsRefreshing(false);
+    }
+  }, [refreshing]);
 
   if (!hasDatabaseConfig) {
     return (
@@ -95,9 +124,11 @@ const ImportantCharts: FC = () => {
                     {t('livedata.changeTimerangeAndRefreshInterval')}
                   </Text>
                 </View>
-                <View>
-                  <Icon size={20} source="chevron-right" />
-                </View>
+                <IconButton
+                  icon="reload"
+                  onPress={handleRefresh}
+                  loading={isRefreshing}
+                />
               </View>
             </TouchableRipple>
           </StyledSurface>
