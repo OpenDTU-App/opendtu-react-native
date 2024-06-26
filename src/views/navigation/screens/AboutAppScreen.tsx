@@ -16,7 +16,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-import { Linking, ScrollView, Text as RNText } from 'react-native';
+import { Linking, ScrollView, Text as RNText, View } from 'react-native';
 
 import moment from 'moment';
 
@@ -26,6 +26,7 @@ import GenericRefreshModal from '@/components/modals/GenericRefreshModal';
 
 import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 
+import { spacing } from '@/constants';
 import { useFetchControl } from '@/github/FetchHandler';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
@@ -189,6 +190,7 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 />
               )}
             />
+            <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
       </StyledSafeAreaView>

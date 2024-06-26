@@ -11,7 +11,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-import { RefreshControl, ScrollView } from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 
 import { settingsSurfaceRoundness } from '@/components/styled/SettingsSurface';
 import StyledSurface from '@/components/styled/StyledSurface';
@@ -22,7 +22,7 @@ import useGridProfile from '@/hooks/useGridProfile';
 import { rootLogging } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
-import { colors } from '@/constants';
+import { colors, spacing } from '@/constants';
 import { StyledScrollView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
@@ -192,6 +192,7 @@ const InverterGridProfileScreen: FC<PropsWithNavigation> = ({
                 ) : null}
               </>
             )}
+            <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
       </StyledScrollView>

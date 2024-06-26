@@ -12,7 +12,7 @@ const LivedataTab = () => {
   return (
     <StyledSafeAreaView theme={theme}>
       <DeviceOfflineWrapper>
-        <StyledScrollView theme={theme}>
+        <StyledScrollView theme={theme} disableSafeBottomMargin>
           <DeviceStatus />
           <ImportantStatusValues />
         </StyledScrollView>

@@ -372,6 +372,7 @@ const InverterInfoScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
                 </List.Section>
               </View>
             </Box>
+            <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
         <PowerConfigModal

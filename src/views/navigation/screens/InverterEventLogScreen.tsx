@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, List, Text, useTheme } from 'react-native-paper';
 
-import { RefreshControl, ScrollView } from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 
 import StyledSurface from '@/components/styled/StyledSurface';
 
@@ -14,6 +14,7 @@ import { rootLogging } from '@/utils/log';
 import { durationToString, timestampToString } from '@/utils/time';
 
 import { useApi } from '@/api/ApiHandler';
+import { spacing } from '@/constants';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
@@ -110,6 +111,7 @@ const InverterEventLogScreen: FC<PropsWithNavigation> = ({
                 </Box>
               )}
             </StyledSurface>
+            <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
       </StyledSafeAreaView>

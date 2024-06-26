@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, Button, List, Text, useTheme } from 'react-native-paper';
 
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import AddDatabaseModal from '@/components/modals/AddDatabaseModal';
 import ManageDatabaseModal from '@/components/modals/ManageDatabaseModal';
@@ -85,6 +85,7 @@ const ManageDatabasesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   />
                 ))}
               </Box>
+              <View style={{ height: spacing * 2 }} />
             </ScrollView>
           )}
         </Box>

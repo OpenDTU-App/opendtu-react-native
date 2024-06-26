@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, Button, List, Text, useTheme } from 'react-native-paper';
 
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { setSelectedDtuConfig } from '@/slices/settings';
 
@@ -14,10 +14,10 @@ import ChangeCustomNameModal from '@/components/modals/ChangeCustomNameModal';
 import ChangeOpendtuCredentialsModal from '@/components/modals/ChangeOpendtuCredentialsModal';
 import ChangeServerUrlModal from '@/components/modals/ChangeServerUrlModal';
 import ConfirmDeleteDeviceModal from '@/components/modals/ConfirmDeleteDeviceModal';
-import SettingsSurface from '@/components/styled/SettingsSurface';
 
 import useLivedata from '@/hooks/useLivedata';
 
+import { spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
@@ -108,197 +108,192 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
       <StyledSafeAreaView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView>
-            <SettingsSurface>
-              <Box style={{ flex: 1, width: '100%' }} ph={16} mt={16}>
-                <Box>
-                  <Text variant="titleMedium">
-                    {t('deviceSettings.general')}
-                  </Text>
-                </Box>
-                <Box p={16}>
-                  {config.hostname !== null ? (
-                    <Text variant="titleLarge">{config.hostname}</Text>
-                  ) : null}
+            <Box style={{ flex: 1, width: '100%' }} ph={16} mt={16}>
+              <Box>
+                <Text variant="titleMedium">{t('deviceSettings.general')}</Text>
+              </Box>
+              <Box p={16}>
+                {config.hostname !== null ? (
+                  <Text variant="titleLarge">{config.hostname}</Text>
+                ) : null}
+                <Text
+                  variant="bodySmall"
+                  style={{ color: theme.colors.onSurface }}
+                >
+                  {t('deviceSettings.status', {
+                    status:
+                      DeviceState[deviceState] ??
+                      DeviceState[DeviceState.Unknown],
+                  })}
+                </Text>
+                <Text
+                  variant="bodySmall"
+                  style={{ color: theme.colors.onSurface }}
+                >
+                  {t('deviceSettings.serverUrl', { url: config.baseUrl })}
+                </Text>
+                {config.customName !== null ? (
                   <Text
                     variant="bodySmall"
                     style={{ color: theme.colors.onSurface }}
                   >
-                    {t('deviceSettings.status', {
-                      status:
-                        DeviceState[deviceState] ??
-                        DeviceState[DeviceState.Unknown],
+                    {t('deviceSettings.deviceName', {
+                      name: config.customName,
                     })}
                   </Text>
+                ) : null}
+                {config.serialNumber !== null ? (
                   <Text
                     variant="bodySmall"
                     style={{ color: theme.colors.onSurface }}
                   >
-                    {t('deviceSettings.serverUrl', { url: config.baseUrl })}
+                    {t('deviceSettings.serialNumber', {
+                      serialNumber: config.serialNumber,
+                    })}
                   </Text>
-                  {config.customName !== null ? (
-                    <Text
-                      variant="bodySmall"
-                      style={{ color: theme.colors.onSurface }}
-                    >
-                      {t('deviceSettings.deviceName', {
-                        name: config.customName,
-                      })}
-                    </Text>
-                  ) : null}
-                  {config.serialNumber !== null ? (
-                    <Text
-                      variant="bodySmall"
-                      style={{ color: theme.colors.onSurface }}
-                    >
-                      {t('deviceSettings.serialNumber', {
-                        serialNumber: config.serialNumber,
-                      })}
-                    </Text>
-                  ) : null}
-                  {username ? (
-                    <Text
-                      variant="bodySmall"
-                      style={{ color: theme.colors.onSurface }}
-                    >
-                      {t('deviceSettings.username', { username })}
-                    </Text>
-                  ) : null}
-                </Box>
-                {hasHints ? (
-                  <>
-                    <Box>
-                      <Text
-                        variant="titleMedium"
-                        style={{ color: theme.colors.error }}
-                      >
-                        {t('deviceSettings.hints')}
-                      </Text>
-                    </Box>
-                    <Box p={16}>
-                      {hints?.default_password ? (
-                        <Text
-                          variant="bodySmall"
-                          style={{
-                            color: theme.colors.error,
-                            marginVertical: 4,
-                          }}
-                        >
-                          {t('deviceSettings.hint.defaultPassword')}
-                        </Text>
-                      ) : null}
-                      {hints?.time_sync ? (
-                        <Text
-                          variant="bodySmall"
-                          style={{
-                            color: theme.colors.error,
-                            marginVertical: 4,
-                          }}
-                        >
-                          {t('deviceSettings.hint.timeSync')}
-                        </Text>
-                      ) : null}
-                      {hints?.radio_problem ? (
-                        <Text
-                          variant="bodySmall"
-                          style={{
-                            color: theme.colors.error,
-                            marginVertical: 4,
-                          }}
-                        >
-                          {t('deviceSettings.hint.radioProblem')}
-                        </Text>
-                      ) : null}
-                    </Box>
-                  </>
                 ) : null}
-                <Box mt={8}>
-                  <Text variant="titleMedium">
-                    {t('deviceSettings.details')}
+                {username ? (
+                  <Text
+                    variant="bodySmall"
+                    style={{ color: theme.colors.onSurface }}
+                  >
+                    {t('deviceSettings.username', { username })}
                   </Text>
-                  <List.Item
-                    title={t('deviceSettings.configureDeviceName')}
-                    description={config.customName}
-                    left={props => <List.Icon {...props} icon="format-size" />}
-                    borderless
-                    style={{ borderRadius: 8 }}
-                    onPress={() => setOpenCustomNameModal(true)}
-                  />
-                  <List.Item
-                    title={t('deviceSettings.configureServerUrl')}
-                    description={config.baseUrl}
-                    left={props => <List.Icon {...props} icon="lan-connect" />}
-                    borderless
-                    style={{ borderRadius: 8 }}
-                    onPress={() => setOpenServerUrlModal(true)}
-                  />
-                  <List.Item
-                    title={t('deviceSettings.opendtuCredentials')}
-                    description={hasPassword ? '********' : t('notConfigured')}
-                    left={props => <List.Icon {...props} icon="lock" />}
-                    borderless
-                    style={{ borderRadius: 8 }}
-                    onPress={() => setOpenCredentialsModal(true)}
-                  />
-                  <List.Item
-                    title={t('deviceSettings.configureDatabase')}
-                    description={databaseName ?? t('notConfigured')}
-                    left={props => <List.Icon {...props} icon="database" />}
-                    borderless
-                    style={{ borderRadius: 8 }}
-                    onPress={() => openDatabaseSettings()}
-                  />
-                </Box>
-                <Box mt={32} mb={16}>
-                  <Box mb={16}>
-                    <Button
-                      onPress={connectToDevice}
-                      mode="contained"
-                      disabled={
-                        deviceState !== DeviceState.Reachable &&
-                        index === selectedDtuConfig
-                      }
-                    >
-                      {deviceState === DeviceState.Connected &&
-                      index === selectedDtuConfig
-                        ? t('deviceSettings.alreadyConnected')
-                        : t('deviceSettings.connect')}
-                    </Button>
-                  </Box>
+                ) : null}
+              </Box>
+              {hasHints ? (
+                <>
                   <Box>
-                    <Button
-                      onPress={() => setOpenDeleteModal(true)}
-                      mode="contained"
-                      buttonColor={theme.colors.error}
-                      textColor={theme.colors.onError}
+                    <Text
+                      variant="titleMedium"
+                      style={{ color: theme.colors.error }}
                     >
-                      {t('delete')}
-                    </Button>
+                      {t('deviceSettings.hints')}
+                    </Text>
                   </Box>
+                  <Box p={16}>
+                    {hints?.default_password ? (
+                      <Text
+                        variant="bodySmall"
+                        style={{
+                          color: theme.colors.error,
+                          marginVertical: 4,
+                        }}
+                      >
+                        {t('deviceSettings.hint.defaultPassword')}
+                      </Text>
+                    ) : null}
+                    {hints?.time_sync ? (
+                      <Text
+                        variant="bodySmall"
+                        style={{
+                          color: theme.colors.error,
+                          marginVertical: 4,
+                        }}
+                      >
+                        {t('deviceSettings.hint.timeSync')}
+                      </Text>
+                    ) : null}
+                    {hints?.radio_problem ? (
+                      <Text
+                        variant="bodySmall"
+                        style={{
+                          color: theme.colors.error,
+                          marginVertical: 4,
+                        }}
+                      >
+                        {t('deviceSettings.hint.radioProblem')}
+                      </Text>
+                    ) : null}
+                  </Box>
+                </>
+              ) : null}
+              <Box mt={8}>
+                <Text variant="titleMedium">{t('deviceSettings.details')}</Text>
+                <List.Item
+                  title={t('deviceSettings.configureDeviceName')}
+                  description={config.customName}
+                  left={props => <List.Icon {...props} icon="format-size" />}
+                  borderless
+                  style={{ borderRadius: 8 }}
+                  onPress={() => setOpenCustomNameModal(true)}
+                />
+                <List.Item
+                  title={t('deviceSettings.configureServerUrl')}
+                  description={config.baseUrl}
+                  left={props => <List.Icon {...props} icon="lan-connect" />}
+                  borderless
+                  style={{ borderRadius: 8 }}
+                  onPress={() => setOpenServerUrlModal(true)}
+                />
+                <List.Item
+                  title={t('deviceSettings.opendtuCredentials')}
+                  description={hasPassword ? '********' : t('notConfigured')}
+                  left={props => <List.Icon {...props} icon="lock" />}
+                  borderless
+                  style={{ borderRadius: 8 }}
+                  onPress={() => setOpenCredentialsModal(true)}
+                />
+                <List.Item
+                  title={t('deviceSettings.configureDatabase')}
+                  description={databaseName ?? t('notConfigured')}
+                  left={props => <List.Icon {...props} icon="database" />}
+                  borderless
+                  style={{ borderRadius: 8 }}
+                  onPress={() => openDatabaseSettings()}
+                />
+              </Box>
+              <Box mt={32} mb={16}>
+                <Box mb={16}>
+                  <Button
+                    onPress={connectToDevice}
+                    mode="contained"
+                    disabled={
+                      deviceState !== DeviceState.Reachable &&
+                      index === selectedDtuConfig
+                    }
+                  >
+                    {deviceState === DeviceState.Connected &&
+                    index === selectedDtuConfig
+                      ? t('deviceSettings.alreadyConnected')
+                      : t('deviceSettings.connect')}
+                  </Button>
+                </Box>
+                <Box>
+                  <Button
+                    onPress={() => setOpenDeleteModal(true)}
+                    mode="contained"
+                    buttonColor={theme.colors.error}
+                    textColor={theme.colors.onError}
+                  >
+                    {t('delete')}
+                  </Button>
                 </Box>
               </Box>
-            </SettingsSurface>
-            <ChangeCustomNameModal
-              visible={openCustomNameModal}
-              onDismiss={() => setOpenCustomNameModal(false)}
-              index={index}
-            />
-            <ChangeServerUrlModal
-              visible={openServerUrlModal}
-              onDismiss={() => setOpenServerUrlModal(false)}
-              index={index}
-            />
-            <ChangeOpendtuCredentialsModal
-              visible={openCredentialsModal}
-              onDismiss={() => setOpenCredentialsModal(false)}
-              index={index}
-            />
-            <ConfirmDeleteDeviceModal
-              visible={openDeleteModal}
-              onDismiss={() => setOpenDeleteModal(false)}
-              index={index}
-            />
+            </Box>
+            <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
+        <ChangeCustomNameModal
+          visible={openCustomNameModal}
+          onDismiss={() => setOpenCustomNameModal(false)}
+          index={index}
+        />
+        <ChangeServerUrlModal
+          visible={openServerUrlModal}
+          onDismiss={() => setOpenServerUrlModal(false)}
+          index={index}
+        />
+        <ChangeOpendtuCredentialsModal
+          visible={openCredentialsModal}
+          onDismiss={() => setOpenCredentialsModal(false)}
+          index={index}
+        />
+        <ConfirmDeleteDeviceModal
+          visible={openDeleteModal}
+          onDismiss={() => setOpenDeleteModal(false)}
+          index={index}
+        />
       </StyledSafeAreaView>
     </>
   );

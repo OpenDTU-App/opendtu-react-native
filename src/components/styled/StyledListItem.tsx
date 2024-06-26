@@ -6,7 +6,7 @@ const StyledListItem: FC<ListItemProps> = props => {
   return (
     <Surface
       mode="flat"
-      elevation={props.disabled ? 1 : 5}
+      elevation={props.disabled ? 1 : 3}
       style={{
         borderRadius: 16,
         ...(props.disabled && { opacity: 0.5 }),

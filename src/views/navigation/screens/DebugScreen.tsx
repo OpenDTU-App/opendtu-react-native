@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, IconButton, List, useTheme } from 'react-native-paper';
 
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import moment from 'moment';
 
@@ -17,6 +17,7 @@ import { setDebugEnabled } from '@/slices/settings';
 
 import { useApi } from '@/api/ApiHandler';
 import type { DebugInfo } from '@/api/opendtuapi';
+import { spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
@@ -148,6 +149,7 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 onPress={() => navigation.navigate('DebugColorsScreen')}
               />
             </List.Section>
+            <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
       </StyledSafeAreaView>
