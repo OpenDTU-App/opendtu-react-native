@@ -14,7 +14,6 @@ const ColorCircle = styled(View)`
   width: 50px;
   height: 50px;
   border-radius: 50px;
-  border: 1px solid white;
 `;
 
 const DebugColorsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
@@ -32,6 +31,9 @@ const DebugColorsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               key={key}
               style={{
                 backgroundColor: value,
+                borderColor: theme.colors.onSurface,
+                borderWidth: 1,
+                borderStyle: 'dashed',
               }}
             />
           )}
