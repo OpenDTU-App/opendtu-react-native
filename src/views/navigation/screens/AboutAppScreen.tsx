@@ -152,7 +152,12 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               </Box>
               <Surface style={{ padding: 16, marginTop: 8, borderRadius: 16 }}>
                 <Markdown
-                  style={{ link: { textDecorationLine: 'none' } }}
+                  style={{
+                    body: {
+                      color: theme.colors.onSurface,
+                    },
+                    link: { textDecorationLine: 'none' },
+                  }}
                   rules={rules}
                 >
                   {releaseInfo?.body || ''}
