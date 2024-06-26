@@ -133,7 +133,12 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
       <SettingsSurface style={{ marginHorizontal: 8, flex: 1 }}>
         <View style={{ padding: 8, flex: 1 }}>
           <Markdown
-            style={{ link: { textDecorationLine: 'none' } }}
+            style={{
+              body: {
+                color: theme.colors.onSurface,
+              },
+              link: { textDecorationLine: 'none' },
+            }}
             rules={rules}
           >
             {release.body}
