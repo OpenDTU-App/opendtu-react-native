@@ -3,7 +3,15 @@ import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import type { ModalProps } from 'react-native-paper';
-import { Button, Portal, RadioButton, Text } from 'react-native-paper';
+import {
+  Button,
+  Portal,
+  RadioButton,
+  Text,
+  useTheme,
+} from 'react-native-paper';
+
+import { Linking } from 'react-native';
 
 import { setLanguage } from '@/slices/settings';
 
@@ -13,6 +21,7 @@ import useAppLanguage from '@/hooks/useAppLanguage';
 
 import { rootLogging } from '@/utils/log';
 
+import { colors, weblateUrl } from '@/constants';
 import { useAppDispatch } from '@/store';
 import type { SupportedLanguage } from '@/translations';
 import { supportedLanguages } from '@/translations';
@@ -23,6 +32,7 @@ const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
   const { onDismiss } = props;
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const language = useAppLanguage();
 
@@ -39,11 +49,20 @@ const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
     onDismiss?.();
   }, [dispatch, onDismiss, selectedLanguage]);
 
+  const handleOpenWeblate = useCallback(async () => {
+    if (await Linking.canOpenURL(weblateUrl)) {
+      await Linking.openURL(weblateUrl);
+    } else {
+      // TODO: Better error handling (issue #101)
+      log.error('Cannot open Weblate URL');
+    }
+  }, []);
+
   return (
     <Portal>
       <BaseModal {...props}>
-        <Box p={16}>
-          <Box mb={8}>
+        <Box p={8}>
+          <Box m={8}>
             <Text variant="bodyLarge">{t('settings.changeTheLanguage')}</Text>
           </Box>
           <RadioButton.Group
@@ -60,6 +79,24 @@ const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
               />
             ))}
           </RadioButton.Group>
+          <Box
+            mt={16}
+            style={{
+              gap: 8,
+              backgroundColor: theme.colors.elevation.level1,
+              padding: 8,
+              borderRadius: theme.roundness * 4,
+            }}
+          >
+            <Text variant="bodyMedium">{t('settings.weblateInfo')}</Text>
+            <Button
+              buttonColor={colors.weblate}
+              textColor={colors.onWeblate}
+              onPress={handleOpenWeblate}
+            >
+              {t('settings.openWeblate')}
+            </Button>
+          </Box>
           <Box
             mt={16}
             style={{

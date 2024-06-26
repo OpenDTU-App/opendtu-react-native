@@ -14,6 +14,8 @@ export const colors = {
     warningSurface: '#fff9c4',
     onWarningSurface: '#7a471d',
   },
+  weblate: '#124b47',
+  onWeblate: '#fff',
 };
 
 export const spacing = 8;
@@ -23,3 +25,6 @@ export const defaultUser = 'admin';
 export const minimumOpenDtuFirmwareVersion = 'v23.11.16';
 
 export const maximumTestedOpenDtuFirmwareVersion = 'v24.4.12';
+
+export const weblateUrl =
+  'https://weblate.commanderred.xyz/engage/opendtu-react-native/';
