@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, IconButton, List, Text, useTheme } from 'react-native-paper';
 
-import { RefreshControl, ScrollView } from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 
 import type { Moment } from 'moment';
 import moment from 'moment';
@@ -222,7 +222,10 @@ const InverterInfoScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
       <StyledSafeAreaView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView
-            style={{ paddingHorizontal: spacing, marginBottom: spacing }}
+            style={{
+              paddingHorizontal: spacing,
+              marginBottom: spacing,
+            }}
             refreshControl={
               <RefreshControl
                 refreshing={isRefreshing}
@@ -233,134 +236,141 @@ const InverterInfoScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
               />
             }
           >
-            <Box style={{ marginBottom: spacing * 3 }}>
-              <StyledSurface
-                theme={theme}
-                style={{ backgroundColor: headerColor.background, padding: 12 }}
-              >
-                <Box
+            <Box style={{ width: '100%', flex: 1, gap: spacing * 2 }}>
+              <Box>
+                <StyledSurface
+                  theme={theme}
                   style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    maxWidth: '100%',
+                    backgroundColor: headerColor.background,
+                    padding: 12,
                   }}
                 >
-                  <Box ml={8} style={{ flexShrink: 1 }}>
-                    <Text style={{ color: headerColor.text }}>
-                      {t('inverterInfo.serial', { serial: inverterSerial })}
-                    </Text>
-                    <Text style={{ color: headerColor.text }}>
-                      {t('inverterInfo.limits', {
-                        absolute: livedataInverter?.limit_absolute ?? 0,
-                        relative: livedataInverter?.limit_relative ?? 0,
-                      })}
-                    </Text>
-                    <Box
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: 4,
-                        flexWrap: 'wrap',
-                      }}
-                    >
+                  <Box
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      maxWidth: '100%',
+                    }}
+                  >
+                    <Box ml={8} style={{ flexShrink: 1 }}>
                       <Text style={{ color: headerColor.text }}>
-                        {t('inverterInfo.lastUpdateWas', { ago: dataAge })}
+                        {t('inverterInfo.serial', { serial: inverterSerial })}
                       </Text>
-                      {absoluteDataAge !== null ? (
+                      <Text style={{ color: headerColor.text }}>
+                        {t('inverterInfo.limits', {
+                          absolute: livedataInverter?.limit_absolute ?? 0,
+                          relative: livedataInverter?.limit_relative ?? 0,
+                        })}
+                      </Text>
+                      <Box
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          gap: 4,
+                          flexWrap: 'wrap',
+                        }}
+                      >
                         <Text style={{ color: headerColor.text }}>
-                          ({absoluteDataAge})
+                          {t('inverterInfo.lastUpdateWas', { ago: dataAge })}
                         </Text>
-                      ) : null}
+                        {absoluteDataAge !== null ? (
+                          <Text style={{ color: headerColor.text }}>
+                            ({absoluteDataAge})
+                          </Text>
+                        ) : null}
+                      </Box>
                     </Box>
+                    <IconButton
+                      iconColor={headerColor.text}
+                      icon="information"
+                      onPress={showInverterInfo}
+                    />
                   </Box>
-                  <IconButton
-                    iconColor={headerColor.text}
-                    icon="information"
-                    onPress={showInverterInfo}
-                  />
-                </Box>
-              </StyledSurface>
-            </Box>
-            {livedataInverter &&
-            'AC' in livedataInverter &&
-            'DC' in livedataInverter &&
-            'INV' in livedataInverter ? (
-              <Box
-                style={{
-                  gap: spacing,
-                  display: 'flex',
-                  marginBottom: spacing * 3,
-                }}
-              >
-                {Object.keys(DataKeys).map(key => (
-                  <StyledListItem
-                    key={`inverter-info-${key}`}
-                    title={t(`inverter.livedata.${key}`)}
-                    description={generateDescription(
-                      livedataInverter[key as DataKeys],
-                      DataKeys[key as DataKeys].valueKey,
-                      t,
-                    )}
-                    onPress={() =>
-                      navigation.navigate('InverterDataScreen', {
-                        inverterSerial,
-                        dataKey: key,
-                      })
-                    }
-                    left={props => (
-                      <List.Icon
-                        style={{
-                          ...props.style,
-                          alignSelf: 'center',
-                        }}
-                        icon={key === 'AC' ? 'current-ac' : 'current-dc'}
-                        color={theme.colors.primary}
-                      />
-                    )}
-                    right={props => (
-                      <List.Icon
-                        style={{
-                          ...props.style,
-                          alignSelf: 'center',
-                        }}
-                        color={props.color}
-                        icon="chevron-right"
-                      />
-                    )}
-                  />
-                ))}
+                </StyledSurface>
               </Box>
-            ) : null}
-            <Box style={{ gap: spacing, display: 'flex' }}>
-              <StyledListItem
-                onPress={handleNavigateEventLog}
-                left={props => <List.Icon {...props} icon="history" />}
-                title={t('inverter.eventLog.title')}
-                description={t('inverter.eventLog.description')}
-              />
-              <StyledListItem
-                onPress={showGridProfile}
-                disabled={!supportsGridProfile}
-                left={props => <List.Icon {...props} icon="power-plug" />}
-                title={t('inverter.gridProfile.title')}
-                description={t('inverter.gridProfile.description')}
-              />
-              <StyledListItem
-                onPress={() => setShowLimitConfigModal(true)}
-                disabled={!hasAuthConfigured}
-                left={props => <List.Icon {...props} icon="tune" />}
-                title={t('inverter.limits.title')}
-                description={t('inverter.limits.description')}
-              />
-              <StyledListItem
-                onPress={() => setShowPowerConfigModal(true)}
-                disabled={!hasAuthConfigured}
-                left={props => <List.Icon {...props} icon="power" />}
-                title={t('inverter.control.title')}
-                description={t('inverter.control.description')}
-              />
+              <View>
+                {livedataInverter &&
+                'AC' in livedataInverter &&
+                'DC' in livedataInverter &&
+                'INV' in livedataInverter ? (
+                  <List.Section
+                    title={t('inverter.inverterInfoSections.livedata')}
+                    style={{ gap: spacing }}
+                  >
+                    {Object.keys(DataKeys).map(key => (
+                      <StyledListItem
+                        key={`inverter-info-${key}`}
+                        title={t(`inverter.livedata.${key}`)}
+                        description={generateDescription(
+                          livedataInverter[key as DataKeys],
+                          DataKeys[key as DataKeys].valueKey,
+                          t,
+                        )}
+                        onPress={() =>
+                          navigation.navigate('InverterDataScreen', {
+                            inverterSerial,
+                            dataKey: key,
+                          })
+                        }
+                        left={props => (
+                          <List.Icon
+                            style={{
+                              ...props.style,
+                              alignSelf: 'center',
+                            }}
+                            icon={key === 'AC' ? 'current-ac' : 'current-dc'}
+                            color={theme.colors.primary}
+                          />
+                        )}
+                        right={props => (
+                          <List.Icon
+                            style={{
+                              ...props.style,
+                              alignSelf: 'center',
+                            }}
+                            color={props.color}
+                            icon="chevron-right"
+                          />
+                        )}
+                      />
+                    ))}
+                  </List.Section>
+                ) : null}
+                <List.Section
+                  title={t('inverter.inverterInfoSections.controls')}
+                  style={{ gap: spacing }}
+                >
+                  <StyledListItem
+                    onPress={handleNavigateEventLog}
+                    left={props => <List.Icon {...props} icon="history" />}
+                    title={t('inverter.eventLog.title')}
+                    description={t('inverter.eventLog.description')}
+                  />
+                  <StyledListItem
+                    onPress={showGridProfile}
+                    disabled={!supportsGridProfile}
+                    left={props => <List.Icon {...props} icon="power-plug" />}
+                    title={t('inverter.gridProfile.title')}
+                    description={t('inverter.gridProfile.description')}
+                  />
+                  <StyledListItem
+                    onPress={() => setShowLimitConfigModal(true)}
+                    disabled={!hasAuthConfigured}
+                    left={props => <List.Icon {...props} icon="tune" />}
+                    title={t('inverter.limits.title')}
+                    description={t('inverter.limits.description')}
+                  />
+                  <StyledListItem
+                    onPress={() => setShowPowerConfigModal(true)}
+                    disabled={!hasAuthConfigured}
+                    left={props => <List.Icon {...props} icon="power" />}
+                    title={t('inverter.control.title')}
+                    description={t('inverter.control.description')}
+                  />
+                </List.Section>
+              </View>
             </Box>
           </ScrollView>
         </Box>
