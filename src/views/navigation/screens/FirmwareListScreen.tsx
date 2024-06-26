@@ -16,7 +16,7 @@ import SettingsSurface from '@/components/styled/SettingsSurface';
 
 import useDtuState from '@/hooks/useDtuState';
 
-import { minimumOpenDtuFirmwareVersion } from '@/constants';
+import { minimumOpenDtuFirmwareVersion, spacing } from '@/constants';
 import { useFetchControl } from '@/github/FetchHandler';
 import { useAppSelector } from '@/store';
 import { StyledSafeAreaView } from '@/style';
@@ -86,7 +86,7 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.Content title={t('firmwares.title')} />
         <Appbar.Action icon="refresh" onPress={handleShowRefreshModal} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledSafeAreaView theme={theme} disableSafeBottomMargin>
         <GenericRefreshModal
           visible={showRefreshModal}
           onDismiss={handleHideRefreshModal}
@@ -199,6 +199,7 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   ))}
                 </View>
               ) : null}
+              <View style={{ height: spacing * 2 }} />
             </ScrollView>
           </Box>
         )}

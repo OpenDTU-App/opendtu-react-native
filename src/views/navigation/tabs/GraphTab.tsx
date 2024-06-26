@@ -9,9 +9,9 @@ const LivedataTab = () => {
   const theme = useTheme();
 
   return (
-    <StyledSafeAreaView theme={theme}>
+    <StyledSafeAreaView theme={theme} disableSafeBottomMargin>
       <DeviceOfflineWrapper>
-        <StyledScrollView theme={theme}>
+        <StyledScrollView theme={theme} disableSafeBottomMargin>
           <ImportantCharts />
         </StyledScrollView>
       </DeviceOfflineWrapper>

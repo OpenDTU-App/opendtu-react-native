@@ -113,7 +113,7 @@ const MainSettingsTab: FC = () => {
   const handleUnlockDebug = useRequireMultiplePresses(enableDebugMode);
 
   return (
-    <StyledSafeAreaView theme={theme}>
+    <StyledSafeAreaView theme={theme} disableSafeBottomMargin>
       <Box style={{ width: '100%', flex: 1 }}>
         <ScrollView>
           <List.Section>
