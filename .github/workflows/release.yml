@@ -38,13 +38,13 @@ jobs:
           yarn install --immutable --check-cache
 
       - name: Cache Gradle Wrapper
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/android/gradle/wrapper/gradle-wrapper.properties') }}
 
       - name: Cache Gradle Dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/android/build.gradle') }}
@@ -84,7 +84,7 @@ jobs:
           rm android/app/build/outputs/apk/release/*-aligned.apk
 
       - name: Upload APK as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: opendtu-app
           path: android/app/build/outputs/apk/release/*.apk

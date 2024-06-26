@@ -57,7 +57,7 @@
     "prometheus-query": "^3.4.0",
     "react": "18.3.1",
     "react-i18next": "^14.1.1",
-    "react-native": "^0.74.1",
+    "react-native": "0.74.2",
     "react-native-charts-wrapper": "^0.6.0",
     "react-native-fast-image": "^8.6.3",
     "react-native-flex-layout": "^0.1.5",
