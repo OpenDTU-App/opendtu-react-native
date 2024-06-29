@@ -30,7 +30,7 @@ import { rootLogging } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
 import { colors, spacing } from '@/constants';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const log = rootLogging.extend('InverterInfoScreen');
@@ -219,7 +219,7 @@ const InverterInfoScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
         <Appbar.Content title={inverter.name} />
         <Appbar.Action icon="refresh" onPress={handleRefresh} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView
             style={{
@@ -385,7 +385,7 @@ const InverterInfoScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
           onDismiss={() => setShowLimitConfigModal(false)}
           visible={showLimitConfigModal}
         />
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

@@ -12,7 +12,7 @@ import StyledListItem from '@/components/styled/StyledListItem';
 
 import { spacing } from '@/constants';
 import { useAppSelector } from '@/store';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const ManageDatabasesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
@@ -44,7 +44,7 @@ const ManageDatabasesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.Content title={t('manageDatabases.databases')} />
         <Appbar.Action icon="plus" onPress={handleClickAdd} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <Box style={{ flex: 1, width: '100%' }}>
           {!hasConfiguredDatabases ? (
             <Box
@@ -98,7 +98,7 @@ const ManageDatabasesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
           onDismiss={() => setOpenManageDatabaseModal(null)}
           uuid={openManageDatabaseModal ?? undefined}
         />
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

@@ -10,7 +10,7 @@ import { updateDTUDatabaseUuid } from '@/slices/settings';
 
 import { spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const SelectDatabaseScreen: FC<PropsWithNavigation> = ({
@@ -67,7 +67,7 @@ const SelectDatabaseScreen: FC<PropsWithNavigation> = ({
         <Appbar.Content title={t('settings.selectDatabase')} />
         <Appbar.Action icon="cog" onPress={handleClickManage} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <Box style={{ flex: 1, width: '100%' }} mt={16}>
           <ScrollView>
             <RadioButton.Group
@@ -86,7 +86,7 @@ const SelectDatabaseScreen: FC<PropsWithNavigation> = ({
             <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

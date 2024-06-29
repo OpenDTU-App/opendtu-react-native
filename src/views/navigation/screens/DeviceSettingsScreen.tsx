@@ -19,7 +19,7 @@ import useLivedata from '@/hooks/useLivedata';
 
 import { spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
@@ -105,7 +105,7 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('deviceSettings.title')} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView>
             <Box style={{ flex: 1, width: '100%' }} ph={16} mt={16}>
@@ -294,7 +294,7 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
           onDismiss={() => setOpenDeleteModal(false)}
           index={index}
         />
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

@@ -8,7 +8,7 @@ import { ScrollView, View } from 'react-native';
 import styled from 'styled-components';
 
 import { spacing } from '@/constants';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const ColorCircle = styled(View)`
@@ -49,14 +49,14 @@ const DebugColorsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('debug.debugColors')} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <Box style={{ flex: 1, width: '100%' }}>
           <ScrollView>
             {flatColors}
             <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

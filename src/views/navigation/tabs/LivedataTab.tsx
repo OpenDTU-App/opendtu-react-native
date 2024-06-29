@@ -4,20 +4,20 @@ import DeviceOfflineWrapper from '@/components/DeviceOfflineWrapper';
 import DeviceStatus from '@/components/DeviceStatus';
 import ImportantStatusValues from '@/components/ImportantStatusValues';
 
-import { StyledSafeAreaView, StyledScrollView } from '@/style';
+import { StyledScrollView, StyledView } from '@/style';
 
 const LivedataTab = () => {
   const theme = useTheme();
 
   return (
-    <StyledSafeAreaView theme={theme}>
+    <StyledView theme={theme}>
       <DeviceOfflineWrapper>
         <StyledScrollView theme={theme} disableSafeBottomMargin>
           <DeviceStatus />
           <ImportantStatusValues />
         </StyledScrollView>
       </DeviceOfflineWrapper>
-    </StyledSafeAreaView>
+    </StyledView>
   );
 };
 

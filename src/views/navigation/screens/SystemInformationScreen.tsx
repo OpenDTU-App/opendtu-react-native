@@ -23,7 +23,7 @@ import percentage from '@/utils/percentage';
 
 import { colors, spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
@@ -135,7 +135,7 @@ const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('opendtu.systemInformation')} />
       </Appbar.Header>
-      <StyledSafeAreaView>
+      <StyledView>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView>
             <SettingsSurface>
@@ -452,7 +452,7 @@ const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };
