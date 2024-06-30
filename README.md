@@ -24,6 +24,8 @@ There are signed .apk files inside the "Releases" tab. As of now, the is no plan
 <br>
 ~However, if you want to help with F-Droid, feel free to contact me.~ Thanks to @IzzySoft for [having the app in their repo](https://apt.izzysoft.de/fdroid/index/apk/xyz.commanderred.opendtuapp/)!
 
+iOS is set up in xCode, but there is no plan yet to publish it to the App Store, so if you want to try it, you have to clone the repository and build it manually. If you encounter any issues, feel free to open an issue.
+
 ## Development
 There are two branches. `main` is the stable branch, `develop` is the development branch. If you want to contribute, please create a pull request to `develop`.
 
@@ -38,7 +40,7 @@ This helps to have a better developer experience when working with Weblate.
 ### ToDo
 - [x] App Icon
 - [x] Splash Screen
-- [ ] Add iOS support (currently only tested on / implemented for Android)
+- [x] Add iOS support
 - [ ] Original Functionality
   - [ ] Settings
     - [ ] Network Settings
