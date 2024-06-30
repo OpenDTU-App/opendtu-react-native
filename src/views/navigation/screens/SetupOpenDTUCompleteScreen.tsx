@@ -10,7 +10,7 @@ import { addDtuConfig } from '@/slices/settings';
 import { rootLogging } from '@/utils/log';
 
 import { useAppDispatch, useAppSelector } from '@/store';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const log = rootLogging.extend('SetupOpenDTUCompleteScreen');
@@ -66,7 +66,7 @@ const SetupOpenDTUCompleteScreen: FC<PropsWithNavigation> = ({
   }, [dispatch, navigation, setupConfig.baseUrl, setupConfig.userString]);
 
   return (
-    <StyledSafeAreaView theme={theme} style={{ justifyContent: 'center' }}>
+    <StyledView theme={theme} style={{ justifyContent: 'center' }}>
       <Box ph={32} w="100%" mb={8} style={{ alignItems: 'center' }}>
         <Title>{t('setup.setupComplete')}</Title>
       </Box>
@@ -79,7 +79,7 @@ const SetupOpenDTUCompleteScreen: FC<PropsWithNavigation> = ({
           {t('setup.goToDashboard')}
         </Button>
       </Box>
-    </StyledSafeAreaView>
+    </StyledView>
   );
 };
 

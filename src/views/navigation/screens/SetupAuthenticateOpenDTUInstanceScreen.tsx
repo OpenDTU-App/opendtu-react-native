@@ -22,7 +22,7 @@ import { rootLogging } from '@/utils/log';
 import { useApi } from '@/api/ApiHandler';
 import { defaultUser } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const log = rootLogging.extend('SetupAuthenticateOpenDTUInstanceScreen');
@@ -122,7 +122,7 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
         />
         <Appbar.Content title={t('setup.authenticateOpendtuInstance')} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme} style={{ justifyContent: 'center' }}>
+      <StyledView theme={theme} style={{ justifyContent: 'center' }}>
         <Box ph={32} w="100%" mb={16}>
           <Box mb={4}>
             <StyledTextInput
@@ -183,7 +183,7 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
             {t('setup.anonymous')}
           </Button>
         </Box>
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

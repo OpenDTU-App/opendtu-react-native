@@ -10,7 +10,7 @@ import SettingsSurface from '@/components/styled/SettingsSurface';
 import useDtuState from '@/hooks/useDtuState';
 
 import { colors, spacing } from '@/constants';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const NtpInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
@@ -25,7 +25,7 @@ const NtpInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('opendtu.ntpInformation')} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView>
             <SettingsSurface>
@@ -123,7 +123,7 @@ const NtpInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

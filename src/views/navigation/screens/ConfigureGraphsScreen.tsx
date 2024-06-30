@@ -19,7 +19,7 @@ import ShowTimeRange from '@/components/ShowTimeRange';
 
 import { spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const ConfigureGraphsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
@@ -205,7 +205,7 @@ const ConfigureGraphsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('configureGraphs.title')} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
           <Box
             style={{
@@ -310,7 +310,7 @@ const ConfigureGraphsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
           visible={openChangeGraphRefreshIntervalModal}
           onDismiss={() => setOpenChangeGraphRefreshIntervalModal(false)}
         />
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

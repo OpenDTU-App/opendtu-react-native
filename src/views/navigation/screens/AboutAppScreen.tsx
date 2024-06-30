@@ -29,7 +29,7 @@ import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 import { spacing } from '@/constants';
 import { useFetchControl } from '@/github/FetchHandler';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 import packageJson from '@root/package.json';
@@ -92,7 +92,7 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.Content title={t('settings.aboutApp')} />
         <Appbar.Action icon="refresh" onPress={handleShowRefreshModal} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <GenericRefreshModal
           visible={showRefreshModal}
           onDismiss={handleHideRefreshModal}
@@ -193,7 +193,7 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

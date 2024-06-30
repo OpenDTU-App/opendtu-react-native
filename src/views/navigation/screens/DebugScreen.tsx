@@ -19,7 +19,7 @@ import { useApi } from '@/api/ApiHandler';
 import type { DebugInfo } from '@/api/opendtuapi';
 import { spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
@@ -72,7 +72,7 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('settings.debug')} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView>
             <List.Section>
@@ -152,7 +152,7 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

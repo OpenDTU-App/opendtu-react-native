@@ -16,7 +16,7 @@ import { rootLogging } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
 import { spacing } from '@/constants';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const log = rootLogging.extend('InverterDeviceInfoScreen');
@@ -93,7 +93,7 @@ const InverterDeviceInfoScreen: FC<PropsWithNavigation> = ({
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={inverterName} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView
             refreshControl={
@@ -164,7 +164,7 @@ const InverterDeviceInfoScreen: FC<PropsWithNavigation> = ({
             <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

@@ -16,7 +16,7 @@ import { rootLogging } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const log = rootLogging.extend('SetupAddOpenDTUScreen');
@@ -131,7 +131,7 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         ) : null}
         <Appbar.Content title={t('setup.addOpendtuInstance')} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme} style={{ justifyContent: 'center' }}>
+      <StyledView theme={theme} style={{ justifyContent: 'center' }}>
         <Box ph={32} w="100%">
           <StyledTextInput
             label={t('setup.opendtuAddress')}
@@ -188,7 +188,7 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             ) : null}
           </Box>
         </Box>
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

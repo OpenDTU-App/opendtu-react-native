@@ -7,7 +7,7 @@ import { Appbar, useTheme } from 'react-native-paper';
 import DeviceList from '@/components/devices/DeviceList';
 
 import { useAppSelector } from '@/store';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const DeviceListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
@@ -42,11 +42,11 @@ const DeviceListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.Content title={t('deviceList.devices')} />
         <Appbar.Action icon="plus" onPress={handleClickAdd} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <Box style={{ flex: 1, justifyContent: 'flex-start', width: '100%' }}>
           <DeviceList />
         </Box>
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

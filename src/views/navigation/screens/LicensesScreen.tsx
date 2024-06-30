@@ -8,7 +8,7 @@ import { Linking, ScrollView, View } from 'react-native';
 import type { Licenses } from 'npm-license-crawler';
 
 import { spacing } from '@/constants';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 import licenses from '@root/licenses.json';
@@ -23,7 +23,7 @@ const LicensesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('aboutApp.licenses')} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView>
             {Object.entries(licenses as unknown as Licenses).map(
@@ -52,7 +52,7 @@ const LicensesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

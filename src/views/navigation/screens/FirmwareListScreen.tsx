@@ -19,7 +19,7 @@ import useDtuState from '@/hooks/useDtuState';
 import { minimumOpenDtuFirmwareVersion, spacing } from '@/constants';
 import { useFetchControl } from '@/github/FetchHandler';
 import { useAppSelector } from '@/store';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 import type { Release } from '@octokit/webhooks-types';
@@ -86,7 +86,7 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.Content title={t('firmwares.title')} />
         <Appbar.Action icon="refresh" onPress={handleShowRefreshModal} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <GenericRefreshModal
           visible={showRefreshModal}
           onDismiss={handleHideRefreshModal}
@@ -208,7 +208,7 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
           release={selectedRelease}
           onDismiss={() => setSelectedRelease(null)}
         />
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };

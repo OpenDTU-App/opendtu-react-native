@@ -16,8 +16,8 @@ import MainSettingsTab from '@/views/navigation/tabs/MainSettingsTab';
 
 const LivedataRoute = () => <LivedataTab />;
 const InverterListRoute = () => <InverterListTab />;
-const SettingsRoute = () => <MainSettingsTab />;
 const GraphRoute = () => <GraphTab />;
+const SettingsRoute = () => <MainSettingsTab />;
 
 type BaseRoutes = ComponentProps<
   typeof BottomNavigationPaper

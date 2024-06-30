@@ -15,7 +15,7 @@ import { durationToString, timestampToString } from '@/utils/time';
 
 import { useApi } from '@/api/ApiHandler';
 import { spacing } from '@/constants';
-import { StyledSafeAreaView } from '@/style';
+import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 const log = rootLogging.extend('InverterEventLogScreen');
@@ -62,7 +62,7 @@ const InverterEventLogScreen: FC<PropsWithNavigation> = ({
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('inverter.eventLog.title')} />
       </Appbar.Header>
-      <StyledSafeAreaView theme={theme}>
+      <StyledView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView
             refreshControl={
@@ -114,7 +114,7 @@ const InverterEventLogScreen: FC<PropsWithNavigation> = ({
             <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
-      </StyledSafeAreaView>
+      </StyledView>
     </>
   );
 };
