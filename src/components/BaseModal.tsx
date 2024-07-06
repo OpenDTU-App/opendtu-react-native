@@ -2,6 +2,10 @@ import type { FC } from 'react';
 import type { ModalProps } from 'react-native-paper';
 import { Modal, useTheme } from 'react-native-paper';
 
+import { Platform } from 'react-native';
+
+import { spacing } from '@/constants.ts';
+
 export interface BaseModalProps extends ModalProps {
   backgroundColor?: string;
   disableSidePadding?: boolean;
@@ -20,7 +24,12 @@ const BaseModal: FC<BaseModalProps> = ({
   return (
     <Modal
       {...rest}
-      style={{ backgroundColor: visible ? 'rgba(0, 0, 0, 0.5)' : undefined }}
+      style={{
+        ...(Platform.OS !== 'android'
+          ? { height: '100%', paddingBottom: spacing * 10 }
+          : {}),
+        backgroundColor: visible ? 'rgba(0, 0, 0, 0.5)' : undefined,
+      }}
       contentContainerStyle={{
         backgroundColor: backgroundColor ?? theme.colors.elevation.level4,
         ...(disableSidePadding
