@@ -35,7 +35,7 @@
         "licenseUrl": "https://github.com/react-native-masked-view/masked-view/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/bottom-tabs@6.5.20": {
+    "@react-navigation/bottom-tabs@6.6.0": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
@@ -209,7 +209,7 @@
         "licenseUrl": "https://github.com/callstack/react-native-paper/raw/master/LICENSE.md",
         "parents": "opendtu-react-native"
     },
-    "react-native-reanimated@3.11.0": {
+    "react-native-reanimated@3.12.1": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-reanimated",
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
