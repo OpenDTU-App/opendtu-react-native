@@ -50,7 +50,7 @@ This helps to have a better developer experience when working with Weblate.
     - [ ] DTU Settings
     - [ ] Device Manager
     - [ ] Config Management
-    - [ ] Firmware Upgrade with Firmware Browser
+    - [x] Firmware Upgrade with Firmware Browser
     - [ ] Device Reboot
   - [ ] Information
     - [x] System Information
@@ -58,10 +58,10 @@ This helps to have a better developer experience when working with Weblate.
     - [x] NTP Information
     - [x] MQTT Information
     - [ ] tbd if also console
-  - [ ] Livedata
+  - [x] Livedata
     - [x] Today's Yield 
     - [x] Power
-    - [ ] Temperature & Other stats (design tbd)
+    - [x] Temperature & Other stats
 
 ### Testing
 Stuff that I cannot test myself
