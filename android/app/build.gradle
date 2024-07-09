@@ -113,7 +113,7 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             **/
-            if (false && project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
                 signingConfig signingConfigs.release
                 minifyEnabled enableProguardInReleaseBuilds
                 proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
