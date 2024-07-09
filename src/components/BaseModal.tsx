@@ -4,7 +4,7 @@ import { Modal, useTheme } from 'react-native-paper';
 
 import { Platform } from 'react-native';
 
-import { spacing } from '@/constants.ts';
+import { spacing } from '@/constants';
 
 export interface BaseModalProps extends ModalProps {
   backgroundColor?: string;
