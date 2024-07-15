@@ -261,8 +261,8 @@ const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
   const inverters = useAppSelector(
     state =>
       state.settings.selectedDtuConfig !== null
-        ? state.opendtu.dtuStates[state.settings.selectedDtuConfig]?.liveData
-            ?.inverters ?? null
+        ? (state.opendtu.dtuStates[state.settings.selectedDtuConfig]?.liveData
+            ?.inverters ?? null)
         : null,
     (left, right) =>
       left?.map(i => i.serial).join() === right?.map(i => i.serial).join(),

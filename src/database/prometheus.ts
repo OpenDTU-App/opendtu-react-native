@@ -180,7 +180,7 @@ class PrometheusDatabase implements Database {
         const data = result.values as PrometheusResult[];
 
         const labelText = labelName
-          ? result.metric.labels[labelName] ?? 'unknown'
+          ? (result.metric.labels[labelName] ?? 'unknown')
           : '';
 
         lineChartData.dataSets?.push({

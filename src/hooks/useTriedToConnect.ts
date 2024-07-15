@@ -8,7 +8,7 @@ const useTriedToConnect = (): boolean => {
   return useAppSelector(state =>
     index === null
       ? false
-      : state.opendtu.dtuStates[index]?.triedToConnect ?? false,
+      : (state.opendtu.dtuStates[index]?.triedToConnect ?? false),
   );
 };
 

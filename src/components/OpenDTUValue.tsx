@@ -27,7 +27,7 @@ export const getOpenDTUValueText = (
   const valid =
     value !== undefined && decimals !== undefined && unit !== undefined;
 
-  return valid ? `${value.toFixed(decimals)} ${unit}` : textWhenInvalid ?? '';
+  return valid ? `${value.toFixed(decimals)} ${unit}` : (textWhenInvalid ?? '');
 };
 
 const OpenDTUValue: FC<OpenDTUValueProps> = ({

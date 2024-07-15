@@ -17,11 +17,11 @@ const MainScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
   const deviceName = useAppSelector(state =>
     state.settings.selectedDtuConfig !== null
-      ? (state.settings.dtuConfigs[state.settings.selectedDtuConfig]
+      ? ((state.settings.dtuConfigs[state.settings.selectedDtuConfig]
           ?.customName ||
           state.opendtu.dtuStates[state.settings.selectedDtuConfig]
             ?.systemStatus?.hostname) ??
-        null
+        null)
       : null,
   );
 
