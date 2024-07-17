@@ -82,8 +82,8 @@ android {
         setProperty("archivesBaseName", "OpenDTUApp")
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 22
-        versionName "0.4.1"
+        versionCode 23
+        versionName "0.4.2"
     }
     signingConfigs {
         debug {
