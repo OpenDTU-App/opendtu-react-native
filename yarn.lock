@@ -9561,12 +9561,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^23.12.1":
-  version: 23.12.1
-  resolution: "i18next@npm:23.12.1"
+"i18next@npm:^23.12.2":
+  version: 23.12.2
+  resolution: "i18next@npm:23.12.2"
   dependencies:
     "@babel/runtime": ^7.23.2
-  checksum: 0c993dac5b951895fd70b7b2daf329779c40d52188f408701a425fa08bbca16cc87a1adcd72c0831ccbc338b9fdb0390bd1614c1f502c3592d473cdacf114976
+  checksum: 283d1ebb3d645bc3ea134f2e8e882b87e36ecd2389ddba5c165c322eed564a38bb3035e53ccd3b80b553f7a300f8acc5d107c89e6ecbb294ebbb5d9a4619ec22
   languageName: node
   linkType: hard
 
@@ -12644,7 +12644,7 @@ __metadata:
     eslint-plugin-simple-import-sort: ^12.1.1
     eslint-plugin-testing-library: ^6.2.2
     expo: ^51.0.21
-    i18next: ^23.12.1
+    i18next: ^23.12.2
     intl-pluralrules: ^2.0.1
     ip-regex: ^5.0.0
     jest: ^29.7.0
