@@ -3393,7 +3393,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/metro-config@npm:0.18.8, @expo/metro-config@npm:~0.18.6":
+"@expo/metro-config@npm:0.18.9":
+  version: 0.18.9
+  resolution: "@expo/metro-config@npm:0.18.9"
+  dependencies:
+    "@babel/core": ^7.20.0
+    "@babel/generator": ^7.20.5
+    "@babel/parser": ^7.20.0
+    "@babel/types": ^7.20.0
+    "@expo/config": ~9.0.0-beta.0
+    "@expo/env": ~0.3.0
+    "@expo/json-file": ~8.3.0
+    "@expo/spawn-async": ^1.7.2
+    chalk: ^4.1.0
+    debug: ^4.3.2
+    find-yarn-workspace-root: ~2.0.0
+    fs-extra: ^9.1.0
+    getenv: ^1.0.0
+    glob: ^7.2.3
+    jsc-safe-url: ^0.2.4
+    lightningcss: ~1.19.0
+    postcss: ~8.4.32
+    resolve-from: ^5.0.0
+  checksum: 720bb621cf037e3183d4cec6be4773ba28c0b602a43cbd156637ffaebb279881a22578eaa4e106203a1664df1f521a9e5602106de843997914a97c95bcad22f2
+  languageName: node
+  linkType: hard
+
+"@expo/metro-config@npm:~0.18.6":
   version: 0.18.8
   resolution: "@expo/metro-config@npm:0.18.8"
   dependencies:
@@ -5228,9 +5254,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native-stack@npm:^6.10.1":
-  version: 6.10.1
-  resolution: "@react-navigation/native-stack@npm:6.10.1"
+"@react-navigation/native-stack@npm:^6.11.0":
+  version: 6.11.0
+  resolution: "@react-navigation/native-stack@npm:6.11.0"
   dependencies:
     "@react-navigation/elements": ^1.3.31
     warn-once: ^0.1.0
@@ -5240,7 +5266,7 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: ">= 3.0.0"
     react-native-screens: ">= 3.0.0"
-  checksum: be3c81351bf29eaf2c18b37014961afb02ae1931b50d7a66c6c55a3d522ee2a371b2f0f94e7a71f0b7f510ac6f24af91b3b5d5b511d74c9f3bd99e7f7d90f51f
+  checksum: d3dd57c216f5dbe53636bdb9aa48fe27831640f868cf5c68731943a49b68cb457d81182e7868f3e3033da0564e9f193f1b06b69085b8bc5b04ccfbe12ea2bbc0
   languageName: node
   linkType: hard
 
@@ -5268,9 +5294,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reduxjs/toolkit@npm:^2.2.6":
-  version: 2.2.6
-  resolution: "@reduxjs/toolkit@npm:2.2.6"
+"@reduxjs/toolkit@npm:^2.2.7":
+  version: 2.2.7
+  resolution: "@reduxjs/toolkit@npm:2.2.7"
   dependencies:
     immer: ^10.0.3
     redux: ^5.0.1
@@ -5284,7 +5310,7 @@ __metadata:
       optional: true
     react-redux:
       optional: true
-  checksum: 9cd02df5c7f2a40ce9ea41c74a7684a9be2b4adf75c2ad897375fb64b57c039e4fa7f2b74c86588434f795f3ab90b71a14ab6768ace8fd5c6d0153a6ed93ba83
+  checksum: 039d61d94cec25d07c7813f9cd234cbe83478f65df7622f2dafed609f2f0cbe00565999e33e7d22bf915c3c5bceb7be606ca17a9c55b51ce1841f541f63a3395
   languageName: node
   linkType: hard
 
@@ -8776,15 +8802,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:^51.0.21":
-  version: 51.0.21
-  resolution: "expo@npm:51.0.21"
+"expo@npm:^51.0.22":
+  version: 51.0.22
+  resolution: "expo@npm:51.0.22"
   dependencies:
     "@babel/runtime": ^7.20.0
     "@expo/cli": 0.18.25
     "@expo/config": 9.0.3
     "@expo/config-plugins": 8.0.8
-    "@expo/metro-config": 0.18.8
+    "@expo/metro-config": 0.18.9
     "@expo/vector-icons": ^14.0.0
     babel-preset-expo: ~11.0.12
     expo-asset: ~10.0.10
@@ -8797,7 +8823,7 @@ __metadata:
     whatwg-url-without-unicode: 8.0.0-3
   bin:
     expo: bin/cli
-  checksum: dcd18974ae1b8a7d0a08252ad013c4d2ebf986e5e39b2ed2cefe521623c182bf6cba67bd05fe54bbf0586a9ac6559c872807ef6d4e829af3a314ed52e1434e4a
+  checksum: 99274c8da23fa6c81825b4bdac6a264700cdf0a17cc101ed31f3700dbc78e75c6ec0e41a724b2c591269e41163f9cf52745b83e54ce831342192c0cfdd5144b6
   languageName: node
   linkType: hard
 
@@ -12789,8 +12815,8 @@ __metadata:
     "@react-native/typescript-config": 0.74.85
     "@react-navigation/bottom-tabs": ^6.6.1
     "@react-navigation/native": ^6.1.18
-    "@react-navigation/native-stack": ^6.10.1
-    "@reduxjs/toolkit": ^2.2.6
+    "@react-navigation/native-stack": ^6.11.0
+    "@reduxjs/toolkit": ^2.2.7
     "@testing-library/react-native": ^12.5.2
     "@trivago/prettier-plugin-sort-imports": ^4.3.0
     "@types/jest": ^29.5.12
@@ -12814,7 +12840,7 @@ __metadata:
     eslint-plugin-react-hooks: ^4.6.2
     eslint-plugin-simple-import-sort: ^12.1.1
     eslint-plugin-testing-library: ^6.2.2
-    expo: ^51.0.21
+    expo: ^51.0.22
     i18next: ^23.12.2
     intl-pluralrules: ^2.0.1
     ip-regex: ^5.0.0
@@ -12839,7 +12865,7 @@ __metadata:
     react-native-linear-gradient: ^2.8.3
     react-native-logs: ^5.1.0
     react-native-markdown-display: ^7.0.2
-    react-native-paper: ^5.12.3
+    react-native-paper: ^5.12.5
     react-native-paper-dates: ^0.22.19
     react-native-reanimated: ^3.14.0
     react-native-safe-area-context: ^4.10.8
@@ -13706,9 +13732,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-paper@npm:5.12.3":
-  version: 5.12.3
-  resolution: "react-native-paper@npm:5.12.3"
+"react-native-paper@npm:^5.12.5":
+  version: 5.12.5
+  resolution: "react-native-paper@npm:5.12.5"
   dependencies:
     "@callstack/react-theme-provider": ^3.0.9
     color: ^3.1.2
@@ -13718,23 +13744,7 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: "*"
     react-native-vector-icons: "*"
-  checksum: 927a8948d220fb59cb4dae2f12f3b4dc2173b9cd42e38dc74a0f25584a69978555a260c140db973f8401f7fef394dee3ec42c90b6134deeb3aa462291fd0ce5f
-  languageName: node
-  linkType: hard
-
-"react-native-paper@patch:react-native-paper@npm%3A5.12.3#./.yarn/patches/react-native-paper-npm-5.12.3-1a888b7688.patch::locator=opendtu-react-native%40workspace%3A.":
-  version: 5.12.3
-  resolution: "react-native-paper@patch:react-native-paper@npm%3A5.12.3#./.yarn/patches/react-native-paper-npm-5.12.3-1a888b7688.patch::version=5.12.3&hash=701004&locator=opendtu-react-native%40workspace%3A."
-  dependencies:
-    "@callstack/react-theme-provider": ^3.0.9
-    color: ^3.1.2
-    use-latest-callback: ^0.1.5
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-    react-native-safe-area-context: "*"
-    react-native-vector-icons: "*"
-  checksum: 154d450c7873d1b30e4d5260e08c0c3d6a4b8cf81694b7377c15f1be68671df5466162d1482cf7b183cfe5edb73a5f2b0e06a2466d03130b641ef4b29f274a8c
+  checksum: 35ce56e0bb19c46ce85adc47a504527b7ec455d1a15f3ace0d6fd438abd51b1fe30e1b44351950e16d6376ddbc18ecc94b558e267767d0a9fd886a5f66a4c322
   languageName: node
   linkType: hard
 
