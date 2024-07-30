@@ -29,6 +29,9 @@ const BaseModal: FC<BaseModalProps> = ({
           ? { height: '100%', paddingBottom: spacing * 10 }
           : {}),
         backgroundColor: visible ? 'rgba(0, 0, 0, 0.5)' : undefined,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
       }}
       contentContainerStyle={{
         backgroundColor: backgroundColor ?? theme.colors.elevation.level4,
@@ -38,6 +41,8 @@ const BaseModal: FC<BaseModalProps> = ({
         borderRadius: 28,
         marginVertical: 8,
         marginHorizontal: 24,
+        maxWidth: 450,
+        flex: 1,
       }}
     >
       {children}
