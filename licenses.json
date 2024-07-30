@@ -77,7 +77,7 @@
         "licenseUrl": "https://github.com/expo/expo",
         "parents": "opendtu-react-native"
     },
-    "i18next@23.12.1": {
+    "i18next@23.12.2": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
