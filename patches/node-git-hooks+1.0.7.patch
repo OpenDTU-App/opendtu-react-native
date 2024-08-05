@@ -1,0 +1,13 @@
+diff --git a/node_modules/node-git-hooks/install-git-hooks.js b/node_modules/node-git-hooks/install-git-hooks.js
+index 6272352..a21d9dd 100644
+--- a/node_modules/node-git-hooks/install-git-hooks.js
++++ b/node_modules/node-git-hooks/install-git-hooks.js
+@@ -54,7 +54,7 @@ function copyDir(src, dest) {
+ };
+ 
+ function copy(src, dest) {
+-  fs.copyFileSync(src, dest);
++  fs.cpSync(src, dest);
+ };
+ 
+ module.exports = installGitHooks;
