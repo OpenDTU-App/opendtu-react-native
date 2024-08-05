@@ -48,7 +48,7 @@
     "intl-pluralrules": "^2.0.1",
     "ip-regex": "^5.0.0",
     "moment": "^2.30.1",
-    "node-git-hooks": "^1.0.7",
+    "node-git-hooks": "1.0.7",
     "npm-license-crawler": "^0.2.1",
     "octokit": "^3.2.1",
     "patch-package": "^8.0.0",

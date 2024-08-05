@@ -118,7 +118,50 @@ const MainSettingsTab: FC = () => {
       <Box style={{ width: '100%', flex: 1 }}>
         <ScrollView>
           <List.Section>
-            <List.Subheader>{t('opendtu.title')}</List.Subheader>
+            <List.Subheader>{t('settings.title')}</List.Subheader>
+            <List.Item
+              title="Network Settings"
+              description="WiFi • Ethernet • DHCP • mDNS"
+              left={props => <List.Icon {...props} icon="wifi" />}
+            />
+            <List.Item
+              title="NTP Settings"
+              description="Timezone • NTP Server • Location • Time Sync"
+              left={props => <List.Icon {...props} icon="clock" />}
+            />
+            <List.Item
+              title="MQTT Settings"
+              description="MQTT Broker • Auto-Discovery • Topics"
+              left={props => <List.Icon {...props} icon="broadcast" />}
+            />
+            <List.Item
+              title="Inverter Settings"
+              description="Inverters • Strings"
+              left={props => <List.Icon {...props} icon="solar-panel" />}
+            />
+            <List.Item
+              title="Security Settings"
+              description="Admin password • Permissions"
+              left={props => <List.Icon {...props} icon="lock" />}
+            />
+            <List.Item
+              title="DTU Settings"
+              description="Serial Number • Polling Interval • TX Power"
+              left={props => <List.Icon {...props} icon="cog" />}
+            />
+            <List.Item
+              title="Hardware Settings"
+              description="Pinout • Peripherals"
+              left={props => <List.Icon {...props} icon="chip" />}
+            />
+            <List.Item
+              title="Config Management"
+              description="Backup • Restore • Reset"
+              left={props => <List.Icon {...props} icon="file" />}
+            />
+          </List.Section>
+          <List.Section>
+            <List.Subheader>{t('opendtu.information')}</List.Subheader>
             <List.Item
               title={t('opendtu.systemInformation')}
               description={t('opendtu.systemInformationDescription')}
