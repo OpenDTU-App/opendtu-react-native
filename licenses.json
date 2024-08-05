@@ -41,7 +41,7 @@
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native-stack@6.10.1": {
+    "@react-navigation/native-stack@6.11.0": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
@@ -53,7 +53,7 @@
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@reduxjs/toolkit@2.2.6": {
+    "@reduxjs/toolkit@2.2.7": {
         "licenses": "MIT",
         "repository": "https://github.com/reduxjs/redux-toolkit",
         "licenseUrl": "https://github.com/reduxjs/redux-toolkit/raw/master/LICENSE",
@@ -71,7 +71,7 @@
         "licenseUrl": "https://github.com/omichelsen/compare-versions/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "expo@51.0.21": {
+    "expo@51.0.23": {
         "licenses": "MIT",
         "repository": "https://github.com/expo/expo",
         "licenseUrl": "https://github.com/expo/expo",
@@ -203,7 +203,7 @@
         "licenseUrl": "https://github.com/web-ridge/react-native-paper-dates/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-paper@5.12.3": {
+    "react-native-paper@5.12.5": {
         "licenses": "MIT",
         "repository": "https://github.com/callstack/react-native-paper",
         "licenseUrl": "https://github.com/callstack/react-native-paper/raw/master/LICENSE.md",

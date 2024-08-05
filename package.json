@@ -127,7 +127,7 @@
   },
   "packageManager": "yarn@3.6.4",
   "resolutions": {
-    "react-native-paper@^5.12.3": "patch:react-native-paper@npm%3A5.12.3#./.yarn/patches/react-native-paper-npm-5.12.3-1a888b7688.patch",
+    "react-native-paper@5.12.5": "patch:react-native-paper@npm%3A5.12.5#./.yarn/patches/react-native-paper-npm-5.12.3-1a888b7688.patch",
     "node-git-hooks@^1.0.7": "patch:node-git-hooks@npm%3A1.0.7#./.yarn/patches/node-git-hooks-npm-1.0.7-618e27eb9b.patch"
   },
   "expo": {
