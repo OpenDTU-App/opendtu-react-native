@@ -1,29 +1,29 @@
 import type { FC } from 'react';
 
 import { useAppSelector } from '@/store';
-import AboutAppScreen from '@/views/navigation/screens/AboutAppScreen';
-import ConfigureGraphsScreen from '@/views/navigation/screens/ConfigureGraphsScreen';
-import DebugColorsScreen from '@/views/navigation/screens/DebugColorsScreen';
-import DebugScreen from '@/views/navigation/screens/DebugScreen';
-import DeviceListScreen from '@/views/navigation/screens/DeviceListScreen';
-import DeviceSettingsScreen from '@/views/navigation/screens/DeviceSettingsScreen';
-import FirmwareListScreen from '@/views/navigation/screens/FirmwareListScreen';
-import InverterDataScreen from '@/views/navigation/screens/InverterDataScreen';
-import InverterDeviceInfoScreen from '@/views/navigation/screens/InverterDeviceInfoScreen';
-import InverterEventLogScreen from '@/views/navigation/screens/InverterEventLogScreen';
-import InverterGridProfileScreen from '@/views/navigation/screens/InverterGridProfileScreen';
-import InverterInfoScreen from '@/views/navigation/screens/InverterInfoScreen';
-import LicensesScreen from '@/views/navigation/screens/LicensesScreen';
+import DebugColorsScreen from '@/views/navigation/screens/DebugGroup/DebugColorsScreen';
+import DebugScreen from '@/views/navigation/screens/DebugGroup/DebugScreen';
+import DeviceListScreen from '@/views/navigation/screens/DeviceGroup/DeviceListScreen';
+import DeviceSettingsScreen from '@/views/navigation/screens/DeviceGroup/DeviceSettingsScreen';
+import ConfigureGraphsScreen from '@/views/navigation/screens/GraphsGroup/ConfigureGraphsScreen';
+import ManageDatabasesScreen from '@/views/navigation/screens/GraphsGroup/ManageDatabasesScreen';
+import SelectDatabaseScreen from '@/views/navigation/screens/GraphsGroup/SelectDatabaseScreen';
+import AboutAppScreen from '@/views/navigation/screens/InformationGroup/AboutAppScreen';
+import FirmwareListScreen from '@/views/navigation/screens/InformationGroup/FirmwareListScreen';
+import LicensesScreen from '@/views/navigation/screens/InformationGroup/LicensesScreen';
+import MqttInformationScreen from '@/views/navigation/screens/InformationGroup/MqttInformationScreen';
+import NetworkInformationScreen from '@/views/navigation/screens/InformationGroup/NetworkInformationScreen';
+import NtpInformationScreen from '@/views/navigation/screens/InformationGroup/NtpInformationScreen';
+import SystemInformationScreen from '@/views/navigation/screens/InformationGroup/SystemInformationScreen';
+import InverterDataScreen from '@/views/navigation/screens/InverterGroup/InverterDataScreen';
+import InverterDeviceInfoScreen from '@/views/navigation/screens/InverterGroup/InverterDeviceInfoScreen';
+import InverterEventLogScreen from '@/views/navigation/screens/InverterGroup/InverterEventLogScreen';
+import InverterGridProfileScreen from '@/views/navigation/screens/InverterGroup/InverterGridProfileScreen';
+import InverterInfoScreen from '@/views/navigation/screens/InverterGroup/InverterInfoScreen';
 import MainScreen from '@/views/navigation/screens/MainScreen';
-import ManageDatabasesScreen from '@/views/navigation/screens/ManageDatabasesScreen';
-import MqttInformationScreen from '@/views/navigation/screens/MqttInformationScreen';
-import NetworkInformationScreen from '@/views/navigation/screens/NetworkInformationScreen';
-import NtpInformationScreen from '@/views/navigation/screens/NtpInformationScreen';
-import SelectDatabaseScreen from '@/views/navigation/screens/SelectDatabaseScreen';
-import SetupAddOpenDTUScreen from '@/views/navigation/screens/SetupAddOpenDTUScreen';
-import SetupAuthenticateOpenDTUInstanceScreen from '@/views/navigation/screens/SetupAuthenticateOpenDTUInstanceScreen';
-import SetupOpenDTUCompleteScreen from '@/views/navigation/screens/SetupOpenDTUCompleteScreen';
-import SystemInformationScreen from '@/views/navigation/screens/SystemInformationScreen';
+import SetupAddOpenDTUScreen from '@/views/navigation/screens/SetupGroup/SetupAddOpenDTUScreen';
+import SetupAuthenticateOpenDTUInstanceScreen from '@/views/navigation/screens/SetupGroup/SetupAuthenticateOpenDTUInstanceScreen';
+import SetupOpenDTUCompleteScreen from '@/views/navigation/screens/SetupGroup/SetupOpenDTUCompleteScreen';
 
 import type {
   NavigationProp,

@@ -17,7 +17,7 @@ import { rootLogging } from '@/utils/log';
 import { spacing } from '@/constants';
 import { StyledScrollView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
-import type { DataKeys } from '@/views/navigation/screens/InverterInfoScreen';
+import type { DataKeys } from '@/views/navigation/screens/InverterGroup/InverterInfoScreen';
 
 const log = rootLogging.extend('InverterDataScreen');
 
