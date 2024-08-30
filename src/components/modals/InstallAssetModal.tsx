@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Button,
   Divider,
+  HelperText,
   Portal,
   ProgressBar,
   Text,
@@ -241,11 +242,9 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
                   </Box>
                 </Box>
               </Box>
-              {error ? (
-                <Box>
-                  <Text style={{ color: theme.colors.error }}>{error}</Text>
-                </Box>
-              ) : null}
+              <HelperText type="error" visible={!!error}>
+                {error}
+              </HelperText>
               <Divider />
               <Box
                 mt={4}

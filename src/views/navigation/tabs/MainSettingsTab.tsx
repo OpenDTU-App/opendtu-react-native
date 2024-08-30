@@ -79,16 +79,18 @@ const MainSettingsTab: FC = () => {
     [hasMqttInformation, websocketConnected],
   );
 
+  // Settings navigation
+  const handleNetworkSettings = useCallback(() => {
+    navigation.navigate('NetworkSettingsScreen');
+  }, [navigation]);
+
+  // OpenDTU information navigation
   const handleAbout = useCallback(() => {
     navigation.navigate('AboutSettingsScreen');
   }, [navigation]);
 
   const handleSystemInformation = useCallback(() => {
     navigation.navigate('SystemInformationScreen');
-  }, [navigation]);
-
-  const handleLicenses = useCallback(() => {
-    navigation.navigate('LicensesScreen');
   }, [navigation]);
 
   const handleNetworkInformation = useCallback(() => {
@@ -101,6 +103,11 @@ const MainSettingsTab: FC = () => {
 
   const handleMqttInformation = useCallback(() => {
     navigation.navigate('MqttInformationScreen');
+  }, [navigation]);
+
+  // App information screen
+  const handleLicenses = useCallback(() => {
+    navigation.navigate('LicensesScreen');
   }, [navigation]);
 
   const handleDebugScreen = useCallback(() => {
@@ -118,7 +125,65 @@ const MainSettingsTab: FC = () => {
       <Box style={{ width: '100%', flex: 1 }}>
         <ScrollView>
           <List.Section>
-            <List.Subheader>{t('opendtu.title')}</List.Subheader>
+            <List.Subheader>{t('settings.title')}</List.Subheader>
+            <List.Item
+              title={t('settings.networkSettings.title')}
+              description={t('settings.networkSettings.description')}
+              left={props => <List.Icon {...props} icon="wifi" />}
+              onPress={handleNetworkSettings}
+            />
+            <List.Item
+              title={t('settings.ntpSettings.title')}
+              description={t('settings.ntpSettings.description')}
+              left={props => <List.Icon {...props} icon="clock" />}
+              disabled
+              style={{ opacity: 0.6 }}
+            />
+            <List.Item
+              title={t('settings.mqttSettings.title')}
+              description={t('settings.mqttSettings.description')}
+              left={props => <List.Icon {...props} icon="broadcast" />}
+              disabled
+              style={{ opacity: 0.6 }}
+            />
+            <List.Item
+              title={t('settings.inverterSettings.title')}
+              description={t('settings.inverterSettings.description')}
+              left={props => <List.Icon {...props} icon="solar-panel" />}
+              disabled
+              style={{ opacity: 0.6 }}
+            />
+            <List.Item
+              title={t('settings.securitySettings.title')}
+              description={t('settings.securitySettings.description')}
+              left={props => <List.Icon {...props} icon="lock" />}
+              disabled
+              style={{ opacity: 0.6 }}
+            />
+            <List.Item
+              title={t('settings.dtuSettings.title')}
+              description={t('settings.dtuSettings.description')}
+              left={props => <List.Icon {...props} icon="cog" />}
+              disabled
+              style={{ opacity: 0.6 }}
+            />
+            <List.Item
+              title={t('settings.hardwareSettings.title')}
+              description={t('settings.hardwareSettings.description')}
+              left={props => <List.Icon {...props} icon="chip" />}
+              disabled
+              style={{ opacity: 0.6 }}
+            />
+            <List.Item
+              title={t('settings.configManagement.title')}
+              description={t('settings.configManagement.description')}
+              left={props => <List.Icon {...props} icon="file" />}
+              disabled
+              style={{ opacity: 0.6 }}
+            />
+          </List.Section>
+          <List.Section>
+            <List.Subheader>{t('opendtu.information')}</List.Subheader>
             <List.Item
               title={t('opendtu.systemInformation')}
               description={t('opendtu.systemInformationDescription')}

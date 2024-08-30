@@ -77,6 +77,12 @@
         "licenseUrl": "https://github.com/expo/expo",
         "parents": "opendtu-react-native"
     },
+    "fast-deep-equal@3.1.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/epoberezkin/fast-deep-equal",
+        "licenseUrl": "https://github.com/epoberezkin/fast-deep-equal/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
     "i18next@23.12.2": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
@@ -147,6 +153,12 @@
         "licenses": "MIT",
         "repository": "https://github.com/i18next/react-i18next",
         "licenseUrl": "https://github.com/i18next/react-i18next/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
+    "react-native-animated-bottom-drawer@0.0.23": {
+        "licenses": "ISC",
+        "repository": "https://github.com/AtharvaDeolalikar/react-native-animated-bottom-drawer",
+        "licenseUrl": "https://github.com/AtharvaDeolalikar/react-native-animated-bottom-drawer",
         "parents": "opendtu-react-native"
     },
     "react-native-charts-wrapper@0.6.0": {

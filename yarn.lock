@@ -12409,7 +12409,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-git-hooks@npm:^1.0.7":
+"node-git-hooks@npm:1.0.7":
   version: 1.0.7
   resolution: "node-git-hooks@npm:1.0.7"
   bin:
@@ -12832,12 +12832,13 @@ __metadata:
     eslint-plugin-simple-import-sort: "npm:^12.1.1"
     eslint-plugin-testing-library: "npm:^6.2.2"
     expo: "npm:^51.0.23"
+    fast-deep-equal: "npm:^3.1.3"
     i18next: "npm:^23.12.2"
     intl-pluralrules: "npm:^2.0.1"
     ip-regex: "npm:^5.0.0"
     jest: "npm:^29.7.0"
     moment: "npm:^2.30.1"
-    node-git-hooks: "npm:^1.0.7"
+    node-git-hooks: "npm:1.0.7"
     npm-license-crawler: "npm:^0.2.1"
     octokit: "npm:^3.2.1"
     patch-package: "npm:^8.0.0"
@@ -12848,6 +12849,7 @@ __metadata:
     react: "npm:18.3.1"
     react-i18next: "npm:^15.0.0"
     react-native: "npm:0.74.3"
+    react-native-animated-bottom-drawer: "npm:^0.0.23"
     react-native-charts-wrapper: "npm:^0.6.0"
     react-native-fast-image: "npm:^8.6.3"
     react-native-flex-layout: "npm:^0.1.5"
@@ -13607,6 +13609,16 @@ __metadata:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 10/73b36281e58eeb27c9cc6031301b6ae19ecdc9f18ae2d518bdb39b0ac564e65c5779405d623f1df9abf378a13858b79442480244bd579968afc1faf9a2ce5e05
+  languageName: node
+  linkType: hard
+
+"react-native-animated-bottom-drawer@npm:^0.0.23":
+  version: 0.0.23
+  resolution: "react-native-animated-bottom-drawer@npm:0.0.23"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10/16b5e628cd313a8ddc128aa6cab118d6afdf0700ea8bc96782f9db7cb967c08eb537336991383555ebda1fc011858793807aa91cfedf6f3884112186247b0a2d
   languageName: node
   linkType: hard
 
