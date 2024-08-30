@@ -21,6 +21,7 @@ import InverterEventLogScreen from '@/views/navigation/screens/InverterGroup/Inv
 import InverterGridProfileScreen from '@/views/navigation/screens/InverterGroup/InverterGridProfileScreen';
 import InverterInfoScreen from '@/views/navigation/screens/InverterGroup/InverterInfoScreen';
 import MainScreen from '@/views/navigation/screens/MainScreen';
+import NetworkSettingsScreen from '@/views/navigation/screens/SettingsGroup/NetworkSettingsScreen';
 import SetupAddOpenDTUScreen from '@/views/navigation/screens/SetupGroup/SetupAddOpenDTUScreen';
 import SetupAuthenticateOpenDTUInstanceScreen from '@/views/navigation/screens/SetupGroup/SetupAuthenticateOpenDTUInstanceScreen';
 import SetupOpenDTUCompleteScreen from '@/views/navigation/screens/SetupGroup/SetupOpenDTUCompleteScreen';
@@ -119,6 +120,10 @@ const NavigationStack: FC = () => {
         component={InverterGridProfileScreen}
       />
       <Stack.Screen name="InverterDataScreen" component={InverterDataScreen} />
+      <Stack.Screen
+        name="NetworkSettingsScreen"
+        component={NetworkSettingsScreen}
+      />
     </Stack.Navigator>
   );
 };

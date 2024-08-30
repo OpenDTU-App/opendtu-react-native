@@ -9,6 +9,7 @@ import type {
 import type { EventLogData } from '@/types/opendtu/eventlog';
 import type { GridProfileData } from '@/types/opendtu/gridprofile';
 import type { InverterDeviceData } from '@/types/opendtu/inverterDevice';
+import type { NetworkSettings } from '@/types/opendtu/settings';
 import type { InverterItem } from '@/types/opendtu/state';
 import { DeviceState } from '@/types/opendtu/state';
 import type {
@@ -98,6 +99,9 @@ class OpenDtuApi {
         index: Index,
         inverterSerial: InverterSerial,
       ) => void)
+    | null = null;
+  private onNetworkSettingsHandler:
+    | ((data: NetworkSettings, index: Index) => void)
     | null = null;
 
   private ws: WebSocket | null = null;
@@ -279,6 +283,16 @@ class OpenDtuApi {
 
   public unregisterOnGridProfileHandler(): void {
     this.onGridProfileHandler = null;
+  }
+
+  public registerOnNetworkSettingsHandler(
+    handler: (data: NetworkSettings, index: Index) => void,
+  ): void {
+    this.onNetworkSettingsHandler = handler;
+  }
+
+  public unregisterOnNetworkSettingsHandler(): void {
+    this.onNetworkSettingsHandler = null;
   }
 
   public async getSystemStatusFromUrl(
@@ -1000,6 +1014,64 @@ class OpenDtuApi {
     if (!res) {
       log.error('setLimitConfig', 'no response');
       return false;
+    }
+
+    const parsed = await res.json();
+
+    return res.status === 200 && parsed.type === 'success';
+  }
+
+  public async getNetworkConfig(): Promise<NetworkSettings | null> {
+    if (!this.baseUrl) {
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest(
+      '/api/network/config',
+      'GET',
+    );
+
+    if (!res) {
+      log.error('getNetworkConfig', 'no response');
+      return null;
+    }
+
+    if (res.status === 200) {
+      const json = await res.json();
+
+      if (this.onNetworkSettingsHandler && this.index !== null) {
+        this.onNetworkSettingsHandler(json, this.index);
+      }
+
+      return json;
+    }
+
+    log.error('getNetworkConfig', 'invalid status');
+
+    return null;
+  }
+
+  public async setNetworkConfig(
+    config: NetworkSettings,
+  ): Promise<boolean | null> {
+    if (!this.baseUrl) {
+      return null;
+    }
+
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(config));
+
+    const res = await this.makeAuthenticatedRequest(
+      '/api/network/config',
+      'POST',
+      {
+        body: formData,
+      },
+    );
+
+    if (!res) {
+      log.error('setNetworkConfig', 'no response');
+      return null;
     }
 
     const parsed = await res.json();

@@ -13,6 +13,7 @@ import {
   setLiveDataFromStatus,
   setLiveDataFromWebsocket,
   setMqttStatus,
+  setNetworkSettings,
   setNetworkStatus,
   setNtpStatus,
   setPowerStatus,
@@ -174,6 +175,10 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
 
       api.registerOnGridProfileHandler((data, index, inverterSerial) => {
         dispatch(setGridProfile({ data, index, inverterSerial }));
+      });
+
+      api.registerOnNetworkSettingsHandler((data, index) => {
+        dispatch(setNetworkSettings({ data, index }));
       });
 
       log.debug('Connecting API Handler');

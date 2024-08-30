@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import type { ModalProps } from 'react-native-paper';
-import { Button, Portal, Text, useTheme } from 'react-native-paper';
+import { Button, HelperText, Portal, Text, useTheme } from 'react-native-paper';
 
 import { updateDtuUserString } from '@/slices/settings';
 
@@ -111,29 +111,27 @@ const ChangeOpendtuCredentialsModal: FC<
               {t('settings.changeOpendtuCredentials')}
             </Text>
           </Box>
-          <StyledTextInput
-            label={t('setup.username')}
-            mode="outlined"
-            value={username}
-            onChangeText={setUsername}
-            textContentType="username"
-            style={{ backgroundColor: theme.colors.elevation.level3 }}
-          />
-          <StyledTextInput
-            label={t('setup.password')}
-            mode="outlined"
-            value={password}
-            onChangeText={setPassword}
-            textContentType="password"
-            style={{ backgroundColor: theme.colors.elevation.level3 }}
-          />
-          {error ? (
-            <Box mt={8}>
-              <Text variant="bodySmall" style={{ color: theme.colors.error }}>
-                {error}
-              </Text>
-            </Box>
-          ) : null}
+          <Box mb={8}>
+            <StyledTextInput
+              label={t('setup.username')}
+              mode="outlined"
+              value={username}
+              onChangeText={setUsername}
+              textContentType="username"
+              style={{ backgroundColor: theme.colors.elevation.level3 }}
+            />
+            <StyledTextInput
+              label={t('setup.password')}
+              mode="outlined"
+              value={password}
+              onChangeText={setPassword}
+              textContentType="password"
+              style={{ backgroundColor: theme.colors.elevation.level3 }}
+            />
+          </Box>
+          <HelperText type="error" visible={!!error}>
+            {error}
+          </HelperText>
         </Box>
         <Box
           style={{

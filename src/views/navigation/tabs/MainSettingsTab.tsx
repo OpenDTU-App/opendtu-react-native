@@ -79,16 +79,18 @@ const MainSettingsTab: FC = () => {
     [hasMqttInformation, websocketConnected],
   );
 
+  // Settings navigation
+  const handleNetworkSettings = useCallback(() => {
+    navigation.navigate('NetworkSettingsScreen');
+  }, [navigation]);
+
+  // OpenDTU information navigation
   const handleAbout = useCallback(() => {
     navigation.navigate('AboutSettingsScreen');
   }, [navigation]);
 
   const handleSystemInformation = useCallback(() => {
     navigation.navigate('SystemInformationScreen');
-  }, [navigation]);
-
-  const handleLicenses = useCallback(() => {
-    navigation.navigate('LicensesScreen');
   }, [navigation]);
 
   const handleNetworkInformation = useCallback(() => {
@@ -101,6 +103,11 @@ const MainSettingsTab: FC = () => {
 
   const handleMqttInformation = useCallback(() => {
     navigation.navigate('MqttInformationScreen');
+  }, [navigation]);
+
+  // App information screen
+  const handleLicenses = useCallback(() => {
+    navigation.navigate('LicensesScreen');
   }, [navigation]);
 
   const handleDebugScreen = useCallback(() => {
@@ -120,44 +127,59 @@ const MainSettingsTab: FC = () => {
           <List.Section>
             <List.Subheader>{t('settings.title')}</List.Subheader>
             <List.Item
-              title="Network Settings"
-              description="WiFi • Ethernet • DHCP • mDNS"
+              title={t('settings.networkSettings.title')}
+              description={t('settings.networkSettings.description')}
               left={props => <List.Icon {...props} icon="wifi" />}
+              onPress={handleNetworkSettings}
             />
             <List.Item
-              title="NTP Settings"
-              description="Timezone • NTP Server • Location • Time Sync"
+              title={t('settings.ntpSettings.title')}
+              description={t('settings.ntpSettings.description')}
               left={props => <List.Icon {...props} icon="clock" />}
+              disabled
+              style={{ opacity: 0.6 }}
             />
             <List.Item
-              title="MQTT Settings"
-              description="MQTT Broker • Auto-Discovery • Topics"
+              title={t('settings.mqttSettings.title')}
+              description={t('settings.mqttSettings.description')}
               left={props => <List.Icon {...props} icon="broadcast" />}
+              disabled
+              style={{ opacity: 0.6 }}
             />
             <List.Item
-              title="Inverter Settings"
-              description="Inverters • Strings"
+              title={t('settings.inverterSettings.title')}
+              description={t('settings.inverterSettings.description')}
               left={props => <List.Icon {...props} icon="solar-panel" />}
+              disabled
+              style={{ opacity: 0.6 }}
             />
             <List.Item
-              title="Security Settings"
-              description="Admin password • Permissions"
+              title={t('settings.securitySettings.title')}
+              description={t('settings.securitySettings.description')}
               left={props => <List.Icon {...props} icon="lock" />}
+              disabled
+              style={{ opacity: 0.6 }}
             />
             <List.Item
-              title="DTU Settings"
-              description="Serial Number • Polling Interval • TX Power"
+              title={t('settings.dtuSettings.title')}
+              description={t('settings.dtuSettings.description')}
               left={props => <List.Icon {...props} icon="cog" />}
+              disabled
+              style={{ opacity: 0.6 }}
             />
             <List.Item
-              title="Hardware Settings"
-              description="Pinout • Peripherals"
+              title={t('settings.hardwareSettings.title')}
+              description={t('settings.hardwareSettings.description')}
               left={props => <List.Icon {...props} icon="chip" />}
+              disabled
+              style={{ opacity: 0.6 }}
             />
             <List.Item
-              title="Config Management"
-              description="Backup • Restore • Reset"
+              title={t('settings.configManagement.title')}
+              description={t('settings.configManagement.description')}
               left={props => <List.Icon {...props} icon="file" />}
+              disabled
+              style={{ opacity: 0.6 }}
             />
           </List.Section>
           <List.Section>
