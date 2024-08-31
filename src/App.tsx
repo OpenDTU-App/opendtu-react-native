@@ -19,13 +19,14 @@ import { StatusBar, useColorScheme } from 'react-native';
 import moment from 'moment';
 import { PersistGate as ReduxPersistGate } from 'redux-persist/integration/react';
 
+import { appendLog } from '@/slices/app';
 import { setLanguage } from '@/slices/settings';
 
 import AppOfflineModal from '@/components/modals/AppOfflineModal';
 import EnableAppUpdatesModal from '@/components/modals/EnableAppUpdatesModal';
 import EnableFetchOpenDtuUpdatesModal from '@/components/modals/EnableFetchOpenDtuUpdatesModal';
 
-import { rootLogging } from '@/utils/log';
+import { rootLogging, setPushMessageFunction } from '@/utils/log';
 
 import ApiProvider from '@/api/ApiHandler';
 import DatabaseProvider from '@/database';
@@ -312,6 +313,12 @@ const _App: FC = () => {
   const showEnableFetchOpenDTUReleasesModal = useAppSelector(
     state => state.settings.enableFetchOpenDTUReleases === null,
   );
+
+  useEffect(() => {
+    setPushMessageFunction(props => {
+      dispatch(appendLog(props));
+    });
+  }, [dispatch]);
 
   if (!i18nLanguageMatchesSettings) {
     return null;
