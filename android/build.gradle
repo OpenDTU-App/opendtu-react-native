@@ -4,20 +4,16 @@ buildscript {
         minSdkVersion = 23
         compileSdkVersion = 34
         targetSdkVersion = 34
-
-        // We use NDK 23 which has both M1 support and is the side-by-side NDK version from AGP.
         ndkVersion = "26.1.10909125"
-        kotlinVersion = "1.9.22"
+        kotlinVersion = "1.9.24"
     }
     repositories {
         google()
         mavenCentral()
-        // maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
         classpath("com.android.tools.build:gradle")
         classpath("com.facebook.react:react-native-gradle-plugin")
-        // classpath("de.nanogiants:android-versioning:2.4.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
     }
 }
