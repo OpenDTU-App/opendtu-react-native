@@ -52,23 +52,25 @@ const StatusWidget: FC<StatusWidgetProps> = ({
           {children}
         </Box>
       ) : (
-        <SkeletonPlaceholder
-          backgroundColor={theme.colors.elevation.level1}
-          highlightColor={theme.colors.elevation.level2}
-          borderRadius={16}
-          speed={1000}
-        >
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              width: '100%',
-              maxWidth,
-            }}
+        <View style={{ borderRadius: 16, overflow: 'hidden' }}>
+          <SkeletonPlaceholder
+            backgroundColor={theme.colors.elevation.level1}
+            highlightColor={theme.colors.elevation.level2}
+            borderRadius={16}
+            speed={1000}
           >
-            <View style={{ width: '100%', height: 80 }} />
-          </View>
-        </SkeletonPlaceholder>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                width: '100%',
+                maxWidth,
+              }}
+            >
+              <View style={{ width: '100%', height: 80 }} />
+            </View>
+          </SkeletonPlaceholder>
+        </View>
       )}
     </StyledSurface>
   );
