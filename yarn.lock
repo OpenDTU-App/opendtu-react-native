@@ -11298,7 +11298,7 @@ __metadata:
     react-native-svg: "npm:^15.6.0"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.1.0"
-    react-native-version: "npm:^4.0.0"
+    react-native-version: "npm:4.0.0"
     react-native-zeroconf: "npm:^0.13.8"
     react-redux: "npm:^9.1.2"
     react-test-renderer: "npm:18.3.1"
@@ -12298,7 +12298,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-version@npm:^4.0.0":
+"react-native-version@npm:4.0.0":
   version: 4.0.0
   resolution: "react-native-version@npm:4.0.0"
   dependencies:
