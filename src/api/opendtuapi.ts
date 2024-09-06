@@ -175,7 +175,7 @@ class OpenDtuApi {
   }
 
   public stopFetchHttpStateInterval(): void {
-    log.warn('OpenDtuApi.stopFetchHttpStateInterval()', {
+    log.info('OpenDtuApi.stopFetchHttpStateInterval()', {
       baseUrl: this.baseUrl,
     });
 
@@ -555,7 +555,7 @@ class OpenDtuApi {
 
       this.ws.onclose = () => {
         this.wsUrl = null;
-        log.warn('OpenDtuApi.onclose()', { baseUrl: this.baseUrl });
+        log.info('OpenDtuApi.onclose()', { baseUrl: this.baseUrl });
 
         this.wsConnected = false;
 
@@ -584,10 +584,10 @@ class OpenDtuApi {
   }
 
   public disconnect(): void {
-    log.warn('OpenDtuApi.disconnect()', { baseUrl: this.baseUrl, ws: this.ws });
+    log.info('OpenDtuApi.disconnect()', { baseUrl: this.baseUrl, ws: this.ws });
 
     if (this.ws) {
-      log.warn('OpenDtuApi.disconnect() closing websocket', {
+      log.info('OpenDtuApi.disconnect() closing websocket', {
         baseUrl: this.baseUrl,
       });
 

@@ -114,6 +114,10 @@ const MainSettingsTab: FC = () => {
     navigation.navigate('DebugScreen');
   }, [navigation]);
 
+  const handleLogScreen = useCallback(() => {
+    navigation.navigate('AppLogScreen');
+  }, [navigation]);
+
   const enableDebugMode = useCallback(() => {
     dispatch(setDebugEnabled({ debugEnabled: true }));
   }, [dispatch]);
@@ -268,8 +272,14 @@ const MainSettingsTab: FC = () => {
             <List.Item
               title={t('settings.licenses')}
               description={t('settings.licensesDescription')}
-              left={props => <List.Icon {...props} icon="file-document" />}
+              left={props => <List.Icon {...props} icon="certificate" />}
               onPress={handleLicenses}
+            />
+            <List.Item
+              title={t('settings.logs')}
+              description={t('settings.logsDescription')}
+              left={props => <List.Icon {...props} icon="file-document" />}
+              onPress={handleLogScreen}
             />
             {showDebugScreen ? (
               <List.Item

@@ -10,7 +10,14 @@ import moment from 'moment';
 
 let pushMessageFunction: transportFunctionType | null = null;
 
-export type LogProps = Parameters<transportFunctionType>[0];
+export type LogProps = Parameters<transportFunctionType>[0] & {
+  uuid: string;
+};
+
+export interface ExtendedLogProps extends LogProps {
+  timestamp: number;
+  stacktrace?: string;
+}
 
 export const setPushMessageFunction = (func: transportFunctionType) => {
   pushMessageFunction = func;
@@ -19,6 +26,13 @@ export const setPushMessageFunction = (func: transportFunctionType) => {
 const customTransport: transportFunctionType = (...args) => {
   if (pushMessageFunction) pushMessageFunction(...args);
 };
+
+export enum LogLevel {
+  debug,
+  info,
+  warn,
+  error,
+}
 
 const config: configLoggerType = {
   transport: [consoleTransport, customTransport],

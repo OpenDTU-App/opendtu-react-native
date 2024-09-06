@@ -1,0 +1,49 @@
+{
+  "version" : "1.2",
+  "profiles" : [ {
+    "id" : "2780720d-cfe4-4d48-90a6-dc9303a203dc",
+    "name" : "React-i18n",
+    "keyNamingPattern" : "CAMEL_CASE_PATTERN",
+    "sink" : {
+      "id" : "f430b888-f954-456f-8f44-f3b23318703e",
+      "type" : "namespaced",
+      "translationsDirectory" : "$PROJECT_DIR$/src/translations",
+      "fileType" : "json",
+      "defaultLocale" : "translation-files",
+      "namespaces" : [ "en", "de", "fr", "it" ],
+      "outputFilenameTemplate" : "%locale%/%namespace%.json",
+      "nestingType" : "DOT",
+      "placeholderFormatterName" : "I18NEXT"
+    },
+    "sources" : [ {
+      "id" : "f8c57dda-3ec5-45d8-909a-a93414fe1c1c",
+      "type" : "js",
+      "defaultReplacementTemplate" : "t('%key%', %map%)",
+      "scopeName" : "Project Files",
+      "scopePattern" : "",
+      "recognizedReplacementTemplates" : [ ],
+      "skipDefaultNamespace" : true
+    }, {
+      "id" : "f6f47de3-0e18-40e0-8188-baab88baf3ec",
+      "type" : "jsx",
+      "defaultReplacementTemplate" : "t('%key%', %map%)",
+      "scopeName" : "Project Files",
+      "scopePattern" : "",
+      "attributeReplacementTemplate" : "",
+      "inlineTagsReplacementTemplate" : "",
+      "recognizedReplacementTemplates" : [ ],
+      "inlineTagNames" : [ "a", "abbr", "acronym", "b", "bdi", "bdo", "big", "br", "cite", "code", "data", "del", "dfn", "em", "i", "img", "input", "ins", "kbd", "label", "mark", "meter", "output", "progress", "q", "ruby", "s", "samp", "slot", "small", "span", "strong", "sub", "sup", "time", "u", "tt", "var", "wbr" ],
+      "translatableAttributeNames" : [ "title", "alt", "placeholder", "label", "aria-label", "description" ],
+      "skipDefaultNamespace" : true,
+      "inlineTagHandler" : "I18NEXT"
+    } ]
+  } ],
+  "ignores" : {
+    "valuesInProject" : [ "use strict" ],
+    "valuesInFile" : { },
+    "filesInProject" : [ ],
+    "unignoredFunctionNames" : [ ],
+    "unignoredFunctionArguments" : { },
+    "ignoredArrayKeys" : [ "class", "selector", "template", "middleware", "layout", "el", "component", "type", "name", "id", "key", "sql", "query", "dateFormat", "date", "condition" ]
+  }
+}

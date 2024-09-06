@@ -1,5 +1,5 @@
-import type { LogProps } from '@/utils/log';
+import type { ExtendedLogProps } from '@/utils/log';
 
 export interface AppState {
-  logs: LogProps[];
+  logs: ExtendedLogProps[];
 }

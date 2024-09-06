@@ -11292,10 +11292,12 @@ __metadata:
     react-native-reanimated: "npm:^3.15.1"
     react-native-safe-area-context: "npm:^4.10.9"
     react-native-screens: "npm:^3.34.0"
+    react-native-share: "npm:^11.0.2"
     react-native-simple-gauge: "npm:^0.3.1"
     react-native-skeleton-placeholder: "npm:^5.2.4"
     react-native-splash-screen: "npm:^3.3.0"
     react-native-svg: "npm:^15.6.0"
+    react-native-toast-message: "npm:^2.2.0"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.1.0"
     react-native-version: "npm:4.0.0"
@@ -12230,6 +12232,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-share@npm:^11.0.2":
+  version: 11.0.2
+  resolution: "react-native-share@npm:11.0.2"
+  checksum: 10/afd7b6d4b7bb9f06655c35db19f217ccb9a40bcc8709d995e76bbf1b7c2781ad49108b403df62434f47bbb2b780900c769f923ad2b114c1db16a6ec10c1bf66d
+  languageName: node
+  linkType: hard
+
 "react-native-simple-gauge@npm:^0.3.1":
   version: 0.3.1
   resolution: "react-native-simple-gauge@npm:0.3.1"
@@ -12269,6 +12278,16 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10/e778b61b249988e063a3f740383583a910a16159d92ac4fd385452b5572e02c6547db27d181fe1edf6097389e521fa763fe867483419c7ad4b989c191e6c500e
+  languageName: node
+  linkType: hard
+
+"react-native-toast-message@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "react-native-toast-message@npm:2.2.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10/5d4e18eb6bcdcf117c64242e09dd1fc791a51d614dcafc7ef685942dbf891010b8901cb5a6093088d65607f77b417cdc4053fb1bef7a8e119e2776063d32b78f
   languageName: node
   linkType: hard
 
