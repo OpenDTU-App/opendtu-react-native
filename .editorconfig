@@ -20,3 +20,7 @@ tab_width = 2
 
 [{*.graphqlconfig,*.graphqlrc,*.har,*.jsb2,*.jsb3,*.json,*.jsonc,*.postman_collection,*.postman_collection.json,*.postman_environment,*.postman_environment.json,.babelrc,.eslintrc,.stylelintrc,.ws-context,jest.config}]
 indent_size = 4
+
+[{*.yml,*.yaml}]
+indent_size = 2
+tab_width = 2
