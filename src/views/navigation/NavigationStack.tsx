@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 
 import { useAppSelector } from '@/store';
+import AppLogScreen from '@/views/navigation/screens/DebugGroup/AppLogScreen';
 import DebugColorsScreen from '@/views/navigation/screens/DebugGroup/DebugColorsScreen';
 import DebugScreen from '@/views/navigation/screens/DebugGroup/DebugScreen';
 import DeviceListScreen from '@/views/navigation/screens/DeviceGroup/DeviceListScreen';
@@ -124,6 +125,7 @@ const NavigationStack: FC = () => {
         name="NetworkSettingsScreen"
         component={NetworkSettingsScreen}
       />
+      <Stack.Screen name="AppLogScreen" component={AppLogScreen} />
     </Stack.Navigator>
   );
 };

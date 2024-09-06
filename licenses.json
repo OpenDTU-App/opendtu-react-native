@@ -239,6 +239,12 @@
         "licenseUrl": "https://github.com/software-mansion/react-native-screens/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
+    "react-native-share@11.0.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-community/react-native-share",
+        "licenseUrl": "https://github.com/react-native-community/react-native-share/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
     "react-native-simple-gauge@0.3.1": {
         "licenses": "MIT",
         "repository": "https://github.com/nerdyfactory/react-native-simple-gauge",
@@ -261,6 +267,12 @@
         "licenses": "MIT",
         "repository": "https://github.com/react-native-community/react-native-svg",
         "licenseUrl": "https://github.com/react-native-community/react-native-svg/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
+    "react-native-toast-message@2.2.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/calintamas/react-native-toast-message",
+        "licenseUrl": "https://github.com/calintamas/react-native-toast-message/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
     "react-native-url-polyfill@2.0.0": {

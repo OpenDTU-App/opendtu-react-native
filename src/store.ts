@@ -6,6 +6,7 @@ import {
 
 import { persistReducer, persistStore } from 'redux-persist';
 
+import { AppReducer } from '@/slices/app';
 import { DatabaseReducer } from '@/slices/database';
 import { GithubReducer } from '@/slices/github';
 import { OpenDTUReducer } from '@/slices/opendtu';
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   opendtu: OpenDTUReducer,
   database: DatabaseReducer,
   github: persistReducer(githubPersistConfig, GithubReducer),
+  app: AppReducer,
 });
 
 export const store = configureStore({

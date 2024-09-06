@@ -12,6 +12,12 @@ import type { TranslationsType } from 'react-native-paper-dates';
 import { registerTranslation } from 'react-native-paper-dates';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
+import Toast, {
+  BaseToast,
+  ErrorToast,
+  InfoToast,
+  SuccessToast,
+} from 'react-native-toast-message';
 import { Provider as ReduxProvider } from 'react-redux';
 
 import { StatusBar, useColorScheme } from 'react-native';
@@ -19,13 +25,14 @@ import { StatusBar, useColorScheme } from 'react-native';
 import moment from 'moment';
 import { PersistGate as ReduxPersistGate } from 'redux-persist/integration/react';
 
+import { appendLog } from '@/slices/app';
 import { setLanguage } from '@/slices/settings';
 
 import AppOfflineModal from '@/components/modals/AppOfflineModal';
 import EnableAppUpdatesModal from '@/components/modals/EnableAppUpdatesModal';
 import EnableFetchOpenDtuUpdatesModal from '@/components/modals/EnableFetchOpenDtuUpdatesModal';
 
-import { rootLogging } from '@/utils/log';
+import { rootLogging, setPushMessageFunction } from '@/utils/log';
 
 import ApiProvider from '@/api/ApiHandler';
 import DatabaseProvider from '@/database';
@@ -313,6 +320,12 @@ const _App: FC = () => {
     state => state.settings.enableFetchOpenDTUReleases === null,
   );
 
+  useEffect(() => {
+    setPushMessageFunction(props => {
+      dispatch(appendLog(props));
+    });
+  }, [dispatch]);
+
   if (!i18nLanguageMatchesSettings) {
     return null;
   }
@@ -327,6 +340,52 @@ const _App: FC = () => {
       />
       <NavigationContainer theme={navigationTheme}>
         <NavigationStack />
+        <Toast
+          position="bottom"
+          config={{
+            success: props => (
+              <SuccessToast
+                {...props}
+                contentContainerStyle={{
+                  backgroundColor: theme.colors.elevation.level2,
+                }}
+                text1Style={{ color: theme.colors.onSurface }}
+                text2Style={{ color: theme.colors.onSurface }}
+              />
+            ),
+            error: props => (
+              <ErrorToast
+                {...props}
+                contentContainerStyle={{
+                  backgroundColor: theme.colors.elevation.level2,
+                }}
+                text1Style={{ color: theme.colors.onSurface }}
+                text2Style={{ color: theme.colors.onSurface }}
+              />
+            ),
+            info: props => (
+              <InfoToast
+                {...props}
+                contentContainerStyle={{
+                  backgroundColor: theme.colors.elevation.level2,
+                }}
+                text1Style={{ color: theme.colors.onSurface }}
+                text2Style={{ color: theme.colors.onSurface }}
+              />
+            ),
+            warning: props => (
+              <BaseToast
+                {...props}
+                style={{ borderLeftColor: '#FFC107' }}
+                contentContainerStyle={{
+                  backgroundColor: theme.colors.elevation.level2,
+                }}
+                text1Style={{ color: theme.colors.onSurface }}
+                text2Style={{ color: theme.colors.onSurface }}
+              />
+            ),
+          }}
+        />
       </NavigationContainer>
       <EnableAppUpdatesModal
         visible={showEnableAppUpdatesModal}

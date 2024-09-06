@@ -22,8 +22,10 @@ export type StyledSurfaceProps = SurfaceProps & {
   theme: ThemeProp;
 } & ExtraProps;
 
-const StyledSurface: FC<StyledSurfaceProps> = props => (
-  <InternalStyledSurface elevation={5} mode="flat" disableShadow {...props} />
+const StyledSurface: FC<StyledSurfaceProps> = ({ children, ...props }) => (
+  <InternalStyledSurface elevation={5} mode="flat" disableShadow {...props}>
+    {children}
+  </InternalStyledSurface>
 );
 
 export default StyledSurface;

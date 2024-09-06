@@ -47,6 +47,11 @@ export type LiveDataFromStatusHandler = (
 export interface GetSystemStatusReturn {
   systemStatus?: SystemStatus;
   deviceState: DeviceState;
+  meta: {
+    statusCode?: number;
+    error?: string | Error;
+    info?: string;
+  };
 }
 
 export interface HttpStatusData {
@@ -170,7 +175,7 @@ class OpenDtuApi {
   }
 
   public stopFetchHttpStateInterval(): void {
-    log.warn('OpenDtuApi.stopFetchHttpStateInterval()', {
+    log.info('OpenDtuApi.stopFetchHttpStateInterval()', {
       baseUrl: this.baseUrl,
     });
 
@@ -316,32 +321,55 @@ class OpenDtuApi {
         headers: {
           'Content-Type': 'application/json',
         },
-      }).catch(() => null);
+      });
 
       if (response?.status === 200) {
         clearTimeout(abortTimeout);
         return {
           systemStatus: await response.json(),
           deviceState: DeviceState.Reachable,
+          meta: {},
         };
       }
 
-      return { deviceState: DeviceState.NotInstance };
+      return {
+        deviceState: DeviceState.NotInstance,
+        meta: {
+          statusCode: response?.status,
+          error: (await response.text()) || 'No body available',
+        },
+      };
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      log.error('getSystemStatusFromUrl error', error, error.name);
+    } catch (error) {
+      if (error instanceof Error) {
+        log.error('getSystemStatusFromUrl error', error, error.name);
 
-      if (error.name === 'AbortError') {
-        return { deviceState: DeviceState.Unreachable };
+        if (error.name === 'AbortError') {
+          return {
+            deviceState: DeviceState.Unreachable,
+            meta: {
+              error: error,
+              info: 'AbortError',
+            },
+          };
+        }
+
+        return { deviceState: DeviceState.NotInstance, meta: { error: error } };
       }
-
-      return { deviceState: DeviceState.NotInstance };
     }
+
+    return {
+      deviceState: DeviceState.Unknown,
+      meta: {},
+    };
   }
 
   public async getSystemStatus(): Promise<GetSystemStatusReturn> {
     if (!this.baseUrl) {
-      return { deviceState: DeviceState.InvalidState };
+      return {
+        deviceState: DeviceState.InvalidState,
+        meta: { error: 'No base url' },
+      };
     }
 
     return await this.getSystemStatusFromUrl(new URL(this.baseUrl));
@@ -359,6 +387,7 @@ class OpenDtuApi {
     const result = await this.getSystemStatusFromUrl(url);
 
     if (result.deviceState !== DeviceState.Reachable) {
+      console.log('isOpenDtuInstance', result.meta, url);
       return result.deviceState;
     }
 
@@ -526,7 +555,7 @@ class OpenDtuApi {
 
       this.ws.onclose = () => {
         this.wsUrl = null;
-        log.warn('OpenDtuApi.onclose()', { baseUrl: this.baseUrl });
+        log.info('OpenDtuApi.onclose()', { baseUrl: this.baseUrl });
 
         this.wsConnected = false;
 
@@ -555,10 +584,10 @@ class OpenDtuApi {
   }
 
   public disconnect(): void {
-    log.warn('OpenDtuApi.disconnect()', { baseUrl: this.baseUrl, ws: this.ws });
+    log.info('OpenDtuApi.disconnect()', { baseUrl: this.baseUrl, ws: this.ws });
 
     if (this.ws) {
-      log.warn('OpenDtuApi.disconnect() closing websocket', {
+      log.info('OpenDtuApi.disconnect() closing websocket', {
         baseUrl: this.baseUrl,
       });
 
