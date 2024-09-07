@@ -19,7 +19,7 @@
     "typecheck": "tsc --project tsconfig.json --pretty --noEmit --skipLibCheck",
     "start": "react-native start",
     "test": "jest --passWithNoTests",
-    "pod:install": "(cd ios && pod install)",
+    "pod:install": "command -v pod && (cd ios && pod install)",
     "postinstall": "yarn run npm-license-crawler -onlyDirectDependencies -json licenses.json && patch-package && yarn run pod:install",
     "postuninstall": "yarn run npm-license-crawler -onlyDirectDependencies -json licenses.json",
     "build-android": "bash -c \"pushd android ; ./gradlew assembleRelease ; popd\"",
