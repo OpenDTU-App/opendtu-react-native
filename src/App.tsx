@@ -286,6 +286,9 @@ const _App: FC = () => {
 
     if (moment.locales().includes(momentLocale)) {
       moment.locale(momentLocale);
+    } else {
+      log.error(`moment locale "${momentLocale}" not available`);
+      moment.locale('en-gb');
     }
   }, [i18n, language]);
 
