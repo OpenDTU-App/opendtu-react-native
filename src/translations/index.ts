@@ -4,11 +4,13 @@ import i18n from 'i18next';
 
 import de from './translation-files/de.json';
 import en from './translation-files/en.json';
+import fr from './translation-files/fr.json';
+import it from './translation-files/it.json';
 
 import 'intl-pluralrules';
 import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';
 
-export const supportedLanguages = ['en', 'de'];
+export const supportedLanguages = ['en', 'de', 'fr', 'it'];
 
 export const defaultLanguage = 'en';
 
@@ -25,6 +27,12 @@ if (!i18n.isInitialized) {
         },
         en: {
           translation: en,
+        },
+        fr: {
+          translation: fr,
+        },
+        it: {
+          translation: it,
         },
       },
       defaultNS: 'translation',
