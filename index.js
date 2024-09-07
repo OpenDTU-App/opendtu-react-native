@@ -9,6 +9,8 @@ import App from '@/App';
 
 import 'moment/locale/de';
 import 'moment/locale/en-gb';
+import 'moment/locale/fr';
+import 'moment/locale/it';
 import 'react-native-get-random-values';
 import 'react-native-url-polyfill/auto';
 import '@/utils/rsplit';

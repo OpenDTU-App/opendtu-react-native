@@ -273,10 +273,19 @@ const _App: FC = () => {
     setI18nLanguageMatchesSettings(false);
     i18n.changeLanguage(language);
 
-    if (language === 'en') {
-      moment.locale('en-gb');
-    } else {
-      moment.locale(language);
+    let momentLocale = '';
+
+    switch (language) {
+      case 'en':
+        momentLocale = 'en-gb';
+        break;
+      default:
+        momentLocale = language;
+        break;
+    }
+
+    if (moment.locales().includes(momentLocale)) {
+      moment.locale(momentLocale);
     }
   }, [i18n, language]);
 
