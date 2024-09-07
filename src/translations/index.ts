@@ -44,6 +44,7 @@ if (!i18n.isInitialized) {
       debug: __DEV__,
       nonExplicitSupportedLngs: true,
       supportedLngs: supportedLanguages,
+      returnEmptyString: false,
     });
 }
 
