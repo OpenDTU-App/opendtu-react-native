@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { StrictMode, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Config from 'react-native-config';
 import type { MD3Theme } from 'react-native-paper';
 import {
   adaptNavigationTheme,
@@ -313,7 +314,9 @@ const _App: FC = () => {
   }, [i18n.language, t]);
 
   const showEnableAppUpdatesModal = useAppSelector(
-    state => state.settings.enableAppUpdates === null,
+    state =>
+      state.settings.enableAppUpdates === null &&
+      Config.DISABLE_IN_APP_UPDATES !== 'true',
   );
 
   const showEnableFetchOpenDTUReleasesModal = useAppSelector(
@@ -325,6 +328,10 @@ const _App: FC = () => {
       dispatch(appendLog(props));
     });
   }, [dispatch]);
+
+  useEffect(() => {
+    log.info('react-native-config', JSON.stringify(Config, null, 4));
+  }, []);
 
   if (!i18nLanguageMatchesSettings) {
     return null;

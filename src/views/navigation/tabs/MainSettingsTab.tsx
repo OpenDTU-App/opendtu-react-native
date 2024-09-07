@@ -141,49 +141,49 @@ const MainSettingsTab: FC = () => {
               description={t('settings.ntpSettings.description')}
               left={props => <List.Icon {...props} icon="clock" />}
               disabled
-              style={{ opacity: 0.6 }}
+              style={{ opacity: 0.5 }}
             />
             <List.Item
               title={t('settings.mqttSettings.title')}
               description={t('settings.mqttSettings.description')}
               left={props => <List.Icon {...props} icon="broadcast" />}
               disabled
-              style={{ opacity: 0.6 }}
+              style={{ opacity: 0.5 }}
             />
             <List.Item
               title={t('settings.inverterSettings.title')}
               description={t('settings.inverterSettings.description')}
               left={props => <List.Icon {...props} icon="solar-panel" />}
               disabled
-              style={{ opacity: 0.6 }}
+              style={{ opacity: 0.5 }}
             />
             <List.Item
               title={t('settings.securitySettings.title')}
               description={t('settings.securitySettings.description')}
               left={props => <List.Icon {...props} icon="lock" />}
               disabled
-              style={{ opacity: 0.6 }}
+              style={{ opacity: 0.5 }}
             />
             <List.Item
               title={t('settings.dtuSettings.title')}
               description={t('settings.dtuSettings.description')}
               left={props => <List.Icon {...props} icon="cog" />}
               disabled
-              style={{ opacity: 0.6 }}
+              style={{ opacity: 0.5 }}
             />
             <List.Item
               title={t('settings.hardwareSettings.title')}
               description={t('settings.hardwareSettings.description')}
               left={props => <List.Icon {...props} icon="chip" />}
               disabled
-              style={{ opacity: 0.6 }}
+              style={{ opacity: 0.5 }}
             />
             <List.Item
               title={t('settings.configManagement.title')}
               description={t('settings.configManagement.description')}
               left={props => <List.Icon {...props} icon="file" />}
               disabled
-              style={{ opacity: 0.6 }}
+              style={{ opacity: 0.5 }}
             />
           </List.Section>
           <List.Section>

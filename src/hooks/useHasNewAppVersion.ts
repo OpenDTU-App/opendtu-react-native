@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import Config from 'react-native-config';
 
 import { compare } from 'compare-versions';
 
@@ -17,7 +18,9 @@ const useHasNewAppVersion: UseHasNewAppVersion = options => {
   const appRelease = useAppSelector(state => state.github.latestAppRelease);
 
   const showIndicator = useAppSelector(
-    state => !!state.settings.enableAppUpdates,
+    state =>
+      !!state.settings.enableAppUpdates &&
+      Config.DISABLE_IN_APP_UPDATES !== 'true',
   );
 
   return useMemo(() => {

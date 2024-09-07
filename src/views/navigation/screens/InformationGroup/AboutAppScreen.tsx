@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Config from 'react-native-config';
 import { Box } from 'react-native-flex-layout';
 import type { RenderRules } from 'react-native-markdown-display';
 import Markdown from 'react-native-markdown-display';
@@ -64,7 +65,9 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   }, [releaseFetchTime]);
 
   const inAppUpdatesEnabled = useAppSelector(
-    state => state.settings.enableAppUpdates,
+    state =>
+      state.settings.enableAppUpdates &&
+      Config.DISABLE_IN_APP_UPDATES !== 'true',
   );
 
   const handleToggleInAppUpdates = useCallback(() => {
@@ -187,8 +190,13 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   value={!!inAppUpdatesEnabled}
                   onValueChange={handleToggleInAppUpdates}
                   color={theme.colors.primary}
+                  disabled={Config.DISABLE_IN_APP_UPDATES === 'true'}
                 />
               )}
+              disabled={Config.DISABLE_IN_APP_UPDATES === 'true'}
+              style={{
+                opacity: Config.DISABLE_IN_APP_UPDATES === 'true' ? 0.5 : 1,
+              }}
             />
             <View style={{ height: spacing * 2 }} />
           </ScrollView>

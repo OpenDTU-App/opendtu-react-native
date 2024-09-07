@@ -11280,6 +11280,7 @@ __metadata:
     react-native: "npm:0.75.2"
     react-native-animated-bottom-drawer: "npm:^0.0.23"
     react-native-charts-wrapper: "npm:^0.6.0"
+    react-native-config: "npm:^1.5.3"
     react-native-fast-image: "npm:^8.6.3"
     react-native-flex-layout: "npm:^0.1.5"
     react-native-fs: "npm:^2.20.0"
@@ -12065,6 +12066,18 @@ __metadata:
     prop-types: "npm:^15.8.1"
     react: "npm:16.13.1"
   checksum: 10/5e91480b5af5aa1393ccd7f5eb83ac6df7183651283f980dc7398e5960fa3a764c457e9cbca121c134a8c548a1d9b9a98cee920f5eda392cae5ca27aafe80cbb
+  languageName: node
+  linkType: hard
+
+"react-native-config@npm:^1.5.3":
+  version: 1.5.3
+  resolution: "react-native-config@npm:1.5.3"
+  peerDependencies:
+    react-native-windows: ">=0.61"
+  peerDependenciesMeta:
+    react-native-windows:
+      optional: true
+  checksum: 10/ba5e38c907fa39ea072238a12bf4d5fca88e92bc8192974c7aceeadf814cf9f452dc30bcf705819d778c6e69ac2df699960c044f1c8c0c69cd5a8bcc9b7f555a
   languageName: node
   linkType: hard
 
