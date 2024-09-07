@@ -1,5 +1,6 @@
 import type { FC, PropsWithChildren } from 'react';
 import { createContext, useCallback, useContext, useEffect } from 'react';
+import Config from 'react-native-config';
 
 import {
   setLatestAppRelease,
@@ -77,7 +78,9 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
   });
 
   const enableAppUpdates = useAppSelector(
-    state => !!state.settings.enableAppUpdates,
+    state =>
+      !!state.settings.enableAppUpdates &&
+      Config.DISABLE_IN_APP_UPDATES !== 'true',
   );
 
   const enableFetchOpenDTUReleases = useAppSelector(

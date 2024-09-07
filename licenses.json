@@ -167,6 +167,12 @@
         "licenseUrl": "https://github.com/wuxudong/react-native-charts-wrapper",
         "parents": "opendtu-react-native"
     },
+    "react-native-config@1.5.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/luggit/react-native-config",
+        "licenseUrl": "https://github.com/luggit/react-native-config/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
     "react-native-fast-image@8.6.3": {
         "licenses": "(MIT AND Apache-2.0)",
         "repository": "https://github.com/DylanVann/react-native-fast-image",
