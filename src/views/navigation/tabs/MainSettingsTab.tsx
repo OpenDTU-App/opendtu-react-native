@@ -13,6 +13,7 @@ import ChangeLanguageModal from '@/components/modals/ChangeLanguageModal';
 import ChangeThemeModal from '@/components/modals/ChangeThemeModal';
 
 import useDtuState from '@/hooks/useDtuState';
+import useHasAuthConfigured from '@/hooks/useHasAuthConfigured';
 import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 import useHasNewOpenDtuVersion from '@/hooks/useHasNewOpenDtuVersion';
 import useIsConnected from '@/hooks/useIsConnected';
@@ -25,13 +26,17 @@ import { StyledView } from '@/style';
 import type { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import packageJson from '@root/package.json';
+import useDeviceIndex from '@/hooks/useDeviceIndex';
 
 const MainSettingsTab: FC = () => {
   const navigation = useNavigation() as NavigationProp<ParamListBase>;
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const index = useDeviceIndex();
 
   const theme = useTheme();
+
+  const hasAuthConfigured = useHasAuthConfigured();
 
   const [showChangeThemeModal, setShowChangeThemeModal] =
     useState<boolean>(false);
@@ -124,67 +129,82 @@ const MainSettingsTab: FC = () => {
 
   const handleUnlockDebug = useRequireMultiplePresses(enableDebugMode);
 
+  const handleNavigateToAuth = useCallback((): void => {
+    navigation.navigate('DeviceSettingsScreen', { index, highlightAuth: true });
+  }, [index, navigation]);
+
   return (
     <StyledView theme={theme}>
       <Box style={{ width: '100%', flex: 1 }}>
         <ScrollView>
           <List.Section>
             <List.Subheader>{t('settings.title')}</List.Subheader>
-            <List.Item
-              title={t('settings.networkSettings.title')}
-              description={t('settings.networkSettings.description')}
-              left={props => <List.Icon {...props} icon="wifi" />}
-              onPress={handleNetworkSettings}
-            />
-            <List.Item
-              title={t('settings.ntpSettings.title')}
-              description={t('settings.ntpSettings.description')}
-              left={props => <List.Icon {...props} icon="clock" />}
-              disabled
-              style={{ opacity: 0.5 }}
-            />
-            <List.Item
-              title={t('settings.mqttSettings.title')}
-              description={t('settings.mqttSettings.description')}
-              left={props => <List.Icon {...props} icon="broadcast" />}
-              disabled
-              style={{ opacity: 0.5 }}
-            />
-            <List.Item
-              title={t('settings.inverterSettings.title')}
-              description={t('settings.inverterSettings.description')}
-              left={props => <List.Icon {...props} icon="solar-panel" />}
-              disabled
-              style={{ opacity: 0.5 }}
-            />
-            <List.Item
-              title={t('settings.securitySettings.title')}
-              description={t('settings.securitySettings.description')}
-              left={props => <List.Icon {...props} icon="lock" />}
-              disabled
-              style={{ opacity: 0.5 }}
-            />
-            <List.Item
-              title={t('settings.dtuSettings.title')}
-              description={t('settings.dtuSettings.description')}
-              left={props => <List.Icon {...props} icon="cog" />}
-              disabled
-              style={{ opacity: 0.5 }}
-            />
-            <List.Item
-              title={t('settings.hardwareSettings.title')}
-              description={t('settings.hardwareSettings.description')}
-              left={props => <List.Icon {...props} icon="chip" />}
-              disabled
-              style={{ opacity: 0.5 }}
-            />
-            <List.Item
-              title={t('settings.configManagement.title')}
-              description={t('settings.configManagement.description')}
-              left={props => <List.Icon {...props} icon="file" />}
-              disabled
-              style={{ opacity: 0.5 }}
-            />
+            {hasAuthConfigured ? (
+              <>
+                <List.Item
+                  title={t('settings.networkSettings.title')}
+                  description={t('settings.networkSettings.description')}
+                  left={props => <List.Icon {...props} icon="wifi" />}
+                  onPress={handleNetworkSettings}
+                />
+                <List.Item
+                  title={t('settings.ntpSettings.title')}
+                  description={t('settings.ntpSettings.description')}
+                  left={props => <List.Icon {...props} icon="clock" />}
+                  disabled
+                  style={{ opacity: 0.5 }}
+                />
+                <List.Item
+                  title={t('settings.mqttSettings.title')}
+                  description={t('settings.mqttSettings.description')}
+                  left={props => <List.Icon {...props} icon="broadcast" />}
+                  disabled
+                  style={{ opacity: 0.5 }}
+                />
+                <List.Item
+                  title={t('settings.inverterSettings.title')}
+                  description={t('settings.inverterSettings.description')}
+                  left={props => <List.Icon {...props} icon="solar-panel" />}
+                  disabled
+                  style={{ opacity: 0.5 }}
+                />
+                <List.Item
+                  title={t('settings.securitySettings.title')}
+                  description={t('settings.securitySettings.description')}
+                  left={props => <List.Icon {...props} icon="lock" />}
+                  disabled
+                  style={{ opacity: 0.5 }}
+                />
+                <List.Item
+                  title={t('settings.dtuSettings.title')}
+                  description={t('settings.dtuSettings.description')}
+                  left={props => <List.Icon {...props} icon="cog" />}
+                  disabled
+                  style={{ opacity: 0.5 }}
+                />
+                <List.Item
+                  title={t('settings.hardwareSettings.title')}
+                  description={t('settings.hardwareSettings.description')}
+                  left={props => <List.Icon {...props} icon="chip" />}
+                  disabled
+                  style={{ opacity: 0.5 }}
+                />
+                <List.Item
+                  title={t('settings.configManagement.title')}
+                  description={t('settings.configManagement.description')}
+                  left={props => <List.Icon {...props} icon="file" />}
+                  disabled
+                  style={{ opacity: 0.5 }}
+                />
+              </>
+            ) : (
+              <List.Item
+                title={t('settings.configureAuth.title')}
+                description={t('settings.configureAuth.description')}
+                left={props => <List.Icon {...props} icon="key" />}
+                onPress={() => handleNavigateToAuth()}
+              />
+            )}
           </List.Section>
           <List.Section>
             <List.Subheader>{t('opendtu.information')}</List.Subheader>

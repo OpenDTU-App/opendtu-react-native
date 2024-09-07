@@ -27,10 +27,31 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
   route,
 }) => {
   const { params } = route;
-  const { index } = params as { index: number };
+  const { index, highlightAuth } = params as {
+    index: number;
+    highlightAuth?: boolean;
+  };
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+
+  const [isHighlighted, setIsHighlighted] = useState<boolean>(false);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout | null = null;
+
+    if (highlightAuth) {
+      setIsHighlighted(true);
+      timeout = setTimeout(() => setIsHighlighted(false), 2500);
+    }
+
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+        setIsHighlighted(false);
+      }
+    };
+  }, [highlightAuth]);
 
   const hasConfigs = useAppSelector(
     state => state.settings.dtuConfigs.length > 0,
@@ -231,7 +252,12 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
                   description={hasPassword ? '********' : t('notConfigured')}
                   left={props => <List.Icon {...props} icon="lock" />}
                   borderless
-                  style={{ borderRadius: 8 }}
+                  style={{
+                    borderRadius: 8,
+                    backgroundColor: isHighlighted
+                      ? theme.colors.elevation.level3
+                      : undefined,
+                  }}
                   onPress={() => setOpenCredentialsModal(true)}
                 />
                 <List.Item
