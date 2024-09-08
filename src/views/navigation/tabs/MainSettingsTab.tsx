@@ -12,6 +12,7 @@ import { setDebugEnabled } from '@/slices/settings';
 import ChangeLanguageModal from '@/components/modals/ChangeLanguageModal';
 import ChangeThemeModal from '@/components/modals/ChangeThemeModal';
 
+import useDeviceIndex from '@/hooks/useDeviceIndex';
 import useDtuState from '@/hooks/useDtuState';
 import useHasAuthConfigured from '@/hooks/useHasAuthConfigured';
 import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
@@ -26,7 +27,6 @@ import { StyledView } from '@/style';
 import type { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import packageJson from '@root/package.json';
-import useDeviceIndex from '@/hooks/useDeviceIndex';
 
 const MainSettingsTab: FC = () => {
   const navigation = useNavigation() as NavigationProp<ParamListBase>;
