@@ -73,12 +73,14 @@ const InverterGridProfileScreen: FC<PropsWithNavigation> = ({
     }
   }, [rawContent]);
 
-  if (!inverterSerial) {
-    if (navigation.canGoBack()) {
+  useEffect(() => {
+    if (!inverterSerial && navigation.canGoBack()) {
       log.warn('Inverter not found, going back', inverterSerial);
       navigation.goBack();
     }
+  }, [inverterSerial, navigation]);
 
+  if (!inverterSerial) {
     return null;
   }
 

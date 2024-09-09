@@ -78,12 +78,14 @@ const InverterDeviceInfoScreen: FC<PropsWithNavigation> = ({
     [inverterDeviceInfo],
   );
 
-  if (typeof inverterDeviceInfo === 'undefined') {
-    if (navigation.canGoBack()) {
+  useEffect(() => {
+    if (typeof inverterDeviceInfo === 'undefined' && navigation.canGoBack()) {
       log.warn('Inverter not found, going back', inverterSerial);
       navigation.goBack();
     }
+  }, [inverterDeviceInfo, inverterSerial, navigation]);
 
+  if (typeof inverterDeviceInfo === 'undefined') {
     return null;
   }
 

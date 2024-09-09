@@ -25,7 +25,8 @@ const InverterList: FC = () => {
 
       return (
         a.every((x, i) => x.name === b[i].name) &&
-        a.every((x, i) => x.serial === b[i].serial)
+        a.every((x, i) => x.serial === b[i].serial) &&
+        a.every((x, i) => x.order === b[i].order)
       );
     },
   );
