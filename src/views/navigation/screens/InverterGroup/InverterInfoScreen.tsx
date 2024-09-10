@@ -203,12 +203,14 @@ const InverterInfoScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
 
   const hasAuthConfigured = useHasAuthConfigured();
 
-  if (typeof inverter === 'undefined') {
-    if (navigation.canGoBack()) {
+  useEffect(() => {
+    if (typeof inverter === 'undefined' && navigation.canGoBack()) {
       log.warn('Inverter not found, going back', inverterSerial);
       navigation.goBack();
     }
+  }, [inverter, inverterSerial, navigation]);
 
+  if (typeof inverter === 'undefined') {
     return null;
   }
 

@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, List, useTheme } from 'react-native-paper';
@@ -42,12 +43,14 @@ const InverterDataScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
         | undefined,
   );
 
-  if (!inverter) {
-    if (navigation.canGoBack()) {
+  useEffect(() => {
+    if (!inverter && navigation.canGoBack()) {
       log.warn('Inverter not found, going back', inverterSerial);
       navigation.goBack();
     }
+  }, [inverter, inverterSerial, navigation]);
 
+  if (!inverter) {
     return null;
   }
 
