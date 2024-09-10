@@ -30,7 +30,7 @@ const InverterList: FC = () => {
     },
   );
 
-  const sortedInverters = inverters?.sort((a, b) => a.order - b.order);
+  const sortedInverters = inverters?.slice().sort((a, b) => a.order - b.order);
 
   return (
     <ScrollView style={{ marginBottom: 16 }}>
