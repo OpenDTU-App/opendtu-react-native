@@ -62,5 +62,7 @@ jobs:
         with:
           name: opendtu-app
           if-no-files-found: error
-          path: android/app/build/outputs/apk/release/*.apk
+          path: |
+            android/app/build/outputs/apk/release/*.apk
+            android/app/build/generated/assets/react/release/index.android.bundle
 
