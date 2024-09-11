@@ -71,7 +71,7 @@
         "licenseUrl": "https://github.com/omichelsen/compare-versions/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "expo@51.0.31": {
+    "expo@51.0.32": {
         "licenses": "MIT",
         "repository": "https://github.com/expo/expo",
         "licenseUrl": "https://github.com/expo/expo",
@@ -83,7 +83,7 @@
         "licenseUrl": "https://github.com/epoberezkin/fast-deep-equal/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "i18next@23.14.0": {
+    "i18next@23.15.0": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
