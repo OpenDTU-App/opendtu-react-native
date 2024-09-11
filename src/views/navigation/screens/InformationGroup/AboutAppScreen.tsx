@@ -93,7 +93,9 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('settings.aboutApp')} />
-        <Appbar.Action icon="refresh" onPress={handleShowRefreshModal} />
+        {Config.DISABLE_IN_APP_UPDATES !== 'true' ? (
+          <Appbar.Action icon="refresh" onPress={handleShowRefreshModal} />
+        ) : null}
       </Appbar.Header>
       <StyledView theme={theme}>
         <GenericRefreshModal
@@ -125,79 +127,89 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 </Box>
               </Box>
             </Box>
-            <Divider />
-            <Box p={8}>
-              <Box
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  gap: 4,
-                }}
-              >
-                <Text variant="titleLarge" style={{ textAlign: 'center' }}>
-                  {hasNewAppVersion
-                    ? t('aboutApp.newVersionAvailable')
-                    : t('aboutApp.latestAppRelease')}
-                </Text>
-                <Badge
-                  style={{
-                    alignSelf: 'center',
-                    backgroundColor: theme.colors.primary,
-                  }}
-                >
-                  {prettyTagName}
-                </Badge>
-              </Box>
-              <Box>
-                <Text variant="bodySmall" style={{ textAlign: 'center' }}>
-                  {t('fetchedWithTime', { time: formattedReleaseFetchTime })}
-                </Text>
-              </Box>
-              <Surface style={{ padding: 16, marginTop: 8, borderRadius: 16 }}>
-                <Markdown
-                  style={{
-                    body: {
-                      color: theme.colors.onSurface,
-                    },
-                    link: { textDecorationLine: 'none' },
-                  }}
-                  rules={rules}
-                >
-                  {releaseInfo?.body || ''}
-                </Markdown>
-              </Surface>
-              <Box mt={16} mb={8}>
-                <Button
-                  buttonColor="#24292e"
-                  textColor="#ffffff"
-                  icon="github"
-                  onPress={() => Linking.openURL(releaseInfo?.html_url || '')}
-                  disabled={!releaseInfo?.html_url}
-                >
-                  {t('aboutApp.viewMore')}
-                </Button>
-              </Box>
-            </Box>
-            <Divider />
-            <List.Item
-              title={t('settings.activateInappUpdates')}
-              onPress={handleToggleInAppUpdates}
-              borderless
-              right={props => (
-                <Switch
-                  {...props}
-                  value={!!inAppUpdatesEnabled}
-                  onValueChange={handleToggleInAppUpdates}
-                  color={theme.colors.primary}
+            {Config.DISABLE_IN_APP_UPDATES !== 'true' ? (
+              <>
+                <Divider />
+                <Box p={8}>
+                  <Box
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      gap: 4,
+                    }}
+                  >
+                    <Text variant="titleLarge" style={{ textAlign: 'center' }}>
+                      {hasNewAppVersion
+                        ? t('aboutApp.newVersionAvailable')
+                        : t('aboutApp.latestAppRelease')}
+                    </Text>
+                    <Badge
+                      style={{
+                        alignSelf: 'center',
+                        backgroundColor: theme.colors.primary,
+                      }}
+                    >
+                      {prettyTagName}
+                    </Badge>
+                  </Box>
+                  <Box>
+                    <Text variant="bodySmall" style={{ textAlign: 'center' }}>
+                      {t('fetchedWithTime', {
+                        time: formattedReleaseFetchTime,
+                      })}
+                    </Text>
+                  </Box>
+                  <Surface
+                    style={{ padding: 16, marginTop: 8, borderRadius: 16 }}
+                  >
+                    <Markdown
+                      style={{
+                        body: {
+                          color: theme.colors.onSurface,
+                        },
+                        link: { textDecorationLine: 'none' },
+                      }}
+                      rules={rules}
+                    >
+                      {releaseInfo?.body || ''}
+                    </Markdown>
+                  </Surface>
+                  <Box mt={16} mb={8}>
+                    <Button
+                      buttonColor="#24292e"
+                      textColor="#ffffff"
+                      icon="github"
+                      onPress={() =>
+                        Linking.openURL(releaseInfo?.html_url || '')
+                      }
+                      disabled={!releaseInfo?.html_url}
+                    >
+                      {t('aboutApp.viewMore')}
+                    </Button>
+                  </Box>
+                </Box>
+                <Divider />
+                <List.Item
+                  title={t('settings.activateInappUpdates')}
+                  onPress={handleToggleInAppUpdates}
+                  borderless
+                  right={props => (
+                    <Switch
+                      {...props}
+                      value={!!inAppUpdatesEnabled}
+                      onValueChange={handleToggleInAppUpdates}
+                      color={theme.colors.primary}
+                      disabled={Config.DISABLE_IN_APP_UPDATES === 'true'}
+                    />
+                  )}
                   disabled={Config.DISABLE_IN_APP_UPDATES === 'true'}
+                  style={{
+                    opacity: Config.DISABLE_IN_APP_UPDATES === 'true' ? 0.5 : 1,
+                  }}
                 />
-              )}
-              disabled={Config.DISABLE_IN_APP_UPDATES === 'true'}
-              style={{
-                opacity: Config.DISABLE_IN_APP_UPDATES === 'true' ? 0.5 : 1,
-              }}
-            />
+              </>
+            ) : null}
             <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
