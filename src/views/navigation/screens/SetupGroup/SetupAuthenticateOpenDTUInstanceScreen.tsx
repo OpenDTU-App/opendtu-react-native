@@ -132,6 +132,10 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
           }}
         />
         <Appbar.Content title={t('setup.authenticateOpendtuInstance')} />
+        <Appbar.Action
+          onPress={() => navigation.navigate('AppLogScreen')}
+          icon="bug"
+        />
       </Appbar.Header>
       <StyledView theme={theme} style={{ justifyContent: 'center' }}>
         <Box ph={32} w="100%" mb={16}>

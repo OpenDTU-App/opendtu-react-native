@@ -140,6 +140,10 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
           <Appbar.BackAction onPress={() => navigation.goBack()} />
         ) : null}
         <Appbar.Content title={t('setup.addOpendtuInstance')} />
+        <Appbar.Action
+          onPress={() => navigation.navigate('AppLogScreen')}
+          icon="bug"
+        />
       </Appbar.Header>
       <StyledView theme={theme} style={{ justifyContent: 'center' }}>
         <Box ph={32} w="100%">
