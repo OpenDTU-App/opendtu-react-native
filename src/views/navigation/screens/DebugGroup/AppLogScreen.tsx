@@ -11,13 +11,16 @@ import { ScrollView } from 'react-native';
 import { clearLogs } from '@/slices/app';
 
 import LogLine from '@/components/logging/LogLine';
+import LogExtensionModal from '@/components/modals/LogExtensionModal';
 import LogLevelModal from '@/components/modals/LogLevelModal';
 
-import { LogLevel } from '@/utils/log';
+import { LogLevel, rootLogging } from '@/utils/log';
 
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
+
+const log = rootLogging.extend('AppLogScreen');
 
 const AppLogScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const { t } = useTranslation();
@@ -25,13 +28,21 @@ const AppLogScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const dispatch = useAppDispatch();
 
   const [logLevelFilter, setLogLevelFilter] = useState<LogLevel>(LogLevel.warn);
+  const [extensionFilter, setExtensionFilter] = useState<string | null>(null);
+
   const [showLogLevelModal, setShowLogLevelModal] = useState<boolean>(false);
+  const [showExtensionModal, setShowExtensionModal] = useState<boolean>(false);
 
   const rawLogs = useAppSelector(state => state.app.logs);
 
   const logs = useMemo(
-    () => rawLogs.filter(log => log.level.severity >= logLevelFilter),
-    [rawLogs, logLevelFilter],
+    () =>
+      rawLogs.filter(
+        log =>
+          log.level.severity >= logLevelFilter &&
+          (extensionFilter ? log.extension === extensionFilter : true),
+      ),
+    [rawLogs, logLevelFilter, extensionFilter],
   );
 
   return (
@@ -47,7 +58,6 @@ const AppLogScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               url: `data:text/plain;base64,${btoa(JSON.stringify(logs, null, 4))}`,
               type: 'text/plain',
               filename: 'opendtu-app-logs',
-              failOnCancel: false,
               saveToFiles: true,
             })
               .then(() => {
@@ -56,7 +66,13 @@ const AppLogScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   text1: t('settings.logsShared'),
                 });
               })
-              .catch(() => {
+              .catch((error: Error) => {
+                if (error.message === 'User did not share') {
+                  return;
+                }
+
+                log.error('Error sharing logs', error);
+
                 Toast.show({
                   type: 'error',
                   text1: t('settings.logsNotShared'),
@@ -68,6 +84,10 @@ const AppLogScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.Action
           icon="filter"
           onPress={() => setShowLogLevelModal(true)}
+        />
+        <Appbar.Action
+          icon="filter-variant"
+          onPress={() => setShowExtensionModal(true)}
         />
       </Appbar.Header>
       <StyledView theme={theme}>
@@ -104,6 +124,12 @@ const AppLogScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         setLogLevel={value => setLogLevelFilter(value)}
         visible={showLogLevelModal}
         onDismiss={() => setShowLogLevelModal(false)}
+      />
+      <LogExtensionModal
+        extensionFilter={extensionFilter}
+        setExtensionFilter={value => setExtensionFilter(value)}
+        visible={showExtensionModal}
+        onDismiss={() => setShowExtensionModal(false)}
       />
     </>
   );

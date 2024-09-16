@@ -7,7 +7,7 @@ import type { LogProps } from '@/utils/log';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-const maximumLogs = 100;
+const maximumLogsPerType = 100;
 
 const initialState: AppState = {
   logs: [],
@@ -25,8 +25,12 @@ const appSlice = createSlice({
         uuid: uuidv4(),
       });
 
+      const logsOfType = state.logs.filter(
+        log => log.level.severity === action.payload.level.severity,
+      ).length;
+
       // remove the last log in the array
-      if (state.logs.length > maximumLogs) {
+      if (logsOfType > maximumLogsPerType) {
         state.logs.pop();
       }
     },
@@ -42,8 +46,12 @@ const appSlice = createSlice({
         uuid: uuidv4(),
       });
 
+      const logsOfType = state.logs.filter(
+        log => log.level.severity === action.payload.level.severity,
+      ).length;
+
       // remove the last log in the array
-      if (state.logs.length > maximumLogs) {
+      if (logsOfType > maximumLogsPerType) {
         state.logs.pop();
       }
     },

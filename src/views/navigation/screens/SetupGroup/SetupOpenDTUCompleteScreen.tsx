@@ -63,6 +63,8 @@ const SetupOpenDTUCompleteScreen: FC<PropsWithNavigation> = ({
       index: 0,
       routes: [{ name: 'MainScreen', params: {} }],
     });
+
+    log.info('Finished setup');
   }, [dispatch, navigation, setupConfig.baseUrl, setupConfig.userString]);
 
   return (

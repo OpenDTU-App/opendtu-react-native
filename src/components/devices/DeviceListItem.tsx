@@ -51,6 +51,7 @@ const DeviceListItem: FC<DeviceListItemProps> = ({ config, index }) => {
 
         dispatch(setDeviceState({ deviceState: res, index }));
       } catch (error) {
+        log.error('DeviceListItem - Error', error);
         dispatch(setDeviceState({ deviceState: DeviceState.Unknown, index }));
       }
     };

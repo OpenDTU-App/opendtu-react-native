@@ -50,7 +50,14 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
   const valid = username && password && !error;
 
   const handleLogin = useCallback(async () => {
-    if (!address || !username || !password) return;
+    if (!address || !username || !password) {
+      log.error('Missing address, username or password', {
+        address,
+        username,
+        password,
+      });
+      return;
+    }
 
     setLoading(true);
     setError(null);
@@ -73,6 +80,8 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
       navigation.navigate('SetupOpenDTUCompleteScreen');
       setLoading(false);
 
+      log.info('Successfully authenticated');
+
       return;
     } else {
       setError(t('setup.errors.genericError'));
@@ -83,7 +92,10 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
   }, [t, address, username, password, openDtuApi, dispatch, navigation]);
 
   const handleAnonymous = useCallback(async () => {
-    if (!address) return;
+    if (!address) {
+      log.error('No address provided');
+      return;
+    }
 
     setLoading(true);
     setError(null);
@@ -101,8 +113,7 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
       dispatch(setSetupUserString({ userString: null }));
       navigation.navigate('SetupOpenDTUCompleteScreen');
       setLoading(false);
-
-      setLoading(false);
+      log.info('Successfully authenticated');
     } catch (e) {
       setError(t('setup.errors.genericError'));
       log.info('Error while connecting to OpenDTU instance', e);

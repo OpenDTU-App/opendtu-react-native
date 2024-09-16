@@ -41,7 +41,7 @@ const ChangeGraphRefreshIntervalModal: FC<
       dispatch(setRefreshInterval({ refreshInterval }));
       onDismiss?.();
     } catch (error) {
-      log.error(error);
+      log.error('Failed to parse refresh interval', error);
     }
   }, [dispatch, intervalState, onDismiss]);
 

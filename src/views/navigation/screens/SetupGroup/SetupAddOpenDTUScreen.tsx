@@ -50,7 +50,10 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const handleConnectCheck = useCallback(async () => {
     let ourAddress = address;
 
-    if (!ourAddress) return;
+    if (!ourAddress) {
+      log.error('No address provided');
+      return;
+    }
 
     let url: URL | null = null;
 
@@ -62,14 +65,18 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
     try {
       url = new URL(ourAddress);
-    } catch {
+    } catch (e) {
+      log.error('Invalid address', ourAddress, e);
       setError(t('setup.errors.invalidAddress'));
       return;
     }
 
-    log.info(`url=${url}`);
+    log.debug(`url=${url}`);
 
-    if (!url) return;
+    if (!url) {
+      log.error('No URL');
+      return;
+    }
 
     setLoading(true);
 
@@ -107,6 +114,8 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     navigation.navigate('SetupAuthenticateOpenDTUInstanceScreen');
 
     setLoading(false);
+
+    log.info('Connected to OpenDTU', baseUrl);
   }, [t, address, baseUrls, dispatch, navigation, openDtuApi]);
 
   useEffect(() => {
@@ -114,6 +123,7 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
     return navigation.addListener('beforeRemove', e => {
       if (!loading && hasConfigs) {
+        log.info('Preventing navigation');
         return;
       }
 
