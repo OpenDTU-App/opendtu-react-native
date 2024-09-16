@@ -48,6 +48,7 @@ const MDNSScanItem: FC<MDNSScanItemProps> = ({
       log.debug('res', res, DeviceState[res], url.toString());
 
       if (res === null) {
+        log.error('Could not connect to OpenDTU!');
         setError('Could not connect to OpenDTU!');
         setLoading(false);
 
@@ -55,13 +56,14 @@ const MDNSScanItem: FC<MDNSScanItemProps> = ({
       }
 
       if (!res) {
+        log.error('Not an OpenDTU instance!');
         setError('Not an OpenDTU instance!');
         setLoading(false);
 
         return;
       }
     } catch (e) {
-      log.error(e);
+      log.error('Could not connect to OpenDTU!', e);
 
       setError('Could not connect to OpenDTU!');
       setLoading(false);

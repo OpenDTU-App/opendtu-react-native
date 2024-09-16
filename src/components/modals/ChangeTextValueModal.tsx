@@ -14,6 +14,10 @@ import {
 
 import { View } from 'react-native';
 
+import { rootLogging } from '@/utils/log';
+
+const log = rootLogging.extend('ChangeTextValueModal');
+
 export interface ChangeValueModalProps {
   isOpen?: boolean;
   onClose?: () => void;
@@ -65,6 +69,7 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message);
+        log.error('Validation failed', e);
       }
 
       return;

@@ -132,24 +132,29 @@ class OpenDtuApi {
       this.wsConnected &&
       ago(this.lastMessageTimestamp) > maximumTimeUntilInvalid
     ) {
+      log.warn('OpenDtuApi.handle() disconnecting due to inactivity');
       this.disconnect();
       this.connect();
     }
   }
 
   public setLocale(locale: string): void {
+    log.debug('OpenDtuApi.setLocale()', locale);
     this.locale = locale;
   }
 
   public setBaseUrl(baseUrl: string): void {
+    log.debug('OpenDtuApi.setBaseUrl()', baseUrl);
     this.baseUrl = baseUrl;
   }
 
   public setUserString(userString: string | null): void {
+    log.debug('OpenDtuApi.setUserString()', userString);
     this.userString = userString;
   }
 
   public setIndex(index: Index): void {
+    log.debug('OpenDtuApi.setIndex()', index);
     this.index = index;
   }
 
@@ -157,6 +162,7 @@ class OpenDtuApi {
     log.debug('OpenDtuApi.startFetchHttpStateInterval()');
 
     if (this.fetchHttpStateInterval) {
+      log.debug('OpenDtuApi.startFetchHttpStateInterval() already running');
       clearInterval(this.fetchHttpStateInterval);
     }
 
@@ -180,6 +186,7 @@ class OpenDtuApi {
     });
 
     if (this.fetchHttpStateInterval) {
+      log.debug('OpenDtuApi.stopFetchHttpStateInterval() clearing interval');
       clearInterval(this.fetchHttpStateInterval);
     }
 
@@ -187,44 +194,54 @@ class OpenDtuApi {
   }
 
   public registerLiveDataHandler(handler: LiveDataHandler): void {
+    log.debug('OpenDtuApi.registerLiveDataHandler()');
     this.liveDataHandler = handler;
   }
 
   public unregisterLiveDataHandler(): void {
+    log.debug('OpenDtuApi.unregisterLiveDataHandler()');
     this.liveDataHandler = null;
   }
 
   public registerLiveDataFromStatusHandler(
     handler: LiveDataFromStatusHandler,
   ): void {
+    log.debug('OpenDtuApi.registerLiveDataFromStatusHandler()');
     this.liveDataFromStatusHandler = handler;
   }
 
   public unregisterLiveDataFromStatusHandler(): void {
+    log.debug('OpenDtuApi.unregisterLiveDataFromStatusHandler()');
     this.liveDataFromStatusHandler = null;
   }
 
   public registerHttpStatusHandler(handler: HttpStatusHandler): void {
+    log.debug('OpenDtuApi.registerHttpStatusHandler()');
     this.httpStatusHandler = handler;
   }
 
   public unregisterHttpStatusHandler(): void {
+    log.debug('OpenDtuApi.unregisterHttpStatusHandler()');
     this.httpStatusHandler = null;
   }
 
   public registerOnConnectedHandler(handler: (index: Index) => void): void {
+    log.debug('OpenDtuApi.registerOnConnectedHandler()');
     this.onConnectedHandler = handler;
   }
 
   public unregisterOnConnectedHandler(): void {
+    log.debug('OpenDtuApi.unregisterOnConnectedHandler()');
     this.onConnectedHandler = null;
   }
 
   public registerOnDisconnectedHandler(handler: () => void): void {
+    log.debug('OpenDtuApi.registerOnDisconnectedHandler()');
     this.onDisconnectedHandler = handler;
   }
 
   public unregisterOnDisconnectedHandler(): void {
+    log.debug('OpenDtuApi.unregisterOnDisconnectedHandler()');
     this.onDisconnectedHandler = null;
   }
 
@@ -235,30 +252,36 @@ class OpenDtuApi {
       inverterSerial: InverterSerial,
     ) => void,
   ): void {
+    log.debug('OpenDtuApi.registerOnEventLogHandler()');
     this.onEventLogHandler = handler;
   }
 
   public unregisterOnEventLogHandler(): void {
+    log.debug('OpenDtuApi.unregisterOnEventLogHandler()');
     this.onEventLogHandler = null;
   }
 
   public registerOnPowerStatusHandler(
     handler: (data: PowerStatusData, index: Index) => void,
   ): void {
+    log.debug('OpenDtuApi.registerOnPowerStatusHandler()');
     this.onPowerStatusHandler = handler;
   }
 
   public unregisterOnPowerStatusHandler(): void {
+    log.debug('OpenDtuApi.unregisterOnPowerStatusHandler()');
     this.onPowerStatusHandler = null;
   }
 
   public registerOnLimitStatusHandler(
     handler: (data: LimitStatusData, index: Index) => void,
   ): void {
+    log.debug('OpenDtuApi.registerOnLimitStatusHandler()');
     this.onLimitStatusHandler = handler;
   }
 
   public unregisterOnLimitStatusHandler(): void {
+    log.debug('OpenDtuApi.unregisterOnLimitStatusHandler()');
     this.onLimitStatusHandler = null;
   }
 
@@ -269,10 +292,12 @@ class OpenDtuApi {
       inverterSerial: InverterSerial,
     ) => void,
   ): void {
+    log.debug('OpenDtuApi.registerOnInverterDeviceHandler()');
     this.onInverterDeviceHandler = handler;
   }
 
   public unregisterOnInverterDeviceHandler(): void {
+    log.debug('OpenDtuApi.unregisterOnInverterDeviceHandler()');
     this.onInverterDeviceHandler = null;
   }
 
@@ -283,20 +308,24 @@ class OpenDtuApi {
       inverterSerial: InverterSerial,
     ) => void,
   ): void {
+    log.debug('OpenDtuApi.registerOnGridProfileHandler()');
     this.onGridProfileHandler = handler;
   }
 
   public unregisterOnGridProfileHandler(): void {
+    log.debug('OpenDtuApi.unregisterOnGridProfileHandler()');
     this.onGridProfileHandler = null;
   }
 
   public registerOnNetworkSettingsHandler(
     handler: (data: NetworkSettings, index: Index) => void,
   ): void {
+    log.debug('OpenDtuApi.registerOnNetworkSettingsHandler()');
     this.onNetworkSettingsHandler = handler;
   }
 
   public unregisterOnNetworkSettingsHandler(): void {
+    log.debug('OpenDtuApi.unregisterOnNetworkSettingsHandler()');
     this.onNetworkSettingsHandler = null;
   }
 
@@ -325,6 +354,9 @@ class OpenDtuApi {
 
       if (response?.status === 200) {
         clearTimeout(abortTimeout);
+
+        log.debug('getSystemStatusFromUrl', 'success', response);
+
         return {
           systemStatus: await response.json(),
           deviceState: DeviceState.Reachable,
@@ -332,11 +364,21 @@ class OpenDtuApi {
         };
       }
 
+      const errorText = await response.text();
+
+      log.error(
+        'getSystemStatusFromUrl',
+        'invalid status',
+        response?.status,
+        'errortext',
+        errorText,
+      );
+
       return {
         deviceState: DeviceState.NotInstance,
         meta: {
           statusCode: response?.status,
-          error: (await response.text()) || 'No body available',
+          error: errorText || 'No body available',
         },
       };
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -345,6 +387,10 @@ class OpenDtuApi {
         log.error('getSystemStatusFromUrl error', error, error.name);
 
         if (error.name === 'AbortError') {
+          log.debug(
+            'getSystemStatusFromUrl',
+            'Returning Unreachable / abort error',
+          );
           return {
             deviceState: DeviceState.Unreachable,
             meta: {
@@ -354,9 +400,13 @@ class OpenDtuApi {
           };
         }
 
+        log.debug('getSystemStatusFromUrl', 'Returning NotInstance / error');
+
         return { deviceState: DeviceState.NotInstance, meta: { error: error } };
       }
     }
+
+    log.debug('getSystemStatusFromUrl', 'Returning Unknown / no response');
 
     return {
       deviceState: DeviceState.Unknown,
@@ -366,6 +416,8 @@ class OpenDtuApi {
 
   public async getSystemStatus(): Promise<GetSystemStatusReturn> {
     if (!this.baseUrl) {
+      log.error('getSystemStatus', 'No base url');
+
       return {
         deviceState: DeviceState.InvalidState,
         meta: { error: 'No base url' },
@@ -387,7 +439,7 @@ class OpenDtuApi {
     const result = await this.getSystemStatusFromUrl(url);
 
     if (result.deviceState !== DeviceState.Reachable) {
-      console.log('isOpenDtuInstance', result.meta, url);
+      log.error('isOpenDtuInstance', result.meta, url);
       return result.deviceState;
     }
 
@@ -399,11 +451,20 @@ class OpenDtuApi {
         result.systemStatus.sdkversion
       ) {
         if (originalUrl === this.baseUrl) {
+          log.debug('isOpenDtuInstance', 'baseUrl matches');
           return DeviceState.Connected;
         }
+
+        log.debug('isOpenDtuInstance', 'baseUrl does not match');
         return DeviceState.Reachable;
       }
     }
+
+    log.error(
+      'isOpenDtuInstance',
+      'invalid system status, returning NotInstance',
+      result.systemStatus,
+    );
 
     return DeviceState.NotInstance;
   }
@@ -420,6 +481,10 @@ class OpenDtuApi {
   } {
     const decoded = atob(decodeURIComponent(authdata));
     const split = decoded.split(':');
+
+    if (split.length !== 2) {
+      throw new Error('Invalid authdata');
+    }
 
     return {
       username: split[0],
@@ -460,6 +525,7 @@ class OpenDtuApi {
       ).catch(() => null);
 
       if (!response) {
+        log.error('checkCredentials', 'no response');
         return false;
       }
 
@@ -468,8 +534,11 @@ class OpenDtuApi {
         if (returnValue) {
           returnValue.authdata = authData;
         }
+        log.debug('checkCredentials', 'success', returnValue);
         return returnValue;
       }
+
+      log.error('checkCredentials', 'invalid status', response.status);
 
       return false;
     } catch (error) {
@@ -535,6 +604,11 @@ class OpenDtuApi {
             parsedData !== null &&
             Object.keys(parsedData).length > 0
           ) {
+            log.debug('OpenDtuApi.onmessage() valid data', {
+              parsedData,
+              index: this.index,
+              wsConnected: this.wsConnected,
+            });
             this.liveDataHandler(
               {
                 ...parsedData,
@@ -671,6 +745,7 @@ class OpenDtuApi {
     let user = null;
 
     if (!this.userString) {
+      log.warn('getAuthString', 'userString is null');
       return null;
     }
 
@@ -684,6 +759,8 @@ class OpenDtuApi {
       return encodeURIComponent(atob(user.authdata)).replace('%3A', ':') + '@';
     }
 
+    log.debug('getAuthString', 'no authdata');
+
     return '';
   }
 
@@ -693,6 +770,7 @@ class OpenDtuApi {
 
   public async getLiveData(): Promise<LiveDataFromStatus | null> {
     if (!this.baseUrl) {
+      log.error('getLiveData', 'no base url');
       return null;
     }
 
@@ -713,16 +791,19 @@ class OpenDtuApi {
         this.liveDataFromStatusHandler(json, true, this.index);
       }
 
+      log.debug('getLiveData', 'success');
+
       return json;
     }
 
-    log.error('getLiveData', 'invalid status');
+    log.error('getLiveData', 'invalid status', res.status);
 
     return null;
   }
 
   public async getNetworkStatus(): Promise<NetworkStatus | null> {
     if (!this.baseUrl) {
+      log.error('getNetworkStatus', 'no base url');
       return null;
     }
 
@@ -737,10 +818,11 @@ class OpenDtuApi {
     }
 
     if (res.status === 200) {
+      log.debug('getNetworkStatus', 'success');
       return await res.json();
     }
 
-    log.error('getNetworkStatus', 'invalid status');
+    log.error('getNetworkStatus', 'invalid status', res.status);
 
     return null;
   }
@@ -771,16 +853,19 @@ class OpenDtuApi {
         this.onEventLogHandler(json, this.index, inverterId);
       }
 
+      log.debug('getEventLog', 'success');
+
       return json;
     }
 
-    log.error('getEventLog', 'invalid status');
+    log.error('getEventLog', 'invalid status', res.status);
 
     return null;
   }
 
   public async getNtpStatus(): Promise<NtpStatus | null> {
     if (!this.baseUrl) {
+      log.error('getNtpStatus', 'no base url');
       return null;
     }
 
@@ -792,16 +877,18 @@ class OpenDtuApi {
     }
 
     if (res.status === 200) {
+      log.debug('getNtpStatus', 'success');
       return await res.json();
     }
 
-    log.error('getNtpStatus', 'invalid status');
+    log.error('getNtpStatus', 'invalid status', res.status);
 
     return null;
   }
 
   public async getMqttStatus(): Promise<MqttStatus | null> {
     if (!this.baseUrl) {
+      log.error('getMqttStatus', 'no base url');
       return null;
     }
 
@@ -813,20 +900,23 @@ class OpenDtuApi {
     }
 
     if (res.status === 200) {
+      log.debug('getMqttStatus', 'success');
       return await res.json();
     }
 
-    log.error('getMqttStatus', 'invalid status');
+    log.error('getMqttStatus', 'invalid status', res.status);
 
     return null;
   }
 
   public async getInverters(): Promise<InverterItem[] | null> {
     if (!this.baseUrl) {
+      log.error('getInverters', 'no base url');
       return null;
     }
 
     if (!this.isAuthenticated()) {
+      log.error('getInverters', 'not authenticated');
       return null;
     }
 
@@ -841,10 +931,11 @@ class OpenDtuApi {
     }
 
     if (res.status === 200) {
+      log.debug('getInverters', 'success');
       return (await res.json()).inverter;
     }
 
-    log.error('getInverters', 'invalid status');
+    log.error('getInverters', 'invalid status', res.status);
 
     return null;
   }
@@ -853,6 +944,7 @@ class OpenDtuApi {
     serial: InverterSerial,
   ): Promise<InverterDeviceData | null> {
     if (!this.baseUrl) {
+      log.error('getInverterDeviceInfo', 'no base url');
       return null;
     }
 
@@ -875,10 +967,12 @@ class OpenDtuApi {
         this.onInverterDeviceHandler(json, this.index, serial);
       }
 
+      log.debug('getInverterDeviceInfo', 'success');
+
       return json;
     }
 
-    log.error('getInverterDeviceInfo', 'invalid status');
+    log.error('getInverterDeviceInfo', 'invalid status', res.status);
 
     return null;
   }
@@ -888,6 +982,7 @@ class OpenDtuApi {
     excludeRaw: boolean,
   ): Promise<GridProfileData | null> {
     if (!this.baseUrl) {
+      log.error('getGridProfile', 'no base url');
       return null;
     }
 
@@ -904,7 +999,11 @@ class OpenDtuApi {
         });
 
     if (!parsedRes || (!excludeRaw && !rawRes)) {
-      log.error('getGridProfile', 'no or invalid response');
+      log.error('getGridProfile', 'no or invalid response', {
+        parsedRes,
+        excludeRaw,
+        rawRes,
+      });
       return null;
     }
 
@@ -921,16 +1020,22 @@ class OpenDtuApi {
         this.onGridProfileHandler(gridProfileData, this.index, serial);
       }
 
+      log.debug('getGridProfile', 'success');
+
       return gridProfileData;
     }
 
-    log.error('getGridProfile', 'invalid status');
+    log.error('getGridProfile', 'invalid status', {
+      parsedRes: parsedRes.status,
+      rawRes: rawRes?.status,
+    });
 
     return null;
   }
 
   public async getPowerConfig(): Promise<PowerStatusData | null> {
     if (!this.baseUrl) {
+      log.error('getPowerConfig', 'no base url');
       return null;
     }
 
@@ -948,10 +1053,12 @@ class OpenDtuApi {
         this.onPowerStatusHandler(json, this.index);
       }
 
+      log.debug('getPowerConfig', 'success');
+
       return json;
     }
 
-    log.error('getPowerConfig', 'invalid status');
+    log.error('getPowerConfig', 'invalid status', res.status);
 
     return null;
   }
@@ -961,6 +1068,7 @@ class OpenDtuApi {
     action: PowerSetAction,
   ): Promise<boolean> {
     if (!this.baseUrl) {
+      log.error('setPowerConfig', 'no base url');
       return false;
     }
 
@@ -991,6 +1099,11 @@ class OpenDtuApi {
 
     const parsed = await res.json();
 
+    log.debug('setPowerConfig', 'success', {
+      status: res.status,
+      parsed,
+    });
+
     return res.status === 200 && parsed.type === 'success';
   }
 
@@ -1013,10 +1126,12 @@ class OpenDtuApi {
         this.onLimitStatusHandler(json, this.index);
       }
 
+      log.debug('getLimitConfig', 'success');
+
       return json;
     }
 
-    log.error('getLimitConfig', 'invalid status');
+    log.error('getLimitConfig', 'invalid status', res.status);
 
     return null;
   }
@@ -1026,6 +1141,7 @@ class OpenDtuApi {
     config: LimitConfig,
   ): Promise<boolean> {
     if (!this.baseUrl) {
+      log.error('setLimitConfig', 'no base url');
       return false;
     }
 
@@ -1047,11 +1163,17 @@ class OpenDtuApi {
 
     const parsed = await res.json();
 
+    log.debug('setLimitConfig', 'success', {
+      status: res.status,
+      parsed,
+    });
+
     return res.status === 200 && parsed.type === 'success';
   }
 
   public async getNetworkConfig(): Promise<NetworkSettings | null> {
     if (!this.baseUrl) {
+      log.error('getNetworkConfig', 'no base url');
       return null;
     }
 
@@ -1072,10 +1194,12 @@ class OpenDtuApi {
         this.onNetworkSettingsHandler(json, this.index);
       }
 
+      log.debug('getNetworkConfig', 'success');
+
       return json;
     }
 
-    log.error('getNetworkConfig', 'invalid status');
+    log.error('getNetworkConfig', 'invalid status', res.status);
 
     return null;
   }
@@ -1084,6 +1208,7 @@ class OpenDtuApi {
     config: NetworkSettings,
   ): Promise<boolean | null> {
     if (!this.baseUrl) {
+      log.error('setNetworkConfig', 'no base url');
       return null;
     }
 
@@ -1104,6 +1229,11 @@ class OpenDtuApi {
     }
 
     const parsed = await res.json();
+
+    log.debug('setNetworkConfig', 'success', {
+      status: res.status,
+      parsed,
+    });
 
     return res.status === 200 && parsed.type === 'success';
   }
@@ -1150,6 +1280,12 @@ class OpenDtuApi {
 
     const url = `${authString ?? ''}${this.baseUrl}${route}`;
 
+    log.debug('makeAuthenticatedRequest', {
+      authString: typeof authString,
+      requestOptions,
+      route,
+    });
+
     // console.log('makeAuthenticatedRequest', url, requestOptions);
 
     try {
@@ -1162,6 +1298,11 @@ class OpenDtuApi {
         `url=${url}, status=${res.status}`,
       );
       */
+
+      log.debug('makeAuthenticatedRequest', {
+        url,
+        status: res?.status,
+      });
 
       return res;
     } catch (error) {
@@ -1191,6 +1332,8 @@ class OpenDtuApi {
     downloadUrl: string,
     onDownloadProgressEvent: (progress: number) => void,
   ): Promise<string | null> {
+    log.debug('downloadOTA', { version, downloadUrl });
+
     return await downloadFirmware(
       version,
       downloadUrl,
@@ -1223,6 +1366,8 @@ class OpenDtuApi {
       headers,
       onUploadProgressEvent,
     );
+
+    log.debug('handleOTA', { version, path, res });
 
     return res?.statusCode === 200;
   }
@@ -1262,11 +1407,14 @@ class OpenDtuApi {
         };
 
         const abortTimeout = setTimeout(() => {
+          log.warn('awaitForUpdateFinish', 'Aborting fetch');
           controller.abort();
         }, 1000 * 3);
 
         fetch(url, requestOptions)
           .then(response => {
+            log.debug('awaitForUpdateFinish', response.status);
+
             if (response.status === 200) {
               clearTimeout(abortTimeout);
               clearTimeout(rejectTimeout);
@@ -1276,6 +1424,12 @@ class OpenDtuApi {
               }
 
               resolve();
+            } else {
+              log.debug(
+                'awaitForUpdateFinish',
+                'invalid status',
+                response.status,
+              );
             }
           })
           .catch(() => null);
