@@ -29,6 +29,9 @@ iOS is set up in xCode, but there is no plan yet to publish it to the App Store,
 ## Development
 There are two branches. `main` is the stable branch, `develop` is the development branch. If you want to contribute, please create a pull request to `develop`.
 
+## Logging
+If you want to have a nice view of the logs the app exports as a txt file, you can find the project [here](https://github.com/OpenDTU-App/opendtu-react-native-logviewer). It is hosted on GitHub pages here: [https://opendtu-app.github.io/opendtu-react-native-logviewer/](https://opendtu-app.github.io/opendtu-react-native-logviewer/)
+
 ## Translations
 Translations are inside a [submodule](https://github.com/OpenDTU-App/opendtu-react-native-translations) located in `src/translations/translation-files`.
 This helps to have a better developer experience when working with Weblate.
