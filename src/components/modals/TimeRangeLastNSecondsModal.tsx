@@ -69,7 +69,7 @@ const TimeRangeLastNSecondsModal: FC<TimeRangeLastNSecondsModalProps> = ({
             label={t('settings.seconds')}
             keyboardType="numeric"
             mode="outlined"
-            value={secondsState?.toString()}
+            defaultValue={secondsState?.toString()}
             onChangeText={handleChange}
             style={{ backgroundColor: theme.colors.elevation.level3 }}
             right={<StyledTextInput.Affix text="s" />}

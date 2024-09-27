@@ -67,7 +67,7 @@ const ChangeCustomNameModal: FC<ChangeCustomNameModalProps> = props => {
           <StyledTextInput
             label={t('device.deviceName')}
             mode="outlined"
-            value={customName}
+            defaultValue={customName}
             onChangeText={setCustomName}
             style={{ backgroundColor: theme.colors.elevation.level3 }}
           />

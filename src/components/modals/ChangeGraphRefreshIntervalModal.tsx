@@ -65,7 +65,7 @@ const ChangeGraphRefreshIntervalModal: FC<
             label={t('settings.milliseconds')}
             keyboardType="numeric"
             mode="outlined"
-            value={intervalState?.toString()}
+            defaultValue={intervalState?.toString()}
             onChangeText={handleChange}
             style={{ backgroundColor: theme.colors.elevation.level3 }}
             right={<StyledTextInput.Affix text="ms" />}

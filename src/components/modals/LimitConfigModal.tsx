@@ -226,7 +226,7 @@ const LimitConfigModal: FC<LimitConfigModalProps> = ({
               label={t('limitStatus.limitValue', {
                 unit: limitType === 'absolute' ? 'W' : '%',
               })}
-              value={limitValue}
+              defaultValue={limitValue}
               onChangeText={(text: string) => {
                 setLimitValue(text);
                 setError(null);

@@ -54,7 +54,7 @@ const ChangeServerUrlModal: FC<ChangeServerUrlModalProps> = props => {
           <StyledTextInput
             label={t('settings.serverUrl')}
             mode="outlined"
-            value={baseUrl}
+            defaultValue={baseUrl}
             onChangeText={setBaseUrl}
             style={{ backgroundColor: theme.colors.elevation.level3 }}
           />
