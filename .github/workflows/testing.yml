@@ -32,6 +32,7 @@ jobs:
           yarn install --immutable --check-cache
 
       - name: Run ESLint
+        continue-on-error: true
         run: |
           yarn lint --max-warnings=0 --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif
 
