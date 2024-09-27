@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, Text, useTheme } from 'react-native-paper';
@@ -14,9 +14,11 @@ import LogLine from '@/components/logging/LogLine';
 import LogExtensionModal from '@/components/modals/LogExtensionModal';
 import LogLevelModal from '@/components/modals/LogLevelModal';
 
+import useEnhancedLog from '@/hooks/useEnhancedLog';
+
 import { LogLevel, rootLogging } from '@/utils/log';
 
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppDispatch } from '@/store';
 import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
@@ -33,17 +35,7 @@ const AppLogScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const [showLogLevelModal, setShowLogLevelModal] = useState<boolean>(false);
   const [showExtensionModal, setShowExtensionModal] = useState<boolean>(false);
 
-  const rawLogs = useAppSelector(state => state.app.logs);
-
-  const logs = useMemo(
-    () =>
-      rawLogs.filter(
-        log =>
-          log.level.severity >= logLevelFilter &&
-          (extensionFilter ? log.extension === extensionFilter : true),
-      ),
-    [rawLogs, logLevelFilter, extensionFilter],
-  );
+  const logData = useEnhancedLog(logLevelFilter, extensionFilter);
 
   return (
     <>
@@ -55,7 +47,7 @@ const AppLogScreen: FC<PropsWithNavigation> = ({ navigation }) => {
           onPress={() => {
             Share.open({
               title: t('settings.shareLogs'),
-              url: `data:text/plain;base64,${btoa(JSON.stringify(logs, null, 4))}`,
+              url: `data:text/plain;base64,${btoa(JSON.stringify(logData, null, 4))}`,
               type: 'text/plain',
               filename: 'opendtu-app-logs',
               saveToFiles: true,
@@ -91,7 +83,7 @@ const AppLogScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         />
       </Appbar.Header>
       <StyledView theme={theme}>
-        {logs.length === 0 ? (
+        {logData.logs.length === 0 ? (
           <Box
             style={{
               display: 'flex',
@@ -112,7 +104,7 @@ const AppLogScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         ) : (
           <Box style={{ width: '100%', flex: 1 }}>
             <ScrollView>
-              {logs.map(log => (
+              {logData.logs.map(log => (
                 <LogLine key={log.uuid} log={log} />
               ))}
             </ScrollView>

@@ -17,13 +17,13 @@
         "licenseUrl": "https://github.com/react-native-async-storage/async-storage/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-native-clipboard/clipboard@1.14.1": {
+    "@react-native-clipboard/clipboard@1.14.2": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-clipboard/clipboard",
         "licenseUrl": "https://github.com/react-native-clipboard/clipboard/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-native-community/netinfo@11.4.0": {
+    "@react-native-community/netinfo@11.4.1": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-netinfo/react-native-netinfo",
         "licenseUrl": "https://github.com/react-native-netinfo/react-native-netinfo/raw/master/LICENSE",
@@ -71,7 +71,7 @@
         "licenseUrl": "https://github.com/omichelsen/compare-versions/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "expo@51.0.32": {
+    "expo@51.0.34": {
         "licenses": "MIT",
         "repository": "https://github.com/expo/expo",
         "licenseUrl": "https://github.com/expo/expo",
@@ -227,7 +227,7 @@
         "licenseUrl": "https://github.com/callstack/react-native-paper/raw/master/LICENSE.md",
         "parents": "opendtu-react-native"
     },
-    "react-native-reanimated@3.15.2": {
+    "react-native-reanimated@3.15.3": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-reanimated",
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
@@ -245,7 +245,7 @@
         "licenseUrl": "https://github.com/software-mansion/react-native-screens/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-share@11.0.2": {
+    "react-native-share@11.0.3": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-community/react-native-share",
         "licenseUrl": "https://github.com/react-native-community/react-native-share/raw/master/LICENSE",
@@ -269,13 +269,13 @@
         "licenseUrl": "https://github.com/crazycodeboy/react-native-splash-screen/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-svg@15.6.0": {
+    "react-native-svg@15.7.1": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-community/react-native-svg",
         "licenseUrl": "https://github.com/react-native-community/react-native-svg/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-toast-message@2.2.0": {
+    "react-native-toast-message@2.2.1": {
         "licenses": "MIT",
         "repository": "https://github.com/calintamas/react-native-toast-message",
         "licenseUrl": "https://github.com/calintamas/react-native-toast-message/raw/master/LICENSE",
