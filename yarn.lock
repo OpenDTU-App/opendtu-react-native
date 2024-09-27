@@ -4513,12 +4513,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-native-zeroconf@npm:^0.12.3":
-  version: 0.12.3
-  resolution: "@types/react-native-zeroconf@npm:0.12.3"
+"@types/react-native-zeroconf@npm:^0.13.1":
+  version: 0.13.1
+  resolution: "@types/react-native-zeroconf@npm:0.13.1"
   dependencies:
     "@types/node": "npm:*"
-  checksum: 10/a04e9f057e5e8b4d6121e8fa7fe694f71da8590890597714dd62f1648edf54f1e625aaee9fd6e76c20b107b6afcae51a2cdc82a16cd726bd65838166f7063e51
+  checksum: 10/949d494d9cbcb49eb9d56cfb15f885de78b52658d890eb676be27aefa3d5cec3c545d9615ecff037d643a5b2f5acd68f7cc4d2fa0e952af745a051667fdb83b5
   languageName: node
   linkType: hard
 
@@ -4541,13 +4541,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.3.6":
-  version: 18.3.6
-  resolution: "@types/react@npm:18.3.6"
+"@types/react@npm:^18.3.10":
+  version: 18.3.10
+  resolution: "@types/react@npm:18.3.10"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10/ba0d337244347ecbf921de174d9db9bb80b03d41ad3ae7aa65500b3339925852c97e501d7657b5cd629ffed9f7fe3820a63069847e7b8529e4d02934d0f182e9
+  checksum: 10/cdc946f15fcad62387e6485a2bbef3e45609708fd81e3ce30b03580077bb8a8a1bd0d19858d8602b33c3921bbb8907ddbc9411fd25294a2c2e944907dad8dd67
   languageName: node
   linkType: hard
 
@@ -11750,9 +11750,9 @@ __metadata:
     "@types/jest": "npm:^29.5.13"
     "@types/markdown-it": "npm:^14.1.2"
     "@types/npm-license-crawler": "npm:^0.2.3"
-    "@types/react": "npm:^18.3.6"
+    "@types/react": "npm:^18.3.10"
     "@types/react-native-charts-wrapper": "npm:^0.5.11"
-    "@types/react-native-zeroconf": "npm:^0.12.3"
+    "@types/react-native-zeroconf": "npm:^0.13.1"
     "@types/react-test-renderer": "npm:^18.3.0"
     "@types/styled-components": "npm:^5.1.34"
     "@types/uuid": "npm:^10.0.0"
