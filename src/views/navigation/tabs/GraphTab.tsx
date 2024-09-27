@@ -5,7 +5,7 @@ import DeviceOfflineWrapper from '@/components/DeviceOfflineWrapper';
 
 import { StyledScrollView, StyledView } from '@/style';
 
-const LivedataTab = () => {
+const GraphTab = () => {
   const theme = useTheme();
 
   return (
@@ -19,4 +19,4 @@ const LivedataTab = () => {
   );
 };
 
-export default LivedataTab;
+export default GraphTab;
