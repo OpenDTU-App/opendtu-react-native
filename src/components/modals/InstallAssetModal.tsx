@@ -8,6 +8,7 @@ import {
   Button,
   Divider,
   HelperText,
+  Icon,
   Portal,
   ProgressBar,
   Text,
@@ -19,7 +20,7 @@ import BaseModal from '@/components/BaseModal';
 import { rootLogging } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
-import { spacing } from '@/constants';
+import { colors, spacing } from '@/constants';
 
 import type { ReleaseAsset } from '@octokit/webhooks-types';
 
@@ -70,6 +71,7 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
         version,
         asset.browser_download_url,
         progress => {
+          log.info('download progress', progress);
           setDownloadProgress(progress);
         },
       );
@@ -125,6 +127,7 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
     setInstallProgress(0);
 
     const result = await api.handleOTA(version, path, progress => {
+      log.info('install progress', progress);
       setInstallProgress(progress);
     });
 
@@ -139,7 +142,7 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
     setInstallProgress(1);
 
     try {
-      await api.awaitForUpdateFinish();
+      await api.awaitForUpdateFinish(version);
 
       if (successful) {
         setSuccess(true);
@@ -199,10 +202,13 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
         >
           {success ? (
             <Box p={16} style={{ maxHeight: '100%' }}>
-              <Box mb={8}>
-                <Text variant="bodyLarge">
+              <Box mb={16} style={{ display: 'flex', alignItems: 'center' }}>
+                <Text variant="titleLarge">
                   {t('firmwares.successfullyInstalledTheFirmware')}
                 </Text>
+              </Box>
+              <Box style={{ display: 'flex', alignItems: 'center' }}>
+                <Icon source="check-circle" size={100} color={colors.success} />
               </Box>
             </Box>
           ) : !showWaitForUpdateFinished ? (

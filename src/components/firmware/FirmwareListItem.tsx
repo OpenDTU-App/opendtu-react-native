@@ -65,9 +65,11 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
     selectRelease(release);
   }, [selectRelease, release]);
 
+  const isInstalled = release.tag_name === installedFirmware;
+
   const downloadDisabled = useMemo(
-    () => release.tag_name === installedFirmware || !authStringConfigured,
-    [authStringConfigured, installedFirmware, release.tag_name],
+    () => isInstalled || !authStringConfigured,
+    [authStringConfigured, isInstalled],
   );
 
   const description = useMemo(() => {
@@ -149,19 +151,30 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
           title={t('firmwares.view_on_github')}
           onPress={handleOpenGithub}
           left={props => <List.Icon {...props} icon="github" />}
-        />
-        <List.Item
-          title={t('firmwares.install_firmware_on_device')}
-          onPress={handleInstallFirmware}
-          left={props => <List.Icon {...props} icon="download" />}
           borderless
           style={{
-            borderBottomLeftRadius: settingsSurfaceRoundness(theme),
-            borderBottomRightRadius: settingsSurfaceRoundness(theme),
-            opacity: downloadDisabled ? 0.5 : 1,
+            borderBottomLeftRadius: isInstalled
+              ? settingsSurfaceRoundness(theme)
+              : 0,
+            borderBottomRightRadius: isInstalled
+              ? settingsSurfaceRoundness(theme)
+              : 0,
           }}
-          disabled={downloadDisabled}
         />
+        {!isInstalled ? (
+          <List.Item
+            title={t('firmwares.install_firmware_on_device')}
+            onPress={handleInstallFirmware}
+            left={props => <List.Icon {...props} icon="download" />}
+            borderless
+            style={{
+              borderBottomLeftRadius: settingsSurfaceRoundness(theme),
+              borderBottomRightRadius: settingsSurfaceRoundness(theme),
+              opacity: downloadDisabled ? 0.5 : 1,
+            }}
+            disabled={downloadDisabled}
+          />
+        ) : null}
       </SettingsSurface>
     </List.Accordion>
   );
