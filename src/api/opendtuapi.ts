@@ -745,7 +745,7 @@ class OpenDtuApi {
     let user = null;
 
     if (!this.userString) {
-      log.warn('getAuthString', 'userString is null');
+      log.debug('getAuthString', 'userString is null');
       return null;
     }
 
@@ -916,7 +916,7 @@ class OpenDtuApi {
     }
 
     if (!this.isAuthenticated()) {
-      log.error('getInverters', 'not authenticated');
+      log.debug('getInverters', 'not authenticated'); // Maybe user is anonymous
       return null;
     }
 
@@ -1372,20 +1372,23 @@ class OpenDtuApi {
     return res?.statusCode === 200;
   }
 
-  public awaitForUpdateFinish(): Promise<void> {
+  public awaitForUpdateFinish(updating_to: string): Promise<void> {
     return new Promise((resolve, reject) => {
       // fetch from /api/system/status using HTTP HEAD. if okay, resolve. after 1 minute, reject.
       let fetchInterval: NodeJS.Timeout | null = null;
 
-      const rejectTimeout = setTimeout(() => {
-        log.warn('waiting took too long');
+      const rejectTimeout = setTimeout(
+        () => {
+          log.warn('waiting took too long');
 
-        if (fetchInterval) {
-          clearInterval(fetchInterval);
-        }
+          if (fetchInterval) {
+            clearInterval(fetchInterval);
+          }
 
-        reject();
-      }, 60 * 1000);
+          reject();
+        },
+        5 * 60 * 1000,
+      );
 
       const authString = this.getAuthString();
 
@@ -1412,8 +1415,8 @@ class OpenDtuApi {
         }, 1000 * 3);
 
         fetch(url, requestOptions)
-          .then(response => {
-            log.debug('awaitForUpdateFinish', response.status);
+          .then(async response => {
+            log.info('awaitForUpdateFinish', response.status);
 
             if (response.status === 200) {
               clearTimeout(abortTimeout);
@@ -1421,6 +1424,28 @@ class OpenDtuApi {
 
               if (fetchInterval) {
                 clearInterval(fetchInterval);
+              }
+
+              const systemStatus = await this.getSystemStatus();
+
+              if (systemStatus?.systemStatus?.git_hash) {
+                log.info('awaitForUpdateFinish', 'update finished', {
+                  git_hash: systemStatus.systemStatus.git_hash,
+                  updating_to: updating_to,
+                  are_the_same:
+                    systemStatus.systemStatus.git_hash === updating_to,
+                });
+
+                const areTheSame =
+                  systemStatus.systemStatus.git_hash === updating_to;
+
+                if (!areTheSame) {
+                  log.error(
+                    'awaitForUpdateFinish',
+                    'update failed, version still the same',
+                  );
+                  reject();
+                }
               }
 
               resolve();

@@ -8,6 +8,7 @@ import {
   Button,
   Divider,
   HelperText,
+  Icon,
   Portal,
   ProgressBar,
   Text,
@@ -19,7 +20,7 @@ import BaseModal from '@/components/BaseModal';
 import { rootLogging } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
-import { spacing } from '@/constants';
+import { colors, spacing } from '@/constants';
 
 import type { ReleaseAsset } from '@octokit/webhooks-types';
 
@@ -70,6 +71,7 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
         version,
         asset.browser_download_url,
         progress => {
+          log.info('download progress', progress);
           setDownloadProgress(progress);
         },
       );
@@ -125,6 +127,7 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
     setInstallProgress(0);
 
     const result = await api.handleOTA(version, path, progress => {
+      log.info('install progress', progress);
       setInstallProgress(progress);
     });
 
@@ -139,7 +142,7 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
     setInstallProgress(1);
 
     try {
-      await api.awaitForUpdateFinish();
+      await api.awaitForUpdateFinish(version);
 
       if (successful) {
         setSuccess(true);
@@ -184,9 +187,20 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
     error,
   ]);
 
-  const showWaitForUpdateFinished = useMemo(() => {
-    return isInstalling && installProgress >= 1;
-  }, [isInstalling, installProgress]);
+  const [showWaitForUpdateFinished, setShowWaitForUpdateFinished] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    if (showWaitForUpdateFinished && !isInstalling) {
+      setShowWaitForUpdateFinished(false);
+    }
+
+    if (isInstalling && installProgress >= 1) {
+      setTimeout(() => {
+        setShowWaitForUpdateFinished(true);
+      }, 1200);
+    }
+  }, [isInstalling, installProgress, showWaitForUpdateFinished]);
 
   return (
     <>
@@ -199,46 +213,55 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
         >
           {success ? (
             <Box p={16} style={{ maxHeight: '100%' }}>
-              <Box mb={8}>
-                <Text variant="bodyLarge">
+              <Box mb={16} style={{ display: 'flex', alignItems: 'center' }}>
+                <Text variant="titleLarge">
                   {t('firmwares.successfullyInstalledTheFirmware')}
                 </Text>
+              </Box>
+              <Box style={{ display: 'flex', alignItems: 'center' }}>
+                <Icon source="check-circle" size={100} color={colors.success} />
               </Box>
             </Box>
           ) : !showWaitForUpdateFinished ? (
             <Box pt={16} style={{ maxHeight: '100%' }}>
               <Box mb={8} ph={16}>
-                <Text variant="bodyLarge">
+                <Text variant="titleLarge">
                   {t('firmwares.installAsset', { name: asset?.name })}
                 </Text>
               </Box>
               <Box ph={16}>
-                <Box
-                  mb={4}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: spacing,
-                    alignItems: 'center',
-                  }}
-                >
-                  <Text>{t('firmwares.downloadProgress')}</Text>
-                  <Box style={{ flex: 1 }}>
-                    <ProgressBar progress={downloadProgress} />
+                <Box mb={16}>
+                  <Text variant="titleSmall">
+                    {t('firmwares.downloadProgress')} (
+                    {(downloadProgress * 100).toFixed(1)}%)
+                  </Text>
+                  <Box style={{ marginTop: 4 }}>
+                    <ProgressBar
+                      progress={downloadProgress}
+                      style={{ height: 8, borderRadius: 8 }}
+                      color={
+                        downloadProgress < 1
+                          ? theme.colors.primary
+                          : colors.success
+                      }
+                    />
                   </Box>
                 </Box>
-                <Box
-                  mb={4}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: spacing,
-                    alignItems: 'center',
-                  }}
-                >
-                  <Text>{t('firmwares.installProgress')}</Text>
-                  <Box style={{ flex: 1 }}>
-                    <ProgressBar progress={installProgress} />
+                <Box mb={16}>
+                  <Text variant="titleSmall">
+                    {t('firmwares.installProgress')} (
+                    {(installProgress * 100).toFixed(1)}%)
+                  </Text>
+                  <Box style={{ marginTop: 4 }}>
+                    <ProgressBar
+                      progress={installProgress}
+                      style={{ height: 8, borderRadius: 8 }}
+                      color={
+                        installProgress < 1
+                          ? theme.colors.primary
+                          : colors.success
+                      }
+                    />
                   </Box>
                 </Box>
               </Box>
@@ -286,29 +309,30 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
                 </Text>
               </Box>
               {error ? (
-                <Box mb={8}>
-                  <Text
-                    variant="bodyMedium"
-                    style={{ color: theme.colors.error }}
-                  >
-                    {error}
-                  </Text>
-                </Box>
+                <>
+                  <Box mb={16}>
+                    <Text
+                      variant="titleMedium"
+                      style={{ color: theme.colors.error }}
+                    >
+                      {error}
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Button
+                      mode="contained"
+                      onPress={() => handleAbort(true)}
+                      style={{ width: '100%' }}
+                    >
+                      {t('goBack')}
+                    </Button>
+                  </Box>
+                </>
               ) : (
-                <Box mb={16}>
+                <Box>
                   <ActivityIndicator size="large" />
                 </Box>
               )}
-              <Box>
-                <Button
-                  mode="contained"
-                  onPress={() => handleAbort(true)}
-                  style={{ width: '100%' }}
-                  disabled={error === null}
-                >
-                  {t('cancel')}
-                </Button>
-              </Box>
             </Box>
           )}
         </BaseModal>

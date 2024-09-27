@@ -25,8 +25,6 @@ const useEnhancedLog = (
 ): EnhancedLog => {
   const rawLogs = useAppSelector(state => state.app.logs);
 
-  console.log('platform', Platform);
-
   return useMemo<EnhancedLog>(
     () => ({
       meta: {
