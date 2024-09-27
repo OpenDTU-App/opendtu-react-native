@@ -115,7 +115,7 @@ const ChangeOpendtuCredentialsModal: FC<
             <StyledTextInput
               label={t('setup.username')}
               mode="outlined"
-              value={username}
+              defaultValue={username}
               onChangeText={setUsername}
               textContentType="username"
               style={{ backgroundColor: theme.colors.elevation.level3 }}
@@ -123,7 +123,7 @@ const ChangeOpendtuCredentialsModal: FC<
             <StyledTextInput
               label={t('setup.password')}
               mode="outlined"
-              value={password}
+              defaultValue={password}
               onChangeText={setPassword}
               textContentType="password"
               style={{ backgroundColor: theme.colors.elevation.level3 }}

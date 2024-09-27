@@ -138,7 +138,7 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
         </View>
         <View style={{ marginTop: 32 }}>
           <TextInput
-            value={value}
+            defaultValue={value}
             onChangeText={value => {
               setWasModified(true);
               setError(null);
