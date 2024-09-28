@@ -12,9 +12,11 @@ jobs:
     name: Run Tests
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: write
       checks: write
       pull-requests: write
+      security-events: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
