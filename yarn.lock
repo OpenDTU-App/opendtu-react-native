@@ -11797,7 +11797,7 @@ __metadata:
     react-native-logs: "npm:^5.1.0"
     react-native-markdown-display: "npm:^7.0.2"
     react-native-paper: "npm:5.12.5"
-    react-native-paper-dates: "npm:^0.22.25"
+    react-native-paper-dates: "npm:^0.22.26"
     react-native-reanimated: "npm:^3.15.3"
     react-native-safe-area-context: "npm:^4.11.0"
     react-native-screens: "npm:^3.34.0"
@@ -12677,9 +12677,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-paper-dates@npm:^0.22.25":
-  version: 0.22.25
-  resolution: "react-native-paper-dates@npm:0.22.25"
+"react-native-paper-dates@npm:^0.22.26":
+  version: 0.22.26
+  resolution: "react-native-paper-dates@npm:0.22.26"
   dependencies:
     color: "npm:^4.2.3"
   peerDependencies:
@@ -12687,7 +12687,7 @@ __metadata:
     react-native: "*"
     react-native-paper: "*"
     react-native-vector-icons: "*"
-  checksum: 10/d06e47ac03e43e1d41e5a4d65afe5a73a52621de5f6532b9dd22590940a7e71bd673c09f8f79286c4f0f27849f2a15f44d9bcfbcb3cd3b4a37a31a767c3b170a
+  checksum: 10/729ac38d50d1dde67f5eee9b260e6562073034cfe5e9c738e941d383ffc15df5073e48cc79187ba6a79748e7134fc676f5613d31748552478797a5e3ff8e6f8d
   languageName: node
   linkType: hard
 
