@@ -1,39 +1,39 @@
 {
   "version" : "1.2",
   "profiles" : [ {
-    "id" : "c3f0d08a-f45e-431c-b94c-b1f804f03020",
+    "id" : "c5971871-5302-4f4f-935a-3e23e6b6b489",
     "name" : "React-i18n",
     "keyNamingPattern" : "CAMEL_CASE_PATTERN",
     "sink" : {
-      "id" : "5f3ca4ff-ebc0-47e4-b26a-327bc4420eca",
+      "id" : "769a6527-dcaf-47c3-8e8a-9e4a3e7e7598",
       "type" : "namespaced",
       "translationsDirectory" : "$PROJECT_DIR$/src/translations",
       "fileType" : "json",
       "defaultLocale" : "translation-files",
-      "namespaces" : [ "en", "de", "fr", "it" ],
+      "namespaces" : [ "de", "en", "fr", "it" ],
       "outputFilenameTemplate" : "%locale%/%namespace%.json",
       "nestingType" : "DOT",
       "placeholderFormatterName" : "I18NEXT"
     },
     "sources" : [ {
-      "id" : "5109160d-817e-4585-9137-c47699eb87ae",
+      "id" : "8fcaf4c6-6a07-45fd-87c8-a8c1d203313d",
       "type" : "js",
-      "defaultReplacementTemplate" : "t('%key%', %map%)",
+      "defaultReplacementTemplate" : "t('%namespace%:%key%', %map%)",
       "scopeName" : "Project Files",
       "scopePattern" : "",
       "recognizedReplacementTemplates" : [ ],
       "skipDefaultNamespace" : true
     }, {
-      "id" : "099e5a35-548b-46f2-ab89-1e98a3f573a7",
+      "id" : "e627e178-c8e9-4b3c-a2bb-f2db1349f11d",
       "type" : "jsx",
-      "defaultReplacementTemplate" : "t('%key%', %map%)",
+      "defaultReplacementTemplate" : "t('%namespace%:%key%', %map%)",
       "scopeName" : "Project Files",
       "scopePattern" : "",
       "attributeReplacementTemplate" : "",
       "inlineTagsReplacementTemplate" : "",
       "recognizedReplacementTemplates" : [ ],
       "inlineTagNames" : [ "a", "abbr", "acronym", "b", "bdi", "bdo", "big", "br", "cite", "code", "data", "del", "dfn", "em", "i", "img", "input", "ins", "kbd", "label", "mark", "meter", "output", "progress", "q", "ruby", "s", "samp", "slot", "small", "span", "strong", "sub", "sup", "time", "u", "tt", "var", "wbr" ],
-      "translatableAttributeNames" : [ "title", "alt", "placeholder", "label", "aria-label", "description" ],
+      "translatableAttributeNames" : [ "title", "alt", "placeholder", "label", "aria-label" ],
       "skipDefaultNamespace" : true,
       "inlineTagHandler" : "I18NEXT"
     } ]
