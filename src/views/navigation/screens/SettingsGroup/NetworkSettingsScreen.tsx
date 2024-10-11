@@ -153,6 +153,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       setChangeSsidModalOpen(true);
                     }
                   }}
+                  disabled={typeof networkSettings === 'undefined'}
                 />
                 <List.Item
                   title={t('settings.networkSettings.wifiStation.password')}
@@ -172,6 +173,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       setChangePasswordModalOpen(true);
                     }
                   }}
+                  disabled={typeof networkSettings === 'undefined'}
                 />
                 <List.Item
                   title={t('settings.networkSettings.wifiStation.hostname')}
@@ -188,6 +190,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       setChangeHostnameModalOpen(true);
                     }
                   }}
+                  disabled={typeof networkSettings === 'undefined'}
                 />
                 <List.Item
                   title={t('settings.networkSettings.wifiStation.dhcpEnabled')}
@@ -204,6 +207,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   onPress={() => {
                     setChangeDhcpEnabledModalOpen(true);
                   }}
+                  disabled={typeof networkSettings === 'undefined'}
                 />
               </List.Section>
             </SettingsSurface>
@@ -226,6 +230,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       setChangeStaticIpAddressModalOpen(true);
                     }
                   }}
+                  disabled={typeof networkSettings === 'undefined'}
                 />
                 <List.Item
                   title={t('settings.networkSettings.staticIp.netmask')}
@@ -242,6 +247,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       setChangeStaticIpNetmaskModalOpen(true);
                     }
                   }}
+                  disabled={typeof networkSettings === 'undefined'}
                 />
                 <List.Item
                   title={t('settings.networkSettings.staticIp.gateway')}
@@ -258,6 +264,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       setChangeStaticIpGatewayModalOpen(true);
                     }
                   }}
+                  disabled={typeof networkSettings === 'undefined'}
                 />
                 <List.Item
                   title={t('settings.networkSettings.staticIp.dns1')}
@@ -274,6 +281,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       setChangeStaticIpDns1ModalOpen(true);
                     }
                   }}
+                  disabled={typeof networkSettings === 'undefined'}
                 />
                 <List.Item
                   title={t('settings.networkSettings.staticIp.dns2')}
@@ -290,6 +298,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       setChangeStaticIpDns2ModalOpen(true);
                     }
                   }}
+                  disabled={typeof networkSettings === 'undefined'}
                 />
               </List.Section>
             </SettingsSurface>
@@ -310,6 +319,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   onPress={() => {
                     setChangeMdnsEnabledModalOpen(true);
                   }}
+                  disabled={typeof networkSettings === 'undefined'}
                 />
               </List.Section>
             </SettingsSurface>
@@ -332,6 +342,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   onPress={() => {
                     setChangeApTimeoutModalOpen(true);
                   }}
+                  disabled={typeof networkSettings === 'undefined'}
                 />
               </List.Section>
             </SettingsSurface>
