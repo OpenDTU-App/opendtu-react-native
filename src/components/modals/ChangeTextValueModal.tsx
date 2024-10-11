@@ -163,7 +163,7 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
             {t('cancel')}
           </Button>
           <Button mode="contained" onPress={handleSave} style={{ flex: 1 }}>
-            {t('save')}
+            {t('apply')}
           </Button>
         </View>
       </View>
