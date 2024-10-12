@@ -234,7 +234,7 @@ const InnerApp: FC = () => {
     setI18nLanguageMatchesSettings(false);
     i18n.changeLanguage(language);
 
-    let momentLocale = '';
+    let momentLocale: string;
 
     switch (language) {
       case 'en':

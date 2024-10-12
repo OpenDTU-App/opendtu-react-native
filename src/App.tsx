@@ -4,6 +4,8 @@ import { Provider as ReduxProvider } from 'react-redux';
 
 import { PersistGate as ReduxPersistGate } from 'redux-persist/integration/react';
 
+import StorageMigrator from '@/components/StorageMigrator';
+
 import ApiProvider from '@/api/ApiHandler';
 import DatabaseProvider from '@/database';
 import GithubProvider from '@/github';
@@ -27,15 +29,17 @@ const App = () => {
             loading={null}
             // onBeforeLift={onBeforeLift}
           >
-            <GithubProvider>
-              <ApiProvider>
-                <DatabaseProvider>
-                  <FetchHandler>
-                    <InnerApp />
-                  </FetchHandler>
-                </DatabaseProvider>
-              </ApiProvider>
-            </GithubProvider>
+            <StorageMigrator>
+              <GithubProvider>
+                <ApiProvider>
+                  <DatabaseProvider>
+                    <FetchHandler>
+                      <InnerApp />
+                    </FetchHandler>
+                  </DatabaseProvider>
+                </ApiProvider>
+              </GithubProvider>
+            </StorageMigrator>
           </ReduxPersistGate>
         </ReduxProvider>
       </SafeAreaProvider>
