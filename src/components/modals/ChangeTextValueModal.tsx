@@ -16,6 +16,8 @@ import { View } from 'react-native';
 
 import { rootLogging } from '@/utils/log';
 
+import { spacing } from '@/constants';
+
 const log = rootLogging.extend('ChangeTextValueModal');
 
 export interface ChangeValueModalProps {
@@ -45,7 +47,9 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
   const drawerRef = useRef<BottomDrawerMethods>(null);
   const { t } = useTranslation();
 
-  const height = 300 + (extraHeight ?? 0);
+  const [initialHeight, setInitialHeight] = useState<number>(
+    300 + (extraHeight ?? 0),
+  );
 
   const [value, setValue] = useState<string>(defaultValue ?? '');
   const [error, setError] = useState<string | null>(null);
@@ -114,7 +118,6 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
           minHeight: 35,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
-          marginBottom: 16,
         },
         handle: {
           backgroundColor: theme.colors.surfaceDisabled,
@@ -123,13 +126,22 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
           borderRadius: 5,
         },
       }}
-      initialHeight={height}
+      initialHeight={initialHeight}
       onClose={handleCancel}
     >
       <View
         style={{
-          flex: 1,
-          paddingHorizontal: 14,
+          paddingHorizontal: spacing * 1.5,
+          paddingVertical: spacing * 2,
+        }}
+        onLayout={e => {
+          const { height, y } = e.nativeEvent.layout;
+          const heightValue = height + y + (extraHeight ?? 0);
+
+          drawerRef.current?.snapToPosition(heightValue, {
+            resetLastPosition: false,
+          });
+          setInitialHeight(heightValue);
         }}
       >
         <View>

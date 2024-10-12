@@ -149,9 +149,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     />
                   )}
                   onPress={() => {
-                    if (typeof networkSettings?.ssid !== 'undefined') {
-                      setChangeSsidModalOpen(true);
-                    }
+                    setChangeSsidModalOpen(true);
                   }}
                   disabled={typeof networkSettings === 'undefined'}
                 />
@@ -169,9 +167,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     />
                   )}
                   onPress={() => {
-                    if (typeof networkSettings?.password !== 'undefined') {
-                      setChangePasswordModalOpen(true);
-                    }
+                    setChangePasswordModalOpen(true);
                   }}
                   disabled={typeof networkSettings === 'undefined'}
                 />
@@ -186,9 +182,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     />
                   )}
                   onPress={() => {
-                    if (typeof networkSettings?.hostname !== 'undefined') {
-                      setChangeHostnameModalOpen(true);
-                    }
+                    setChangeHostnameModalOpen(true);
                   }}
                   disabled={typeof networkSettings === 'undefined'}
                 />
@@ -226,9 +220,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     />
                   )}
                   onPress={() => {
-                    if (typeof networkSettings?.ipaddress !== 'undefined') {
-                      setChangeStaticIpAddressModalOpen(true);
-                    }
+                    setChangeStaticIpAddressModalOpen(true);
                   }}
                   disabled={typeof networkSettings === 'undefined'}
                 />
@@ -243,9 +235,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     />
                   )}
                   onPress={() => {
-                    if (typeof networkSettings?.netmask !== 'undefined') {
-                      setChangeStaticIpNetmaskModalOpen(true);
-                    }
+                    setChangeStaticIpNetmaskModalOpen(true);
                   }}
                   disabled={typeof networkSettings === 'undefined'}
                 />
@@ -260,9 +250,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     />
                   )}
                   onPress={() => {
-                    if (typeof networkSettings?.gateway !== 'undefined') {
-                      setChangeStaticIpGatewayModalOpen(true);
-                    }
+                    setChangeStaticIpGatewayModalOpen(true);
                   }}
                   disabled={typeof networkSettings === 'undefined'}
                 />
@@ -277,9 +265,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     />
                   )}
                   onPress={() => {
-                    if (typeof networkSettings?.dns1 !== 'undefined') {
-                      setChangeStaticIpDns1ModalOpen(true);
-                    }
+                    setChangeStaticIpDns1ModalOpen(true);
                   }}
                   disabled={typeof networkSettings === 'undefined'}
                 />
@@ -294,9 +280,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     />
                   )}
                   onPress={() => {
-                    if (typeof networkSettings?.dns2 !== 'undefined') {
-                      setChangeStaticIpDns2ModalOpen(true);
-                    }
+                    setChangeStaticIpDns2ModalOpen(true);
                   }}
                   disabled={typeof networkSettings === 'undefined'}
                 />
@@ -435,7 +419,6 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         title={t('settings.networkSettings.changeHostname.title')}
         description={t('settings.networkSettings.changeHostname.description')}
-        extraHeight={20}
       />
       <ChangeBooleanValueModal
         defaultValue={networkSettings?.dhcp}
