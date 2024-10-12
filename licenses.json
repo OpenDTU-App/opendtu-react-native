@@ -53,7 +53,7 @@
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@reduxjs/toolkit@2.2.7": {
+    "@reduxjs/toolkit@2.2.8": {
         "licenses": "MIT",
         "repository": "https://github.com/reduxjs/redux-toolkit",
         "licenseUrl": "https://github.com/reduxjs/redux-toolkit/raw/master/LICENSE",
@@ -71,7 +71,7 @@
         "licenseUrl": "https://github.com/omichelsen/compare-versions/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "expo@51.0.34": {
+    "expo@51.0.37": {
         "licenses": "MIT",
         "repository": "https://github.com/expo/expo",
         "licenseUrl": "https://github.com/expo/expo",
@@ -83,7 +83,7 @@
         "licenseUrl": "https://github.com/epoberezkin/fast-deep-equal/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "i18next@23.15.1": {
+    "i18next@23.15.2": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
@@ -215,7 +215,7 @@
         "licenseUrl": "https://github.com/iamacup/react-native-markdown-display/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-paper-dates@0.22.25": {
+    "react-native-paper-dates@0.22.26": {
         "licenses": "MIT",
         "repository": "https://github.com/web-ridge/react-native-paper-dates",
         "licenseUrl": "https://github.com/web-ridge/react-native-paper-dates/raw/master/LICENSE",
@@ -227,7 +227,7 @@
         "licenseUrl": "https://github.com/callstack/react-native-paper/raw/master/LICENSE.md",
         "parents": "opendtu-react-native"
     },
-    "react-native-reanimated@3.15.3": {
+    "react-native-reanimated@3.15.5": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-reanimated",
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",

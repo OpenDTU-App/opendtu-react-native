@@ -9,16 +9,16 @@
       "type" : "namespaced",
       "translationsDirectory" : "$PROJECT_DIR$/src/translations",
       "fileType" : "json",
-      "defaultLocale" : "translation-files",
-      "namespaces" : [ "de", "en", "fr", "it" ],
-      "outputFilenameTemplate" : "%locale%/%namespace%.json",
+      "defaultLocale" : "en",
+      "namespaces" : [ "translation-files" ],
+      "outputFilenameTemplate" : "%namespace%/%locale%.json",
       "nestingType" : "DOT",
       "placeholderFormatterName" : "I18NEXT"
     },
     "sources" : [ {
       "id" : "8fcaf4c6-6a07-45fd-87c8-a8c1d203313d",
       "type" : "js",
-      "defaultReplacementTemplate" : "t('%namespace%:%key%', %map%)",
+      "defaultReplacementTemplate" : "t('%key%', %map%)",
       "scopeName" : "Project Files",
       "scopePattern" : "",
       "recognizedReplacementTemplates" : [ ],
@@ -26,14 +26,14 @@
     }, {
       "id" : "e627e178-c8e9-4b3c-a2bb-f2db1349f11d",
       "type" : "jsx",
-      "defaultReplacementTemplate" : "t('%namespace%:%key%', %map%)",
+      "defaultReplacementTemplate" : "t('%key%', %map%)",
       "scopeName" : "Project Files",
       "scopePattern" : "",
       "attributeReplacementTemplate" : "",
       "inlineTagsReplacementTemplate" : "",
       "recognizedReplacementTemplates" : [ ],
       "inlineTagNames" : [ "a", "abbr", "acronym", "b", "bdi", "bdo", "big", "br", "cite", "code", "data", "del", "dfn", "em", "i", "img", "input", "ins", "kbd", "label", "mark", "meter", "output", "progress", "q", "ruby", "s", "samp", "slot", "small", "span", "strong", "sub", "sup", "time", "u", "tt", "var", "wbr" ],
-      "translatableAttributeNames" : [ "title", "alt", "placeholder", "label", "aria-label" ],
+      "translatableAttributeNames" : [ "title", "alt", "placeholder", "label", "aria-label", "description" ],
       "skipDefaultNamespace" : true,
       "inlineTagHandler" : "I18NEXT"
     } ]
