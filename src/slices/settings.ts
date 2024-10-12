@@ -26,9 +26,11 @@ import { rootLogging } from '@/utils/log';
 
 import { createSlice } from '@reduxjs/toolkit';
 
+import { Platform } from 'react-native';
+
 const initialState: SettingsState = {
   appTheme: AppTheme.System,
-  allowMaterialYou: true,
+  allowMaterialYou: Platform.OS === 'android',
   language: null,
   dtuConfigs: [],
   selectedDtuConfig: null,

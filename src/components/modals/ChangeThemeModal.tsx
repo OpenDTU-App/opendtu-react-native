@@ -12,6 +12,8 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 
+import { Platform } from 'react-native';
+
 import { setAllowMaterialYou, setAppTheme } from '@/slices/settings';
 
 import type { SettingsState } from '@/types/settings';
@@ -19,6 +21,8 @@ import type { SettingsState } from '@/types/settings';
 import BaseModal from '@/components/BaseModal';
 
 import { useAppDispatch, useAppSelector } from '@/store';
+
+const isAndroid = Platform.OS === 'android';
 
 const ChangeThemeModal: FC<Omit<ModalProps, 'children'>> = props => {
   const { onDismiss } = props;
@@ -63,24 +67,26 @@ const ChangeThemeModal: FC<Omit<ModalProps, 'children'>> = props => {
             <RadioButton.Item label={t('themes.dark')} value="dark" />
             <RadioButton.Item label={t('themes.system')} value="system" />
           </RadioButton.Group>
-          <TouchableRipple
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              paddingVertical: 8,
-              paddingHorizontal: 16,
-            }}
-            onPress={handleMaterialYouChange}
-          >
-            <>
-              <Text variant="bodyLarge">{t('themes.allowMaterialYou')}</Text>
-              <Switch
-                value={allowMaterialYou}
-                onValueChange={handleMaterialYouChange}
-              />
-            </>
-          </TouchableRipple>
+          {isAndroid ? (
+            <TouchableRipple
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+              }}
+              onPress={handleMaterialYouChange}
+            >
+              <>
+                <Text variant="bodyLarge">{t('themes.allowMaterialYou')}</Text>
+                <Switch
+                  value={allowMaterialYou}
+                  onValueChange={handleMaterialYouChange}
+                />
+              </>
+            </TouchableRipple>
+          ) : null}
           <Box
             mt={16}
             style={{
