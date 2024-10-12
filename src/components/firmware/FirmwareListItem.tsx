@@ -1,15 +1,14 @@
 import type { FC } from 'react';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { RenderRules } from 'react-native-markdown-display';
-import Markdown from 'react-native-markdown-display';
 import { Badge, Divider, List, Text, useTheme } from 'react-native-paper';
 
-import { Linking, Text as RNText, View } from 'react-native';
+import { Linking, View } from 'react-native';
 
 import { compare } from 'compare-versions';
 import moment from 'moment/moment';
 
+import ReleaseChangelog from '@/components/ReleaseChangelog';
 import SettingsSurface, {
   settingsSurfaceRoundness,
 } from '@/components/styled/SettingsSurface';
@@ -30,10 +29,6 @@ export interface FirmwareListItemProps {
   selectRelease: (release: Release) => void;
   latestReleaseTag?: string;
 }
-
-const rules: RenderRules = {
-  link: (node, children) => <RNText key={node.key}>{children}</RNText>,
-};
 
 const needsCapitalization: Record<SupportedLanguage, boolean> = {
   en: false,
@@ -134,17 +129,7 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
     >
       <SettingsSurface style={{ marginHorizontal: 8, flex: 1 }}>
         <View style={{ padding: 8, flex: 1 }}>
-          <Markdown
-            style={{
-              body: {
-                color: theme.colors.onSurface,
-              },
-              link: { textDecorationLine: 'none' },
-            }}
-            rules={rules}
-          >
-            {release.body}
-          </Markdown>
+          <ReleaseChangelog releaseBody={release.body} />
         </View>
         <Divider />
         <List.Item

@@ -38,7 +38,7 @@ export const FetchHandlerContext = createContext<{
 const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useAppDispatch();
 
-  const latestReleaseRefetchOk = useAppSelector(state => {
+  const latestReleaseUpdateOk = useAppSelector(state => {
     const result =
       state.github.latestRelease.lastUpdate !== null
         ? ago(state.github.latestRelease.lastUpdate)
@@ -51,7 +51,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
     return result > 1000 * 60 * 10; // 10 minutes
   });
 
-  const allReleasesRefetchOk = useAppSelector(state => {
+  const allReleasesUpdateOk = useAppSelector(state => {
     const result =
       state.github.releases.lastUpdate !== null
         ? ago(state.github.releases.lastUpdate)
@@ -64,7 +64,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
     return result > 1000 * 60 * 10; // 10 minutes
   });
 
-  const latestAppReleaseRefetchOk = useAppSelector(state => {
+  const latestAppReleaseUpdateOk = useAppSelector(state => {
     const result =
       state.github.latestAppRelease.lastUpdate !== null
         ? ago(state.github.latestAppRelease.lastUpdate)
@@ -94,7 +94,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
       if (!githubApi) return false;
 
       try {
-        if ((latestReleaseRefetchOk || force) && enableFetchOpenDTUReleases) {
+        if ((latestReleaseUpdateOk || force) && enableFetchOpenDTUReleases) {
           dispatch(setLatestReleaseTimeout());
 
           log.info('Fetching latest release from Github api...');
@@ -109,7 +109,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
           return true;
         } else {
           log.info(
-            `SKIP latestReleaseRefetchOk=${latestReleaseRefetchOk} enableFetchOpenDTUReleases=${enableFetchOpenDTUReleases}`,
+            `SKIP latestReleaseRefetchOk=${latestReleaseUpdateOk} enableFetchOpenDTUReleases=${enableFetchOpenDTUReleases}`,
           );
         }
       } catch (e) {
@@ -118,7 +118,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
       return false;
     },
-    [dispatch, enableFetchOpenDTUReleases, githubApi, latestReleaseRefetchOk],
+    [dispatch, enableFetchOpenDTUReleases, githubApi, latestReleaseUpdateOk],
   );
 
   const fetchAllReleasesHandler = useCallback(
@@ -126,7 +126,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
       if (!githubApi) return false;
 
       try {
-        if ((allReleasesRefetchOk || force) && enableFetchOpenDTUReleases) {
+        if ((allReleasesUpdateOk || force) && enableFetchOpenDTUReleases) {
           dispatch(setReleasesTimeout());
 
           log.info('Fetching all releases from Github api...');
@@ -141,7 +141,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
           return true;
         } else {
           log.info(
-            `SKIP allReleasesRefetchOk=${allReleasesRefetchOk} enableFetchOpenDTUReleases=${enableFetchOpenDTUReleases}`,
+            `SKIP allReleasesRefetchOk=${allReleasesUpdateOk} enableFetchOpenDTUReleases=${enableFetchOpenDTUReleases}`,
           );
         }
       } catch (e) {
@@ -150,7 +150,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
       return false;
     },
-    [allReleasesRefetchOk, dispatch, enableFetchOpenDTUReleases, githubApi],
+    [allReleasesUpdateOk, dispatch, enableFetchOpenDTUReleases, githubApi],
   );
 
   const fetchLatestAppReleaseHandler = useCallback(
@@ -158,7 +158,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
       if (!githubApi) return false;
 
       try {
-        if ((latestAppReleaseRefetchOk || force) && enableAppUpdates) {
+        if ((latestAppReleaseUpdateOk || force) && enableAppUpdates) {
           dispatch(setLatestAppReleaseTimeout());
 
           log.info('Fetching latest app release from Github api...');
@@ -173,7 +173,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
           return true;
         } else {
           log.info(
-            `SKIP latestAppReleaseRefetchOk=${latestAppReleaseRefetchOk} enableAppUpdates=${enableAppUpdates}`,
+            `SKIP latestAppReleaseRefetchOk=${latestAppReleaseUpdateOk} enableAppUpdates=${enableAppUpdates}`,
           );
         }
       } catch (e) {
@@ -182,7 +182,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
       return false;
     },
-    [dispatch, enableAppUpdates, githubApi, latestAppReleaseRefetchOk],
+    [dispatch, enableAppUpdates, githubApi, latestAppReleaseUpdateOk],
   );
 
   const fetchHandler = useCallback(async () => {

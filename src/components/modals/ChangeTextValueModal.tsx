@@ -132,7 +132,8 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
       <View
         style={{
           paddingHorizontal: spacing * 1.5,
-          paddingVertical: spacing * 2,
+          paddingTop: spacing * 2,
+          paddingBottom: spacing * 3,
         }}
         onLayout={e => {
           const { height, y } = e.nativeEvent.layout;
