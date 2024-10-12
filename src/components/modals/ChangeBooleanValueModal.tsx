@@ -8,6 +8,8 @@ import { Button, Switch, Text, useTheme } from 'react-native-paper';
 
 import { View } from 'react-native';
 
+import { spacing } from '@/constants';
+
 export interface ChangeValueModalProps {
   isOpen?: boolean;
   onClose?: () => void;
@@ -33,7 +35,9 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
   const drawerRef = useRef<BottomDrawerMethods>(null);
   const { t } = useTranslation();
 
-  const height = 180 + (extraHeight ?? 0);
+  const [initialHeight, setInitialHeight] = useState<number>(
+    180 + (extraHeight ?? 0),
+  );
 
   const [value, setValue] = useState<boolean>(defaultValue ?? false);
   const [wasModified, setWasModified] = useState<boolean>(false);
@@ -80,7 +84,6 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
           minHeight: 35,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
-          marginBottom: 16,
         },
         handle: {
           backgroundColor: theme.colors.surfaceDisabled,
@@ -89,13 +92,22 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
           borderRadius: 5,
         },
       }}
-      initialHeight={height}
+      initialHeight={initialHeight}
       onClose={handleCancel}
     >
       <View
         style={{
-          flex: 1,
-          paddingHorizontal: 14,
+          paddingHorizontal: spacing * 1.5,
+          paddingVertical: spacing * 2,
+        }}
+        onLayout={e => {
+          const { height, y } = e.nativeEvent.layout;
+          const heightValue = height + y + (extraHeight ?? 0);
+
+          drawerRef.current?.snapToPosition(heightValue, {
+            resetLastPosition: false,
+          });
+          setInitialHeight(heightValue);
         }}
       >
         <View
@@ -133,7 +145,7 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
             {t('cancel')}
           </Button>
           <Button mode="contained" onPress={handleSave} style={{ flex: 1 }}>
-            {t('save')}
+            {t('apply')}
           </Button>
         </View>
       </View>
