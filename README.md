@@ -46,7 +46,7 @@ This helps to have a better developer experience when working with Weblate.
 - [x] Add iOS support
 - [ ] Original Functionality
   - [ ] Settings
-    - [ ] Network Settings
+    - [x] Network Settings
     - [ ] MQTT Settings
     - [ ] Inverter Settings
     - [ ] Security Settings
@@ -62,7 +62,7 @@ This helps to have a better developer experience when working with Weblate.
     - [x] MQTT Information
     - [ ] tbd if also console
   - [x] Livedata
-    - [x] Today's Yield 
+    - [x] Today's Yield
     - [x] Power
     - [x] Temperature & Other stats
 
