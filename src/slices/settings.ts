@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import type {
   AddDatabaseConfigAction,
   AddDtuConfigAction,
@@ -9,6 +11,7 @@ import type {
   RemoveDtuConfigAction,
   SetAppThemeModeAction,
   SetLanguageAction,
+  SetLastAppVersionAction,
   SetSelectedDtuConfigAction,
   SettingsState,
   UpdateDatabaseConfigAction,
@@ -25,8 +28,7 @@ import { AppTheme, DidNotAskYet } from '@/types/settings';
 import { rootLogging } from '@/utils/log';
 
 import { createSlice } from '@reduxjs/toolkit';
-
-import { Platform } from 'react-native';
+import packageJson from '@root/package.json';
 
 const initialState: SettingsState = {
   appTheme: AppTheme.System,
@@ -38,6 +40,7 @@ const initialState: SettingsState = {
   enableAppUpdates: DidNotAskYet,
   enableFetchOpenDTUReleases: DidNotAskYet,
   debugEnabled: false,
+  lastAppVersion: packageJson.version,
 };
 
 const log = rootLogging.extend('SettingsSlice');
@@ -258,6 +261,12 @@ const settingsSlice = createSlice({
     ) => {
       state.enableFetchOpenDTUReleases = action.payload.enable;
     },
+    updateLastAppVersion: state => {
+      state.lastAppVersion = packageJson.version;
+    },
+    setLastAppVersion: (state, action: SetLastAppVersionAction) => {
+      state.lastAppVersion = action.payload.version;
+    },
   },
 });
 
@@ -284,6 +293,8 @@ export const {
   setEnableAppUpdates,
   setDebugEnabled,
   setEnableFetchOpenDTUReleases,
+  updateLastAppVersion,
+  setLastAppVersion,
 } = settingsSlice.actions;
 
 export const { reducer: SettingsReducer } = settingsSlice;

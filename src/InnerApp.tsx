@@ -26,6 +26,7 @@ import moment from 'moment/moment';
 import { appendLog } from '@/slices/app';
 import { setLanguage } from '@/slices/settings';
 
+import AppChangelogModal from '@/components/modals/AppChangelogModal';
 import AppOfflineModal from '@/components/modals/AppOfflineModal';
 import EnableAppUpdatesModal from '@/components/modals/EnableAppUpdatesModal';
 import EnableFetchOpenDtuUpdatesModal from '@/components/modals/EnableFetchOpenDtuUpdatesModal';
@@ -199,6 +200,7 @@ const InnerApp: FC = () => {
   useEffect(() => {
     i18n.on('languageChanged', () => {
       setI18nLanguageMatchesSettings(true);
+      SplashScreen.hide();
     });
 
     return () => {
@@ -254,12 +256,6 @@ const InnerApp: FC = () => {
   }, [i18n, language]);
 
   useEffect(() => {
-    if (i18nLanguageMatchesSettings) {
-      SplashScreen.hide();
-    }
-  }, [i18nLanguageMatchesSettings]);
-
-  useEffect(() => {
     const translation: TranslationsType = {
       selectSingle: t('RNPaperDates.selectSingle'),
       selectMultiple: t('RNPaperDates.selectMultiple'),
@@ -313,6 +309,7 @@ const InnerApp: FC = () => {
   return (
     <PaperProvider theme={theme}>
       <AppOfflineModal />
+      <AppChangelogModal />
       <StatusBar
         backgroundColor={theme.colors.background}
         barStyle={theme.dark ? 'light-content' : 'dark-content'}

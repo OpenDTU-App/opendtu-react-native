@@ -43,6 +43,7 @@ export interface SettingsState {
   enableAppUpdates: boolean | DidNotAskYet;
   enableFetchOpenDTUReleases: boolean | DidNotAskYet;
   debugEnabled: boolean;
+  lastAppVersion: string;
 
   // opendtu
   dtuConfigs: OpenDTUConfig[];
@@ -135,4 +136,8 @@ export type DebugEnabledAction = PayloadAction<{
 
 export type EnableFetchOpenDTUReleasesAction = PayloadAction<{
   enable: boolean;
+}>;
+
+export type SetLastAppVersionAction = PayloadAction<{
+  version: string;
 }>;

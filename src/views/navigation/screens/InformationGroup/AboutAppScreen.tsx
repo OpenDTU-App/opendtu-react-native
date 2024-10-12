@@ -3,8 +3,6 @@ import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Config from 'react-native-config';
 import { Box } from 'react-native-flex-layout';
-import type { RenderRules } from 'react-native-markdown-display';
-import Markdown from 'react-native-markdown-display';
 import {
   Appbar,
   Badge,
@@ -17,13 +15,14 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-import { Linking, ScrollView, Text as RNText, View } from 'react-native';
+import { Linking, ScrollView, View } from 'react-native';
 
 import moment from 'moment';
 
 import { setEnableAppUpdates } from '@/slices/settings';
 
 import GenericRefreshModal from '@/components/modals/GenericRefreshModal';
+import ReleaseChangelog from '@/components/ReleaseChangelog';
 
 import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 
@@ -34,10 +33,6 @@ import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 import packageJson from '@root/package.json';
-
-const rules: RenderRules = {
-  link: (node, children) => <RNText key={node.key}>{children}</RNText>,
-};
 
 const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
@@ -163,17 +158,7 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   <Surface
                     style={{ padding: 16, marginTop: 8, borderRadius: 16 }}
                   >
-                    <Markdown
-                      style={{
-                        body: {
-                          color: theme.colors.onSurface,
-                        },
-                        link: { textDecorationLine: 'none' },
-                      }}
-                      rules={rules}
-                    >
-                      {releaseInfo?.body || ''}
-                    </Markdown>
+                    <ReleaseChangelog releaseBody={releaseInfo?.body} />
                   </Surface>
                   <Box mt={16} mb={8}>
                     <Button

@@ -102,7 +102,7 @@ const ImportantCharts: FC = () => {
     <View style={{ flex: 1, width: '100%', height: '100%', marginTop: 4 }}>
       <View style={{ flex: 1 }}>
         <Box p={8} pt={0}>
-          <StyledSurface theme={theme} mode="flat" elevation={2}>
+          <StyledSurface theme={theme}>
             <TouchableRipple
               onPress={handleShowConfigureGraphs}
               borderless

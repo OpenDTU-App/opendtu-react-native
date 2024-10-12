@@ -246,12 +246,7 @@ const UnifiedLineChart: FC<UnifiedLineChartProps> = props => {
   }
 
   return (
-    <StyledSurface
-      theme={theme}
-      style={{ paddingHorizontal: 8 }}
-      elevation={2}
-      mode="flat"
-    >
+    <StyledSurface theme={theme} style={{ paddingHorizontal: 8 }}>
       <Box
         style={{
           flexDirection: 'row',
