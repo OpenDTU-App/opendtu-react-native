@@ -2,10 +2,10 @@ import { initReactI18next } from 'react-i18next';
 
 import i18n from 'i18next';
 
-import de from './translation-files/de.json';
-import en from './translation-files/en.json';
-import fr from './translation-files/fr.json';
-import it from './translation-files/it.json';
+import de from './translations/de/translation.json';
+import en from './translations/en/translation.json';
+import fr from './translations/fr/translation.json';
+import it from './translations/it/translation.json';
 
 import 'intl-pluralrules';
 import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';

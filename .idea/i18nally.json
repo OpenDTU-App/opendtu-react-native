@@ -1,22 +1,22 @@
 {
   "version" : "1.2",
   "profiles" : [ {
-    "id" : "c5971871-5302-4f4f-935a-3e23e6b6b489",
+    "id" : "11caf075-7b79-470d-8430-e57d098f3c02",
     "name" : "React-i18n",
     "keyNamingPattern" : "CAMEL_CASE_PATTERN",
     "sink" : {
-      "id" : "769a6527-dcaf-47c3-8e8a-9e4a3e7e7598",
+      "id" : "179a7f7e-aab2-4306-8cff-9f9fe16db304",
       "type" : "namespaced",
       "translationsDirectory" : "$PROJECT_DIR$/src/translations",
       "fileType" : "json",
       "defaultLocale" : "en",
-      "namespaces" : [ "translation-files" ],
-      "outputFilenameTemplate" : "%namespace%/%locale%.json",
+      "namespaces" : [ "translation" ],
+      "outputFilenameTemplate" : "%locale%/%namespace%.json",
       "nestingType" : "DOT",
       "placeholderFormatterName" : "I18NEXT"
     },
     "sources" : [ {
-      "id" : "8fcaf4c6-6a07-45fd-87c8-a8c1d203313d",
+      "id" : "aa39c25a-9d02-4202-b2ab-d9e527eba34c",
       "type" : "js",
       "defaultReplacementTemplate" : "t('%key%', %map%)",
       "scopeName" : "Project Files",
@@ -24,7 +24,7 @@
       "recognizedReplacementTemplates" : [ ],
       "skipDefaultNamespace" : true
     }, {
-      "id" : "e627e178-c8e9-4b3c-a2bb-f2db1349f11d",
+      "id" : "143d8c6c-c8da-4317-8e78-d402248eaa2c",
       "type" : "jsx",
       "defaultReplacementTemplate" : "t('%key%', %map%)",
       "scopeName" : "Project Files",
@@ -33,7 +33,7 @@
       "inlineTagsReplacementTemplate" : "",
       "recognizedReplacementTemplates" : [ ],
       "inlineTagNames" : [ "a", "abbr", "acronym", "b", "bdi", "bdo", "big", "br", "cite", "code", "data", "del", "dfn", "em", "i", "img", "input", "ins", "kbd", "label", "mark", "meter", "output", "progress", "q", "ruby", "s", "samp", "slot", "small", "span", "strong", "sub", "sup", "time", "u", "tt", "var", "wbr" ],
-      "translatableAttributeNames" : [ "title", "alt", "placeholder", "label", "aria-label", "description" ],
+      "translatableAttributeNames" : [ "title", "alt", "placeholder", "label", "aria-label" ],
       "skipDefaultNamespace" : true,
       "inlineTagHandler" : "I18NEXT"
     } ]
