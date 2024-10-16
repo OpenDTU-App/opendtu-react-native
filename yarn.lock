@@ -12569,7 +12569,7 @@ __metadata:
     react-native-linear-gradient: "npm:^2.8.3"
     react-native-logs: "npm:^5.1.0"
     react-native-markdown-display: "npm:^7.0.2"
-    react-native-mmkv: "npm:^2.12.2"
+    react-native-mmkv: "npm:~2.12.2"
     react-native-paper: "npm:5.12.5"
     react-native-paper-dates: "npm:^0.22.26"
     react-native-reanimated: "npm:^3.15.5"
@@ -13463,7 +13463,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-mmkv@npm:^2.12.2":
+"react-native-mmkv@npm:~2.12.2":
   version: 2.12.2
   resolution: "react-native-mmkv@npm:2.12.2"
   peerDependencies:
