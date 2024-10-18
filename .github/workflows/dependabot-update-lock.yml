@@ -1,0 +1,52 @@
+# This adds react-native support to dependabot by automatically running pod install after dependabot upgrades an npm/yarn package.
+# Dependabot open issue: https://github.com/dependabot/dependabot-core/issues/935#issuecomment-698481919
+name: Update Cocoapods Dependencies after Dependabot package upgrade
+on:
+  push:
+    branches:
+      - dependabot/npm_and_yarn/** # OR dependabot/npm_and_yarn/**react-native** to run only for packages that have react-native in the name
+  pull_request:
+    branches:
+      - dependabot/npm_and_yarn/** # OR dependabot/npm_and_yarn/**react-native** to run only for packages that have react-native in the name
+
+jobs:
+  run:
+    name: Run pod install
+    runs-on: macos-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: Install Packages
+        run: yarn install --frozen-lockfile
+
+      - name: Cache pods
+        uses: actions/cache@v4
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: Install Cocoapods Packages
+        run: pushd ios && pod install --verbose && popd
+
+      - name: Generate Commit Message
+        id: generate_commit_message
+        # eg: ⬆️ Bump Cocoapods Packages for apple-signin-auth-1.4.0
+        run: |
+          branch=${GITHUB_REF#refs/heads/}
+          # add `[dependabot skip]` prefix so Dependabot force pushes any rebases over our changes triggering the action again
+          commit_message="Bump ${branch//dependabot\/npm_and_yarn\// } cocoapods packages%0A%0A[dependabot skip]"
+          echo ::set-output name=commit_message::$commit_message
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: ${{ github.head_ref }}
+          commit_message: ${{ steps.generate_commit_message.outputs.commit_message }}
