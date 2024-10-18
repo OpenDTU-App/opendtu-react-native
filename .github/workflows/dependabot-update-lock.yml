@@ -2,6 +2,7 @@
 # Dependabot open issue: https://github.com/dependabot/dependabot-core/issues/935#issuecomment-698481919
 name: Update Cocoapods Dependencies after Dependabot package upgrade
 on:
+  workflow_dispatch:
   push:
     branches:
       - dependabot/npm_and_yarn/** # OR dependabot/npm_and_yarn/**react-native** to run only for packages that have react-native in the name
