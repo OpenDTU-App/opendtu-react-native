@@ -36,9 +36,9 @@ PODS:
   - FBLazyVector (0.75.4)
   - fmt (9.1.0)
   - glog (0.3.5)
-  - hermes-engine (0.75.2):
-    - hermes-engine/Pre-built (= 0.75.2)
-  - hermes-engine/Pre-built (0.75.2)
+  - hermes-engine (0.75.4):
+    - hermes-engine/Pre-built (= 0.75.4)
+  - hermes-engine/Pre-built (0.75.4)
   - libwebp (1.3.2):
     - libwebp/demux (= 1.3.2)
     - libwebp/mux (= 1.3.2)
@@ -1994,7 +1994,7 @@ SPEC CHECKSUMS:
   FBLazyVector: 430e10366de01d1e3d57374500b1b150fe482e6d
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
   glog: 69ef571f3de08433d766d614c73a9838a06bf7eb
-  hermes-engine: 3b6e0717ca847e2fc90a201e59db36caf04dee88
+  hermes-engine: ea92f60f37dba025e293cbe4b4a548fd26b610a0
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
   MMKV: 817ba1eea17421547e01e087285606eb270a8dcb
   MMKVCore: af055b00e27d88cd92fad301c5fecd1ff9b26dd9
