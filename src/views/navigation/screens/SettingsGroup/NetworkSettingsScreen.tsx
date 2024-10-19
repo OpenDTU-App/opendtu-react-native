@@ -17,6 +17,7 @@ import SettingsSurface from '@/components/styled/SettingsSurface';
 import useDtuSettings from '@/hooks/useDtuSettings';
 
 import isIP from '@/utils/isIP';
+import { validateIntNumber, validateMinMaxString } from '@/utils/validation';
 
 import { useApi } from '@/api/ApiHandler';
 import { StyledView } from '@/style';
@@ -344,21 +345,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         isOpen={changeSsidModalOpen}
         onClose={() => setChangeSsidModalOpen(false)}
-        validate={value => {
-          if (value.length > 32) {
-            throw new Error(t('errors.maxLength', { n: 32 }));
-          }
-
-          if (value.length < 3) {
-            throw new Error(t('errors.minLength', { n: 3 }));
-          }
-
-          if (value.trim() !== value) {
-            throw new Error(t('errors.noLeadingOrTrailingSpaces'));
-          }
-
-          return true;
-        }}
+        validate={value => validateMinMaxString(t, value)}
         title={t('settings.networkSettings.changeSsid.title')}
         description={t('settings.networkSettings.changeSsid.description')}
       />
@@ -373,21 +360,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         isOpen={changePasswordModalOpen}
         onClose={() => setChangePasswordModalOpen(false)}
-        validate={value => {
-          if (value.length > 63) {
-            throw new Error(t('errors.maxLength', { n: 63 }));
-          }
-
-          if (value.length < 8) {
-            throw new Error(t('errors.minLength', { n: 8 }));
-          }
-
-          if (value.trim() !== value) {
-            throw new Error(t('errors.noLeadingOrTrailingSpaces'));
-          }
-
-          return true;
-        }}
+        validate={value => validateMinMaxString(t, value, 8, 63)}
         title={t('settings.networkSettings.changePassword.title')}
         description={t('settings.networkSettings.changePassword.description')}
       />
@@ -402,21 +375,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         isOpen={changeHostnameModalOpen}
         onClose={() => setChangeHostnameModalOpen(false)}
-        validate={value => {
-          if (value.length > 63) {
-            throw new Error(t('errors.maxLength', { n: 63 }));
-          }
-
-          if (value.length < 1) {
-            throw new Error(t('errors.minLength', { n: 1 }));
-          }
-
-          if (value.trim() !== value) {
-            throw new Error(t('errors.noLeadingOrTrailingSpaces'));
-          }
-
-          return true;
-        }}
+        validate={value => validateMinMaxString(t, value, 1, 63)}
         title={t('settings.networkSettings.changeHostname.title')}
         description={t('settings.networkSettings.changeHostname.description')}
       />
@@ -580,17 +539,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         isOpen={changeApTimeoutModalOpen}
         onClose={() => setChangeApTimeoutModalOpen(false)}
-        validate={value => {
-          if (value.length > 0 && !/^\d+$/.test(value)) {
-            throw new Error(t('errors.invalidNumber'));
-          }
-
-          if (value.length > 0 && parseInt(value) < 0) {
-            throw new Error(t('errors.invalidNumber'));
-          }
-
-          return true;
-        }}
+        validate={value => validateIntNumber(t, value, 0, 3600)}
         title={t('settings.networkSettings.changeApTimeout.title')}
         description={t('settings.networkSettings.changeApTimeout.description')}
       />

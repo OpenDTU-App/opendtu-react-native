@@ -59,6 +59,12 @@
         "licenseUrl": "https://github.com/reduxjs/redux-toolkit/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
+    "@shopify/flash-list@1.7.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/Shopify/flash-list",
+        "licenseUrl": "https://github.com/Shopify/flash-list/raw/master/LICENSE.md",
+        "parents": "opendtu-react-native"
+    },
     "base-64@1.0.0": {
         "licenses": "MIT",
         "repository": "https://github.com/mathiasbynens/base64",
@@ -81,6 +87,12 @@
         "licenses": "MIT",
         "repository": "https://github.com/epoberezkin/fast-deep-equal",
         "licenseUrl": "https://github.com/epoberezkin/fast-deep-equal/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
+    "fuse.js@7.0.0": {
+        "licenses": "Apache-2.0",
+        "repository": "https://github.com/krisk/Fuse",
+        "licenseUrl": "https://github.com/krisk/Fuse/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
     "i18next@23.16.0": {

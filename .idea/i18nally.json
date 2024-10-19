@@ -1,11 +1,11 @@
 {
   "version" : "1.2",
   "profiles" : [ {
-    "id" : "11caf075-7b79-470d-8430-e57d098f3c02",
+    "id" : "ca4fa22e-3f8c-4b34-b0b1-af290aaec98c",
     "name" : "React-i18n",
     "keyNamingPattern" : "CAMEL_CASE_PATTERN",
     "sink" : {
-      "id" : "179a7f7e-aab2-4306-8cff-9f9fe16db304",
+      "id" : "60bdb323-21fe-418c-b9e7-4bbc815e33c4",
       "type" : "namespaced",
       "translationsDirectory" : "$PROJECT_DIR$/src/translations",
       "fileType" : "json",
@@ -16,24 +16,24 @@
       "placeholderFormatterName" : "I18NEXT"
     },
     "sources" : [ {
-      "id" : "aa39c25a-9d02-4202-b2ab-d9e527eba34c",
+      "id" : "166a1f40-a5c9-4904-98e4-892fb22d8a34",
       "type" : "js",
-      "defaultReplacementTemplate" : "t('%key%', %map%)",
+      "defaultReplacementTemplate" : "t('%namespace%:%key%', %map%)",
       "scopeName" : "Project Files",
       "scopePattern" : "",
       "recognizedReplacementTemplates" : [ ],
       "skipDefaultNamespace" : true
     }, {
-      "id" : "143d8c6c-c8da-4317-8e78-d402248eaa2c",
+      "id" : "31f3e70e-edf7-473f-87ce-1338240b5360",
       "type" : "jsx",
-      "defaultReplacementTemplate" : "t('%key%', %map%)",
+      "defaultReplacementTemplate" : "t('%namespace%:%key%', %map%)",
       "scopeName" : "Project Files",
       "scopePattern" : "",
       "attributeReplacementTemplate" : "",
       "inlineTagsReplacementTemplate" : "",
       "recognizedReplacementTemplates" : [ ],
       "inlineTagNames" : [ "a", "abbr", "acronym", "b", "bdi", "bdo", "big", "br", "cite", "code", "data", "del", "dfn", "em", "i", "img", "input", "ins", "kbd", "label", "mark", "meter", "output", "progress", "q", "ruby", "s", "samp", "slot", "small", "span", "strong", "sub", "sup", "time", "u", "tt", "var", "wbr" ],
-      "translatableAttributeNames" : [ "title", "alt", "placeholder", "label", "aria-label" ],
+      "translatableAttributeNames" : [ "title", "alt", "placeholder", "label", "aria-label", "description" ],
       "skipDefaultNamespace" : true,
       "inlineTagHandler" : "I18NEXT"
     } ]

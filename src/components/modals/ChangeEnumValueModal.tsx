@@ -3,45 +3,35 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { BottomDrawerMethods } from 'react-native-animated-bottom-drawer';
 import BottomDrawer from 'react-native-animated-bottom-drawer';
-import type { TextInputProps } from 'react-native-paper';
-import {
-  Button,
-  HelperText,
-  Text,
-  TextInput,
-  useTheme,
-} from 'react-native-paper';
+import { Box } from 'react-native-flex-layout';
+import { Button, RadioButton, Text, useTheme } from 'react-native-paper';
 
-import { View } from 'react-native';
-
-import { rootLogging } from '@/utils/log';
+import { ScrollView, View } from 'react-native';
 
 import { spacing } from '@/constants';
 
-const log = rootLogging.extend('ChangeTextValueModal');
-
-export interface ChangeValueModalProps {
+export interface ChangeEnumValueModalProps {
   isOpen?: boolean;
   onClose?: () => void;
   defaultValue?: string;
   onChange?: (value: string) => void;
+  possibleValues: PossibleEnumValues;
   title?: string;
   description?: string;
   extraHeight?: number;
-  inputProps?: Omit<TextInputProps, 'value' | 'onChangeText'>;
-  validate?: (value: string) => boolean;
 }
 
-const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
+export type PossibleEnumValues = { label: string; value: string }[];
+
+const ChangeEnumValueModal: FC<ChangeEnumValueModalProps> = ({
   isOpen,
   title,
   description,
   defaultValue,
   onChange: onSave,
   onClose,
-  inputProps,
-  validate,
   extraHeight,
+  possibleValues,
 }) => {
   const theme = useTheme();
   const drawerRef = useRef<BottomDrawerMethods>(null);
@@ -50,7 +40,6 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
   const [initialHeight, setInitialHeight] = useState<number>(0);
 
   const [value, setValue] = useState<string>(defaultValue ?? '');
-  const [error, setError] = useState<string | null>(null);
   const [wasModified, setWasModified] = useState<boolean>(false);
 
   useEffect(() => {
@@ -62,21 +51,6 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
   }, [isOpen]);
 
   const handleSave = () => {
-    setError(null);
-
-    try {
-      if (!validate?.(value)) {
-        throw new Error(t('invalidValue'));
-      }
-    } catch (e) {
-      if (e instanceof Error) {
-        setError(e.message);
-        log.error('Validation failed', e);
-      }
-
-      return;
-    }
-
     onSave?.(value);
     onClose?.();
   };
@@ -90,12 +64,6 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
     setValue(defaultValue ?? '');
     onClose?.();
   };
-
-  useEffect(() => {
-    if (wasModified) {
-      setError(null);
-    }
-  }, [wasModified]);
 
   useEffect(() => {
     if (!wasModified) {
@@ -143,31 +111,42 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
           setInitialHeight(heightValue);
         }}
       >
-        <View>
-          <Text variant="titleLarge">{title}</Text>
-          <Text variant="bodyMedium">{description}</Text>
-        </View>
-        <View style={{ marginTop: 40 }}>
-          <TextInput
-            defaultValue={value}
-            onChangeText={value => {
-              setWasModified(true);
-              setError(null);
-              setValue(value);
-            }}
-            {...inputProps}
-            error={!!error}
-          />
-          <HelperText type="error" visible={!!error}>
-            {error}
-          </HelperText>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <View style={{ width: '100%' }}>
+            <Text variant="titleLarge">{title}</Text>
+            <Text variant="bodyMedium">{description}</Text>
+          </View>
+          <ScrollView style={{ maxHeight: 350, width: '100%' }}>
+            <Box mv={4}>
+              <RadioButton.Group onValueChange={setValue} value={value}>
+                {possibleValues.map(({ label, value }) => (
+                  <RadioButton.Item
+                    key={value}
+                    value={value}
+                    label={label}
+                    labelVariant="bodyMedium"
+                    style={{
+                      backgroundColor: theme.colors.surface,
+                    }}
+                  />
+                ))}
+              </RadioButton.Group>
+            </Box>
+          </ScrollView>
         </View>
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
             gap: 8,
-            marginTop: 8,
+            marginTop: 24,
           }}
         >
           <Button mode="text" onPress={handleCancel} style={{ flex: 1 }}>
@@ -182,4 +161,4 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
   );
 };
 
-export default ChangeTextValueModal;
+export default ChangeEnumValueModal;

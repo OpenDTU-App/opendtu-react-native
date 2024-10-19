@@ -1,8 +1,9 @@
 import type { FC } from 'react';
-import { Text as RNText } from 'react-native/Libraries/Text/Text';
 import type { RenderRules } from 'react-native-markdown-display';
 import Markdown from 'react-native-markdown-display';
 import { useTheme } from 'react-native-paper';
+
+import { Text as RNText } from 'react-native';
 
 export interface ReleaseChangelogProps {
   releaseBody?: string;

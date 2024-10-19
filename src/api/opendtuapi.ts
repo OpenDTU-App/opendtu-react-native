@@ -9,7 +9,12 @@ import type {
 import type { EventLogData } from '@/types/opendtu/eventlog';
 import type { GridProfileData } from '@/types/opendtu/gridprofile';
 import type { InverterDeviceData } from '@/types/opendtu/inverterDevice';
-import type { NetworkSettings } from '@/types/opendtu/settings';
+import type {
+  NetworkSettings,
+  NTPSettings,
+  NTPTime,
+  TimezoneData,
+} from '@/types/opendtu/settings';
 import type { InverterItem } from '@/types/opendtu/state';
 import { DeviceState } from '@/types/opendtu/state';
 import type {
@@ -105,8 +110,13 @@ class OpenDtuApi {
         inverterSerial: InverterSerial,
       ) => void)
     | null = null;
+
+  // settings
   private onNetworkSettingsHandler:
     | ((data: NetworkSettings, index: Index) => void)
+    | null = null;
+  private onNtpSettingsHandler:
+    | ((data: NTPSettings, index: Index) => void)
     | null = null;
 
   private ws: WebSocket | null = null;
@@ -327,6 +337,18 @@ class OpenDtuApi {
   public unregisterOnNetworkSettingsHandler(): void {
     log.debug('OpenDtuApi.unregisterOnNetworkSettingsHandler()');
     this.onNetworkSettingsHandler = null;
+  }
+
+  public registerOnNtpSettingsHandler(
+    handler: (data: NTPSettings, index: Index) => void,
+  ): void {
+    log.debug('OpenDtuApi.registerOnNtpSettingsHandler()');
+    this.onNtpSettingsHandler = handler;
+  }
+
+  public unregisterOnNtpSettingsHandler(): void {
+    log.debug('OpenDtuApi.unregisterOnNtpSettingsHandler()');
+    this.onNtpSettingsHandler = null;
   }
 
   public async getSystemStatusFromUrl(
@@ -1231,6 +1253,147 @@ class OpenDtuApi {
     const parsed = await res.json();
 
     log.debug('setNetworkConfig', 'success', {
+      status: res.status,
+      parsed,
+    });
+
+    return res.status === 200 && parsed.type === 'success';
+  }
+
+  public async getNTPConfig(): Promise<NTPSettings | null> {
+    if (!this.baseUrl) {
+      log.error('getNTPConfig', 'no base url');
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest('/api/ntp/config', 'GET');
+
+    if (!res) {
+      log.error('getNNTPConfig', 'no response');
+      return null;
+    }
+
+    if (res.status === 200) {
+      const json = await res.json();
+
+      if (this.onNtpSettingsHandler && this.index !== null) {
+        this.onNtpSettingsHandler(json, this.index);
+      }
+
+      log.debug('getNTPConfig', 'success');
+
+      return json;
+    }
+
+    log.error('getNTPConfig', 'invalid status', res.status);
+
+    return null;
+  }
+
+  public async setNTPConfig(config: NTPSettings): Promise<boolean | null> {
+    if (!this.baseUrl) {
+      log.error('setNTPConfig', 'no base url');
+      return null;
+    }
+
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(config));
+
+    const res = await this.makeAuthenticatedRequest('/api/ntp/config', 'POST', {
+      body: formData,
+    });
+
+    if (!res) {
+      log.error('setNTPConfig', 'no response');
+      return null;
+    }
+
+    const parsed = await res.json();
+
+    log.debug('setNTPConfig', 'success', {
+      status: res.status,
+      parsed,
+    });
+
+    return res.status === 200 && parsed.type === 'success';
+  }
+
+  public async fetchTimezones(): Promise<TimezoneData | null> {
+    // fetch /zones.json
+    if (!this.baseUrl) {
+      log.error('fetchTimezones', 'no base url');
+      return null;
+    }
+
+    const res = await fetch(`${this.baseUrl}/zones.json`).catch(() => null);
+
+    if (!res) {
+      log.error('fetchTimezones', 'no response');
+      return null;
+    }
+
+    if (res.status === 200) {
+      const json = await res.json();
+
+      log.debug('fetchTimezones', 'success');
+
+      return json;
+    }
+
+    log.error('fetchTimezones', 'invalid status', res.status);
+
+    return null;
+  }
+
+  public async getNTPTime(): Promise<NTPTime | null> {
+    if (!this.baseUrl) {
+      log.error('getNTPTime', 'no base url');
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest('/api/ntp/time', 'GET');
+
+    if (!res) {
+      log.error('getNTPTime', 'no response');
+      return null;
+    }
+
+    if (res.status === 200) {
+      const json = await res.json();
+
+      log.debug('getNTPTime', 'success');
+
+      return json;
+    }
+
+    log.error('getNTPTime', 'invalid status', res.status);
+
+    return null;
+  }
+
+  public async setNTPTime(
+    config: Omit<NTPTime, 'ntp_status'>,
+  ): Promise<boolean | null> {
+    if (!this.baseUrl) {
+      log.error('setNTPTime', 'no base url');
+      return null;
+    }
+
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(config));
+
+    const res = await this.makeAuthenticatedRequest('/api/ntp/time', 'POST', {
+      body: formData,
+    });
+
+    if (!res) {
+      log.error('setNTPTime', 'no response');
+      return null;
+    }
+
+    const parsed = await res.json();
+
+    log.debug('setNTPTime', 'success', {
       status: res.status,
       parsed,
     });
