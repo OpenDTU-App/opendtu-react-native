@@ -35,9 +35,7 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
   const drawerRef = useRef<BottomDrawerMethods>(null);
   const { t } = useTranslation();
 
-  const [initialHeight, setInitialHeight] = useState<number>(
-    180 + (extraHeight ?? 0),
-  );
+  const [initialHeight, setInitialHeight] = useState<number>(0);
 
   const [value, setValue] = useState<boolean>(defaultValue ?? false);
   const [wasModified, setWasModified] = useState<boolean>(false);

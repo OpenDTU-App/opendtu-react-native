@@ -15,6 +15,7 @@ import {
   setMqttStatus,
   setNetworkSettings,
   setNetworkStatus,
+  setNTPSettings,
   setNtpStatus,
   setPowerStatus,
   setSystemStatus,
@@ -179,6 +180,10 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
 
       api.registerOnNetworkSettingsHandler((data, index) => {
         dispatch(setNetworkSettings({ data, index }));
+      });
+
+      api.registerOnNtpSettingsHandler((data, index) => {
+        dispatch(setNTPSettings({ data, index }));
       });
 
       log.debug('Connecting API Handler');

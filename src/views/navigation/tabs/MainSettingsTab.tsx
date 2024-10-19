@@ -89,6 +89,10 @@ const MainSettingsTab: FC = () => {
     navigation.navigate('NetworkSettingsScreen');
   }, [navigation]);
 
+  const handleNTPSettings = useCallback(() => {
+    navigation.navigate('NTPSettingsScreen');
+  }, [navigation]);
+
   // OpenDTU information navigation
   const handleAbout = useCallback(() => {
     navigation.navigate('AboutSettingsScreen');
@@ -151,8 +155,7 @@ const MainSettingsTab: FC = () => {
                   title={t('settings.ntpSettings.title')}
                   description={t('settings.ntpSettings.description')}
                   left={props => <List.Icon {...props} icon="clock" />}
-                  disabled
-                  style={{ opacity: 0.5 }}
+                  onPress={handleNTPSettings}
                 />
                 <List.Item
                   title={t('settings.mqttSettings.title')}

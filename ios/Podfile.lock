@@ -1594,6 +1594,27 @@ PODS:
     - React-Core
     - SDWebImage (~> 5.11.1)
     - SDWebImageWebPCoder (~> 0.8.4)
+  - RNFlashList (1.7.1):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNFS (2.20.0):
     - React-Core
   - RNReanimated (3.16.0):
@@ -1818,6 +1839,7 @@ DEPENDENCIES:
   - "RNCClipboard (from `../node_modules/@react-native-clipboard/clipboard`)"
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
   - RNFastImage (from `../node_modules/react-native-fast-image`)
+  - "RNFlashList (from `../node_modules/@shopify/flash-list`)"
   - RNFS (from `../node_modules/react-native-fs`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -1992,6 +2014,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-masked-view/masked-view"
   RNFastImage:
     :path: "../node_modules/react-native-fast-image"
+  RNFlashList:
+    :path: "../node_modules/@shopify/flash-list"
   RNFS:
     :path: "../node_modules/react-native-fs"
   RNReanimated:
@@ -2087,6 +2111,7 @@ SPEC CHECKSUMS:
   RNCClipboard: 5e503962f0719ace8f7fdfe9c60282b526305c85
   RNCMaskedView: 090213d32d8b3bb83a4dcb7d12c18f0152591906
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
+  RNFlashList: 115dd44377580761bff386a0caebf165424cf16f
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNReanimated: f6a10979b3701f8029c71dbfe35d0ff4328dce4c
   RNScreens: 19719a9c326e925498ac3b2d35c4e50fe87afc06
