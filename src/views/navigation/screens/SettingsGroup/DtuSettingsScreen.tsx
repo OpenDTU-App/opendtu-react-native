@@ -135,7 +135,7 @@ const DtuSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     if (typeof dtuSettings?.cmt_country !== 'undefined') {
       const country = dtuSettings.country_def[dtuSettings.cmt_country];
 
-      return `${t('settings.dtuSettings.country_' + dtuSettings.cmt_country)} (${formatFrequency(country.freq_min)} - ${formatFrequency(country.freq_max)})`;
+      return `${t('settings.dtuSettings.country-' + dtuSettings.cmt_country)} (${formatFrequency(country.freq_min)} - ${formatFrequency(country.freq_max)})`;
     }
   }, [dtuSettings?.cmt_country, dtuSettings?.country_def, t]);
 
@@ -438,7 +438,7 @@ const DtuSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         description={t('settings.dtuSettings.countryDescription')}
         possibleValues={
           dtuSettings?.country_def.map((item, index) => ({
-            label: `${t('settings.dtuSettings.country_' + index)} (${formatFrequency(item.freq_min)} - ${formatFrequency(item.freq_max)})`,
+            label: `${t('settings.dtuSettings.country-' + index)} (${formatFrequency(item.freq_min)} - ${formatFrequency(item.freq_max)})`,
             value: index.toString(),
           })) || []
         }
