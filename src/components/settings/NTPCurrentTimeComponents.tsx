@@ -6,11 +6,11 @@ import { List } from 'react-native-paper';
 import useMemoWithInterval from '@/hooks/useMemoWithInterval';
 
 export interface NTPCurrentTimeComponentsProps {
-  initalCurrentOpendtuTime?: Date;
+  initialCurrentOpenDtuTime?: Date;
 }
 
 const NTPCurrentTimeComponents: FC<NTPCurrentTimeComponentsProps> = ({
-  initalCurrentOpendtuTime,
+  initialCurrentOpenDtuTime,
 }) => {
   const { t } = useTranslation();
 
@@ -20,39 +20,42 @@ const NTPCurrentTimeComponents: FC<NTPCurrentTimeComponentsProps> = ({
     1000,
   );
 
-  const [currentOpendtuTime, setCurrentOpendtuTime] = useState<
+  const [currentOpenDtuTime, setCurrentOpenDtuTime] = useState<
     Date | undefined
-  >(initalCurrentOpendtuTime);
+  >(initialCurrentOpenDtuTime);
 
   useEffect(() => {
-    if (!initalCurrentOpendtuTime) {
+    if (!initialCurrentOpenDtuTime) {
       return;
     }
 
-    setCurrentOpendtuTime(initalCurrentOpendtuTime);
-  }, [initalCurrentOpendtuTime]);
+    setCurrentOpenDtuTime(initialCurrentOpenDtuTime);
+  }, [initialCurrentOpenDtuTime]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (currentOpendtuTime) {
-        const newDate = new Date(currentOpendtuTime.getTime() + 1000);
+      if (currentOpenDtuTime) {
+        const newDate = new Date(currentOpenDtuTime.getTime() + 1000);
 
-        setCurrentOpendtuTime(newDate);
+        setCurrentOpenDtuTime(newDate);
       }
     }, 1000);
 
     return () => {
       clearInterval(interval);
     };
-  }, [currentOpendtuTime]);
+  }, [currentOpenDtuTime]);
 
   return (
-    <List.Section title="Manual Time Synchronization">
+    <List.Section title={t('settings.ntpSettings.manualTimeSync')}>
       <List.Item
-        title="Current OpenDTU Time"
-        description={currentOpendtuTime?.toString() || t('unknown')}
+        title={t('settings.ntpSettings.currentOpenDtuTime')}
+        description={currentOpenDtuTime?.toString() || t('unknown')}
       />
-      <List.Item title="Current Local Time" description={currentLocalTime} />
+      <List.Item
+        title={t('settings.ntpSettings.currentPhoneTime')}
+        description={currentLocalTime}
+      />
     </List.Section>
   );
 };

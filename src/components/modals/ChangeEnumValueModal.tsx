@@ -124,7 +124,14 @@ const ChangeEnumValueModal: FC<ChangeEnumValueModalProps> = ({
             <Text variant="bodyMedium">{description}</Text>
           </View>
           <ScrollView style={{ maxHeight: 350, width: '100%' }}>
-            <Box mv={4}>
+            <Box
+              mv={4}
+              style={{
+                backgroundColor: theme.colors.surfaceVariant,
+                borderRadius: theme.roundness * 6,
+                paddingVertical: spacing,
+              }}
+            >
               <RadioButton.Group onValueChange={setValue} value={value}>
                 {possibleValues.map(({ label, value }) => (
                   <RadioButton.Item
@@ -133,7 +140,10 @@ const ChangeEnumValueModal: FC<ChangeEnumValueModalProps> = ({
                     label={label}
                     labelVariant="bodyMedium"
                     style={{
-                      backgroundColor: theme.colors.surface,
+                      borderRadius: theme.roundness * 6,
+                    }}
+                    labelStyle={{
+                      borderRadius: theme.roundness * 6,
                     }}
                   />
                 ))}

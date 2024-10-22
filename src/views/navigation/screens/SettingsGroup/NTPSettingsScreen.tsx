@@ -263,7 +263,7 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   description={
                     (typeof timeSettings?.sunsettype === 'number'
                       ? t(
-                          `settings.ntpSettings.sunsetType.${SunsetType[timeSettings.sunsettype]}`,
+                          `settings.ntpSettings.sunsetTypeObject.${SunsetType[timeSettings.sunsettype]}`,
                         )
                       : null) || t('notConfigured')
                   }
@@ -283,7 +283,7 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             </SettingsSurface>
             <SettingsSurface>
               <NTPCurrentTimeComponents
-                initalCurrentOpendtuTime={currentOpendtuTime}
+                initialCurrentOpenDtuTime={currentOpendtuTime}
               />
               <View
                 style={{
@@ -348,6 +348,9 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateFloatNumber(t, value, -90, 90)}
         title={t('settings.ntpSettings.changeLatitude')}
         description={t('settings.ntpSettings.changeLatitudeDescription')}
+        inputProps={{
+          keyboardType: 'numeric',
+        }}
       />
       <ChangeTextValueModal
         defaultValue={timeSettings?.longitude.toString()}
@@ -372,6 +375,9 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateFloatNumber(t, value, -180, 180)}
         title={t('settings.ntpSettings.changeLongitude')}
         description={t('settings.ntpSettings.changeLongitudeDescription')}
+        inputProps={{
+          keyboardType: 'numeric',
+        }}
       />
       <ChangeEnumValueModal
         defaultValue={
@@ -396,19 +402,19 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         possibleValues={[
           {
             value: 'OFFICIAL',
-            label: t('settings.ntpSettings.sunsetType.OFFICIAL'),
+            label: t('settings.ntpSettings.sunsetTypeObject.OFFICIAL'),
           },
           {
             value: 'NAUTICAL',
-            label: t('settings.ntpSettings.sunsetType.NAUTICAL'),
+            label: t('settings.ntpSettings.sunsetTypeObject.NAUTICAL'),
           },
           {
             value: 'CIVIL',
-            label: t('settings.ntpSettings.sunsetType.CIVIL'),
+            label: t('settings.ntpSettings.sunsetTypeObject.CIVIL'),
           },
           {
             value: 'ASTONOMICAL',
-            label: t('settings.ntpSettings.sunsetType.ASTONOMICAL'),
+            label: t('settings.ntpSettings.sunsetTypeObject.ASTONOMICAL'),
           },
         ]}
       />

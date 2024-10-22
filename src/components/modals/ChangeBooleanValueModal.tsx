@@ -10,7 +10,7 @@ import { View } from 'react-native';
 
 import { spacing } from '@/constants';
 
-export interface ChangeValueModalProps {
+export interface ChangeBooleanValueModalProps {
   isOpen?: boolean;
   onClose?: () => void;
   defaultValue?: boolean;
@@ -21,7 +21,7 @@ export interface ChangeValueModalProps {
   inputProps?: Omit<SwitchProps, 'value' | 'onValueChange'>;
 }
 
-const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
+const ChangeBooleanValueModal: FC<ChangeBooleanValueModalProps> = ({
   isOpen,
   title,
   description,
@@ -152,4 +152,4 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
   );
 };
 
-export default ChangeTextValueModal;
+export default ChangeBooleanValueModal;

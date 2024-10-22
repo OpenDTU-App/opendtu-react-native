@@ -93,6 +93,10 @@ const MainSettingsTab: FC = () => {
     navigation.navigate('NTPSettingsScreen');
   }, [navigation]);
 
+  const handleDtuSettings = useCallback(() => {
+    navigation.navigate('DtuSettingsScreen');
+  }, [navigation]);
+
   // OpenDTU information navigation
   const handleAbout = useCallback(() => {
     navigation.navigate('AboutSettingsScreen');
@@ -182,8 +186,7 @@ const MainSettingsTab: FC = () => {
                   title={t('settings.dtuSettings.title')}
                   description={t('settings.dtuSettings.description')}
                   left={props => <List.Icon {...props} icon="cog" />}
-                  disabled
-                  style={{ opacity: 0.5 }}
+                  onPress={handleDtuSettings}
                 />
                 <List.Item
                   title={t('settings.hardwareSettings.title')}

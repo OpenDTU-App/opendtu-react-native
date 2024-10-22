@@ -1,11 +1,11 @@
 {
   "version" : "1.2",
   "profiles" : [ {
-    "id" : "ca4fa22e-3f8c-4b34-b0b1-af290aaec98c",
+    "id" : "59d315e8-e60a-4763-8def-d3c7f7582cde",
     "name" : "React-i18n",
     "keyNamingPattern" : "CAMEL_CASE_PATTERN",
     "sink" : {
-      "id" : "60bdb323-21fe-418c-b9e7-4bbc815e33c4",
+      "id" : "b3a44f4f-0000-44f1-8c51-dd298482f4e1",
       "type" : "namespaced",
       "translationsDirectory" : "$PROJECT_DIR$/src/translations",
       "fileType" : "json",
@@ -16,17 +16,17 @@
       "placeholderFormatterName" : "I18NEXT"
     },
     "sources" : [ {
-      "id" : "166a1f40-a5c9-4904-98e4-892fb22d8a34",
+      "id" : "3c9fb61a-ff0a-4e85-a973-d4f6ba16e99d",
       "type" : "js",
-      "defaultReplacementTemplate" : "t('%namespace%:%key%', %map%)",
+      "defaultReplacementTemplate" : "t('%key%', %map%)",
       "scopeName" : "Project Files",
       "scopePattern" : "",
       "recognizedReplacementTemplates" : [ ],
       "skipDefaultNamespace" : true
     }, {
-      "id" : "31f3e70e-edf7-473f-87ce-1338240b5360",
+      "id" : "1eff7e75-d64d-4715-8b59-2f65ef3a4c06",
       "type" : "jsx",
-      "defaultReplacementTemplate" : "t('%namespace%:%key%', %map%)",
+      "defaultReplacementTemplate" : "t('%key%', %map%)",
       "scopeName" : "Project Files",
       "scopePattern" : "",
       "attributeReplacementTemplate" : "",

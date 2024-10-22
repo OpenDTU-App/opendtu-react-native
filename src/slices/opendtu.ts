@@ -5,6 +5,7 @@ import type {
   OpenDTUReduxState,
   OpenDTUSettings,
   SetDeviceStateAction,
+  SetDtuSettingsAction,
   SetEventLogAction,
   SetGridProfileAction,
   SetInverterDeviceAction,
@@ -362,6 +363,21 @@ const opendtuSlice = createSlice({
           .settings as OpenDTUSettings
       ).ntp = action.payload.data;
     },
+    setDtuSettings: (state, action: SetDtuSettingsAction) => {
+      if (!state.dtuStates[action.payload.index]) {
+        state.dtuStates[action.payload.index] = {};
+      }
+
+      if (!state.dtuStates[action.payload.index]?.settings) {
+        (state.dtuStates[action.payload.index] as OpenDTUDeviceState).settings =
+          {};
+      }
+
+      (
+        (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
+          .settings as OpenDTUSettings
+      ).dtu = action.payload.data;
+    },
   },
 });
 
@@ -388,6 +404,7 @@ export const {
   setLimitStatus,
   setNetworkSettings,
   setNTPSettings,
+  setDtuSettings,
 } = opendtuSlice.actions;
 
 export const { reducer: OpenDTUReducer } = opendtuSlice;

@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import { Appbar, List, useTheme } from 'react-native-paper';
+import { Appbar, List, TextInput, useTheme } from 'react-native-paper';
 
 import { RefreshControl, ScrollView } from 'react-native';
 
@@ -536,6 +536,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         inputProps={{
           keyboardType: 'number-pad',
+          right: <TextInput.Affix text={t('settings.seconds')} />,
         }}
         isOpen={changeApTimeoutModalOpen}
         onClose={() => setChangeApTimeoutModalOpen(false)}

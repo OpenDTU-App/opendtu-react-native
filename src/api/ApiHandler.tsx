@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useMemo } from 'react';
 import {
   clearOpenDtuState,
   setDeviceState,
+  setDtuSettings,
   setEventLog,
   setGridProfile,
   setInverterDevice,
@@ -184,6 +185,10 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
 
       api.registerOnNtpSettingsHandler((data, index) => {
         dispatch(setNTPSettings({ data, index }));
+      });
+
+      api.registerOnDtuSettingsHandler((data, index) => {
+        dispatch(setDtuSettings({ data, index }));
       });
 
       log.debug('Connecting API Handler');
