@@ -2,7 +2,11 @@ import type { LimitStatusData, PowerStatusData } from '@/types/opendtu/control';
 import type { EventLogData } from '@/types/opendtu/eventlog';
 import type { GridProfileData } from '@/types/opendtu/gridprofile';
 import type { InverterDeviceData } from '@/types/opendtu/inverterDevice';
-import type { NetworkSettings, NTPSettings } from '@/types/opendtu/settings';
+import type {
+  DtuSettings,
+  NetworkSettings,
+  NTPSettings,
+} from '@/types/opendtu/settings';
 import type {
   InverterSerial,
   LiveData,
@@ -20,6 +24,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 export interface OpenDTUSettings {
   network?: NetworkSettings;
   ntp?: NTPSettings;
+  dtu?: DtuSettings;
 }
 
 export enum DeviceState {
@@ -133,6 +138,11 @@ export type SetNetworkSettingsAction = PayloadAction<{
 export type SetNTPSettingsAction = PayloadAction<{
   index: Index;
   data: NTPSettings;
+}>;
+
+export type SetDtuSettingsAction = PayloadAction<{
+  index: Index;
+  data: DtuSettings;
 }>;
 
 export interface OpenDTUSetup {

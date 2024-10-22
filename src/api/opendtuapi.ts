@@ -10,6 +10,7 @@ import type { EventLogData } from '@/types/opendtu/eventlog';
 import type { GridProfileData } from '@/types/opendtu/gridprofile';
 import type { InverterDeviceData } from '@/types/opendtu/inverterDevice';
 import type {
+  DtuSettings,
   NetworkSettings,
   NTPSettings,
   NTPTime,
@@ -117,6 +118,9 @@ class OpenDtuApi {
     | null = null;
   private onNtpSettingsHandler:
     | ((data: NTPSettings, index: Index) => void)
+    | null = null;
+  private onDtuSettingsHandler:
+    | ((data: DtuSettings, index: Index) => void)
     | null = null;
 
   private ws: WebSocket | null = null;
@@ -349,6 +353,18 @@ class OpenDtuApi {
   public unregisterOnNtpSettingsHandler(): void {
     log.debug('OpenDtuApi.unregisterOnNtpSettingsHandler()');
     this.onNtpSettingsHandler = null;
+  }
+
+  public registerOnDtuSettingsHandler(
+    handler: (data: DtuSettings, index: Index) => void,
+  ): void {
+    log.debug('OpenDtuApi.registerOnDtuSettingsHandler()');
+    this.onDtuSettingsHandler = handler;
+  }
+
+  public unregisterOnDtuSettingsHandler(): void {
+    log.debug('OpenDtuApi.unregisterOnDtuSettingsHandler()');
+    this.onDtuSettingsHandler = null;
   }
 
   public async getSystemStatusFromUrl(
@@ -1394,6 +1410,64 @@ class OpenDtuApi {
     const parsed = await res.json();
 
     log.debug('setNTPTime', 'success', {
+      status: res.status,
+      parsed,
+    });
+
+    return res.status === 200 && parsed.type === 'success';
+  }
+
+  public async getDtuConfig(): Promise<DtuSettings | null> {
+    if (!this.baseUrl) {
+      log.error('getDtuConfig', 'no base url');
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest('/api/dtu/config', 'GET');
+
+    if (!res) {
+      log.error('getDtuConfig', 'no response');
+      return null;
+    }
+
+    if (res.status === 200) {
+      const json = await res.json();
+
+      if (this.onDtuSettingsHandler && this.index !== null) {
+        this.onDtuSettingsHandler(json, this.index);
+      }
+
+      log.debug('getDtuConfig', 'success');
+
+      return json;
+    }
+
+    log.error('getDtuConfig', 'invalid status', res.status);
+
+    return null;
+  }
+
+  public async setDtuConfig(config: DtuSettings): Promise<boolean | null> {
+    if (!this.baseUrl) {
+      log.error('setDtuConfig', 'no base url');
+      return null;
+    }
+
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(config));
+
+    const res = await this.makeAuthenticatedRequest('/api/dtu/config', 'POST', {
+      body: formData,
+    });
+
+    if (!res) {
+      log.error('setDtuConfig', 'no response');
+      return null;
+    }
+
+    const parsed = await res.json();
+
+    log.debug('setDtuConfig', 'success', {
       status: res.status,
       parsed,
     });

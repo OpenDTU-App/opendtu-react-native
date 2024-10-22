@@ -22,6 +22,7 @@ import InverterEventLogScreen from '@/views/navigation/screens/InverterGroup/Inv
 import InverterGridProfileScreen from '@/views/navigation/screens/InverterGroup/InverterGridProfileScreen';
 import InverterInfoScreen from '@/views/navigation/screens/InverterGroup/InverterInfoScreen';
 import MainScreen from '@/views/navigation/screens/MainScreen';
+import DtuSettingsScreen from '@/views/navigation/screens/SettingsGroup/DtuSettingsScreen';
 import NetworkSettingsScreen from '@/views/navigation/screens/SettingsGroup/NetworkSettingsScreen';
 import NTPChangeTimezoneScreen from '@/views/navigation/screens/SettingsGroup/NTPChangeTimezoneScreen';
 import NTPSettingsScreen from '@/views/navigation/screens/SettingsGroup/NTPSettingsScreen';
@@ -132,6 +133,7 @@ const NavigationStack: FC = () => {
         name="NTPChangeTimezoneScreen"
         component={NTPChangeTimezoneScreen}
       />
+      <Stack.Screen name="DtuSettingsScreen" component={DtuSettingsScreen} />
       <Stack.Screen name="AppLogScreen" component={AppLogScreen} />
     </Stack.Navigator>
   );

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { BottomDrawerMethods } from 'react-native-animated-bottom-drawer';
 import BottomDrawer from 'react-native-animated-bottom-drawer';
@@ -20,7 +20,7 @@ import { spacing } from '@/constants';
 
 const log = rootLogging.extend('ChangeTextValueModal');
 
-export interface ChangeValueModalProps {
+export interface ChangeTextValueModalProps {
   isOpen?: boolean;
   onClose?: () => void;
   defaultValue?: string;
@@ -30,9 +30,10 @@ export interface ChangeValueModalProps {
   extraHeight?: number;
   inputProps?: Omit<TextInputProps, 'value' | 'onChangeText'>;
   validate?: (value: string) => boolean;
+  allowedRegex?: RegExp;
 }
 
-const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
+const ChangeTextValueModal: FC<ChangeTextValueModalProps> = ({
   isOpen,
   title,
   description,
@@ -42,6 +43,7 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
   inputProps,
   validate,
   extraHeight,
+  allowedRegex,
 }) => {
   const theme = useTheme();
   const drawerRef = useRef<BottomDrawerMethods>(null);
@@ -149,13 +151,17 @@ const ChangeTextValueModal: FC<ChangeValueModalProps> = ({
         </View>
         <View style={{ marginTop: 40 }}>
           <TextInput
+            {...inputProps}
             defaultValue={value}
             onChangeText={value => {
+              if (allowedRegex && !allowedRegex.test(value)) {
+                return;
+              }
+
               setWasModified(true);
               setError(null);
               setValue(value);
             }}
-            {...inputProps}
             error={!!error}
           />
           <HelperText type="error" visible={!!error}>
