@@ -1,4 +1,10 @@
 {
+    "@octokit/core@3.6.0": {
+        "licenses": "MIT",
+        "repository": "github:octokit/core.js",
+        "licenseUrl": "github:octokit/core.js",
+        "parents": "opendtu-react-native"
+    },
     "@os-team/i18next-react-native-language-detector@1.0.34": {
         "licenses": "MIT",
         "repository": "git@gitlab.com:os-team/libs/utils",
@@ -129,12 +135,6 @@
         "licenses": "BSD-3-Clause",
         "repository": "http://github.com/mwittig/npm-license-crawler",
         "licenseUrl": "http://github.com/mwittig/npm-license-crawler/raw/master/LICENSE",
-        "parents": "opendtu-react-native"
-    },
-    "octokit@3.2.1": {
-        "licenses": "MIT",
-        "repository": "github:octokit/octokit.js",
-        "licenseUrl": "github:octokit/octokit.js",
         "parents": "opendtu-react-native"
     },
     "patch-package@8.0.0": {
