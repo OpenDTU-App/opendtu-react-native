@@ -1,5 +1,5 @@
 {
-    "@octokit/core@3.6.0": {
+    "@octokit/core@6.1.2": {
         "licenses": "MIT",
         "repository": "github:octokit/core.js",
         "licenseUrl": "github:octokit/core.js",
@@ -83,7 +83,7 @@
         "licenseUrl": "https://github.com/omichelsen/compare-versions/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "expo@51.0.38": {
+    "expo@52.0.0-preview.18": {
         "licenses": "MIT",
         "repository": "https://github.com/expo/expo",
         "licenseUrl": "https://github.com/expo/expo",
@@ -251,7 +251,7 @@
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-safe-area-context@4.12.0": {
+    "react-native-safe-area-context@4.14.0": {
         "licenses": "MIT",
         "repository": "https://github.com/th3rdwave/react-native-safe-area-context",
         "licenseUrl": "https://github.com/th3rdwave/react-native-safe-area-context/raw/master/LICENSE",
