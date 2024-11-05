@@ -17,7 +17,7 @@
         "licenseUrl": "https://github.com/react-native-async-storage/async-storage/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-native-clipboard/clipboard@1.14.2": {
+    "@react-native-clipboard/clipboard@1.14.3": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-clipboard/clipboard",
         "licenseUrl": "https://github.com/react-native-clipboard/clipboard/raw/master/LICENSE",
@@ -29,7 +29,7 @@
         "licenseUrl": "https://github.com/react-native-netinfo/react-native-netinfo/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-native-masked-view/masked-view@0.3.1": {
+    "@react-native-masked-view/masked-view@0.3.2": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-masked-view/masked-view",
         "licenseUrl": "https://github.com/react-native-masked-view/masked-view/raw/master/LICENSE",
@@ -95,7 +95,7 @@
         "licenseUrl": "https://github.com/krisk/Fuse/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "i18next@23.16.2": {
+    "i18next@23.16.4": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
@@ -215,7 +215,7 @@
         "licenseUrl": "https://github.com/react-native-linear-gradient/react-native-linear-gradient/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-logs@5.2.2": {
+    "react-native-logs@5.3.0": {
         "licenses": "MIT",
         "repository": "https://github.com/mowispace/react-native-logs",
         "licenseUrl": "https://github.com/mowispace/react-native-logs/raw/master/LICENSE",
@@ -251,13 +251,13 @@
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-safe-area-context@4.11.1": {
+    "react-native-safe-area-context@4.14.0": {
         "licenses": "MIT",
         "repository": "https://github.com/th3rdwave/react-native-safe-area-context",
         "licenseUrl": "https://github.com/th3rdwave/react-native-safe-area-context/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-screens@3.34.0": {
+    "react-native-screens@3.35.0": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-screens",
         "licenseUrl": "https://github.com/software-mansion/react-native-screens/raw/master/LICENSE",
@@ -353,7 +353,7 @@
         "licenseUrl": "https://github.com/styled-components/styled-components/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "uuid@10.0.0": {
+    "uuid@11.0.2": {
         "licenses": "MIT",
         "repository": "https://github.com/uuidjs/uuid",
         "licenseUrl": "https://github.com/uuidjs/uuid/raw/master/LICENSE.md",

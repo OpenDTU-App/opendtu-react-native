@@ -3825,9 +3825,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-clipboard/clipboard@npm:^1.14.2":
-  version: 1.14.2
-  resolution: "@react-native-clipboard/clipboard@npm:1.14.2"
+"@react-native-clipboard/clipboard@npm:^1.14.3":
+  version: 1.14.3
+  resolution: "@react-native-clipboard/clipboard@npm:1.14.3"
   peerDependencies:
     react: ">= 16.9.0"
     react-native: ">= 0.61.5"
@@ -3838,7 +3838,7 @@ __metadata:
       optional: true
     react-native-windows:
       optional: true
-  checksum: 10/c70544b94957158dca90bb9554e116c0714a79245d9bb09762329fb321a3e71509e3fb58b95e9681df509df406fdf2f383dfd999594b1cf6edc13ce4aad1d68c
+  checksum: 10/0778410650fb0abcba3fb00a5f999ee62fd35d75edd0b322faa75263ffd625a64faca13e8c978c44d098a0823b36f79c0340c98ddfd1f98c8ab3edb128c6e38d
   languageName: node
   linkType: hard
 
@@ -4227,13 +4227,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-masked-view/masked-view@npm:^0.3.1":
-  version: 0.3.1
-  resolution: "@react-native-masked-view/masked-view@npm:0.3.1"
+"@react-native-masked-view/masked-view@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "@react-native-masked-view/masked-view@npm:0.3.2"
   peerDependencies:
     react: ">=16"
     react-native: ">=0.57"
-  checksum: 10/71d7a6277a869beaed34497d5b92cba7405586fe19ad05c2e892e5e5843b664386080573f4cfaea1fb68ed77de94bf46c20958f4e58d1a5a716c3652d65815b9
+  checksum: 10/04ffbc01083aa563ca1e2d7ef6759e7b326b8129f5bb1aa5f3142348adab06d5e321a400cf70a5434324dfa906add383f8214640697c48c9e5311b30bfea03d9
   languageName: node
   linkType: hard
 
@@ -9470,12 +9470,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^23.16.2":
-  version: 23.16.2
-  resolution: "i18next@npm:23.16.2"
+"i18next@npm:^23.16.4":
+  version: 23.16.4
+  resolution: "i18next@npm:23.16.4"
   dependencies:
     "@babel/runtime": "npm:^7.23.2"
-  checksum: 10/38635d5b4530d256055b9b9bc471eddad630060c5fce06a426628487e05ea2ad0ed5dd2cb45e7e7afd16d58ecb8e6d13fad81c2391a07f1313256cf4b58dfb26
+  checksum: 10/a3aa6189aa4bf3022c372a03c88a2216d420b70f01369bd1017f7e51d0ed012dcda8b5f6476021835ab9574ee0ac5d056049fe4b720b5458b42bcc6ae66bd38d
   languageName: node
   linkType: hard
 
@@ -12528,9 +12528,9 @@ __metadata:
     "@os-team/i18next-react-native-language-detector": "npm:^1.0.34"
     "@pchmn/expo-material3-theme": "npm:^1.3.2"
     "@react-native-async-storage/async-storage": "npm:^2.0.0"
-    "@react-native-clipboard/clipboard": "npm:^1.14.2"
+    "@react-native-clipboard/clipboard": "npm:^1.14.3"
     "@react-native-community/netinfo": "npm:^11.4.1"
-    "@react-native-masked-view/masked-view": "npm:^0.3.1"
+    "@react-native-masked-view/masked-view": "npm:^0.3.2"
     "@react-native/babel-preset": "npm:0.75.4"
     "@react-native/eslint-config": "npm:0.75.4"
     "@react-native/metro-config": "npm:0.75.4"
@@ -12566,7 +12566,7 @@ __metadata:
     expo: "npm:^51.0.38"
     fast-deep-equal: "npm:^3.1.3"
     fuse.js: "npm:^7.0.0"
-    i18next: "npm:^23.16.2"
+    i18next: "npm:^23.16.4"
     intl-pluralrules: "npm:^2.0.1"
     ip-regex: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -12590,14 +12590,14 @@ __metadata:
     react-native-fs: "npm:^2.20.0"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-linear-gradient: "npm:^2.8.3"
-    react-native-logs: "npm:^5.2.2"
+    react-native-logs: "npm:^5.3.0"
     react-native-markdown-display: "npm:^7.0.2"
     react-native-mmkv: "npm:~2.12.2"
     react-native-paper: "npm:5.12.5"
     react-native-paper-dates: "npm:^0.22.26"
     react-native-reanimated: "npm:^3.16.1"
-    react-native-safe-area-context: "npm:^4.11.1"
-    react-native-screens: "npm:^3.34.0"
+    react-native-safe-area-context: "npm:^4.14.0"
+    react-native-screens: "npm:^3.35.0"
     react-native-share: "npm:^11.0.4"
     react-native-simple-gauge: "npm:^0.3.1"
     react-native-skeleton-placeholder: "npm:^5.2.4"
@@ -12615,7 +12615,7 @@ __metadata:
     styled-components: "npm:^6.1.13"
     ts-jest: "npm:^29.2.5"
     typescript: "npm:~5.6.3"
-    uuid: "npm:^10.0.0"
+    uuid: "npm:^11.0.2"
   languageName: unknown
   linkType: soft
 
@@ -13464,10 +13464,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-logs@npm:^5.2.2":
-  version: 5.2.2
-  resolution: "react-native-logs@npm:5.2.2"
-  checksum: 10/a0db8630183a0ae27584eab3102bdc62a15287d36bc32794cf1507056cddd434afb8eb51f2076e47f9eadbf92390988f3e2112277d5ab1a79d8ee4128f895b08
+"react-native-logs@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "react-native-logs@npm:5.3.0"
+  checksum: 10/ae717ebf855acfe2a37216e82b59f98bef0c758813e6e094da9a90850fef2862754ccdbb03074a787ece18f7cf6f90378253df7fbb24000475a76205a6bb885c
   languageName: node
   linkType: hard
 
@@ -13549,26 +13549,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^4.11.1":
-  version: 4.11.1
-  resolution: "react-native-safe-area-context@npm:4.11.1"
+"react-native-safe-area-context@npm:^4.14.0":
+  version: 4.14.0
+  resolution: "react-native-safe-area-context@npm:4.14.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10/52245f5146061919596b2db7fc808406967b41cc00b85e87eebb87c6a9df7e42f2e1e82936cbb7dd1fe26256192f5ea486c20fc62ae211f8002d2ba2f5b6aa79
+  checksum: 10/64e7b6314da1af137cccaf18a5604869eb777f69d777ae1a88cc1f7e1dffc951fd4cc6472134a6cd4311698de4b58e283fc63843ee6eb86ad285ea807de01fa1
   languageName: node
   linkType: hard
 
-"react-native-screens@npm:^3.34.0":
-  version: 3.34.0
-  resolution: "react-native-screens@npm:3.34.0"
+"react-native-screens@npm:^3.35.0":
+  version: 3.35.0
+  resolution: "react-native-screens@npm:3.35.0"
   dependencies:
     react-freeze: "npm:^1.0.0"
     warn-once: "npm:^0.1.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10/dfcbde7de4aae27980191bc64861190b2edece8f0e3988ef7e83ee6a7895df35fe006024d8fa0611cefc1e7dd6d574ce598f1dcb036750dc6b0a5fca073dd2b9
+  checksum: 10/18085fb68bb2349330cb9b536f79161474788bc478b4b13e23de26d80b68000c60c0b79ba19d430ed0693350c062863f0620da6397d3bd24da08c09181c0fcfd
   languageName: node
   linkType: hard
 
@@ -15956,12 +15956,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "uuid@npm:10.0.0"
+"uuid@npm:^11.0.2":
+  version: 11.0.2
+  resolution: "uuid@npm:11.0.2"
   bin:
-    uuid: dist/bin/uuid
-  checksum: 10/35aa60614811a201ff90f8ca5e9ecb7076a75c3821e17f0f5ff72d44e36c2d35fcbc2ceee9c4ac7317f4cc41895da30e74f3885e30313bee48fda6338f250538
+    uuid: dist/esm/bin/uuid
+  checksum: 10/b98082f398fa2ece8cacc2264402f739256ca70def4bb82e3a14ec70777d189c01ce1054764c3b59b8fc098b62b135a15d1b24914712904c988822e2ac9b4f44
   languageName: node
   linkType: hard
 
