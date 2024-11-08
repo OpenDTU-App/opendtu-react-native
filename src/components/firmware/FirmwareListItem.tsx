@@ -127,7 +127,7 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
       }
       description={description}
     >
-      <SettingsSurface style={{ marginHorizontal: 8, flex: 1 }}>
+      <SettingsSurface style={{ marginHorizontal: 16, flex: 1 }}>
         <View style={{ padding: 8, flex: 1 }}>
           <ReleaseChangelog releaseBody={release.body} />
         </View>

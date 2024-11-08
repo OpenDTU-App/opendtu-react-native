@@ -105,7 +105,7 @@ const InverterGridProfileScreen: FC<PropsWithNavigation> = ({
             }
           >
             {!gridProfile || !gridProfile.parsed.sections.length ? (
-              <StyledSurface theme={theme} style={{ marginHorizontal: 8 }}>
+              <StyledSurface theme={theme} style={{ marginHorizontal: 16 }}>
                 <Box
                   style={{
                     display: 'flex',
@@ -128,7 +128,7 @@ const InverterGridProfileScreen: FC<PropsWithNavigation> = ({
               <>
                 <StyledSurface
                   theme={theme}
-                  style={{ marginHorizontal: 8, marginBottom: 8 }}
+                  style={{ marginHorizontal: 16, marginBottom: 8 }}
                 >
                   <List.Item
                     title={t('inverter.gridProfile.name')}
@@ -139,7 +139,7 @@ const InverterGridProfileScreen: FC<PropsWithNavigation> = ({
                     description={gridProfile.parsed.version}
                   />
                 </StyledSurface>
-                <StyledSurface theme={theme} style={{ marginHorizontal: 8 }}>
+                <StyledSurface theme={theme} style={{ marginHorizontal: 16 }}>
                   {gridProfile.parsed.sections.map((section, index) => (
                     <List.Accordion
                       key={index}

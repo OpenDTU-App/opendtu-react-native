@@ -245,6 +245,7 @@ const InverterInfoScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
                   style={{
                     backgroundColor: headerColor.background,
                     padding: 12,
+                    marginHorizontal: 8,
                   }}
                 >
                   <Box
@@ -302,75 +303,80 @@ const InverterInfoScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
                     style={{ gap: spacing }}
                   >
                     {Object.keys(DataKeys).map(key => (
-                      <StyledListItem
+                      <View
                         key={`inverter-info-${key}`}
-                        title={t(`inverter.livedata.${key}`)}
-                        description={generateDescription(
-                          livedataInverter[key as DataKeys],
-                          DataKeys[key as DataKeys].valueKey,
-                          t,
-                        )}
-                        onPress={() =>
-                          navigation.navigate('InverterDataScreen', {
-                            inverterSerial,
-                            dataKey: key,
-                          })
-                        }
-                        left={props => (
-                          <List.Icon
-                            style={{
-                              ...props.style,
-                              alignSelf: 'center',
-                            }}
-                            icon={key === 'AC' ? 'current-ac' : 'current-dc'}
-                            color={theme.colors.primary}
-                          />
-                        )}
-                        right={props => (
-                          <List.Icon
-                            style={{
-                              ...props.style,
-                              alignSelf: 'center',
-                            }}
-                            color={props.color}
-                            icon="chevron-right"
-                          />
-                        )}
-                      />
+                        style={{ marginHorizontal: spacing }}
+                      >
+                        <StyledListItem
+                          title={t(`inverter.livedata.${key}`)}
+                          description={generateDescription(
+                            livedataInverter[key as DataKeys],
+                            DataKeys[key as DataKeys].valueKey,
+                            t,
+                          )}
+                          onPress={() =>
+                            navigation.navigate('InverterDataScreen', {
+                              inverterSerial,
+                              dataKey: key,
+                            })
+                          }
+                          left={props => (
+                            <List.Icon
+                              style={{
+                                ...props.style,
+                                alignSelf: 'center',
+                              }}
+                              icon={key === 'AC' ? 'current-ac' : 'current-dc'}
+                              color={theme.colors.primary}
+                            />
+                          )}
+                          right={props => (
+                            <List.Icon
+                              style={{
+                                ...props.style,
+                                alignSelf: 'center',
+                              }}
+                              color={props.color}
+                              icon="chevron-right"
+                            />
+                          )}
+                        />
+                      </View>
                     ))}
                   </List.Section>
                 ) : null}
                 <List.Section
                   title={t('inverter.inverterInfoSections.controls')}
-                  style={{ gap: spacing }}
                 >
-                  <StyledListItem
-                    onPress={handleNavigateEventLog}
-                    left={props => <List.Icon {...props} icon="history" />}
-                    title={t('inverter.eventLog.title')}
-                    description={t('inverter.eventLog.description')}
-                  />
-                  <StyledListItem
-                    onPress={showGridProfile}
-                    disabled={!supportsGridProfile}
-                    left={props => <List.Icon {...props} icon="power-plug" />}
-                    title={t('inverter.gridProfile.title')}
-                    description={t('inverter.gridProfile.description')}
-                  />
-                  <StyledListItem
-                    onPress={() => setShowLimitConfigModal(true)}
-                    disabled={!hasAuthConfigured}
-                    left={props => <List.Icon {...props} icon="tune" />}
-                    title={t('inverter.limits.title')}
-                    description={t('inverter.limits.description')}
-                  />
-                  <StyledListItem
-                    onPress={() => setShowPowerConfigModal(true)}
-                    disabled={!hasAuthConfigured}
-                    left={props => <List.Icon {...props} icon="power" />}
-                    title={t('inverter.control.title')}
-                    description={t('inverter.control.description')}
-                  />
+                  <View style={{ marginHorizontal: spacing, gap: spacing }}>
+                    <StyledListItem
+                      onPress={handleNavigateEventLog}
+                      left={props => <List.Icon {...props} icon="history" />}
+                      title={t('inverter.eventLog.title')}
+                      description={t('inverter.eventLog.description')}
+                    />
+                    <StyledListItem
+                      onPress={showGridProfile}
+                      disabled={!supportsGridProfile}
+                      left={props => <List.Icon {...props} icon="power-plug" />}
+                      title={t('inverter.gridProfile.title')}
+                      description={t('inverter.gridProfile.description')}
+                    />
+                    <StyledListItem
+                      onPress={() => setShowLimitConfigModal(true)}
+                      disabled={!hasAuthConfigured}
+                      left={props => <List.Icon {...props} icon="tune" />}
+                      title={t('inverter.limits.title')}
+                      description={t('inverter.limits.description')}
+                    />
+                    <StyledListItem
+                      onPress={() => setShowPowerConfigModal(true)}
+                      disabled={!hasAuthConfigured}
+                      left={props => <List.Icon {...props} icon="power" />}
+                      title={t('inverter.control.title')}
+                      description={t('inverter.control.description')}
+                    />
+                  </View>
                 </List.Section>
               </View>
             </Box>
