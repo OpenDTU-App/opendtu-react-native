@@ -10,6 +10,11 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "eslint"
+      - dependency-name: "octokit"
+      - dependency-name: "react-native"
+      - dependency-name: "@react-native/*"
     groups:
       production-dependencies:
         dependency-type: "production"
