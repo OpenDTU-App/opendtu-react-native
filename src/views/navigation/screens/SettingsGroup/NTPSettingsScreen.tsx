@@ -13,6 +13,7 @@ import { SunsetType } from '@/types/opendtu/settings';
 
 import ChangeEnumValueModal from '@/components/modals/ChangeEnumValueModal';
 import ChangeTextValueModal from '@/components/modals/ChangeTextValueModal';
+import NTPChangeTimezoneModal from '@/components/modals/NTPChangeTimezoneModal';
 import NTPCurrentTimeComponents from '@/components/settings/NTPCurrentTimeComponents';
 import SettingsSurface from '@/components/styled/SettingsSurface';
 
@@ -142,9 +143,8 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const [changeTimeserverModalOpen, setChangeTimeserverModalOpen] =
     useState<boolean>(false);
 
-  const handleTimezoneChange = useCallback(() => {
-    navigation.navigate('NTPChangeTimezoneScreen');
-  }, [navigation]);
+  const [changeTimezoneModalOpen, setChangeTimezoneModalOpen] =
+    useState<boolean>(false);
 
   const [changeLatitudeModalOpen, setChangeLatitudeModalOpen] =
     useState<boolean>(false);
@@ -211,7 +211,9 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       color={theme.colors.primary}
                     />
                   )}
-                  onPress={handleTimezoneChange}
+                  onPress={() => {
+                    setChangeTimezoneModalOpen(true);
+                  }}
                   disabled={typeof timeSettings === 'undefined'}
                 />
                 <List.Item
@@ -417,6 +419,12 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             label: t('settings.ntpSettings.sunsetTypeObject.ASTONOMICAL'),
           },
         ]}
+      />
+      <NTPChangeTimezoneModal
+        visible={changeTimezoneModalOpen}
+        onDismiss={() => setChangeTimezoneModalOpen(false)}
+        timeSettings={timeSettings}
+        setTimeSettings={setTimeSettings}
       />
     </>
   );

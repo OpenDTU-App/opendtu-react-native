@@ -9,15 +9,24 @@ import { spacing } from '@/constants';
 export interface BaseModalProps extends ModalProps {
   backgroundColor?: string;
   disableSidePadding?: boolean;
+  disableSideMargin?: boolean;
+  isScreen?: boolean;
 }
 
 const BaseModal: FC<BaseModalProps> = ({
   children,
   backgroundColor,
   disableSidePadding,
+  disableSideMargin,
+  isScreen,
   ...rest
 }) => {
   const theme = useTheme();
+
+  if (isScreen) {
+    disableSideMargin = true;
+    disableSidePadding = true;
+  }
 
   const { visible } = rest;
 
@@ -38,9 +47,9 @@ const BaseModal: FC<BaseModalProps> = ({
         ...(disableSidePadding
           ? { paddingTop: 8, paddingBottom: 8 }
           : { padding: 8 }),
-        borderRadius: 28,
-        marginVertical: 8,
-        marginHorizontal: 24,
+        borderRadius: isScreen ? 0 : 28,
+        marginVertical: isScreen ? 0 : 8,
+        marginHorizontal: disableSideMargin ? 0 : 24,
         maxWidth: 450,
         flex: 1,
       }}

@@ -2,9 +2,11 @@ import type { FC } from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
+import type { ModalProps } from 'react-native-paper';
 import {
   Appbar,
   IconButton,
+  Portal,
   RadioButton,
   TextInput,
   useTheme,
@@ -16,32 +18,42 @@ import Fuse from 'fuse.js';
 
 import type { NTPSettings, TimezoneData } from '@/types/opendtu/settings';
 
+import BaseModal from '@/components/BaseModal';
 import type { PossibleEnumValues } from '@/components/modals/ChangeEnumValueModal';
-
-import useDtuSettings from '@/hooks/useDtuSettings';
 
 import { rootLogging } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
-import { StyledView } from '@/style';
-import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 import { FlashList } from '@shopify/flash-list';
 
-const log = rootLogging.extend('NTPChangeTimezoneScreen');
+const log = rootLogging.extend('NTPChangeTimezoneModal');
 
-const NTPChangeTimezoneScreen: FC<PropsWithNavigation> = ({ navigation }) => {
+export interface NTPChangeTimezoneModalProps
+  extends Omit<ModalProps, 'children'> {
+  timeSettings?: NTPSettings;
+  setTimeSettings?: (settings: NTPSettings) => void;
+}
+
+const NTPChangeTimezoneModal: FC<NTPChangeTimezoneModalProps> = props => {
+  const { timeSettings, setTimeSettings, visible } = props;
   const openDtuApi = useApi();
   const { t } = useTranslation();
   const theme = useTheme();
 
-  const initialTimeSettings = useDtuSettings(state => state?.ntp);
-
-  const [timeSettings, setTimeSettings] = useState<NTPSettings | undefined>(
-    initialTimeSettings,
-  );
-
   const [selectedTimezone, setSelectedTimezone] = useState<string>('');
+
+  const handleSetTimezone = useCallback(
+    async (timezone: string) => {
+      setSelectedTimezone(timezone);
+
+      if (setTimeSettings && timeSettings) {
+        const [ntp_timezone_descr, ntp_timezone] = timezone.split('---');
+        setTimeSettings({ ...timeSettings, ntp_timezone_descr, ntp_timezone });
+      }
+    },
+    [setTimeSettings, timeSettings],
+  );
 
   const listRef = useRef<FlashList<PossibleEnumValues[number]>>(null);
   const [hasScrolledToSelectedTimezone, setHasScrolledToSelectedTimezone] =
@@ -65,12 +77,9 @@ const NTPChangeTimezoneScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         setTimeZones(timeZoneData);
       }
 
-      const settings = await openDtuApi.getNTPConfig();
-
-      if (settings) {
-        setTimeSettings(settings);
+      if (timeSettings) {
         setSelectedTimezone(
-          `${settings.ntp_timezone_descr}---${settings.ntp_timezone}`,
+          `${timeSettings.ntp_timezone_descr}---${timeSettings.ntp_timezone}`,
         );
       }
     } catch (error) {
@@ -78,7 +87,7 @@ const NTPChangeTimezoneScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     } finally {
       setIsRefreshing(false);
     }
-  }, [openDtuApi]);
+  }, [openDtuApi, timeSettings]);
 
   useEffect(() => {
     if (timeSettings) {
@@ -89,11 +98,11 @@ const NTPChangeTimezoneScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   }, [timeSettings]);
 
   useEffect(() => {
-    if (navigation.isFocused()) {
+    if (visible) {
       setHasScrolledToSelectedTimezone(false);
       handleGetTimezones();
     }
-  }, [handleGetTimezones, navigation]);
+  }, [visible, handleGetTimezones]);
 
   const timezoneValues = useMemo<PossibleEnumValues>(() => {
     return Object.entries(timeZones ?? {}).map(([name, value]) => ({
@@ -101,10 +110,6 @@ const NTPChangeTimezoneScreen: FC<PropsWithNavigation> = ({ navigation }) => {
       value: `${name}---${value}`,
     }));
   }, [timeZones]);
-
-  const isSaving = false;
-  const hasChanges = false;
-  const handleSave = () => {};
 
   const fuse = useMemo(() => {
     return new Fuse(timezoneValues, {
@@ -158,20 +163,12 @@ const NTPChangeTimezoneScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   ]);
 
   return (
-    <>
-      <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
-        <Appbar.Content title={t('settings.ntpSettings.title')} />
-        {isSaving || hasChanges ? (
-          <Appbar.Action
-            icon={
-              isSaving ? 'progress-clock' : hasChanges ? 'content-save' : 'save'
-            }
-            onPress={isSaving ? undefined : handleSave}
-          />
-        ) : null}
-      </Appbar.Header>
-      <StyledView theme={theme}>
+    <Portal>
+      <BaseModal {...props} isScreen backgroundColor={theme.colors.background}>
+        <Appbar.Header>
+          <Appbar.BackAction onPress={props.onDismiss} />
+          <Appbar.Content title={t('settings.ntpSettings.timezoneConfig')} />
+        </Appbar.Header>
         <Box style={{ width: '100%', flex: 1 }}>
           <Box style={{ height: '100%' }}>
             <Box
@@ -222,11 +219,11 @@ const NTPChangeTimezoneScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     item.value === selectedTimezone ? 'checked' : 'unchecked'
                   }
                   onPress={() => {
-                    setSelectedTimezone(item.value);
+                    handleSetTimezone(item.value);
                   }}
                   labelVariant="bodyMedium"
                   style={{
-                    backgroundColor: theme.colors.surface,
+                    backgroundColor: theme.colors.background,
                   }}
                 />
               )}
@@ -237,9 +234,9 @@ const NTPChangeTimezoneScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             />
           </Box>
         </Box>
-      </StyledView>
-    </>
+      </BaseModal>
+    </Portal>
   );
 };
 
-export default NTPChangeTimezoneScreen;
+export default NTPChangeTimezoneModal;
