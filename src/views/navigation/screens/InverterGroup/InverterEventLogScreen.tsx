@@ -77,7 +77,7 @@ const InverterEventLogScreen: FC<PropsWithNavigation> = ({
               />
             }
           >
-            <StyledSurface theme={theme} style={{ marginHorizontal: 8 }}>
+            <StyledSurface theme={theme} style={{ marginHorizontal: 16 }}>
               {(eventLog?.length ?? 0) > 0 ? (
                 <List.Section>
                   {eventLog?.map((event, index) => (

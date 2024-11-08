@@ -69,7 +69,7 @@ const InverterDataScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
             'AC' in livedataInverter &&
             'DC' in livedataInverter &&
             'INV' in livedataInverter ? (
-              <StyledSurface theme={theme} style={{ marginHorizontal: 8 }}>
+              <StyledSurface theme={theme} style={{ marginHorizontal: 16 }}>
                 {Object.entries(
                   livedataInverter[dataKey as keyof Inverter],
                 ).map(([dataIdx, data]) => (

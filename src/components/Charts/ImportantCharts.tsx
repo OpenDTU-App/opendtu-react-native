@@ -101,7 +101,7 @@ const ImportantCharts: FC = () => {
   return (
     <View style={{ flex: 1, width: '100%', height: '100%', marginTop: 4 }}>
       <View style={{ flex: 1 }}>
-        <Box p={8} pt={0}>
+        <Box ph={16} pt={0} pb={8}>
           <StyledSurface theme={theme}>
             <TouchableRipple
               onPress={handleShowConfigureGraphs}
@@ -134,7 +134,7 @@ const ImportantCharts: FC = () => {
           </StyledSurface>
         </Box>
       </View>
-      <Box p={8} pt={4} style={{ gap: spacing }}>
+      <Box ph={16} pt={4} style={{ gap: spacing }}>
         <AcPowerChart />
         <DcVoltageChart />
       </Box>

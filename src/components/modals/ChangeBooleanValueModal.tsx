@@ -95,7 +95,7 @@ const ChangeBooleanValueModal: FC<ChangeBooleanValueModalProps> = ({
     >
       <View
         style={{
-          paddingHorizontal: spacing * 1.5,
+          paddingHorizontal: spacing * 2,
           paddingTop: spacing * 2,
           paddingBottom: spacing * 3,
         }}

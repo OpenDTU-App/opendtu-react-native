@@ -11,7 +11,7 @@ export const settingsSurfaceRoundness = (theme: ThemeBase) => {
 };
 
 const InternalSettingsSurface = styled(Surface)`
-  margin: 4px 8px 12px;
+  margin: 4px 16px 12px;
   border-radius: ${props =>
     (props.theme.roundness ?? 0) * settingsSurfaceBorderRadiusFactor}px;
 `;

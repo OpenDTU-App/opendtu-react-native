@@ -35,7 +35,7 @@ const InverterList: FC = () => {
 
   return (
     <ScrollView style={{ marginBottom: 16 }}>
-      <Box style={{ gap: spacing, marginHorizontal: 8 }}>
+      <Box style={{ gap: spacing, marginHorizontal: 16 }}>
         {sortedInverters?.map((inverter, index) => (
           <InverterListItem
             key={`InverterListItem-${inverter.serial}-${index}`}

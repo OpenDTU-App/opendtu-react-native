@@ -70,7 +70,7 @@ const ManageDatabasesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             </Box>
           ) : (
             <ScrollView style={{ marginTop: 16, marginBottom: 16 }}>
-              <Box style={{ gap: spacing, marginHorizontal: 8 }}>
+              <Box style={{ gap: spacing, marginHorizontal: 16 }}>
                 {databases.map((config, index) => (
                   <StyledListItem
                     theme={theme}
