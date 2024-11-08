@@ -22,7 +22,7 @@ const LogLineItem = styled(Box)<{
 
 const LogLine = ({ log }: LogLineProps) => {
   const theme = useTheme();
-  const color = log.options.colors[log.level.text];
+  const color = log.options?.colors?.[log.level.text];
 
   return (
     <LogLineItem theme={theme}>

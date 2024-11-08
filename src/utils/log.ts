@@ -3,14 +3,18 @@ import type {
   transportFunctionType,
 } from 'react-native-logs';
 import { consoleTransport, logger } from 'react-native-logs';
+import type { ConsoleTransportOptions } from 'react-native-logs/dist/transports/consoleTransport';
 
 import { InteractionManager } from 'react-native';
 
 import moment from 'moment';
 
-let pushMessageFunction: transportFunctionType | null = null;
+let pushMessageFunction: transportFunctionType<ConsoleTransportOptions> | null =
+  null;
 
-export type LogProps = Parameters<transportFunctionType>[0] & {
+export type LogProps = Parameters<
+  transportFunctionType<ConsoleTransportOptions>
+>[0] & {
   uuid: string;
 };
 
@@ -19,11 +23,15 @@ export interface ExtendedLogProps extends LogProps {
   stacktrace?: string;
 }
 
-export const setPushMessageFunction = (func: transportFunctionType) => {
+export const setPushMessageFunction = (
+  func: transportFunctionType<ConsoleTransportOptions>,
+) => {
   pushMessageFunction = func;
 };
 
-const customTransport: transportFunctionType = (...args) => {
+const customTransport: transportFunctionType<ConsoleTransportOptions> = (
+  ...args
+) => {
   if (pushMessageFunction) pushMessageFunction(...args);
 };
 
@@ -34,7 +42,10 @@ export enum LogLevel {
   error,
 }
 
-const config: configLoggerType = {
+const config: configLoggerType<
+  transportFunctionType<object> | transportFunctionType<object>[],
+  string
+> = {
   transport: [consoleTransport, customTransport],
   severity: __DEV__ ? 'info' : 'warn',
   transportOptions: {
