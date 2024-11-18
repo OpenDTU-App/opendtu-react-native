@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from 'react';
 import { createContext, useContext, useMemo } from 'react';
 
-import { Octokit } from 'octokit';
+import { Octokit } from '@octokit/rest';
 
 export const GithubContext = createContext<Octokit | undefined>(undefined);
 
