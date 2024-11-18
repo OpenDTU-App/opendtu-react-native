@@ -209,9 +209,7 @@ const ConfigureGraphsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Box style={{ width: '100%', flex: 1 }}>
           <Box
             style={{
-              borderWidth: 1,
-              borderColor: theme.colors.outline,
-              borderRadius: theme.roundness,
+              borderRadius: theme.roundness * 6,
               padding: 16,
               margin: 8,
               backgroundColor: theme.colors.elevation.level3,
@@ -248,9 +246,7 @@ const ConfigureGraphsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
           </Box>
           <Box
             style={{
-              borderWidth: 1,
-              borderColor: theme.colors.outline,
-              borderRadius: theme.roundness,
+              borderRadius: theme.roundness * 6,
               padding: 16,
               margin: 8,
               backgroundColor: theme.colors.elevation.level3,

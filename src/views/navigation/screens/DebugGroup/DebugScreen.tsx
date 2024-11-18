@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import { Appbar, IconButton, List, useTheme } from 'react-native-paper';
+import { Appbar, IconButton, List, Text, useTheme } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 
 import { ScrollView, View } from 'react-native';
@@ -194,6 +194,15 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 }}
                 left={props => <List.Icon {...props} icon="alert" />}
               />
+            </List.Section>
+            <List.Section title={t('settings.theme')}>
+              <Text
+                style={{
+                  fontFamily: 'monospace',
+                }}
+              >
+                {JSON.stringify(theme, null, 2)}
+              </Text>
             </List.Section>
             <View style={{ height: spacing * 2 }} />
           </ScrollView>
