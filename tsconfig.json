@@ -9,6 +9,7 @@
     "types": ["react-native", "node"],
     "skipLibCheck": true,
     "allowImportingTsExtensions": false,
+    "resolvePackageJsonExports": true
   },
   "exclude": [
     "node_modules",
