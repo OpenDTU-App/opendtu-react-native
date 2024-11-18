@@ -53,6 +53,9 @@ jobs:
       - name: Make Gradlew executable
         run: cd android && chmod +x ./gradlew
 
+      - name: Dump memory info
+        run: free -m
+
       - name: Build Android Dev
         run: |
           cd android && ./gradlew assembleRelease --no-daemon
