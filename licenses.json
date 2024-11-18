@@ -17,7 +17,7 @@
         "licenseUrl": "https://github.com/react-native-async-storage/async-storage/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-native-clipboard/clipboard@1.14.3": {
+    "@react-native-clipboard/clipboard@1.15.0": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-clipboard/clipboard",
         "licenseUrl": "https://github.com/react-native-clipboard/clipboard/raw/master/LICENSE",
@@ -35,7 +35,7 @@
         "licenseUrl": "https://github.com/react-native-masked-view/masked-view/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/bottom-tabs@7.0.0": {
+    "@react-navigation/bottom-tabs@7.0.1": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
@@ -155,7 +155,7 @@
         "licenseUrl": "https://github.com/sindresorhus/pretty-bytes/raw/master/license",
         "parents": "opendtu-react-native"
     },
-    "prometheus-query@3.4.0": {
+    "prometheus-query@3.4.1": {
         "licenses": "MIT",
         "repository": "https://github.com/samber/prometheus-query-js",
         "licenseUrl": "https://github.com/samber/prometheus-query-js/raw/master/LICENSE",
@@ -233,7 +233,7 @@
         "licenseUrl": "https://github.com/mrousavy/react-native-mmkv/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-paper-dates@0.22.26": {
+    "react-native-paper-dates@0.22.27": {
         "licenses": "MIT",
         "repository": "https://github.com/web-ridge/react-native-paper-dates",
         "licenseUrl": "https://github.com/web-ridge/react-native-paper-dates/raw/master/LICENSE",
@@ -353,7 +353,7 @@
         "licenseUrl": "https://github.com/styled-components/styled-components/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "uuid@11.0.2": {
+    "uuid@11.0.3": {
         "licenses": "MIT",
         "repository": "https://github.com/uuidjs/uuid",
         "licenseUrl": "https://github.com/uuidjs/uuid/raw/master/LICENSE.md",
