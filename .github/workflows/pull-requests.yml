@@ -58,7 +58,7 @@ jobs:
 
       - name: Build Android Dev
         run: |
-          cd android && ./gradlew assembleRelease --no-daemon
+          cd android && ./gradlew assembleRelease --no-daemon --build-cache --build-cache-key=dev
 
       - name: Upload APK as artifact
         uses: actions/upload-artifact@v4
