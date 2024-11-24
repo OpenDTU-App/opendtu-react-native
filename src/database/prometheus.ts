@@ -163,7 +163,6 @@ class PrometheusDatabase implements Database {
     return await this.performQuery(query, args);
   }
 
-
   async performQuery(
     query: string,
     args: InverterRangeQueryArgs,

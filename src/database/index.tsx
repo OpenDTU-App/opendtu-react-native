@@ -87,6 +87,7 @@ export abstract class Database {
   abstract acPower(args: InverterRangeQueryArgs): DatabaseReturnType;
   abstract dcVoltage(args: InverterRangeQueryArgs): DatabaseReturnType;
   abstract dcPower(args: InverterRangeQueryArgs): DatabaseReturnType;
+
   abstract isSame: (config: DatabaseConfig | null | undefined) => boolean;
 
   abstract close: () => Promise<void>;
@@ -362,8 +363,6 @@ const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
         unit: 'W',
         labelName: 'channel',
       }),
-
-
     };
 
     await handleUpdateData(data);
