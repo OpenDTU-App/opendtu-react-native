@@ -73,6 +73,7 @@ export interface UpdateResult {
   acCurrent: DatabaseAwaitReturnType;
   acPower: DatabaseAwaitReturnType;
   dcVoltage: DatabaseAwaitReturnType;
+  dcPower: DatabaseAwaitReturnType;
 }
 
 export abstract class Database {
@@ -85,7 +86,7 @@ export abstract class Database {
   abstract acCurrent(args: InverterRangeQueryArgs): DatabaseReturnType;
   abstract acPower(args: InverterRangeQueryArgs): DatabaseReturnType;
   abstract dcVoltage(args: InverterRangeQueryArgs): DatabaseReturnType;
-
+  abstract dcPower(args: InverterRangeQueryArgs): DatabaseReturnType;
   abstract isSame: (config: DatabaseConfig | null | undefined) => boolean;
 
   abstract close: () => Promise<void>;
@@ -352,6 +353,17 @@ const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
         unit: 'V',
         labelName: 'channel',
       }),
+      dcPower: await database.dcPower({
+        from,
+        to,
+        step,
+        inverters,
+        label: t('charts.dcPower'),
+        unit: 'W',
+        labelName: 'channel',
+      }),
+
+
     };
 
     await handleUpdateData(data);

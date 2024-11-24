@@ -144,6 +144,26 @@ class PrometheusDatabase implements Database {
     return await this.performQuery(query, args);
   }
 
+  async dcPower(args: InverterRangeQueryArgs): DatabaseReturnType {
+    const { inverters } = args;
+
+    if (!this.statusSuccess) {
+      log.warn('Could not fetch database status (!statusSuccess)');
+      return {
+        message: 'Could not fetch database status (!statusSuccess)',
+        success: false,
+        loading: false,
+      };
+    }
+
+    const serialList = inverters.map(i => i.serial).join('|');
+
+    const query = `opendtu_Power{serial=~"${serialList}", type="DC"}`;
+
+    return await this.performQuery(query, args);
+  }
+
+
   async performQuery(
     query: string,
     args: InverterRangeQueryArgs,
