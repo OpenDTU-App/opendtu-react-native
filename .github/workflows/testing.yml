@@ -36,6 +36,7 @@ jobs:
 
       - name: Run ESLint
         continue-on-error: true
+        id: eslint
         run: |
           yarn lint --max-warnings=0 --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif
 
@@ -58,3 +59,7 @@ jobs:
         # only if it is not a fork
         if: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
         run: yarn test
+
+      - name: Fail if ESLint errors
+        if: steps.eslint.outcome == 'failure'
+        run: exit 1
