@@ -12,8 +12,8 @@ import {
 import { View } from 'react-native';
 
 import AcPowerChart from '@/components/Charts/AcPowerChart';
-import DcVoltageChart from '@/components/Charts/DcVoltageChart';
 import DcPowerChart from '@/components/Charts/DcPowerChart';
+import DcVoltageChart from '@/components/Charts/DcVoltageChart';
 import StyledSurface from '@/components/styled/StyledSurface';
 
 import { spacing } from '@/constants';
