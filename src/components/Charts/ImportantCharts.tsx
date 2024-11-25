@@ -12,6 +12,7 @@ import {
 import { View } from 'react-native';
 
 import AcPowerChart from '@/components/Charts/AcPowerChart';
+import DcPowerChart from '@/components/Charts/DcPowerChart';
 import DcVoltageChart from '@/components/Charts/DcVoltageChart';
 import StyledSurface from '@/components/styled/StyledSurface';
 
@@ -137,6 +138,7 @@ const ImportantCharts: FC = () => {
       <Box ph={16} pt={4} style={{ gap: spacing }}>
         <AcPowerChart />
         <DcVoltageChart />
+        <DcPowerChart />
       </Box>
     </View>
   );
