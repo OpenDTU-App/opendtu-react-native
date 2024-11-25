@@ -47,10 +47,11 @@ This helps to have a better developer experience when working with Weblate.
 - [ ] Original Functionality
   - [ ] Settings
     - [x] Network Settings
+    - [x] NTP Settings
     - [ ] MQTT Settings
     - [ ] Inverter Settings
     - [ ] Security Settings
-    - [ ] DTU Settings
+    - [x] DTU Settings
     - [ ] Device Manager
     - [ ] Config Management
     - [x] Firmware Upgrade with Firmware Browser
