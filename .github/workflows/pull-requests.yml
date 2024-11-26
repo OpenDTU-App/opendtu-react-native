@@ -5,8 +5,8 @@ on:
       - main
       - develop
   push:
-    branches-ignore:
-      - main
+    branches:
+      - develop
 
 jobs:
   android-build:
