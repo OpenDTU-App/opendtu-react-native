@@ -7,10 +7,17 @@ I am a OpenDTU user, but I am not affiliated with the original project. However,
 [![GitHub issues](https://img.shields.io/github/issues/OpenDTU-App/opendtu-react-native)](https://github.com/OpenDTU-App/opendtu-react-native/issues)
 [![Continuous Integration](https://github.com/OpenDTU-App/opendtu-react-native/actions/workflows/testing.yml/badge.svg)](https://github.com/OpenDTU-App/opendtu-react-native/actions/workflows/testing.yml)
 [![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/OpenDTU-App/opendtu-react-native/latest/total?label=Downloads%20for%20latest%20version)](https://github.com/OpenDTU-App/opendtu-react-native/releases/latest)
+[![IzzyOnDroid Badge](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/xyz.commanderred.opendtuapp)](https://apt.izzysoft.de/fdroid/index/apk/xyz.commanderred.opendtuapp/)
 
 ## Download
 
-[![IzzyOnDroid Badge](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/xyz.commanderred.opendtuapp)](https://apt.izzysoft.de/fdroid/index/apk/xyz.commanderred.opendtuapp/)
+You can install the app via the Google Play Store or IzzyOnDroid repository (available through F-Droid):
+<br>
+<a href='https://play.google.com/store/apps/details?id=xyz.commanderred.opendtuapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="200" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+<a href='https://apt.izzysoft.de/fdroid/index/apk/xyz.commanderred.opendtuapp'><img width="200" alt='Get it on IzzyOnDroid' src='https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png'/></a>
+
+or get it here:
+
 [![Download App](https://img.shields.io/badge/Download%20latest%20APK%20from%20Github-27a624)](https://github.com/OpenDTU-App/opendtu-react-native/releases/latest/download/OpenDTUApp-universal-release-signed.apk)
 
 ## Features
@@ -19,15 +26,15 @@ I am a OpenDTU user, but I am not affiliated with the original project. However,
 - Multi-Language support (Currently English and German, feel free to [contribute more](#translations))
 - Dark Mode
 
-## Installation
-There are signed .apk files inside the "Releases" tab. As of now, the is no plan to publish to Google Play store ~or F-Droid~.
-<br>
-~However, if you want to help with F-Droid, feel free to contact me.~ Thanks to @IzzySoft for [having the app in their repo](https://apt.izzysoft.de/fdroid/index/apk/xyz.commanderred.opendtuapp/)!
+## Installation via releases
+There are signed .apk files inside the "Releases" tab.
 
 iOS is set up in xCode, but there is no plan yet to publish it to the App Store, so if you want to try it, you have to clone the repository and build it manually. If you encounter any issues, feel free to open an issue.
 
 ## Development
 There are two branches. `main` is the stable branch, `develop` is the development branch. If you want to contribute, please create a pull request to `develop`.
+
+More instructions will follow asap. (Probably even a developer docker container)
 
 ## Logging
 If you want to have a nice view of the logs the app exports as a txt file, you can find the project [here](https://github.com/OpenDTU-App/opendtu-react-native-logviewer). It is hosted on GitHub pages here: [https://opendtu-app.github.io/opendtu-react-native-logviewer/](https://opendtu-app.github.io/opendtu-react-native-logviewer/)
