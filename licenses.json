@@ -215,6 +215,12 @@
         "licenseUrl": "https://github.com/react-native-linear-gradient/react-native-linear-gradient/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
+    "react-native-localize@3.3.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/zoontek/react-native-localize",
+        "licenseUrl": "https://github.com/zoontek/react-native-localize/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
     "react-native-logs@5.3.0": {
         "licenses": "MIT",
         "repository": "https://github.com/mowispace/react-native-logs",

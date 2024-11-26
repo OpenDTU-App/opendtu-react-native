@@ -10840,6 +10840,7 @@ __metadata:
     react-native-fs: "npm:^2.20.0"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-linear-gradient: "npm:^2.8.3"
+    react-native-localize: "npm:^3.3.0"
     react-native-logs: "npm:^5.3.0"
     react-native-markdown-display: "npm:^7.0.2"
     react-native-mmkv: "npm:~2.12.2"
@@ -11675,6 +11676,20 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10/db18c7ae4b68afe8b6f12c67defeeccda7a3cff4ee14a0b2d92ff2581d53bd2e65bf29837cf2828abb3d8d1f3cef3f808e8cc1c5d4c8da5dd6f1d09e2b9c2c55
+  languageName: node
+  linkType: hard
+
+"react-native-localize@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "react-native-localize@npm:3.3.0"
+  peerDependencies:
+    react: ">=18.1.0"
+    react-native: ">=0.70.0"
+    react-native-macos: ">=0.70.0"
+  peerDependenciesMeta:
+    react-native-macos:
+      optional: true
+  checksum: 10/141dddf4008a806d28b8bd7698c722813350fb49bfcf3f3415bbdbcc7b2faa50c4cd76b0c6355707646c4d587312a1695493d87400cbe8121566a68dfc000db3
   languageName: node
   linkType: hard
 
