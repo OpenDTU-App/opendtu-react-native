@@ -8,9 +8,9 @@ PODS:
   - DoubleConversion (1.1.6)
   - EXConstants (17.0.3):
     - ExpoModulesCore
-  - Expo (52.0.11):
+  - Expo (52.0.14):
     - ExpoModulesCore
-  - ExpoModulesCore (2.0.6):
+  - ExpoModulesCore (2.1.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1903,7 +1903,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNShare (12.0.2):
+  - RNShare (12.0.3):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1924,7 +1924,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNSVG (15.9.0):
+  - RNSVG (15.10.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1944,9 +1944,9 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNSVG/common (= 15.9.0)
+    - RNSVG/common (= 15.10.0)
     - Yoga
-  - RNSVG/common (15.9.0):
+  - RNSVG/common (15.10.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2259,8 +2259,8 @@ SPEC CHECKSUMS:
   DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
   DoubleConversion: f16ae600a246532c4020132d54af21d0ddb2a385
   EXConstants: dd2fe64c6cdb1383b694c309a63028a8e9f2be6d
-  Expo: 148aac4ce0da148c63447d09ae41ddb153f35506
-  ExpoModulesCore: bb3f481a7912159f2289a653e4195146170f0a00
+  Expo: 0e7b52be71a24a38d5e919e3040d8f51a8739cd0
+  ExpoModulesCore: f7db8b4faee7e5b94ad55f2bf781781a0bcf934d
   FBLazyVector: bc70dcb22ad30ce734a7cce7210791dc737e230f
   fmt: 10c6e61f4be25dc963c36bd73fc7b1705fe975be
   glog: 08b301085f15bcbb6ff8632a8ebaf239aae04e6a
@@ -2341,8 +2341,8 @@ SPEC CHECKSUMS:
   RNLocalize: c28a383fb73b1480d1117c3ca4402113e1772366
   RNReanimated: 006a5d3961bf09c1e96d62ed436e02b2e43b89bb
   RNScreens: 44a3e358d5ccd7815c5ae9148988c562826992b2
-  RNShare: d836abdda225c471c27d74deb6b5af4343bf8a8f
-  RNSVG: b2fbe96b2bb3887752f8abc1f495953847e90384
+  RNShare: 05e577d8a74e5647a5cf753cd5e038623676392b
+  RNSVG: 0ac7301275469a63da5178fad6930833012c5a7c
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
