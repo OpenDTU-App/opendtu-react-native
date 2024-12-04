@@ -13,8 +13,8 @@ I am a OpenDTU user, but I am not affiliated with the original project. However,
 
 You can install the app via the Google Play Store or IzzyOnDroid repository (available through F-Droid):
 <br>
-<a href='https://play.google.com/store/apps/details?id=xyz.commanderred.opendtuapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="200" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-<a href='https://apt.izzysoft.de/fdroid/index/apk/xyz.commanderred.opendtuapp'><img width="200" alt='Get it on IzzyOnDroid' src='https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png'/></a>
+<a href='https://play.google.com/store/apps/details?id=xyz.commanderred.opendtuapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' target="_blank"><img width="200" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+<a href='https://apt.izzysoft.de/fdroid/index/apk/xyz.commanderred.opendtuapp' target="_blank"><img width="200" alt='Get it on IzzyOnDroid' src='https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png'/></a>
 
 or get it here:
 
