@@ -8,7 +8,7 @@ PODS:
   - DoubleConversion (1.1.6)
   - EXConstants (17.0.3):
     - ExpoModulesCore
-  - Expo (52.0.14):
+  - Expo (52.0.17):
     - ExpoModulesCore
   - ExpoModulesCore (2.1.1):
     - DoubleConversion
@@ -1323,7 +1323,7 @@ PODS:
     - Yoga
   - react-native-netinfo (11.4.1):
     - React-Core
-  - react-native-safe-area-context (4.14.0):
+  - react-native-safe-area-context (5.0.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1336,8 +1336,8 @@ PODS:
     - React-featureflags
     - React-graphics
     - React-ImageManager
-    - react-native-safe-area-context/common (= 4.14.0)
-    - react-native-safe-area-context/fabric (= 4.14.0)
+    - react-native-safe-area-context/common (= 5.0.0)
+    - react-native-safe-area-context/fabric (= 5.0.0)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-rendererdebug
@@ -1346,7 +1346,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-safe-area-context/common (4.14.0):
+  - react-native-safe-area-context/common (5.0.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1367,7 +1367,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-safe-area-context/fabric (4.14.0):
+  - react-native-safe-area-context/fabric (5.0.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1771,7 +1771,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNReanimated (3.16.3):
+  - RNReanimated (3.16.4):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1791,10 +1791,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated (= 3.16.3)
-    - RNReanimated/worklets (= 3.16.3)
+    - RNReanimated/reanimated (= 3.16.4)
+    - RNReanimated/worklets (= 3.16.4)
     - Yoga
-  - RNReanimated/reanimated (3.16.3):
+  - RNReanimated/reanimated (3.16.4):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1814,9 +1814,9 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated/apple (= 3.16.3)
+    - RNReanimated/reanimated/apple (= 3.16.4)
     - Yoga
-  - RNReanimated/reanimated/apple (3.16.3):
+  - RNReanimated/reanimated/apple (3.16.4):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1837,7 +1837,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNReanimated/worklets (3.16.3):
+  - RNReanimated/worklets (3.16.4):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1924,7 +1924,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNSVG (15.10.0):
+  - RNSVG (15.10.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1944,9 +1944,9 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNSVG/common (= 15.10.0)
+    - RNSVG/common (= 15.10.1)
     - Yoga
-  - RNSVG/common (15.10.0):
+  - RNSVG/common (15.10.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2259,7 +2259,7 @@ SPEC CHECKSUMS:
   DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
   DoubleConversion: f16ae600a246532c4020132d54af21d0ddb2a385
   EXConstants: dd2fe64c6cdb1383b694c309a63028a8e9f2be6d
-  Expo: 0e7b52be71a24a38d5e919e3040d8f51a8739cd0
+  Expo: a49e904c6f4edc8c3a5bde3fb75df5a64a53f555
   ExpoModulesCore: f7db8b4faee7e5b94ad55f2bf781781a0bcf934d
   FBLazyVector: bc70dcb22ad30ce734a7cce7210791dc737e230f
   fmt: 10c6e61f4be25dc963c36bd73fc7b1705fe975be
@@ -2302,7 +2302,7 @@ SPEC CHECKSUMS:
   react-native-get-random-values: 21325b2244dfa6b58878f51f9aa42821e7ba3d06
   react-native-mmkv: 90d4a43bce35c9bc21ba4c42c7977fbcf0e682ee
   react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
-  react-native-safe-area-context: 2500e4fe998caad50ad3bc51ec23ef951308569e
+  react-native-safe-area-context: d6406c2adbd41b2e09ab1c386781dc1c81a90919
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   react-native-zeroconf: 5b38b434ccc6ca245c8a5ffd64a4501e67f9edcb
   React-nativeconfig: 470fce6d871c02dc5eff250a362d56391b7f52d6
@@ -2339,10 +2339,10 @@ SPEC CHECKSUMS:
   RNFlashList: 2af1645548006fe5e4586c8c3d7e84f060a5478f
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNLocalize: c28a383fb73b1480d1117c3ca4402113e1772366
-  RNReanimated: 006a5d3961bf09c1e96d62ed436e02b2e43b89bb
+  RNReanimated: 1b622aa38321705e0865a0c156a2bdf0a85d7ebc
   RNScreens: 44a3e358d5ccd7815c5ae9148988c562826992b2
   RNShare: 05e577d8a74e5647a5cf753cd5e038623676392b
-  RNSVG: 0ac7301275469a63da5178fad6930833012c5a7c
+  RNSVG: ec2e9d524612ee95db5df143a54518c5404d93f0
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
