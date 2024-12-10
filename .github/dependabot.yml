@@ -15,6 +15,7 @@ updates:
       - dependency-name: "octokit"
       - dependency-name: "react-native"
       - dependency-name: "@react-native/*"
+      - dependency-name: "react"
     groups:
       production-dependencies:
         dependency-type: "production"
