@@ -5,7 +5,7 @@
         "licenseUrl": "github:octokit/rest.js",
         "parents": "opendtu-react-native"
     },
-    "@os-team/i18next-react-native-language-detector@1.1.3": {
+    "@os-team/i18next-react-native-language-detector@1.1.4": {
         "licenses": "MIT",
         "repository": "git@gitlab.com:os-team/libs/utils",
         "licenseUrl": "git@gitlab.com:os-team/libs/utils",
@@ -83,7 +83,7 @@
         "licenseUrl": "https://github.com/omichelsen/compare-versions/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "expo@52.0.14": {
+    "expo@52.0.17": {
         "licenses": "MIT",
         "repository": "https://github.com/expo/expo",
         "licenseUrl": "https://github.com/expo/expo",
@@ -161,7 +161,7 @@
         "licenseUrl": "https://github.com/samber/prometheus-query-js/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-i18next@15.1.3": {
+    "react-i18next@15.1.4": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/react-i18next",
         "licenseUrl": "https://github.com/i18next/react-i18next/raw/master/LICENSE",
@@ -251,13 +251,13 @@
         "licenseUrl": "https://github.com/callstack/react-native-paper/raw/master/LICENSE.md",
         "parents": "opendtu-react-native"
     },
-    "react-native-reanimated@3.16.3": {
+    "react-native-reanimated@3.16.4": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-reanimated",
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-safe-area-context@4.14.0": {
+    "react-native-safe-area-context@5.0.0": {
         "licenses": "MIT",
         "repository": "https://github.com/th3rdwave/react-native-safe-area-context",
         "licenseUrl": "https://github.com/th3rdwave/react-native-safe-area-context/raw/master/LICENSE",
@@ -293,7 +293,7 @@
         "licenseUrl": "https://github.com/crazycodeboy/react-native-splash-screen/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-svg@15.10.0": {
+    "react-native-svg@15.10.1": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-community/react-native-svg",
         "licenseUrl": "https://github.com/react-native-community/react-native-svg/raw/master/LICENSE",
