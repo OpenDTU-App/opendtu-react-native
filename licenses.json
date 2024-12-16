@@ -5,7 +5,7 @@
         "licenseUrl": "github:octokit/rest.js",
         "parents": "opendtu-react-native"
     },
-    "@os-team/i18next-react-native-language-detector@1.1.4": {
+    "@os-team/i18next-react-native-language-detector@1.1.5": {
         "licenses": "MIT",
         "repository": "git@gitlab.com:os-team/libs/utils",
         "licenseUrl": "git@gitlab.com:os-team/libs/utils",
@@ -41,25 +41,25 @@
         "licenseUrl": "https://github.com/react-native-masked-view/masked-view/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/bottom-tabs@7.1.3": {
+    "@react-navigation/bottom-tabs@7.2.0": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native-stack@7.1.14": {
+    "@react-navigation/native-stack@7.2.0": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native@7.0.13": {
+    "@react-navigation/native@7.0.14": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@reduxjs/toolkit@2.4.0": {
+    "@reduxjs/toolkit@2.5.0": {
         "licenses": "MIT",
         "repository": "https://github.com/reduxjs/redux-toolkit",
         "licenseUrl": "https://github.com/reduxjs/redux-toolkit/raw/master/LICENSE",
@@ -83,7 +83,7 @@
         "licenseUrl": "https://github.com/omichelsen/compare-versions/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "expo@52.0.17": {
+    "expo@52.0.19": {
         "licenses": "MIT",
         "repository": "https://github.com/expo/expo",
         "licenseUrl": "https://github.com/expo/expo",
@@ -101,7 +101,7 @@
         "licenseUrl": "https://github.com/krisk/Fuse/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "i18next@24.0.5": {
+    "i18next@24.1.0": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
@@ -161,7 +161,7 @@
         "licenseUrl": "https://github.com/samber/prometheus-query-js/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-i18next@15.1.4": {
+    "react-i18next@15.2.0": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/react-i18next",
         "licenseUrl": "https://github.com/i18next/react-i18next/raw/master/LICENSE",
@@ -239,7 +239,7 @@
         "licenseUrl": "https://github.com/mrousavy/react-native-mmkv/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-paper-dates@0.22.27": {
+    "react-native-paper-dates@0.22.28": {
         "licenses": "MIT",
         "repository": "https://github.com/web-ridge/react-native-paper-dates",
         "licenseUrl": "https://github.com/web-ridge/react-native-paper-dates/raw/master/LICENSE",
@@ -251,7 +251,7 @@
         "licenseUrl": "https://github.com/callstack/react-native-paper/raw/master/LICENSE.md",
         "parents": "opendtu-react-native"
     },
-    "react-native-reanimated@3.16.4": {
+    "react-native-reanimated@3.16.5": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-reanimated",
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
@@ -329,7 +329,7 @@
         "licenseUrl": "https://github.com/facebook/react-native/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-redux@9.1.2": {
+    "react-redux@9.2.0": {
         "licenses": "MIT",
         "repository": "github:reduxjs/react-redux",
         "licenseUrl": "github:reduxjs/react-redux",
