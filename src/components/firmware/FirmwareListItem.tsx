@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Badge, Divider, List, Text, useTheme } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 
 import { Linking, View } from 'react-native';
 
@@ -18,6 +19,7 @@ import useDtuState from '@/hooks/useDtuState';
 import useHasAuthConfigured from '@/hooks/useHasAuthConfigured';
 
 import capitalize from '@/utils/capitalize';
+import { rootLogging } from '@/utils/log';
 
 import { minimumOpenDtuFirmwareVersion, spacing } from '@/constants';
 import type { SupportedLanguage } from '@/translations';
@@ -34,6 +36,8 @@ const needsCapitalization: Record<SupportedLanguage, boolean> = {
   en: false,
   de: true,
 };
+
+const log = rootLogging.extend('FirmwareListItem');
 
 const FirmwareListItem: FC<FirmwareListItemProps> = ({
   release,
@@ -53,8 +57,14 @@ const FirmwareListItem: FC<FirmwareListItemProps> = ({
 
     if (await Linking.canOpenURL(url)) {
       await Linking.openURL(url);
+    } else {
+      log.error(`Cannot open URL: ${url}`);
+      Toast.show({
+        type: 'error',
+        text1: t('cannotOpenUrl'),
+      });
     }
-  }, [release.html_url]);
+  }, [release.html_url, t]);
 
   const handleInstallFirmware = useCallback(() => {
     selectRelease(release);

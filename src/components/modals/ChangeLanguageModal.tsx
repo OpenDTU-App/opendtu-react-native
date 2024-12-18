@@ -25,6 +25,7 @@ import { colors, weblateUrl } from '@/constants';
 import { useAppDispatch } from '@/store';
 import type { SupportedLanguage } from '@/translations';
 import { supportedLanguages } from '@/translations';
+import Toast from 'react-native-toast-message';
 
 const log = rootLogging.extend('ChangeLanguageModal');
 
@@ -53,10 +54,13 @@ const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
     if (await Linking.canOpenURL(weblateUrl)) {
       await Linking.openURL(weblateUrl);
     } else {
-      // TODO: Better error handling (issue #101)
       log.error('Cannot open Weblate URL');
+      Toast.show({
+        type: 'error',
+        text1: t('cannotOpenUrl'),
+      });
     }
-  }, []);
+  }, [t]);
 
   return (
     <Portal>
