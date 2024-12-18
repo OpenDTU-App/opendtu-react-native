@@ -37,11 +37,11 @@ const ManageDatabaseModal: FC<ManageDatabaseModalProps> = props => {
 
   useEffect(() => {
     if (typeof dbConfig !== 'undefined') {
-      setDbType(dbConfig.databaseType);
-      setBaseUrl(dbConfig.baseUrl);
-      setName(dbConfig.name);
-      setUsername(dbConfig.username);
-      setPassword(dbConfig.password);
+      setDbType(dbConfig.databaseType ?? '');
+      setBaseUrl(dbConfig.baseUrl ?? '');
+      setName(dbConfig.name ?? '');
+      setUsername(dbConfig.username ?? '');
+      setPassword(dbConfig.password ?? '');
     }
   }, [dbConfig]);
 
@@ -109,7 +109,7 @@ const ManageDatabaseModal: FC<ManageDatabaseModalProps> = props => {
             <StyledTextInput
               label={t('database.name')}
               mode="outlined"
-              defaultValue={name}
+              value={name ?? ''}
               onChangeText={setName}
               style={{ backgroundColor: theme.colors.elevation.level3 }}
             />
@@ -118,7 +118,7 @@ const ManageDatabaseModal: FC<ManageDatabaseModalProps> = props => {
             <StyledTextInput
               label={t('database.baseUrl')}
               mode="outlined"
-              defaultValue={baseUrl}
+              value={baseUrl ?? ''}
               onChangeText={setBaseUrl}
               placeholder={baseUrlPlaceholder}
               style={{ backgroundColor: theme.colors.elevation.level3 }}
@@ -128,7 +128,7 @@ const ManageDatabaseModal: FC<ManageDatabaseModalProps> = props => {
             <StyledTextInput
               label={t('database.username')}
               mode="outlined"
-              defaultValue={username}
+              value={username ?? ''}
               onChangeText={setUsername}
               style={{ backgroundColor: theme.colors.elevation.level3 }}
             />
@@ -137,7 +137,7 @@ const ManageDatabaseModal: FC<ManageDatabaseModalProps> = props => {
             <StyledTextInput
               label={t('database.password')}
               mode="outlined"
-              defaultValue={password}
+              value={password ?? ''}
               onChangeText={setPassword}
               secureTextEntry
               style={{ backgroundColor: theme.colors.elevation.level3 }}
