@@ -9,6 +9,7 @@ import { setSetupBaseUrl } from '@/slices/opendtu';
 import { DeviceState } from '@/types/opendtu/state';
 
 import MDNSScan from '@/components/devices/MDNSScan';
+import OrientationContainer from '@/components/OrientationContainer';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
 import isIP from '@/utils/isIP';
@@ -145,63 +146,69 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
           icon="bug"
         />
       </Appbar.Header>
-      <StyledView theme={theme} style={{ justifyContent: 'center' }}>
-        <Box ph={32} w="100%">
-          <StyledTextInput
-            label={t('setup.opendtuAddress')}
-            value={address ?? undefined}
-            onChangeText={(text: string) => {
-              setAddress(text);
-              setError(null);
-            }}
-            mode="outlined"
-            placeholder="http://192.168.4.1"
-            autoCapitalize="none"
-            textContentType="URL"
-            keyboardType="url"
-            error={!!error}
-            disabled={loading}
-          />
-          <HelperText type="error" visible={!!error}>
-            {error}
-          </HelperText>
-        </Box>
-        <Box ph={32} w="100%" mb={16}>
-          <Box mb={8}>
-            <Text variant="bodySmall">{t('setup.instancesInYourNetwork')}</Text>
+      <StyledView theme={theme}>
+        <OrientationContainer justifyContent="center" flexDirection="row">
+          <Box style={{ flex: 1 }}>
+            <Box ph={32} w="100%">
+              <StyledTextInput
+                label={t('setup.opendtuAddress')}
+                value={address ?? undefined}
+                onChangeText={(text: string) => {
+                  setAddress(text);
+                  setError(null);
+                }}
+                mode="outlined"
+                placeholder="http://192.168.4.1"
+                autoCapitalize="none"
+                textContentType="URL"
+                keyboardType="url"
+                error={!!error}
+                disabled={loading}
+              />
+              <HelperText type="error" visible={!!error}>
+                {error}
+              </HelperText>
+            </Box>
+            <Box ph={32} w="100%" mb={16}>
+              <Box mb={8}>
+                <Text variant="bodySmall">
+                  {t('setup.instancesInYourNetwork')}
+                </Text>
+              </Box>
+              <Box mb={8}>
+                <MDNSScan
+                  setLoading={setLoading}
+                  setError={setError}
+                  loading={loading}
+                />
+              </Box>
+            </Box>
+            <Box ph={32} w="100%">
+              <Box mb={8}>
+                <Button
+                  mode="contained"
+                  onPress={handleConnectCheck}
+                  loading={loading}
+                  disabled={loading || !valid}
+                >
+                  {t('setup.connect')}
+                </Button>
+              </Box>
+              <Box mb={8}>
+                {hasConfigs ? (
+                  <Button
+                    mode="contained"
+                    onPress={handleAbort}
+                    buttonColor={theme.colors.error}
+                    textColor={theme.colors.onError}
+                  >
+                    {t('cancel')}
+                  </Button>
+                ) : null}
+              </Box>
+            </Box>
           </Box>
-          <Box mb={8}>
-            <MDNSScan
-              setLoading={setLoading}
-              setError={setError}
-              loading={loading}
-            />
-          </Box>
-        </Box>
-        <Box ph={32} w="100%">
-          <Box mb={8}>
-            <Button
-              mode="contained"
-              onPress={handleConnectCheck}
-              loading={loading}
-              disabled={loading || !valid}
-            >
-              {t('setup.connect')}
-            </Button>
-          </Box>
-          <Box mb={8}>
-            {hasConfigs ? (
-              <Button
-                mode="contained"
-                onPress={handleAbort}
-                buttonColor={theme.colors.error}
-                textColor={theme.colors.onError}
-              >
-                {t('cancel')}
-              </Button>
-            ) : null}
-          </Box>
-        </Box>
+        </OrientationContainer>
       </StyledView>
     </>
   );

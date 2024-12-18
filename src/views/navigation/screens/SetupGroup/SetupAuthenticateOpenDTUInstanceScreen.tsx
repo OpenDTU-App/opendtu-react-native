@@ -15,6 +15,7 @@ import { setSetupUserString } from '@/slices/opendtu';
 
 import { DeviceState } from '@/types/opendtu/state';
 
+import OrientationContainer from '@/components/OrientationContainer';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
 import { rootLogging } from '@/utils/log';
@@ -138,66 +139,70 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
         />
       </Appbar.Header>
       <StyledView theme={theme} style={{ justifyContent: 'center' }}>
-        <Box ph={32} w="100%" mb={16}>
-          <Box mb={4}>
-            <StyledTextInput
-              label={t('setup.username')}
-              placeholder={t('setup.placeholder.username')}
-              mode="outlined"
-              value={username || ''}
-              onChangeText={(text: string) => {
-                setUsername(text);
-                setError(null);
-              }}
-              disabled={loading || !previousStepValid}
-              error={!!error}
-            />
-          </Box>
-          <Box mb={4}>
-            <StyledTextInput
-              label={t('setup.password')}
-              secureTextEntry={!visible}
-              mode="outlined"
-              value={password || ''}
-              onChangeText={(text: string) => {
-                setPassword(text);
-                setError(null);
-              }}
-              disabled={loading || !previousStepValid}
-              error={!!error}
-              right={
-                <TextInput.Icon
-                  icon={visible ? 'eye-off' : 'eye'}
-                  onPress={() => setVisible(!visible)}
+        <OrientationContainer justifyContent="center" flexDirection="row">
+          <Box style={{ flex: 1 }}>
+            <Box ph={32} w="100%" mb={16}>
+              <Box mb={4}>
+                <StyledTextInput
+                  label={t('setup.username')}
+                  placeholder={t('setup.placeholder.username')}
+                  mode="outlined"
+                  value={username || ''}
+                  onChangeText={(text: string) => {
+                    setUsername(text);
+                    setError(null);
+                  }}
+                  disabled={loading || !previousStepValid}
+                  error={!!error}
                 />
-              }
-            />
+              </Box>
+              <Box mb={4}>
+                <StyledTextInput
+                  label={t('setup.password')}
+                  secureTextEntry={!visible}
+                  mode="outlined"
+                  value={password || ''}
+                  onChangeText={(text: string) => {
+                    setPassword(text);
+                    setError(null);
+                  }}
+                  disabled={loading || !previousStepValid}
+                  error={!!error}
+                  right={
+                    <TextInput.Icon
+                      icon={visible ? 'eye-off' : 'eye'}
+                      onPress={() => setVisible(!visible)}
+                    />
+                  }
+                />
+              </Box>
+              <HelperText type="error" visible={!!error}>
+                {error}
+              </HelperText>
+            </Box>
+            <Box ph={32} w="100%">
+              <Button
+                // login button
+                mode="contained"
+                onPress={handleLogin}
+                disabled={loading || !previousStepValid || !valid}
+                buttonColor={theme.colors.primary}
+                style={{ marginBottom: 8 }}
+              >
+                {t('setup.login')}
+              </Button>
+              <Divider style={{ marginBottom: 8 }} />
+              <Button
+                // anonymous button
+                mode="text"
+                onPress={handleAnonymous}
+                disabled={loading || !previousStepValid}
+              >
+                {t('setup.anonymous')}
+              </Button>
+            </Box>
           </Box>
-          <HelperText type="error" visible={!!error}>
-            {error}
-          </HelperText>
-        </Box>
-        <Box ph={32} w="100%">
-          <Button
-            // login button
-            mode="contained"
-            onPress={handleLogin}
-            disabled={loading || !previousStepValid || !valid}
-            buttonColor={theme.colors.primary}
-            style={{ marginBottom: 8 }}
-          >
-            {t('setup.login')}
-          </Button>
-          <Divider style={{ marginBottom: 8 }} />
-          <Button
-            // anonymous button
-            mode="text"
-            onPress={handleAnonymous}
-            disabled={loading || !previousStepValid}
-          >
-            {t('setup.anonymous')}
-          </Button>
-        </Box>
+        </OrientationContainer>
       </StyledView>
     </>
   );

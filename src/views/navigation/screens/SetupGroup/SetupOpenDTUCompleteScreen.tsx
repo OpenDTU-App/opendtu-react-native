@@ -7,6 +7,8 @@ import { Button, Title, useTheme } from 'react-native-paper';
 import { clearSetup } from '@/slices/opendtu';
 import { addDtuConfig } from '@/slices/settings';
 
+import OrientationContainer from '@/components/OrientationContainer';
+
 import { rootLogging } from '@/utils/log';
 
 import { useAppDispatch, useAppSelector } from '@/store';
@@ -69,18 +71,22 @@ const SetupOpenDTUCompleteScreen: FC<PropsWithNavigation> = ({
 
   return (
     <StyledView theme={theme} style={{ justifyContent: 'center' }}>
-      <Box ph={32} w="100%" mb={8} style={{ alignItems: 'center' }}>
-        <Title>{t('setup.setupComplete')}</Title>
-      </Box>
-      <Box p={32} w="100%">
-        <Button
-          mode="contained"
-          onPress={handleFinishSetup}
-          buttonColor={theme.colors.primary}
-        >
-          {t('setup.goToDashboard')}
-        </Button>
-      </Box>
+      <OrientationContainer justifyContent="center" flexDirection="row">
+        <Box style={{ flex: 1 }}>
+          <Box ph={32} w="100%" mb={8} style={{ alignItems: 'center' }}>
+            <Title>{t('setup.setupComplete')}</Title>
+          </Box>
+          <Box p={32} w="100%">
+            <Button
+              mode="contained"
+              onPress={handleFinishSetup}
+              buttonColor={theme.colors.primary}
+            >
+              {t('setup.goToDashboard')}
+            </Button>
+          </Box>
+        </Box>
+      </OrientationContainer>
     </StyledView>
   );
 };
