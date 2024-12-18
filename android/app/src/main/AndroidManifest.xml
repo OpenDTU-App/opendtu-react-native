@@ -39,6 +39,8 @@
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
+            <!-- https://stackoverflow.com/a/70672054 -->
+            <data android:host="*" />
         </intent>
     </queries>
 </manifest>
