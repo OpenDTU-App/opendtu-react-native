@@ -5,7 +5,7 @@ import { Box } from 'react-native-flex-layout';
 import { Appbar, IconButton, List, Text, useTheme } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 
-import { ScrollView, View } from 'react-native';
+import { Linking, ScrollView, View } from 'react-native';
 
 import moment from 'moment';
 
@@ -203,6 +203,31 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               >
                 {JSON.stringify(theme, null, 2)}
               </Text>
+            </List.Section>
+            <List.Section title="Linking testing">
+              <List.Item
+                title="Open GitHub (With canOpenURL)"
+                onPress={async () => {
+                  const link =
+                    'https://github.com/tbnobody/OpenDTU/releases/tag/v24.11.7-2-gdc1787b';
+                  if (await Linking.canOpenURL(link)) {
+                    await Linking.openURL(link);
+                  } else {
+                    Toast.show({
+                      type: 'error',
+                      text1: t('cannotOpenUrl'),
+                    });
+                  }
+                }}
+              />
+              <List.Item
+                title="Open GitHub (Without canOpenURL)"
+                onPress={async () => {
+                  await Linking.openURL(
+                    'https://github.com/tbnobody/OpenDTU/releases/tag/v24.11.7-2-gdc1787b',
+                  );
+                }}
+              />
             </List.Section>
             <View style={{ height: spacing * 2 }} />
           </ScrollView>

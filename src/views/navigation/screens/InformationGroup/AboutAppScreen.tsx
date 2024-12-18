@@ -22,6 +22,7 @@ import moment from 'moment';
 import { setEnableAppUpdates } from '@/slices/settings';
 
 import GenericRefreshModal from '@/components/modals/GenericRefreshModal';
+import OrientationContainer from '@/components/OrientationContainer';
 import ReleaseChangelog from '@/components/ReleaseChangelog';
 
 import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
@@ -100,104 +101,117 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
           title={t('aboutApp.refreshModal.title')}
           warningText={t('aboutApp.refreshModal.warningText')}
         />
-        <Box style={{ width: '100%', flex: 1 }}>
-          <ScrollView>
-            <Box>
-              <Text style={{ textAlign: 'center' }} variant="titleLarge">
-                {packageJson.name} {packageJson.version}
-              </Text>
-              <Box p={8}>
-                <Text style={{ textAlign: 'center' }}>
-                  {t('aboutApp.projectHint')}
-                </Text>
-                <Box mt={16} mb={8}>
-                  <Button
-                    buttonColor="#24292e"
-                    textColor="#ffffff"
-                    icon="github"
-                    onPress={() => Linking.openURL(packageJson.repository.url)}
-                  >
-                    {t('aboutApp.viewOnGithub')}
-                  </Button>
-                </Box>
-              </Box>
-            </Box>
-            {Config.DISABLE_IN_APP_UPDATES !== 'true' ? (
-              <>
-                <Divider />
-                <Box p={8}>
-                  <Box
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'center',
-                      gap: 4,
-                    }}
-                  >
-                    <Text variant="titleLarge" style={{ textAlign: 'center' }}>
-                      {hasNewAppVersion
-                        ? t('aboutApp.newVersionAvailable')
-                        : t('aboutApp.latestAppRelease')}
+        <OrientationContainer justifyContent="center">
+          <Box style={{ flex: 1 }}>
+            <Box style={{ width: '100%', flex: 1 }}>
+              <ScrollView>
+                <Box>
+                  <Text style={{ textAlign: 'center' }} variant="titleLarge">
+                    {packageJson.name} {packageJson.version}
+                  </Text>
+                  <Box p={8}>
+                    <Text style={{ textAlign: 'center' }}>
+                      {t('aboutApp.projectHint')}
                     </Text>
-                    <Badge
-                      style={{
-                        alignSelf: 'center',
-                        backgroundColor: theme.colors.primary,
-                      }}
-                    >
-                      {prettyTagName}
-                    </Badge>
-                  </Box>
-                  <Box>
-                    <Text variant="bodySmall" style={{ textAlign: 'center' }}>
-                      {t('fetchedWithTime', {
-                        time: formattedReleaseFetchTime,
-                      })}
-                    </Text>
-                  </Box>
-                  <Surface
-                    style={{ padding: 16, marginTop: 8, borderRadius: 16 }}
-                  >
-                    <ReleaseChangelog releaseBody={releaseInfo?.body} />
-                  </Surface>
-                  <Box mt={16} mb={8}>
-                    <Button
-                      buttonColor="#24292e"
-                      textColor="#ffffff"
-                      icon="github"
-                      onPress={() =>
-                        Linking.openURL(releaseInfo?.html_url || '')
-                      }
-                      disabled={!releaseInfo?.html_url}
-                    >
-                      {t('aboutApp.viewMore')}
-                    </Button>
+                    <Box mt={16} mb={8}>
+                      <Button
+                        buttonColor="#24292e"
+                        textColor="#ffffff"
+                        icon="github"
+                        onPress={() =>
+                          Linking.openURL(packageJson.repository.url)
+                        }
+                      >
+                        {t('aboutApp.viewOnGithub')}
+                      </Button>
+                    </Box>
                   </Box>
                 </Box>
-                <Divider />
-                <List.Item
-                  title={t('settings.activateInappUpdates')}
-                  onPress={handleToggleInAppUpdates}
-                  borderless
-                  right={props => (
-                    <Switch
-                      {...props}
-                      value={!!inAppUpdatesEnabled}
-                      onValueChange={handleToggleInAppUpdates}
-                      color={theme.colors.primary}
+                {Config.DISABLE_IN_APP_UPDATES !== 'true' ? (
+                  <>
+                    <Divider />
+                    <Box p={8}>
+                      <Box
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          justifyContent: 'center',
+                          gap: 4,
+                        }}
+                      >
+                        <Text
+                          variant="titleLarge"
+                          style={{ textAlign: 'center' }}
+                        >
+                          {hasNewAppVersion
+                            ? t('aboutApp.newVersionAvailable')
+                            : t('aboutApp.latestAppRelease')}
+                        </Text>
+                        <Badge
+                          style={{
+                            alignSelf: 'center',
+                            backgroundColor: theme.colors.primary,
+                          }}
+                        >
+                          {prettyTagName}
+                        </Badge>
+                      </Box>
+                      <Box>
+                        <Text
+                          variant="bodySmall"
+                          style={{ textAlign: 'center' }}
+                        >
+                          {t('fetchedWithTime', {
+                            time: formattedReleaseFetchTime,
+                          })}
+                        </Text>
+                      </Box>
+                      <Surface
+                        style={{ padding: 16, marginTop: 8, borderRadius: 16 }}
+                      >
+                        <ReleaseChangelog releaseBody={releaseInfo?.body} />
+                      </Surface>
+                      <Box mt={16} mb={8}>
+                        <Button
+                          buttonColor="#24292e"
+                          textColor="#ffffff"
+                          icon="github"
+                          onPress={() =>
+                            Linking.openURL(releaseInfo?.html_url || '')
+                          }
+                          disabled={!releaseInfo?.html_url}
+                        >
+                          {t('aboutApp.viewMore')}
+                        </Button>
+                      </Box>
+                    </Box>
+                    <Divider />
+                    <List.Item
+                      title={t('settings.activateInappUpdates')}
+                      onPress={handleToggleInAppUpdates}
+                      borderless
+                      right={props => (
+                        <Switch
+                          {...props}
+                          value={!!inAppUpdatesEnabled}
+                          onValueChange={handleToggleInAppUpdates}
+                          color={theme.colors.primary}
+                          disabled={Config.DISABLE_IN_APP_UPDATES === 'true'}
+                        />
+                      )}
                       disabled={Config.DISABLE_IN_APP_UPDATES === 'true'}
+                      style={{
+                        opacity:
+                          Config.DISABLE_IN_APP_UPDATES === 'true' ? 0.5 : 1,
+                      }}
                     />
-                  )}
-                  disabled={Config.DISABLE_IN_APP_UPDATES === 'true'}
-                  style={{
-                    opacity: Config.DISABLE_IN_APP_UPDATES === 'true' ? 0.5 : 1,
-                  }}
-                />
-              </>
-            ) : null}
-            <View style={{ height: spacing * 2 }} />
-          </ScrollView>
-        </Box>
+                  </>
+                ) : null}
+                <View style={{ height: spacing * 2 }} />
+              </ScrollView>
+            </Box>
+          </Box>
+        </OrientationContainer>
       </StyledView>
     </>
   );
