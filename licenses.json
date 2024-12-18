@@ -101,7 +101,7 @@
         "licenseUrl": "https://github.com/krisk/Fuse/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "i18next@24.1.0": {
+    "i18next@24.1.2": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
@@ -323,7 +323,7 @@
         "licenseUrl": "https://github.com/Apercu/react-native-zeroconf/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native@0.76.2": {
+    "react-native@0.76.5": {
         "licenses": "MIT",
         "repository": "https://github.com/facebook/react-native",
         "licenseUrl": "https://github.com/facebook/react-native/raw/master/LICENSE",
