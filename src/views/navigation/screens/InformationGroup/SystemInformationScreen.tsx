@@ -18,6 +18,7 @@ import SettingsSurface, {
 import useDtuState from '@/hooks/useDtuState';
 import useHasNewOpenDtuVersion from '@/hooks/useHasNewOpenDtuVersion';
 
+import correctTag from '@/utils/correctTag';
 import formatBytes from '@/utils/formatBytes';
 import percentage from '@/utils/percentage';
 
@@ -51,9 +52,13 @@ const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const openGitHub = useCallback(async () => {
     if (!systemStatus) return undefined;
 
+    const corrected = correctTag(systemStatus.git_hash);
+
+    if (!corrected) return undefined;
+
     const url = systemStatus.git_is_hash
-      ? `https://github.com/tbnobody/OpenDTU/commits/${systemStatus.git_hash}`
-      : `https://github.com/tbnobody/OpenDTU/releases/tag/${systemStatus.git_hash}`;
+      ? `https://github.com/tbnobody/OpenDTU/commits/${corrected}`
+      : `https://github.com/tbnobody/OpenDTU/releases/tag/${corrected}`;
 
     if (await Linking.canOpenURL(url)) {
       await Linking.openURL(url);
@@ -66,7 +71,9 @@ const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
     if (systemStatus?.git_is_hash) return systemStatus.git_hash;
 
-    const isLatest = compare(systemStatus.git_hash, latestVersion, '>=');
+    const corrected = correctTag(systemStatus.git_hash);
+
+    const isLatest = compare(corrected, latestVersion, '>=');
 
     return isLatest
       ? `${systemStatus.git_hash} (latest)`
@@ -218,6 +225,7 @@ const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   description={versionString}
                   right={props => <List.Icon {...props} icon="git" />}
                   onPress={openGitHub}
+                  disabled={!openGitHub}
                 />
                 <List.Item
                   title={t('opendtu.systemInformationScreen.pioEnvironment')}

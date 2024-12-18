@@ -4,6 +4,8 @@ import { compare } from 'compare-versions';
 
 import useDtuState from '@/hooks/useDtuState';
 
+import correctTag from '@/utils/correctTag';
+
 import { useAppSelector } from '@/store';
 
 const useHasNewOpenDtuVersion = (options?: {
@@ -21,12 +23,15 @@ const useHasNewOpenDtuVersion = (options?: {
 
   const currentRelease = useDtuState(state => state?.systemStatus?.git_hash);
 
+  const correctedCurrentRelease = correctTag(currentRelease);
+
   return useMemo(() => {
-    if (!openDtuRelease || !currentRelease) return [false, null] as const;
+    if (!openDtuRelease || !correctedCurrentRelease)
+      return [false, null] as const;
 
     const newAppVersionAvailable = compare(
       openDtuRelease?.tag_name,
-      currentRelease,
+      correctedCurrentRelease,
       '>',
     );
 
@@ -34,7 +39,12 @@ const useHasNewOpenDtuVersion = (options?: {
       !showIndicator && usedForIndicatorOnly ? false : newAppVersionAvailable,
       openDtuRelease,
     ] as const;
-  }, [currentRelease, openDtuRelease, showIndicator, usedForIndicatorOnly]);
+  }, [
+    correctedCurrentRelease,
+    openDtuRelease,
+    showIndicator,
+    usedForIndicatorOnly,
+  ]);
 };
 
 export default useHasNewOpenDtuVersion;

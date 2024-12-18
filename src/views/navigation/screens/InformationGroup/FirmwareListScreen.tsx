@@ -16,6 +16,8 @@ import SettingsSurface from '@/components/styled/SettingsSurface';
 
 import useDtuState from '@/hooks/useDtuState';
 
+import correctTag from '@/utils/correctTag';
+
 import { minimumOpenDtuFirmwareVersion, spacing } from '@/constants';
 import { useFetchControl } from '@/github/FetchHandler';
 import { useAppSelector } from '@/store';
@@ -30,7 +32,11 @@ const FirmwareListScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const { refreshLatestRelease, refreshReleases } = useFetchControl();
 
   const releases = useAppSelector(state => state.github.releases);
-  const currentRelease = useDtuState(state => state?.systemStatus?.git_hash);
+  const rawCurrentRelease = useDtuState(state => state?.systemStatus?.git_hash);
+  const currentRelease = useMemo(
+    () => correctTag(rawCurrentRelease),
+    [rawCurrentRelease],
+  );
 
   const newReleases = useMemo(() => {
     if (!currentRelease) {
