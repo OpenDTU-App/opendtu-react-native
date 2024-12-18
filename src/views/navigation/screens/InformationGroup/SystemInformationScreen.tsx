@@ -3,6 +3,7 @@ import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, Badge, List, Switch, useTheme } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 
 import { Linking, ScrollView, View } from 'react-native';
 
@@ -27,7 +28,6 @@ import { colors, spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
-import Toast from 'react-native-toast-message';
 
 const log = rootLogging.extend('SystemInformationScreen');
 
