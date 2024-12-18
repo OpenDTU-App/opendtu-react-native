@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, List, useTheme } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 
 import { Linking, ScrollView, View } from 'react-native';
 
@@ -14,7 +15,6 @@ import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 import licenses from '@root/licenses.json';
-import Toast from 'react-native-toast-message';
 
 const log = rootLogging.extend('LicensesScreen');
 
