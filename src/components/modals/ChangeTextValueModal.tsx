@@ -1,8 +1,6 @@
 import type { FC } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { BottomDrawerMethods } from 'react-native-animated-bottom-drawer';
-import BottomDrawer from 'react-native-animated-bottom-drawer';
 import type { TextInputProps } from 'react-native-paper';
 import {
   Button,
@@ -14,26 +12,30 @@ import {
 
 import { View } from 'react-native';
 
+import useOrientation, { Orientation } from '@/hooks/useOrientation';
+
 import { rootLogging } from '@/utils/log';
 
 import { spacing } from '@/constants';
 
+import type { BottomSheetMethods } from '@devvie/bottom-sheet';
+import BottomSheet from '@devvie/bottom-sheet';
+
 const log = rootLogging.extend('ChangeTextValueModal');
 
-export interface ChangeTextValueModalProps {
+export interface NewChangeTextValueModalProps {
   isOpen?: boolean;
   onClose?: () => void;
   defaultValue?: string;
   onChange?: (value: string) => void;
   title?: string;
   description?: string;
-  extraHeight?: number;
   inputProps?: Omit<TextInputProps, 'value' | 'onChangeText'>;
   validate?: (value: string) => boolean;
   allowedRegex?: RegExp;
 }
 
-const ChangeTextValueModal: FC<ChangeTextValueModalProps> = ({
+const ChangeTextValueModal: FC<NewChangeTextValueModalProps> = ({
   isOpen,
   title,
   description,
@@ -42,14 +44,11 @@ const ChangeTextValueModal: FC<ChangeTextValueModalProps> = ({
   onClose,
   inputProps,
   validate,
-  extraHeight,
   allowedRegex,
 }) => {
   const theme = useTheme();
-  const drawerRef = useRef<BottomDrawerMethods>(null);
+  const drawerRef = useRef<BottomSheetMethods>(null);
   const { t } = useTranslation();
-
-  const [initialHeight, setInitialHeight] = useState<number>(0);
 
   const [value, setValue] = useState<string>(defaultValue ?? '');
   const [error, setError] = useState<string | null>(null);
@@ -105,44 +104,27 @@ const ChangeTextValueModal: FC<ChangeTextValueModalProps> = ({
     }
   }, [defaultValue, wasModified]);
 
+  const { orientation } = useOrientation();
+
   return (
-    <BottomDrawer
+    <BottomSheet
       ref={drawerRef}
-      overDrag
-      customStyles={{
-        container: {
-          backgroundColor: theme.colors.surface,
-        },
-        handleContainer: {
-          backgroundColor: theme.colors.surfaceVariant,
-          minHeight: 35,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-        },
-        handle: {
-          backgroundColor: theme.colors.surfaceDisabled,
-          width: 40,
-          height: 5,
-          borderRadius: 5,
-        },
-      }}
-      initialHeight={initialHeight}
       onClose={handleCancel}
+      style={{
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        backgroundColor: theme.colors.surface,
+        left: orientation === Orientation.LANDSCAPE ? '25%' : 0,
+        right: orientation === Orientation.LANDSCAPE ? '25%' : 0,
+        width: orientation === Orientation.LANDSCAPE ? '50%' : '100%',
+      }}
+      openDuration={450}
+      closeDuration={300}
     >
       <View
         style={{
           paddingHorizontal: spacing * 2,
           paddingTop: spacing * 2,
-          paddingBottom: spacing * 3,
-        }}
-        onLayout={e => {
-          const { height, y } = e.nativeEvent.layout;
-          const heightValue = height + y + (extraHeight ?? 0);
-
-          drawerRef.current?.snapToPosition(heightValue, {
-            resetLastPosition: false,
-          });
-          setInitialHeight(heightValue);
         }}
       >
         <View>
@@ -152,7 +134,7 @@ const ChangeTextValueModal: FC<ChangeTextValueModalProps> = ({
         <View style={{ marginTop: 40 }}>
           <TextInput
             {...inputProps}
-            defaultValue={value}
+            value={value}
             onChangeText={value => {
               if (allowedRegex && !allowedRegex.test(value)) {
                 return;
@@ -184,7 +166,7 @@ const ChangeTextValueModal: FC<ChangeTextValueModalProps> = ({
           </Button>
         </View>
       </View>
-    </BottomDrawer>
+    </BottomSheet>
   );
 };
 
