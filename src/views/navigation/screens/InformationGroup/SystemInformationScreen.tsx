@@ -20,12 +20,16 @@ import useHasNewOpenDtuVersion from '@/hooks/useHasNewOpenDtuVersion';
 
 import correctTag from '@/utils/correctTag';
 import formatBytes from '@/utils/formatBytes';
+import { rootLogging } from '@/utils/log';
 import percentage from '@/utils/percentage';
 
 import { colors, spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
+import Toast from 'react-native-toast-message';
+
+const log = rootLogging.extend('SystemInformationScreen');
 
 const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
@@ -62,8 +66,14 @@ const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
     if (await Linking.canOpenURL(url)) {
       await Linking.openURL(url);
+    } else {
+      log.error(`Cannot open URL: ${url}`);
+      Toast.show({
+        type: 'error',
+        text1: t('cannotOpenUrl'),
+      });
     }
-  }, [systemStatus]);
+  }, [systemStatus, t]);
 
   const versionString = useMemo(() => {
     if (!latestVersion || !systemStatus?.git_hash)
