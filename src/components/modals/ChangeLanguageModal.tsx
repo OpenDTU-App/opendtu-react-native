@@ -10,6 +10,7 @@ import {
   Text,
   useTheme,
 } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 
 import { Linking } from 'react-native';
 
@@ -53,10 +54,13 @@ const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
     if (await Linking.canOpenURL(weblateUrl)) {
       await Linking.openURL(weblateUrl);
     } else {
-      // TODO: Better error handling (issue #101)
       log.error('Cannot open Weblate URL');
+      Toast.show({
+        type: 'error',
+        text1: t('cannotOpenUrl'),
+      });
     }
-  }, []);
+  }, [t]);
 
   return (
     <Portal>
