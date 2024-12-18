@@ -1,4 +1,10 @@
 {
+    "@devvie/bottom-sheet@0.4.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/stanleyugwu/react-native-bottom-sheet",
+        "licenseUrl": "https://github.com/stanleyugwu/react-native-bottom-sheet/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
     "@octokit/rest@21.0.2": {
         "licenses": "MIT",
         "repository": "github:octokit/rest.js",
@@ -165,12 +171,6 @@
         "licenses": "MIT",
         "repository": "https://github.com/i18next/react-i18next",
         "licenseUrl": "https://github.com/i18next/react-i18next/raw/master/LICENSE",
-        "parents": "opendtu-react-native"
-    },
-    "react-native-animated-bottom-drawer@0.0.23": {
-        "licenses": "ISC",
-        "repository": "https://github.com/AtharvaDeolalikar/react-native-animated-bottom-drawer",
-        "licenseUrl": "https://github.com/AtharvaDeolalikar/react-native-animated-bottom-drawer",
         "parents": "opendtu-react-native"
     },
     "react-native-charts-wrapper@0.6.0": {
