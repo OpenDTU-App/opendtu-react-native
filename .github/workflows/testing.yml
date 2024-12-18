@@ -34,6 +34,9 @@ jobs:
         run: |
           yarn install --immutable --check-cache
 
+      - name: Run Typecheck
+        run: yarn typecheck
+
       - name: Run ESLint
         continue-on-error: true
         id: eslint
