@@ -22,6 +22,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@/store';
 
 import type { Release } from '@octokit/webhooks-types';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 const log = rootLogging.extend('FetchHandler');
 
@@ -89,9 +90,17 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
   const githubApi = useGithub();
 
+  const { isConnected } = useNetInfo();
+
   const fetchLatestReleaseHandler = useCallback(
     async (force?: boolean): Promise<boolean> => {
       if (!githubApi) return false;
+
+      if (!isConnected) {
+        log.info('No internet connection, skipping fetch...');
+
+        return false;
+      }
 
       try {
         if ((latestReleaseUpdateOk || force) && enableFetchOpenDTUReleases) {
@@ -118,12 +127,24 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
       return false;
     },
-    [dispatch, enableFetchOpenDTUReleases, githubApi, latestReleaseUpdateOk],
+    [
+      isConnected,
+      dispatch,
+      enableFetchOpenDTUReleases,
+      githubApi,
+      latestReleaseUpdateOk,
+    ],
   );
 
   const fetchAllReleasesHandler = useCallback(
     async (force?: boolean): Promise<boolean> => {
       if (!githubApi) return false;
+
+      if (!isConnected) {
+        log.info('No internet connection, skipping fetch...');
+
+        return false;
+      }
 
       try {
         if ((allReleasesUpdateOk || force) && enableFetchOpenDTUReleases) {
@@ -150,12 +171,24 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
       return false;
     },
-    [allReleasesUpdateOk, dispatch, enableFetchOpenDTUReleases, githubApi],
+    [
+      isConnected,
+      allReleasesUpdateOk,
+      dispatch,
+      enableFetchOpenDTUReleases,
+      githubApi,
+    ],
   );
 
   const fetchLatestAppReleaseHandler = useCallback(
     async (force?: boolean): Promise<boolean> => {
       if (!githubApi) return false;
+
+      if (!isConnected) {
+        log.info('No internet connection, skipping fetch...');
+
+        return false;
+      }
 
       try {
         if ((latestAppReleaseUpdateOk || force) && enableAppUpdates) {
@@ -182,11 +215,23 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
       return false;
     },
-    [dispatch, enableAppUpdates, githubApi, latestAppReleaseUpdateOk],
+    [
+      isConnected,
+      dispatch,
+      enableAppUpdates,
+      githubApi,
+      latestAppReleaseUpdateOk,
+    ],
   );
 
   const fetchHandler = useCallback(async () => {
     if (!githubApi) return;
+
+    if (!isConnected) {
+      log.info('No internet connection, skipping fetch...');
+
+      return false;
+    }
 
     log.info('Fetching latest information from Github api...');
 
@@ -204,6 +249,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
       );
     }
   }, [
+    isConnected,
     fetchAllReleasesHandler,
     fetchLatestAppReleaseHandler,
     fetchLatestReleaseHandler,
