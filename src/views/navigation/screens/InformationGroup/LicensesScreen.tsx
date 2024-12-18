@@ -15,6 +15,9 @@ import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 
 import licenses from '@root/licenses.json';
+import Toast from 'react-native-toast-message';
+
+const log = rootLogging.extend('LicensesScreen');
 
 const log = rootLogging.extend('LicensesScreen');
 

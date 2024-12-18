@@ -26,6 +26,7 @@ import { colors, weblateUrl } from '@/constants';
 import { useAppDispatch } from '@/store';
 import type { SupportedLanguage } from '@/translations';
 import { supportedLanguages } from '@/translations';
+import Toast from 'react-native-toast-message';
 
 const log = rootLogging.extend('ChangeLanguageModal');
 

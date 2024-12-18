@@ -28,6 +28,9 @@ import { colors, spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
+import Toast from 'react-native-toast-message';
+
+const log = rootLogging.extend('SystemInformationScreen');
 
 const log = rootLogging.extend('SystemInformationScreen');
 
