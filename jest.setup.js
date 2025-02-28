@@ -1,4 +1,3 @@
-import '@testing-library/react-native/extend-expect';
-
+// noinspection JSConstantReassignment
 // eslint-disable-next-line no-global-assign
 __DEV__ = false;

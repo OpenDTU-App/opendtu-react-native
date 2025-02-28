@@ -1,0 +1,58 @@
+diff --git a/node_modules/react-native-paper/lib/typescript/types.d.ts b/node_modules/react-native-paper/lib/typescript/types.d.ts
+index 4e749cb..679107c 100644
+--- a/node_modules/react-native-paper/lib/typescript/types.d.ts
++++ b/node_modules/react-native-paper/lib/typescript/types.d.ts
+@@ -1,5 +1,6 @@
+ import type * as React from 'react';
+ import type { $DeepPartial } from '@callstack/react-theme-provider';
++import type { Theme as NativeNavigationTheme } from '@react-navigation/native';
+ export type Font = {
+     fontFamily: string;
+     fontWeight?: 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
+@@ -161,16 +162,6 @@ export type MD3ElevationColors = {
+ export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+ export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<React.ComponentPropsWithoutRef<T>, 'children'>;
+ export type EllipsizeProp = 'head' | 'middle' | 'tail' | 'clip';
+-export type NavigationTheme = {
+-    dark: boolean;
+-    colors: {
+-        primary: string;
+-        background: string;
+-        card: string;
+-        text: string;
+-        border: string;
+-        notification: string;
+-    };
+-};
++export declare type NavigationTheme = NativeNavigationTheme;
+ export {};
+ //# sourceMappingURL=types.d.ts.map
+diff --git a/node_modules/react-native-paper/src/types.tsx b/node_modules/react-native-paper/src/types.tsx
+index 175131c..1c05b25 100644
+--- a/node_modules/react-native-paper/src/types.tsx
++++ b/node_modules/react-native-paper/src/types.tsx
+@@ -2,6 +2,8 @@ import type * as React from 'react';
+ 
+ import type { $DeepPartial } from '@callstack/react-theme-provider';
+ 
++import type { Theme as NativeNavigationTheme } from '@react-navigation/native';
++
+ export type Font = {
+   fontFamily: string;
+   fontWeight?:
+@@ -203,14 +205,4 @@ export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
+ 
+ export type EllipsizeProp = 'head' | 'middle' | 'tail' | 'clip';
+ 
+-export type NavigationTheme = {
+-  dark: boolean;
+-  colors: {
+-    primary: string;
+-    background: string;
+-    card: string;
+-    text: string;
+-    border: string;
+-    notification: string;
+-  };
+-};
++export declare type NavigationTheme = NativeNavigationTheme;

@@ -1,4 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+/* eslint-disable @typescript-eslint/no-require-imports */
+// noinspection ES6ConvertRequireIntoImport
+
 const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 
 /**

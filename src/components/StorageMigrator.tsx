@@ -4,10 +4,14 @@ import { ActivityIndicator } from 'react-native-paper';
 
 import { InteractionManager, View } from 'react-native';
 
+import { rootLogging } from '@/utils/log';
+
 import {
   hasMigratedFromAsyncStorage,
   migrateFromAsyncStorage,
 } from '@/storage';
+
+const log = rootLogging.extend('StorageMigrator');
 
 const StorageMigrator: FC<PropsWithChildren> = ({ children }) => {
   const [hasMigrated, setHasMigrated] = useState(hasMigratedFromAsyncStorage);
@@ -18,8 +22,9 @@ const StorageMigrator: FC<PropsWithChildren> = ({ children }) => {
         try {
           await migrateFromAsyncStorage();
           setHasMigrated(true);
-        } catch (e) {
+        } catch (error) {
           // TODO: fall back to AsyncStorage? Wipe storage clean and use MMKV? Crash app?
+          log.error('Failed to migrate storage:', error);
         }
       });
     }
