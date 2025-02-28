@@ -14,3 +14,13 @@ jest.mock('react-native', () => {
   };
   return RN;
 });
+
+jest.mock('react-native/Libraries/Utilities/Platform.android', () => ({
+  OS: 'android',
+  select: jest.fn(),
+}));
+
+jest.mock('react-native/Libraries/Utilities/Platform.ios', () => ({
+  OS: 'ios',
+  select: jest.fn(),
+}));

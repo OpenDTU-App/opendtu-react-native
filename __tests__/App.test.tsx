@@ -1,13 +1,13 @@
+/* eslint-disable simple-import-sort/imports */
 /**
  * @format
  */
 /* eslint-env jest */
-
-import App from '@/App';
-
 import { it } from '@jest/globals';
 import { render } from '@testing-library/react-native';
 
-it('renders correctly', () => {
+import App from '@/App';
+
+it('renders correctly', async () => {
   render(<App />);
 });

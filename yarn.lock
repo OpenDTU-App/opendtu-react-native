@@ -11495,7 +11495,7 @@ __metadata:
     react-native-paper: "npm:5.13.1"
     react-native-paper-dates: "npm:^0.22.34"
     react-native-reanimated: "npm:^3.17.1"
-    react-native-safe-area-context: "npm:^5.2.0"
+    react-native-safe-area-context: "npm:5.0.0"
     react-native-screens: "npm:^4.9.1"
     react-native-share: "npm:^12.0.9"
     react-native-simple-gauge: "npm:^0.3.1"
@@ -12437,13 +12437,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "react-native-safe-area-context@npm:5.2.0"
+"react-native-safe-area-context@npm:5.0.0":
+  version: 5.0.0
+  resolution: "react-native-safe-area-context@npm:5.0.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10/0972d6f1e2485b71c148aeabaf9f1bfbc533549c66de7d0ea617f92df0024646324c38dc9062ea0392761b72b0f7b6e605a784c09addce61e105e6737bbde7b0
+  checksum: 10/79ccb3b335a53f97fec5751b35b178825e59e86575d6b43a4fb4bc42ffe0e9ed7596b882c709b53007a805f59d77bd7b4ce5ab2a93bf59cf92487872bf264b66
   languageName: node
   linkType: hard
 
