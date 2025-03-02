@@ -1,10 +1,4 @@
 {
-    "@devvie/bottom-sheet@0.4.3": {
-        "licenses": "MIT",
-        "repository": "https://github.com/stanleyugwu/react-native-bottom-sheet",
-        "licenseUrl": "https://github.com/stanleyugwu/react-native-bottom-sheet/raw/master/LICENSE",
-        "parents": "opendtu-react-native"
-    },
     "@octokit/rest@21.1.1": {
         "licenses": "MIT",
         "repository": "github:octokit/rest.js",

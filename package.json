@@ -32,7 +32,6 @@
         "pod-install": "cd ios && pod install"
     },
     "dependencies": {
-        "@devvie/bottom-sheet": "^0.4.3",
         "@octokit/rest": "^21.1.1",
         "@os-team/i18next-react-native-language-detector": "^1.1.5",
         "@pchmn/expo-material3-theme": "^1.3.2",

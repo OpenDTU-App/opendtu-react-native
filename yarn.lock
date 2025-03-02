@@ -1819,16 +1819,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@devvie/bottom-sheet@npm:^0.4.3":
-  version: 0.4.3
-  resolution: "@devvie/bottom-sheet@npm:0.4.3"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 10/c42b5f67a573103b47c16afb71e03c2ae0f9690a92cd5c81ecfc5429a5e0b73380ebbc41b83a57f1af6e0720d47030f51b5ea7b23cee2662832ab4e90475a2cc
-  languageName: node
-  linkType: hard
-
 "@egjs/hammerjs@npm:^2.0.17":
   version: 2.0.17
   resolution: "@egjs/hammerjs@npm:2.0.17"
@@ -11414,7 +11404,6 @@ __metadata:
     "@babel/plugin-transform-private-methods": "npm:^7.25.9"
     "@babel/preset-env": "npm:^7.26.9"
     "@babel/runtime": "npm:^7.26.9"
-    "@devvie/bottom-sheet": "npm:^0.4.3"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@octokit/rest": "npm:^21.1.1"
     "@octokit/webhooks-types": "npm:^7.6.1"
