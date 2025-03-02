@@ -11475,7 +11475,6 @@ __metadata:
     react-native-fast-image: "npm:^8.6.3"
     react-native-flex-layout: "npm:^0.1.5"
     react-native-fs: "npm:^2.20.0"
-    react-native-gesture-handler: "npm:^2.24.0"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-linear-gradient: "npm:^2.8.3"
     react-native-localize: "npm:^3.4.1"
@@ -12282,7 +12281,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:^2.23.1, react-native-gesture-handler@npm:^2.24.0":
+"react-native-gesture-handler@npm:^2.23.1":
   version: 2.24.0
   resolution: "react-native-gesture-handler@npm:2.24.0"
   dependencies:

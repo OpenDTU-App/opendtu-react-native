@@ -197,12 +197,6 @@
         "licenseUrl": "https://github.com/itinance/react-native-fs/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-gesture-handler@2.24.0": {
-        "licenses": "MIT",
-        "repository": "https://github.com/software-mansion/react-native-gesture-handler",
-        "licenseUrl": "https://github.com/software-mansion/react-native-gesture-handler/raw/master/LICENSE",
-        "parents": "opendtu-react-native"
-    },
     "react-native-get-random-values@1.11.0": {
         "licenses": "MIT",
         "repository": "https://github.com/LinusU/react-native-get-random-values",
