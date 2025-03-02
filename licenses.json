@@ -5,6 +5,12 @@
         "licenseUrl": "https://github.com/stanleyugwu/react-native-bottom-sheet/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
+    "@gorhom/bottom-sheet@5.1.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/gorhom/react-native-bottom-sheet",
+        "licenseUrl": "https://github.com/gorhom/react-native-bottom-sheet/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
     "@octokit/rest@21.1.1": {
         "licenses": "MIT",
         "repository": "github:octokit/rest.js",
@@ -201,6 +207,12 @@
         "licenses": "MIT",
         "repository": "https://github.com/itinance/react-native-fs",
         "licenseUrl": "https://github.com/itinance/react-native-fs/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
+    "react-native-gesture-handler@2.24.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/software-mansion/react-native-gesture-handler",
+        "licenseUrl": "https://github.com/software-mansion/react-native-gesture-handler/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
     "react-native-get-random-values@1.11.0": {

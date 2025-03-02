@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { useAppSelector } from '@/store';
 import AppLogScreen from '@/views/navigation/screens/DebugGroup/AppLogScreen';
@@ -49,88 +50,99 @@ const NavigationStack: FC = () => {
   );
 
   return (
-    <Stack.Navigator
-      initialRouteName={hasConfigs ? 'MainScreen' : 'SetupAddOpenDTUScreen'}
-      screenOptions={{
-        headerShown: false,
-        headerBackVisible: false,
-        headerTitle: '',
-        headerTransparent: true,
-      }}
-    >
-      <Stack.Screen name="MainScreen" component={MainScreen} />
-      <Stack.Screen name="DeviceListScreen" component={DeviceListScreen} />
-      <Stack.Screen
-        name="SetupAddOpenDTUScreen"
-        component={SetupAddOpenDTUScreen}
-      />
-      <Stack.Screen
-        name="SetupAuthenticateOpenDTUInstanceScreen"
-        component={SetupAuthenticateOpenDTUInstanceScreen}
-      />
-      <Stack.Screen
-        name="SetupOpenDTUCompleteScreen"
-        component={SetupOpenDTUCompleteScreen}
-      />
-      <Stack.Screen
-        name="DeviceSettingsScreen"
-        component={DeviceSettingsScreen}
-      />
-      <Stack.Screen
-        name="SelectDatabaseScreen"
-        component={SelectDatabaseScreen}
-      />
-      <Stack.Screen
-        name="ManageDatabasesScreen"
-        component={ManageDatabasesScreen}
-      />
-      <Stack.Screen name="AboutSettingsScreen" component={AboutAppScreen} />
-      <Stack.Screen
-        name="ConfigureGraphsScreen"
-        component={ConfigureGraphsScreen}
-      />
-      <Stack.Screen
-        name="SystemInformationScreen"
-        component={SystemInformationScreen}
-      />
-      <Stack.Screen
-        name="NetworkInformationScreen"
-        component={NetworkInformationScreen}
-      />
-      <Stack.Screen
-        name="NtpInformationScreen"
-        component={NtpInformationScreen}
-      />
-      <Stack.Screen
-        name="MqttInformationScreen"
-        component={MqttInformationScreen}
-      />
-      <Stack.Screen name="LicensesScreen" component={LicensesScreen} />
-      <Stack.Screen name="DebugScreen" component={DebugScreen} />
-      <Stack.Screen name="InverterInfoScreen" component={InverterInfoScreen} />
-      <Stack.Screen
-        name="InverterEventLogScreen"
-        component={InverterEventLogScreen}
-      />
-      <Stack.Screen name="FirmwareListScreen" component={FirmwareListScreen} />
-      <Stack.Screen name="DebugColorsScreen" component={DebugColorsScreen} />
-      <Stack.Screen
-        name="InverterDeviceInfoScreen"
-        component={InverterDeviceInfoScreen}
-      />
-      <Stack.Screen
-        name="InverterGridProfileScreen"
-        component={InverterGridProfileScreen}
-      />
-      <Stack.Screen name="InverterDataScreen" component={InverterDataScreen} />
-      <Stack.Screen
-        name="NetworkSettingsScreen"
-        component={NetworkSettingsScreen}
-      />
-      <Stack.Screen name="NTPSettingsScreen" component={NTPSettingsScreen} />
-      <Stack.Screen name="DtuSettingsScreen" component={DtuSettingsScreen} />
-      <Stack.Screen name="AppLogScreen" component={AppLogScreen} />
-    </Stack.Navigator>
+    <GestureHandlerRootView>
+      <Stack.Navigator
+        initialRouteName={hasConfigs ? 'MainScreen' : 'SetupAddOpenDTUScreen'}
+        screenOptions={{
+          headerShown: false,
+          headerBackVisible: false,
+          headerTitle: '',
+          headerTransparent: true,
+        }}
+      >
+        <Stack.Screen name="MainScreen" component={MainScreen} />
+        <Stack.Screen name="DeviceListScreen" component={DeviceListScreen} />
+        <Stack.Screen
+          name="SetupAddOpenDTUScreen"
+          component={SetupAddOpenDTUScreen}
+        />
+        <Stack.Screen
+          name="SetupAuthenticateOpenDTUInstanceScreen"
+          component={SetupAuthenticateOpenDTUInstanceScreen}
+        />
+        <Stack.Screen
+          name="SetupOpenDTUCompleteScreen"
+          component={SetupOpenDTUCompleteScreen}
+        />
+        <Stack.Screen
+          name="DeviceSettingsScreen"
+          component={DeviceSettingsScreen}
+        />
+        <Stack.Screen
+          name="SelectDatabaseScreen"
+          component={SelectDatabaseScreen}
+        />
+        <Stack.Screen
+          name="ManageDatabasesScreen"
+          component={ManageDatabasesScreen}
+        />
+        <Stack.Screen name="AboutSettingsScreen" component={AboutAppScreen} />
+        <Stack.Screen
+          name="ConfigureGraphsScreen"
+          component={ConfigureGraphsScreen}
+        />
+        <Stack.Screen
+          name="SystemInformationScreen"
+          component={SystemInformationScreen}
+        />
+        <Stack.Screen
+          name="NetworkInformationScreen"
+          component={NetworkInformationScreen}
+        />
+        <Stack.Screen
+          name="NtpInformationScreen"
+          component={NtpInformationScreen}
+        />
+        <Stack.Screen
+          name="MqttInformationScreen"
+          component={MqttInformationScreen}
+        />
+        <Stack.Screen name="LicensesScreen" component={LicensesScreen} />
+        <Stack.Screen name="DebugScreen" component={DebugScreen} />
+        <Stack.Screen
+          name="InverterInfoScreen"
+          component={InverterInfoScreen}
+        />
+        <Stack.Screen
+          name="InverterEventLogScreen"
+          component={InverterEventLogScreen}
+        />
+        <Stack.Screen
+          name="FirmwareListScreen"
+          component={FirmwareListScreen}
+        />
+        <Stack.Screen name="DebugColorsScreen" component={DebugColorsScreen} />
+        <Stack.Screen
+          name="InverterDeviceInfoScreen"
+          component={InverterDeviceInfoScreen}
+        />
+        <Stack.Screen
+          name="InverterGridProfileScreen"
+          component={InverterGridProfileScreen}
+        />
+        <Stack.Screen
+          name="InverterDataScreen"
+          component={InverterDataScreen}
+        />
+        <Stack.Screen
+          name="NetworkSettingsScreen"
+          component={NetworkSettingsScreen}
+        />
+        <Stack.Screen name="NTPSettingsScreen" component={NTPSettingsScreen} />
+        <Stack.Screen name="DtuSettingsScreen" component={DtuSettingsScreen} />
+        <Stack.Screen name="AppLogScreen" component={AppLogScreen} />
+      </Stack.Navigator>
+    </GestureHandlerRootView>
   );
 };
 

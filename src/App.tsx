@@ -19,29 +19,28 @@ const App = () => {
     console.log('onBeforeLift');
     SplashScreen.hide();
   }, []);*/
-
   return (
     <StrictMode>
       <SafeAreaProvider>
-        <ReduxProvider store={store}>
-          <ReduxPersistGate
-            persistor={persistor}
-            loading={null}
-            // onBeforeLift={onBeforeLift}
-          >
-            <StorageMigrator>
-              <GithubProvider>
-                <ApiProvider>
-                  <DatabaseProvider>
-                    <FetchHandler>
-                      <InnerApp />
-                    </FetchHandler>
-                  </DatabaseProvider>
-                </ApiProvider>
-              </GithubProvider>
-            </StorageMigrator>
-          </ReduxPersistGate>
-        </ReduxProvider>
+          <ReduxProvider store={store}>
+            <ReduxPersistGate
+              persistor={persistor}
+              loading={null}
+              // onBeforeLift={onBeforeLift}
+            >
+              <StorageMigrator>
+                <GithubProvider>
+                  <ApiProvider>
+                    <DatabaseProvider>
+                      <FetchHandler>
+                        <InnerApp />
+                      </FetchHandler>
+                    </DatabaseProvider>
+                  </ApiProvider>
+                </GithubProvider>
+              </StorageMigrator>
+            </ReduxPersistGate>
+          </ReduxProvider>
       </SafeAreaProvider>
     </StrictMode>
   );
