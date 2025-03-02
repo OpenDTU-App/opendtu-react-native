@@ -1,16 +1,14 @@
 import type { FC } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { SwitchProps } from 'react-native-paper';
-import { Button, Switch, Text, useTheme } from 'react-native-paper';
+import { Button, Portal, Switch, Text } from 'react-native-paper';
+
+import { View } from 'react-native';
+
+import BaseModal from '@/components/BaseModal';
 
 import { spacing } from '@/constants';
-
-import {
-  BottomSheetModal,
-  BottomSheetModalProvider,
-  BottomSheetView,
-} from '@gorhom/bottom-sheet';
 
 export interface ChangeBooleanValueModalProps {
   isOpen?: boolean;
@@ -31,20 +29,10 @@ const ChangeBooleanValueModal: FC<ChangeBooleanValueModalProps> = ({
   onClose,
   inputProps,
 }) => {
-  const theme = useTheme();
-  const drawerRef = useRef<BottomSheetModal>(null);
   const { t } = useTranslation();
 
   const [value, setValue] = useState<boolean>(defaultValue ?? false);
   const [wasModified, setWasModified] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      drawerRef.current?.present();
-    } else {
-      drawerRef.current?.dismiss();
-    }
-  }, [isOpen]);
 
   const handleSave = () => {
     onSave?.(value);
@@ -68,28 +56,15 @@ const ChangeBooleanValueModal: FC<ChangeBooleanValueModalProps> = ({
   }, [defaultValue, wasModified]);
 
   return (
-    <BottomSheetModalProvider>
-      <BottomSheetModal
-        ref={drawerRef}
-        onDismiss={handleCancel}
-        snapPoints={[180]}
-        handleStyle={{
-          backgroundColor: theme.colors.surfaceVariant,
-          height: 4,
-          borderTopLeftRadius: 8,
-          borderTopRightRadius: 8,
-        }}
-      >
-        <BottomSheetView
+    <Portal>
+      <BaseModal visible={!!isOpen} onDismiss={handleCancel}>
+        <View
           style={{
-            paddingHorizontal: spacing * 2,
-            paddingTop: spacing * 2,
-            flex: 1,
+            padding: spacing,
             alignItems: 'center',
-            backgroundColor: theme.colors.surface,
           }}
         >
-          <BottomSheetView
+          <View
             style={{
               width: '100%',
               alignItems: 'center',
@@ -97,11 +72,11 @@ const ChangeBooleanValueModal: FC<ChangeBooleanValueModalProps> = ({
               justifyContent: 'space-between',
             }}
           >
-            <BottomSheetView>
+            <View>
               <Text variant="titleLarge">{title}</Text>
               <Text variant="bodyMedium">{description}</Text>
-            </BottomSheetView>
-            <BottomSheetView>
+            </View>
+            <View>
               <Switch
                 value={value}
                 onValueChange={value => {
@@ -110,14 +85,14 @@ const ChangeBooleanValueModal: FC<ChangeBooleanValueModalProps> = ({
                 }}
                 {...inputProps}
               />
-            </BottomSheetView>
-          </BottomSheetView>
-          <BottomSheetView
+            </View>
+          </View>
+          <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
               gap: 8,
-              marginTop: 32,
+              marginTop: spacing * 2,
             }}
           >
             <Button mode="text" onPress={handleCancel} style={{ flex: 1 }}>
@@ -126,10 +101,10 @@ const ChangeBooleanValueModal: FC<ChangeBooleanValueModalProps> = ({
             <Button mode="contained" onPress={handleSave} style={{ flex: 1 }}>
               {t('apply')}
             </Button>
-          </BottomSheetView>
-        </BottomSheetView>
-      </BottomSheetModal>
-    </BottomSheetModalProvider>
+          </View>
+        </View>
+      </BaseModal>
+    </Portal>
   );
 };
 
