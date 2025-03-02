@@ -1,0 +1,25 @@
+# GitHub Labeler Configuration
+# Documentation:
+#   - changed-files:
+#       - any-glob-to-any-file: docs/**
+
+#feature:
+#  - head-branch: ['^feature', 'feature']
+
+#bug:
+#  - head-branch: ['^bug', 'bug']
+
+#bugfix:
+#  - head-branch: ['^bug', 'bug']
+
+Dependencies:
+  - changed-files:
+      - any-glob-to-any-file: ['package.json', 'yarn.lock', 'patches/**']
+
+Unit-Tests:
+  - changed-files:
+      - any-glob-to-any-file: ['__tests__/**', '__mocks__/**']
+
+Translations:
+  - changed-files:
+      - any-glob-to-any-file: 'src/translations/**'
