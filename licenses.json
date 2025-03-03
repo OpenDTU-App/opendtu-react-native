@@ -23,7 +23,7 @@
         "licenseUrl": "https://github.com/react-native-async-storage/async-storage/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-native-clipboard/clipboard@1.16.1": {
+    "@react-native-clipboard/clipboard@1.16.2": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-clipboard/clipboard",
         "licenseUrl": "https://github.com/react-native-clipboard/clipboard/raw/master/LICENSE",
@@ -41,19 +41,19 @@
         "licenseUrl": "https://github.com/react-native-masked-view/masked-view/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/bottom-tabs@7.2.0": {
+    "@react-navigation/bottom-tabs@7.2.1": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native-stack@7.2.0": {
+    "@react-navigation/native-stack@7.2.1": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native@7.0.14": {
+    "@react-navigation/native@7.0.15": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
@@ -251,7 +251,7 @@
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-safe-area-context@5.0.0": {
+    "react-native-safe-area-context@5.2.0": {
         "licenses": "MIT",
         "repository": "https://github.com/th3rdwave/react-native-safe-area-context",
         "licenseUrl": "https://github.com/th3rdwave/react-native-safe-area-context/raw/master/LICENSE",
