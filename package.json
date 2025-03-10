@@ -42,7 +42,7 @@
         "@react-navigation/bottom-tabs": "^7.2.1",
         "@react-navigation/native": "^7.0.15",
         "@react-navigation/native-stack": "^7.2.1",
-        "@reduxjs/toolkit": "^2.6.0",
+        "@reduxjs/toolkit": "^2.6.1",
         "@shopify/flash-list": "^1.7.3",
         "base-64": "^1.0.0",
         "compare-versions": "^6.1.1",
