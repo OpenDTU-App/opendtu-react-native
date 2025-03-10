@@ -72,28 +72,32 @@ const NetworkInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     />
                   )}
                 />
-                <List.Item
-                  title={t('opendtu.networkInformationScreen.ssid')}
-                  description={networkStatus?.sta_ssid}
-                />
-                <List.Item
-                  title={t('opendtu.networkInformationScreen.macAddress')}
-                  description={networkStatus?.sta_bssid}
-                />
-                <List.Item
-                  title={t('opendtu.networkInformationScreen.quality')}
-                  description={wifiQuality}
-                />
-                <List.Item
-                  title={t('opendtu.networkInformationScreen.rssi')}
-                  description={
-                    typeof networkStatus?.sta_rssi === 'number'
-                      ? t('opendtu.networkInformationScreen.dBm', {
-                          rssi: networkStatus.sta_rssi,
-                        })
-                      : ''
-                  }
-                />
+                {networkStatus?.sta_status ? (
+                  <>
+                    <List.Item
+                      title={t('opendtu.networkInformationScreen.ssid')}
+                      description={networkStatus?.sta_ssid}
+                    />
+                    <List.Item
+                      title={t('opendtu.networkInformationScreen.macAddress')}
+                      description={networkStatus?.sta_bssid}
+                    />
+                    <List.Item
+                      title={t('opendtu.networkInformationScreen.quality')}
+                      description={wifiQuality}
+                    />
+                    <List.Item
+                      title={t('opendtu.networkInformationScreen.rssi')}
+                      description={
+                        typeof networkStatus?.sta_rssi === 'number'
+                          ? t('opendtu.networkInformationScreen.dBm', {
+                              rssi: networkStatus.sta_rssi,
+                            })
+                          : ''
+                      }
+                    />
+                  </>
+                ) : null}
               </List.Section>
             </SettingsSurface>
             <SettingsSurface>
@@ -119,25 +123,31 @@ const NetworkInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     />
                   )}
                 />
-                <List.Item
-                  title={t('opendtu.networkInformationScreen.ssid')}
-                  description={networkStatus?.ap_ssid}
-                />
-                <List.Item
-                  title={t('opendtu.networkInformationScreen.numberOfStations')}
-                  description={
-                    networkStatus?.ap_stationnum
-                      ? networkStatus.ap_stationnum
-                      : '0'
-                  }
-                />
+                {networkStatus?.ap_status ? (
+                  <>
+                    <List.Item
+                      title={t('opendtu.networkInformationScreen.ssid')}
+                      description={networkStatus?.ap_ssid}
+                    />
+                    <List.Item
+                      title={t(
+                        'opendtu.networkInformationScreen.numberOfStations',
+                      )}
+                      description={
+                        networkStatus?.ap_stationnum
+                          ? networkStatus.ap_stationnum
+                          : '0'
+                      }
+                    />
+                  </>
+                ) : null}
               </List.Section>
             </SettingsSurface>
             <SettingsSurface>
               <List.Section
-                title={t(
-                  'opendtu.networkInformationScreen.wifiStationInterface',
-                )}
+                title={t('opendtu.networkInformationScreen.networkInterface', {
+                  interface: networkStatus?.network_mode,
+                })}
               >
                 <List.Item
                   title={t('opendtu.networkInformationScreen.hostname')}
@@ -169,22 +179,24 @@ const NetworkInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 />
               </List.Section>
             </SettingsSurface>
-            <SettingsSurface>
-              <List.Section
-                title={t(
-                  'opendtu.networkInformationScreen.wifiAccessPointInterface',
-                )}
-              >
-                <List.Item
-                  title={t('opendtu.networkInformationScreen.ipAddress')}
-                  description={networkStatus?.ap_ip}
-                />
-                <List.Item
-                  title={t('opendtu.networkInformationScreen.macAddress')}
-                  description={networkStatus?.ap_mac}
-                />
-              </List.Section>
-            </SettingsSurface>
+            {networkStatus?.ap_status ? (
+              <SettingsSurface>
+                <List.Section
+                  title={t(
+                    'opendtu.networkInformationScreen.wifiAccessPointInterface',
+                  )}
+                >
+                  <List.Item
+                    title={t('opendtu.networkInformationScreen.ipAddress')}
+                    description={networkStatus?.ap_ip}
+                  />
+                  <List.Item
+                    title={t('opendtu.networkInformationScreen.macAddress')}
+                    description={networkStatus?.ap_mac}
+                  />
+                </List.Section>
+              </SettingsSurface>
+            ) : null}
             <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>
