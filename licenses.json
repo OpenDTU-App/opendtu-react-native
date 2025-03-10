@@ -59,7 +59,7 @@
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@reduxjs/toolkit@2.6.0": {
+    "@reduxjs/toolkit@2.6.1": {
         "licenses": "MIT",
         "repository": "https://github.com/reduxjs/redux-toolkit",
         "licenseUrl": "https://github.com/reduxjs/redux-toolkit/raw/master/LICENSE",
