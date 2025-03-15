@@ -380,13 +380,21 @@ class OpenDtuApi {
       }, 5000);
 
       log.debug('getSystemStatusFromUrl', url);
-      const path = `${url.origin}/api/system/status`;
+
+      const authString = this.getAuthString();
+
+      const path = `${authString ?? ''}${url.origin}/api/system/status`;
 
       const response = await fetch(path, {
         signal: controller.signal,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          ...(this.userString
+            ? {
+                Authorization: `Basic ${this.userString}`,
+              }
+            : {}),
         },
       });
 
