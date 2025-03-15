@@ -3,9 +3,10 @@ import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Badge, List, Text, useTheme } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 import { useDispatch } from 'react-redux';
 
-import { ScrollView, View } from 'react-native';
+import { Linking, ScrollView, View } from 'react-native';
 
 import { setDebugEnabled } from '@/slices/settings';
 
@@ -21,12 +22,16 @@ import useIsConnected from '@/hooks/useIsConnected';
 import useRequireMultiplePresses from '@/hooks/useRequireMultiplePresses';
 import useSettings from '@/hooks/useSettings';
 
-import { spacing } from '@/constants';
+import { rootLogging } from '@/utils/log';
+
+import { bugreportUrl, spacing } from '@/constants';
 import { StyledView } from '@/style';
 
 import type { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import packageJson from '@root/package.json';
+
+const log = rootLogging.extend('MainSettingsTab');
 
 const MainSettingsTab: FC = () => {
   const navigation = useNavigation() as NavigationProp<ParamListBase>;
@@ -122,6 +127,22 @@ const MainSettingsTab: FC = () => {
   const handleLicenses = useCallback(() => {
     navigation.navigate('LicensesScreen');
   }, [navigation]);
+
+  const handleBugReporting = useCallback(async () => {
+    // open github issues
+    const url = bugreportUrl;
+
+    // open url in browser
+    if (await Linking.canOpenURL(url)) {
+      await Linking.openURL(url);
+    } else {
+      log.error(`Cannot open URL: ${url}`);
+      Toast.show({
+        type: 'error',
+        text1: t('cannotOpenUrl'),
+      });
+    }
+  }, [t]);
 
   const handleDebugScreen = useCallback(() => {
     navigation.navigate('DebugScreen');
@@ -294,6 +315,12 @@ const MainSettingsTab: FC = () => {
                 ) : null
               }
               onPress={handleAbout}
+            />
+            <List.Item
+              title={t('settings.bugReporting')}
+              description={t('settings.bugReportingDescription')}
+              left={props => <List.Icon {...props} icon="bug" />}
+              onPress={handleBugReporting}
             />
             <List.Item
               title={t('settings.licenses')}

@@ -1,5 +1,6 @@
 import { useTheme } from 'react-native-paper';
 
+import AppInfos from '@/components/AppInfos';
 import DeviceOfflineWrapper from '@/components/DeviceOfflineWrapper';
 import DeviceStatus from '@/components/DeviceStatus';
 import ImportantStatusValues from '@/components/ImportantStatusValues';
@@ -13,6 +14,7 @@ const LivedataTab = () => {
     <StyledView theme={theme}>
       <DeviceOfflineWrapper>
         <StyledScrollView theme={theme} disableSafeBottomMargin>
+          <AppInfos />
           <DeviceStatus />
           <ImportantStatusValues />
         </StyledScrollView>

@@ -41,6 +41,8 @@ const initialState: SettingsState = {
   enableFetchOpenDTUReleases: DidNotAskYet,
   debugEnabled: false,
   lastAppVersion: packageJson.version,
+  feedbackInfoDismissed: false,
+  bugreportInfoDismissed: false,
 };
 
 const log = rootLogging.extend('SettingsSlice');
@@ -267,6 +269,12 @@ const settingsSlice = createSlice({
     setLastAppVersion: (state, action: SetLastAppVersionAction) => {
       state.lastAppVersion = action.payload.version;
     },
+    setFeedbackInfoDismissed: state => {
+      state.feedbackInfoDismissed = true;
+    },
+    setBugreportInfoDismissed: state => {
+      state.bugreportInfoDismissed = true;
+    },
   },
 });
 
@@ -295,6 +303,8 @@ export const {
   setEnableFetchOpenDTUReleases,
   updateLastAppVersion,
   setLastAppVersion,
+  setFeedbackInfoDismissed,
+  setBugreportInfoDismissed,
 } = settingsSlice.actions;
 
 export const { reducer: SettingsReducer } = settingsSlice;
