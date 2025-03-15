@@ -89,9 +89,19 @@ const InverterGridProfileScreen: FC<PropsWithNavigation> = ({
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('inverter.gridProfile.title')} />
-        <Appbar.Action icon="refresh" onPress={handleGetGridProfile} />
       </Appbar.Header>
-      <StyledScrollView theme={theme}>
+      <StyledScrollView
+        theme={theme}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={handleGetGridProfile}
+            colors={[theme.colors.primary]}
+            progressBackgroundColor={theme.colors.elevation.level3}
+            tintColor={theme.colors.primary}
+          />
+        }
+      >
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView
             refreshControl={

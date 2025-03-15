@@ -219,7 +219,6 @@ const InverterInfoScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={inverter.name} />
-        <Appbar.Action icon="refresh" onPress={handleRefresh} />
       </Appbar.Header>
       <StyledView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
