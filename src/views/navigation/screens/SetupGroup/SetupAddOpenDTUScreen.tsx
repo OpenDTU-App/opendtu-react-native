@@ -84,7 +84,10 @@ const SetupAddOpenDTUScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     try {
       const res = await openDtuApi.isOpenDtuInstance(url);
 
-      if (res !== DeviceState.Reachable) {
+      if (
+        res !== DeviceState.Reachable &&
+        res !== DeviceState.CouldBeInstanceWithoutReadonly
+      ) {
         setError('Not an OpenDTU instance!');
         setLoading(false);
 

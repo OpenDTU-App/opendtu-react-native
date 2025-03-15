@@ -105,8 +105,13 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
       const result = await openDtuApi.getSystemStatusFromUrl(new URL(address));
 
       if (result.deviceState !== DeviceState.Reachable) {
-        setError('Invalid credentials');
-        log.info('Invalid credentials');
+        if (result.deviceState === DeviceState.CouldBeInstanceWithoutReadonly) {
+          setError('OpenDTU instance does not allow anonymous access');
+          log.info('OpenDTU instance does not allow anonymous access');
+        } else {
+          setError('Invalid credentials');
+          log.info('Invalid credentials', { deviceState: result.deviceState });
+        }
         setLoading(false);
         return;
       }
