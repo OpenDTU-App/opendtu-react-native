@@ -15,6 +15,7 @@ updates:
       - dependency-name: "octokit"
       - dependency-name: "react-native"
       - dependency-name: "@react-native/*"
+      - dependency-name: "@react-native-community/*"
       - dependency-name: "react"
       - dependency-name: "react-test-renderer"
       - dependency-name: "typescript"
