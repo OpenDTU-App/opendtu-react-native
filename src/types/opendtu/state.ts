@@ -33,6 +33,7 @@ export enum DeviceState {
   Unreachable,
   InvalidAuth,
   InvalidState,
+  CouldBeInstanceWithoutReadonly,
   NotInstance,
   NotConnected,
   Connected,

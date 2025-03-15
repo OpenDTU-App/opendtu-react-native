@@ -380,13 +380,21 @@ class OpenDtuApi {
       }, 5000);
 
       log.debug('getSystemStatusFromUrl', url);
-      const path = `${url.origin}/api/system/status`;
+
+      const authString = this.getAuthString();
+
+      const path = `${authString ?? ''}${url.origin}/api/system/status`;
 
       const response = await fetch(path, {
         signal: controller.signal,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          ...(this.userString
+            ? {
+                Authorization: `Basic ${this.userString}`,
+              }
+            : {}),
         },
       });
 
@@ -411,6 +419,18 @@ class OpenDtuApi {
         'errortext',
         errorText,
       );
+
+      const wasAuthProblem = response?.status === 401;
+
+      if (wasAuthProblem) {
+        return {
+          deviceState: DeviceState.CouldBeInstanceWithoutReadonly,
+          meta: {
+            statusCode: response?.status,
+            error: errorText || 'No body available',
+          },
+        };
+      }
 
       return {
         deviceState: DeviceState.NotInstance,
@@ -476,7 +496,10 @@ class OpenDtuApi {
 
     const result = await this.getSystemStatusFromUrl(url);
 
-    if (result.deviceState !== DeviceState.Reachable) {
+    if (
+      result.deviceState !== DeviceState.Reachable &&
+      result.deviceState !== DeviceState.CouldBeInstanceWithoutReadonly
+    ) {
       log.error('isOpenDtuInstance', result.meta, url);
       return result.deviceState;
     }
@@ -496,6 +519,11 @@ class OpenDtuApi {
         log.debug('isOpenDtuInstance', 'baseUrl does not match');
         return DeviceState.Reachable;
       }
+    }
+
+    if (result.deviceState === DeviceState.CouldBeInstanceWithoutReadonly) {
+      log.debug('isOpenDtuInstance', 'CouldBeInstanceWithoutReadonly');
+      return DeviceState.CouldBeInstanceWithoutReadonly;
     }
 
     log.error(
