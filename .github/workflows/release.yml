@@ -100,6 +100,7 @@ jobs:
         with:
           generate_release_notes: true
           prerelease: false
+          draft: true
           files: |
             android/app/build/outputs/apk/release/*-signed.apk
             android/app/build/generated/assets/createBundleReleaseJsAndAssets/index.android.bundle
