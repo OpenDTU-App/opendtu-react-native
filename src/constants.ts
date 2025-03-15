@@ -1,7 +1,12 @@
 export const colors = {
   success: '#4caf50',
+  onSuccess: '#fff',
   error: '#f44336',
+  onError: '#fff',
   warning: '#ff9800',
+  onWarning: '#fff',
+  info: '#0a5591',
+  onInfo: '#fff',
   dark: {
     successSurface: '#164016',
     onSuccessSurface: '#c0e5c0',
@@ -28,3 +33,6 @@ export const maximumTestedOpenDtuFirmwareVersion = 'v24.4.12';
 
 export const weblateUrl =
   'https://weblate.commanderred.xyz/engage/opendtu-react-native/';
+
+export const bugreportUrl =
+  'https://github.com/OpenDTU-App/opendtu-react-native/issues/new';

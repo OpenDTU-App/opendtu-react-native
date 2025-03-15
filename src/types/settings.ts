@@ -51,6 +51,10 @@ export interface SettingsState {
 
   // database
   databaseConfigs: DatabaseConfig[];
+
+  // modals & infos
+  feedbackInfoDismissed: boolean;
+  bugreportInfoDismissed: boolean;
 }
 
 // Redux Actions
