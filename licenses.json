@@ -41,19 +41,19 @@
         "licenseUrl": "https://github.com/react-native-masked-view/masked-view/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/bottom-tabs@7.2.1": {
+    "@react-navigation/bottom-tabs@7.3.2": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native-stack@7.2.1": {
+    "@react-navigation/native-stack@7.3.2": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native@7.0.15": {
+    "@react-navigation/native@7.0.18": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
@@ -65,7 +65,7 @@
         "licenseUrl": "https://github.com/reduxjs/redux-toolkit/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@shopify/flash-list@1.7.5": {
+    "@shopify/flash-list@1.7.6": {
         "licenses": "MIT",
         "repository": "https://github.com/Shopify/flash-list",
         "licenseUrl": "https://github.com/Shopify/flash-list/raw/master/LICENSE.md",
@@ -83,7 +83,7 @@
         "licenseUrl": "https://github.com/omichelsen/compare-versions/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "expo@52.0.39": {
+    "expo@52.0.40": {
         "licenses": "MIT",
         "repository": "https://github.com/expo/expo",
         "licenseUrl": "https://github.com/expo/expo",
@@ -233,7 +233,7 @@
         "licenseUrl": "https://github.com/mrousavy/react-native-mmkv/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-paper-dates@0.22.36": {
+    "react-native-paper-dates@0.22.38": {
         "licenses": "MIT",
         "repository": "https://github.com/web-ridge/react-native-paper-dates",
         "licenseUrl": "https://github.com/web-ridge/react-native-paper-dates/raw/master/LICENSE",
@@ -347,7 +347,7 @@
         "licenseUrl": "github:reduxjs/redux",
         "parents": "opendtu-react-native"
     },
-    "styled-components@6.1.15": {
+    "styled-components@6.1.16": {
         "licenses": "MIT",
         "repository": "https://github.com/styled-components/styled-components",
         "licenseUrl": "https://github.com/styled-components/styled-components/raw/master/LICENSE",
