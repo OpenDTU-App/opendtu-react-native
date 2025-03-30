@@ -70,22 +70,21 @@ const ChangeBooleanValueModal: FC<ChangeBooleanValueModalProps> = ({
               alignItems: 'center',
               flexDirection: 'row',
               justifyContent: 'space-between',
+              display: 'flex',
             }}
           >
-            <View>
+            <View style={{ flex: 1 }}>
               <Text variant="titleLarge">{title}</Text>
               <Text variant="bodyMedium">{description}</Text>
             </View>
-            <View>
-              <Switch
-                value={value}
-                onValueChange={value => {
-                  setWasModified(true);
-                  setValue(value);
-                }}
-                {...inputProps}
-              />
-            </View>
+            <Switch
+              value={value}
+              onValueChange={value => {
+                setWasModified(true);
+                setValue(value);
+              }}
+              {...inputProps}
+            />
           </View>
           <View
             style={{

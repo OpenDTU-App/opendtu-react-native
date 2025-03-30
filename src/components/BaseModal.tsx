@@ -49,7 +49,7 @@ const BaseModal: FC<BaseModalProps> = ({
           : { padding: 8 }),
         borderRadius: isScreen ? 0 : 28,
         marginVertical: isScreen ? 0 : 8,
-        marginHorizontal: disableSideMargin ? 0 : 24,
+        marginHorizontal: disableSideMargin ? 0 : 20,
         maxWidth: 450,
         flex: 1,
       }}
