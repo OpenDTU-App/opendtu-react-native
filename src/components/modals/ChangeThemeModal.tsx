@@ -53,7 +53,7 @@ const ChangeThemeModal: FC<Omit<ModalProps, 'children'>> = props => {
   return (
     <Portal>
       <BaseModal {...props}>
-        <Box p={16}>
+        <Box p={8}>
           <Box mb={8}>
             <Text variant="bodyLarge">{t('settings.changeTheTheme')}</Text>
           </Box>
