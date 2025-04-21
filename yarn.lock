@@ -3944,10 +3944,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reduxjs/toolkit@npm:^2.6.1":
-  version: 2.6.1
-  resolution: "@reduxjs/toolkit@npm:2.6.1"
+"@reduxjs/toolkit@npm:^2.7.0":
+  version: 2.7.0
+  resolution: "@reduxjs/toolkit@npm:2.7.0"
   dependencies:
+    "@standard-schema/spec": "npm:^1.0.0"
+    "@standard-schema/utils": "npm:^0.3.0"
     immer: "npm:^10.0.3"
     redux: "npm:^5.0.1"
     redux-thunk: "npm:^3.1.0"
@@ -3960,7 +3962,7 @@ __metadata:
       optional: true
     react-redux:
       optional: true
-  checksum: 10/62ad00b875115eb2fb5b776665d2dbe71b1ad98f4342f409c67dfb27bd0cd7a13dffd7343bee6f232d0498429361f95541993bb2ecd747ad09a55069bc43303e
+  checksum: 10/cc264efc95f9ebeafa469bf1040d106a33768a802e6f46aa678bf9f26822d049c18b5f10864aa8badb2e62febe58e242860256174528e62b09e8f897d32cd182
   languageName: node
   linkType: hard
 
@@ -4040,6 +4042,20 @@ __metadata:
   dependencies:
     "@sinonjs/commons": "npm:^3.0.0"
   checksum: 10/78155c7bd866a85df85e22028e046b8d46cf3e840f72260954f5e3ed5bd97d66c595524305a6841ffb3f681a08f6e5cef572a2cce5442a8a232dc29fb409b83e
+  languageName: node
+  linkType: hard
+
+"@standard-schema/spec@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@standard-schema/spec@npm:1.0.0"
+  checksum: 10/aee780cc1431888ca4b9aba9b24ffc8f3073fc083acc105e3951481478a2f4dc957796931b2da9e2d8329584cf211e4542275f188296c1cdff3ed44fd93a8bc8
+  languageName: node
+  linkType: hard
+
+"@standard-schema/utils@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@standard-schema/utils@npm:0.3.0"
+  checksum: 10/7084f875d322792f2e0a5904009434c8374b9345b09ba89828b68fd56fa3c2b366d35bf340d9e8c72736ef01793c2f70d350c372ed79845dc3566c58d34b4b51
   languageName: node
   linkType: hard
 
@@ -8703,9 +8719,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^25.0.0":
-  version: 25.0.0
-  resolution: "i18next@npm:25.0.0"
+"i18next@npm:^25.0.1":
+  version: 25.0.1
+  resolution: "i18next@npm:25.0.1"
   dependencies:
     "@babel/runtime": "npm:^7.26.10"
   peerDependencies:
@@ -8713,7 +8729,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/49fc1bb94661a1253f0decb837fa4ad7b26a09e04dacf29e453bd396ba9c05a5bc38575133a4a893b0b65da143ad0493867d2e2c41a4d3d10f9fce4b71c45fc0
+  checksum: 10/388595b935122a73a0c81d5ae8e67dadfc5f2e25e67470121d3f771a69c8abad84dfa457d1f1bf9a943f804de6e69ba3d03fd07564b5ee25859705440fed6e9f
   languageName: node
   linkType: hard
 
@@ -11610,7 +11626,7 @@ __metadata:
     "@react-navigation/bottom-tabs": "npm:^7.3.10"
     "@react-navigation/native": "npm:^7.1.6"
     "@react-navigation/native-stack": "npm:^7.3.10"
-    "@reduxjs/toolkit": "npm:^2.6.1"
+    "@reduxjs/toolkit": "npm:^2.7.0"
     "@shopify/flash-list": "npm:^1.8.0"
     "@testing-library/react-native": "npm:^13.2.0"
     "@trivago/prettier-plugin-sort-imports": "npm:^5.2.2"
@@ -11641,7 +11657,7 @@ __metadata:
     expo: "npm:52.0.46"
     fast-deep-equal: "npm:^3.1.3"
     fuse.js: "npm:^7.1.0"
-    i18next: "npm:^25.0.0"
+    i18next: "npm:^25.0.1"
     intl-pluralrules: "npm:^2.0.1"
     ip-regex: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -11667,7 +11683,7 @@ __metadata:
     react-native-logs: "npm:^5.3.0"
     react-native-markdown-display: "npm:^7.0.2"
     react-native-mmkv: "npm:~2.12.2"
-    react-native-paper: "npm:5.13.2"
+    react-native-paper: "npm:5.13.3"
     react-native-paper-dates: "npm:^0.22.40"
     react-native-reanimated: "npm:^3.17.4"
     react-native-safe-area-context: "npm:5.4.0"
@@ -12558,9 +12574,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-paper@npm:5.13.2":
-  version: 5.13.2
-  resolution: "react-native-paper@npm:5.13.2"
+"react-native-paper@npm:5.13.3":
+  version: 5.13.3
+  resolution: "react-native-paper@npm:5.13.3"
   dependencies:
     "@callstack/react-theme-provider": "npm:^3.0.9"
     color: "npm:^3.1.2"
@@ -12570,7 +12586,7 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: "*"
     react-native-vector-icons: "*"
-  checksum: 10/042771f4907c670cf35fb1667ac9aae1a569e062b194668347d98621813940da8269046d718008d07b8f9159364b60039e35291c02d5e3744151f7c0d92cb8bb
+  checksum: 10/39c709d13569fdd5020901fdae38b0af228bcda2b95b98f8d54c2ef80c48a460f390d2d7d56d8942c2d9c4f095a60084909fd1176e7b589209c8d0b421bafd8b
   languageName: node
   linkType: hard
 
