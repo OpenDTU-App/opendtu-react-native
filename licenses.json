@@ -101,7 +101,7 @@
         "licenseUrl": "https://github.com/krisk/Fuse/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "i18next@25.0.1": {
+    "i18next@25.0.2": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
@@ -161,7 +161,7 @@
         "licenseUrl": "https://github.com/samber/prometheus-query-js/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-i18next@15.4.1": {
+    "react-i18next@15.5.1": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/react-i18next",
         "licenseUrl": "https://github.com/i18next/react-i18next/raw/master/LICENSE",
@@ -239,13 +239,13 @@
         "licenseUrl": "https://github.com/web-ridge/react-native-paper-dates/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-paper@5.13.3": {
+    "react-native-paper@5.13.5": {
         "licenses": "MIT",
         "repository": "https://github.com/callstack/react-native-paper",
         "licenseUrl": "https://github.com/callstack/react-native-paper/raw/master/LICENSE.md",
         "parents": "opendtu-react-native"
     },
-    "react-native-reanimated@3.17.4": {
+    "react-native-reanimated@3.17.5": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-reanimated",
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
