@@ -8719,9 +8719,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^25.0.1":
-  version: 25.0.1
-  resolution: "i18next@npm:25.0.1"
+"i18next@npm:^25.0.2":
+  version: 25.0.2
+  resolution: "i18next@npm:25.0.2"
   dependencies:
     "@babel/runtime": "npm:^7.26.10"
   peerDependencies:
@@ -8729,7 +8729,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/388595b935122a73a0c81d5ae8e67dadfc5f2e25e67470121d3f771a69c8abad84dfa457d1f1bf9a943f804de6e69ba3d03fd07564b5ee25859705440fed6e9f
+  checksum: 10/3cb457ea42c8e7fd3dd3efa1656b02df1af4a73c44db74f3dfc44b54bbbaa0260a951e3f50212ba6ddfdd8321e9ad21e1d644d48270b918cfcb5b27345d16faf
   languageName: node
   linkType: hard
 
@@ -11657,7 +11657,7 @@ __metadata:
     expo: "npm:52.0.46"
     fast-deep-equal: "npm:^3.1.3"
     fuse.js: "npm:^7.1.0"
-    i18next: "npm:^25.0.1"
+    i18next: "npm:^25.0.2"
     intl-pluralrules: "npm:^2.0.1"
     ip-regex: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -11670,7 +11670,7 @@ __metadata:
     pretty-bytes: "npm:^6.1.1"
     prometheus-query: "npm:^3.5.0"
     react: "npm:18.3.1"
-    react-i18next: "npm:^15.4.1"
+    react-i18next: "npm:^15.5.1"
     react-native: "npm:0.76.5"
     react-native-charts-wrapper: "npm:^0.6.0"
     react-native-config: "npm:^1.5.5"
@@ -11683,9 +11683,9 @@ __metadata:
     react-native-logs: "npm:^5.3.0"
     react-native-markdown-display: "npm:^7.0.2"
     react-native-mmkv: "npm:~2.12.2"
-    react-native-paper: "npm:5.13.3"
+    react-native-paper: "npm:5.13.5"
     react-native-paper-dates: "npm:^0.22.40"
-    react-native-reanimated: "npm:^3.17.4"
+    react-native-reanimated: "npm:^3.17.5"
     react-native-safe-area-context: "npm:5.4.0"
     react-native-screens: "npm:^4.10.0"
     react-native-share: "npm:^12.0.9"
@@ -12376,21 +12376,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^15.4.1":
-  version: 15.4.1
-  resolution: "react-i18next@npm:15.4.1"
+"react-i18next@npm:^15.5.1":
+  version: 15.5.1
+  resolution: "react-i18next@npm:15.5.1"
   dependencies:
     "@babel/runtime": "npm:^7.25.0"
     html-parse-stringify: "npm:^3.0.1"
   peerDependencies:
     i18next: ">= 23.2.3"
     react: ">= 16.8.0"
+    typescript: ^5
   peerDependenciesMeta:
     react-dom:
       optional: true
     react-native:
       optional: true
-  checksum: 10/fd1f2dbffd579d6ea35d5510734f997c11d4a09372a24db194daf5f3201a0f536992d558aa58863d20da4002994d1b6e6bd35cd1eab623f90afb97ea783a01b1
+    typescript:
+      optional: true
+  checksum: 10/19b9ecb1df2eb611c79a27c0f0e9ba7b93933ff7f3c2413507df5f514057b1f860df676157a3eafd5bd76726eb820c1f2ddb8f6be42c39152f2d585864344f01
   languageName: node
   linkType: hard
 
@@ -12574,9 +12577,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-paper@npm:5.13.3":
-  version: 5.13.3
-  resolution: "react-native-paper@npm:5.13.3"
+"react-native-paper@npm:5.13.5":
+  version: 5.13.5
+  resolution: "react-native-paper@npm:5.13.5"
   dependencies:
     "@callstack/react-theme-provider": "npm:^3.0.9"
     color: "npm:^3.1.2"
@@ -12586,13 +12589,13 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: "*"
     react-native-vector-icons: "*"
-  checksum: 10/39c709d13569fdd5020901fdae38b0af228bcda2b95b98f8d54c2ef80c48a460f390d2d7d56d8942c2d9c4f095a60084909fd1176e7b589209c8d0b421bafd8b
+  checksum: 10/a4e7a051d1ec9ccaa49249d439f650f137aba8f909dd2d0cf2f7526857b37069bab8eeab70d7f1f86b9f724c41fa38948d2f408d9c0d88c91fe5abf51c289b1e
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:^3.17.4":
-  version: 3.17.4
-  resolution: "react-native-reanimated@npm:3.17.4"
+"react-native-reanimated@npm:^3.17.5":
+  version: 3.17.5
+  resolution: "react-native-reanimated@npm:3.17.5"
   dependencies:
     "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
     "@babel/plugin-transform-class-properties": "npm:^7.0.0-0"
@@ -12610,7 +12613,7 @@ __metadata:
     "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-  checksum: 10/8d4693185af76776ae8b24f0e90c4170581c4bf7a4592042f5d695e20479fcdebd8f480575200b94d79007b2780bee832f285aea66001fcc14ceb6a63eb7e1ab
+  checksum: 10/63501d8ac0cb2039e60ac93bc779e946af267bb55f95cf53ed538bcf9bfca030fa5d84d5c9343dcbc4d8df0d5e9d7c58ca5647d43b17f8399dec11d812da11fc
   languageName: node
   linkType: hard
 
