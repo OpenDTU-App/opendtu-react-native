@@ -41,19 +41,19 @@
         "licenseUrl": "https://github.com/react-native-masked-view/masked-view/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/bottom-tabs@7.3.10": {
+    "@react-navigation/bottom-tabs@7.3.12": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native-stack@7.3.10": {
+    "@react-navigation/native-stack@7.3.12": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native@7.1.6": {
+    "@react-navigation/native@7.1.8": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
@@ -101,7 +101,7 @@
         "licenseUrl": "https://github.com/krisk/Fuse/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "i18next@25.0.2": {
+    "i18next@25.1.1": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
@@ -149,7 +149,7 @@
         "licenseUrl": "https://github.com/ds300/postinstall-postinstall/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "pretty-bytes@6.1.1": {
+    "pretty-bytes@7.0.0": {
         "licenses": "MIT",
         "repository": "https://github.com/sindresorhus/pretty-bytes",
         "licenseUrl": "https://github.com/sindresorhus/pretty-bytes/raw/master/license",
@@ -239,7 +239,7 @@
         "licenseUrl": "https://github.com/web-ridge/react-native-paper-dates/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-paper@5.13.5": {
+    "react-native-paper@5.14.0": {
         "licenses": "MIT",
         "repository": "https://github.com/callstack/react-native-paper",
         "licenseUrl": "https://github.com/callstack/react-native-paper/raw/master/LICENSE.md",
@@ -263,7 +263,7 @@
         "licenseUrl": "https://github.com/software-mansion/react-native-screens/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-share@12.0.9": {
+    "react-native-share@12.0.10": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-community/react-native-share",
         "licenseUrl": "https://github.com/react-native-community/react-native-share/raw/master/LICENSE",
