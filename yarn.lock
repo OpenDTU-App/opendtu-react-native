@@ -2208,15 +2208,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.26.10":
-  version: 7.26.10
-  resolution: "@babel/runtime@npm:7.26.10"
-  dependencies:
-    regenerator-runtime: "npm:^0.14.0"
-  checksum: 10/9d7ff8e96abe3791047c1138789c742411e3ef19c4d7ca18ce916f83cec92c06ec5dc64401759f6dd1e377cf8a01bbd2c62e033eb7550f435cf6579768d0d4a5
-  languageName: node
-  linkType: hard
-
 "@babel/runtime@npm:^7.27.1":
   version: 7.27.1
   resolution: "@babel/runtime@npm:7.27.1"
@@ -4453,9 +4444,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reduxjs/toolkit@npm:^2.8.1":
-  version: 2.8.1
-  resolution: "@reduxjs/toolkit@npm:2.8.1"
+"@reduxjs/toolkit@npm:^2.8.2":
+  version: 2.8.2
+  resolution: "@reduxjs/toolkit@npm:2.8.2"
   dependencies:
     "@standard-schema/spec": "npm:^1.0.0"
     "@standard-schema/utils": "npm:^0.3.0"
@@ -4471,7 +4462,7 @@ __metadata:
       optional: true
     react-redux:
       optional: true
-  checksum: 10/388e39af72d42935bb644b8121c6b0de043bba51ab378f532476f7c77b79bde625f7c8dc5a6bc1095448008a08568c17876d958df87eeae1cfcb72214907e7da
+  checksum: 10/7834b7b91a364f98f5ffa932b1027179d9a0a27a145206a7b5256304acafe5516c6622540656435e310e4a08e579eecaee5c2582442c4ef6a4dbe6f417b7d395
   languageName: node
   linkType: hard
 
@@ -9333,17 +9324,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^25.1.2":
-  version: 25.1.2
-  resolution: "i18next@npm:25.1.2"
+"i18next@npm:^25.2.0":
+  version: 25.2.0
+  resolution: "i18next@npm:25.2.0"
   dependencies:
-    "@babel/runtime": "npm:^7.26.10"
+    "@babel/runtime": "npm:^7.27.1"
   peerDependencies:
     typescript: ^5
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/40000d98969c5c76d4271b5ac3fedddc42482717961488bd2d595dc675f1a620f4f29f5f1d7f49c8c8ed4697faa911cfffa31360119a2fbbaf4b92f6dfc587c3
+  checksum: 10/76961aadcafe301c475e801df914827ea7470987f9b7cf552596bab60117165efaaffcbb69d937af943db5e4eb46cb7798f79042b657ade10dc8983f63c28753
   languageName: node
   linkType: hard
 
@@ -12263,7 +12254,7 @@ __metadata:
     "@react-navigation/bottom-tabs": "npm:^7.3.13"
     "@react-navigation/native": "npm:^7.1.9"
     "@react-navigation/native-stack": "npm:^7.3.13"
-    "@reduxjs/toolkit": "npm:^2.8.1"
+    "@reduxjs/toolkit": "npm:^2.8.2"
     "@shopify/flash-list": "npm:^1.8.0"
     "@testing-library/react-native": "npm:^13.2.0"
     "@trivago/prettier-plugin-sort-imports": "npm:^5.2.2"
@@ -12294,7 +12285,7 @@ __metadata:
     expo: "npm:52.0.46"
     fast-deep-equal: "npm:^3.1.3"
     fuse.js: "npm:^7.1.0"
-    i18next: "npm:^25.1.2"
+    i18next: "npm:^25.2.0"
     intl-pluralrules: "npm:^2.0.1"
     ip-regex: "npm:^5.0.0"
     jest: "npm:^29.7.0"
@@ -12320,7 +12311,7 @@ __metadata:
     react-native-logs: "npm:^5.3.0"
     react-native-markdown-display: "npm:^7.0.2"
     react-native-mmkv: "npm:~2.12.2"
-    react-native-paper: "npm:5.14.1"
+    react-native-paper: "npm:5.14.4"
     react-native-paper-dates: "npm:^0.22.42"
     react-native-reanimated: "npm:^3.17.5"
     react-native-safe-area-context: "npm:5.4.0"
@@ -13221,9 +13212,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-paper@npm:5.14.1":
-  version: 5.14.1
-  resolution: "react-native-paper@npm:5.14.1"
+"react-native-paper@npm:5.14.4":
+  version: 5.14.4
+  resolution: "react-native-paper@npm:5.14.4"
   dependencies:
     "@callstack/react-theme-provider": "npm:^3.0.9"
     color: "npm:^3.1.2"
@@ -13232,7 +13223,7 @@ __metadata:
     react: "*"
     react-native: "*"
     react-native-safe-area-context: "*"
-  checksum: 10/e57d578c3f8c2b15a94e5451bcb0609772549653ef5e4cb7da3fb68e4ac9b009061469af5dd5f199bd05a539d2df11554b6557349cab168d6bc770612c54f3db
+  checksum: 10/38e15e4dd52097242b50a814532f5c740f14c96403686356d02af249b0c8c8118c274fea1609021589ba40110231e682655ff80bbfe0746026c2e94ead83e7ee
   languageName: node
   linkType: hard
 
