@@ -2215,6 +2215,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.27.3":
+  version: 7.27.3
+  resolution: "@babel/runtime@npm:7.27.3"
+  checksum: 10/c1975b37bfc3f24a32c0beb4999d4302a33a70d0599fb3d42a9baf836fcd615de7ae36eff2fbbc7451c892d3dcc9314a90c3f1f3b337f5617f6c5b826d2dbd54
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.25.0, @babel/template@npm:^7.25.9, @babel/template@npm:^7.3.3":
   version: 7.25.9
   resolution: "@babel/template@npm:7.25.9"
@@ -12256,7 +12263,7 @@ __metadata:
     "@babel/plugin-transform-class-static-block": "npm:^7.27.1"
     "@babel/plugin-transform-private-methods": "npm:^7.27.1"
     "@babel/preset-env": "npm:^7.27.2"
-    "@babel/runtime": "npm:^7.27.1"
+    "@babel/runtime": "npm:^7.27.3"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@octokit/rest": "npm:^22.0.0"
     "@octokit/webhooks-types": "npm:^7.6.1"
