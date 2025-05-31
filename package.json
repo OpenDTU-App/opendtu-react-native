@@ -98,7 +98,7 @@
         "@babel/plugin-transform-class-static-block": "^7.27.1",
         "@babel/plugin-transform-private-methods": "^7.27.1",
         "@babel/preset-env": "^7.27.2",
-        "@babel/runtime": "^7.27.1",
+        "@babel/runtime": "^7.27.3",
         "@microsoft/eslint-formatter-sarif": "^3.1.0",
         "@octokit/webhooks-types": "^7.6.1",
         "@react-native-community/cli": "15.1.3",
