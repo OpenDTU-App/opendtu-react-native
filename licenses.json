@@ -41,19 +41,19 @@
         "licenseUrl": "https://github.com/react-native-masked-view/masked-view/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/bottom-tabs@7.3.13": {
+    "@react-navigation/bottom-tabs@7.3.14": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native-stack@7.3.13": {
+    "@react-navigation/native-stack@7.3.14": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native@7.1.9": {
+    "@react-navigation/native@7.1.10": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
@@ -65,7 +65,7 @@
         "licenseUrl": "https://github.com/reduxjs/redux-toolkit/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@shopify/flash-list@1.8.1": {
+    "@shopify/flash-list@1.8.2": {
         "licenses": "MIT",
         "repository": "https://github.com/Shopify/flash-list",
         "licenseUrl": "https://github.com/Shopify/flash-list/raw/master/LICENSE.md",
@@ -245,7 +245,7 @@
         "licenseUrl": "https://github.com/callstack/react-native-paper/raw/master/LICENSE.md",
         "parents": "opendtu-react-native"
     },
-    "react-native-reanimated@3.17.5": {
+    "react-native-reanimated@3.18.0": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-reanimated",
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
@@ -257,7 +257,7 @@
         "licenseUrl": "https://github.com/th3rdwave/react-native-safe-area-context/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-screens@4.11.0": {
+    "react-native-screens@4.11.1": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-screens",
         "licenseUrl": "https://github.com/software-mansion/react-native-screens/raw/master/LICENSE",
