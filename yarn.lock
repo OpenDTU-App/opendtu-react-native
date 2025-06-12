@@ -2215,10 +2215,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.27.3":
-  version: 7.27.3
-  resolution: "@babel/runtime@npm:7.27.3"
-  checksum: 10/c1975b37bfc3f24a32c0beb4999d4302a33a70d0599fb3d42a9baf836fcd615de7ae36eff2fbbc7451c892d3dcc9314a90c3f1f3b337f5617f6c5b826d2dbd54
+"@babel/runtime@npm:^7.27.4":
+  version: 7.27.6
+  resolution: "@babel/runtime@npm:7.27.6"
+  checksum: 10/cc957a12ba3781241b83d528eb69ddeb86ca5ac43179a825e83aa81263a6b3eb88c57bed8a937cdeacfc3192e07ec24c73acdfea4507d0c0428c8e23d6322bfe
   languageName: node
   linkType: hard
 
@@ -6174,12 +6174,12 @@ __metadata:
   linkType: hard
 
 "brace-expansion@npm:^1.1.7":
-  version: 1.1.11
-  resolution: "brace-expansion@npm:1.1.11"
+  version: 1.1.12
+  resolution: "brace-expansion@npm:1.1.12"
   dependencies:
     balanced-match: "npm:^1.0.0"
     concat-map: "npm:0.0.1"
-  checksum: 10/faf34a7bb0c3fcf4b59c7808bc5d2a96a40988addf2e7e09dfbb67a2251800e0d14cd2bfc1aa79174f2f5095c54ff27f46fb1289fe2d77dac755b5eb3434cc07
+  checksum: 10/12cb6d6310629e3048cadb003e1aca4d8c9bb5c67c3c321bafdd7e7a50155de081f78ea3e0ed92ecc75a9015e784f301efc8132383132f4f7904ad1ac529c562
   languageName: node
   linkType: hard
 
@@ -12263,7 +12263,7 @@ __metadata:
     "@babel/plugin-transform-class-static-block": "npm:^7.27.1"
     "@babel/plugin-transform-private-methods": "npm:^7.27.1"
     "@babel/preset-env": "npm:^7.27.2"
-    "@babel/runtime": "npm:^7.27.3"
+    "@babel/runtime": "npm:^7.27.4"
     "@microsoft/eslint-formatter-sarif": "npm:^3.1.0"
     "@octokit/rest": "npm:^22.0.0"
     "@octokit/webhooks-types": "npm:^7.6.1"
