@@ -1,24 +1,24 @@
 diff --git a/node_modules/react-native-paper-dates/src/Date/Swiper.tsx b/node_modules/react-native-paper-dates/src/Date/Swiper.tsx
-index 08c47c1..bdd49b5 100644
+index a71e0f2..c455c37 100644
 --- a/node_modules/react-native-paper-dates/src/Date/Swiper.tsx
 +++ b/node_modules/react-native-paper-dates/src/Date/Swiper.tsx
-@@ -21,6 +21,7 @@ import React, {
+@@ -32,6 +32,7 @@ import {
  import { sharedStyles } from '../shared/styles'
  
  const useIsomorphicLayoutEffect =
-+// @ts-ignore
++  // @ts-ignore
    typeof window !== 'undefined' ? useLayoutEffect : useEffect
  
  function Swiper({
-@@ -120,6 +121,7 @@ function VerticalScroller({
-     const top =
-       getVerticalMonthsOffset(idx.current, startWeekOnMonday) - montHeaderHeight
+@@ -177,6 +178,7 @@ function VerticalScroller({
+         effectiveEndYear
+       ) - montHeaderHeight
  
 +    // @ts-ignore
      element.scrollTo({
        top,
      })
-@@ -129,6 +131,7 @@ function VerticalScroller({
+@@ -186,6 +188,7 @@ function VerticalScroller({
  
    const onScroll = useCallback(
      (e: UIEvent) => {
@@ -26,7 +26,7 @@ index 08c47c1..bdd49b5 100644
        const top = e.currentTarget?.scrollTop
        if (top === 0) {
          return
-@@ -206,6 +209,7 @@ export function useDebouncedCallback(callback: any): any {
+@@ -298,6 +301,7 @@ export function useDebouncedCallback(callback: any): any {
      return () => {
        mounted.current = false
        if (timerId.current) {
@@ -34,7 +34,7 @@ index 08c47c1..bdd49b5 100644
          window.cancelAnimationFrame(timerId.current)
        }
      }
-@@ -214,8 +218,10 @@ export function useDebouncedCallback(callback: any): any {
+@@ -306,8 +310,10 @@ export function useDebouncedCallback(callback: any): any {
    return useCallback(
      (args: any) => {
        if (timerId.current) {
