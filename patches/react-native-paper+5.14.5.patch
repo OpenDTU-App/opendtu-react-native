@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-paper/lib/typescript/types.d.ts b/node_modules/react-native-paper/lib/typescript/types.d.ts
-index 4e749cb..679107c 100644
+index 4e749cb..376e71c 100644
 --- a/node_modules/react-native-paper/lib/typescript/types.d.ts
 +++ b/node_modules/react-native-paper/lib/typescript/types.d.ts
 @@ -1,5 +1,6 @@
@@ -27,6 +27,7 @@ index 4e749cb..679107c 100644
 +export declare type NavigationTheme = NativeNavigationTheme;
  export {};
  //# sourceMappingURL=types.d.ts.map
+\ No newline at end of file
 diff --git a/node_modules/react-native-paper/src/types.tsx b/node_modules/react-native-paper/src/types.tsx
 index 175131c..1c05b25 100644
 --- a/node_modules/react-native-paper/src/types.tsx
