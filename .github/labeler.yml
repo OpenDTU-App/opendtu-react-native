@@ -16,7 +16,7 @@ Dependencies:
   - changed-files:
       - any-glob-to-any-file: ['package.json', 'yarn.lock', 'patches/**']
 
-Unit-Tests:
+Tests:
   - changed-files:
       - any-glob-to-any-file: ['__tests__/**', '__mocks__/**']
 
