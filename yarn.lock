@@ -13123,7 +13123,7 @@ __metadata:
     react-native-localize: "npm:^3.4.2"
     react-native-logs: "npm:^5.3.0"
     react-native-markdown-display: "npm:^7.0.2"
-    react-native-mmkv: "npm:~2.12.2"
+    react-native-mmkv: "npm:~3.3.0"
     react-native-paper: "npm:5.14.5"
     react-native-paper-dates: "npm:^0.22.47"
     react-native-reanimated: "npm:^3.16.7"
@@ -14022,13 +14022,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-mmkv@npm:~2.12.2":
-  version: 2.12.2
-  resolution: "react-native-mmkv@npm:2.12.2"
+"react-native-mmkv@npm:~3.3.0":
+  version: 3.3.0
+  resolution: "react-native-mmkv@npm:3.3.0"
   peerDependencies:
     react: "*"
-    react-native: ">=0.71.0"
-  checksum: 10/c1ebb8e81905ee8ce17858ff6096525cbdd0e51892dca80a3cd6e26feb5e979a9c7d609c5a55886150efb0136c5899de174c71115f81607019ed7af68678797b
+    react-native: "*"
+  checksum: 10/809f89f0192eb856ca4a0cc931ba26d6e383da154ccbf23160b89c4c4fcbb8c2bc8976ad921a75ad5170f60bc6991cadf8c41579b4ca9bb892b0b7a10e2689f4
   languageName: node
   linkType: hard
 
