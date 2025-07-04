@@ -56,16 +56,22 @@ const AppInfos: FC = () => {
             }}
           >
             <Box mh={8}>
-              <Icon size={24} source="file-document" />
+              <Icon color={colors.onInfo} size={24} source="file-document" />
             </Box>
             <Box style={{ flex: 1 }}>
-              <Text variant="titleMedium">{t('appInfos.feedback')}</Text>
+              <Text style={{ color: colors.onInfo }} variant="titleMedium">
+                {t('appInfos.feedback')}
+              </Text>
               <Text style={{ color: colors.onInfo }}>
                 {t('appInfos.feedbackDescription')}
               </Text>
             </Box>
           </Box>
-          <IconButton icon="close" onPress={handleHideFeedbackInfo} />
+          <IconButton
+            iconColor={colors.onInfo}
+            icon="close"
+            onPress={handleHideFeedbackInfo}
+          />
         </Box>
       ) : null}
       {!bugreportInfoDismissed ? (
@@ -91,15 +97,21 @@ const AppInfos: FC = () => {
             }}
           >
             <Box mh={8}>
-              <Icon size={24} source="bug" />
+              <Icon color={colors.onInfo} size={24} source="bug" />
             </Box>
             <Box style={{ flex: 1 }}>
-              <Text variant="titleMedium">{t('appInfos.bugReporting')}</Text>
+              <Text style={{ color: colors.onInfo }} variant="titleMedium">
+                {t('appInfos.bugReporting')}
+              </Text>
               <Text style={{ color: colors.onInfo, flex: 1 }}>
                 {t('appInfos.bugReportingDescription')}
               </Text>
             </Box>
-            <IconButton icon="close" onPress={handleHideBugreportInfo} />
+            <IconButton
+              iconColor={colors.onInfo}
+              icon="close"
+              onPress={handleHideBugreportInfo}
+            />
           </Box>
         </Box>
       ) : null}
