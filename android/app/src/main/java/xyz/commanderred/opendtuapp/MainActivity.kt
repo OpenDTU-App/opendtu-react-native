@@ -16,7 +16,7 @@ class MainActivity : ReactActivity() {
    * Returns the name of the main component registered from JavaScript. This is used to schedule
    * rendering of the component.
    */
-  override fun getMainComponentName(): String = "opendtu-react-native"
+  override fun getMainComponentName(): String = "opendtureactnative"
 
   /**
    * We override onCreate here to pass null as the savedInstanceState parameter. This is because
