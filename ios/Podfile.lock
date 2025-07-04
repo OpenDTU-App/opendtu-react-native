@@ -8,9 +8,9 @@ PODS:
   - DoubleConversion (1.1.6)
   - EXConstants (17.0.8):
     - ExpoModulesCore
-  - Expo (52.0.46):
+  - Expo (52.0.27):
     - ExpoModulesCore
-  - ExpoModulesCore (2.2.3):
+  - ExpoModulesCore (2.1.4):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2291,8 +2291,8 @@ SPEC CHECKSUMS:
   DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
   EXConstants: a1f35b9aabbb3c6791f8e67722579b1ffcdd3f18
-  Expo: 3e53243e3281214a7d613f8a875c0b732d7512c2
-  ExpoModulesCore: 99d5de91c92f514765d101d1e4988a5f387995e8
+  Expo: 7021c4880d0bbd02781e88e213b6786c1200ebdf
+  ExpoModulesCore: 0c6ccf07837d7fb78c1ff320229efcb8dc935424
   fast_float: 06eeec4fe712a76acc9376682e4808b05ce978b6
   FBLazyVector: 2bc03a5cf64e29c611bbc5d7eb9d9f7431f37ee6
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
@@ -2384,6 +2384,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Yoga: 78d74e245ed67bb94275a1316cdc170b9b7fe884
 
-PODFILE CHECKSUM: 57716f8a03eff655b12cbeac63118fce21c860fb
+PODFILE CHECKSUM: 236a2187fcbe084e16792ff6d57013e36a11638e
 
 COCOAPODS: 1.15.2
