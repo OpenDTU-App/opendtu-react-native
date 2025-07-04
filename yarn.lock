@@ -4360,10 +4360,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native/gradle-plugin@npm:0.76.5":
-  version: 0.76.5
-  resolution: "@react-native/gradle-plugin@npm:0.76.5"
-  checksum: 10/337a2a1dcca76e58463340e3de8c6d1e207a00f1b7441067f2828f67a03aba2d00d9abf3340d74d653a1eeaf60827ecd0e67bac9128dad6dceded444ea70e2ff
+"@react-native/gradle-plugin@npm:0.76.2":
+  version: 0.76.2
+  resolution: "@react-native/gradle-plugin@npm:0.76.2"
+  checksum: 10/0f23a2684661589d1d0bff6cf96661b752798fa2d21b51a9e7c123736d609e1cfd1699f7f9900dd59554d3d84bdd17ea50e29380fa827cb74cf83a14b315112c
+  languageName: node
+  linkType: hard
+
+"@react-native/gradle-plugin@npm:0.78.0":
+  version: 0.78.0
+  resolution: "@react-native/gradle-plugin@npm:0.78.0"
+  checksum: 10/8ee487980c9b995c9ea11384a336d53247f425b67c7276583a8191b0e9b090f56b6eacb06df0953e92a212313a37e8942ad2717539d3b3dd7ed36255b5ffecee
+  languageName: node
+  linkType: hard
+
+"@react-native/gradle-plugin@npm:0.80.1":
+  version: 0.80.1
+  resolution: "@react-native/gradle-plugin@npm:0.80.1"
+  checksum: 10/8172e700832766d0e95417c07de4e4a97106f062d8a29791cede843d06ed8256a4fb8011ae36fbbb40d8c097bfa4b812b94296dc24c45555ee85d4661ea6b5bc
   languageName: node
   linkType: hard
 
@@ -4418,6 +4432,20 @@ __metadata:
     metro-config: "npm:^0.82.2"
     metro-runtime: "npm:^0.82.2"
   checksum: 10/0b857c57097dde69c63d7765a64f94fbbfd712ffd05acf8ce47f9ef7473f42d99e5a8effb31b30da014aaa352697adc27a76cc956d75ee59f2a4ba4f5cad9aea
+  languageName: node
+  linkType: hard
+
+"@react-native/new-app-screen@npm:0.80.1":
+  version: 0.80.1
+  resolution: "@react-native/new-app-screen@npm:0.80.1"
+  peerDependencies:
+    "@types/react": ^19.0.0
+    react: "*"
+    react-native: "*"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10/63146921654bef0a22622d411a88cc5bf457b7bfcb25ef63078fda034a104eaa932d3728cf774490a0f7c91c04bf4dc9d08b3cae8adcec414980119fd7d84ddc
   languageName: node
   linkType: hard
 
@@ -13172,8 +13200,9 @@ __metadata:
     "@react-native-masked-view/masked-view": "npm:^0.3.2"
     "@react-native/babel-preset": "npm:0.80.1"
     "@react-native/eslint-config": "npm:0.80.1"
-    "@react-native/gradle-plugin": "npm:0.80.1"
+    "@react-native/gradle-plugin": "npm:0.78.0"
     "@react-native/metro-config": "npm:0.80.1"
+    "@react-native/new-app-screen": "npm:0.80.1"
     "@react-native/typescript-config": "npm:0.80.1"
     "@react-navigation/bottom-tabs": "npm:^7.4.2"
     "@react-navigation/native": "npm:^7.1.14"
