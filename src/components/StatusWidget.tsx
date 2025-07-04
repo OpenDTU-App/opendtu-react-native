@@ -43,7 +43,7 @@ const StatusWidget: FC<StatusWidgetProps> = ({
                 gap: spacing,
               }}
             >
-              <Text variant="titleLarge" style={{ fontSize: 20 }}>
+              <Text variant="titleLarge" style={{ fontSize: 18 }}>
                 {title}
               </Text>
               {icon ? <Icon size={iconSize ?? 20} source={icon} /> : null}

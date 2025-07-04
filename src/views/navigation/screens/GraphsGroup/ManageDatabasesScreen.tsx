@@ -45,31 +45,44 @@ const ManageDatabasesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         <Appbar.Action icon="plus" onPress={handleClickAdd} />
       </Appbar.Header>
       <StyledView theme={theme}>
-        <Box style={{ flex: 1, width: '100%' }}>
+        <Box
+          style={{
+            flex: 1,
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
           {!hasConfiguredDatabases ? (
-            <Box
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                height: '100%',
-              }}
-            >
-              <Box mb={16}>
-                <Text style={{ textAlign: 'center' }} variant="titleLarge">
-                  {t('manageDatabases.noDatabasesConfigured')}
-                </Text>
+            <Box>
+              <Box
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  height: '100%',
+                  width: '90%',
+                }}
+              >
+                <Box mb={16}>
+                  <Text style={{ textAlign: 'center' }} variant="titleLarge">
+                    {t('manageDatabases.noDatabasesConfigured')}
+                  </Text>
+                </Box>
+                <Box mb={16}>
+                  <Text style={{ textAlign: 'center' }} variant="titleMedium">
+                    {t('manageDatabases.noDatabasesConfiguredHint')}
+                  </Text>
+                </Box>
+                <Button icon="plus" onPress={handleClickAdd}>
+                  {t('manageDatabases.addDatabase')}
+                </Button>
               </Box>
-              <Box mb={16}>
-                <Text style={{ textAlign: 'center' }} variant="titleMedium">
-                  {t('manageDatabases.noDatabasesConfiguredHint')}
-                </Text>
-              </Box>
-              <Button icon="plus" onPress={handleClickAdd}>
-                {t('manageDatabases.addDatabase')}
-              </Button>
             </Box>
           ) : (
-            <ScrollView style={{ marginTop: 16, marginBottom: 16 }}>
+            <ScrollView
+              style={{ marginTop: 16, marginBottom: 16, width: '100%' }}
+            >
               <Box style={{ gap: spacing, marginHorizontal: 16 }}>
                 {databases.map((config, index) => (
                   <StyledListItem
