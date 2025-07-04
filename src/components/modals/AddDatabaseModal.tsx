@@ -76,6 +76,8 @@ const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
               mode="outlined"
               onChangeText={setName}
               style={{ backgroundColor: theme.colors.elevation.level3 }}
+              autoCapitalize="none"
+              autoCorrect={false}
             />
           </Box>
           <Box mb={4}>
@@ -85,6 +87,9 @@ const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
               onChangeText={setBaseUrl}
               placeholder={baseUrlPlaceholder}
               style={{ backgroundColor: theme.colors.elevation.level3 }}
+              textContentType="URL"
+              autoCapitalize="none"
+              autoCorrect={false}
             />
           </Box>
           <Box mb={4}>
@@ -93,6 +98,8 @@ const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
               mode="outlined"
               onChangeText={setUsername}
               style={{ backgroundColor: theme.colors.elevation.level3 }}
+              autoCapitalize="none"
+              autoCorrect={false}
             />
           </Box>
           <Box mb={4}>
@@ -102,6 +109,9 @@ const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
               onChangeText={setPassword}
               style={{ backgroundColor: theme.colors.elevation.level3 }}
               secureTextEntry
+              textContentType="password"
+              autoCapitalize="none"
+              autoCorrect={false}
             />
           </Box>
         </Box>

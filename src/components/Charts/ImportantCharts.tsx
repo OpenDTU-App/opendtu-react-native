@@ -117,7 +117,7 @@ const ImportantCharts: FC = () => {
                   justifyContent: 'space-between',
                 }}
               >
-                <View>
+                <View style={{ flex: 1 }}>
                   <Text variant="titleMedium">
                     {t('livedata.configureGraphs')}
                   </Text>
