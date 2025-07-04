@@ -7,7 +7,7 @@ const useRequireMultiplePresses = (
 ) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setPresses] = useState(0);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout>(null);
 
   return useCallback(() => {
     setPresses(prevPresses => {
@@ -18,7 +18,9 @@ const useRequireMultiplePresses = (
       }
 
       if (prevPresses + 1 === requiredPresses) {
-        clearTimeout(timeoutRef.current);
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
         onPress();
         return 0;
       }

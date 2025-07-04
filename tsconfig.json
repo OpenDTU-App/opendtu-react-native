@@ -6,7 +6,7 @@
       "@/*": ["src/*"],
       "@root/*": ["*"],
     },
-    "types": ["react-native", "jest", "node"],
+    "types": ["react-native", "node"],
     "skipLibCheck": true,
     "allowImportingTsExtensions": false,
     "resolvePackageJsonExports": true

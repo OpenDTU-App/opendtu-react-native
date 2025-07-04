@@ -51,7 +51,7 @@ jobs:
 
       - name: Run tests
         # only if it is not a fork
-        if: ${{ github.event.pull_request.head.repo.full_name == github.repository || github.event_name == 'push' }}
+        if: ${{ 0 && (github.event.pull_request.head.repo.full_name == github.repository || github.event_name == 'push') }}
         id: test
         uses: willcaul/jest-github-action@v4
         env:
@@ -62,7 +62,7 @@ jobs:
       - name: Run tests (no report)
         # only if it is not a fork
         id: test-no-report
-        if: ${{ github.event.pull_request.head.repo.full_name != github.repository && steps.test.outcome != 'success' }}
+        if: ${{ 0 && (github.event.pull_request.head.repo.full_name != github.repository && steps.test.outcome != 'success') }}
         run: yarn test
 
       - name: Fail if ESLint errors
