@@ -1,0 +1,12 @@
+diff --git a/node_modules/react-native/Libraries/Lists/FlatList.js b/node_modules/react-native/Libraries/Lists/FlatList.js
+index d1240ae..5f53685 100644
+--- a/node_modules/react-native/Libraries/Lists/FlatList.js
++++ b/node_modules/react-native/Libraries/Lists/FlatList.js
+@@ -425,6 +425,7 @@ class FlatList<ItemT = any> extends React.PureComponent<FlatListProps<ItemT>> {
+ 
+   constructor(props: FlatListProps<ItemT>) {
+     super(props);
++    this.props = props;
+     this._checkProps(this.props);
+     if (this.props.viewabilityConfigCallbackPairs) {
+       this._virtualizedListPairs =
