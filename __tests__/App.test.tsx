@@ -3,11 +3,13 @@
  * @format
  */
 /* eslint-env jest */
-import { it } from '@jest/globals';
-import { render } from '@testing-library/react-native';
+import { test } from '@jest/globals';
+import ReactTestRenderer from 'react-test-renderer';
 
 import App from '@/App';
 
-it('renders correctly', async () => {
-  render(<App />);
+test('renders correctly', async () => {
+  await ReactTestRenderer.act(() => {
+    ReactTestRenderer.create(<App />);
+  });
 });
