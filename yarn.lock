@@ -9155,9 +9155,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^25.3.0":
-  version: 25.3.0
-  resolution: "i18next@npm:25.3.0"
+"i18next@npm:^25.3.2":
+  version: 25.3.2
+  resolution: "i18next@npm:25.3.2"
   dependencies:
     "@babel/runtime": "npm:^7.27.6"
   peerDependencies:
@@ -9165,7 +9165,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/73d478510bce6a1d4b0690cee4b33f7585c11b4d42a144f804a7ee5b6b9b1d8ced661c0b987a83dfd4f54840a32344d42970e37c6e6ebea2683f80216018baeb
+  checksum: 10/fb6b2035cc8f3bcc89f56e164d22cefbefd54e5a569315b20ddcfa6e1b68c48962307181b271fea7e5ee37ddfaa90721a4a7f7814b739f24bf00a3a670b8eb93
   languageName: node
   linkType: hard
 
@@ -12056,7 +12056,7 @@ __metadata:
     expo: "npm:53.0.17"
     fast-deep-equal: "npm:^3.1.3"
     fuse.js: "npm:^7.1.0"
-    i18next: "npm:^25.3.0"
+    i18next: "npm:^25.3.2"
     intl-pluralrules: "npm:^2.0.1"
     ip-regex: "npm:^5.0.0"
     moment: "npm:^2.30.1"
@@ -12068,7 +12068,7 @@ __metadata:
     pretty-bytes: "npm:^7.0.0"
     prometheus-query: "npm:^3.5.0"
     react: "npm:19.0.0"
-    react-i18next: "npm:^15.5.3"
+    react-i18next: "npm:^15.6.0"
     react-native: "npm:0.79.0"
     react-native-charts-wrapper: "npm:^0.6.0"
     react-native-config: "npm:^1.5.5"
@@ -12077,14 +12077,14 @@ __metadata:
     react-native-fs: "npm:^2.18.0"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-linear-gradient: "npm:^2.8.3"
-    react-native-localize: "npm:^3.4.2"
+    react-native-localize: "npm:^3.5.1"
     react-native-logs: "npm:^5.3.0"
     react-native-markdown-display: "npm:^7.0.2"
     react-native-mmkv: "npm:~3.3.0"
     react-native-paper: "npm:5.14.5"
     react-native-paper-dates: "npm:^0.22.47"
     react-native-reanimated: "npm:^3.16.7"
-    react-native-safe-area-context: "npm:^5.1.0"
+    react-native-safe-area-context: "npm:^5.5.2"
     react-native-screens: "npm:^4.5.0"
     react-native-share: "npm:^12.1.0"
     react-native-simple-gauge: "npm:^0.3.1"
@@ -12766,9 +12766,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^15.5.3":
-  version: 15.5.3
-  resolution: "react-i18next@npm:15.5.3"
+"react-i18next@npm:^15.6.0":
+  version: 15.6.0
+  resolution: "react-i18next@npm:15.6.0"
   dependencies:
     "@babel/runtime": "npm:^7.27.6"
     html-parse-stringify: "npm:^3.0.1"
@@ -12783,7 +12783,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10/7e93c2fe408c0a56ce57be4ff87d8cbf58ea181380d4b366f73142e45ddc10b3a435feb76447ad3c5e5320e7fc10d61596113405e89b97bc23e140613f5b19a4
+  checksum: 10/d8549c364eb32ea078be0e87df35ee23b8c9d6a30af4fe2a41099c12f62b5ce4268f9997132a9b5abcb4556e30fb37f4ba7f5548429333548b5b9856627c6a50
   languageName: node
   linkType: hard
 
@@ -12924,17 +12924,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-localize@npm:^3.4.2":
-  version: 3.4.2
-  resolution: "react-native-localize@npm:3.4.2"
+"react-native-localize@npm:^3.5.1":
+  version: 3.5.1
+  resolution: "react-native-localize@npm:3.5.1"
   peerDependencies:
-    react: ">=18.1.0"
-    react-native: ">=0.70.0"
-    react-native-macos: ">=0.70.0"
+    "@expo/config-plugins": ^9.0.0 || ^10.0.0
+    react: "*"
+    react-native: "*"
+    react-native-macos: "*"
   peerDependenciesMeta:
+    "@expo/config-plugins":
+      optional: true
     react-native-macos:
       optional: true
-  checksum: 10/c1d5292725e2c8c8626a0760e933f1938deb08e32ebce5134e4247ebf3e504434cce185ab81698b655f8a980c2e736ac3aee1902048d444ebd83bda01cb8febe
+  checksum: 10/5fcd8caaf931e202530ae8830c95be85fbe8f0945f776548f553f4a152ba74aef56fce36ce6494b6b02416155626bdbd2460d8bcfe103b33d174400f681d5d78
   languageName: node
   linkType: hard
 
@@ -13023,13 +13026,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^5.1.0":
-  version: 5.5.1
-  resolution: "react-native-safe-area-context@npm:5.5.1"
+"react-native-safe-area-context@npm:^5.5.2":
+  version: 5.5.2
+  resolution: "react-native-safe-area-context@npm:5.5.2"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10/eebb52854549172c1c639908f687ccde0e74261df977eae2b9998643f57eb5c28928934842840c418f628a6d0af783dfb72b4dbce742a2e199ae76a4f7fdc0d4
+  checksum: 10/3f0ba6a09ba7dfeb34147f9625700e5cc05b4590a94cc6bc982ac0e4db337caa461f83f619e925ac52dffe9fc207346036e880d47cbb4a2c9884f2d767e56687
   languageName: node
   linkType: hard
 
