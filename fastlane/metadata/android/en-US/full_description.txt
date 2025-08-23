@@ -1,0 +1,1 @@
+<p>This is a mobile app for the <a href='https://github.com/tbnobody/OpenDTU' target='_blank' rel='nofollow noopener'>OpenDTU project by tbnobody</a> – a software for ESP32 to talk to Hoymiles Inverters intended to replace the original Hoymiles DTU (Telemetry Gateway) with their cloud access.</p>
