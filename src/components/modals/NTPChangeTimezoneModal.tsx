@@ -25,6 +25,7 @@ import { rootLogging } from '@/utils/log';
 
 import { useApi } from '@/api/ApiHandler';
 
+import type { FlashListRef } from '@shopify/flash-list';
 import { FlashList } from '@shopify/flash-list';
 
 const log = rootLogging.extend('NTPChangeTimezoneModal');
@@ -55,7 +56,7 @@ const NTPChangeTimezoneModal: FC<NTPChangeTimezoneModalProps> = props => {
     [setTimeSettings, timeSettings],
   );
 
-  const listRef = useRef<FlashList<PossibleEnumValues[number]>>(null);
+  const listRef = useRef<FlashListRef<PossibleEnumValues[number]>>(null);
   const [hasScrolledToSelectedTimezone, setHasScrolledToSelectedTimezone] =
     useState<boolean>(false);
 
@@ -227,10 +228,6 @@ const NTPChangeTimezoneModal: FC<NTPChangeTimezoneModalProps> = props => {
                   }}
                 />
               )}
-              estimatedItemSize={70}
-              overrideItemLayout={layout => {
-                layout.size = 52;
-              }}
             />
           </Box>
         </Box>
