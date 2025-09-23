@@ -12,6 +12,7 @@ import GithubProvider from '@/github';
 import FetchHandler from '@/github/FetchHandler';
 import InnerApp from '@/InnerApp';
 import { persistor, store } from '@/store';
+import { useColorScheme, StatusBar } from 'react-native';
 
 const App = () => {
   /*const onBeforeLift = useCallback(() => {

@@ -41,6 +41,12 @@
         "licenseUrl": "https://github.com/react-native-masked-view/masked-view/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
+    "@react-native/new-app-screen@0.81.4": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/react-native",
+        "licenseUrl": "https://github.com/facebook/react-native",
+        "parents": "opendtu-react-native"
+    },
     "@react-navigation/bottom-tabs@7.4.7": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
@@ -83,7 +89,7 @@
         "licenseUrl": "https://github.com/omichelsen/compare-versions/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "expo@53.0.17": {
+    "expo@54.0.10": {
         "licenses": "MIT",
         "repository": "https://github.com/expo/expo",
         "licenseUrl": "https://github.com/expo/expo",
@@ -173,7 +179,7 @@
         "licenseUrl": "https://github.com/wuxudong/react-native-charts-wrapper",
         "parents": "opendtu-react-native"
     },
-    "react-native-config@1.5.9": {
+    "react-native-config@1.5.6": {
         "licenses": "MIT",
         "repository": "https://github.com/luggit/react-native-config",
         "licenseUrl": "https://github.com/luggit/react-native-config/raw/master/LICENSE",
@@ -227,7 +233,7 @@
         "licenseUrl": "https://github.com/iamacup/react-native-markdown-display/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-mmkv@3.3.0": {
+    "react-native-mmkv@3.3.3": {
         "licenses": "(MIT AND BSD-3-Clause)",
         "repository": "https://github.com/mrousavy/react-native-mmkv",
         "licenseUrl": "https://github.com/mrousavy/react-native-mmkv",
@@ -323,7 +329,7 @@
         "licenseUrl": "https://github.com/Apercu/react-native-zeroconf/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native@0.79.0": {
+    "react-native@0.81.4": {
         "licenses": "MIT",
         "repository": "https://github.com/facebook/react-native",
         "licenseUrl": "https://github.com/facebook/react-native/raw/master/LICENSE",
@@ -335,7 +341,7 @@
         "licenseUrl": "github:reduxjs/react-redux",
         "parents": "opendtu-react-native"
     },
-    "react@19.0.0": {
+    "react@19.1.0": {
         "licenses": "MIT",
         "repository": "https://github.com/facebook/react",
         "licenseUrl": "https://github.com/facebook/react/raw/master/LICENSE",
