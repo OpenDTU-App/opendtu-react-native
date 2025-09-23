@@ -8079,15 +8079,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-testing-library@npm:^7.8.1":
-  version: 7.8.1
-  resolution: "eslint-plugin-testing-library@npm:7.8.1"
+"eslint-plugin-testing-library@npm:^7.9.1":
+  version: 7.9.1
+  resolution: "eslint-plugin-testing-library@npm:7.9.1"
   dependencies:
     "@typescript-eslint/scope-manager": "npm:^8.15.0"
     "@typescript-eslint/utils": "npm:^8.15.0"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
-  checksum: 10/8dd8f1d4f894765a6022aac68c567c593f375c6b0764447ddecd7bb5d0cff1c474e0e817aa1f2cd2eebf23b9bb5a0b05b7a3c70a3dcfec38351bafdd715b8bcc
+  checksum: 10/e6097380fcac790e57e299c3d9f78ff7143fb4638fcefc2f57fc232b24ab38087ce61504a1d4463a33aa44993e2d0eae75e2b7aa342ff421ae442b6e052d0847
   languageName: node
   linkType: hard
 
@@ -12252,7 +12252,7 @@ __metadata:
     eslint-plugin-prettier: "npm:5.5.4"
     eslint-plugin-react-hooks: "npm:^5.2.0"
     eslint-plugin-simple-import-sort: "npm:^12.1.1"
-    eslint-plugin-testing-library: "npm:^7.8.1"
+    eslint-plugin-testing-library: "npm:^7.9.1"
     expo: "npm:53.0.17"
     fast-deep-equal: "npm:^3.1.3"
     fuse.js: "npm:^7.1.0"
