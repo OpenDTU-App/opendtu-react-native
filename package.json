@@ -131,7 +131,7 @@
         "eslint-plugin-prettier": "5.5.4",
         "eslint-plugin-react-hooks": "^5.2.0",
         "eslint-plugin-simple-import-sort": "^12.1.1",
-        "eslint-plugin-testing-library": "^7.9.1",
+        "eslint-plugin-testing-library": "^7.9.2",
         "prettier": "^3.6.2",
         "react-native-version": "4.0.0",
         "react-test-renderer": "19.0.0",
