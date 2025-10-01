@@ -88,6 +88,13 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 38
         versionName "0.10.1"
+        externalNativeBuild {
+              // For ndk-build, instead use the ndkBuild block.
+              cmake {
+                // Passes optional arguments to CMake.
+                arguments "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
+              }
+        }
     }
     signingConfigs {
         debug {
