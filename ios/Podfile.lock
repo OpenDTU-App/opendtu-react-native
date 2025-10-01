@@ -8,7 +8,7 @@ PODS:
   - DoubleConversion (1.1.6)
   - EXConstants (18.0.9):
     - ExpoModulesCore
-  - Expo (54.0.10):
+  - Expo (54.0.12):
     - boost
     - DoubleConversion
     - ExpoModulesCore
@@ -39,7 +39,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - ExpoModulesCore (3.0.18):
+  - ExpoModulesCore (3.0.20):
     - boost
     - DoubleConversion
     - fast_float
@@ -3220,8 +3220,8 @@ SPEC CHECKSUMS:
   DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
   EXConstants: 59d46d25b89f88cc38291a56dbce4d550758f72d
-  Expo: bc41e148d0e1129b9c10786660abe5d6df8824ec
-  ExpoModulesCore: 56c8a911b34c43d54c98e1bffb80cb43c44c25c1
+  Expo: 75f917e5dcbca1f5b4e344cabd84712aa9d97af8
+  ExpoModulesCore: 71828444161f0e604bbf53b023e22d123c9f6caa
   fast_float: b32c788ed9c6a8c584d114d0047beda9664e7cc6
   FBLazyVector: 941bef1c8eeabd9fe1f501e30a5220beee913886
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
