@@ -71,7 +71,7 @@
         "licenseUrl": "https://github.com/reduxjs/redux-toolkit/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@shopify/flash-list@2.0.3": {
+    "@shopify/flash-list@2.1.0": {
         "licenses": "MIT",
         "repository": "https://github.com/Shopify/flash-list",
         "licenseUrl": "https://github.com/Shopify/flash-list/raw/master/LICENSE.md",
@@ -143,7 +143,7 @@
         "licenseUrl": "http://github.com/mwittig/npm-license-crawler/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "patch-package@8.0.0": {
+    "patch-package@8.0.1": {
         "licenses": "MIT",
         "repository": "github:ds300/patch-package",
         "licenseUrl": "github:ds300/patch-package",
@@ -167,7 +167,7 @@
         "licenseUrl": "https://github.com/samber/prometheus-query-js/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-i18next@15.7.3": {
+    "react-i18next@16.0.0": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/react-i18next",
         "licenseUrl": "https://github.com/i18next/react-i18next/raw/master/LICENSE",
@@ -251,7 +251,7 @@
         "licenseUrl": "https://github.com/callstack/react-native-paper/raw/master/LICENSE.md",
         "parents": "opendtu-react-native"
     },
-    "react-native-reanimated@4.1.0": {
+    "react-native-reanimated@4.1.2": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-reanimated",
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
@@ -305,7 +305,7 @@
         "licenseUrl": "https://github.com/calintamas/react-native-toast-message/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-url-polyfill@2.0.0": {
+    "react-native-url-polyfill@3.0.0": {
         "licenses": "MIT",
         "repository": "https://github.com/charpeni/react-native-url-polyfill",
         "licenseUrl": "https://github.com/charpeni/react-native-url-polyfill/raw/master/LICENSE",
@@ -317,7 +317,7 @@
         "licenseUrl": "https://github.com/oblador/react-native-vector-icons/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-worklets@0.5.1": {
+    "react-native-worklets@0.6.0": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-reanimated",
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
