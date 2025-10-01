@@ -96,6 +96,20 @@ android {
               }
         }
     }
+
+    packagingOptions {
+        // Add these lines to handle 16KB page size issue
+        jniLibs {
+            useLegacyPackaging = true
+        }
+
+        // Exclude problematic libraries if needed
+        exclude "lib/arm64-v8a/libjdns_sd.so"
+        exclude "lib/arm64-v8a/libjdns_sd_embedded.so"
+        exclude "lib/x86_64/libjdns_sd.so"
+        exclude "lib/x86_64/libjdns_sd_embedded.so"
+    }
+
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -112,6 +126,7 @@ android {
             }
         }
     }
+
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
