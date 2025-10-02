@@ -65,6 +65,7 @@
         "react-native": "0.81.4",
         "react-native-charts-wrapper": "^0.6.0",
         "react-native-config": "1.5.6",
+        "react-native-edge-to-edge": "^1.7.0",
         "react-native-fast-image": "^8.6.3",
         "react-native-flex-layout": "^0.1.5",
         "react-native-fs": "^2.20.0",

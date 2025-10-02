@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Config from 'react-native-config';
+import { SystemBars } from 'react-native-edge-to-edge';
 import type { MD3Theme } from 'react-native-paper';
 import {
   adaptNavigationTheme,
@@ -19,7 +20,7 @@ import Toast, {
   SuccessToast,
 } from 'react-native-toast-message';
 
-import { StatusBar, useColorScheme } from 'react-native';
+import { useColorScheme } from 'react-native';
 
 import moment from 'moment/moment';
 
@@ -310,10 +311,12 @@ const InnerApp: FC = () => {
     <PaperProvider theme={theme}>
       <AppOfflineModal />
       <AppChangelogModal />
-      <StatusBar
-        backgroundColor={theme.colors.background}
-        barStyle={theme.dark ? 'light-content' : 'dark-content'}
-        animated
+      <SystemBars
+        style={{
+          statusBar: theme.dark ? 'light' : 'dark',
+          navigationBar: theme.dark ? 'light' : 'dark',
+        }}
+        hidden={{ statusBar: false, navigationBar: false }}
       />
       <NavigationContainer theme={navigationTheme}>
         <NavigationStack />
