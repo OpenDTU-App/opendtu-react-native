@@ -12542,6 +12542,7 @@ __metadata:
     react-native: "npm:0.81.4"
     react-native-charts-wrapper: "npm:^0.6.0"
     react-native-config: "npm:1.5.6"
+    react-native-edge-to-edge: "npm:^1.7.0"
     react-native-fast-image: "npm:^8.6.3"
     react-native-flex-layout: "npm:^0.1.5"
     react-native-fs: "npm:^2.20.0"
@@ -13286,6 +13287,16 @@ __metadata:
     react-native-windows:
       optional: true
   checksum: 10/0199c644d784ac0679d31084e740979f0c7df826dfd3fdc21c264e17fa9be119fe08493bddb474b7fdd7c655a0f61a9fb407331fe1fc1c74766a6d05b0f40203
+  languageName: node
+  linkType: hard
+
+"react-native-edge-to-edge@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "react-native-edge-to-edge@npm:1.7.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10/26ca09c125ce21b632b1645f23681688630b1bc4d7ad869de74c64328a29fd5300eaf258f1353072016c30a0c236e832e4b19ed42846c48d19898917d4c13112
   languageName: node
   linkType: hard
 
