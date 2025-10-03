@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import Config from 'react-native-config';
 
 import { compare } from 'compare-versions';
 
+import { allowInAppUpdates } from '@/constants';
 import { useAppSelector } from '@/store';
 
 import type { Release } from '@octokit/webhooks-types';
@@ -18,9 +18,7 @@ const useHasNewAppVersion: UseHasNewAppVersion = options => {
   const appRelease = useAppSelector(state => state.github.latestAppRelease);
 
   const showIndicator = useAppSelector(
-    state =>
-      !!state.settings.enableAppUpdates &&
-      Config.DISABLE_IN_APP_UPDATES !== 'true',
+    state => !!state.settings.enableAppUpdates && allowInAppUpdates,
   );
 
   return useMemo(() => {

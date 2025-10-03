@@ -1,3 +1,5 @@
+import Config from 'react-native-config';
+
 export const colors = {
   success: '#4caf50',
   onSuccess: '#fff',
@@ -36,3 +38,6 @@ export const weblateUrl =
 
 export const bugreportUrl =
   'https://github.com/OpenDTU-App/opendtu-react-native/issues/new';
+
+export const allowInAppUpdates =
+  Config.DISABLE_IN_APP_UPDATES !== 'true' || __DEV__;
