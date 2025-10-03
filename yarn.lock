@@ -109,7 +109,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.28.4":
+"@babel/core@npm:^7.24.4, @babel/core@npm:^7.28.4":
   version: 7.28.4
   resolution: "@babel/core@npm:7.28.4"
   dependencies:
@@ -678,6 +678,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/parser@npm:^7.24.4, @babel/parser@npm:^7.28.3, @babel/parser@npm:^7.28.4":
+  version: 7.28.4
+  resolution: "@babel/parser@npm:7.28.4"
+  dependencies:
+    "@babel/types": "npm:^7.28.4"
+  bin:
+    parser: ./bin/babel-parser.js
+  checksum: 10/f54c46213ef180b149f6a17ea765bf40acc1aebe2009f594e2a283aec69a190c6dda1fdf24c61a258dbeb903abb8ffb7a28f1a378f8ab5d333846ce7b7e23bf1
+  languageName: node
+  linkType: hard
+
 "@babel/parser@npm:^7.26.7, @babel/parser@npm:^7.26.9":
   version: 7.26.9
   resolution: "@babel/parser@npm:7.26.9"
@@ -708,17 +719,6 @@ __metadata:
   bin:
     parser: ./bin/babel-parser.js
   checksum: 10/0ad671be7994dba7d31ec771bd70ea5090aa34faf73e93b1b072e3c0a704ab69f4a7a68ebfb9d6a7fa455e0aa03dfa65619c4df6bae1cf327cba925b1d233fc4
-  languageName: node
-  linkType: hard
-
-"@babel/parser@npm:^7.28.3, @babel/parser@npm:^7.28.4":
-  version: 7.28.4
-  resolution: "@babel/parser@npm:7.28.4"
-  dependencies:
-    "@babel/types": "npm:^7.28.4"
-  bin:
-    parser: ./bin/babel-parser.js
-  checksum: 10/f54c46213ef180b149f6a17ea765bf40acc1aebe2009f594e2a283aec69a190c6dda1fdf24c61a258dbeb903abb8ffb7a28f1a378f8ab5d333846ce7b7e23bf1
   languageName: node
   linkType: hard
 
@@ -839,6 +839,18 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 10/522cd133aff5c94c0ef36ff83c64f03deee183815da68b65b6950e81972ace3b514e032df07ea76d0f9ec8cc7a49578092907adfa17fccb4612117557c04a882
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-proposal-private-methods@npm:^7.18.6":
+  version: 7.18.6
+  resolution: "@babel/plugin-proposal-private-methods@npm:7.18.6"
+  dependencies:
+    "@babel/helper-create-class-features-plugin": "npm:^7.18.6"
+    "@babel/helper-plugin-utils": "npm:^7.18.6"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 10/22d8502ee96bca99ad2c8393e8493e2b8d4507576dd054490fd8201a36824373440106f5b098b6d821b026c7e72b0424ff4aeca69ed5f42e48f029d3a156d5ad
   languageName: node
   linkType: hard
 
@@ -8021,6 +8033,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-react-hooks@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "eslint-plugin-react-hooks@npm:6.1.0"
+  dependencies:
+    "@babel/core": "npm:^7.24.4"
+    "@babel/parser": "npm:^7.24.4"
+    "@babel/plugin-proposal-private-methods": "npm:^7.18.6"
+    hermes-parser: "npm:^0.25.1"
+    zod: "npm:^3.22.4"
+    zod-validation-error: "npm:^3.0.3"
+  peerDependencies:
+    eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
+  checksum: 10/0b1d32510f6419c058182ec159914f6580bb070bbabcdb1ac47348993f84c3c93407304b93de13920b1a6e5bf72463367ab80d9e5aa688f3e44000abab75fa14
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-react-native-globals@npm:^0.1.1":
   version: 0.1.2
   resolution: "eslint-plugin-react-native-globals@npm:0.1.2"
@@ -9279,7 +9307,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hermes-parser@npm:0.25.1":
+"hermes-parser@npm:0.25.1, hermes-parser@npm:^0.25.1":
   version: 0.25.1
   resolution: "hermes-parser@npm:0.25.1"
   dependencies:
@@ -12520,7 +12548,7 @@ __metadata:
     eslint-plugin-import: "npm:^2.32.0"
     eslint-plugin-no-relative-import-paths: "npm:^1.6.1"
     eslint-plugin-prettier: "npm:5.5.4"
-    eslint-plugin-react-hooks: "npm:^5.2.0"
+    eslint-plugin-react-hooks: "npm:^6.1.0"
     eslint-plugin-simple-import-sort: "npm:^12.1.1"
     eslint-plugin-testing-library: "npm:^7.11.0"
     expo: "npm:54.0.12"
@@ -16565,7 +16593,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.25.76":
+"zod-validation-error@npm:^3.0.3":
+  version: 3.5.3
+  resolution: "zod-validation-error@npm:3.5.3"
+  peerDependencies:
+    zod: ^3.25.0 || ^4.0.0
+  checksum: 10/f550565ffb2a0a1733616d856302184dbe2080ec649ff9361125467065c3dfa02aeb5bf399605cdb61fe640f79ff1fe8ad0805f6e0c8144fa34764cad58f4401
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.22.4, zod@npm:^3.25.76":
   version: 3.25.76
   resolution: "zod@npm:3.25.76"
   checksum: 10/f0c963ec40cd96858451d1690404d603d36507c1fc9682f2dae59ab38b578687d542708a7fdbf645f77926f78c9ed558f57c3d3aa226c285f798df0c4da16995
