@@ -12,12 +12,11 @@ import capitalize from '@/utils/capitalize';
 import { rootLogging } from '@/utils/log';
 
 import type {
-  Database,
   DatabaseAwaitReturnType,
   DatabaseReturnType,
   InverterRangeQueryArgs,
-} from '@/database/index';
-import { DatabaseType, GrafanaColors } from '@/database/index';
+} from '@/database';
+import { Database, DatabaseType, GrafanaColors } from '@/database';
 
 export interface PrometheusResult {
   time: Date;
@@ -26,7 +25,7 @@ export interface PrometheusResult {
 
 const log = rootLogging.extend('PrometheusDatabase');
 
-class PrometheusDatabase implements Database {
+class PrometheusDatabase extends Database {
   readonly type: DatabaseType = DatabaseType.Prometheus;
   lastUpdate: Date | undefined;
   config: DatabaseConfig;
@@ -37,6 +36,7 @@ class PrometheusDatabase implements Database {
   private db: PrometheusDriver;
 
   constructor(config: DatabaseConfig) {
+    super();
     log.debug('PrometheusDatabase constructor', config);
 
     this.config = config;
@@ -49,15 +49,23 @@ class PrometheusDatabase implements Database {
 
     this.statusSuccess = false;
 
-    this.db
-      .status()
-      .then(() => {
-        this.statusSuccess = true;
-      })
-      .catch(error => {
-        log.error('PrometheusDatabase status error', error);
-        this.statusSuccess = false;
-      });
+    // initial status check
+    this.doStatusCheck().then(() => {
+      log.debug('Initial status check done', this.statusSuccess);
+    });
+  }
+
+  async doStatusCheck(): Promise<boolean> {
+    try {
+      await this.db.status();
+      this.statusSuccess = true;
+    } catch (error) {
+      log.error('PrometheusDatabase status error', error);
+      this.statusSuccess = false;
+    }
+
+    this.lastUpdate = new Date();
+    return this.statusSuccess;
   }
 
   isSame(config: DatabaseConfig | null | undefined): boolean {
