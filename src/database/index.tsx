@@ -83,8 +83,12 @@ export abstract class Database {
   abstract readonly lastUpdate: Date | undefined;
   abstract config: DatabaseConfig;
   abstract updateInterval: NodeJS.Timeout | number | undefined;
+  abstract statusSuccess: boolean;
 
   abstract doStatusCheck(): Promise<boolean>;
+  abstract getStatusSuccess(): boolean;
+  abstract getLastUpdate(): Date | undefined;
+  abstract getType(): DatabaseType;
 
   abstract acVoltage(args: InverterRangeQueryArgs): DatabaseReturnType;
   abstract acCurrent(args: InverterRangeQueryArgs): DatabaseReturnType;
@@ -94,73 +98,76 @@ export abstract class Database {
 
   abstract isSame(config: DatabaseConfig | null | undefined): boolean;
 
-  async refresh(
-    t: TFunction,
-    {
-      from,
-      to,
-      step,
-      inverters,
-    }: {
-      from: Date;
-      to: Date;
-      step: number;
-      inverters: InverterFromStatus[];
-    },
-  ): Promise<UpdateResult> {
-    // try to parallelize the queries
-    const [acVoltage, acCurrent, acPower, dcVoltage, dcPower] =
-      await Promise.all([
-        this.acVoltage({
-          from,
-          to,
-          step,
-          inverters,
-          label: t('charts.acVoltage'),
-          unit: 'V',
-        }),
-        this.acCurrent({
-          from,
-          to,
-          step,
-          inverters,
-          label: t('charts.acCurrent'),
-          unit: 'A',
-        }),
-        this.acPower({
-          from,
-          to,
-          step,
-          inverters,
-          label: t('charts.acPower'),
-          unit: 'W',
-        }),
-        this.dcVoltage({
-          from,
-          to,
-          step,
-          inverters,
-          label: t('charts.dcVoltage'),
-          unit: 'V',
-          labelName: 'channel',
-        }),
-        this.dcPower({
-          from,
-          to,
-          step,
-          inverters,
-          label: t('charts.dcPower'),
-          unit: 'W',
-          labelName: 'channel',
-        }),
-      ]);
-
-    return { acVoltage, acCurrent, acPower, dcVoltage, dcPower };
-  }
-
   abstract close(): Promise<void>;
   abstract get name(): string;
 }
+
+export const refreshDatabase = async (
+  database: Database,
+  t: TFunction,
+  {
+    from,
+    to,
+    step,
+    inverters,
+  }: {
+    from: Date;
+    to: Date;
+    step: number;
+    inverters: InverterFromStatus[];
+  },
+): Promise<UpdateResult> => {
+  // check if database is
+
+  const [acVoltage, acCurrent, acPower, dcVoltage, dcPower] = await Promise.all(
+    [
+      database.acVoltage({
+        from,
+        to,
+        step,
+        inverters,
+        label: t('charts.acVoltage'),
+        unit: 'V',
+      }),
+      database.acCurrent({
+        from,
+        to,
+        step,
+        inverters,
+        label: t('charts.acCurrent'),
+        unit: 'A',
+      }),
+      database.acPower({
+        from,
+        to,
+        step,
+        inverters,
+        label: t('charts.acPower'),
+        unit: 'W',
+      }),
+      database.dcVoltage({
+        from,
+        to,
+        step,
+        inverters,
+        label: t('charts.dcVoltage'),
+        unit: 'V',
+        labelName: 'channel',
+      }),
+      database.dcPower({
+        from,
+        to,
+        step,
+        inverters,
+        label: t('charts.dcPower'),
+        unit: 'W',
+        labelName: 'channel',
+      }),
+    ],
+  );
+
+  return { acVoltage, acCurrent, acPower, dcVoltage, dcPower };
+};
 
 export const GrafanaColors: string[] = [
   '#7EB26D',
@@ -389,7 +396,7 @@ const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
     );
 
     await handleUpdateData(
-      await database.refresh(t, { from, to, step, inverters }),
+      await refreshDatabase(database, t, { from, to, step, inverters }),
     );
   }, [
     database,

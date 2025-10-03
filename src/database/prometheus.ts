@@ -12,11 +12,12 @@ import capitalize from '@/utils/capitalize';
 import { rootLogging } from '@/utils/log';
 
 import type {
+  Database,
   DatabaseAwaitReturnType,
   DatabaseReturnType,
   InverterRangeQueryArgs,
 } from '@/database';
-import { Database, DatabaseType, GrafanaColors } from '@/database';
+import { DatabaseType, GrafanaColors } from '@/database';
 
 export interface PrometheusResult {
   time: Date;
@@ -25,18 +26,16 @@ export interface PrometheusResult {
 
 const log = rootLogging.extend('PrometheusDatabase');
 
-class PrometheusDatabase extends Database {
+class PrometheusDatabase implements Database {
   readonly type: DatabaseType = DatabaseType.Prometheus;
   lastUpdate: Date | undefined;
   config: DatabaseConfig;
   updateInterval: NodeJS.Timeout | number | undefined;
-
-  private statusSuccess = false;
+  statusSuccess = false;
 
   private db: PrometheusDriver;
 
   constructor(config: DatabaseConfig) {
-    super();
     log.debug('PrometheusDatabase constructor', config);
 
     this.config = config;
@@ -53,6 +52,18 @@ class PrometheusDatabase extends Database {
     this.doStatusCheck().then(() => {
       log.debug('Initial status check done', this.statusSuccess);
     });
+  }
+
+  getLastUpdate(): Date | undefined {
+    return this.lastUpdate;
+  }
+
+  getStatusSuccess(): boolean {
+    return this.statusSuccess;
+  }
+
+  getType(): DatabaseType {
+    return this.type;
   }
 
   async doStatusCheck(): Promise<boolean> {
