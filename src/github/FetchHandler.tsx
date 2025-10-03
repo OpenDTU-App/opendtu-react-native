@@ -1,6 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
 import { createContext, useCallback, useContext, useEffect } from 'react';
-import Config from 'react-native-config';
 
 import {
   setLatestAppRelease,
@@ -14,6 +13,7 @@ import {
 import ago from '@/utils/ago';
 import { rootLogging } from '@/utils/log';
 
+import { allowInAppUpdates } from '@/constants';
 import {
   AppGithubBaseConfig,
   OpenDTUGithubBaseConfig,
@@ -79,9 +79,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
   });
 
   const enableAppUpdates = useAppSelector(
-    state =>
-      !!state.settings.enableAppUpdates &&
-      Config.DISABLE_IN_APP_UPDATES !== 'true',
+    state => !!state.settings.enableAppUpdates && allowInAppUpdates,
   );
 
   const enableFetchOpenDTUReleases = useAppSelector(

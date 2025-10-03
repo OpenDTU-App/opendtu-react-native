@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Config from 'react-native-config';
 import { Box } from 'react-native-flex-layout';
 import {
   Appbar,
@@ -27,7 +26,7 @@ import ReleaseChangelog from '@/components/ReleaseChangelog';
 
 import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 
-import { spacing } from '@/constants';
+import { allowInAppUpdates, spacing } from '@/constants';
 import { useFetchControl } from '@/github/FetchHandler';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledView } from '@/style';
@@ -61,9 +60,7 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   }, [releaseFetchTime]);
 
   const inAppUpdatesEnabled = useAppSelector(
-    state =>
-      state.settings.enableAppUpdates &&
-      Config.DISABLE_IN_APP_UPDATES !== 'true',
+    state => !!state.settings.enableAppUpdates && allowInAppUpdates,
   );
 
   const handleToggleInAppUpdates = useCallback(() => {
@@ -89,7 +86,7 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('settings.aboutApp')} />
-        {Config.DISABLE_IN_APP_UPDATES !== 'true' ? (
+        {allowInAppUpdates ? (
           <Appbar.Action icon="refresh" onPress={handleShowRefreshModal} />
         ) : null}
       </Appbar.Header>
@@ -127,50 +124,62 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                     </Box>
                   </Box>
                 </Box>
-                {Config.DISABLE_IN_APP_UPDATES !== 'true' ? (
-                  <>
-                    <Divider />
-                    <Box p={8}>
-                      <Box
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          justifyContent: 'center',
-                          gap: 4,
-                        }}
-                      >
-                        <Text
-                          variant="titleLarge"
-                          style={{ textAlign: 'center' }}
-                        >
-                          {hasNewAppVersion
-                            ? t('aboutApp.newVersionAvailable')
-                            : t('aboutApp.latestAppRelease')}
-                        </Text>
-                        <Badge
+                {allowInAppUpdates ? (
+                  <Surface
+                    style={{ margin: 8, borderRadius: 24 }}
+                    elevation={1}
+                    mode="flat"
+                  >
+                    <Box mh={12}>
+                      <Box pt={12} pb={8}>
+                        <Box
                           style={{
-                            alignSelf: 'center',
-                            backgroundColor: theme.colors.primary,
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            gap: 8,
                           }}
                         >
-                          {prettyTagName}
-                        </Badge>
+                          <Text
+                            variant="titleLarge"
+                            style={{ textAlign: 'center' }}
+                          >
+                            {hasNewAppVersion
+                              ? t('aboutApp.newVersionAvailable')
+                              : t('aboutApp.latestAppRelease')}
+                          </Text>
+                          <Badge
+                            style={{
+                              alignSelf: 'center',
+                              backgroundColor: theme.colors.primary,
+                              paddingHorizontal: 8,
+                            }}
+                          >
+                            {prettyTagName}
+                          </Badge>
+                        </Box>
+                        <Box>
+                          <Text
+                            variant="bodySmall"
+                            style={{ textAlign: 'center' }}
+                          >
+                            {t('fetchedWithTime', {
+                              time: formattedReleaseFetchTime,
+                            })}
+                          </Text>
+                        </Box>
                       </Box>
-                      <Box>
-                        <Text
-                          variant="bodySmall"
-                          style={{ textAlign: 'center' }}
-                        >
-                          {t('fetchedWithTime', {
-                            time: formattedReleaseFetchTime,
-                          })}
-                        </Text>
-                      </Box>
-                      <Surface
-                        style={{ padding: 16, marginTop: 8, borderRadius: 16 }}
+                      <Box
+                        style={{
+                          padding: 16,
+                          marginTop: 8,
+                          borderRadius: 16,
+                          backgroundColor: theme.colors.background,
+                        }}
                       >
                         <ReleaseChangelog releaseBody={releaseInfo?.body} />
-                      </Surface>
+                      </Box>
                       <Box mt={16} mb={8}>
                         <Button
                           buttonColor="#24292e"
@@ -193,19 +202,18 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       right={props => (
                         <Switch
                           {...props}
-                          value={!!inAppUpdatesEnabled}
+                          value={inAppUpdatesEnabled}
                           onValueChange={handleToggleInAppUpdates}
                           color={theme.colors.primary}
-                          disabled={Config.DISABLE_IN_APP_UPDATES === 'true'}
+                          disabled={!allowInAppUpdates}
                         />
                       )}
-                      disabled={Config.DISABLE_IN_APP_UPDATES === 'true'}
+                      disabled={!allowInAppUpdates}
                       style={{
-                        opacity:
-                          Config.DISABLE_IN_APP_UPDATES === 'true' ? 0.5 : 1,
+                        opacity: !allowInAppUpdates ? 0.5 : 1,
                       }}
                     />
-                  </>
+                  </Surface>
                 ) : null}
                 <View style={{ height: spacing * 2 }} />
               </ScrollView>

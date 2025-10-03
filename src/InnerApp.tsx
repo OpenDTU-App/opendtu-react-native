@@ -34,6 +34,7 @@ import EnableFetchOpenDtuUpdatesModal from '@/components/modals/EnableFetchOpenD
 
 import { rootLogging, setPushMessageFunction } from '@/utils/log';
 
+import { allowInAppUpdates } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { ReactNavigationDarkTheme, ReactNavigationLightTheme } from '@/style';
 import type { SupportedLanguage } from '@/translations';
@@ -284,9 +285,7 @@ const InnerApp: FC = () => {
   }, [i18n.language, t]);
 
   const showEnableAppUpdatesModal = useAppSelector(
-    state =>
-      state.settings.enableAppUpdates === null &&
-      Config.DISABLE_IN_APP_UPDATES !== 'true',
+    state => state.settings.enableAppUpdates === null && allowInAppUpdates,
   );
 
   const showEnableFetchOpenDTUReleasesModal = useAppSelector(
