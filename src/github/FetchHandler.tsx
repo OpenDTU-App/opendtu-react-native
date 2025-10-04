@@ -1,6 +1,8 @@
 import type { FC, PropsWithChildren } from 'react';
 import { createContext, useCallback, useContext, useEffect } from 'react';
 
+import { AppState } from 'react-native';
+
 import {
   setLatestAppRelease,
   setLatestAppReleaseTimeout,
@@ -90,15 +92,30 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
   const { isConnected } = useNetInfo();
 
+  const doChecks = useCallback((): boolean => {
+    if (!githubApi) {
+      log.info('No github api, skipping fetch...');
+      return false;
+    }
+
+    if (!isConnected) {
+      log.info('No internet connection, skipping fetch...');
+
+      return false;
+    }
+
+    if (!AppState.currentState.match(/active/)) {
+      log.info('App is not active, skipping fetch...');
+
+      return false;
+    }
+
+    return true;
+  }, [githubApi, isConnected]);
+
   const fetchLatestReleaseHandler = useCallback(
     async (force?: boolean): Promise<boolean> => {
-      if (!githubApi) return false;
-
-      if (!isConnected) {
-        log.info('No internet connection, skipping fetch...');
-
-        return false;
-      }
+      if (!doChecks()) return false;
 
       try {
         if ((latestReleaseUpdateOk || force) && enableFetchOpenDTUReleases) {
@@ -106,7 +123,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
           log.info('Fetching latest release from Github api...');
 
-          const latestRelease = await githubApi.request(
+          const latestRelease = await githubApi!.request(
             'GET /repos/{owner}/{repo}/releases/latest',
             OpenDTUGithubBaseConfig,
           );
@@ -126,7 +143,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
       return false;
     },
     [
-      isConnected,
+      doChecks,
       dispatch,
       enableFetchOpenDTUReleases,
       githubApi,
@@ -136,13 +153,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
   const fetchAllReleasesHandler = useCallback(
     async (force?: boolean): Promise<boolean> => {
-      if (!githubApi) return false;
-
-      if (!isConnected) {
-        log.info('No internet connection, skipping fetch...');
-
-        return false;
-      }
+      if (!doChecks()) return false;
 
       try {
         if ((allReleasesUpdateOk || force) && enableFetchOpenDTUReleases) {
@@ -150,7 +161,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
           log.info('Fetching all releases from Github api...');
 
-          const releases = await githubApi.paginate(
+          const releases = await githubApi!.paginate(
             'GET /repos/{owner}/{repo}/releases',
             OpenDTUGithubBaseConfig,
           );
@@ -170,23 +181,17 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
       return false;
     },
     [
-      isConnected,
+      doChecks,
       allReleasesUpdateOk,
-      dispatch,
       enableFetchOpenDTUReleases,
+      dispatch,
       githubApi,
     ],
   );
 
   const fetchLatestAppReleaseHandler = useCallback(
     async (force?: boolean): Promise<boolean> => {
-      if (!githubApi) return false;
-
-      if (!isConnected) {
-        log.info('No internet connection, skipping fetch...');
-
-        return false;
-      }
+      if (!doChecks()) return false;
 
       try {
         if ((latestAppReleaseUpdateOk || force) && enableAppUpdates) {
@@ -194,7 +199,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
           log.info('Fetching latest app release from Github api...');
 
-          const appRelease = await githubApi.request(
+          const appRelease = await githubApi!.request(
             'GET /repos/{owner}/{repo}/releases/latest',
             AppGithubBaseConfig,
           );
@@ -213,13 +218,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
       return false;
     },
-    [
-      isConnected,
-      dispatch,
-      enableAppUpdates,
-      githubApi,
-      latestAppReleaseUpdateOk,
-    ],
+    [doChecks, latestAppReleaseUpdateOk, enableAppUpdates, dispatch, githubApi],
   );
 
   const fetchHandler = useCallback(async () => {
