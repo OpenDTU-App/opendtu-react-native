@@ -154,6 +154,8 @@
         }
     },
     "resolutions": {
-        "use-latest-callback": "0.2.3"
+        "use-latest-callback": "0.2.3",
+        "markdown-it": "^14.0.0",
+        "@types/markdown-it": "^14.0.1"
     }
 }
