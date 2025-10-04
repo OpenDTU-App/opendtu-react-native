@@ -16,8 +16,8 @@ import type {
   DatabaseAwaitReturnType,
   DatabaseReturnType,
   InverterRangeQueryArgs,
-} from '@/database/index';
-import { DatabaseType, GrafanaColors } from '@/database/index';
+} from '@/database';
+import { DatabaseType, GrafanaColors } from '@/database';
 
 export interface PrometheusResult {
   time: Date;
@@ -31,8 +31,7 @@ class PrometheusDatabase implements Database {
   lastUpdate: Date | undefined;
   config: DatabaseConfig;
   updateInterval: NodeJS.Timeout | number | undefined;
-
-  private statusSuccess = false;
+  statusSuccess = false;
 
   private db: PrometheusDriver;
 
@@ -49,15 +48,37 @@ class PrometheusDatabase implements Database {
 
     this.statusSuccess = false;
 
-    this.db
-      .status()
-      .then(() => {
-        this.statusSuccess = true;
-      })
-      .catch(error => {
-        log.error('PrometheusDatabase status error', error);
-        this.statusSuccess = false;
-      });
+    // initial status check
+    this.doStatusCheck().then(() => {
+      log.debug('Initial status check done', this.statusSuccess);
+    });
+  }
+
+  getLastUpdate(): Date | undefined {
+    return this.lastUpdate;
+  }
+
+  getStatusSuccess(): boolean {
+    return this.statusSuccess;
+  }
+
+  getType(): DatabaseType {
+    return this.type;
+  }
+
+  async doStatusCheck(): Promise<boolean> {
+    log.info('Doing status check');
+
+    try {
+      await this.db.status();
+      this.statusSuccess = true;
+    } catch (error) {
+      log.error('PrometheusDatabase status error', error);
+      this.statusSuccess = false;
+    }
+
+    this.lastUpdate = new Date();
+    return this.statusSuccess;
   }
 
   isSame(config: DatabaseConfig | null | undefined): boolean {
@@ -74,7 +95,7 @@ class PrometheusDatabase implements Database {
     if (!this.statusSuccess) {
       log.warn('Could not fetch database status (!statusSuccess)');
       return {
-        message: 'Could not fetch database status (!statusSuccess)',
+        message: 'Could not fetch database status',
         success: false,
         loading: false,
       };
@@ -93,7 +114,7 @@ class PrometheusDatabase implements Database {
     if (!this.statusSuccess) {
       log.warn('Could not fetch database status (!statusSuccess)');
       return {
-        message: 'Could not fetch database status (!statusSuccess)',
+        message: 'Could not fetch database status',
         success: false,
         loading: false,
       };
@@ -112,7 +133,7 @@ class PrometheusDatabase implements Database {
     if (!this.statusSuccess) {
       log.warn('Could not fetch database status (!statusSuccess)');
       return {
-        message: 'Could not fetch database status (!statusSuccess)',
+        message: 'Could not fetch database status',
         success: false,
         loading: false,
       };
@@ -131,7 +152,7 @@ class PrometheusDatabase implements Database {
     if (!this.statusSuccess) {
       log.warn('Could not fetch database status (!statusSuccess)');
       return {
-        message: 'Could not fetch database status (!statusSuccess)',
+        message: 'Could not fetch database status',
         success: false,
         loading: false,
       };
@@ -150,7 +171,7 @@ class PrometheusDatabase implements Database {
     if (!this.statusSuccess) {
       log.warn('Could not fetch database status (!statusSuccess)');
       return {
-        message: 'Could not fetch database status (!statusSuccess)',
+        message: 'Could not fetch database status',
         success: false,
         loading: false,
       };
@@ -177,7 +198,7 @@ class PrometheusDatabase implements Database {
       if (result.result.length === 0) {
         log.warn('No data (result.length === 0)');
         return {
-          message: 'No data (result.length === 0)',
+          message: 'No data received from database',
           success: false,
           loading: false,
         };
@@ -235,6 +256,8 @@ class PrometheusDatabase implements Database {
     } catch (error) {
       const e = error as Error;
       log.error('PrometheusDatabase performQuery error', e);
+
+      this.statusSuccess = false;
 
       return {
         message: e.message ?? `Unknown error (${e.name})`,

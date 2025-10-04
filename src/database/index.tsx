@@ -10,6 +10,8 @@ import { useTranslation } from 'react-i18next';
 
 import { Dimensions } from 'react-native';
 
+import type { TFunction } from 'i18next';
+
 import { clearUpdateResult, setUpdateResult } from '@/slices/database';
 
 import type { InverterFromStatus } from '@/types/opendtu/status';
@@ -81,6 +83,12 @@ export abstract class Database {
   abstract readonly lastUpdate: Date | undefined;
   abstract config: DatabaseConfig;
   abstract updateInterval: NodeJS.Timeout | number | undefined;
+  abstract statusSuccess: boolean;
+
+  abstract doStatusCheck(): Promise<boolean>;
+  abstract getStatusSuccess(): boolean;
+  abstract getLastUpdate(): Date | undefined;
+  abstract getType(): DatabaseType;
 
   abstract acVoltage(args: InverterRangeQueryArgs): DatabaseReturnType;
   abstract acCurrent(args: InverterRangeQueryArgs): DatabaseReturnType;
@@ -88,11 +96,80 @@ export abstract class Database {
   abstract dcVoltage(args: InverterRangeQueryArgs): DatabaseReturnType;
   abstract dcPower(args: InverterRangeQueryArgs): DatabaseReturnType;
 
-  abstract isSame: (config: DatabaseConfig | null | undefined) => boolean;
+  abstract isSame(config: DatabaseConfig | null | undefined): boolean;
 
-  abstract close: () => Promise<void>;
+  abstract close(): Promise<void>;
   abstract get name(): string;
 }
+
+export const refreshDatabase = async (
+  database: Database,
+  t: TFunction,
+  {
+    from,
+    to,
+    step,
+    inverters,
+  }: {
+    from: Date;
+    to: Date;
+    step: number;
+    inverters: InverterFromStatus[];
+  },
+): Promise<UpdateResult> => {
+  if (!database.getStatusSuccess()) {
+    await database.doStatusCheck();
+  }
+
+  const [acVoltage, acCurrent, acPower, dcVoltage, dcPower] = await Promise.all(
+    [
+      database.acVoltage({
+        from,
+        to,
+        step,
+        inverters,
+        label: t('charts.acVoltage'),
+        unit: 'V',
+      }),
+      database.acCurrent({
+        from,
+        to,
+        step,
+        inverters,
+        label: t('charts.acCurrent'),
+        unit: 'A',
+      }),
+      database.acPower({
+        from,
+        to,
+        step,
+        inverters,
+        label: t('charts.acPower'),
+        unit: 'W',
+      }),
+      database.dcVoltage({
+        from,
+        to,
+        step,
+        inverters,
+        label: t('charts.dcVoltage'),
+        unit: 'V',
+        labelName: 'channel',
+      }),
+      database.dcPower({
+        from,
+        to,
+        step,
+        inverters,
+        label: t('charts.dcPower'),
+        unit: 'W',
+        labelName: 'channel',
+      }),
+    ],
+  );
+
+  return { acVoltage, acCurrent, acPower, dcVoltage, dcPower };
+};
 
 export const GrafanaColors: string[] = [
   '#7EB26D',
@@ -320,52 +397,9 @@ const DatabaseProvider: FC<PropsWithChildren> = ({ children }) => {
       Math.ceil((to.getTime() - from.getTime()) / maxDataPoints / 1000),
     );
 
-    const data: UpdateResult = {
-      acVoltage: await database.acVoltage({
-        from,
-        to,
-        step,
-        inverters,
-        label: t('charts.acVoltage'),
-        unit: 'V',
-      }),
-      acCurrent: await database.acCurrent({
-        from,
-        to,
-        step,
-        inverters,
-        label: t('charts.acCurrent'),
-        unit: 'A',
-      }),
-      acPower: await database.acPower({
-        from,
-        to,
-        step,
-        inverters,
-        label: t('charts.acPower'),
-        unit: 'W',
-      }),
-      dcVoltage: await database.dcVoltage({
-        from,
-        to,
-        step,
-        inverters,
-        label: t('charts.dcVoltage'),
-        unit: 'V',
-        labelName: 'channel',
-      }),
-      dcPower: await database.dcPower({
-        from,
-        to,
-        step,
-        inverters,
-        label: t('charts.dcPower'),
-        unit: 'W',
-        labelName: 'channel',
-      }),
-    };
-
-    await handleUpdateData(data);
+    await handleUpdateData(
+      await refreshDatabase(database, t, { from, to, step, inverters }),
+    );
   }, [
     database,
     databaseTimeRange.end,
