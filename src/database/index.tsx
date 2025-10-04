@@ -117,7 +117,9 @@ export const refreshDatabase = async (
     inverters: InverterFromStatus[];
   },
 ): Promise<UpdateResult> => {
-  // check if database is
+  if (!database.getStatusSuccess()) {
+    await database.doStatusCheck();
+  }
 
   const [acVoltage, acCurrent, acPower, dcVoltage, dcPower] = await Promise.all(
     [

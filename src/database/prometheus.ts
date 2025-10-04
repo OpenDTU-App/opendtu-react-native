@@ -67,6 +67,8 @@ class PrometheusDatabase implements Database {
   }
 
   async doStatusCheck(): Promise<boolean> {
+    log.info('Doing status check');
+
     try {
       await this.db.status();
       this.statusSuccess = true;
@@ -93,7 +95,7 @@ class PrometheusDatabase implements Database {
     if (!this.statusSuccess) {
       log.warn('Could not fetch database status (!statusSuccess)');
       return {
-        message: 'Could not fetch database status (!statusSuccess)',
+        message: 'Could not fetch database status',
         success: false,
         loading: false,
       };
@@ -112,7 +114,7 @@ class PrometheusDatabase implements Database {
     if (!this.statusSuccess) {
       log.warn('Could not fetch database status (!statusSuccess)');
       return {
-        message: 'Could not fetch database status (!statusSuccess)',
+        message: 'Could not fetch database status',
         success: false,
         loading: false,
       };
@@ -131,7 +133,7 @@ class PrometheusDatabase implements Database {
     if (!this.statusSuccess) {
       log.warn('Could not fetch database status (!statusSuccess)');
       return {
-        message: 'Could not fetch database status (!statusSuccess)',
+        message: 'Could not fetch database status',
         success: false,
         loading: false,
       };
@@ -150,7 +152,7 @@ class PrometheusDatabase implements Database {
     if (!this.statusSuccess) {
       log.warn('Could not fetch database status (!statusSuccess)');
       return {
-        message: 'Could not fetch database status (!statusSuccess)',
+        message: 'Could not fetch database status',
         success: false,
         loading: false,
       };
@@ -169,7 +171,7 @@ class PrometheusDatabase implements Database {
     if (!this.statusSuccess) {
       log.warn('Could not fetch database status (!statusSuccess)');
       return {
-        message: 'Could not fetch database status (!statusSuccess)',
+        message: 'Could not fetch database status',
         success: false,
         loading: false,
       };
@@ -196,7 +198,7 @@ class PrometheusDatabase implements Database {
       if (result.result.length === 0) {
         log.warn('No data (result.length === 0)');
         return {
-          message: 'No data (result.length === 0)',
+          message: 'No data received from database',
           success: false,
           loading: false,
         };
@@ -254,6 +256,8 @@ class PrometheusDatabase implements Database {
     } catch (error) {
       const e = error as Error;
       log.error('PrometheusDatabase performQuery error', e);
+
+      this.statusSuccess = false;
 
       return {
         message: e.message ?? `Unknown error (${e.name})`,
