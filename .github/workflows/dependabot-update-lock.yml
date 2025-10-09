@@ -31,7 +31,7 @@ jobs:
 
       - name: Install Packages
         run: |
-          yarn install --immutable --check-cache --ignore-scripts
+          YARN_ENABLE_SCRIPTS=false yarn install --immutable --check-cache
 
       - name: Cache pods
         uses: actions/cache@v4
