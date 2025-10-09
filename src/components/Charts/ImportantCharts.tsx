@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
+import { Box, Flex } from 'react-native-flex-layout';
 import {
   Icon,
   IconButton,

@@ -2,27 +2,19 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import {
-  Button,
-  Portal,
-  RadioButton,
-  Text,
-  useTheme,
-} from 'react-native-paper';
+import { Portal, RadioButton, useTheme } from 'react-native-paper';
 
 import { ScrollView, View } from 'react-native';
 
 import BaseModal from '@/components/BaseModal';
 
-import { spacing } from '@/constants';
-
 export interface ChangeEnumValueModalProps {
   isOpen?: boolean;
+  title: string;
   onClose?: () => void;
   defaultValue?: string;
   onChange?: (value: string) => void;
   possibleValues: PossibleEnumValues;
-  title?: string;
   description?: string;
 }
 
@@ -67,68 +59,49 @@ const ChangeEnumValueModal: FC<ChangeEnumValueModalProps> = ({
 
   return (
     <Portal>
-      <BaseModal visible={!!isOpen} onDismiss={handleCancel}>
+      <BaseModal
+        visible={!!isOpen}
+        onDismiss={handleCancel}
+        title={title}
+        description={description}
+        dismissButton="cancel"
+        actions={[{ label: t('apply'), onPress: handleSave }]}
+      >
         <View
           style={{
-            padding: spacing,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-between',
           }}
         >
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-          >
-            <View style={{ width: '100%' }}>
-              <Text variant="titleLarge">{title}</Text>
-              <Text variant="bodyMedium">{description}</Text>
-            </View>
-            <ScrollView
-              style={{ maxHeight: 450, width: '100%', marginVertical: spacing }}
+          <ScrollView style={{ maxHeight: 450, width: '100%' }}>
+            <Box
+              mv={4}
+              style={{
+                backgroundColor: theme.colors.surfaceVariant,
+                borderRadius: theme.roundness * 6,
+                overflow: 'hidden',
+              }}
             >
-              <Box
-                mv={4}
-                style={{
-                  backgroundColor: theme.colors.surfaceVariant,
-                  borderRadius: theme.roundness * 6,
-                  overflow: 'hidden',
-                }}
-              >
-                <RadioButton.Group onValueChange={setValue} value={value}>
-                  {possibleValues.map(({ label, value }) => (
-                    <RadioButton.Item
-                      value={value}
-                      label={label}
-                      labelVariant="bodyMedium"
-                      style={{
-                        borderRadius: theme.roundness * 6,
-                      }}
-                      labelStyle={{
-                        borderRadius: theme.roundness * 6,
-                      }}
-                    />
-                  ))}
-                </RadioButton.Group>
-              </Box>
-            </ScrollView>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              gap: 8,
-              marginTop: spacing,
-            }}
-          >
-            <Button mode="text" onPress={handleCancel} style={{ flex: 1 }}>
-              {t('cancel')}
-            </Button>
-            <Button mode="contained" onPress={handleSave} style={{ flex: 1 }}>
-              {t('apply')}
-            </Button>
-          </View>
+              <RadioButton.Group onValueChange={setValue} value={value}>
+                {possibleValues.map(({ label, value }) => (
+                  <RadioButton.Item
+                    key={`ChangeEnumValueModal-${value}`}
+                    value={value}
+                    label={label}
+                    labelVariant="bodyMedium"
+                    style={{
+                      borderRadius: theme.roundness * 6,
+                    }}
+                    labelStyle={{
+                      borderRadius: theme.roundness * 6,
+                    }}
+                  />
+                ))}
+              </RadioButton.Group>
+            </Box>
+          </ScrollView>
         </View>
       </BaseModal>
     </Portal>

@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import type { ModalProps } from 'react-native-paper';
 import {
   ActivityIndicator,
   Button,
@@ -15,6 +14,7 @@ import {
   useTheme,
 } from 'react-native-paper';
 
+import type { ExtendableModalProps } from '@/components/BaseModal';
 import BaseModal from '@/components/BaseModal';
 
 import { rootLogging } from '@/utils/log';
@@ -26,8 +26,7 @@ import type { ReleaseAsset } from '@octokit/webhooks-types';
 
 const log = rootLogging.extend('InstallAssetModal');
 
-export interface InstallFirmwareModalProps
-  extends Omit<ModalProps, 'children'> {
+export interface InstallFirmwareModalProps extends ExtendableModalProps {
   asset: ReleaseAsset | null;
   version: string | null;
   closeAll: () => void;

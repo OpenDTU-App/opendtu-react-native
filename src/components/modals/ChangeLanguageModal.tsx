@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import type { ModalProps } from 'react-native-paper';
 import {
   Button,
   Portal,
@@ -16,6 +15,7 @@ import { Linking } from 'react-native';
 
 import { setLanguage } from '@/slices/settings';
 
+import type { ExtendableModalProps } from '@/components/BaseModal';
 import BaseModal from '@/components/BaseModal';
 
 import useAppLanguage from '@/hooks/useAppLanguage';
@@ -29,7 +29,7 @@ import { supportedLanguages } from '@/translations';
 
 const log = rootLogging.extend('ChangeLanguageModal');
 
-const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
+const ChangeLanguageModal: FC<ExtendableModalProps> = props => {
   const { onDismiss } = props;
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -64,58 +64,53 @@ const ChangeLanguageModal: FC<Omit<ModalProps, 'children'>> = props => {
 
   return (
     <Portal>
-      <BaseModal {...props}>
-        <Box p={8}>
-          <Box m={8}>
-            <Text variant="bodyLarge">{t('settings.changeTheLanguage')}</Text>
-          </Box>
-          <RadioButton.Group
-            value={selectedLanguage}
-            onValueChange={value =>
-              setSelectedLanguage(value as SupportedLanguage)
-            }
+      <BaseModal
+        {...props}
+        title={t('settings.changeTheLanguage')}
+        icon="translate"
+        onDismiss={handleAbort}
+        dismissButton="cancel"
+        actions={[
+          {
+            label: t('change'),
+            onPress: handleChangeLanguage,
+          },
+        ]}
+      >
+        <RadioButton.Group
+          value={selectedLanguage}
+          onValueChange={value =>
+            setSelectedLanguage(value as SupportedLanguage)
+          }
+        >
+          {supportedLanguages.map(language => (
+            <RadioButton.Item
+              key={language}
+              label={t(`languages.${language}`)}
+              value={language}
+            />
+          ))}
+        </RadioButton.Group>
+        <Box
+          mt={16}
+          style={{
+            gap: 16,
+            backgroundColor: theme.colors.surface,
+            padding: 16,
+            borderRadius: theme.roundness * 6,
+          }}
+        >
+          <Text variant="bodyMedium" style={{ textAlign: 'center' }}>
+            {t('settings.weblateInfo')}
+          </Text>
+          <Button
+            buttonColor={colors.weblate}
+            textColor={colors.onWeblate}
+            onPress={handleOpenWeblate}
+            icon="open-in-new"
           >
-            {supportedLanguages.map(language => (
-              <RadioButton.Item
-                key={language}
-                label={t(`languages.${language}`)}
-                value={language}
-              />
-            ))}
-          </RadioButton.Group>
-          <Box
-            mt={16}
-            style={{
-              gap: 8,
-              backgroundColor: theme.colors.elevation.level1,
-              padding: 8,
-              borderRadius: theme.roundness * 4,
-            }}
-          >
-            <Text variant="bodyMedium">{t('settings.weblateInfo')}</Text>
-            <Button
-              buttonColor={colors.weblate}
-              textColor={colors.onWeblate}
-              onPress={handleOpenWeblate}
-            >
-              {t('settings.openWeblate')}
-            </Button>
-          </Box>
-          <Box
-            mt={16}
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-            }}
-          >
-            <Button onPress={handleAbort}>{t('cancel')}</Button>
-            <Box ml={8}>
-              <Button mode="contained" onPress={handleChangeLanguage}>
-                {t('change')}
-              </Button>
-            </Box>
-          </Box>
+            {t('settings.openWeblate')}
+          </Button>
         </Box>
       </BaseModal>
     </Portal>

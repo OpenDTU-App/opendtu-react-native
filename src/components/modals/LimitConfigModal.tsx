@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import type { ModalProps } from 'react-native-paper';
 import {
   Button,
   HelperText,
@@ -18,6 +17,7 @@ import type { TFunction } from 'i18next';
 import type { LimitConfig } from '@/types/opendtu/control';
 import { SetStatus } from '@/types/opendtu/control';
 
+import type { ExtendableModalProps } from '@/components/BaseModal';
 import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
@@ -25,7 +25,7 @@ import useInverterLimits from '@/hooks/useInverterLimits';
 
 import { useApi } from '@/api/ApiHandler';
 
-export interface LimitConfigModalProps extends Omit<ModalProps, 'children'> {
+export interface LimitConfigModalProps extends ExtendableModalProps {
   inverterSerial: string;
 }
 
@@ -172,11 +172,14 @@ const LimitConfigModal: FC<LimitConfigModalProps> = ({
 
   return (
     <Portal>
-      <BaseModal {...props} onDismiss={onDismiss}>
+      <BaseModal
+        {...props}
+        onDismiss={onDismiss}
+        title={t('limitStatus.title')}
+        dismissButton={false}
+        hideBottomPadding
+      >
         <Box pt={16} style={{ maxHeight: '100%' }}>
-          <Box mb={8} ph={16}>
-            <Text variant="titleMedium">{t('limitStatus.title')}</Text>
-          </Box>
           <Surface
             style={{
               borderRadius: theme.roundness * 4,

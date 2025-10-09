@@ -1,21 +1,19 @@
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Flex } from 'react-native-flex-layout';
 import type { SwitchProps } from 'react-native-paper';
-import { Button, Portal, Switch, Text } from 'react-native-paper';
-
-import { View } from 'react-native';
+import { Portal, Switch, Text } from 'react-native-paper';
 
 import BaseModal from '@/components/BaseModal';
 
-import { spacing } from '@/constants';
-
 export interface ChangeBooleanValueModalProps {
   isOpen?: boolean;
+  title: string;
+  switchLabel: string;
   onClose?: () => void;
   defaultValue?: boolean;
   onChange?: (value: boolean) => void;
-  title?: string;
   description?: string;
   inputProps?: Omit<SwitchProps, 'value' | 'onValueChange'>;
 }
@@ -28,6 +26,7 @@ const ChangeBooleanValueModal: FC<ChangeBooleanValueModalProps> = ({
   onChange: onSave,
   onClose,
   inputProps,
+  switchLabel,
 }) => {
   const { t } = useTranslation();
 
@@ -58,51 +57,30 @@ const ChangeBooleanValueModal: FC<ChangeBooleanValueModalProps> = ({
 
   return (
     <Portal>
-      <BaseModal visible={!!isOpen} onDismiss={handleCancel}>
-        <View
-          style={{
-            padding: spacing,
-            alignItems: 'center',
-          }}
+      <BaseModal
+        visible={!!isOpen}
+        onDismiss={handleCancel}
+        title={title}
+        description={description}
+        dismissButton="cancel"
+        actions={[{ label: t('apply'), onPress: handleSave }]}
+      >
+        <Flex
+          direction="row"
+          justify="between"
+          items="center"
+          style={{ gap: 16 }}
         >
-          <View
-            style={{
-              width: '100%',
-              alignItems: 'center',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              display: 'flex',
+          <Text variant="bodyLarge">{switchLabel}</Text>
+          <Switch
+            value={value}
+            onValueChange={value => {
+              setWasModified(true);
+              setValue(value);
             }}
-          >
-            <View style={{ flex: 1 }}>
-              <Text variant="titleLarge">{title}</Text>
-              <Text variant="bodyMedium">{description}</Text>
-            </View>
-            <Switch
-              value={value}
-              onValueChange={value => {
-                setWasModified(true);
-                setValue(value);
-              }}
-              {...inputProps}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              gap: 8,
-              marginTop: spacing * 2,
-            }}
-          >
-            <Button mode="text" onPress={handleCancel} style={{ flex: 1 }}>
-              {t('cancel')}
-            </Button>
-            <Button mode="contained" onPress={handleSave} style={{ flex: 1 }}>
-              {t('apply')}
-            </Button>
-          </View>
-        </View>
+            {...inputProps}
+          />
+        </Flex>
       </BaseModal>
     </Portal>
   );

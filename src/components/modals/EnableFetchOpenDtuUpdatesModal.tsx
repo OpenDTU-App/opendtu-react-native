@@ -1,17 +1,16 @@
 import type { FC } from 'react';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
-import type { ModalProps } from 'react-native-paper';
-import { Button, Portal, Text } from 'react-native-paper';
+import { Portal } from 'react-native-paper';
 
 import { setEnableFetchOpenDTUReleases } from '@/slices/settings';
 
+import type { ExtendableModalProps } from '@/components/BaseModal';
 import BaseModal from '@/components/BaseModal';
 
 import { useAppDispatch } from '@/store';
 
-const EnableAppUpdatesModal: FC<Omit<ModalProps, 'children'>> = props => {
+const EnableAppUpdatesModal: FC<ExtendableModalProps> = props => {
   const { onDismiss } = props;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -32,37 +31,24 @@ const EnableAppUpdatesModal: FC<Omit<ModalProps, 'children'>> = props => {
 
   return (
     <Portal>
-      <BaseModal {...props}>
-        <Box p={16}>
-          <Box mb={8}>
-            <Text variant="bodyLarge">
-              {t('settings.doYouWantToEnableOpenDtuUpdates')}
-            </Text>
-            <Text variant="bodySmall" style={{ opacity: 0.75 }}>
-              {t('settings.thisWillMakeRequestsToGithub')}
-            </Text>
-          </Box>
-        </Box>
-        <Box
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            padding: 8,
-          }}
-        >
-          <Button
-            style={{ marginRight: 8 }}
-            onPress={handleEnable}
-            mode="contained"
-          >
-            {t('enable')}
-          </Button>
-          <Button onPress={handleDisable} mode="text">
-            {t('disable')}
-          </Button>
-        </Box>
-      </BaseModal>
+      <BaseModal
+        {...props}
+        title={t('settings.doYouWantToEnableOpenDtuUpdates')}
+        description={t('settings.thisWillMakeRequestsToGithub')}
+        onDismiss={handleAbort}
+        dismissButton="cancel"
+        icon="update"
+        actions={[
+          {
+            label: t('disable'),
+            onPress: handleDisable,
+          },
+          {
+            label: t('enable'),
+            onPress: handleEnable,
+          },
+        ]}
+      />
     </Portal>
   );
 };

@@ -6,7 +6,6 @@ import type { ModalProps } from 'react-native-paper';
 import {
   Appbar,
   IconButton,
-  Portal,
   RadioButton,
   TextInput,
   useTheme,
@@ -18,7 +17,6 @@ import Fuse from 'fuse.js';
 
 import type { NTPSettings, TimezoneData } from '@/types/opendtu/settings';
 
-import BaseModal from '@/components/BaseModal';
 import type { PossibleEnumValues } from '@/components/modals/ChangeEnumValueModal';
 
 import { rootLogging } from '@/utils/log';
@@ -164,75 +162,73 @@ const NTPChangeTimezoneModal: FC<NTPChangeTimezoneModalProps> = props => {
   ]);
 
   return (
-    <Portal>
-      <BaseModal {...props} isScreen backgroundColor={theme.colors.background}>
-        <Appbar.Header>
-          <Appbar.BackAction onPress={props.onDismiss} />
-          <Appbar.Content title={t('settings.ntpSettings.timezoneConfig')} />
-        </Appbar.Header>
-        <Box style={{ width: '100%', flex: 1 }}>
-          <Box style={{ height: '100%' }}>
-            <Box
-              mv={8}
-              ph={8}
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                gap: 8,
-                alignItems: 'center',
+    <>
+      <Appbar.Header>
+        <Appbar.BackAction onPress={props.onDismiss} />
+        <Appbar.Content title={t('settings.ntpSettings.timezoneConfig')} />
+      </Appbar.Header>
+      <Box style={{ width: '100%', flex: 1 }}>
+        <Box style={{ height: '100%' }}>
+          <Box
+            mv={8}
+            ph={8}
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: 8,
+              alignItems: 'center',
+            }}
+          >
+            <TextInput
+              label={t('settings.ntpSettings.search')}
+              value={searchQuery}
+              style={{ flex: 1, marginHorizontal: 8 }}
+              onChangeText={value => {
+                setSearchQuery(value);
               }}
-            >
-              <TextInput
-                label={t('settings.ntpSettings.search')}
-                value={searchQuery}
-                style={{ flex: 1, marginHorizontal: 8 }}
-                onChangeText={value => {
-                  setSearchQuery(value);
-                }}
-                right={<TextInput.Icon icon="magnify" />}
-              />
-              <IconButton
-                onPress={() => {
-                  setSearchQuery('');
-                  setHasScrolledToSelectedTimezone(false);
-                }}
-                icon="close"
-              />
-            </Box>
-            <FlashList
-              extraData={selectedTimezone}
-              data={filteredTimezones}
-              ref={listRef}
-              refreshControl={
-                <RefreshControl
-                  refreshing={isRefreshing}
-                  onRefresh={handleGetTimezones}
-                  colors={[theme.colors.primary]}
-                  progressBackgroundColor={theme.colors.elevation.level3}
-                  tintColor={theme.colors.primary}
-                />
-              }
-              renderItem={({ item }) => (
-                <RadioButton.Item
-                  value={item.value}
-                  label={item.label}
-                  status={
-                    item.value === selectedTimezone ? 'checked' : 'unchecked'
-                  }
-                  onPress={() => {
-                    handleSetTimezone(item.value);
-                  }}
-                  labelVariant="bodyMedium"
-                  style={{
-                    backgroundColor: theme.colors.background,
-                  }}
-                />
-              )}
+              right={<TextInput.Icon icon="magnify" />}
+            />
+            <IconButton
+              onPress={() => {
+                setSearchQuery('');
+                setHasScrolledToSelectedTimezone(false);
+              }}
+              icon="close"
             />
           </Box>
+          <FlashList
+            extraData={selectedTimezone}
+            data={filteredTimezones}
+            ref={listRef}
+            refreshControl={
+              <RefreshControl
+                refreshing={isRefreshing}
+                onRefresh={handleGetTimezones}
+                colors={[theme.colors.primary]}
+                progressBackgroundColor={theme.colors.elevation.level3}
+                tintColor={theme.colors.primary}
+              />
+            }
+            renderItem={({ item }) => (
+              <RadioButton.Item
+                value={item.value}
+                label={item.label}
+                status={
+                  item.value === selectedTimezone ? 'checked' : 'unchecked'
+                }
+                onPress={() => {
+                  handleSetTimezone(item.value);
+                }}
+                labelVariant="bodyMedium"
+                style={{
+                  backgroundColor: theme.colors.background,
+                }}
+              />
+            )}
+          />
         </Box>
-      </BaseModal>
-    </Portal>
+      </Box>
+    </>
   );
 };
 

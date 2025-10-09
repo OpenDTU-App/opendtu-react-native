@@ -1,19 +1,17 @@
 import type { FC } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
-import type { ModalProps } from 'react-native-paper';
-import { Button, Portal, Text, useTheme } from 'react-native-paper';
+import { Portal, useTheme } from 'react-native-paper';
 
 import { updateDtuCustomName } from '@/slices/settings';
 
+import type { ExtendableModalProps } from '@/components/BaseModal';
 import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
 import { useAppDispatch, useAppSelector } from '@/store';
 
-export interface ChangeCustomNameModalProps
-  extends Omit<ModalProps, 'children'> {
+export interface ChangeCustomNameModalProps extends ExtendableModalProps {
   index: number;
 }
 
@@ -59,46 +57,32 @@ const ChangeCustomNameModal: FC<ChangeCustomNameModalProps> = props => {
 
   return (
     <Portal>
-      <BaseModal {...props}>
-        <Box p={16}>
-          <Box mb={8}>
-            <Text variant="bodyLarge">{t('device.changeTheDeviceName')}</Text>
-          </Box>
-          <StyledTextInput
-            label={t('device.deviceName')}
-            mode="outlined"
-            defaultValue={customName}
-            onChangeText={setCustomName}
-            style={{ backgroundColor: theme.colors.elevation.level3 }}
-          />
-        </Box>
-        <Box
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            padding: 8,
-          }}
-        >
-          <Button
-            mode="text"
-            onPress={resetCustomName}
-            style={{ marginRight: 8 }}
-            disabled={currentCustomName === currentHostname}
-          >
-            {t('reset')}
-          </Button>
-          <Button mode="text" onPress={handleAbort} style={{ marginRight: 8 }}>
-            {t('cancel')}
-          </Button>
-          <Button
-            mode="text"
-            onPress={handleRename}
-            disabled={customName === currentCustomName}
-          >
-            {t('rename')}
-          </Button>
-        </Box>
+      <BaseModal
+        {...props}
+        title={t('device.changeTheDeviceName')}
+        dismissButton="cancel"
+        onDismiss={handleAbort}
+        icon="format-size"
+        actions={[
+          {
+            label: t('reset'),
+            onPress: resetCustomName,
+            disabled: currentCustomName === currentHostname,
+          },
+          {
+            label: t('rename'),
+            onPress: handleRename,
+            disabled: customName === currentCustomName,
+          },
+        ]}
+      >
+        <StyledTextInput
+          label={t('device.deviceName')}
+          mode="outlined"
+          defaultValue={customName}
+          onChangeText={setCustomName}
+          style={{ backgroundColor: theme.colors.elevation.level3 }}
+        />
       </BaseModal>
     </Portal>
   );

@@ -2,8 +2,7 @@ import type { FC } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import type { ModalProps } from 'react-native-paper';
-import { Button, Portal, Text, useTheme } from 'react-native-paper';
+import { Portal, useTheme } from 'react-native-paper';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -11,13 +10,14 @@ import { addDatabaseConfig } from '@/slices/settings';
 
 import type { DatabaseConfig } from '@/types/settings';
 
+import type { ExtendableModalProps } from '@/components/BaseModal';
 import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
 import { DatabaseType } from '@/database';
 import { useAppDispatch } from '@/store';
 
-export type AddDatabaseModalProps = Omit<ModalProps, 'children'>;
+export type AddDatabaseModalProps = ExtendableModalProps;
 
 const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
   const { onDismiss } = props;
@@ -65,70 +65,59 @@ const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
 
   return (
     <Portal>
-      <BaseModal {...props}>
-        <Box p={16}>
-          <Box mb={8}>
-            <Text variant="bodyLarge">{t('database.addANewDatabase')}</Text>
-          </Box>
-          <Box mb={4}>
-            <StyledTextInput
-              label={t('database.name')}
-              mode="outlined"
-              onChangeText={setName}
-              style={{ backgroundColor: theme.colors.elevation.level3 }}
-              autoCapitalize="none"
-              autoCorrect={false}
-            />
-          </Box>
-          <Box mb={4}>
-            <StyledTextInput
-              label={t('database.baseUrl')}
-              mode="outlined"
-              onChangeText={setBaseUrl}
-              placeholder={baseUrlPlaceholder}
-              style={{ backgroundColor: theme.colors.elevation.level3 }}
-              textContentType="URL"
-              autoCapitalize="none"
-              autoCorrect={false}
-            />
-          </Box>
-          <Box mb={4}>
-            <StyledTextInput
-              label={t('database.username')}
-              mode="outlined"
-              onChangeText={setUsername}
-              style={{ backgroundColor: theme.colors.elevation.level3 }}
-              autoCapitalize="none"
-              autoCorrect={false}
-            />
-          </Box>
-          <Box mb={4}>
-            <StyledTextInput
-              label={t('database.password')}
-              mode="outlined"
-              onChangeText={setPassword}
-              style={{ backgroundColor: theme.colors.elevation.level3 }}
-              secureTextEntry
-              textContentType="password"
-              autoCapitalize="none"
-              autoCorrect={false}
-            />
-          </Box>
+      <BaseModal
+        {...props}
+        title={t('database.addANewDatabase')}
+        description={t('database.addANewDatabaseDescription')}
+        onDismiss={handleAbort}
+        dismissButton="cancel"
+        actions={[
+          { label: t('add'), onPress: handleAddDatabase, disabled: !valid },
+        ]}
+      >
+        <Box mb={4}>
+          <StyledTextInput
+            label={t('database.name')}
+            mode="outlined"
+            onChangeText={setName}
+            style={{ backgroundColor: theme.colors.elevation.level3 }}
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
         </Box>
-        <Box
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            padding: 8,
-          }}
-        >
-          <Button mode="text" onPress={handleAbort} style={{ marginRight: 8 }}>
-            {t('cancel')}
-          </Button>
-          <Button mode="text" onPress={handleAddDatabase} disabled={!valid}>
-            {t('add')}
-          </Button>
+        <Box mb={4}>
+          <StyledTextInput
+            label={t('database.baseUrl')}
+            mode="outlined"
+            onChangeText={setBaseUrl}
+            placeholder={baseUrlPlaceholder}
+            style={{ backgroundColor: theme.colors.elevation.level3 }}
+            textContentType="URL"
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
+        </Box>
+        <Box mb={4}>
+          <StyledTextInput
+            label={t('database.username')}
+            mode="outlined"
+            onChangeText={setUsername}
+            style={{ backgroundColor: theme.colors.elevation.level3 }}
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
+        </Box>
+        <Box mb={4}>
+          <StyledTextInput
+            label={t('database.password')}
+            mode="outlined"
+            onChangeText={setPassword}
+            style={{ backgroundColor: theme.colors.elevation.level3 }}
+            secureTextEntry
+            textContentType="password"
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
         </Box>
       </BaseModal>
     </Portal>

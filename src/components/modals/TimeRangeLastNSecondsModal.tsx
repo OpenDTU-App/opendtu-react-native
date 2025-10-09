@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
+import { Box, Flex } from 'react-native-flex-layout';
 import type { ModalProps } from 'react-native-paper';
 import { Button, Portal, Text, useTheme } from 'react-native-paper';
 
@@ -58,60 +58,49 @@ const TimeRangeLastNSecondsModal: FC<TimeRangeLastNSecondsModalProps> = ({
 
   return (
     <Portal>
-      <BaseModal {...props}>
-        <Box p={16}>
-          <Box mb={8}>
-            <Text variant="bodyLarge">
-              {t('configureGraphs.setLastNSeconds')}
-            </Text>
-          </Box>
-          <StyledTextInput
-            label={t('settings.seconds')}
-            keyboardType="numeric"
-            mode="outlined"
-            defaultValue={secondsState?.toString()}
-            onChangeText={handleChange}
-            style={{ backgroundColor: theme.colors.elevation.level3 }}
-            right={<StyledTextInput.Affix text="s" />}
-          />
-          <Box mt={8}>
-            <Text variant="bodyMedium">{t('configureGraphs.presets')}</Text>
-            <Box
-              style={{
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-              }}
-            >
-              {Object.entries(Presets).map(([key, value]) => (
+      <BaseModal
+        {...props}
+        title={t('configureGraphs.setLastNSeconds')}
+        onDismiss={handleAbort}
+        dismissButton="cancel"
+        icon="timer-sand"
+        actions={[
+          {
+            label: t('save'),
+            onPress: handleConfirm,
+            disabled: !secondsState || secondsState === seconds?.toString(),
+          },
+        ]}
+      >
+        <StyledTextInput
+          label={t('settings.seconds')}
+          keyboardType="numeric"
+          mode="outlined"
+          defaultValue={secondsState?.toString()}
+          onChangeText={handleChange}
+          style={{ backgroundColor: theme.colors.elevation.level3 }}
+          right={<StyledTextInput.Affix text="s" />}
+        />
+        <Box mt={8}>
+          <Text variant="bodyMedium">{t('configureGraphs.presets')}</Text>
+          <Flex direction="row" wrap="wrap" items="center" justify="start">
+            {Object.entries(Presets).map(([key, value]) => (
+              <Flex key={key} fill>
                 <Button
-                  key={key}
                   onPress={() => setSecondsState(value.toString())}
-                  mode="contained-tonal"
+                  mode="contained"
                   compact
-                  style={{ marginRight: 8, marginBottom: 8 }}
+                  style={{
+                    marginRight: 8,
+                    marginBottom: 8,
+                    paddingHorizontal: 12,
+                  }}
                 >
                   {key}
                 </Button>
-              ))}
-            </Box>
-          </Box>
-          <Box
-            mt={16}
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-            }}
-          >
-            <Button onPress={handleAbort}>{t('cancel')}</Button>
-            <Box ml={8}>
-              <Button mode="contained" onPress={handleConfirm}>
-                {t('save')}
-              </Button>
-            </Box>
-          </Box>
+              </Flex>
+            ))}
+          </Flex>
         </Box>
       </BaseModal>
     </Portal>

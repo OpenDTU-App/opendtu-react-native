@@ -98,74 +98,62 @@ const ManageDatabaseModal: FC<ManageDatabaseModalProps> = props => {
 
   return (
     <Portal>
-      <BaseModal {...props}>
-        <Box p={16}>
-          <Box mb={8}>
-            <Text variant="bodyLarge">
-              {t('settings.manageDatabase', { name: dbConfig?.name })}
-            </Text>
-          </Box>
-          <Box mb={4}>
-            <StyledTextInput
-              label={t('database.name')}
-              mode="outlined"
-              value={name ?? ''}
-              onChangeText={setName}
-              style={{ backgroundColor: theme.colors.elevation.level3 }}
-            />
-          </Box>
-          <Box mb={4}>
-            <StyledTextInput
-              label={t('database.baseUrl')}
-              mode="outlined"
-              value={baseUrl ?? ''}
-              onChangeText={setBaseUrl}
-              placeholder={baseUrlPlaceholder}
-              style={{ backgroundColor: theme.colors.elevation.level3 }}
-            />
-          </Box>
-          <Box mb={4}>
-            <StyledTextInput
-              label={t('database.username')}
-              mode="outlined"
-              value={username ?? ''}
-              onChangeText={setUsername}
-              style={{ backgroundColor: theme.colors.elevation.level3 }}
-            />
-          </Box>
-          <Box mb={4}>
-            <StyledTextInput
-              label={t('database.password')}
-              mode="outlined"
-              value={password ?? ''}
-              onChangeText={setPassword}
-              secureTextEntry
-              style={{ backgroundColor: theme.colors.elevation.level3 }}
-            />
-          </Box>
+      <BaseModal
+        {...props}
+        title={t('settings.manageDatabase', { name: dbConfig?.name })}
+        onDismiss={handleAbort}
+        dismissButton="cancel"
+        icon="database"
+        actions={[
+          {
+            label: t('delete'),
+            onPress: handleDeleteDatabase,
+            textColor: theme.colors.error,
+          },
+          {
+            label: t('save'),
+            onPress: handleEditDatabase,
+            disabled: !valid,
+          },
+        ]}
+      >
+        <Box mb={4}>
+          <StyledTextInput
+            label={t('database.name')}
+            mode="outlined"
+            value={name ?? ''}
+            onChangeText={setName}
+            style={{ backgroundColor: theme.colors.elevation.level3 }}
+          />
         </Box>
-        <Box
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            padding: 8,
-          }}
-        >
-          <Button
-            mode="text"
-            onPress={handleDeleteDatabase}
-            style={{ marginRight: 8 }}
-            textColor={theme.colors.error}
-          >
-            {t('delete')}
-          </Button>
-          <Button mode="text" onPress={handleAbort} style={{ marginRight: 8 }}>
-            {t('cancel')}
-          </Button>
-          <Button mode="text" onPress={handleEditDatabase} disabled={!valid}>
-            {t('save')}
-          </Button>
+        <Box mb={4}>
+          <StyledTextInput
+            label={t('database.baseUrl')}
+            mode="outlined"
+            value={baseUrl ?? ''}
+            onChangeText={setBaseUrl}
+            placeholder={baseUrlPlaceholder}
+            style={{ backgroundColor: theme.colors.elevation.level3 }}
+          />
+        </Box>
+        <Box mb={4}>
+          <StyledTextInput
+            label={t('database.username')}
+            mode="outlined"
+            value={username ?? ''}
+            onChangeText={setUsername}
+            style={{ backgroundColor: theme.colors.elevation.level3 }}
+          />
+        </Box>
+        <Box mb={4}>
+          <StyledTextInput
+            label={t('database.password')}
+            mode="outlined"
+            value={password ?? ''}
+            onChangeText={setPassword}
+            secureTextEntry
+            style={{ backgroundColor: theme.colors.elevation.level3 }}
+          />
         </Box>
       </BaseModal>
     </Portal>

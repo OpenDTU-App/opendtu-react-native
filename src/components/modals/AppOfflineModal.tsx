@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
-import { Portal, Text } from 'react-native-paper';
+import { Portal } from 'react-native-paper';
 
 import BaseModal from '@/components/BaseModal';
 
@@ -13,16 +12,15 @@ const AppOfflineModal: FC = () => {
 
   return (
     <Portal>
-      <BaseModal visible={!isConnected} dismissable={false}>
-        <Box p={16}>
-          <Box mb={8}>
-            <Text variant="bodyLarge">{t('offlineModal.title')}</Text>
-          </Box>
-          <Box mb={4}>
-            <Text>{t('offlineModal.description')}</Text>
-          </Box>
-        </Box>
-      </BaseModal>
+      <BaseModal
+        visible={!isConnected}
+        modalProps={{ dismissable: false, dismissableBackButton: false }}
+        title={t('offlineModal.title')}
+        description={t('offlineModal.description')}
+        dismissButton={false}
+        onDismiss={() => {}}
+        icon="wifi-off"
+      />
     </Portal>
   );
 };

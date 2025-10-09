@@ -1,15 +1,14 @@
 import type { FC } from 'react';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
-import type { ModalProps } from 'react-native-paper';
-import { Button, Portal, Text, useTheme } from 'react-native-paper';
+import { Portal, useTheme } from 'react-native-paper';
 
 import {
   removeDtuConfig,
   setSelectedDtuToFirstOrNull,
 } from '@/slices/settings';
 
+import type { ExtendableModalProps } from '@/components/BaseModal';
 import BaseModal from '@/components/BaseModal';
 
 import { useAppDispatch } from '@/store';
@@ -17,8 +16,7 @@ import { useAppDispatch } from '@/store';
 import type { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 
-export interface ConfirmDeleteDeviceModalProps
-  extends Omit<ModalProps, 'children'> {
+export interface ConfirmDeleteDeviceModalProps extends ExtendableModalProps {
   index: number;
 }
 
@@ -45,35 +43,21 @@ const ConfirmDeleteDeviceModal: FC<ConfirmDeleteDeviceModalProps> = props => {
 
   return (
     <Portal>
-      <BaseModal {...props}>
-        <Box p={16}>
-          <Box mb={8}>
-            <Text variant="bodyLarge">
-              {t('settings.doYouWantToDeleteThisConfig')}
-            </Text>
-          </Box>
-        </Box>
-        <Box
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            padding: 8,
-          }}
-        >
-          <Button mode="text" onPress={handleAbort} style={{ marginRight: 8 }}>
-            {t('cancel')}
-          </Button>
-          <Button
-            onPress={handleDelete}
-            mode="contained"
-            buttonColor={theme.colors.error}
-            textColor={theme.colors.onError}
-          >
-            {t('delete')}
-          </Button>
-        </Box>
-      </BaseModal>
+      <BaseModal
+        {...props}
+        title={t('settings.doYouWantToDeleteThisConfig')}
+        description={t('settings.thisActionIsIrreversible')}
+        onDismiss={handleAbort}
+        dismissButton="cancel"
+        icon="delete"
+        actions={[
+          {
+            label: t('delete'),
+            onPress: handleDelete,
+            textColor: theme.colors.error,
+          },
+        ]}
+      />
     </Portal>
   );
 };

@@ -250,7 +250,7 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
                 <List.Item
                   title={t('deviceSettings.opendtuCredentials')}
                   description={hasPassword ? '********' : t('notConfigured')}
-                  left={props => <List.Icon {...props} icon="lock" />}
+                  left={props => <List.Icon {...props} icon="account-key" />}
                   borderless
                   style={{
                     borderRadius: 8,
