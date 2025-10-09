@@ -4,7 +4,7 @@ import { Surface, useTheme } from 'react-native-paper';
 
 import styled from 'styled-components';
 
-const settingsSurfaceBorderRadiusFactor = 3;
+const settingsSurfaceBorderRadiusFactor = 8;
 
 export const settingsSurfaceRoundness = (theme: ThemeBase) => {
   return theme.roundness! * settingsSurfaceBorderRadiusFactor;
@@ -12,6 +12,7 @@ export const settingsSurfaceRoundness = (theme: ThemeBase) => {
 
 const InternalSettingsSurface = styled(Surface)`
   margin: 4px 16px 12px;
+  padding: 0 4px;
   border-radius: ${props =>
     (props.theme.roundness ?? 0) * settingsSurfaceBorderRadiusFactor}px;
 `;

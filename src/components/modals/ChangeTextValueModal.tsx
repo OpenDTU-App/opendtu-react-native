@@ -65,6 +65,7 @@ const ChangeTextValueModal: FC<NewChangeTextValueModalProps> = ({
       return;
     }
 
+    setWasModified(false);
     onSave?.(value);
     onClose?.();
   };

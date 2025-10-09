@@ -44,6 +44,7 @@ const ChangeEnumValueModal: FC<ChangeEnumValueModalProps> = ({
   const [wasModified, setWasModified] = useState<boolean>(false);
 
   const handleSave = () => {
+    setWasModified(false);
     onSave?.(value);
     onClose?.();
   };
@@ -98,7 +99,6 @@ const ChangeEnumValueModal: FC<ChangeEnumValueModalProps> = ({
                 <RadioButton.Group onValueChange={setValue} value={value}>
                   {possibleValues.map(({ label, value }) => (
                     <RadioButton.Item
-                      key={value}
                       value={value}
                       label={label}
                       labelVariant="bodyMedium"
