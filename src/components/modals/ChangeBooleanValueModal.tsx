@@ -35,6 +35,7 @@ const ChangeBooleanValueModal: FC<ChangeBooleanValueModalProps> = ({
   const [wasModified, setWasModified] = useState<boolean>(false);
 
   const handleSave = () => {
+    setWasModified(false);
     onSave?.(value);
     onClose?.();
   };

@@ -13,6 +13,8 @@ import { SunsetType } from '@/types/opendtu/settings';
 
 import ChangeEnumValueModal from '@/components/modals/ChangeEnumValueModal';
 import ChangeTextValueModal from '@/components/modals/ChangeTextValueModal';
+import type { ConfirmUnsavedDataModalInput } from '@/components/modals/ConfirmUnsavedDataModal';
+import ConfirmUnsavedDataModal from '@/components/modals/ConfirmUnsavedDataModal';
 import NTPChangeTimezoneModal from '@/components/modals/NTPChangeTimezoneModal';
 import NTPCurrentTimeComponents from '@/components/settings/NTPCurrentTimeComponents';
 import SettingsSurface from '@/components/styled/SettingsSurface';
@@ -43,36 +45,53 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);
 
+  const hasChanges = useMemo(() => {
+    return !deepEqual(initialTimeSettings, timeSettings);
+  }, [initialTimeSettings, timeSettings]);
+
   const [currentOpendtuTime, setCurrentOpendtuTime] = useState<
     Date | undefined
   >(undefined);
 
-  const handleGetNTPSettings = useCallback(async () => {
-    setIsRefreshing(true);
+  const [confirmRefreshDataModalOpen, setConfirmRefreshDataModalOpen] =
+    useState<ConfirmUnsavedDataModalInput>(false);
 
-    try {
-      await openDtuApi.getNTPConfig();
-
-      const timeData = await openDtuApi.getNTPTime();
-
-      if (timeData) {
-        const date = new Date(
-          timeData.year,
-          timeData.month - 1,
-          timeData.day,
-          timeData.hour,
-          timeData.minute,
-          timeData.second,
-        );
-
-        setCurrentOpendtuTime(date);
+  const performRefresh = useCallback(
+    async (forceRefresh: boolean = false) => {
+      if (hasChanges && !forceRefresh) {
+        setConfirmRefreshDataModalOpen(() => () => {
+          performRefresh(true);
+        });
+        return;
       }
-    } catch (error) {
-      log.error('Error fetching NTP settings', error);
-    } finally {
-      setIsRefreshing(false);
-    }
-  }, [openDtuApi]);
+
+      setIsRefreshing(true);
+
+      try {
+        await openDtuApi.getNTPConfig();
+
+        const timeData = await openDtuApi.getNTPTime();
+
+        if (timeData) {
+          const date = new Date(
+            timeData.year,
+            timeData.month - 1,
+            timeData.day,
+            timeData.hour,
+            timeData.minute,
+            timeData.second,
+          );
+
+          setCurrentOpendtuTime(date);
+        }
+      } catch (error) {
+        log.error('Error fetching NTP settings', error);
+      } finally {
+        setIsRefreshing(false);
+      }
+    },
+    [hasChanges, openDtuApi],
+  );
 
   const handleSave = useCallback(async () => {
     if (!timeSettings) {
@@ -97,13 +116,11 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
   useEffect(() => {
     if (navigation.isFocused()) {
-      handleGetNTPSettings();
+      performRefresh();
     }
-  }, [handleGetNTPSettings, navigation]);
-
-  const hasChanges = useMemo(() => {
-    return !deepEqual(initialTimeSettings, timeSettings);
-  }, [initialTimeSettings, timeSettings]);
+    // we do not want to include performRefresh here
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigation]);
 
   const [synchronizeTimeLoading, setSynchronizeTimeLoading] =
     useState<boolean>(false);
@@ -158,7 +175,17 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   return (
     <>
       <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.BackAction
+          onPress={() => {
+            if (hasChanges) {
+              setConfirmRefreshDataModalOpen(() => () => {
+                navigation.goBack();
+              });
+              return;
+            }
+            navigation.goBack();
+          }}
+        />
         <Appbar.Content title={t('settings.ntpSettings.title')} />
         {isSaving || hasChanges ? (
           <Appbar.Action
@@ -175,7 +202,7 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             refreshControl={
               <RefreshControl
                 refreshing={isRefreshing}
-                onRefresh={handleGetNTPSettings}
+                onRefresh={performRefresh}
                 colors={[theme.colors.primary]}
                 progressBackgroundColor={theme.colors.elevation.level3}
                 tintColor={theme.colors.primary}
@@ -425,6 +452,12 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         onDismiss={() => setChangeTimezoneModalOpen(false)}
         timeSettings={timeSettings}
         setTimeSettings={setTimeSettings}
+      />
+      <ConfirmUnsavedDataModal
+        visible={confirmRefreshDataModalOpen}
+        onDismiss={() => {
+          setConfirmRefreshDataModalOpen(false);
+        }}
       />
     </>
   );

@@ -13,6 +13,8 @@ import { NRFPaLevel } from '@/types/opendtu/settings';
 
 import ChangeEnumValueModal from '@/components/modals/ChangeEnumValueModal';
 import ChangeTextValueModal from '@/components/modals/ChangeTextValueModal';
+import type { ConfirmUnsavedDataModalInput } from '@/components/modals/ConfirmUnsavedDataModal';
+import ConfirmUnsavedDataModal from '@/components/modals/ConfirmUnsavedDataModal';
 import SettingsSurface from '@/components/styled/SettingsSurface';
 
 import useDtuSettings from '@/hooks/useDtuSettings';
@@ -66,11 +68,28 @@ const DtuSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);
 
-  const handleGetDtuSettings = useCallback(async () => {
-    setIsRefreshing(true);
-    await openDtuApi.getDtuConfig();
-    setIsRefreshing(false);
-  }, [openDtuApi]);
+  const hasChanges = useMemo(() => {
+    return !deepEqual(initialDtuSettings, dtuSettings);
+  }, [initialDtuSettings, dtuSettings]);
+
+  const [confirmRefreshDataModalOpen, setConfirmRefreshDataModalOpen] =
+    useState<ConfirmUnsavedDataModalInput>(false);
+
+  const performRefresh = useCallback(
+    async (forceRefresh: boolean = false) => {
+      if (hasChanges && !forceRefresh) {
+        setConfirmRefreshDataModalOpen(() => () => {
+          performRefresh(true);
+        });
+        return;
+      }
+
+      setIsRefreshing(true);
+      await openDtuApi.getDtuConfig();
+      setIsRefreshing(false);
+    },
+    [hasChanges, openDtuApi],
+  );
 
   const handleSave = useCallback(async () => {
     if (!dtuSettings) {
@@ -95,13 +114,11 @@ const DtuSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
   useEffect(() => {
     if (navigation.isFocused()) {
-      handleGetDtuSettings();
+      performRefresh();
     }
-  }, [handleGetDtuSettings, navigation]);
-
-  const hasChanges = useMemo(() => {
-    return !deepEqual(initialDtuSettings, dtuSettings);
-  }, [initialDtuSettings, dtuSettings]);
+    // we do not want to include performRefresh here
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigation]);
 
   const [changeSerialModalOpen, setChangeSerialModalOpen] = useState(false);
   const [changePollIntervalModalOpen, setChangePollIntervalModalOpen] =
@@ -148,7 +165,17 @@ const DtuSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   return (
     <>
       <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.BackAction
+          onPress={() => {
+            if (hasChanges) {
+              setConfirmRefreshDataModalOpen(() => () => {
+                navigation.goBack();
+              });
+              return;
+            }
+            navigation.goBack();
+          }}
+        />
         <Appbar.Content title={t('settings.dtuSettings.title')} />
         {isSaving || hasChanges ? (
           <Appbar.Action
@@ -165,7 +192,7 @@ const DtuSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             refreshControl={
               <RefreshControl
                 refreshing={isRefreshing}
-                onRefresh={handleGetDtuSettings}
+                onRefresh={performRefresh}
                 colors={[theme.colors.primary]}
                 progressBackgroundColor={theme.colors.elevation.level3}
                 tintColor={theme.colors.primary}
@@ -499,6 +526,12 @@ const DtuSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
           }
 
           return true;
+        }}
+      />
+      <ConfirmUnsavedDataModal
+        visible={confirmRefreshDataModalOpen}
+        onDismiss={() => {
+          setConfirmRefreshDataModalOpen(false);
         }}
       />
     </>

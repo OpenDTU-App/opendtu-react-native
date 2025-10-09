@@ -12,6 +12,8 @@ import type { NetworkSettings } from '@/types/opendtu/settings';
 
 import ChangeBooleanValueModal from '@/components/modals/ChangeBooleanValueModal';
 import ChangeTextValueModal from '@/components/modals/ChangeTextValueModal';
+import type { ConfirmUnsavedDataModalInput } from '@/components/modals/ConfirmUnsavedDataModal';
+import ConfirmUnsavedDataModal from '@/components/modals/ConfirmUnsavedDataModal';
 import SettingsSurface from '@/components/styled/SettingsSurface';
 
 import useDtuSettings from '@/hooks/useDtuSettings';
@@ -38,11 +40,28 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);
 
-  const handleGetNetworkSettings = useCallback(async () => {
-    setIsRefreshing(true);
-    await openDtuApi.getNetworkConfig();
-    setIsRefreshing(false);
-  }, [openDtuApi]);
+  const hasChanges = useMemo(() => {
+    return !deepEqual(initialNetworkSettings, networkSettings);
+  }, [initialNetworkSettings, networkSettings]);
+
+  const [confirmRefreshDataModalOpen, setConfirmRefreshDataModalOpen] =
+    useState<ConfirmUnsavedDataModalInput>(false);
+
+  const performRefresh = useCallback(
+    async (forceRefresh: boolean = false) => {
+      if (hasChanges && !forceRefresh) {
+        setConfirmRefreshDataModalOpen(() => () => {
+          performRefresh(true);
+        });
+        return;
+      }
+
+      setIsRefreshing(true);
+      await openDtuApi.getNetworkConfig();
+      setIsRefreshing(false);
+    },
+    [hasChanges, openDtuApi],
+  );
 
   const handleSave = useCallback(async () => {
     if (!networkSettings) {
@@ -67,13 +86,11 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
   useEffect(() => {
     if (navigation.isFocused()) {
-      handleGetNetworkSettings();
+      performRefresh();
     }
-  }, [handleGetNetworkSettings, navigation]);
-
-  const hasChanges = useMemo(() => {
-    return !deepEqual(initialNetworkSettings, networkSettings);
-  }, [initialNetworkSettings, networkSettings]);
+    // we do not want to include performRefresh here
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigation]);
 
   const [changeSsidModalOpen, setChangeSsidModalOpen] =
     useState<boolean>(false);
@@ -111,7 +128,17 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   return (
     <>
       <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.BackAction
+          onPress={() => {
+            if (hasChanges) {
+              setConfirmRefreshDataModalOpen(() => () => {
+                navigation.goBack();
+              });
+              return;
+            }
+            navigation.goBack();
+          }}
+        />
         <Appbar.Content title={t('settings.networkSettings.title')} />
         {isSaving || hasChanges ? (
           <Appbar.Action
@@ -128,7 +155,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             refreshControl={
               <RefreshControl
                 refreshing={isRefreshing}
-                onRefresh={handleGetNetworkSettings}
+                onRefresh={performRefresh}
                 colors={[theme.colors.primary]}
                 progressBackgroundColor={theme.colors.elevation.level3}
                 tintColor={theme.colors.primary}
@@ -543,6 +570,12 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateIntNumber(t, value, 0, 3600)}
         title={t('settings.networkSettings.changeApTimeout.title')}
         description={t('settings.networkSettings.changeApTimeout.description')}
+      />
+      <ConfirmUnsavedDataModal
+        visible={confirmRefreshDataModalOpen}
+        onDismiss={() => {
+          setConfirmRefreshDataModalOpen(false);
+        }}
       />
     </>
   );
