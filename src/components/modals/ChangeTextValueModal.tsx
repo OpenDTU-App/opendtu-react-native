@@ -97,7 +97,7 @@ const ChangeTextValueModal: FC<ChangeTextValueModalProps> = ({
           {...inputProps}
           value={value}
           style={{
-            backgroundColor: theme.colors.surface,
+            backgroundColor: theme.colors.elevation.level3,
             borderTopLeftRadius: theme.roundness * 3,
             borderTopRightRadius: theme.roundness * 3,
           }}

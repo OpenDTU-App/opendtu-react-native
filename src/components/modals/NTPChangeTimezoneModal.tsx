@@ -189,7 +189,7 @@ const NTPChangeTimezoneModal: FC<NTPChangeTimezoneModalProps> = props => {
               style={{
                 flex: 1,
                 marginHorizontal: 8,
-                backgroundColor: theme.colors.surface,
+                backgroundColor: theme.colors.elevation.level3,
                 borderTopLeftRadius: theme.roundness * 3,
                 borderTopRightRadius: theme.roundness * 3,
               }}

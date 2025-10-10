@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import type { ModalProps } from 'react-native-paper';
-import { Button, Portal, Text, useTheme } from 'react-native-paper';
+import { Portal, useTheme } from 'react-native-paper';
 
 import { removeDatabaseConfig, updateDatabaseConfig } from '@/slices/settings';
 

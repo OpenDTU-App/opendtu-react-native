@@ -369,16 +369,12 @@ const InnerApp: FC = () => {
       <EnableAppUpdatesModal
         visible={showEnableAppUpdatesModal}
         onDismiss={() => {}}
-        dismissable={false}
-        dismissableBackButton={false}
       />
       <EnableFetchOpenDtuUpdatesModal
         visible={
           showEnableFetchOpenDTUReleasesModal && !showEnableAppUpdatesModal
         }
         onDismiss={() => {}}
-        dismissable={false}
-        dismissableBackButton={false}
       />
     </PaperProvider>
   );

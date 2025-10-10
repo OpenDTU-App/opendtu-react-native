@@ -1,13 +1,12 @@
 import type { FC } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
+import { Box, Flex } from 'react-native-flex-layout';
 import {
   Button,
   HelperText,
   Portal,
   RadioButton,
-  Surface,
   Text,
   useTheme,
 } from 'react-native-paper';
@@ -41,11 +40,26 @@ const buttonColors: Record<
 
 const limitStatus = (
   t: TFunction,
-): Record<SetStatus, { label: string; color: string }> => ({
-  Unknown: { label: t('powerStatus.unknown'), color: '#9E9E9E' },
-  Ok: { label: t('powerStatus.ok'), color: '#4CAF50' },
-  Failure: { label: t('powerStatus.failure'), color: '#F44336' },
-  Pending: { label: t('powerStatus.pending'), color: '#FFC107' },
+): Record<
+  SetStatus,
+  { label: string; backgroundColor: string; color: string }
+> => ({
+  Unknown: {
+    label: t('powerStatus.unknown'),
+    backgroundColor: '#9E9E9E',
+    color: '#FFF',
+  },
+  Ok: { label: t('powerStatus.ok'), backgroundColor: '#4CAF50', color: '#FFF' },
+  Failure: {
+    label: t('powerStatus.failure'),
+    backgroundColor: '#F44336',
+    color: '#FFF',
+  },
+  Pending: {
+    label: t('powerStatus.pending'),
+    backgroundColor: '#FFC107',
+    color: '#000',
+  },
 });
 
 const LimitConfigModal: FC<LimitConfigModalProps> = ({
@@ -176,98 +190,120 @@ const LimitConfigModal: FC<LimitConfigModalProps> = ({
         {...props}
         onDismiss={onDismiss}
         title={t('limitStatus.title')}
-        dismissButton={false}
+        icon="tune"
+        dismissButton="dismiss"
         hideBottomPadding
       >
-        <Box pt={16} style={{ maxHeight: '100%' }}>
-          <Surface
-            style={{
-              borderRadius: theme.roundness * 4,
-              paddingHorizontal: 4,
-              paddingVertical: 8,
-              marginBottom: 8,
-            }}
-          >
-            <Box ph={16} mb={8} style={{ flexDirection: 'row', gap: 4 }}>
-              <Text variant="bodyMedium">
-                {t('limitStatus.lastTransmittedStatus')}
-              </Text>
-              <Text
-                variant="bodyMedium"
-                style={{
-                  color: calculatedStatus?.color,
-                }}
-              >
-                {calculatedStatus?.label}
-              </Text>
-            </Box>
-            <Box ph={16}>
-              <Box style={{ flexDirection: 'row', gap: 4 }}>
-                <Text variant="bodyMedium">{t('limitStatus.limits')}</Text>
-                <Text>{t('units.percent', { value: relativeLimit })}</Text>
-                <Text>{t('units.watt', { value: absoluteLimit })}</Text>
-              </Box>
-            </Box>
-          </Surface>
-          <Box ph={4} mb={8}>
-            <RadioButton.Group
-              onValueChange={value => setLimitType(value as LimitType)}
-              value={limitType}
-            >
-              <RadioButton.Item
-                label={t('limitStatus.absolute')}
-                value="absolute"
-              />
-              <RadioButton.Item
-                label={t('limitStatus.relative')}
-                value="relative"
-              />
-            </RadioButton.Group>
-          </Box>
-          <Box ph={4} mb={8}>
-            <StyledTextInput
-              label={t('limitStatus.limitValue', {
-                unit: limitType === 'absolute' ? 'W' : '%',
-              })}
-              defaultValue={limitValue}
-              onChangeText={(text: string) => {
-                setLimitValue(text);
-                setError(null);
+        <Box
+          style={{
+            borderRadius: theme.roundness * 6,
+            paddingHorizontal: 16,
+            paddingVertical: 12,
+            marginBottom: 8,
+            display: 'flex',
+            gap: 8,
+            justifyContent: 'space-between',
+            flexDirection: 'column',
+            backgroundColor: theme.colors.elevation.level3,
+          }}
+        >
+          <Flex direction="row" items="center" style={{ gap: 8 }}>
+            <Text variant="bodyMedium">
+              {t('limitStatus.lastTransmittedStatus')}
+            </Text>
+            <Text
+              variant="bodyLarge"
+              style={{
+                color: calculatedStatus?.color,
+                backgroundColor: calculatedStatus?.backgroundColor,
+                paddingHorizontal: 8,
+                borderRadius: 10,
               }}
-              mode="outlined"
-              keyboardType="numeric"
-              error={!!error}
-              disabled={loading}
-            />
-            {error !== null ? (
-              <HelperText type="error">{error}</HelperText>
-            ) : null}
+            >
+              {calculatedStatus?.label}
+            </Text>
+          </Flex>
+          <Box style={{ flexDirection: 'row', gap: 4 }}>
+            <Text variant="bodyMedium">{t('limitStatus.limits')}</Text>
+            <Text variant="bodyMedium">
+              {t('units.percent', { value: relativeLimit })}
+            </Text>
+            <Text variant="bodyMedium">
+              {t('units.watt', { value: absoluteLimit })}
+            </Text>
           </Box>
-          <Box
-            ph={4}
-            style={{
-              flexDirection: 'column',
-              gap: 8,
-            }}
+        </Box>
+        <Box
+          style={{
+            borderRadius: theme.roundness * 5,
+            paddingHorizontal: 8,
+            paddingVertical: 4,
+            marginTop: 8,
+            marginBottom: 16,
+            backgroundColor: theme.colors.elevation.level3,
+          }}
+        >
+          <RadioButton.Group
+            onValueChange={value => setLimitType(value as LimitType)}
+            value={limitType}
           >
-            <Button
-              mode="contained"
-              buttonColor={buttonColors.permanent.background}
-              textColor={buttonColors.permanent.onBackground}
-              onPress={() => handleLimitControl(true)}
-            >
-              {t('limitStatus.setPermanentLimit')}
-            </Button>
-            <Button
-              mode="contained"
-              buttonColor={buttonColors.temporary.background}
-              textColor={buttonColors.temporary.onBackground}
-              onPress={() => handleLimitControl(false)}
-            >
-              {t('limitStatus.setTemporaryLimit')}
-            </Button>
-            <Button onPress={onDismiss}>{t('cancel')}</Button>
-          </Box>
+            <RadioButton.Item
+              label={t('limitStatus.absolute')}
+              value="absolute"
+            />
+            <RadioButton.Item
+              label={t('limitStatus.relative')}
+              value="relative"
+            />
+          </RadioButton.Group>
+        </Box>
+        <Box mb={16}>
+          <StyledTextInput
+            label={t('limitStatus.limitValue', {
+              unit: limitType === 'absolute' ? 'W' : '%',
+            })}
+            defaultValue={limitValue}
+            onChangeText={(text: string) => {
+              setLimitValue(text);
+              setError(null);
+            }}
+            mode="flat"
+            keyboardType="numeric"
+            error={!!error}
+            disabled={loading}
+            style={{
+              backgroundColor: theme.colors.elevation.level3,
+              borderTopLeftRadius: theme.roundness * 3,
+              borderTopRightRadius: theme.roundness * 3,
+            }}
+          />
+          {error !== null ? (
+            <HelperText type="error">{error}</HelperText>
+          ) : null}
+        </Box>
+        <Box
+          style={{
+            flexDirection: 'column',
+            alignItems: 'flex-end',
+            gap: 8,
+          }}
+        >
+          <Button
+            mode="contained"
+            buttonColor={buttonColors.permanent.background}
+            textColor={buttonColors.permanent.onBackground}
+            onPress={() => handleLimitControl(true)}
+          >
+            {t('limitStatus.setPermanentLimit')}
+          </Button>
+          <Button
+            mode="contained"
+            buttonColor={buttonColors.temporary.background}
+            textColor={buttonColors.temporary.onBackground}
+            onPress={() => handleLimitControl(false)}
+          >
+            {t('limitStatus.setTemporaryLimit')}
+          </Button>
         </Box>
       </BaseModal>
     </Portal>

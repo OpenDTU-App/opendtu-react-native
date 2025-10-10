@@ -17,7 +17,7 @@ import { clearUpdateResult, setUpdateResult } from '@/slices/database';
 import type { InverterFromStatus } from '@/types/opendtu/status';
 import type { DatabaseConfig } from '@/types/settings';
 
-import type { ChartData } from '@/components/Charts/UnifiedLineChart';
+import type { ChartData } from '@/components/charts/UnifiedLineChart';
 
 import { rootLogging } from '@/utils/log';
 

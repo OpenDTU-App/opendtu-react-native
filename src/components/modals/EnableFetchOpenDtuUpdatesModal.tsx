@@ -38,6 +38,10 @@ const EnableAppUpdatesModal: FC<ExtendableModalProps> = props => {
         onDismiss={handleAbort}
         dismissButton="cancel"
         icon="update"
+        modalProps={{
+          dismissable: false,
+          dismissableBackButton: false,
+        }}
         actions={[
           {
             label: t('disable'),

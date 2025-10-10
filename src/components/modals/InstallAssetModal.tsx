@@ -1,15 +1,15 @@
 import type { FC } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
+import { Box, Flex } from 'react-native-flex-layout';
 import {
   ActivityIndicator,
   Button,
-  Divider,
   HelperText,
   Icon,
   Portal,
   ProgressBar,
+  Surface,
   Text,
   useTheme,
 } from 'react-native-paper';
@@ -206,31 +206,45 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
       <Portal>
         <BaseModal
           {...props}
-          dismissable={isDismissible}
+          modalProps={{
+            dismissable: isDismissible,
+            dismissableBackButton: isDismissible,
+          }}
           onDismiss={handleAbort}
-          dismissableBackButton={isDismissible}
+          dismissButton={false}
+          title=""
+          legacy
+          hideBottomPadding
         >
           {success ? (
-            <Box p={16} style={{ maxHeight: '100%' }}>
-              <Box mb={16} style={{ display: 'flex', alignItems: 'center' }}>
-                <Text variant="titleLarge">
+            <Box style={{ maxHeight: '100%' }}>
+              <Flex mb={24} center>
+                <Text variant="headlineMedium">
                   {t('firmwares.successfullyInstalledTheFirmware')}
                 </Text>
-              </Box>
-              <Box style={{ display: 'flex', alignItems: 'center' }}>
+              </Flex>
+              <Flex center>
                 <Icon source="check-circle" size={100} color={colors.success} />
-              </Box>
+              </Flex>
             </Box>
           ) : !showWaitForUpdateFinished ? (
-            <Box pt={16} style={{ maxHeight: '100%' }}>
-              <Box mb={8} ph={16}>
-                <Text variant="titleLarge">
+            <Box style={{ maxHeight: '100%' }}>
+              <Box mb={16}>
+                <Text variant="headlineMedium">
                   {t('firmwares.installAsset', { name: asset?.name })}
                 </Text>
               </Box>
-              <Box ph={16}>
-                <Box mb={16}>
-                  <Text variant="titleSmall">
+              <Surface
+                style={{
+                  padding: 16,
+                  borderRadius: theme.roundness * 6,
+                  display: 'flex',
+                  gap: 16,
+                }}
+                elevation={3}
+              >
+                <Box>
+                  <Text variant="labelLarge">
                     {t('firmwares.downloadProgress')} (
                     {(downloadProgress * 100).toFixed(1)}%)
                   </Text>
@@ -246,8 +260,8 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
                     />
                   </Box>
                 </Box>
-                <Box mb={16}>
-                  <Text variant="titleSmall">
+                <Box>
+                  <Text variant="labelLarge">
                     {t('firmwares.installProgress')} (
                     {(installProgress * 100).toFixed(1)}%)
                   </Text>
@@ -263,16 +277,18 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
                     />
                   </Box>
                 </Box>
-              </Box>
-              <HelperText type="error" visible={!!error}>
-                {error}
-              </HelperText>
-              <Divider />
-              <Box
-                mt={4}
-                p={4}
+              </Surface>
+              {error ? (
+                <HelperText type="error" visible>
+                  {error}
+                </HelperText>
+              ) : null}
+              <Flex
+                mt={16}
+                direction="row"
+                items="center"
+                justify="end"
                 style={{
-                  flexDirection: 'column',
                   gap: spacing,
                 }}
               >
@@ -298,18 +314,18 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
                         : t('firmwares.install')}
                   </Button>
                 </Box>
-              </Box>
+              </Flex>
             </Box>
           ) : (
-            <Box p={16} style={{ maxHeight: '100%' }}>
-              <Box mb={16}>
-                <Text variant="bodyLarge">
+            <Box style={{ maxHeight: '100%' }}>
+              <Box mb={24}>
+                <Text variant="headlineSmall">
                   {t('firmwares.waitingForReconnect')}
                 </Text>
               </Box>
               {error ? (
                 <>
-                  <Box mb={16}>
+                  <Box mb={24}>
                     <Text
                       variant="titleMedium"
                       style={{ color: theme.colors.error }}
@@ -328,7 +344,7 @@ const InstallAssetModal: FC<InstallFirmwareModalProps> = ({
                   </Box>
                 </>
               ) : (
-                <Box>
+                <Box pv={16}>
                   <ActivityIndicator size="large" />
                 </Box>
               )}

@@ -37,6 +37,10 @@ const EnableAppUpdatesModal: FC<ExtendableModalProps> = props => {
         description={t('settings.thisWillMakeRequestsToGithub')}
         onDismiss={handleAbort}
         dismissButton="cancel"
+        modalProps={{
+          dismissable: false,
+          dismissableBackButton: false,
+        }}
         icon="update"
         actions={[
           {

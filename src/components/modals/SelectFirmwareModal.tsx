@@ -69,29 +69,35 @@ const SelectFirmwareModal: FC<SelectFirmwareModalProps> = ({
   return (
     <>
       <Portal>
-        <BaseModal {...props} visible={mainModalVisible}>
-          <Box pt={16} style={{ maxHeight: '100%' }}>
-            <Box mb={8} ph={16}>
-              <Text variant="bodyLarge">
+        <BaseModal
+          {...props}
+          visible={mainModalVisible}
+          legacy
+          title=""
+          dismissButton={false}
+          onDismiss={handleAbort}
+        >
+          <Box style={{ maxHeight: '100%' }}>
+            <Box mb={8}>
+              <Text variant="headlineSmall">
                 {t('firmwares.installFirmware', { name: release?.name })}
               </Text>
             </Box>
             <ScrollView>
-              <Box mv={4}>
-                <RadioButton.Group
-                  onValueChange={setSelectedAsset}
-                  value={selectedAsset}
-                >
-                  {release?.assets.map(asset => (
-                    <RadioButton.Item
-                      key={asset.id}
-                      value={asset.id.toString()}
-                      label={asset.label || asset.name}
-                      labelVariant="bodyMedium"
-                    />
-                  ))}
-                </RadioButton.Group>
-              </Box>
+              <RadioButton.Group
+                onValueChange={setSelectedAsset}
+                value={selectedAsset}
+              >
+                {release?.assets.map(asset => (
+                  <RadioButton.Item
+                    key={asset.id}
+                    value={asset.id.toString()}
+                    label={asset.label || asset.name}
+                    labelVariant="labelLarge"
+                    style={{ paddingLeft: 0 }}
+                  />
+                ))}
+              </RadioButton.Group>
             </ScrollView>
             <Divider />
             <Box

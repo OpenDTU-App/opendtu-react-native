@@ -40,6 +40,7 @@ export interface BaseModalProps extends ExtendableModalProps {
     onPress: () => void;
     variant?: 'text' | 'outlined' | 'contained';
     disabled?: boolean;
+    buttonColor?: string;
     textColor?: string;
     loading?: boolean;
   }[];
@@ -48,6 +49,7 @@ export interface BaseModalProps extends ExtendableModalProps {
   modalProps?: Omit<ModalProps, 'visible' | 'onDismiss' | 'children'>;
   fullscreen?: boolean;
   hideBottomPadding?: boolean;
+  legacy?: boolean;
   children?: React.ReactNode;
 }
 
@@ -63,6 +65,7 @@ const BaseModal: FC<BaseModalProps> = ({
   actions,
   icon,
   hideBottomPadding,
+  legacy,
   ...rest
 }) => {
   const theme = useTheme();
@@ -97,67 +100,85 @@ const BaseModal: FC<BaseModalProps> = ({
       }}
     >
       <Box style={{ flex: fullscreen ? 1 : undefined }}>
-        <Flex direction="column" style={{ gap: 16 }}>
-          {icon && !fullscreen ? (
-            <Flex direction="row" center>
-              <Icon source={icon} color={theme.colors.secondary} size={24} />
-            </Flex>
-          ) : null}
-          <Flex direction="row" justify="between" items="center">
-            <Flex
-              direction="row"
-              justify="start"
-              items="center"
-              style={{ gap: 8, flex: 1 }}
-            >
-              {fullscreen && dismissButton ? (
-                <IconButton icon="close" onPress={onDismiss} />
+        {!legacy ? (
+          <>
+            <Flex direction="column" style={{ gap: 16 }}>
+              {icon && !fullscreen ? (
+                <Flex direction="row" center>
+                  <Icon
+                    source={icon}
+                    color={theme.colors.secondary}
+                    size={24}
+                  />
+                </Flex>
               ) : null}
-              <Text
-                variant="headlineSmall"
-                style={{
-                  textAlign: icon ? 'center' : undefined,
-                  color: theme.colors.onSurface,
-                }}
-              >
-                {title}
-              </Text>
+              <Flex direction="row" justify="between" items="center">
+                <Flex
+                  direction="row"
+                  justify="start"
+                  items="center"
+                  style={{ gap: 8, flex: 1 }}
+                >
+                  {fullscreen && dismissButton ? (
+                    <IconButton icon="close" onPress={onDismiss} />
+                  ) : null}
+                  <Text
+                    variant="headlineSmall"
+                    style={{
+                      textAlign: icon ? 'center' : undefined,
+                      color: theme.colors.onSurface,
+                    }}
+                  >
+                    {title}
+                  </Text>
+                </Flex>
+              </Flex>
+              {actions?.length && actions.length > 1 && fullscreen ? (
+                <Button
+                  onPress={actions[0].onPress}
+                  disabled={actions[0].disabled}
+                  mode={actions[0].variant ? actions[0].variant : 'text'}
+                  buttonColor={actions[0].buttonColor}
+                  textColor={actions[0].textColor}
+                  style={{
+                    paddingVertical: actions[0].variant !== 'text' ? 0 : 8,
+                    minWidth: 100,
+                    alignSelf: 'flex-start',
+                  }}
+                  loading={actions[0].loading}
+                >
+                  {actions[0].label}
+                </Button>
+              ) : null}
+              {description && !fullscreen ? (
+                <Text
+                  variant="bodyMedium"
+                  style={{ color: theme.colors.onSurface }}
+                >
+                  {description}
+                </Text>
+              ) : null}
             </Flex>
-          </Flex>
-          {actions?.length && actions.length > 1 && fullscreen ? (
-            <Button
-              onPress={actions[0].onPress}
-              disabled={actions[0].disabled}
-              mode={actions[0].variant ? actions[0].variant : 'text'}
-              textColor={actions[0].textColor}
-              style={{
-                paddingVertical: actions[0].variant !== 'text' ? 0 : 8,
-                minWidth: 100,
-                alignSelf: 'flex-start',
-              }}
-              loading={actions[0].loading}
-            >
-              {actions[0].label}
-            </Button>
-          ) : null}
-          {description && !fullscreen ? (
-            <Text
-              variant="bodyMedium"
-              style={{ color: theme.colors.onSurface }}
-            >
-              {description}
-            </Text>
-          ) : null}
-        </Flex>
+          </>
+        ) : null}
         {children ? (
-          <Box pt={fullscreen ? 0 : 20} style={{ flex: fullscreen ? 1 : 0 }}>
+          <Box
+            pt={fullscreen || legacy ? 0 : 20}
+            style={{ flex: fullscreen ? 1 : 0 }}
+          >
             {children}
           </Box>
         ) : null}
       </Box>
       {fullscreen ? null : (
         <Box pv={hideBottomPadding ? 12 : 20}>
-          <Flex direction="row" justify="end" items="center" style={{ gap: 8 }}>
+          <Flex
+            direction="row"
+            justify="end"
+            items="center"
+            style={{ gap: 8 }}
+            wrap="wrap"
+          >
             {dismissButton ? (
               <Button
                 onPress={
@@ -197,6 +218,7 @@ const BaseModal: FC<BaseModalProps> = ({
                 onPress={action.onPress}
                 disabled={action.disabled}
                 mode={action.variant ? action.variant : 'text'}
+                buttonColor={action.buttonColor}
                 textColor={action.textColor}
                 style={{
                   paddingVertical: action.variant !== 'text' ? 0 : 8,
