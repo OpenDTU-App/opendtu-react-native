@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import { Appbar, Button, List, useTheme } from 'react-native-paper';
+import { Appbar, Button, List, TextInput, useTheme } from 'react-native-paper';
 
 import { RefreshControl, ScrollView, View } from 'react-native';
 
@@ -256,7 +256,9 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 <List.Item
                   title={t('settings.ntpSettings.latitude')}
                   description={
-                    timeSettings?.latitude.toString() || t('notConfigured')
+                    timeSettings?.latitude
+                      ? `${timeSettings.latitude.toString()}°`
+                      : t('notConfigured')
                   }
                   right={props => (
                     <List.Icon
@@ -273,7 +275,9 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 <List.Item
                   title={t('settings.ntpSettings.longitude')}
                   description={
-                    timeSettings?.longitude.toString() || t('notConfigured')
+                    timeSettings?.longitude
+                      ? `${timeSettings.longitude.toString()}°`
+                      : t('notConfigured')
                   }
                   right={props => (
                     <List.Icon
@@ -379,6 +383,7 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         description={t('settings.ntpSettings.changeLatitudeDescription')}
         inputProps={{
           keyboardType: 'numeric',
+          right: <TextInput.Affix text={t('settings.degrees')} />,
         }}
       />
       <ChangeTextValueModal
@@ -406,6 +411,7 @@ const NTPSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         description={t('settings.ntpSettings.changeLongitudeDescription')}
         inputProps={{
           keyboardType: 'numeric',
+          right: <TextInput.Affix text={t('settings.degrees')} />,
         }}
       />
       <ChangeEnumValueModal
