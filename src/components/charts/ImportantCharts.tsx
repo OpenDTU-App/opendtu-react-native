@@ -12,9 +12,9 @@ import {
 
 import { View } from 'react-native';
 
-import AcPowerChart from '@/components/Charts/AcPowerChart';
-import DcPowerChart from '@/components/Charts/DcPowerChart';
-import DcVoltageChart from '@/components/Charts/DcVoltageChart';
+import AcPowerChart from '@/components/charts/AcPowerChart';
+import DcPowerChart from '@/components/charts/DcPowerChart';
+import DcVoltageChart from '@/components/charts/DcVoltageChart';
 import ErrorSurface from '@/components/styled/ErrorSurface';
 import StyledSurface from '@/components/styled/StyledSurface';
 

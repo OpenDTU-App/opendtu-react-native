@@ -1,12 +1,11 @@
 import type { FC } from 'react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
-import type { ModalProps } from 'react-native-paper';
-import { Button, Portal, Text, useTheme } from 'react-native-paper';
+import { Portal, useTheme } from 'react-native-paper';
 
 import { setRefreshInterval } from '@/slices/database';
 
+import type { ExtendableModalProps } from '@/components/BaseModal';
 import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
@@ -16,9 +15,7 @@ import { useAppDispatch, useAppSelector } from '@/store';
 
 const log = rootLogging.extend('ChangeGraphRefreshIntervalModal');
 
-const ChangeGraphRefreshIntervalModal: FC<
-  Omit<ModalProps, 'children'>
-> = props => {
+const ChangeGraphRefreshIntervalModal: FC<ExtendableModalProps> = props => {
   const { t } = useTranslation();
   const { onDismiss } = props;
   const theme = useTheme();
@@ -54,38 +51,29 @@ const ChangeGraphRefreshIntervalModal: FC<
 
   return (
     <Portal>
-      <BaseModal {...props}>
-        <Box p={16}>
-          <Box mb={8}>
-            <Text variant="bodyLarge">
-              {t('configureGraphs.changeRefreshInterval')}
-            </Text>
-          </Box>
-          <StyledTextInput
-            label={t('settings.milliseconds')}
-            keyboardType="numeric"
-            mode="outlined"
-            defaultValue={intervalState?.toString()}
-            onChangeText={handleChange}
-            style={{ backgroundColor: theme.colors.elevation.level3 }}
-            right={<StyledTextInput.Affix text="ms" />}
-          />
-          <Box
-            mt={16}
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-            }}
-          >
-            <Button onPress={handleAbort}>{t('cancel')}</Button>
-            <Box ml={8}>
-              <Button mode="contained" onPress={handleConfirm}>
-                {t('save')}
-              </Button>
-            </Box>
-          </Box>
-        </Box>
+      <BaseModal
+        {...props}
+        title={t('configureGraphs.changeRefreshInterval')}
+        description={t('configureGraphs.changeRefreshIntervalDescription')}
+        onDismiss={handleAbort}
+        dismissButton="cancel"
+        actions={[
+          {
+            label: t('save'),
+            onPress: handleConfirm,
+            disabled: !intervalState || intervalState === interval.toString(),
+          },
+        ]}
+      >
+        <StyledTextInput
+          label={t('settings.milliseconds')}
+          keyboardType="numeric"
+          mode="outlined"
+          defaultValue={intervalState?.toString()}
+          onChangeText={handleChange}
+          style={{ backgroundColor: theme.colors.elevation.level3 }}
+          right={<StyledTextInput.Affix text="ms" />}
+        />
       </BaseModal>
     </Portal>
   );

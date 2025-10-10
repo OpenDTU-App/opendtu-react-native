@@ -22,7 +22,7 @@ const SettingsSurface: FC<SurfaceProps> = ({ children, ...props }) => {
   const theme = props.theme ?? rnpTheme;
 
   return (
-    <InternalSettingsSurface theme={theme} {...props}>
+    <InternalSettingsSurface theme={theme} {...props} mode="flat" elevation={1}>
       {children}
     </InternalSettingsSurface>
   );

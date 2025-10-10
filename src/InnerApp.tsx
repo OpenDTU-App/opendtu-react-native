@@ -368,17 +368,13 @@ const InnerApp: FC = () => {
       </NavigationContainer>
       <EnableAppUpdatesModal
         visible={showEnableAppUpdatesModal}
-        /* eslint-disable-next-line @typescript-eslint/no-empty-function */
         onDismiss={() => {}}
-        dismissable={false}
-        dismissableBackButton={false}
       />
       <EnableFetchOpenDtuUpdatesModal
-        visible={showEnableFetchOpenDTUReleasesModal}
-        /* eslint-disable-next-line @typescript-eslint/no-empty-function */
+        visible={
+          showEnableFetchOpenDTUReleasesModal && !showEnableAppUpdatesModal
+        }
         onDismiss={() => {}}
-        dismissable={false}
-        dismissableBackButton={false}
       />
     </PaperProvider>
   );

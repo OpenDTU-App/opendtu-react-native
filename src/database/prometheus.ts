@@ -6,7 +6,7 @@ import { PrometheusDriver } from 'prometheus-query';
 
 import type { DatabaseConfig } from '@/types/settings';
 
-import { UNIX_TS_FIRST_SECOND_OF_2000 } from '@/components/Charts/UnifiedLineChart';
+import { UNIX_TS_FIRST_SECOND_OF_2000 } from '@/components/charts/UnifiedLineChart';
 
 import capitalize from '@/utils/capitalize';
 import { rootLogging } from '@/utils/log';

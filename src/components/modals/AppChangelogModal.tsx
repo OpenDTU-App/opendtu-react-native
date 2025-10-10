@@ -2,13 +2,7 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import {
-  ActivityIndicator,
-  Button,
-  Portal,
-  Text,
-  useTheme,
-} from 'react-native-paper';
+import { ActivityIndicator, Portal, Text } from 'react-native-paper';
 
 import { ScrollView } from 'react-native';
 
@@ -30,7 +24,6 @@ const log = rootLogging.extend('AppChangelogModal');
 
 const AppChangelogModal: FC = () => {
   const githubApi = useGithub();
-  const theme = useTheme();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
@@ -118,27 +111,20 @@ const AppChangelogModal: FC = () => {
     <Portal>
       <BaseModal
         visible={isNewVersion && !hasFetchedNewReleaseError}
-        dismissable={false}
+        modalProps={{
+          dismissable: false,
+          dismissableBackButton: false,
+        }}
+        title={t('appChangelogModal.newAppVersionInstalled', {
+          appVersion: appVersion,
+        })}
+        onDismiss={() => {}}
+        dismissButton={false}
+        actions={[{ label: t('acknowledge'), onPress: handleAcknowledge }]}
       >
-        <Box p={16} style={{ maxHeight: '100%' }}>
-          <Box
-            mt={8}
-            mb={8}
-            pb={4}
-            style={{
-              alignItems: 'center',
-              borderBottomColor: theme.colors.onSurface,
-              borderBottomWidth: 1,
-            }}
-          >
-            <Text variant="titleLarge">
-              {t('appChangelogModal.newAppVersionInstalled', {
-                appVersion: appVersion,
-              })}
-            </Text>
-          </Box>
+        <Box style={{ maxHeight: '100%' }}>
           {appReleaseIsCorrectVersion ? (
-            <ScrollView style={{ marginTop: 8, marginBottom: 24 }}>
+            <ScrollView contentInsetAdjustmentBehavior="automatic">
               <ReleaseChangelog releaseBody={appRelease?.body} />
             </ScrollView>
           ) : (
@@ -149,9 +135,6 @@ const AppChangelogModal: FC = () => {
               </Box>
             </Box>
           )}
-          <Button mode="contained" onPress={handleAcknowledge}>
-            {t('acknowledge')}
-          </Button>
         </Box>
       </BaseModal>
     </Portal>

@@ -1,6 +1,6 @@
 import { useTheme } from 'react-native-paper';
 
-import ImportantCharts from '@/components/Charts/ImportantCharts';
+import ImportantCharts from '@/components/charts/ImportantCharts';
 import DeviceOfflineWrapper from '@/components/DeviceOfflineWrapper';
 
 import { StyledScrollView, StyledView } from '@/style';

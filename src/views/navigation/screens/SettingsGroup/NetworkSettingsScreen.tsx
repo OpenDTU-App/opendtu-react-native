@@ -421,6 +421,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         description={t(
           'settings.networkSettings.changeDhcpEnabled.description',
         )}
+        switchLabel={t('settings.networkSettings.wifiStation.dhcpEnabled')}
       />
       <ChangeTextValueModal
         defaultValue={networkSettings?.ipaddress}
@@ -548,6 +549,7 @@ const NetworkSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         description={t(
           'settings.networkSettings.changeMdnsEnabled.description',
         )}
+        switchLabel={t('settings.networkSettings.mdns.enabled')}
       />
       <ChangeTextValueModal
         defaultValue={networkSettings?.aptimeout.toString()}

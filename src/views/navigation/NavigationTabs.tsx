@@ -75,7 +75,7 @@ const NavigationTabs: FC = () => {
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={renderScene}
-      barStyle={{ backgroundColor: theme.colors.surface }}
+      barStyle={{ backgroundColor: theme.colors.elevation.level2 }}
     />
   );
 };

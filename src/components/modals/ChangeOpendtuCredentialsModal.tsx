@@ -2,11 +2,11 @@ import type { FC } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import type { ModalProps } from 'react-native-paper';
-import { Button, HelperText, Portal, Text, useTheme } from 'react-native-paper';
+import { HelperText, Portal, useTheme } from 'react-native-paper';
 
 import { updateDtuUserString } from '@/slices/settings';
 
+import type { ExtendableModalProps } from '@/components/BaseModal';
 import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
@@ -17,7 +17,7 @@ import { defaultUser } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 
 export interface ChangeOpendtuCredentialsModalProps
-  extends Omit<ModalProps, 'children'> {
+  extends ExtendableModalProps {
   index: number;
 }
 
@@ -104,69 +104,50 @@ const ChangeOpendtuCredentialsModal: FC<
 
   return (
     <Portal>
-      <BaseModal {...props}>
-        <Box p={16}>
-          <Box mb={8}>
-            <Text variant="bodyLarge">
-              {t('settings.changeOpendtuCredentials')}
-            </Text>
-          </Box>
-          <Box mb={8}>
-            <StyledTextInput
-              label={t('setup.username')}
-              mode="outlined"
-              defaultValue={username}
-              onChangeText={setUsername}
-              textContentType="username"
-              style={{ backgroundColor: theme.colors.elevation.level3 }}
-            />
-            <StyledTextInput
-              label={t('setup.password')}
-              mode="outlined"
-              defaultValue={password}
-              onChangeText={setPassword}
-              textContentType="password"
-              style={{ backgroundColor: theme.colors.elevation.level3 }}
-            />
-          </Box>
-          <HelperText type="error" visible={!!error}>
+      <BaseModal
+        {...props}
+        title={t('settings.changeOpendtuCredentials')}
+        onDismiss={handleAbort}
+        dismissButton="cancel"
+        icon="account-key"
+        actions={[
+          {
+            label: t('clear'),
+            onPress: handleClearCredentials,
+            disabled: loading,
+            textColor: theme.colors.error,
+          },
+          {
+            label: t('change'),
+            onPress: handleSave,
+            disabled: loading || !username || !password,
+            loading,
+          },
+        ]}
+      >
+        <Box mb={8}>
+          <StyledTextInput
+            label={t('setup.username')}
+            mode="outlined"
+            defaultValue={username}
+            onChangeText={setUsername}
+            textContentType="username"
+            style={{ backgroundColor: theme.colors.elevation.level3 }}
+          />
+          <StyledTextInput
+            label={t('setup.password')}
+            mode="outlined"
+            defaultValue={password}
+            onChangeText={setPassword}
+            textContentType="password"
+            style={{ backgroundColor: theme.colors.elevation.level3 }}
+          />
+        </Box>
+        {error ? (
+          <HelperText type="error" visible>
             {error}
           </HelperText>
-        </Box>
-        <Box
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            padding: 8,
-          }}
-        >
-          <Button
-            mode="text"
-            onPress={handleClearCredentials}
-            style={{ marginRight: 8 }}
-            disabled={loading}
-            textColor={theme.colors.error}
-          >
-            {t('clear')}
-          </Button>
-          <Button
-            mode="text"
-            onPress={handleAbort}
-            style={{ marginRight: 8 }}
-            disabled={loading}
-          >
-            {t('cancel')}
-          </Button>
-          <Button
-            mode="contained"
-            onPress={handleSave}
-            disabled={loading}
-            loading={loading}
-          >
-            {t('change')}
-          </Button>
-        </Box>
+        ) : null}
       </BaseModal>
     </Portal>
   );

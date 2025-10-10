@@ -1,19 +1,17 @@
 import type { FC } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
-import type { ModalProps } from 'react-native-paper';
-import { Button, Portal, Text, useTheme } from 'react-native-paper';
+import { Portal, useTheme } from 'react-native-paper';
 
 import { updateDtuBaseUrl } from '@/slices/settings';
 
+import type { ExtendableModalProps } from '@/components/BaseModal';
 import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
 import { useAppDispatch, useAppSelector } from '@/store';
 
-export interface ChangeServerUrlModalProps
-  extends Omit<ModalProps, 'children'> {
+export interface ChangeServerUrlModalProps extends ExtendableModalProps {
   index: number;
 }
 
@@ -46,38 +44,27 @@ const ChangeServerUrlModal: FC<ChangeServerUrlModalProps> = props => {
 
   return (
     <Portal>
-      <BaseModal {...props}>
-        <Box p={16}>
-          <Box mb={8}>
-            <Text variant="bodyLarge">{t('settings.changeTheServerUrl')}</Text>
-          </Box>
-          <StyledTextInput
-            label={t('settings.serverUrl')}
-            mode="outlined"
-            defaultValue={baseUrl}
-            onChangeText={setBaseUrl}
-            style={{ backgroundColor: theme.colors.elevation.level3 }}
-          />
-        </Box>
-        <Box
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            padding: 8,
-          }}
-        >
-          <Button mode="text" onPress={handleAbort} style={{ marginRight: 8 }}>
-            {t('cancel')}
-          </Button>
-          <Button
-            mode="text"
-            onPress={handleRename}
-            disabled={baseUrl === currentBaseUrl}
-          >
-            {t('change')}
-          </Button>
-        </Box>
+      <BaseModal
+        {...props}
+        title={t('settings.changeTheServerUrl')}
+        onDismiss={handleAbort}
+        dismissButton="cancel"
+        icon="lan-connect"
+        actions={[
+          {
+            label: t('change'),
+            onPress: handleRename,
+            disabled: baseUrl === currentBaseUrl,
+          },
+        ]}
+      >
+        <StyledTextInput
+          label={t('settings.serverUrl')}
+          mode="outlined"
+          defaultValue={baseUrl}
+          onChangeText={setBaseUrl}
+          style={{ backgroundColor: theme.colors.elevation.level3 }}
+        />
       </BaseModal>
     </Portal>
   );

@@ -1,9 +1,8 @@
 import type { FC } from 'react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
 import type { ModalProps } from 'react-native-paper';
-import { Button, Portal, RadioButton, Text } from 'react-native-paper';
+import { Portal, RadioButton } from 'react-native-paper';
 
 import BaseModal from '@/components/BaseModal';
 
@@ -30,31 +29,36 @@ export const LogExtensionModal: FC<LogExtensionModalProps> = ({
 
   return (
     <Portal>
-      <BaseModal {...props} disableSidePadding>
-        <Box ph={16} mv={8}>
-          <Text variant="titleLarge">{t('settings.extension')}</Text>
-        </Box>
-        <Box style={{ maxHeight: '100%' }} pv={16}>
-          <RadioButton.Group
-            onValueChange={value => setExtensionFilter(value)}
-            value={extensionFilter || ''}
-          >
-            {(
-              Array.from(extensionsSet).filter(
-                e => typeof e === 'string' && e.length,
-              ) as string[]
-            ).map(extension => (
-              <RadioButton.Item
-                key={`extension-${extension}`}
-                label={extension}
-                value={extension}
-              />
-            ))}
-          </RadioButton.Group>
-          <Button onPress={() => setExtensionFilter(null)}>
-            {t('settings.clearFilter')}
-          </Button>
-        </Box>
+      <BaseModal
+        {...props}
+        onDismiss={props.onDismiss || (() => setExtensionFilter(null))}
+        title={t('settings.extension')}
+        dismissButton="dismiss"
+        actions={[
+          {
+            label: t('settings.clearFilter'),
+            onPress: () => setExtensionFilter(null),
+            variant: 'text',
+            disabled: extensionFilter === null,
+          },
+        ]}
+      >
+        <RadioButton.Group
+          onValueChange={value => setExtensionFilter(value)}
+          value={extensionFilter || ''}
+        >
+          {(
+            Array.from(extensionsSet).filter(
+              e => typeof e === 'string' && e.length,
+            ) as string[]
+          ).map(extension => (
+            <RadioButton.Item
+              key={`extension-${extension}`}
+              label={extension}
+              value={extension}
+            />
+          ))}
+        </RadioButton.Group>
       </BaseModal>
     </Portal>
   );

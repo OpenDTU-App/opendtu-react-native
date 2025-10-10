@@ -159,6 +159,7 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
                   }}
                   disabled={loading || !previousStepValid}
                   error={!!error}
+                  style={{ backgroundColor: theme.colors.elevation.level3 }}
                 />
               </Box>
               <Box mb={4}>
@@ -179,6 +180,7 @@ const SetupAuthenticateOpenDTUInstanceScreen: FC<PropsWithNavigation> = ({
                       onPress={() => setVisible(!visible)}
                     />
                   }
+                  style={{ backgroundColor: theme.colors.elevation.level3 }}
                 />
               </Box>
               <HelperText type="error" visible={!!error}>

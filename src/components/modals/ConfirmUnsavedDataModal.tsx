@@ -1,16 +1,15 @@
 import type { FC } from 'react';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
-import type { ModalProps } from 'react-native-paper';
-import { Button, Portal, Text, useTheme } from 'react-native-paper';
+import { Portal, useTheme } from 'react-native-paper';
 
+import type { ExtendableModalProps } from '@/components/BaseModal';
 import BaseModal from '@/components/BaseModal';
 
 export type ConfirmUnsavedDataModalInput = false | (() => void);
 
 export interface ConfirmUnsavedDataModalProps
-  extends Omit<ModalProps, 'children' | 'visible'> {
+  extends Omit<ExtendableModalProps, 'visible'> {
   visible: ConfirmUnsavedDataModalInput;
 }
 
@@ -25,37 +24,27 @@ const ConfirmUnsavedDataModal: FC<ConfirmUnsavedDataModalProps> = props => {
 
   return (
     <Portal>
-      <BaseModal {...props} visible={!!visible}>
-        <Box p={16}>
-          <Box mb={8}>
-            <Text variant="bodyLarge">{t('unsavedDataTips')}</Text>
-          </Box>
-        </Box>
-        <Box
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            padding: 8,
-          }}
-        >
-          <Button mode="text" onPress={handleAbort} style={{ marginRight: 8 }}>
-            {t('cancel')}
-          </Button>
-          <Button
-            onPress={() => {
+      <BaseModal
+        {...props}
+        visible={!!visible}
+        title={t('unsavedDataTitle')}
+        description={t('unsavedDataTips')}
+        onDismiss={handleAbort}
+        dismissButton="cancel"
+        icon="alert-circle-outline"
+        actions={[
+          {
+            label: t('confirm'),
+            onPress: () => {
               if (typeof visible === 'function') {
                 visible();
               }
               onDismiss?.();
-            }}
-            mode="contained"
-            buttonColor={theme.colors.primary}
-          >
-            {t('confirm')}
-          </Button>
-        </Box>
-      </BaseModal>
+            },
+            textColor: theme.colors.primary,
+          },
+        ]}
+      />
     </Portal>
   );
 };

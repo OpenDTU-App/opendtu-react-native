@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import UnifiedLineChart from '@/components/Charts/UnifiedLineChart';
+import UnifiedLineChart from '@/components/charts/UnifiedLineChart';
 
 import { useAppSelector } from '@/store';
 

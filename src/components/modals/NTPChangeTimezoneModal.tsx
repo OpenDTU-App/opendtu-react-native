@@ -2,9 +2,7 @@ import type { FC } from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import type { ModalProps } from 'react-native-paper';
 import {
-  Appbar,
   IconButton,
   Portal,
   RadioButton,
@@ -18,6 +16,7 @@ import Fuse from 'fuse.js';
 
 import type { NTPSettings, TimezoneData } from '@/types/opendtu/settings';
 
+import type { ExtendableModalProps } from '@/components/BaseModal';
 import BaseModal from '@/components/BaseModal';
 import type { PossibleEnumValues } from '@/components/modals/ChangeEnumValueModal';
 
@@ -30,8 +29,7 @@ import { FlashList } from '@shopify/flash-list';
 
 const log = rootLogging.extend('NTPChangeTimezoneModal');
 
-export interface NTPChangeTimezoneModalProps
-  extends Omit<ModalProps, 'children'> {
+export interface NTPChangeTimezoneModalProps extends ExtendableModalProps {
   timeSettings?: NTPSettings;
   setTimeSettings?: (settings: NTPSettings) => void;
 }
@@ -115,6 +113,9 @@ const NTPChangeTimezoneModal: FC<NTPChangeTimezoneModalProps> = props => {
   const fuse = useMemo(() => {
     return new Fuse(timezoneValues, {
       keys: ['label'],
+      threshold: 0.3,
+      ignoreLocation: true,
+      minMatchCharLength: 2,
     });
   }, [timezoneValues]);
 
@@ -165,71 +166,80 @@ const NTPChangeTimezoneModal: FC<NTPChangeTimezoneModalProps> = props => {
 
   return (
     <Portal>
-      <BaseModal {...props} isScreen backgroundColor={theme.colors.background}>
-        <Appbar.Header>
-          <Appbar.BackAction onPress={props.onDismiss} />
-          <Appbar.Content title={t('settings.ntpSettings.timezoneConfig')} />
-        </Appbar.Header>
-        <Box style={{ width: '100%', flex: 1 }}>
-          <Box style={{ height: '100%' }}>
-            <Box
-              mv={8}
-              ph={8}
+      <BaseModal
+        {...props}
+        fullscreen
+        dismissButton="dismiss"
+        title={t('settings.ntpSettings.timezoneConfig')}
+      >
+        <Box style={{ flex: 1 }} mb={16}>
+          <Box
+            mv={8}
+            ph={8}
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: 8,
+              alignItems: 'center',
+            }}
+          >
+            <TextInput
+              label={t('settings.ntpSettings.search')}
+              value={searchQuery}
               style={{
-                display: 'flex',
-                flexDirection: 'row',
-                gap: 8,
-                alignItems: 'center',
+                flex: 1,
+                marginHorizontal: 8,
+                backgroundColor: theme.colors.elevation.level3,
+                borderTopLeftRadius: theme.roundness * 3,
+                borderTopRightRadius: theme.roundness * 3,
               }}
-            >
-              <TextInput
-                label={t('settings.ntpSettings.search')}
-                value={searchQuery}
-                style={{ flex: 1, marginHorizontal: 8 }}
-                onChangeText={value => {
-                  setSearchQuery(value);
-                }}
-                right={<TextInput.Icon icon="magnify" />}
-              />
-              <IconButton
-                onPress={() => {
-                  setSearchQuery('');
-                  setHasScrolledToSelectedTimezone(false);
-                }}
-                icon="close"
-              />
-            </Box>
-            <FlashList
-              extraData={selectedTimezone}
-              data={filteredTimezones}
-              ref={listRef}
-              refreshControl={
-                <RefreshControl
-                  refreshing={isRefreshing}
-                  onRefresh={handleGetTimezones}
-                  colors={[theme.colors.primary]}
-                  progressBackgroundColor={theme.colors.elevation.level3}
-                  tintColor={theme.colors.primary}
-                />
-              }
-              renderItem={({ item }) => (
-                <RadioButton.Item
-                  value={item.value}
-                  label={item.label}
-                  status={
-                    item.value === selectedTimezone ? 'checked' : 'unchecked'
-                  }
-                  onPress={() => {
-                    handleSetTimezone(item.value);
-                  }}
-                  labelVariant="bodyMedium"
-                  style={{
-                    backgroundColor: theme.colors.background,
-                  }}
-                />
-              )}
+              onChangeText={value => {
+                setSearchQuery(value);
+              }}
+              right={<TextInput.Icon icon="magnify" />}
+            />
+            <IconButton
+              onPress={() => {
+                if (!searchQuery) {
+                  return;
+                }
+
+                setSearchQuery('');
+                setHasScrolledToSelectedTimezone(false);
+              }}
+              icon="close-circle-outline"
             />
           </Box>
+          <FlashList
+            extraData={selectedTimezone}
+            data={filteredTimezones}
+            ref={listRef}
+            refreshControl={
+              <RefreshControl
+                refreshing={isRefreshing}
+                onRefresh={handleGetTimezones}
+                colors={[theme.colors.primary]}
+                progressBackgroundColor={theme.colors.surfaceVariant}
+                tintColor={theme.colors.primary}
+              />
+            }
+            renderItem={({ item }) => (
+              <RadioButton.Item
+                value={item.value}
+                label={item.label}
+                status={
+                  item.value === selectedTimezone ? 'checked' : 'unchecked'
+                }
+                onPress={() => {
+                  handleSetTimezone(item.value);
+                }}
+                labelVariant="bodyMedium"
+                style={{
+                  backgroundColor: theme.colors.surfaceVariant,
+                }}
+              />
+            )}
+          />
         </Box>
       </BaseModal>
     </Portal>

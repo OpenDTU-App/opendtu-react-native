@@ -1,19 +1,31 @@
 import type { FC } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
-import { Appbar, Button, List, Text, useTheme } from 'react-native-paper';
+import { Box, Flex } from 'react-native-flex-layout';
+import {
+  Appbar,
+  Button,
+  List,
+  Surface,
+  Text,
+  useTheme,
+} from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 
-import { ScrollView, View } from 'react-native';
+import { Linking, ScrollView, View } from 'react-native';
 
 import AddDatabaseModal from '@/components/modals/AddDatabaseModal';
 import ManageDatabaseModal from '@/components/modals/ManageDatabaseModal';
 import StyledListItem from '@/components/styled/StyledListItem';
 
-import { spacing } from '@/constants';
+import { rootLogging } from '@/utils/log';
+
+import { databaseInformationUrl, spacing } from '@/constants';
 import { useAppSelector } from '@/store';
 import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
+
+const log = rootLogging.extend('ManageDatabaseScreen');
 
 const ManageDatabasesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const theme = useTheme();
@@ -37,6 +49,18 @@ const ManageDatabasesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
     setOpenAddDatabaseModal(true);
   }, []);
 
+  const handleOpenDatabaseInformation = useCallback(async () => {
+    if (await Linking.canOpenURL(databaseInformationUrl)) {
+      await Linking.openURL(databaseInformationUrl);
+    } else {
+      log.error('Cannot open url:', databaseInformationUrl);
+      Toast.show({
+        type: 'error',
+        text1: t('cannotOpenUrl'),
+      });
+    }
+  }, [t]);
+
   return (
     <>
       <Appbar.Header>
@@ -54,31 +78,45 @@ const ManageDatabasesScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             alignItems: 'center',
           }}
         >
-          {!hasConfiguredDatabases ? (
-            <Box>
-              <Box
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  height: '100%',
-                  width: '90%',
-                }}
-              >
-                <Box mb={16}>
-                  <Text style={{ textAlign: 'center' }} variant="titleLarge">
-                    {t('manageDatabases.noDatabasesConfigured')}
-                  </Text>
-                </Box>
-                <Box mb={16}>
-                  <Text style={{ textAlign: 'center' }} variant="titleMedium">
-                    {t('manageDatabases.noDatabasesConfiguredHint')}
-                  </Text>
-                </Box>
-                <Button icon="plus" onPress={handleClickAdd}>
-                  {t('manageDatabases.addDatabase')}
-                </Button>
-              </Box>
+          <Surface
+            elevation={2}
+            style={{
+              padding: 16,
+              marginHorizontal: 16,
+              borderRadius: theme.roundness * 6,
+            }}
+          >
+            <Box mb={8}>
+              <Text variant="titleMedium">
+                {t('database.clarificationTitle')}
+              </Text>
+              <Text variant="bodyMedium">
+                {t('database.clarificationText')}
+              </Text>
             </Box>
+            <Button onPress={handleOpenDatabaseInformation}>
+              {t('learnMore')}
+            </Button>
+          </Surface>
+          {!hasConfiguredDatabases ? (
+            <Flex
+              center
+              style={{ padding: 24, position: 'absolute', height: '100%' }}
+            >
+              <Box mb={16}>
+                <Text style={{ textAlign: 'center' }} variant="titleLarge">
+                  {t('manageDatabases.noDatabasesConfigured')}
+                </Text>
+              </Box>
+              <Box mb={16}>
+                <Text style={{ textAlign: 'center' }} variant="titleMedium">
+                  {t('manageDatabases.noDatabasesConfiguredHint')}
+                </Text>
+              </Box>
+              <Button icon="plus" onPress={handleClickAdd}>
+                {t('manageDatabases.addDatabase')}
+              </Button>
+            </Flex>
           ) : (
             <ScrollView
               style={{ marginTop: 16, marginBottom: 16, width: '100%' }}

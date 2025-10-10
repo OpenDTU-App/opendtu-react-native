@@ -1,8 +1,7 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box } from 'react-native-flex-layout';
 import type { ModalProps } from 'react-native-paper';
-import { Portal, RadioButton, Text } from 'react-native-paper';
+import { Portal, RadioButton } from 'react-native-paper';
 
 import BaseModal from '@/components/BaseModal';
 
@@ -22,28 +21,28 @@ export const LogLevelModal: FC<LogLevelModalProps> = ({
 
   return (
     <Portal>
-      <BaseModal {...props} disableSidePadding>
-        <Box ph={16} mv={8}>
-          <Text variant="titleLarge">{t('settings.logLevel')}</Text>
-        </Box>
-        <Box style={{ maxHeight: '100%' }} pv={16}>
-          <RadioButton.Group
-            onValueChange={value =>
-              setLogLevel(LogLevel[value as never] as unknown as LogLevel)
-            }
-            value={LogLevel[logLevel as never]}
-          >
-            {Object.keys(LogLevel)
-              .filter(level => isNaN(level as never))
-              .map(level => (
-                <RadioButton.Item
-                  key={level}
-                  label={t(`logLevels.${level}`)}
-                  value={level}
-                />
-              ))}
-          </RadioButton.Group>
-        </Box>
+      <BaseModal
+        {...props}
+        title={t('settings.logLevel')}
+        dismissButton="dismiss"
+        onDismiss={props.onDismiss || (() => {})}
+      >
+        <RadioButton.Group
+          onValueChange={value =>
+            setLogLevel(LogLevel[value as never] as unknown as LogLevel)
+          }
+          value={LogLevel[logLevel as never]}
+        >
+          {Object.keys(LogLevel)
+            .filter(level => isNaN(level as never))
+            .map(level => (
+              <RadioButton.Item
+                key={level}
+                label={t(`logLevels.${level}`)}
+                value={level}
+              />
+            ))}
+        </RadioButton.Group>
       </BaseModal>
     </Portal>
   );

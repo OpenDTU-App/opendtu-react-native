@@ -2,37 +2,27 @@ import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { TextInputProps } from 'react-native-paper';
-import {
-  Button,
-  HelperText,
-  Portal,
-  Text,
-  TextInput,
-} from 'react-native-paper';
-
-import { View } from 'react-native';
+import { HelperText, Portal, TextInput, useTheme } from 'react-native-paper';
 
 import BaseModal from '@/components/BaseModal';
 
 import { rootLogging } from '@/utils/log';
 
-import { spacing } from '@/constants';
-
 const log = rootLogging.extend('ChangeTextValueModal');
 
-export interface NewChangeTextValueModalProps {
+export interface ChangeTextValueModalProps {
   isOpen?: boolean;
+  title: string;
   onClose?: () => void;
   defaultValue?: string;
   onChange?: (value: string) => void;
-  title?: string;
   description?: string;
   inputProps?: Omit<TextInputProps, 'value' | 'onChangeText'>;
   validate?: (value: string) => boolean;
   allowedRegex?: RegExp;
 }
 
-const ChangeTextValueModal: FC<NewChangeTextValueModalProps> = ({
+const ChangeTextValueModal: FC<ChangeTextValueModalProps> = ({
   isOpen,
   title,
   description,
@@ -43,6 +33,7 @@ const ChangeTextValueModal: FC<NewChangeTextValueModalProps> = ({
   validate,
   allowedRegex,
 }) => {
+  const theme = useTheme();
   const { t } = useTranslation();
 
   const [value, setValue] = useState<string>(defaultValue ?? '');
@@ -94,50 +85,38 @@ const ChangeTextValueModal: FC<NewChangeTextValueModalProps> = ({
 
   return (
     <Portal>
-      <BaseModal visible={!!isOpen} onDismiss={handleCancel}>
-        <View
+      <BaseModal
+        visible={!!isOpen}
+        onDismiss={handleCancel}
+        title={title}
+        description={description}
+        dismissButton="cancel"
+        actions={[{ label: t('apply'), onPress: handleSave }]}
+      >
+        <TextInput
+          {...inputProps}
+          value={value}
           style={{
-            padding: spacing,
+            backgroundColor: theme.colors.elevation.level3,
+            borderTopLeftRadius: theme.roundness * 3,
+            borderTopRightRadius: theme.roundness * 3,
           }}
-        >
-          <View>
-            <Text variant="titleLarge">{title}</Text>
-            <Text variant="bodyMedium">{description}</Text>
-          </View>
-          <View style={{ marginTop: spacing * 2 }}>
-            <TextInput
-              {...inputProps}
-              value={value}
-              onChangeText={value => {
-                if (allowedRegex && !allowedRegex.test(value)) {
-                  return;
-                }
+          onChangeText={value => {
+            if (allowedRegex && !allowedRegex.test(value)) {
+              return;
+            }
 
-                setWasModified(true);
-                setError(null);
-                setValue(value);
-              }}
-              error={!!error}
-            />
-            <HelperText type="error" visible={!!error}>
-              {error}
-            </HelperText>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              gap: 8,
-            }}
-          >
-            <Button mode="text" onPress={handleCancel} style={{ flex: 1 }}>
-              {t('cancel')}
-            </Button>
-            <Button mode="contained" onPress={handleSave} style={{ flex: 1 }}>
-              {t('apply')}
-            </Button>
-          </View>
-        </View>
+            setWasModified(true);
+            setError(null);
+            setValue(value);
+          }}
+          error={!!error}
+        />
+        {error ? (
+          <HelperText type="error" visible>
+            {error}
+          </HelperText>
+        ) : null}
       </BaseModal>
     </Portal>
   );
