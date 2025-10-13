@@ -44,7 +44,7 @@ jobs:
           SARIF_ESLINT_IGNORE_SUPPRESSED=true yarn lint --max-warnings=0 --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif
 
       - name: Upload ESLint analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: eslint-results.sarif
           wait-for-processing: true
