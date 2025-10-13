@@ -4340,9 +4340,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/bottom-tabs@npm:^7.4.8":
-  version: 7.4.8
-  resolution: "@react-navigation/bottom-tabs@npm:7.4.8"
+"@react-navigation/bottom-tabs@npm:^7.4.9":
+  version: 7.4.9
+  resolution: "@react-navigation/bottom-tabs@npm:7.4.9"
   dependencies:
     "@react-navigation/elements": "npm:^2.6.5"
     color: "npm:^4.2.3"
@@ -4352,7 +4352,7 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: ">= 4.0.0"
     react-native-screens: ">= 4.0.0"
-  checksum: 10/6b1943cc6a7cd2be35c9e40aee60cfb04e0af50ed93c5d48be6e0c0ad723c486b2c3bf382d8038c4b7d2bfefe6d32037db903e29bdd4fcd5748458f8c8ca5dc2
+  checksum: 10/001604c12d45f42eac33c80e4f83e93e35c2e79e7b9594430fb02d19d35a6393baf2e3dea33f4cdebadb25bb1d5e88379d28d7404cd525abe0df11192651af09
   languageName: node
   linkType: hard
 
@@ -4393,9 +4393,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native-stack@npm:^7.3.27":
-  version: 7.3.27
-  resolution: "@react-navigation/native-stack@npm:7.3.27"
+"@react-navigation/native-stack@npm:^7.3.28":
+  version: 7.3.28
+  resolution: "@react-navigation/native-stack@npm:7.3.28"
   dependencies:
     "@react-navigation/elements": "npm:^2.6.5"
     warn-once: "npm:^0.1.1"
@@ -4405,7 +4405,7 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: ">= 4.0.0"
     react-native-screens: ">= 4.0.0"
-  checksum: 10/89f13700464d8938210471f4c9c4599e0070e7159b0659aef2f78f328684f73f00021e3bccc3b86f6bd83a26f7e91512292dab1e433409b0143bbc80f2f58689
+  checksum: 10/af30f44aed027a881db269de3b9b7e8a75cd774d9d87bc5e9983565fd4384dd92049a62f8a5fc750b1a4c0c74324414a3314009703f09fc8681983442a523e3a
   languageName: node
   linkType: hard
 
@@ -9411,9 +9411,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^25.5.3":
-  version: 25.5.3
-  resolution: "i18next@npm:25.5.3"
+"i18next@npm:^25.6.0":
+  version: 25.6.0
+  resolution: "i18next@npm:25.6.0"
   dependencies:
     "@babel/runtime": "npm:^7.27.6"
   peerDependencies:
@@ -9421,7 +9421,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/eb7312b3261af4477b7e4d09ec1636372a79a8f81bb5ac9531bbb9aa498ca07f337f9ec2c89507f0d895ce6c0b1352a2ea4fbe47f665ab4feba3df2de79cbeab
+  checksum: 10/3eaa354f7028ff6051e4294c09bf518183c6653c019cfeed73fc4504786b3a474c3b55ed6b9832e122ba2538167b3eb85ae71fdd6423fb9ec9ebe2156b061d66
   languageName: node
   linkType: hard
 
@@ -12517,9 +12517,9 @@ __metadata:
     "@react-native/metro-config": "npm:0.81.4"
     "@react-native/new-app-screen": "npm:0.81.4"
     "@react-native/typescript-config": "npm:0.81.4"
-    "@react-navigation/bottom-tabs": "npm:^7.4.8"
+    "@react-navigation/bottom-tabs": "npm:^7.4.9"
     "@react-navigation/native": "npm:^7.1.18"
-    "@react-navigation/native-stack": "npm:^7.3.27"
+    "@react-navigation/native-stack": "npm:^7.3.28"
     "@reduxjs/toolkit": "npm:^2.9.0"
     "@shopify/flash-list": "npm:^2.1.0"
     "@trivago/prettier-plugin-sort-imports": "npm:^5.2.2"
@@ -12548,7 +12548,7 @@ __metadata:
     expo: "npm:54.0.12"
     fast-deep-equal: "npm:^3.1.3"
     fuse.js: "npm:^7.1.0"
-    i18next: "npm:^25.5.3"
+    i18next: "npm:^25.6.0"
     intl-pluralrules: "npm:^2.0.1"
     ip-regex: "npm:^5.0.0"
     moment: "npm:^2.30.1"
@@ -12560,7 +12560,7 @@ __metadata:
     pretty-bytes: "npm:^7.1.0"
     prometheus-query: "npm:^3.5.1"
     react: "npm:19.1.0"
-    react-i18next: "npm:^16.0.0"
+    react-i18next: "npm:^16.0.1"
     react-native: "npm:0.81.4"
     react-native-charts-wrapper: "npm:^0.6.0"
     react-native-config: "npm:1.5.6"
@@ -12570,7 +12570,7 @@ __metadata:
     react-native-fs: "npm:^2.20.0"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-linear-gradient: "npm:^2.8.3"
-    react-native-localize: "npm:^3.5.3"
+    react-native-localize: "npm:^3.5.4"
     react-native-logs: "npm:^5.5.0"
     react-native-markdown-display: "npm:^7.0.2"
     react-native-mmkv: "npm:~3.3.3"
@@ -13254,9 +13254,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^16.0.0":
-  version: 16.0.0
-  resolution: "react-i18next@npm:16.0.0"
+"react-i18next@npm:^16.0.1":
+  version: 16.0.1
+  resolution: "react-i18next@npm:16.0.1"
   dependencies:
     "@babel/runtime": "npm:^7.27.6"
     html-parse-stringify: "npm:^3.0.1"
@@ -13271,7 +13271,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10/3579b5bd6ee286363b6b0316e8536c81033b62bce1792ca1822a6490cc9ad5bd62c9fc5e7e7ab1dad2de6eff6e34e63d0af810839c5ab73d5369c57497d81936
+  checksum: 10/5828d3985eac2e84bfc8917a295a6a666f0f5fafd692022b83de48bcfa79eb5d0fd499700611463ee9c75c1added93092bf112164b7c9bef39c92441f91ddd54
   languageName: node
   linkType: hard
 
@@ -13405,9 +13405,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-localize@npm:^3.5.3":
-  version: 3.5.3
-  resolution: "react-native-localize@npm:3.5.3"
+"react-native-localize@npm:^3.5.4":
+  version: 3.5.4
+  resolution: "react-native-localize@npm:3.5.4"
   peerDependencies:
     "@expo/config-plugins": ^9.0.0 || ^10.0.0
     react: "*"
@@ -13418,7 +13418,7 @@ __metadata:
       optional: true
     react-native-macos:
       optional: true
-  checksum: 10/719f84ffd8d9a074f570c44eb473fc3a5ff96b2b4a390677566c4a7eb6fda31c170524374f4f980b2d7ec9f1e609451e3efaeb454210aabe2c866444e6e5d46b
+  checksum: 10/afcd00e12561d147ad50b5d2f240a7b7853c5bd8226386e0afab61c7acd7b8a2b40651552272dbb293f5ed68800e0e3e48bd939d98888be81a0f9687c70cdb6b
   languageName: node
   linkType: hard
 
