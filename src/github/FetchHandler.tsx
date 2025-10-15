@@ -262,8 +262,8 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
       () => {
         fetchHandler();
       },
-      1000 * 60 * 10,
-    ); // 10 minutes
+      1000 * 60 * 60,
+    ); // every hour
 
     return () => {
       log.info('Clearing interval...');
