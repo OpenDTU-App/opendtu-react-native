@@ -55,6 +55,7 @@ const ConfigureGraphsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
     if (startDateState instanceof Date) return startDateState;
 
+    // eslint-disable-next-line react-hooks/purity
     return new Date(Date.now() - startDateState.seconds * 1000);
   }, [startDateState]);
 

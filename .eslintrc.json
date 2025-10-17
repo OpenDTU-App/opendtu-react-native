@@ -45,6 +45,8 @@
     "simple-import-sort"
   ],
   "rules": {
+    "react-hooks/preserve-manual-memoization": "off",
+    "react-hooks/set-state-in-effect": "off",
     "import/no-named-as-default-member": "off",
     "import/no-named-as-default": "off",
     "import/first": "error",
