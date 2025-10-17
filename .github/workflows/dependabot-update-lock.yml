@@ -29,6 +29,18 @@ jobs:
           node-version: '22'
           cache: 'yarn'
 
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup cocoapods
+        run: |
+          cd ios
+          gem install cocoapods
+          bundle install
+          bundle exec pod install
+
       - name: Install Packages
         run: |
           YARN_ENABLE_SCRIPTS=false yarn install --immutable --check-cache
