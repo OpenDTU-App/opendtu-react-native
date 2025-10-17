@@ -18,7 +18,7 @@ import { Linking, ScrollView, View } from 'react-native';
 
 import moment from 'moment';
 
-import { setEnableAppUpdates } from '@/slices/settings';
+import { resetAllDismissedFlags, setEnableAppUpdates } from '@/slices/settings';
 
 import GenericRefreshModal from '@/components/modals/GenericRefreshModal';
 import OrientationContainer from '@/components/OrientationContainer';
@@ -80,6 +80,9 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
   const handleHideRefreshModal = useCallback(() => {
     setShowRefreshModal(false);
   }, []);
+
+  const [hasPressedResetDismissedFlags, setHasPressedResetDismissedFlags] =
+    useState<boolean>(false);
 
   return (
     <>
@@ -213,6 +216,19 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                         opacity: !allowInAppUpdates ? 0.5 : 1,
                       }}
                     />
+                    <Divider />
+                    <Box p={8}>
+                      <Button
+                        mode="contained-tonal"
+                        onPress={() => {
+                          dispatch(resetAllDismissedFlags());
+                          setHasPressedResetDismissedFlags(true);
+                        }}
+                        disabled={hasPressedResetDismissedFlags}
+                      >
+                        {t('aboutApp.showAlertsAgain')}
+                      </Button>
+                    </Box>
                   </Surface>
                 ) : null}
                 <View style={{ height: spacing * 2 }} />

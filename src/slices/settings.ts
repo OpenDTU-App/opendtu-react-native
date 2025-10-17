@@ -275,6 +275,10 @@ const settingsSlice = createSlice({
     setBugreportInfoDismissed: state => {
       state.bugreportInfoDismissed = true;
     },
+    resetAllDismissedFlags: state => {
+      state.feedbackInfoDismissed = false;
+      state.bugreportInfoDismissed = false;
+    },
   },
 });
 
@@ -305,6 +309,7 @@ export const {
   setLastAppVersion,
   setFeedbackInfoDismissed,
   setBugreportInfoDismissed,
+  resetAllDismissedFlags,
 } = settingsSlice.actions;
 
 export const { reducer: SettingsReducer } = settingsSlice;
