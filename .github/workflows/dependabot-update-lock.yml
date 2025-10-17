@@ -32,6 +32,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
+          ruby-version: '2.6.10'
           bundler-cache: true
 
       - name: Setup cocoapods
