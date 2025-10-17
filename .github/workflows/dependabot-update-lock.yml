@@ -32,8 +32,8 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.0'
           bundler-cache: true
+          working-directory: 'ios'
 
       - name: Setup cocoapods
         run: |
@@ -58,6 +58,7 @@ jobs:
           pushd ios
           pod install --repo-update
           popd
+          git checkout -- .bundle/config
 
       - name: Generate Commit Message
         id: generate_commit_message
@@ -66,7 +67,7 @@ jobs:
           branch=${GITHUB_REF#refs/heads/}
           # add `[dependabot skip]` prefix so Dependabot force pushes any rebases over our changes triggering the action again
           commit_message="Bump ${branch//dependabot\/npm_and_yarn\// } cocoapods packages%0A%0A[dependabot skip]"
-          echo ::set-output name=commit_message::$commit_message
+          echo "commit_message=$commit_message" >> $GITHUB_OUTPUT
 
       - uses: stefanzweifel/git-auto-commit-action@v7
         with:
