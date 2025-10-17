@@ -211,6 +211,7 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       disabled={!allowInAppUpdates}
                       style={{
                         opacity: !allowInAppUpdates ? 0.5 : 1,
+                        borderRadius: 24,
                       }}
                     />
                   </Surface>
