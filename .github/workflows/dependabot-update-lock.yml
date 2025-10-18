@@ -50,6 +50,7 @@ jobs:
             bundler_version=$(grep -A 1 'BUNDLED WITH' Gemfile.lock | tail -n 1 | tr -d ' ')
             gem install bundler -v "$bundler_version"
             bundler -v
+            ruby -v
 
       - name: Setup cocoapods
         run: |
