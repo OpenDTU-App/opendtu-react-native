@@ -48,7 +48,7 @@ jobs:
         # Check Gemfile.lock for the exact version of bundler to use
         run: |
             bundler_version=$(grep -A 1 'BUNDLED WITH' Gemfile.lock | tail -n 1 | tr -d ' ')
-            gem install bundler -v "$bundler_version"
+            bundle _${bundler_version}_ install
             bundler -v
             ruby -v
 
