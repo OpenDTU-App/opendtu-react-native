@@ -29,10 +29,19 @@ jobs:
           node-version: '22'
           cache: 'yarn'
 
+      - name: Get ruby version from Gemfile.lock
+        id: get_ruby_version
+        run: |
+          ruby_version=$(grep -A 1 'RUBY VERSION' Gemfile.lock | tail -n 1 | tr -d ' ') # ruby2.6.10p210
+          ruby_version_number=${ruby_version%%p*} # ruby2.6.10
+          ruby_version_number=${ruby_version_number#ruby} # 2.6.10
+          echo "ruby_version=$ruby_version_number" >> $GITHUB_OUTPUT
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          ruby-version: ${{ steps.get_ruby_version.outputs.ruby_version }}
           working-directory: 'ios'
 
       - name: Ensure bundler version
