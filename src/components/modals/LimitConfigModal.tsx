@@ -14,21 +14,25 @@ import {
 import type { TFunction } from 'i18next';
 
 import type { LimitConfig } from '@/types/opendtu/control';
-import { SetStatus } from '@/types/opendtu/control';
+import { LegacyLimitType, SetStatus } from '@/types/opendtu/control';
 
 import type { ExtendableModalProps } from '@/components/BaseModal';
 import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
+import useDtuState from '@/hooks/useDtuState';
 import useInverterLimits from '@/hooks/useInverterLimits';
 
+import { convertLimitTypeToCorrectEnum } from '@/utils/legacy';
+
 import { useApi } from '@/api/ApiHandler';
+import type { OpenDtuFirmwareVersion } from '@/constants';
 
 export interface LimitConfigModalProps extends ExtendableModalProps {
   inverterSerial: string;
 }
 
-export type LimitType = 'absolute' | 'relative';
+export type LimitConfigType = 'absolute' | 'relative';
 
 const buttonColors: Record<
   'permanent' | 'temporary',
@@ -72,7 +76,11 @@ const LimitConfigModal: FC<LimitConfigModalProps> = ({
 
   const limitConfig = useInverterLimits(inverterSerial, state => state);
 
-  const [limitType, setLimitType] = useState<LimitType>('absolute');
+  const currentFirmwareVersion = useDtuState(
+    state => state?.systemStatus?.git_hash,
+  );
+
+  const [limitType, setLimitType] = useState<LimitConfigType>('absolute');
   const [limitValue, setLimitValue] = useState<string>('0');
 
   const api = useApi();
@@ -107,8 +115,21 @@ const LimitConfigModal: FC<LimitConfigModalProps> = ({
         return;
       }
 
+      if (typeof currentFirmwareVersion !== 'string') {
+        setError(t('limitStatus.error'));
+        return;
+      }
+
       const limitConfig: LimitConfig = {
-        limit_type: (permanent ? 256 : 0) + (limitType === 'relative' ? 1 : 0),
+        limit_type: convertLimitTypeToCorrectEnum(
+          (permanent
+            ? LegacyLimitType.PermanentAbsolute
+            : LegacyLimitType.TemporaryAbsolute) +
+            (limitType === 'relative'
+              ? LegacyLimitType.TemporaryRelative
+              : LegacyLimitType.TemporaryAbsolute),
+          currentFirmwareVersion as OpenDtuFirmwareVersion,
+        ),
         limit_value: numberValue,
         serial: inverterSerial,
       };
@@ -127,6 +148,7 @@ const LimitConfigModal: FC<LimitConfigModalProps> = ({
       }
     },
     [
+      currentFirmwareVersion,
       api,
       inverterLimitConfig,
       inverterSerial,
@@ -244,7 +266,7 @@ const LimitConfigModal: FC<LimitConfigModalProps> = ({
           }}
         >
           <RadioButton.Group
-            onValueChange={value => setLimitType(value as LimitType)}
+            onValueChange={value => setLimitType(value as LimitConfigType)}
             value={limitType}
           >
             <RadioButton.Item
