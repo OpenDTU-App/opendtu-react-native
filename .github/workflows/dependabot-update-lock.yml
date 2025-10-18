@@ -47,9 +47,10 @@ jobs:
       - name: Ensure bundler version
         # Check Gemfile.lock for the exact version of bundler to use
         run: |
+            bundle --version
             bundler_version=$(grep -A 1 'BUNDLED WITH' Gemfile.lock | tail -n 1 | tr -d ' ')
             bundle _${bundler_version}_ install
-            bundler -v
+            bundle -v
             ruby -v
 
       - name: Setup cocoapods
