@@ -29,9 +29,17 @@ export const spacing = 8;
 
 export const defaultUser = 'admin';
 
-export const minimumOpenDtuFirmwareVersion = 'v23.11.16';
+export type OpenDtuFirmwareVersion = `v${number}.${number}.${number}`;
 
-export const maximumTestedOpenDtuFirmwareVersion = 'v24.4.12';
+export const minimumOpenDtuFirmwareVersion: OpenDtuFirmwareVersion =
+  'v23.11.16';
+
+export const maximumTestedOpenDtuFirmwareVersion: OpenDtuFirmwareVersion =
+  'v24.4.12';
+
+export const featureFlags: Record<string, OpenDtuFirmwareVersion> = {
+  apiLimitConfigEnumChange: 'v25.9.11', // https://github.com/tbnobody/OpenDTU/commit/8cab3335f348d9ec5221ebf01634c593e3a4213b
+};
 
 export const weblateUrl =
   'https://weblate.commanderred.xyz/engage/opendtu-react-native/';

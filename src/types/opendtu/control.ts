@@ -28,15 +28,23 @@ export interface LimitStatusItem {
 
 export type LimitStatusData = Record<InverterSerial, LimitStatusItem>;
 
-export enum LimitType {
+export enum LegacyLimitType {
   TemporaryAbsolute = 0,
   TemporaryRelative = 1,
   PermanentAbsolute = 256,
   PermanentRelative = 257,
 }
 
+export enum LimitType {
+  AbsolutNonPersistent,
+  RelativNonPersistent,
+  AbsolutPersistent,
+  RelativPersistent,
+  PowerLimitControl_Max,
+}
+
 export interface LimitConfig {
   serial: InverterSerial;
   limit_value: number;
-  limit_type: LimitType;
+  limit_type: LimitType | LegacyLimitType; // depends on featureFlags.apiLimitConfigEnumChange
 }
