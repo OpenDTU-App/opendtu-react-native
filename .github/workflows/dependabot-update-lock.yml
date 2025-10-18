@@ -35,6 +35,13 @@ jobs:
           bundler-cache: true
           working-directory: 'ios'
 
+      - name: Ensure bundler version
+        # Check Gemfile.lock for the exact version of bundler to use
+        run: |
+            bundler_version=$(grep -A 1 'BUNDLED WITH' Gemfile.lock | tail -n 1 | tr -d ' ')
+            gem install bundler -v "$bundler_version"
+            bundler -v
+
       - name: Setup cocoapods
         run: |
           cd ios
