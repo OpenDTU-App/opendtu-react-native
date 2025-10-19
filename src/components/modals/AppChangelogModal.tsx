@@ -122,7 +122,7 @@ const AppChangelogModal: FC = () => {
         dismissButton={false}
         actions={[{ label: t('acknowledge'), onPress: handleAcknowledge }]}
       >
-        <Box style={{ maxHeight: '100%' }}>
+        <Box style={{ maxHeight: 500 }}>
           {appReleaseIsCorrectVersion ? (
             <ScrollView contentInsetAdjustmentBehavior="automatic">
               <ReleaseChangelog releaseBody={appRelease?.body} />
