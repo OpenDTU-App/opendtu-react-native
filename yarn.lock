@@ -12547,7 +12547,7 @@ __metadata:
     pretty-bytes: "npm:^7.1.0"
     prometheus-query: "npm:^3.5.1"
     react: "npm:19.1.0"
-    react-i18next: "npm:^16.1.0"
+    react-i18next: "npm:^16.1.4"
     react-native: "npm:0.81.4"
     react-native-charts-wrapper: "npm:^0.6.0"
     react-native-config: "npm:1.5.6"
@@ -13241,9 +13241,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^16.1.0":
-  version: 16.1.0
-  resolution: "react-i18next@npm:16.1.0"
+"react-i18next@npm:^16.1.4":
+  version: 16.1.4
+  resolution: "react-i18next@npm:16.1.4"
   dependencies:
     "@babel/runtime": "npm:^7.27.6"
     html-parse-stringify: "npm:^3.0.1"
@@ -13258,7 +13258,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10/73b23d43bcb470ae470a6481c81879118959d190a05cecfe9e92f87838fffcaa14a74a222287afd3826c8b3deaf7b58e81d47683e76e735d1a632db23899e912
+  checksum: 10/89d58e0877b4705ce5e5e9623af8bebb8326d99949bfa438261f9f7939d70ccab5720947d1ccc297ac240f786d6103222a635879eab07d92fe39aa021508830f
   languageName: node
   linkType: hard
 
