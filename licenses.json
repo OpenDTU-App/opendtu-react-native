@@ -47,13 +47,13 @@
         "licenseUrl": "https://github.com/facebook/react-native",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/bottom-tabs@7.4.9": {
+    "@react-navigation/bottom-tabs@7.5.0": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native-stack@7.3.28": {
+    "@react-navigation/native-stack@7.5.0": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
@@ -65,7 +65,7 @@
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@reduxjs/toolkit@2.9.1": {
+    "@reduxjs/toolkit@2.9.2": {
         "licenses": "MIT",
         "repository": "https://github.com/reduxjs/redux-toolkit",
         "licenseUrl": "https://github.com/reduxjs/redux-toolkit/raw/master/LICENSE",
@@ -167,7 +167,7 @@
         "licenseUrl": "https://github.com/samber/prometheus-query-js/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-i18next@16.1.4": {
+    "react-i18next@16.1.5": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/react-i18next",
         "licenseUrl": "https://github.com/i18next/react-i18next/raw/master/LICENSE",
@@ -209,7 +209,7 @@
         "licenseUrl": "https://github.com/itinance/react-native-fs/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-get-random-values@1.11.0": {
+    "react-native-get-random-values@2.0.0": {
         "licenses": "MIT",
         "repository": "https://github.com/LinusU/react-native-get-random-values",
         "licenseUrl": "https://github.com/LinusU/react-native-get-random-values/raw/master/LICENSE",
@@ -269,7 +269,7 @@
         "licenseUrl": "https://github.com/th3rdwave/react-native-safe-area-context/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-screens@4.17.1": {
+    "react-native-screens@4.18.0": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-screens",
         "licenseUrl": "https://github.com/software-mansion/react-native-screens/raw/master/LICENSE",
