@@ -4381,9 +4381,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native-stack@npm:^7.5.0":
-  version: 7.5.0
-  resolution: "@react-navigation/native-stack@npm:7.5.0"
+"@react-navigation/native-stack@npm:^7.5.1":
+  version: 7.5.1
+  resolution: "@react-navigation/native-stack@npm:7.5.1"
   dependencies:
     "@react-navigation/elements": "npm:^2.7.0"
     color: "npm:^4.2.3"
@@ -4395,7 +4395,7 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: ">= 4.0.0"
     react-native-screens: ">= 4.0.0"
-  checksum: 10/c98d4bf7860ebe0c9a8b317a137fa82df133587694dbd6de5429c2d6b9e6eea0c68537f3bceffd5513f01c3f14ce08bde16c6341c9e9f5f9d4271e07f9eac6ed
+  checksum: 10/a9409a52e7000a227dd99902c25f675ce8e5cec674214e85eaec80d3a72d5d33e2462d056378abcc5f48538900d029cf5989c9c313d5b72350613a87c76ea62d
   languageName: node
   linkType: hard
 
@@ -12508,7 +12508,7 @@ __metadata:
     "@react-native/typescript-config": "npm:0.81.4"
     "@react-navigation/bottom-tabs": "npm:^7.5.0"
     "@react-navigation/native": "npm:^7.1.18"
-    "@react-navigation/native-stack": "npm:^7.5.0"
+    "@react-navigation/native-stack": "npm:^7.5.1"
     "@reduxjs/toolkit": "npm:^2.9.2"
     "@shopify/flash-list": "npm:^2.1.0"
     "@trivago/prettier-plugin-sort-imports": "npm:^5.2.2"
@@ -12549,7 +12549,7 @@ __metadata:
     pretty-bytes: "npm:^7.1.0"
     prometheus-query: "npm:^3.5.1"
     react: "npm:19.1.0"
-    react-i18next: "npm:^16.1.5"
+    react-i18next: "npm:^16.1.6"
     react-native: "npm:0.81.4"
     react-native-charts-wrapper: "npm:^0.6.0"
     react-native-config: "npm:1.5.6"
@@ -13243,9 +13243,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^16.1.5":
-  version: 16.1.5
-  resolution: "react-i18next@npm:16.1.5"
+"react-i18next@npm:^16.1.6":
+  version: 16.1.6
+  resolution: "react-i18next@npm:16.1.6"
   dependencies:
     "@babel/runtime": "npm:^7.27.6"
     html-parse-stringify: "npm:^3.0.1"
@@ -13260,7 +13260,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10/c4b7405fb441e7a8a8827161c8a6c86d5a967f13486f11d0f79b806e8a592f4e4262dda9bb60bb16965a038e6833ecdda51ded379da2adf17429724dfcbc8975
+  checksum: 10/c6d6da6128534294739d14d5fb5f5aa14c9f3b6f768d9a51d2a8560906b9ea59a26c5c2423c11243345702309d51c50d0680ef1129a889fed1b0383d7ed29bdd
   languageName: node
   linkType: hard
 
