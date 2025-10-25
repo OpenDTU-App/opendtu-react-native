@@ -12659,7 +12659,7 @@ __metadata:
     pretty-bytes: "npm:^7.1.0"
     prometheus-query: "npm:^3.5.1"
     react: "npm:19.1.0"
-    react-i18next: "npm:^16.1.6"
+    react-i18next: "npm:^16.2.0"
     react-native: "npm:0.81.4"
     react-native-charts-wrapper: "npm:^0.6.0"
     react-native-config: "npm:1.5.6"
@@ -13353,12 +13353,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^16.1.6":
-  version: 16.1.6
-  resolution: "react-i18next@npm:16.1.6"
+"react-i18next@npm:^16.2.0":
+  version: 16.2.0
+  resolution: "react-i18next@npm:16.2.0"
   dependencies:
     "@babel/runtime": "npm:^7.27.6"
     html-parse-stringify: "npm:^3.0.1"
+    use-sync-external-store: "npm:^1.6.0"
   peerDependencies:
     i18next: ">= 25.5.2"
     react: ">= 16.8.0"
@@ -13370,7 +13371,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10/c6d6da6128534294739d14d5fb5f5aa14c9f3b6f768d9a51d2a8560906b9ea59a26c5c2423c11243345702309d51c50d0680ef1129a889fed1b0383d7ed29bdd
+  checksum: 10/277cdc061d61f2b66805939a848f3dda32e613dc34270a6da8653a06fe6cd3a499ba6272487c7a8119ce0d0d2df2d9ef0d9b1664b49331eb9fc980a0b976a213
   languageName: node
   linkType: hard
 
@@ -16107,6 +16108,15 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   checksum: 10/ddae7c4572511f7f641d6977bd0725340aa7dbeda8250418b54c1a57ec285083d96cf50d1a1acbd6cf729f7a87071b2302c6fbd29310432bf1b21a961a313279
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "use-sync-external-store@npm:1.6.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/b40ad2847ba220695bff2d4ba4f4d60391c0fb4fb012faa7a4c18eb38b69181936f5edc55a522c4d20a788d1a879b73c3810952c9d0fd128d01cb3f22042c09e
   languageName: node
   linkType: hard
 
