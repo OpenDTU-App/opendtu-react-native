@@ -84,7 +84,7 @@ jobs:
           rm android/app/build/outputs/apk/release/*-aligned.apk
 
       - name: Upload APK as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: opendtu-app
           path: |
