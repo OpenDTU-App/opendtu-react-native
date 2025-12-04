@@ -113,7 +113,6 @@
         "@react-native/metro-config": "0.81.4",
         "@react-native/typescript-config": "0.81.4",
         "@trivago/prettier-plugin-sort-imports": "^6.0.0",
-        "@types/color": "^4.2.0",
         "@types/markdown-it": "^14.1.2",
         "@types/npm-license-crawler": "^0.2.3",
         "@types/react": "^19.0.0",
