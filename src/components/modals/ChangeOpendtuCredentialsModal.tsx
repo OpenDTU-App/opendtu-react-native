@@ -16,8 +16,7 @@ import { useApi } from '@/api/ApiHandler';
 import { defaultUser } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 
-export interface ChangeOpendtuCredentialsModalProps
-  extends ExtendableModalProps {
+export interface ChangeOpendtuCredentialsModalProps extends ExtendableModalProps {
   index: number;
 }
 
