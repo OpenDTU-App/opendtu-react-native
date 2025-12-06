@@ -8,8 +8,10 @@ import BaseModal from '@/components/BaseModal';
 
 export type ConfirmUnsavedDataModalInput = false | (() => void);
 
-export interface ConfirmUnsavedDataModalProps
-  extends Omit<ExtendableModalProps, 'visible'> {
+export interface ConfirmUnsavedDataModalProps extends Omit<
+  ExtendableModalProps,
+  'visible'
+> {
   visible: ConfirmUnsavedDataModalInput;
 }
 

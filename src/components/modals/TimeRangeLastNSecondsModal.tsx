@@ -8,8 +8,10 @@ import { Button, Portal, Text, useTheme } from 'react-native-paper';
 import BaseModal from '@/components/BaseModal';
 import StyledTextInput from '@/components/styled/StyledTextInput';
 
-export interface TimeRangeLastNSecondsModalProps
-  extends Omit<ModalProps, 'children'> {
+export interface TimeRangeLastNSecondsModalProps extends Omit<
+  ModalProps,
+  'children'
+> {
   onConfirm: (seconds: number) => void;
   seconds?: number;
 }
