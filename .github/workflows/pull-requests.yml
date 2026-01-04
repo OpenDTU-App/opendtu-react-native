@@ -62,7 +62,7 @@ jobs:
           cd android && ./gradlew assembleRelease --no-daemon --build-cache
 
       - name: Upload APK as artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: opendtu-app
           if-no-files-found: error
