@@ -167,7 +167,7 @@
         "licenseUrl": "https://github.com/samber/prometheus-query-js/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-i18next@16.5.0": {
+    "react-i18next@16.5.1": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/react-i18next",
         "licenseUrl": "https://github.com/i18next/react-i18next/raw/master/LICENSE",
@@ -245,7 +245,7 @@
         "licenseUrl": "https://github.com/mrousavy/react-native-mmkv",
         "parents": "opendtu-react-native"
     },
-    "react-native-paper-dates@0.22.51": {
+    "react-native-paper-dates@0.22.53": {
         "licenses": "MIT",
         "repository": "https://github.com/web-ridge/react-native-paper-dates",
         "licenseUrl": "https://github.com/web-ridge/react-native-paper-dates/raw/master/LICENSE",
@@ -329,7 +329,7 @@
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-zeroconf@0.13.8": {
+    "react-native-zeroconf@0.14.0": {
         "licenses": "MIT",
         "repository": "https://github.com/Apercu/react-native-zeroconf",
         "licenseUrl": "https://github.com/Apercu/react-native-zeroconf/raw/master/LICENSE",
