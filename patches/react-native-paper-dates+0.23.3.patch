@@ -45,31 +45,3 @@ index a71e0f2..c455c37 100644
        timerId.current = window.requestAnimationFrame(function () {
          if (mounted.current) {
            latest.current(args)
-diff --git a/node_modules/react-native-paper-dates/src/shared/utils.ts b/node_modules/react-native-paper-dates/src/shared/utils.ts
-index 831129b..32ec4f9 100644
---- a/node_modules/react-native-paper-dates/src/shared/utils.ts
-+++ b/node_modules/react-native-paper-dates/src/shared/utils.ts
-@@ -5,7 +5,7 @@ import {
-   overlay,
-   useTheme,
- } from 'react-native-paper'
--import Color from 'color'
-+import Color, { ColorInstance } from 'color';
- 
- export const supportedOrientations: (
-   | 'portrait'
-@@ -78,12 +78,12 @@ export function range(start: number, end: number) {
-     .map((_, i) => start + i)
- }
- 
--export function lightenBy(color: Color, ratio: number) {
-+export function lightenBy(color: ColorInstance, ratio: number) {
-   const lightness = color.lightness()
-   return color.lightness(lightness + (100 - lightness) * ratio)
- }
- 
--export function darkenBy(color: Color, ratio: number) {
-+export function darkenBy(color: ColorInstance, ratio: number) {
-   const lightness = color.lightness()
-   return color.lightness(lightness - lightness * ratio)
- }
