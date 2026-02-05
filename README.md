@@ -23,6 +23,10 @@ or get it here:
 
 [![Download App](https://img.shields.io/badge/Download%20latest%20APK%20from%20Github-27a624)](https://github.com/OpenDTU-App/opendtu-react-native/releases/latest/download/OpenDTUApp-universal-release-signed.apk)
 
+> [!IMPORTANT]
+> Because I do not have much time right now, development is paused for this app. Security updates will release and there will be new features in the future, but I am quite exhausted right now.
+> I am happy to review and test out PRs in the meantime!
+
 ## Features
 - All the features of the original webapp
 - In-App updates (Update OpenDTU firmware without leaving the app)
