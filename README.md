@@ -15,6 +15,9 @@ You can install the app via the Google Play Store or IzzyOnDroid repository (ava
 <br>
 <a href='https://play.google.com/store/apps/details?id=xyz.commanderred.opendtuapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' target="_blank"><img width="200" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 <a href='https://apt.izzysoft.de/fdroid/index/apk/xyz.commanderred.opendtuapp' target="_blank"><img width="200" alt='Get it on IzzyOnDroid' src='https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png'/></a>
+<a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22:%22xyz.commanderred.opendtuapp%22,%22url%22:%22https://github.com/OpenDTU-App/opendtu-react-native%22,%22author%22:%22OpenDTU-App%22,%22name%22:%22OpenDTU%22%7D">
+<img alt="Obtanium Badge" src="assets/obtainium-badge.png" width="200" />
+</a>
 
 or get it here:
 
