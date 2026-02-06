@@ -86,8 +86,8 @@ android {
         setProperty("archivesBaseName", "OpenDTUApp")
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 43
-        versionName "0.12.0"
+        versionCode 46
+        versionName "0.12.1"
         externalNativeBuild {
               // For ndk-build, instead use the ndkBuild block.
               cmake {
