@@ -3,8 +3,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Portal, useTheme } from 'react-native-paper';
-
-import { v4 as uuidv4 } from 'uuid';
+import uuid from 'react-native-uuid';
 
 import { addDatabaseConfig } from '@/slices/settings';
 
@@ -42,7 +41,7 @@ const AddDatabaseModal: FC<AddDatabaseModalProps> = props => {
       baseUrl,
       username,
       password,
-      uuid: uuidv4(),
+      uuid: uuid.v4(),
     } as DatabaseConfig;
 
     dispatch(addDatabaseConfig({ config }));

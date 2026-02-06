@@ -317,6 +317,12 @@
         "licenseUrl": "https://github.com/charpeni/react-native-url-polyfill/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
+    "react-native-uuid@2.0.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/eugenehp/react-native-uuid",
+        "licenseUrl": "https://github.com/eugenehp/react-native-uuid/raw/master/LICENSE",
+        "parents": "opendtu-react-native"
+    },
     "react-native-vector-icons@10.3.0": {
         "licenses": "MIT",
         "repository": "https://github.com/oblador/react-native-vector-icons",
@@ -369,12 +375,6 @@
         "licenses": "MIT",
         "repository": "https://github.com/styled-components/styled-components",
         "licenseUrl": "https://github.com/styled-components/styled-components/raw/master/LICENSE",
-        "parents": "opendtu-react-native"
-    },
-    "uuid@13.0.0": {
-        "licenses": "MIT",
-        "repository": "https://github.com/uuidjs/uuid",
-        "licenseUrl": "https://github.com/uuidjs/uuid/raw/master/LICENSE.md",
         "parents": "opendtu-react-native"
     }
 }

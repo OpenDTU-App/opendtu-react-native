@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import uuid from 'react-native-uuid';
 
 import type { AppState } from '@/types/appslice';
 
@@ -22,7 +22,7 @@ const appSlice = createSlice({
       state.logs.unshift({
         ...action.payload,
         timestamp: Date.now(),
-        uuid: uuidv4(),
+        uuid: uuid.v4(),
       });
 
       const logsOfType = state.logs.filter(
@@ -43,7 +43,7 @@ const appSlice = createSlice({
         ...action.payload,
         timestamp: Date.now(),
         stacktrace: action.payload.stacktrace,
-        uuid: uuidv4(),
+        uuid: uuid.v4(),
       });
 
       const logsOfType = state.logs.filter(
