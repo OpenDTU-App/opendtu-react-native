@@ -269,7 +269,7 @@
         "licenseUrl": "https://github.com/AppAndFlow/react-native-safe-area-context/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-screens@4.22.0": {
+    "react-native-screens@4.23.0": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-screens",
         "licenseUrl": "https://github.com/software-mansion/react-native-screens/raw/master/LICENSE",
@@ -299,7 +299,7 @@
         "licenseUrl": "https://github.com/crazycodeboy/react-native-splash-screen/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-svg@15.15.2": {
+    "react-native-svg@15.15.3": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-community/react-native-svg",
         "licenseUrl": "https://github.com/react-native-community/react-native-svg/raw/master/LICENSE",
@@ -371,7 +371,7 @@
         "licenseUrl": "github:reduxjs/redux",
         "parents": "opendtu-react-native"
     },
-    "styled-components@6.3.8": {
+    "styled-components@6.3.9": {
         "licenses": "MIT",
         "repository": "https://github.com/styled-components/styled-components",
         "licenseUrl": "https://github.com/styled-components/styled-components/raw/master/LICENSE",
