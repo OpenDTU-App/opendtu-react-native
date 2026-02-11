@@ -97,10 +97,10 @@
         "styled-components": "^6.3.9"
     },
     "devDependencies": {
-        "@babel/core": "^7.28.6",
+        "@babel/core": "^7.29.0",
         "@babel/plugin-transform-class-static-block": "^7.28.6",
         "@babel/plugin-transform-private-methods": "^7.28.6",
-        "@babel/preset-env": "^7.28.6",
+        "@babel/preset-env": "^7.29.0",
         "@babel/runtime": "^7.28.6",
         "@microsoft/eslint-formatter-sarif": "^3.1.0",
         "@octokit/webhooks-types": "^7.6.1",
@@ -120,8 +120,8 @@
         "@types/react-native-zeroconf": "^0.13.1",
         "@types/react-test-renderer": "^19.0.0",
         "@types/styled-components": "^5.1.36",
-        "@typescript-eslint/eslint-plugin": "^8.53.1",
-        "@typescript-eslint/parser": "^8.53.1",
+        "@typescript-eslint/eslint-plugin": "^8.55.0",
+        "@typescript-eslint/parser": "^8.55.0",
         "babel-plugin-module-resolver": "^5.0.2",
         "eslint": "^8",
         "eslint-import-resolver-typescript": "^4.4.4",
@@ -131,7 +131,7 @@
         "eslint-plugin-react-hooks": "^7.0.1",
         "eslint-plugin-simple-import-sort": "^12.1.1",
         "eslint-plugin-testing-library": "^7.15.4",
-        "prettier": "^3.8.0",
+        "prettier": "^3.8.1",
         "react-native-version": "4.0.0",
         "react-test-renderer": "19.0.0",
         "typescript": "^5.8.3"
