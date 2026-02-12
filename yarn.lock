@@ -4656,9 +4656,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/bottom-tabs@npm:^7.12.0":
-  version: 7.12.0
-  resolution: "@react-navigation/bottom-tabs@npm:7.12.0"
+"@react-navigation/bottom-tabs@npm:^7.13.0":
+  version: 7.13.0
+  resolution: "@react-navigation/bottom-tabs@npm:7.13.0"
   dependencies:
     "@react-navigation/elements": "npm:^2.9.5"
     color: "npm:^4.2.3"
@@ -4669,7 +4669,7 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: ">= 4.0.0"
     react-native-screens: ">= 4.0.0"
-  checksum: 10/483bd75e66880d92495eda68632d718700cbdf1bf7833cc7ab6d7708e1a8d2f16f467fb9af1525fe6b39f53a19b92d1e7ad2f7785d8e5803dabcc7f59a198a00
+  checksum: 10/a69ab57289255e2764a5e8b9ecdf190ae55c8ec2ef59b16b29dd34b3933d69b991b0038365772dbd8cdc21b782106020c33071cd7689978c2dd35e2fcf036f6f
   languageName: node
   linkType: hard
 
@@ -9748,9 +9748,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^25.8.4":
-  version: 25.8.4
-  resolution: "i18next@npm:25.8.4"
+"i18next@npm:^25.8.5":
+  version: 25.8.5
+  resolution: "i18next@npm:25.8.5"
   dependencies:
     "@babel/runtime": "npm:^7.28.4"
   peerDependencies:
@@ -9758,7 +9758,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/2038efc39496a9eed7e2290874e3911e096ecadcecaaccea87a40b7e48d0e4007bacd1b4bae60d9327aa1e4aa52a739fd3c283c082384b9aa45c078728404499
+  checksum: 10/4762e46ca39d679332f1e9ebb31bd4b70ea74018a2dadef79e74d12ab4824c0ac3043bc2a4e3fc1eaf21b333bf79ad6dd97c3861e22811c48f80f02d4352efbc
   languageName: node
   linkType: hard
 
@@ -12863,7 +12863,7 @@ __metadata:
     "@react-native/metro-config": "npm:0.81.4"
     "@react-native/new-app-screen": "npm:0.81.4"
     "@react-native/typescript-config": "npm:0.81.4"
-    "@react-navigation/bottom-tabs": "npm:^7.12.0"
+    "@react-navigation/bottom-tabs": "npm:^7.13.0"
     "@react-navigation/native": "npm:^7.1.28"
     "@react-navigation/native-stack": "npm:^7.12.0"
     "@reduxjs/toolkit": "npm:^2.11.2"
@@ -12892,7 +12892,7 @@ __metadata:
     expo: "npm:54.0.12"
     fast-deep-equal: "npm:^3.1.3"
     fuse.js: "npm:^7.1.0"
-    i18next: "npm:^25.8.4"
+    i18next: "npm:^25.8.5"
     intl-pluralrules: "npm:^2.0.1"
     ip-regex: "npm:^5.0.0"
     moment: "npm:^2.30.1"
@@ -12933,7 +12933,7 @@ __metadata:
     react-native-uuid: "npm:^2.0.3"
     react-native-vector-icons: "npm:^10.3.0"
     react-native-version: "npm:4.0.0"
-    react-native-worklets: "npm:^0.7.2"
+    react-native-worklets: "npm:^0.7.3"
     react-native-zeroconf: "npm:^0.14.0"
     react-redux: "npm:^9.2.0"
     react-test-renderer: "npm:19.0.0"
@@ -14003,9 +14003,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-worklets@npm:^0.7.2":
-  version: 0.7.2
-  resolution: "react-native-worklets@npm:0.7.2"
+"react-native-worklets@npm:^0.7.3":
+  version: 0.7.3
+  resolution: "react-native-worklets@npm:0.7.3"
   dependencies:
     "@babel/plugin-transform-arrow-functions": "npm:7.27.1"
     "@babel/plugin-transform-class-properties": "npm:7.27.1"
@@ -14022,7 +14022,7 @@ __metadata:
     "@babel/core": "*"
     react: "*"
     react-native: "*"
-  checksum: 10/4bc9b71a3a63f589da6f9bc7d889218f4a0e8d80737fb79e9e78298924774a99db254089428a877b0f1e434acdd00099a86a2424f33bf908283eb1b60adaea0e
+  checksum: 10/bc0b24bb8281fa319f7b0b85faa19058020bb26814fc6275b10bd56ad5d6536c4788c7ca913126f27de3ebbe45c7fce144503e3c06d697110910c901dd56db56
   languageName: node
   linkType: hard
 
