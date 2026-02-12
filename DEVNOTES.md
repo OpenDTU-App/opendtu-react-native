@@ -27,4 +27,8 @@ git push
 git checkout develop
 git rebase main
 git push
+
+# create playstore release
+cd android
+./gradlew bundleRelease
 ```
