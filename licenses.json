@@ -17,10 +17,10 @@
         "licenseUrl": "https://github.com/pchmn/expo-material3-theme/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-native-async-storage/async-storage@2.2.0": {
+    "@react-native-async-storage/async-storage@3.0.1": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-async-storage/async-storage",
-        "licenseUrl": "https://github.com/react-native-async-storage/async-storage/raw/master/LICENSE",
+        "licenseUrl": "https://github.com/react-native-async-storage/async-storage",
         "parents": "opendtu-react-native"
     },
     "@react-native-clipboard/clipboard@1.16.3": {
@@ -47,19 +47,19 @@
         "licenseUrl": "https://github.com/facebook/react-native",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/bottom-tabs@7.14.0": {
+    "@react-navigation/bottom-tabs@7.15.2": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native-stack@7.13.0": {
+    "@react-navigation/native-stack@7.14.2": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native@7.1.28": {
+    "@react-navigation/native@7.1.31": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
@@ -107,7 +107,7 @@
         "licenseUrl": "https://github.com/krisk/Fuse/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "i18next@25.8.12": {
+    "i18next@25.8.13": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
@@ -185,7 +185,7 @@
         "licenseUrl": "https://github.com/luggit/react-native-config/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-edge-to-edge@1.7.0": {
+    "react-native-edge-to-edge@1.8.1": {
         "licenses": "MIT",
         "repository": "https://github.com/zoontek/react-native-edge-to-edge",
         "licenseUrl": "https://github.com/zoontek/react-native-edge-to-edge/raw/master/LICENSE",
@@ -221,13 +221,13 @@
         "licenseUrl": "https://github.com/react-native-linear-gradient/react-native-linear-gradient/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-localize@3.6.1": {
+    "react-native-localize@3.7.0": {
         "licenses": "MIT",
         "repository": "https://github.com/zoontek/react-native-localize",
         "licenseUrl": "https://github.com/zoontek/react-native-localize/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-logs@5.5.0": {
+    "react-native-logs@5.6.0": {
         "licenses": "MIT",
         "repository": "https://github.com/mowispace/react-native-logs",
         "licenseUrl": "https://github.com/mowispace/react-native-logs/raw/master/LICENSE",
@@ -263,13 +263,13 @@
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-safe-area-context@5.6.2": {
+    "react-native-safe-area-context@5.7.0": {
         "licenses": "MIT",
         "repository": "https://github.com/AppAndFlow/react-native-safe-area-context",
         "licenseUrl": "https://github.com/AppAndFlow/react-native-safe-area-context/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-screens@4.23.0": {
+    "react-native-screens@4.24.0": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-screens",
         "licenseUrl": "https://github.com/software-mansion/react-native-screens/raw/master/LICENSE",
