@@ -1893,7 +1893,7 @@ PODS:
     - Yoga
   - react-native-netinfo (11.4.1):
     - React-Core
-  - react-native-safe-area-context (5.6.2):
+  - react-native-safe-area-context (5.7.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -1911,8 +1911,8 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-safe-area-context/common (= 5.6.2)
-    - react-native-safe-area-context/fabric (= 5.6.2)
+    - react-native-safe-area-context/common (= 5.7.0)
+    - react-native-safe-area-context/fabric (= 5.7.0)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -1923,7 +1923,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-safe-area-context/common (5.6.2):
+  - react-native-safe-area-context/common (5.7.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -1951,7 +1951,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-safe-area-context/fabric (5.6.2):
+  - react-native-safe-area-context/fabric (5.7.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -2579,7 +2579,7 @@ PODS:
     - SDWebImageWebPCoder (~> 0.8.4)
   - RNFS (2.20.0):
     - React-Core
-  - RNLocalize (3.6.1):
+  - RNLocalize (3.7.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -2699,7 +2699,7 @@ PODS:
     - RNWorklets
     - SocketRocket
     - Yoga
-  - RNScreens (4.23.0):
+  - RNScreens (4.24.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -2726,10 +2726,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNScreens/common (= 4.23.0)
+    - RNScreens/common (= 4.24.0)
     - SocketRocket
     - Yoga
-  - RNScreens/common (4.23.0):
+  - RNScreens/common (4.24.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -2758,7 +2758,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - RNShare (12.2.5):
+  - RNShare (12.2.6):
     - boost
     - DoubleConversion
     - fast_float
@@ -3292,7 +3292,7 @@ SPEC CHECKSUMS:
   react-native-get-random-values: e2acf4070fe4b7325705a05af047449637a27a21
   react-native-mmkv: ac7507625cd74bac0eb5333604a7cd7b08fe9e3e
   react-native-netinfo: cec9c4e86083cb5b6aba0e0711f563e2fbbff187
-  react-native-safe-area-context: c00143b4823773bba23f2f19f85663ae89ceb460
+  react-native-safe-area-context: befb5404eb8a16fdc07fa2bebab3568ecabcbb8a
   react-native-splash-screen: 95994222cc95c236bd3cdc59fe45ed5f27969594
   react-native-zeroconf: eb2e5584308f20f5fc3eb0cea2ceafbbd345b48b
   React-NativeModulesApple: 879fbdc5dcff7136abceb7880fe8a2022a1bd7c3
@@ -3330,10 +3330,10 @@ SPEC CHECKSUMS:
   RNCMaskedView: 5ef8c95cbab95334a32763b72896a7b7d07e6299
   RNFastImage: 462a183c4b0b6b26fdfd639e1ed6ba37536c3b87
   RNFS: 89de7d7f4c0f6bafa05343c578f61118c8282ed8
-  RNLocalize: 23e6689ec46c6cba49eb8cde959e30e49160a35b
+  RNLocalize: 1aedbc2c15073861a364174919d23c31c5924b16
   RNReanimated: 28141b41781ded169829afdb6fd80f3498de254e
-  RNScreens: afaf526a9c804c3b4503f950cf3e67ed81e29ada
-  RNShare: 60a6937925595bf06a0061ffe8a34dbbdd8c6584
+  RNScreens: 7f643ee0fd1407dc5085c7795460bd93da113b8f
+  RNShare: 51d221e8ac06263e91168c604b94274fdcc4784f
   RNSVG: c4d5a438a1c96f7ed7dc66349a5b7e97616fd701
   RNWorklets: ca03ce776c15a592ef0700386071466810c41ea0
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
