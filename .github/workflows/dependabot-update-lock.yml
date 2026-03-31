@@ -55,7 +55,6 @@ jobs:
       - name: Setup cocoapods
         run: |
           cd ios
-          gem install cocoapods
           bundle install
 
       - name: Install Packages
