@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import { Text } from 'react-native-paper';
+import { Text, useTheme } from 'react-native-paper';
 
 import { View } from 'react-native';
 
@@ -10,9 +10,11 @@ import InverterListItem from '@/components/inverters/InverterListItem';
 import useLivedata from '@/hooks/useLivedata';
 
 import { spacing } from '@/constants';
+import { StyledScrollView } from '@/style';
 
 const InverterList: FC = () => {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const inverters = useLivedata(
     state => state?.inverters,
@@ -38,20 +40,22 @@ const InverterList: FC = () => {
   const sortedInverters = inverters?.slice().sort((a, b) => a.order - b.order);
 
   return (
-    <View style={{ marginTop: 8, marginBottom: 16 }}>
-      <Box mh={16}>
+    <View style={{ marginTop: 8, marginBottom: 16, flex: 1, width: '100%' }}>
+      <Box mh={16} style={{ flex: 1 }}>
         <Box mb={8}>
           <Text variant="titleLarge">{t('livedata.inverters')}</Text>
         </Box>
-        <Box style={{ gap: spacing }}>
-          {sortedInverters?.map((inverter, index) => (
-            <InverterListItem
-              key={`InverterListItem-${inverter.serial}-${index}`}
-              inverterSerial={inverter.serial}
-              inverterName={inverter.name}
-            />
-          ))}
-        </Box>
+        <StyledScrollView theme={theme} disableSafeBottomMargin>
+          <Box style={{ gap: spacing }}>
+            {sortedInverters?.map((inverter, index) => (
+              <InverterListItem
+                key={`InverterListItem-${inverter.serial}-${index}`}
+                inverterSerial={inverter.serial}
+                inverterName={inverter.name}
+              />
+            ))}
+          </Box>
+        </StyledScrollView>
       </Box>
     </View>
   );

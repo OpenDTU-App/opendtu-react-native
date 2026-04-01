@@ -6,7 +6,7 @@ import DeviceStatus from '@/components/DeviceStatus';
 import ImportantStatusValues from '@/components/ImportantStatusValues';
 import InverterList from '@/components/inverters/InverterList';
 
-import { StyledScrollView, StyledView } from '@/style';
+import { StyledView } from '@/style';
 
 const LivedataTab = () => {
   const theme = useTheme();
@@ -14,12 +14,10 @@ const LivedataTab = () => {
   return (
     <StyledView theme={theme}>
       <DeviceOfflineWrapper>
-        <StyledScrollView theme={theme} disableSafeBottomMargin>
-          <AppInfos />
-          <DeviceStatus />
-          <ImportantStatusValues />
-          <InverterList />
-        </StyledScrollView>
+        <AppInfos />
+        <DeviceStatus />
+        <ImportantStatusValues />
+        <InverterList />
       </DeviceOfflineWrapper>
     </StyledView>
   );
