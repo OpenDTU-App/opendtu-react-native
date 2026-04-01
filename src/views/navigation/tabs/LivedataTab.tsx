@@ -4,6 +4,7 @@ import AppInfos from '@/components/AppInfos';
 import DeviceOfflineWrapper from '@/components/DeviceOfflineWrapper';
 import DeviceStatus from '@/components/DeviceStatus';
 import ImportantStatusValues from '@/components/ImportantStatusValues';
+import InverterList from '@/components/inverters/InverterList';
 
 import { StyledScrollView, StyledView } from '@/style';
 
@@ -17,6 +18,7 @@ const LivedataTab = () => {
           <AppInfos />
           <DeviceStatus />
           <ImportantStatusValues />
+          <InverterList />
         </StyledScrollView>
       </DeviceOfflineWrapper>
     </StyledView>

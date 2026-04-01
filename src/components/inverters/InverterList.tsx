@@ -1,7 +1,9 @@
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
+import { Text } from 'react-native-paper';
 
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 
 import InverterListItem from '@/components/inverters/InverterListItem';
 
@@ -10,6 +12,8 @@ import useLivedata from '@/hooks/useLivedata';
 import { spacing } from '@/constants';
 
 const InverterList: FC = () => {
+  const { t } = useTranslation();
+
   const inverters = useLivedata(
     state => state?.inverters,
     (a, b) => {
@@ -34,18 +38,22 @@ const InverterList: FC = () => {
   const sortedInverters = inverters?.slice().sort((a, b) => a.order - b.order);
 
   return (
-    <ScrollView style={{ marginBottom: 16 }}>
-      <Box style={{ gap: spacing, marginHorizontal: 16 }}>
-        {sortedInverters?.map((inverter, index) => (
-          <InverterListItem
-            key={`InverterListItem-${inverter.serial}-${index}`}
-            inverterSerial={inverter.serial}
-            inverterName={inverter.name}
-          />
-        ))}
+    <View style={{ marginTop: 8, marginBottom: 16 }}>
+      <Box mh={16}>
+        <Box mb={8}>
+          <Text variant="titleLarge">{t('livedata.inverters')}</Text>
+        </Box>
+        <Box style={{ gap: spacing }}>
+          {sortedInverters?.map((inverter, index) => (
+            <InverterListItem
+              key={`InverterListItem-${inverter.serial}-${index}`}
+              inverterSerial={inverter.serial}
+              inverterName={inverter.name}
+            />
+          ))}
+        </Box>
       </Box>
-      <View style={{ height: spacing * 2 }} />
-    </ScrollView>
+    </View>
   );
 };
 
