@@ -3,6 +3,14 @@
     "node": true,
     "react-native/react-native": true
   },
+  "ignorePatterns": [
+    "vendor",
+    "node_modules",
+    "android",
+    "ios",
+    "assets",
+    "fastlane"
+  ],
   "overrides": [
     {
       // Test files only
