@@ -6,7 +6,7 @@ import { Appbar, List, Text, useTheme } from 'react-native-paper';
 
 import { RefreshControl, ScrollView, View } from 'react-native';
 
-import StyledSurface from '@/components/styled/StyledSurface';
+import SettingsSurface from '@/components/styled/SettingsSurface';
 
 import useEventLog from '@/hooks/useEventLog';
 
@@ -77,7 +77,7 @@ const InverterEventLogScreen: FC<PropsWithNavigation> = ({
               />
             }
           >
-            <StyledSurface theme={theme} style={{ marginHorizontal: 16 }}>
+            <SettingsSurface theme={theme}>
               {(eventLog?.length ?? 0) > 0 ? (
                 <List.Section>
                   {eventLog?.map((event, index) => (
@@ -112,7 +112,7 @@ const InverterEventLogScreen: FC<PropsWithNavigation> = ({
                   </Text>
                 </Box>
               )}
-            </StyledSurface>
+            </SettingsSurface>
             <View style={{ height: spacing * 2 }} />
           </ScrollView>
         </Box>

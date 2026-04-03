@@ -4,25 +4,39 @@ import { Surface, useTheme } from 'react-native-paper';
 
 import styled from 'styled-components';
 
-const settingsSurfaceBorderRadiusFactor = 8;
+const settingsSurfaceBorderRadiusFactor = 4;
 
 export const settingsSurfaceRoundness = (theme: ThemeBase) => {
   return theme.roundness! * settingsSurfaceBorderRadiusFactor;
 };
 
-const InternalSettingsSurface = styled(Surface)`
+export interface SettingsSurfaceProps extends SurfaceProps {
+  disablePadding?: boolean;
+}
+
+const InternalSettingsSurface = styled(Surface)<SettingsSurfaceProps>`
   margin: 4px 16px 12px;
-  padding: 0 4px;
+  padding: ${props => (props.disablePadding ? '0' : '0 4px')};
   border-radius: ${props =>
     (props.theme.roundness ?? 0) * settingsSurfaceBorderRadiusFactor}px;
 `;
 
-const SettingsSurface: FC<SurfaceProps> = ({ children, ...props }) => {
+const SettingsSurface: FC<SettingsSurfaceProps> = ({
+  children,
+  disablePadding,
+  ...props
+}) => {
   const rnpTheme = useTheme();
   const theme = props.theme ?? rnpTheme;
 
   return (
-    <InternalSettingsSurface theme={theme} {...props} mode="flat" elevation={1}>
+    <InternalSettingsSurface
+      theme={theme}
+      {...props}
+      mode="flat"
+      elevation={1}
+      disablePadding={disablePadding}
+    >
       {children}
     </InternalSettingsSurface>
   );

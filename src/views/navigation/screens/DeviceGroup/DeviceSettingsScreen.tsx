@@ -4,8 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, Button, List, Text, useTheme } from 'react-native-paper';
 
-import { ScrollView, View } from 'react-native';
-
 import { setSelectedDtuConfig } from '@/slices/settings';
 
 import { DeviceState } from '@/types/opendtu/state';
@@ -17,7 +15,6 @@ import ConfirmDeleteDeviceModal from '@/components/modals/ConfirmDeleteDeviceMod
 
 import useLivedata from '@/hooks/useLivedata';
 
-import { spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
@@ -120,22 +117,39 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
       )?.name ?? null,
   );
 
+  const isSelected = index === selectedDtuConfig;
+
   return (
     <>
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={t('deviceSettings.title')} />
+        <Appbar.Action
+          icon="trash-can"
+          onPress={() => setOpenDeleteModal(true)}
+        />
       </Appbar.Header>
       <StyledView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
-          <ScrollView>
-            <Box style={{ flex: 1, width: '100%' }} ph={16} mt={16}>
+          <Box
+            style={{
+              flex: 1,
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+            }}
+            ph={24}
+          >
+            <Box>
               <Box>
                 <Text variant="titleMedium">{t('deviceSettings.general')}</Text>
               </Box>
               <Box p={16}>
                 {config.hostname !== null ? (
-                  <Text variant="titleLarge">{config.hostname}</Text>
+                  <Text variant="titleLarge" style={{ marginBottom: 8 }}>
+                    {config.hostname}
+                  </Text>
                 ) : null}
                 <Text
                   variant="bodySmall"
@@ -269,36 +283,19 @@ const DeviceSettingsScreen: FC<PropsWithNavigation> = ({
                   onPress={() => openDatabaseSettings()}
                 />
               </Box>
-              <Box mt={32} mb={16}>
-                <Box mb={16}>
-                  <Button
-                    onPress={connectToDevice}
-                    mode="contained"
-                    disabled={
-                      deviceState !== DeviceState.Reachable &&
-                      index === selectedDtuConfig
-                    }
-                  >
-                    {deviceState === DeviceState.Connected &&
-                    index === selectedDtuConfig
-                      ? t('deviceSettings.alreadyConnected')
-                      : t('deviceSettings.connect')}
-                  </Button>
-                </Box>
-                <Box>
-                  <Button
-                    onPress={() => setOpenDeleteModal(true)}
-                    mode="contained"
-                    buttonColor={theme.colors.error}
-                    textColor={theme.colors.onError}
-                  >
-                    {t('delete')}
-                  </Button>
-                </Box>
-              </Box>
             </Box>
-            <View style={{ height: spacing * 2 }} />
-          </ScrollView>
+            <Box mb={32}>
+              <Button
+                onPress={connectToDevice}
+                mode="contained"
+                disabled={deviceState !== DeviceState.Reachable && isSelected}
+              >
+                {deviceState === DeviceState.Connected && isSelected
+                  ? t('deviceSettings.alreadyConnected')
+                  : t('deviceSettings.connect')}
+              </Button>
+            </Box>
+          </Box>
         </Box>
         <ChangeCustomNameModal
           visible={openCustomNameModal}
