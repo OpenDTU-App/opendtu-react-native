@@ -13,8 +13,8 @@ export interface LogLineProps {
 const LogLineItem = styled(Box)<{
   theme: MD3Theme;
 }>`
-  background-color: #555;
-  border-color: #333;
+  background-color: #101010;
+  border-color: #555;
   border-bottom-width: 1px;
   border-top-width: 1px;
   padding: 10px;
