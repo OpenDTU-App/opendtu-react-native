@@ -7,7 +7,7 @@ import Toast from 'react-native-toast-message';
 import { Linking, View } from 'react-native';
 
 import { compare } from 'compare-versions';
-import moment from 'moment/moment';
+import moment from 'moment';
 
 import ReleaseChangelog from '@/components/ReleaseChangelog';
 import SettingsSurface, {

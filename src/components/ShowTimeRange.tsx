@@ -5,7 +5,7 @@ import { Text } from 'react-native-paper';
 
 import { View } from 'react-native';
 
-import moment from 'moment/moment';
+import moment from 'moment';
 
 import type {
   DatabaseTimeRangeEnd,

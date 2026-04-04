@@ -65,7 +65,8 @@
       "error",
       "never",
       {
-        "json": "always"
+        "json": "always",
+        "png": "always"
       }
     ],
     "no-relative-import-paths/no-relative-import-paths": [

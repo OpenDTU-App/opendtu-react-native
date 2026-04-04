@@ -22,7 +22,7 @@ import Toast, {
 
 import { useColorScheme } from 'react-native';
 
-import moment from 'moment/moment';
+import moment from 'moment';
 
 import { appendLog } from '@/slices/app';
 import { setLanguage } from '@/slices/settings';

@@ -7,7 +7,7 @@ import { Appbar, Icon, Text, useTheme } from 'react-native-paper';
 import { ScrollView, View } from 'react-native';
 
 import { compare } from 'compare-versions';
-import moment from 'moment/moment';
+import moment from 'moment';
 
 import FirmwareListItem from '@/components/firmware/FirmwareListItem';
 import GenericRefreshModal from '@/components/modals/GenericRefreshModal';

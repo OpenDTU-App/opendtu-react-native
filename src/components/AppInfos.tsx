@@ -52,7 +52,6 @@ const AppInfos: FC = () => {
               flexDirection: 'row',
               flex: 1,
               alignItems: 'center',
-              gap: 8,
             }}
           >
             <Box mh={8}>
@@ -93,7 +92,6 @@ const AppInfos: FC = () => {
               flexDirection: 'row',
               flex: 1,
               alignItems: 'center',
-              gap: 8,
             }}
           >
             <Box mh={8}>
