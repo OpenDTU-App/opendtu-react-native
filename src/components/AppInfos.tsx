@@ -103,7 +103,7 @@ const AppInfos: FC = () => {
               <Text style={{ color: colors.onInfo }} variant="titleMedium">
                 {t('appInfos.bugReporting')}
               </Text>
-              <Text style={{ color: colors.onInfo, flex: 1 }}>
+              <Text style={{ color: colors.onInfo }}>
                 {t('appInfos.bugReportingDescription')}
               </Text>
             </Box>
