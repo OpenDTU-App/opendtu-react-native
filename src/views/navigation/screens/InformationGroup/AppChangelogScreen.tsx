@@ -6,7 +6,8 @@ import {
   Appbar,
   Badge,
   Button,
-  List, Switch,
+  List,
+  Switch,
   Text,
   useTheme,
 } from 'react-native-paper';
