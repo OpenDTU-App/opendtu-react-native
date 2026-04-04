@@ -132,7 +132,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
           return true;
         } else {
-          log.info(
+          log.debug(
             `SKIP latestReleaseRefetchOk=${latestReleaseUpdateOk} enableFetchOpenDTUReleases=${enableFetchOpenDTUReleases}`,
           );
         }
@@ -170,7 +170,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
           return true;
         } else {
-          log.info(
+          log.debug(
             `SKIP allReleasesRefetchOk=${allReleasesUpdateOk} enableFetchOpenDTUReleases=${enableFetchOpenDTUReleases}`,
           );
         }
@@ -208,7 +208,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
 
           return true;
         } else {
-          log.info(
+          log.debug(
             `SKIP latestAppReleaseRefetchOk=${latestAppReleaseUpdateOk} enableAppUpdates=${enableAppUpdates}`,
           );
         }
