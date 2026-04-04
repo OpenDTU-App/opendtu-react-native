@@ -2,7 +2,14 @@ import type { FC } from 'react';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import { Appbar, Badge, List, Switch, useTheme } from 'react-native-paper';
+import {
+  Appbar,
+  Badge,
+  Button,
+  List,
+  Switch,
+  useTheme,
+} from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 
 import { Linking, ScrollView, View } from 'react-native';
@@ -233,8 +240,17 @@ const SystemInformationScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                       : t('opendtu.systemInformationScreen.gitTag')
                   }
                   description={versionString}
-                  right={props => <List.Icon {...props} icon="git" />}
-                  onPress={openGitHub}
+                  // right={props => <List.Icon {...props} icon="git" />}
+                  right={props => (
+                    <Button
+                      {...props}
+                      icon="open-in-new"
+                      mode="contained-tonal"
+                      onPress={openGitHub}
+                    >
+                      {t('open')}
+                    </Button>
+                  )}
                   disabled={!openGitHub}
                 />
                 <List.Item

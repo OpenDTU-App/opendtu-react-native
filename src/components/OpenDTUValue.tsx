@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { Flex } from 'react-native-flex-layout';
 import type { TextProps } from 'react-native-paper';
 import { Text } from 'react-native-paper';
 
@@ -13,13 +14,13 @@ export interface OpenDTUValueProps {
 export const getOpenDTUValueText = (
   statusValue?: ValueObject | null | unknown,
   textWhenInvalid?: string,
-): string => {
+): [string, string] => {
   if (statusValue === null) {
-    return textWhenInvalid ?? '';
+    return [textWhenInvalid ?? '', ''];
   }
 
   if (typeof statusValue !== 'object') {
-    return textWhenInvalid ?? '';
+    return [textWhenInvalid ?? '', ''];
   }
 
   const { v: value, d: decimals, u: unit } = (statusValue ?? {}) as ValueObject;
@@ -27,7 +28,9 @@ export const getOpenDTUValueText = (
   const valid =
     value !== undefined && decimals !== undefined && unit !== undefined;
 
-  return valid ? `${value.toFixed(decimals)} ${unit}` : (textWhenInvalid ?? '');
+  return valid
+    ? [`${value.toFixed(decimals)}`, unit]
+    : [textWhenInvalid ?? '', ''];
 };
 
 const OpenDTUValue: FC<OpenDTUValueProps> = ({
@@ -35,12 +38,17 @@ const OpenDTUValue: FC<OpenDTUValueProps> = ({
   textWhenInvalid,
   textProps,
 }) => {
-  const text = getOpenDTUValueText(statusValue, textWhenInvalid);
+  const [text, unit] = getOpenDTUValueText(statusValue, textWhenInvalid);
 
   return (
-    <Text variant="bodyLarge" {...textProps}>
-      {text}
-    </Text>
+    <Flex inline items="baseline" style={{ gap: 4 }}>
+      <Text variant="headlineMedium" {...textProps}>
+        {text}
+      </Text>
+      <Text variant="titleMedium" {...textProps}>
+        {unit}
+      </Text>
+    </Flex>
   );
 };
 

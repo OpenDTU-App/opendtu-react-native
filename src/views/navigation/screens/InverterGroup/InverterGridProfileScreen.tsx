@@ -5,6 +5,7 @@ import { Box } from 'react-native-flex-layout';
 import {
   Appbar,
   Button,
+  Divider,
   List,
   Text,
   TextInput,
@@ -13,8 +14,9 @@ import {
 
 import { RefreshControl, ScrollView, View } from 'react-native';
 
-import { settingsSurfaceRoundness } from '@/components/styled/SettingsSurface';
-import StyledSurface from '@/components/styled/StyledSurface';
+import SettingsSurface, {
+  settingsSurfaceRoundness,
+} from '@/components/styled/SettingsSurface';
 
 import useFirmwareDependantFeature from '@/hooks/useFirmwareDependantFeature';
 import useGridProfile from '@/hooks/useGridProfile';
@@ -115,7 +117,7 @@ const InverterGridProfileScreen: FC<PropsWithNavigation> = ({
             }
           >
             {!gridProfile || !gridProfile.parsed.sections.length ? (
-              <StyledSurface theme={theme} style={{ marginHorizontal: 16 }}>
+              <SettingsSurface>
                 <Box
                   style={{
                     display: 'flex',
@@ -133,13 +135,10 @@ const InverterGridProfileScreen: FC<PropsWithNavigation> = ({
                     {t('inverter.gridProfile.noDataDescription')}
                   </Text>
                 </Box>
-              </StyledSurface>
+              </SettingsSurface>
             ) : (
               <>
-                <StyledSurface
-                  theme={theme}
-                  style={{ marginHorizontal: 16, marginBottom: 8 }}
-                >
+                <SettingsSurface>
                   <List.Item
                     title={t('inverter.gridProfile.name')}
                     description={gridProfile.parsed.name}
@@ -148,8 +147,8 @@ const InverterGridProfileScreen: FC<PropsWithNavigation> = ({
                     title={t('inverter.gridProfile.version')}
                     description={gridProfile.parsed.version}
                   />
-                </StyledSurface>
-                <StyledSurface theme={theme} style={{ marginHorizontal: 16 }}>
+                </SettingsSurface>
+                <SettingsSurface disablePadding>
                   {gridProfile.parsed.sections.map((section, index) => (
                     <List.Accordion
                       key={index}
@@ -181,26 +180,30 @@ const InverterGridProfileScreen: FC<PropsWithNavigation> = ({
                       )}
                     </List.Accordion>
                   ))}
-                </StyledSurface>
+                </SettingsSurface>
                 {supportsGridProfileRawData ? (
-                  <Box mh={4}>
-                    <Text variant="titleLarge" style={{ padding: 8 }}>
-                      {t('inverter.gridProfile.rawGridProfileData')}
-                    </Text>
-                    <TextInput
-                      mode="flat"
-                      multiline
-                      value={rawContent}
-                      editable={false}
-                    />
-                    <Button
-                      mode="contained"
-                      onPress={copyRawContent}
-                      style={{ margin: 8 }}
-                    >
-                      {t('copy')}
-                    </Button>
-                  </Box>
+                  <>
+                    <Box mh={16}>
+                      <Divider />
+                      <Text variant="titleLarge" style={{ marginVertical: 8 }}>
+                        {t('inverter.gridProfile.rawGridProfileData')}
+                      </Text>
+                      <TextInput
+                        mode="outlined"
+                        multiline
+                        value={rawContent}
+                        editable={false}
+                        style={{ marginBottom: 16 }}
+                      />
+                      <Button
+                        mode="contained"
+                        onPress={copyRawContent}
+                        icon="content-copy"
+                      >
+                        {t('copy')}
+                      </Button>
+                    </Box>
+                  </>
                 ) : null}
               </>
             )}

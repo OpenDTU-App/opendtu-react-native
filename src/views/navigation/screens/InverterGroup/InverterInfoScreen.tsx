@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from 'react-native-flex-layout';
-import { Appbar, IconButton, List, Text, useTheme } from 'react-native-paper';
+import { Appbar, List, Text, useTheme } from 'react-native-paper';
 
 import { RefreshControl, ScrollView, View } from 'react-native';
 
@@ -219,6 +219,7 @@ const InverterInfoScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={inverter.name} />
+        <Appbar.Action icon="information" onPress={showInverterInfo} />
       </Appbar.Header>
       <StyledView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
@@ -237,61 +238,54 @@ const InverterInfoScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
               />
             }
           >
-            <Box style={{ width: '100%', flex: 1, gap: spacing * 2 }}>
-              <Box>
-                <StyledSurface
-                  theme={theme}
+            <Box style={{ width: '100%', flex: 1 }}>
+              <StyledSurface
+                theme={theme}
+                style={{
+                  backgroundColor: headerColor.background,
+                  padding: 12,
+                  marginHorizontal: 8,
+                }}
+              >
+                <Box
                   style={{
-                    backgroundColor: headerColor.background,
-                    padding: 12,
-                    marginHorizontal: 8,
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    maxWidth: '100%',
                   }}
                 >
-                  <Box
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      maxWidth: '100%',
-                    }}
-                  >
-                    <Box ml={8} style={{ flexShrink: 1 }}>
+                  <Box ml={8} style={{ flexShrink: 1 }}>
+                    <Text style={{ color: headerColor.text }}>
+                      {t('inverterInfo.serial', { serial: inverterSerial })}
+                    </Text>
+                    <Text style={{ color: headerColor.text }}>
+                      {t('inverterInfo.limits', {
+                        absolute: livedataInverter?.limit_absolute ?? 0,
+                        relative: livedataInverter?.limit_relative ?? 0,
+                      })}
+                    </Text>
+                    <Box
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: 4,
+                        flexWrap: 'wrap',
+                      }}
+                    >
                       <Text style={{ color: headerColor.text }}>
-                        {t('inverterInfo.serial', { serial: inverterSerial })}
+                        {t('inverterInfo.lastUpdateWas', { ago: dataAge })}
                       </Text>
-                      <Text style={{ color: headerColor.text }}>
-                        {t('inverterInfo.limits', {
-                          absolute: livedataInverter?.limit_absolute ?? 0,
-                          relative: livedataInverter?.limit_relative ?? 0,
-                        })}
-                      </Text>
-                      <Box
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          gap: 4,
-                          flexWrap: 'wrap',
-                        }}
-                      >
+                      {absoluteDataAge !== null ? (
                         <Text style={{ color: headerColor.text }}>
-                          {t('inverterInfo.lastUpdateWas', { ago: dataAge })}
+                          ({absoluteDataAge})
                         </Text>
-                        {absoluteDataAge !== null ? (
-                          <Text style={{ color: headerColor.text }}>
-                            ({absoluteDataAge})
-                          </Text>
-                        ) : null}
-                      </Box>
+                      ) : null}
                     </Box>
-                    <IconButton
-                      iconColor={headerColor.text}
-                      icon="information"
-                      onPress={showInverterInfo}
-                    />
                   </Box>
-                </StyledSurface>
-              </Box>
+                </Box>
+              </StyledSurface>
               <View>
                 {livedataInverter &&
                 'AC' in livedataInverter &&

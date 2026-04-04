@@ -80,7 +80,7 @@ const InverterListItem: FC<InverterListItemProps> = ({
 
   const inverterDescription = useMemo(() => {
     if (!inverterName) {
-      return '';
+      return t('noValidDataReceivedYet');
     } // •
 
     if (!inverterIsProducing && !inverterYieldToday) {
@@ -89,7 +89,7 @@ const InverterListItem: FC<InverterListItemProps> = ({
 
     if (!inverterYieldToday) {
       // invalid data
-      return '';
+      return t('noValidDataReceivedYet');
     }
 
     if (!inverterIsProducing || !inverterPower) {

@@ -94,8 +94,8 @@ const ChangeLanguageModal: FC<ExtendableModalProps> = props => {
         <Box
           mt={16}
           style={{
-            gap: 16,
-            backgroundColor: theme.colors.elevation.level3,
+            gap: 8,
+            backgroundColor: theme.colors.elevation.level1,
             padding: 16,
             borderRadius: theme.roundness * 6,
           }}

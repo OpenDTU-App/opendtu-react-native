@@ -52,7 +52,6 @@ const AppInfos: FC = () => {
               flexDirection: 'row',
               flex: 1,
               alignItems: 'center',
-              gap: 8,
             }}
           >
             <Box mh={8}>
@@ -93,7 +92,6 @@ const AppInfos: FC = () => {
               flexDirection: 'row',
               flex: 1,
               alignItems: 'center',
-              gap: 8,
             }}
           >
             <Box mh={8}>
@@ -103,7 +101,7 @@ const AppInfos: FC = () => {
               <Text style={{ color: colors.onInfo }} variant="titleMedium">
                 {t('appInfos.bugReporting')}
               </Text>
-              <Text style={{ color: colors.onInfo, flex: 1 }}>
+              <Text style={{ color: colors.onInfo }}>
                 {t('appInfos.bugReportingDescription')}
               </Text>
             </Box>

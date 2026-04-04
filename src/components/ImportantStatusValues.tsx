@@ -15,7 +15,7 @@ const ImportantStatusValues: FC = () => {
   const power = useLivedata(state => state?.total.Power);
 
   return (
-    <Box ph={12}>
+    <Box ph={12} mb={12}>
       <Box
         style={{
           display: 'flex',

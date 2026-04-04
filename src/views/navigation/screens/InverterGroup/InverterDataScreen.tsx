@@ -9,7 +9,7 @@ import { ScrollView, View } from 'react-native';
 import type { Inverter, InverterFromStatus } from '@/types/opendtu/status';
 
 import { getOpenDTUValueText } from '@/components/OpenDTUValue';
-import StyledSurface from '@/components/styled/StyledSurface';
+import SettingsSurface from '@/components/styled/SettingsSurface';
 
 import useLivedata from '@/hooks/useLivedata';
 
@@ -69,7 +69,7 @@ const InverterDataScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
             'AC' in livedataInverter &&
             'DC' in livedataInverter &&
             'INV' in livedataInverter ? (
-              <StyledSurface theme={theme} style={{ marginHorizontal: 16 }}>
+              <SettingsSurface theme={theme}>
                 {Object.entries(
                   livedataInverter[dataKey as keyof Inverter],
                 ).map(([dataIdx, data]) => (
@@ -100,7 +100,7 @@ const InverterDataScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
                       ))}
                   </List.Section>
                 ))}
-              </StyledSurface>
+              </SettingsSurface>
             ) : null}
             <View style={{ height: spacing * 2 }} />
           </ScrollView>

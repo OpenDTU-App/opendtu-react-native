@@ -52,7 +52,10 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
 
   const handleDisableDebugMode = useCallback(() => {
     dispatch(setDebugEnabled({ debugEnabled: false }));
-  }, [dispatch]);
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    }
+  }, [dispatch, navigation]);
 
   const api = useApi();
 

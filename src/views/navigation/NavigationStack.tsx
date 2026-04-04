@@ -10,6 +10,7 @@ import ConfigureGraphsScreen from '@/views/navigation/screens/GraphsGroup/Config
 import ManageDatabasesScreen from '@/views/navigation/screens/GraphsGroup/ManageDatabasesScreen';
 import SelectDatabaseScreen from '@/views/navigation/screens/GraphsGroup/SelectDatabaseScreen';
 import AboutAppScreen from '@/views/navigation/screens/InformationGroup/AboutAppScreen';
+import AppChangelogScreen from '@/views/navigation/screens/InformationGroup/AppChangelogScreen';
 import FirmwareListScreen from '@/views/navigation/screens/InformationGroup/FirmwareListScreen';
 import LicensesScreen from '@/views/navigation/screens/InformationGroup/LicensesScreen';
 import MqttInformationScreen from '@/views/navigation/screens/InformationGroup/MqttInformationScreen';
@@ -85,6 +86,7 @@ const NavigationStack: FC = () => {
         component={ManageDatabasesScreen}
       />
       <Stack.Screen name="AboutSettingsScreen" component={AboutAppScreen} />
+      <Stack.Screen name="AppChangelogScreen" component={AppChangelogScreen} />
       <Stack.Screen
         name="ConfigureGraphsScreen"
         component={ConfigureGraphsScreen}

@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import { useCallback, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { List, useTheme } from 'react-native-paper';
 
 import { setDeviceState } from '@/slices/opendtu';
@@ -31,6 +32,7 @@ const DeviceListItem: FC<DeviceListItemProps> = ({ config, index }) => {
   const theme = useTheme();
   const navigation = useNavigation() as NavigationProp<ParamListBase>;
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const handlePress = useCallback((): void => {
     navigation.navigate('DeviceSettingsScreen', { index });
@@ -38,16 +40,8 @@ const DeviceListItem: FC<DeviceListItemProps> = ({ config, index }) => {
 
   useEffect(() => {
     const func = async () => {
-      // console.log('DeviceListItem - Check Reachable', config.baseUrl);
-
       try {
         const res = await api.isOpenDtuInstance(config.baseUrl);
-        /*console.log(
-          'DeviceListItem - res',
-          res,
-          DeviceState[res],
-          config.baseUrl,
-        );*/
 
         dispatch(setDeviceState({ deviceState: res, index }));
       } catch (error) {
@@ -93,7 +87,9 @@ const DeviceListItem: FC<DeviceListItemProps> = ({ config, index }) => {
   return (
     <StyledListItem
       theme={theme}
-      title={config.customName || (config.hostname ?? config.baseUrl)}
+      title={`${config.customName || (config.hostname ?? config.baseUrl)}${
+        showConnected ? ` (${t('connected')})` : ''
+      }`}
       description={config.hostname ? config.baseUrl : undefined}
       onPress={handlePress}
       borderless

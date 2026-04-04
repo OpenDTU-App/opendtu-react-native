@@ -10,12 +10,10 @@ import useHasNewAppVersion from '@/hooks/useHasNewAppVersion';
 import useHasNewOpenDtuVersion from '@/hooks/useHasNewOpenDtuVersion';
 
 import GraphTab from '@/views/navigation/tabs/GraphTab';
-import InverterListTab from '@/views/navigation/tabs/InverterListTab';
 import LivedataTab from '@/views/navigation/tabs/LivedataTab';
 import MainSettingsTab from '@/views/navigation/tabs/MainSettingsTab';
 
 const LivedataRoute = () => <LivedataTab />;
-const InverterListRoute = () => <InverterListTab />;
 const GraphRoute = () => <GraphTab />;
 const SettingsRoute = () => <MainSettingsTab />;
 
@@ -25,7 +23,6 @@ type BaseRoutes = ComponentProps<
 
 const renderScene = BottomNavigationPaper.SceneMap({
   livedata: LivedataRoute,
-  inverterList: InverterListRoute,
   graph: GraphRoute,
   settings: SettingsRoute,
 });
@@ -49,11 +46,6 @@ const NavigationTabs: FC = () => {
         key: 'livedata',
         title: t('navigation.livedata'),
         focusedIcon: 'solar-power',
-      },
-      {
-        key: 'inverterList',
-        title: t('navigation.inverterList'),
-        focusedIcon: 'current-ac',
       },
       {
         key: 'graph',

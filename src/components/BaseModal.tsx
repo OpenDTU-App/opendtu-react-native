@@ -92,7 +92,7 @@ const BaseModal: FC<BaseModalProps> = ({
         paddingBottom: 0,
         borderRadius: fullscreen ? 0 : 28,
         marginVertical: fullscreen ? 0 : 8,
-        marginHorizontal: fullscreen ? 0 : 32,
+        marginHorizontal: fullscreen ? 0 : 24,
         maxWidth: fullscreen ? undefined : 450,
         height: fullscreen ? '100%' : undefined,
         flex: 1,

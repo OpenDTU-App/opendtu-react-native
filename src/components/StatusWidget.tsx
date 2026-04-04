@@ -12,7 +12,7 @@ import useHasLiveData from '@/hooks/useHasLiveData';
 import { spacing } from '@/constants';
 
 export interface StatusWidgetProps extends PropsWithChildren {
-  title?: string;
+  title: string;
   maxWidth?: number;
   icon?: string;
   iconSize?: number;
@@ -34,7 +34,6 @@ const StatusWidget: FC<StatusWidgetProps> = ({
         <Box style={{ margin: 12 }}>
           {title ? (
             <Box
-              mb={8}
               style={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -43,13 +42,13 @@ const StatusWidget: FC<StatusWidgetProps> = ({
                 gap: spacing,
               }}
             >
-              <Text variant="titleLarge" style={{ fontSize: 18 }}>
-                {title}
-              </Text>
-              {icon ? <Icon size={iconSize ?? 20} source={icon} /> : null}
+              <Box>
+                <Text variant="bodyMedium">{title}</Text>
+                {children}
+              </Box>
+              {icon ? <Icon size={iconSize ?? 32} source={icon} /> : null}
             </Box>
           ) : null}
-          {children}
         </Box>
       ) : (
         <View style={{ borderRadius: 16, overflow: 'hidden' }}>
