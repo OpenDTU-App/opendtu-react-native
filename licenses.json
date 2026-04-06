@@ -101,13 +101,13 @@
         "licenseUrl": "https://github.com/epoberezkin/fast-deep-equal/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "fuse.js@7.1.0": {
+    "fuse.js@7.3.0": {
         "licenses": "Apache-2.0",
         "repository": "https://github.com/krisk/Fuse",
         "licenseUrl": "https://github.com/krisk/Fuse/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "i18next@26.0.2": {
+    "i18next@26.0.3": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
@@ -167,7 +167,7 @@
         "licenseUrl": "https://github.com/samber/prometheus-query-js/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-i18next@17.0.1": {
+    "react-i18next@17.0.2": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/react-i18next",
         "licenseUrl": "https://github.com/i18next/react-i18next/raw/master/LICENSE",
