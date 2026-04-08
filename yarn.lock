@@ -9239,10 +9239,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fuse.js@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "fuse.js@npm:7.1.0"
-  checksum: 10/9f9105e54372897a46cb3e04074f0db5bd0a428320d4618276a57e6142d7502235a556f05cf87aa3c5d6d9c6fdfa06b901b78379c48aa0951672ccbc4a1bfe70
+"fuse.js@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "fuse.js@npm:7.3.0"
+  checksum: 10/b2cdc39e46acb9524fe900356af74c987ecb1dbc67412df651a5291fa072d212e6d74457f0b5d1c39baf79539481f62b613ac792afd8995dd1fc3d20b5354914
   languageName: node
   linkType: hard
 
@@ -9788,9 +9788,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^26.0.2":
-  version: 26.0.2
-  resolution: "i18next@npm:26.0.2"
+"i18next@npm:^26.0.3":
+  version: 26.0.3
+  resolution: "i18next@npm:26.0.3"
   dependencies:
     "@babel/runtime": "npm:^7.29.2"
   peerDependencies:
@@ -9798,7 +9798,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/16c3b264810d386c6f0ba9e1a42416369bf34acf89e212e222c07c7351d278f7aee008f9a0c70990144b966f85a9123303809313658044001bc858e9af1062a7
+  checksum: 10/5f7286d863fc9385a36f27195dc21365f29d09feefdefcf89a5bdd85f7ccd45bd67f8f1067627c1cede9762b52cacf53d2b81d3b2ecfc7ba112042c4e29d222b
   languageName: node
   linkType: hard
 
@@ -12947,8 +12947,8 @@ __metadata:
     eslint-plugin-testing-library: "npm:^7.16.2"
     expo: "npm:54.0.12"
     fast-deep-equal: "npm:^3.1.3"
-    fuse.js: "npm:^7.1.0"
-    i18next: "npm:^26.0.2"
+    fuse.js: "npm:^7.3.0"
+    i18next: "npm:^26.0.3"
     intl-pluralrules: "npm:^2.0.1"
     ip-regex: "npm:^5.0.0"
     moment: "npm:^2.30.1"
@@ -12960,7 +12960,7 @@ __metadata:
     pretty-bytes: "npm:^7.1.0"
     prometheus-query: "npm:^3.5.1"
     react: "npm:19.1.0"
-    react-i18next: "npm:^17.0.1"
+    react-i18next: "npm:^17.0.2"
     react-native: "npm:0.81.4"
     react-native-charts-wrapper: "npm:^0.6.0"
     react-native-config: "npm:1.5.6"
@@ -13670,9 +13670,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^17.0.1":
-  version: 17.0.1
-  resolution: "react-i18next@npm:17.0.1"
+"react-i18next@npm:^17.0.2":
+  version: 17.0.2
+  resolution: "react-i18next@npm:17.0.2"
   dependencies:
     "@babel/runtime": "npm:^7.29.2"
     html-parse-stringify: "npm:^3.0.1"
@@ -13688,7 +13688,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10/d652e5d909d45d7dd5947e56ea47fe271fa73cf440eeac2d51c2cff046b3d5ef61c663744289d51ee70660f16dfd3c5d76b853ebd1878012bd1ff3e413b99e9d
+  checksum: 10/c9adbdb0666e74b724fc4bec238189831762969b979323bf2d9cf8d428e0d8c7eb66574017628955d0a3e6ada00078d2b9468c703034804fe58dc95b1971ec82
   languageName: node
   linkType: hard
 
