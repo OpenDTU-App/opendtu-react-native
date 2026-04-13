@@ -2908,13 +2908,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/unitless@npm:0.10.0":
-  version: 0.10.0
-  resolution: "@emotion/unitless@npm:0.10.0"
-  checksum: 10/6851c16edce01c494305f43b2cad7a26b939a821131b7c354e49b8e3b012c8810024755b0f4a03ef51117750309e55339825a97bd10411fb3687e68904769106
-  languageName: node
-  linkType: hard
-
 "@eslint-community/eslint-utils@npm:^4.2.0, @eslint-community/eslint-utils@npm:^4.4.0":
   version: 4.4.1
   resolution: "@eslint-community/eslint-utils@npm:4.4.1"
@@ -5106,13 +5099,6 @@ __metadata:
     "@types/react": "npm:*"
     csstype: "npm:^3.2.2"
   checksum: 10/fd9130e344c65992ce67accaf3af239573fa69434fc851ef956fafa1f1c03e8b007af8a2acf899ab4526bb42d326b7e07a64f9cd69a445715b6403617675cdd1
-  languageName: node
-  linkType: hard
-
-"@types/stylis@npm:4.2.7":
-  version: 4.2.7
-  resolution: "@types/stylis@npm:4.2.7"
-  checksum: 10/068c7fd64ee2e1649b06615da57c76dd9f5be1836e310ebf94aa08193c3544d48944079ce6e94ba89b72b716944f217234a86fecc28185246c1787f02ad0eae1
   languageName: node
   linkType: hard
 
@@ -9788,9 +9774,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^26.0.3":
-  version: 26.0.3
-  resolution: "i18next@npm:26.0.3"
+"i18next@npm:^26.0.4":
+  version: 26.0.4
+  resolution: "i18next@npm:26.0.4"
   dependencies:
     "@babel/runtime": "npm:^7.29.2"
   peerDependencies:
@@ -9798,7 +9784,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/5f7286d863fc9385a36f27195dc21365f29d09feefdefcf89a5bdd85f7ccd45bd67f8f1067627c1cede9762b52cacf53d2b81d3b2ecfc7ba112042c4e29d222b
+  checksum: 10/39a8f13851252f97dfd255fae0a72a8aefcab34830def5a2057e631aac5719ba87d3b7e32bef354cd5304f19f78abfafad9dc51eb090c303ebac6ee339cdfb88
   languageName: node
   linkType: hard
 
@@ -12948,7 +12934,7 @@ __metadata:
     expo: "npm:54.0.12"
     fast-deep-equal: "npm:^3.1.3"
     fuse.js: "npm:^7.3.0"
-    i18next: "npm:^26.0.3"
+    i18next: "npm:^26.0.4"
     intl-pluralrules: "npm:^2.0.1"
     ip-regex: "npm:^5.0.0"
     moment: "npm:^2.30.1"
@@ -12975,7 +12961,7 @@ __metadata:
     react-native-markdown-display: "npm:^7.0.2"
     react-native-mmkv: "npm:~3.3.3"
     react-native-paper: "npm:5.15.0"
-    react-native-paper-dates: "npm:^0.23.5"
+    react-native-paper-dates: "npm:^0.23.6"
     react-native-reanimated: "npm:^4.3.0"
     react-native-safe-area-context: "npm:^5.7.0"
     react-native-screens: "npm:^4.24.0"
@@ -12995,7 +12981,7 @@ __metadata:
     react-test-renderer: "npm:19.0.0"
     redux: "npm:^5.0.1"
     redux-persist: "npm:^6.0.0"
-    styled-components: "npm:^6.3.12"
+    styled-components: "npm:^6.4.0"
     typescript: "npm:^5.8.3"
   languageName: unknown
   linkType: soft
@@ -13396,7 +13382,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.4.49, postcss@npm:~8.4.32":
+"postcss@npm:~8.4.32":
   version: 8.4.49
   resolution: "postcss@npm:8.4.49"
   dependencies:
@@ -13871,9 +13857,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-paper-dates@npm:^0.23.5":
-  version: 0.23.5
-  resolution: "react-native-paper-dates@npm:0.23.5"
+"react-native-paper-dates@npm:^0.23.6":
+  version: 0.23.6
+  resolution: "react-native-paper-dates@npm:0.23.6"
   dependencies:
     color: "npm:^5.0.3"
   peerDependencies:
@@ -13881,7 +13867,7 @@ __metadata:
     react-native: "*"
     react-native-paper: "*"
     react-native-safe-area-context: "*"
-  checksum: 10/c517ea8d76d7abf4b5d61474b748da18ff0f9f32fa4b037c5259923629d0ad6feb934fe18fdb0b80bd292c9091b8072b9d502d77ce6f9070c95e60ba1da583bf
+  checksum: 10/92d6c1cd592692bc2302bc6ba89e72bd75e3c7f54e5bbef9e7ed87f6a62d56fe2a799496aa497cac1190b625229f2288685eb2e7d18dfed9ec12494a426a4a17
   languageName: node
   linkType: hard
 
@@ -15107,13 +15093,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shallowequal@npm:1.1.0":
-  version: 1.1.0
-  resolution: "shallowequal@npm:1.1.0"
-  checksum: 10/f4c1de0837f106d2dbbfd5d0720a5d059d1c66b42b580965c8f06bb1db684be8783538b684092648c981294bf817869f743a066538771dbecb293df78f765e00
-  languageName: node
-  linkType: hard
-
 "shebang-command@npm:^2.0.0":
   version: 2.0.0
   resolution: "shebang-command@npm:2.0.0"
@@ -15659,26 +15638,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:^6.3.12":
-  version: 6.3.12
-  resolution: "styled-components@npm:6.3.12"
+"styled-components@npm:^6.4.0":
+  version: 6.4.0
+  resolution: "styled-components@npm:6.4.0"
   dependencies:
     "@emotion/is-prop-valid": "npm:1.4.0"
-    "@emotion/unitless": "npm:0.10.0"
-    "@types/stylis": "npm:4.2.7"
     css-to-react-native: "npm:3.2.0"
     csstype: "npm:3.2.3"
-    postcss: "npm:8.4.49"
-    shallowequal: "npm:1.1.0"
     stylis: "npm:4.3.6"
-    tslib: "npm:2.8.1"
   peerDependencies:
+    css-to-react-native: ">= 3.2.0"
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
+    react-native: ">= 0.68.0"
   peerDependenciesMeta:
+    css-to-react-native:
+      optional: true
     react-dom:
       optional: true
-  checksum: 10/0825d2ad39395f10f8abf60b87aca0673bd653fbff84b3da1298479eb32e44ff1b744f5ef026dd06c24fcb3b9c35886f5cbe8163622c05719d8e754ed42640f1
+    react-native:
+      optional: true
+  checksum: 10/df2914444d1d4e950be68cee686dae37ff243917f71be523a0dbac62ecfe22d04344547efe7d9722e9f137d76248171a2cc37208d9d9b425445e48dee89e71ca
   languageName: node
   linkType: hard
 
@@ -16016,17 +15996,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:2.8.1, tslib@npm:^2.0.1, tslib@npm:^2.4.0":
-  version: 2.8.1
-  resolution: "tslib@npm:2.8.1"
-  checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
-  languageName: node
-  linkType: hard
-
 "tslib@npm:^1.8.1":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: 10/7dbf34e6f55c6492637adb81b555af5e3b4f9cc6b998fb440dac82d3b42bdc91560a35a5fb75e20e24a076c651438234da6743d139e4feabf0783f3cdfe1dddb
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.0.1, tslib@npm:^2.4.0":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
   languageName: node
   linkType: hard
 
