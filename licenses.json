@@ -107,7 +107,7 @@
         "licenseUrl": "https://github.com/krisk/Fuse/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "i18next@26.0.3": {
+    "i18next@26.0.4": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
@@ -245,7 +245,7 @@
         "licenseUrl": "https://github.com/mrousavy/react-native-mmkv",
         "parents": "opendtu-react-native"
     },
-    "react-native-paper-dates@0.23.5": {
+    "react-native-paper-dates@0.23.6": {
         "licenses": "MIT",
         "repository": "https://github.com/web-ridge/react-native-paper-dates",
         "licenseUrl": "https://github.com/web-ridge/react-native-paper-dates/raw/master/LICENSE",
@@ -371,7 +371,7 @@
         "licenseUrl": "github:reduxjs/redux",
         "parents": "opendtu-react-native"
     },
-    "styled-components@6.3.12": {
+    "styled-components@6.4.0": {
         "licenses": "MIT",
         "repository": "https://github.com/styled-components/styled-components",
         "licenseUrl": "https://github.com/styled-components/styled-components/raw/master/LICENSE",
