@@ -98,6 +98,10 @@ const MainSettingsTab: FC = () => {
     navigation.navigate('NTPSettingsScreen');
   }, [navigation]);
 
+  const handleMqttSettings = useCallback(() => {
+    navigation.navigate('MqttSettingsScreen');
+  }, [navigation]);
+
   const handleDtuSettings = useCallback(() => {
     navigation.navigate('DtuSettingsScreen');
   }, [navigation]);
@@ -186,8 +190,7 @@ const MainSettingsTab: FC = () => {
                   title={t('settings.mqttSettings.title')}
                   description={t('settings.mqttSettings.description')}
                   left={props => <List.Icon {...props} icon="broadcast" />}
-                  disabled
-                  style={{ opacity: 0.5 }}
+                  onPress={handleMqttSettings}
                 />
                 <List.Item
                   title={t('settings.inverterSettings.title')}

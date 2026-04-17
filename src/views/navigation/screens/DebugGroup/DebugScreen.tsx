@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Config from 'react-native-config';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, IconButton, List, Text, useTheme } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
@@ -18,7 +19,7 @@ import { setDebugEnabled } from '@/slices/settings';
 
 import { useApi } from '@/api/ApiHandler';
 import type { DebugInfo } from '@/api/opendtuapi';
-import { spacing } from '@/constants';
+import { overrideInitialRoute, spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
@@ -154,6 +155,28 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 onPress={() => navigation.navigate('DebugColorsScreen')}
                 left={props => <List.Icon {...props} icon="palette" />}
               />
+            </List.Section>
+            <List.Section>
+              <List.Subheader>App config</List.Subheader>
+              {Object.entries(Config)
+                .filter(
+                  ([, value]) => !['function', 'symbol'].includes(typeof value),
+                )
+                .map(([key, value]) => (
+                  <List.Item
+                    key={`app-config-key-${key}`}
+                    title={key}
+                    description={
+                      value === null
+                        ? '<null>'
+                        : value === true
+                          ? '<true>'
+                          : value === false
+                            ? '<false>'
+                            : JSON.stringify(value)
+                    }
+                  />
+                ))}
             </List.Section>
             <List.Section>
               <List.Subheader>{t('debug.toast')}</List.Subheader>

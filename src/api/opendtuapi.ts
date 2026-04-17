@@ -11,6 +11,7 @@ import type { GridProfileData } from '@/types/opendtu/gridprofile';
 import type { InverterDeviceData } from '@/types/opendtu/inverterDevice';
 import type {
   DtuSettings,
+  MqttSettings,
   NetworkSettings,
   NTPSettings,
   NTPTime,
@@ -121,6 +122,9 @@ class OpenDtuApi {
     | null = null;
   private onDtuSettingsHandler:
     | ((data: DtuSettings, index: Index) => void)
+    | null = null;
+  private onMqttSettingsHandler:
+    | ((data: MqttSettings, index: Index) => void)
     | null = null;
 
   private ws: WebSocket | null = null;
@@ -365,6 +369,18 @@ class OpenDtuApi {
   public unregisterOnDtuSettingsHandler(): void {
     log.debug('OpenDtuApi.unregisterOnDtuSettingsHandler()');
     this.onDtuSettingsHandler = null;
+  }
+
+  public registerOnMqttSettingsHandler(
+    handler: (data: MqttSettings, index: Index) => void,
+  ): void {
+    log.debug('OpenDtuApi.registerOnMqttSettingsHandler()');
+    this.onMqttSettingsHandler = handler;
+  }
+
+  public unregisterOnMqttSettingsHandler(): void {
+    log.debug('OpenDtuApi.unregisterOnMqttSettingsHandler()');
+    this.onMqttSettingsHandler = null;
   }
 
   public async getSystemStatusFromUrl(
@@ -1498,6 +1514,68 @@ class OpenDtuApi {
     const parsed = await res.json();
 
     log.debug('setDtuConfig', 'success', {
+      status: res.status,
+      parsed,
+    });
+
+    return res.status === 200 && parsed.type === 'success';
+  }
+
+  public async getMqttConfig(): Promise<DtuSettings | null> {
+    if (!this.baseUrl) {
+      log.error('getMqttConfig', 'no base url');
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest('/api/mqtt/config', 'GET');
+
+    if (!res) {
+      log.error('getMqttConfig', 'no response');
+      return null;
+    }
+
+    if (res.status === 200) {
+      const json = await res.json();
+
+      if (this.onMqttSettingsHandler && this.index !== null) {
+        this.onMqttSettingsHandler(json, this.index);
+      }
+
+      log.debug('getMqttConfig', 'success');
+
+      return json;
+    }
+
+    log.error('getMqttConfig', 'invalid status', res.status);
+
+    return null;
+  }
+
+  public async setMqttConfig(config: MqttSettings): Promise<boolean | null> {
+    if (!this.baseUrl) {
+      log.error('setMqttConfig', 'no base url');
+      return null;
+    }
+
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(config));
+
+    const res = await this.makeAuthenticatedRequest(
+      '/api/mqtt/config',
+      'POST',
+      {
+        body: formData,
+      },
+    );
+
+    if (!res) {
+      log.error('setMqttConfig', 'no response');
+      return null;
+    }
+
+    const parsed = await res.json();
+
+    log.debug('setMqttConfig', 'success', {
       status: res.status,
       parsed,
     });

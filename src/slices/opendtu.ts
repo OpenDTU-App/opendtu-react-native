@@ -14,6 +14,7 @@ import type {
   SetLimitStatusAction,
   SetLiveDataFromStatusAction,
   SetLiveDataFromWebsocketAction,
+  SetMqttSettingsAction,
   SetMqttStatusAction,
   SetNetworkSettingsAction,
   SetNetworkStatusAction,
@@ -378,6 +379,21 @@ const opendtuSlice = createSlice({
           .settings as OpenDTUSettings
       ).dtu = action.payload.data;
     },
+    setMqttSettings: (state, action: SetMqttSettingsAction) => {
+      if (!state.dtuStates[action.payload.index]) {
+        state.dtuStates[action.payload.index] = {};
+      }
+
+      if (!state.dtuStates[action.payload.index]?.settings) {
+        (state.dtuStates[action.payload.index] as OpenDTUDeviceState).settings =
+          {};
+      }
+
+      (
+        (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
+          .settings as OpenDTUSettings
+      ).mqtt = action.payload.data;
+    },
   },
 });
 
@@ -405,6 +421,7 @@ export const {
   setNetworkSettings,
   setNTPSettings,
   setDtuSettings,
+  setMqttSettings,
 } = opendtuSlice.actions;
 
 export const { reducer: OpenDTUReducer } = opendtuSlice;

@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 
+import { overrideInitialRoute } from '@/constants';
 import { useAppSelector } from '@/store';
 import AppLogScreen from '@/views/navigation/screens/DebugGroup/AppLogScreen';
 import DebugColorsScreen from '@/views/navigation/screens/DebugGroup/DebugColorsScreen';
@@ -24,6 +25,7 @@ import InverterGridProfileScreen from '@/views/navigation/screens/InverterGroup/
 import InverterInfoScreen from '@/views/navigation/screens/InverterGroup/InverterInfoScreen';
 import MainScreen from '@/views/navigation/screens/MainScreen';
 import DtuSettingsScreen from '@/views/navigation/screens/SettingsGroup/DtuSettingsScreen';
+import MqttSettingsScreen from '@/views/navigation/screens/SettingsGroup/MqttSettingsScreen';
 import NetworkSettingsScreen from '@/views/navigation/screens/SettingsGroup/NetworkSettingsScreen';
 import NTPSettingsScreen from '@/views/navigation/screens/SettingsGroup/NTPSettingsScreen';
 import SetupAddOpenDTUScreen from '@/views/navigation/screens/SetupGroup/SetupAddOpenDTUScreen';
@@ -51,7 +53,10 @@ const NavigationStack: FC = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName={hasConfigs ? 'MainScreen' : 'SetupAddOpenDTUScreen'}
+      initialRouteName={
+        overrideInitialRoute ??
+        (hasConfigs ? 'MainScreen' : 'SetupAddOpenDTUScreen')
+      }
       screenOptions={{
         headerShown: false,
         headerBackVisible: false,
@@ -131,6 +136,7 @@ const NavigationStack: FC = () => {
       />
       <Stack.Screen name="NTPSettingsScreen" component={NTPSettingsScreen} />
       <Stack.Screen name="DtuSettingsScreen" component={DtuSettingsScreen} />
+      <Stack.Screen name="MqttSettingsScreen" component={MqttSettingsScreen} />
       <Stack.Screen name="AppLogScreen" component={AppLogScreen} />
     </Stack.Navigator>
   );

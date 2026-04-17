@@ -4,6 +4,7 @@ import type { GridProfileData } from '@/types/opendtu/gridprofile';
 import type { InverterDeviceData } from '@/types/opendtu/inverterDevice';
 import type {
   DtuSettings,
+  MqttSettings,
   NetworkSettings,
   NTPSettings,
 } from '@/types/opendtu/settings';
@@ -25,6 +26,7 @@ export interface OpenDTUSettings {
   network?: NetworkSettings;
   ntp?: NTPSettings;
   dtu?: DtuSettings;
+  mqtt?: MqttSettings;
 }
 
 export enum DeviceState {
@@ -144,6 +146,11 @@ export type SetNTPSettingsAction = PayloadAction<{
 export type SetDtuSettingsAction = PayloadAction<{
   index: Index;
   data: DtuSettings;
+}>;
+
+export type SetMqttSettingsAction = PayloadAction<{
+  index: Index;
+  data: MqttSettings;
 }>;
 
 export interface OpenDTUSetup {
