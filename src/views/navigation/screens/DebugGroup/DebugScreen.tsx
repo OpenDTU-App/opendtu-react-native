@@ -19,7 +19,7 @@ import { setDebugEnabled } from '@/slices/settings';
 
 import { useApi } from '@/api/ApiHandler';
 import type { DebugInfo } from '@/api/opendtuapi';
-import { overrideInitialRoute, spacing } from '@/constants';
+import { spacing } from '@/constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { StyledView } from '@/style';
 import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
@@ -80,8 +80,7 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
       <StyledView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView>
-            <List.Section>
-              <List.Subheader>{t('debug.cache')}</List.Subheader>
+            <List.Section title={t('debug.cache')}>
               <List.Item
                 title={t('debug.latestAppReleaseCacheCreated')}
                 description={`${
@@ -131,8 +130,7 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 )}
               />
             </List.Section>
-            <List.Section>
-              <List.Subheader>{t('debug.websocket')}</List.Subheader>
+            <List.Section title={t('debug.websocket')}>
               {apiDebugInfo
                 ? Object.entries(apiDebugInfo).map(([key, value]) => (
                     <List.Item
@@ -143,8 +141,7 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   ))
                 : null}
             </List.Section>
-            <List.Section>
-              <List.Subheader>{t('debug.other')}</List.Subheader>
+            <List.Section title={t('debug.other')}>
               <List.Item
                 title={t('debug.disableDebugMode')}
                 onPress={handleDisableDebugMode}
@@ -156,8 +153,7 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 left={props => <List.Icon {...props} icon="palette" />}
               />
             </List.Section>
-            <List.Section>
-              <List.Subheader>App config</List.Subheader>
+            <List.Section title="App config">
               {Object.entries(Config)
                 .filter(
                   ([, value]) => !['function', 'symbol'].includes(typeof value),
@@ -178,8 +174,7 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   />
                 ))}
             </List.Section>
-            <List.Section>
-              <List.Subheader>{t('debug.toast')}</List.Subheader>
+            <List.Section title={t('debug.toast')}>
               <List.Item
                 title={t('debug.showInfoToast')}
                 onPress={() => {
