@@ -17,12 +17,6 @@
         "licenseUrl": "https://github.com/pchmn/expo-material3-theme/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-native-async-storage/async-storage@2.2.0": {
-        "licenses": "MIT",
-        "repository": "https://github.com/react-native-async-storage/async-storage",
-        "licenseUrl": "https://github.com/react-native-async-storage/async-storage/raw/master/LICENSE",
-        "parents": "opendtu-react-native"
-    },
     "@react-native-clipboard/clipboard@1.16.3": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-clipboard/clipboard",
