@@ -4679,9 +4679,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native-stack@npm:^7.14.10":
-  version: 7.14.10
-  resolution: "@react-navigation/native-stack@npm:7.14.10"
+"@react-navigation/native-stack@npm:^7.14.11":
+  version: 7.14.11
+  resolution: "@react-navigation/native-stack@npm:7.14.11"
   dependencies:
     "@react-navigation/elements": "npm:^2.9.14"
     color: "npm:^4.2.3"
@@ -4693,7 +4693,7 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: ">= 4.0.0"
     react-native-screens: ">= 4.0.0"
-  checksum: 10/aebb86454e364f8eaa8e5d2ce576a6445e28d5999cb3dceba786ffe03d43dd1b508ae3f82cdc193405d2a94e93a420a1761efa7e564ae1be2ed96c4823528b36
+  checksum: 10/fe18b3104bcdba4bdbb0efc7bc2ddc76b5036819b485984477bcdeeb3e40fd628f5fbc366fd1f7c1e8e977677181d47adf748d19e2e64d588736973f3d776a2b
   languageName: node
   linkType: hard
 
@@ -9763,9 +9763,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^26.0.4":
-  version: 26.0.4
-  resolution: "i18next@npm:26.0.4"
+"i18next@npm:^26.0.6":
+  version: 26.0.6
+  resolution: "i18next@npm:26.0.6"
   dependencies:
     "@babel/runtime": "npm:^7.29.2"
   peerDependencies:
@@ -9773,7 +9773,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/39a8f13851252f97dfd255fae0a72a8aefcab34830def5a2057e631aac5719ba87d3b7e32bef354cd5304f19f78abfafad9dc51eb090c303ebac6ee339cdfb88
+  checksum: 10/2d474e528cef85da706aef7d556defea36b21ee6df65ca9f168088a553d59cd65324a38d480193415ce88e84e8dd8f77962539ed51710be5124dc5e1ba7d6803
   languageName: node
   linkType: hard
 
@@ -12879,7 +12879,7 @@ __metadata:
     "@react-native/typescript-config": "npm:0.81.4"
     "@react-navigation/bottom-tabs": "npm:^7.15.9"
     "@react-navigation/native": "npm:^7.2.2"
-    "@react-navigation/native-stack": "npm:^7.14.10"
+    "@react-navigation/native-stack": "npm:^7.14.11"
     "@reduxjs/toolkit": "npm:^2.11.2"
     "@shopify/flash-list": "npm:^2.3.1"
     "@trivago/prettier-plugin-sort-imports": "npm:^6.0.2"
@@ -12906,7 +12906,7 @@ __metadata:
     expo: "npm:54.0.12"
     fast-deep-equal: "npm:^3.1.3"
     fuse.js: "npm:^7.3.0"
-    i18next: "npm:^26.0.4"
+    i18next: "npm:^26.0.6"
     intl-pluralrules: "npm:^2.0.1"
     ip-regex: "npm:^5.0.0"
     moment: "npm:^2.30.1"
@@ -12918,7 +12918,7 @@ __metadata:
     pretty-bytes: "npm:^7.1.0"
     prometheus-query: "npm:^3.5.1"
     react: "npm:19.1.0"
-    react-i18next: "npm:^17.0.2"
+    react-i18next: "npm:^17.0.4"
     react-native: "npm:0.81.4"
     react-native-charts-wrapper: "npm:^0.6.0"
     react-native-config: "npm:1.5.6"
@@ -12932,7 +12932,7 @@ __metadata:
     react-native-logs: "npm:^5.6.0"
     react-native-markdown-display: "npm:^7.0.2"
     react-native-mmkv: "npm:~3.3.3"
-    react-native-paper: "npm:5.15.0"
+    react-native-paper: "npm:5.15.1"
     react-native-paper-dates: "npm:^0.23.6"
     react-native-reanimated: "npm:^4.3.0"
     react-native-safe-area-context: "npm:^5.7.0"
@@ -13628,9 +13628,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^17.0.2":
-  version: 17.0.2
-  resolution: "react-i18next@npm:17.0.2"
+"react-i18next@npm:^17.0.4":
+  version: 17.0.4
+  resolution: "react-i18next@npm:17.0.4"
   dependencies:
     "@babel/runtime": "npm:^7.29.2"
     html-parse-stringify: "npm:^3.0.1"
@@ -13646,7 +13646,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10/c9adbdb0666e74b724fc4bec238189831762969b979323bf2d9cf8d428e0d8c7eb66574017628955d0a3e6ada00078d2b9468c703034804fe58dc95b1971ec82
+  checksum: 10/f425c15159ef0ad2d579fbd032f609ab92050031076da104f9c68c42c5c3c1f3dd5fb70a096137c97a4cbc403b9b17c16469da037f2e661da0325e08c343118c
   languageName: node
   linkType: hard
 
@@ -13843,9 +13843,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-paper@npm:5.15.0":
-  version: 5.15.0
-  resolution: "react-native-paper@npm:5.15.0"
+"react-native-paper@npm:5.15.1":
+  version: 5.15.1
+  resolution: "react-native-paper@npm:5.15.1"
   dependencies:
     "@callstack/react-theme-provider": "npm:^3.0.9"
     color: "npm:^3.1.2"
@@ -13854,7 +13854,7 @@ __metadata:
     react: "*"
     react-native: "*"
     react-native-safe-area-context: "*"
-  checksum: 10/a5d7b02595bd7c4ae6f816a036ea9f1d5760dfc8d58ffdc90f9fb53546b90e9c4809e0e1cce34cedf25d27f1a71229db664d68cb55fb4a56c90e30608f29e1b7
+  checksum: 10/22dbe68e96645d056b511749df0b9bf81760833a47174737100b0247c7a75fecd95c693b6bf6317814a055765f7cfeb54b9e84d293ea4d0ac0d230ddb6b674e9
   languageName: node
   linkType: hard
 
