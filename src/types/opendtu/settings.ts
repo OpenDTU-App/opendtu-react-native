@@ -102,3 +102,8 @@ export interface MqttSettings {
   mqtt_hass_topic: string;
   mqtt_hass_individualpanels: boolean;
 }
+
+export interface SecuritySettings {
+  password: string;
+  allow_readonly: boolean;
+}

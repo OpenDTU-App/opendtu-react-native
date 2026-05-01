@@ -102,6 +102,10 @@ const MainSettingsTab: FC = () => {
     navigation.navigate('MqttSettingsScreen');
   }, [navigation]);
 
+  const handleSecuritySettings = useCallback(() => {
+    navigation.navigate('SecuritySettingsScreen');
+  }, [navigation]);
+
   const handleDtuSettings = useCallback(() => {
     navigation.navigate('DtuSettingsScreen');
   }, [navigation]);
@@ -203,8 +207,7 @@ const MainSettingsTab: FC = () => {
                   title={t('settings.securitySettings.title')}
                   description={t('settings.securitySettings.description')}
                   left={props => <List.Icon {...props} icon="lock" />}
-                  disabled
-                  style={{ opacity: 0.5 }}
+                  onPress={handleSecuritySettings}
                 />
                 <List.Item
                   title={t('settings.dtuSettings.title')}

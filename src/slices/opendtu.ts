@@ -21,6 +21,7 @@ import type {
   SetNTPSettingsAction,
   SetNtpStatusAction,
   SetPowerStatusAction,
+  SetSecuritySettingsAction,
   SetSetupBaseUrlAction,
   SetSetupUserStringAction,
   SetSystemStatusAction,
@@ -394,6 +395,21 @@ const opendtuSlice = createSlice({
           .settings as OpenDTUSettings
       ).mqtt = action.payload.data;
     },
+    setSecuritySettings: (state, action: SetSecuritySettingsAction) => {
+      if (!state.dtuStates[action.payload.index]) {
+        state.dtuStates[action.payload.index] = {};
+      }
+
+      if (!state.dtuStates[action.payload.index]?.settings) {
+        (state.dtuStates[action.payload.index] as OpenDTUDeviceState).settings =
+          {};
+      }
+
+      (
+        (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
+          .settings as OpenDTUSettings
+      ).security = action.payload.data;
+    },
   },
 });
 
@@ -422,6 +438,7 @@ export const {
   setNTPSettings,
   setDtuSettings,
   setMqttSettings,
+  setSecuritySettings,
 } = opendtuSlice.actions;
 
 export const { reducer: OpenDTUReducer } = opendtuSlice;

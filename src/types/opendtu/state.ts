@@ -7,6 +7,7 @@ import type {
   MqttSettings,
   NetworkSettings,
   NTPSettings,
+  SecuritySettings,
 } from '@/types/opendtu/settings';
 import type {
   InverterSerial,
@@ -27,6 +28,7 @@ export interface OpenDTUSettings {
   ntp?: NTPSettings;
   dtu?: DtuSettings;
   mqtt?: MqttSettings;
+  security?: SecuritySettings;
 }
 
 export enum DeviceState {
@@ -151,6 +153,11 @@ export type SetDtuSettingsAction = PayloadAction<{
 export type SetMqttSettingsAction = PayloadAction<{
   index: Index;
   data: MqttSettings;
+}>;
+
+export type SetSecuritySettingsAction = PayloadAction<{
+  index: Index;
+  data: SecuritySettings;
 }>;
 
 export interface OpenDTUSetup {

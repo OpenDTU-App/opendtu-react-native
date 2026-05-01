@@ -15,6 +15,7 @@ import type {
   NetworkSettings,
   NTPSettings,
   NTPTime,
+  SecuritySettings,
   TimezoneData,
 } from '@/types/opendtu/settings';
 import type { InverterItem } from '@/types/opendtu/state';
@@ -126,6 +127,9 @@ class OpenDtuApi {
   private onMqttSettingsHandler:
     | ((data: MqttSettings, index: Index) => void)
     | null = null;
+  private onSecuritySettingsHandler:
+    | ((data: SecuritySettings, index: Index) => void)
+    | null = null;
 
   private ws: WebSocket | null = null;
   // communication
@@ -179,21 +183,23 @@ class OpenDtuApi {
   public startFetchHttpStateInterval(): void {
     log.debug('OpenDtuApi.startFetchHttpStateInterval()');
 
-    if (this.fetchHttpStateInterval) {
+    if (this.fetchHttpStateInterval !== null) {
       log.debug('OpenDtuApi.startFetchHttpStateInterval() already running');
       clearInterval(this.fetchHttpStateInterval);
     }
 
-    this.fetchHttpStateInterval = setInterval(() => {
-      this.updateHttpState();
+    if (this.userString !== null) {
+      this.fetchHttpStateInterval = setInterval(() => {
+        this.updateHttpState();
 
-      log.debug(
-        'interval -> OpenDtuApi.updateHttpState()',
-        new Date(),
-        this.index,
-        this.isConnected(),
-      );
-    }, 5000); // 10 seconds
+        log.debug(
+          'interval -> OpenDtuApi.updateHttpState()',
+          new Date(),
+          this.index,
+          this.isConnected(),
+        );
+      }, 5000); // 10 seconds
+    }
 
     this.updateHttpState();
   }
@@ -381,6 +387,18 @@ class OpenDtuApi {
   public unregisterOnMqttSettingsHandler(): void {
     log.debug('OpenDtuApi.unregisterOnMqttSettingsHandler()');
     this.onMqttSettingsHandler = null;
+  }
+
+  public registerOnSecuritySettingsHandler(
+    handler: (data: SecuritySettings, index: Index) => void,
+  ): void {
+    log.debug('OpenDtuApi.registerOnSecuritySettingsHandler()');
+    this.onSecuritySettingsHandler = handler;
+  }
+
+  public unregisterOnSecuritySettingsHandler(): void {
+    log.debug('OpenDtuApi.unregisterOnSecuritySettingsHandler()');
+    this.onSecuritySettingsHandler = null;
   }
 
   public async getSystemStatusFromUrl(
@@ -1576,6 +1594,73 @@ class OpenDtuApi {
     const parsed = await res.json();
 
     log.debug('setMqttConfig', 'success', {
+      status: res.status,
+      parsed,
+    });
+
+    return res.status === 200 && parsed.type === 'success';
+  }
+
+  public async getSecurityConfig(): Promise<DtuSettings | null> {
+    if (!this.baseUrl) {
+      log.error('getSecurityConfig', 'no base url');
+      return null;
+    }
+
+    const res = await this.makeAuthenticatedRequest(
+      '/api/security/config',
+      'GET',
+    );
+
+    if (!res) {
+      log.error('getSecurityConfig', 'no response');
+      return null;
+    }
+
+    if (res.status === 200) {
+      const json = await res.json();
+
+      if (this.onSecuritySettingsHandler && this.index !== null) {
+        this.onSecuritySettingsHandler(json, this.index);
+      }
+
+      log.debug('getSecurityConfig', 'success');
+
+      return json;
+    }
+
+    log.error('getSecurityConfig', 'invalid status', res.status);
+
+    return null;
+  }
+
+  public async setSecurityConfig(
+    config: SecuritySettings,
+  ): Promise<boolean | null> {
+    if (!this.baseUrl) {
+      log.error('setSecurityConfig', 'no base url');
+      return null;
+    }
+
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(config));
+
+    const res = await this.makeAuthenticatedRequest(
+      '/api/security/config',
+      'POST',
+      {
+        body: formData,
+      },
+    );
+
+    if (!res) {
+      log.error('setSecurityConfig', 'no response');
+      return null;
+    }
+
+    const parsed = await res.json();
+
+    log.debug('setSecurityConfig', 'success', {
       status: res.status,
       parsed,
     });
