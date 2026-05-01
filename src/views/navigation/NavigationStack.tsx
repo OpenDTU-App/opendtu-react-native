@@ -28,6 +28,7 @@ import DtuSettingsScreen from '@/views/navigation/screens/SettingsGroup/DtuSetti
 import MqttSettingsScreen from '@/views/navigation/screens/SettingsGroup/MqttSettingsScreen';
 import NetworkSettingsScreen from '@/views/navigation/screens/SettingsGroup/NetworkSettingsScreen';
 import NTPSettingsScreen from '@/views/navigation/screens/SettingsGroup/NTPSettingsScreen';
+import SecuritySettingsScreen from '@/views/navigation/screens/SettingsGroup/SecuritySettingsScreen';
 import SetupAddOpenDTUScreen from '@/views/navigation/screens/SetupGroup/SetupAddOpenDTUScreen';
 import SetupAuthenticateOpenDTUInstanceScreen from '@/views/navigation/screens/SetupGroup/SetupAuthenticateOpenDTUInstanceScreen';
 import SetupOpenDTUCompleteScreen from '@/views/navigation/screens/SetupGroup/SetupOpenDTUCompleteScreen';
@@ -137,6 +138,10 @@ const NavigationStack: FC = () => {
       <Stack.Screen name="NTPSettingsScreen" component={NTPSettingsScreen} />
       <Stack.Screen name="DtuSettingsScreen" component={DtuSettingsScreen} />
       <Stack.Screen name="MqttSettingsScreen" component={MqttSettingsScreen} />
+      <Stack.Screen
+        name="SecuritySettingsScreen"
+        component={SecuritySettingsScreen}
+      />
       <Stack.Screen name="AppLogScreen" component={AppLogScreen} />
     </Stack.Navigator>
   );

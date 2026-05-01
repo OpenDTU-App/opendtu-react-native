@@ -20,6 +20,7 @@ import {
   setNTPSettings,
   setNtpStatus,
   setPowerStatus,
+  setSecuritySettings,
   setSystemStatus,
   setTriedToConnect,
 } from '@/slices/opendtu';
@@ -194,6 +195,10 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
 
       api.registerOnMqttSettingsHandler((data, index) => {
         dispatch(setMqttSettings({ data, index }));
+      });
+
+      api.registerOnSecuritySettingsHandler((data, index) => {
+        dispatch(setSecuritySettings({ data, index }));
       });
 
       log.debug('Connecting API Handler');

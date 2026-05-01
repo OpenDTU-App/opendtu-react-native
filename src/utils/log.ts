@@ -47,7 +47,7 @@ const config: configLoggerType<
   string
 > = {
   transport: [consoleTransport, customTransport],
-  severity: __DEV__ ? 'info' : 'warn',
+  severity: __DEV__ ? 'debug' : 'warn',
   transportOptions: {
     colors: {
       debug: 'gray',
