@@ -30,15 +30,15 @@ import type { PropsWithNavigation } from '@/views/navigation/NavigationStack';
 const mqttQos = (t: TFunction) => [
   {
     value: MqttQosLevel.AtMostOnce,
-    label: 'At most once',
+    label: t('settings.mqttSettings.mqttQosObject.AtMostOnce'),
   },
   {
     value: MqttQosLevel.AtLeastOnce,
-    label: 'At least once',
+    label: t('settings.mqttSettings.mqttQosObject.AtLeastOnce'),
   },
   {
     value: MqttQosLevel.ExactlyOnce,
-    label: 'Exactly once',
+    label: t('settings.mqttSettings.mqttQosObject.ExactlyOnce'),
   },
 ];
 
@@ -211,7 +211,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             navigation.goBack();
           }}
         />
-        <Appbar.Content title="MQTT Settings" />
+        <Appbar.Content title={t('settings.mqttSettings.title')} />
         {isSaving || hasChanges ? (
           <Appbar.Action
             icon={
@@ -235,9 +235,11 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             }
           >
             <SettingsSurface>
-              <List.Section title="MQTT Connection">
+              <List.Section
+                title={t('settings.mqttSettings.mqttConnection.title')}
+              >
                 <List.Item
-                  title="Enable MQTT connection"
+                  title={t('settings.mqttSettings.mqttConnection.enableMqtt')}
                   description={
                     mqttSettings?.mqtt_enabled ? t('enabled') : t('disabled')
                   }
@@ -254,7 +256,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="Broker hostname"
+                  title={t('settings.mqttSettings.mqttConnection.brokerHost')}
                   description={
                     mqttSettings?.mqtt_hostname || t('notConfigured')
                   }
@@ -271,8 +273,12 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="Broker port"
-                  description={mqttSettings?.mqtt_port || t('notConfigured')}
+                  title={t('settings.mqttSettings.mqttConnection.brokerPort')}
+                  description={
+                    typeof mqttSettings?.mqtt_port !== 'undefined'
+                      ? mqttSettings?.mqtt_port
+                      : t('notConfigured')
+                  }
                   right={props => (
                     <List.Icon
                       {...props}
@@ -286,7 +292,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="Client ID"
+                  title={t('settings.mqttSettings.mqttConnection.clientId')}
                   description={
                     mqttSettings?.mqtt_clientid || t('notConfigured')
                   }
@@ -303,7 +309,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="Username"
+                  title={t('settings.mqttSettings.mqttConnection.username')}
                   description={
                     mqttSettings?.mqtt_username || t('notConfigured')
                   }
@@ -320,7 +326,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="Password"
+                  title={t('settings.mqttSettings.mqttConnection.password')}
                   description={
                     mqttSettings?.mqtt_password.replace(/./g, '*') ||
                     t('notConfigured')
@@ -338,7 +344,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="Base Topic"
+                  title={t('settings.mqttSettings.mqttConnection.baseTopic')}
                   description={mqttSettings?.mqtt_topic || t('notConfigured')}
                   right={props => (
                     <List.Icon
@@ -353,9 +359,15 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="Publish Interval"
+                  title={t(
+                    'settings.mqttSettings.mqttConnection.publishInterval',
+                  )}
                   description={
-                    mqttSettings?.mqtt_publish_interval ?? t('notConfigured')
+                    typeof mqttSettings?.mqtt_publish_interval !== 'undefined'
+                      ? t('n_seconds', {
+                          n: mqttSettings.mqtt_publish_interval,
+                        })
+                      : t('notConfigured')
                   }
                   right={props => (
                     <List.Icon
@@ -370,7 +382,9 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="Enable CleanSession flag"
+                  title={t(
+                    'settings.mqttSettings.mqttConnection.enableCleanSessionFlag',
+                  )}
                   description={
                     mqttSettings?.mqtt_clean_session
                       ? t('enabled')
@@ -389,7 +403,9 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="Enable Retain flag"
+                  title={t(
+                    'settings.mqttSettings.mqttConnection.enableRetainFlag',
+                  )}
                   description={
                     mqttSettings?.mqtt_retain ? t('enabled') : t('disabled')
                   }
@@ -406,9 +422,13 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
               </List.Section>
-              <List.Section title="Transport Encryption">
+              <List.Section
+                title={t('settings.mqttSettings.transportEncryption.title')}
+              >
                 <List.Item
-                  title="Enable TLS"
+                  title={t(
+                    'settings.mqttSettings.transportEncryption.enableTls',
+                  )}
                   description={
                     mqttSettings?.mqtt_tls ? t('enabled') : t('disabled')
                   }
@@ -425,7 +445,9 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="CA-Root-Certificate"
+                  title={t(
+                    'settings.mqttSettings.transportEncryption.caRootCert',
+                  )}
                   description={
                     mqttSettings?.mqtt_root_ca_cert || t('notConfigured')
                   }
@@ -448,7 +470,9 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   }
                 />
                 <List.Item
-                  title="Enable TLS authentication"
+                  title={t(
+                    'settings.mqttSettings.transportEncryption.enableTlsAuth',
+                  )}
                   description={
                     mqttSettings?.mqtt_tls_cert_login
                       ? t('enabled')
@@ -473,7 +497,9 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   }
                 />
                 <List.Item
-                  title="Client-Certificate"
+                  title={t(
+                    'settings.mqttSettings.transportEncryption.clientCert',
+                  )}
                   description={
                     mqttSettings?.mqtt_client_cert.replace(/./g, '*') ||
                     t('notConfigured')
@@ -497,7 +523,9 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   }
                 />
                 <List.Item
-                  title="Client-Key"
+                  title={t(
+                    'settings.mqttSettings.transportEncryption.clientKey',
+                  )}
                   description={
                     mqttSettings?.mqtt_client_key.replace(/./g, '*') ||
                     t('notConfigured')
@@ -523,9 +551,9 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               </List.Section>
             </SettingsSurface>
             <SettingsSurface>
-              <List.Section title="LWT">
+              <List.Section title={t('settings.mqttSettings.lwt.title')}>
                 <List.Item
-                  title="LWT Topic"
+                  title={t('settings.mqttSettings.lwt.lwtTopic')}
                   description={
                     mqttSettings?.mqtt_lwt_topic
                       ? `${mqttSettings.mqtt_topic}${mqttSettings.mqtt_lwt_topic}`
@@ -544,7 +572,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="LWT Online message"
+                  title={t('settings.mqttSettings.lwt.lwtOnlineMsg')}
                   description={
                     mqttSettings?.mqtt_lwt_online || t('notConfigured')
                   }
@@ -561,7 +589,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="LWT Offline message"
+                  title={t('settings.mqttSettings.lwt.lwtOfflineMsg')}
                   description={
                     mqttSettings?.mqtt_lwt_offline || t('notConfigured')
                   }
@@ -578,7 +606,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="LWT QoS"
+                  title={t('settings.mqttSettings.lwt.lwtQos')}
                   description={lwtQos || t('notConfigured')}
                   right={props => (
                     <List.Icon
@@ -595,9 +623,13 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               </List.Section>
             </SettingsSurface>
             <SettingsSurface>
-              <List.Section title="Homeassistant Autodiscovery">
+              <List.Section
+                title={t('settings.mqttSettings.homeassistant.title')}
+              >
                 <List.Item
-                  title="Enable Autodiscovery"
+                  title={t(
+                    'settings.mqttSettings.homeassistant.enableAutodiscovery',
+                  )}
                   description={
                     mqttSettings?.mqtt_hass_enabled
                       ? t('enabled')
@@ -616,7 +648,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   disabled={typeof mqttSettings === 'undefined'}
                 />
                 <List.Item
-                  title="Autodiscovery Topic Prefix"
+                  title={t('settings.mqttSettings.homeassistant.topicPrefix')}
                   description={
                     mqttSettings?.mqtt_hass_topic || t('notConfigured')
                   }
@@ -639,7 +671,9 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   }
                 />
                 <List.Item
-                  title="Enable Retain flag"
+                  title={t(
+                    'settings.mqttSettings.homeassistant.enableRetainFlag',
+                  )}
                   description={
                     mqttSettings?.mqtt_hass_retain
                       ? t('enabled')
@@ -664,7 +698,9 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   }
                 />
                 <List.Item
-                  title="Enable expiration"
+                  title={t(
+                    'settings.mqttSettings.homeassistant.enableExpiration',
+                  )}
                   description={
                     mqttSettings?.mqtt_hass_expire
                       ? t('enabled')
@@ -689,7 +725,9 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   }
                 />
                 <List.Item
-                  title="Publish panels individually"
+                  title={t(
+                    'settings.mqttSettings.homeassistant.publishIndividually',
+                  )}
                   description={
                     mqttSettings?.mqtt_hass_individualpanels
                       ? t('enabled')
@@ -729,9 +767,9 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         isOpen={changeMqttEnabledModalOpen}
         onClose={() => setChangeMqttEnabledModalOpen(false)}
-        title="Enable MQTT?"
-        description="Enable connection to a MQTT server"
-        switchLabel="MQTT enabled"
+        title={t('settings.mqttSettings.changeEnableMqtt.title')}
+        description={t('settings.mqttSettings.changeEnableMqtt.description')}
+        switchLabel={t('settings.mqttSettings.mqttConnection.enableMqtt')}
       />
       <ChangeTextValueModal
         defaultValue={mqttSettings?.mqtt_hostname}
@@ -745,8 +783,10 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateMinMaxString(t, value, 0, 128)}
         isOpen={changeHostnameModalOpen}
         onClose={() => setChangeHostnameModalOpen(false)}
-        title="Change broker hostname"
-        description="The IP address or hostname of the broker."
+        title={t('settings.mqttSettings.changeBrokerHostname.title')}
+        description={t(
+          'settings.mqttSettings.changeBrokerHostname.description',
+        )}
       />
       <ChangeTextValueModal
         defaultValue={mqttSettings?.mqtt_port.toString()}
@@ -766,8 +806,8 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateIntNumber(t, value, 1, 65535)}
         isOpen={changePortModalOpen}
         onClose={() => setChangePortModalOpen(false)}
-        title="Change broker port"
-        description="The port where the MQTT broker listens on."
+        title={t('settings.mqttSettings.changeBrokerPort.title')}
+        description={t('settings.mqttSettings.changeBrokerPort.description')}
       />
       <ChangeTextValueModal
         defaultValue={mqttSettings?.mqtt_clientid}
@@ -781,8 +821,8 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateMinMaxString(t, value, 3, 64)}
         isOpen={changeClientIdModalOpen}
         onClose={() => setChangeClientIdModalOpen(false)}
-        title="Change client ID"
-        description="The ID the client uses when connecting."
+        title={t('settings.mqttSettings.changeClientId.title')}
+        description={t('settings.mqttSettings.changeClientId.description')}
       />
       <ChangeTextValueModal
         defaultValue={mqttSettings?.mqtt_username}
@@ -796,8 +836,8 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateMinMaxString(t, value, 3, 64)}
         isOpen={changeUsernameModalOpen}
         onClose={() => setChangeUsernameModalOpen(false)}
-        title="Change username"
-        description="The username for authenticated connections."
+        title={t('settings.mqttSettings.changeUsername.title')}
+        description={t('settings.mqttSettings.changeUsername.description')}
       />
       <ChangeTextValueModal
         defaultValue={mqttSettings?.mqtt_password}
@@ -811,8 +851,8 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateMinMaxString(t, value, 3, 64)}
         isOpen={changePasswordModalOpen}
         onClose={() => setChangePasswordModalOpen(false)}
-        title="Change password"
-        description="The password for authenticated connections."
+        title={t('settings.mqttSettings.changePassword.title')}
+        description={t('settings.mqttSettings.changePassword.description')}
       />
       <ChangeTextValueModal
         defaultValue={mqttSettings?.mqtt_topic}
@@ -826,8 +866,8 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateMinMaxString(t, value, 3, 32)}
         isOpen={changeBaseTopicModalOpen}
         onClose={() => setChangeBaseTopicModalOpen(false)}
-        title="Change Base Topic"
-        description="The base topic for all published messages."
+        title={t('settings.mqttSettings.changeBaseTopic.title')}
+        description={t('settings.mqttSettings.changeBaseTopic.description')}
       />
       <ChangeTextValueModal
         defaultValue={mqttSettings?.mqtt_publish_interval.toString()}
@@ -848,8 +888,10 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateIntNumber(t, value, 5, 86400)}
         isOpen={changePublishIntervalModalOpen}
         onClose={() => setChangePublishIntervalModalOpen(false)}
-        title="Change publish interval"
-        description="The interval for how often updates should be published."
+        title={t('settings.mqttSettings.changePublishInterval.title')}
+        description={t(
+          'settings.mqttSettings.changePublishInterval.description',
+        )}
       />
       <ChangeBooleanValueModal
         defaultValue={mqttSettings?.mqtt_clean_session}
@@ -862,8 +904,10 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         isOpen={changeCleanSessionModalOpen}
         onClose={() => setChangeCleanSessionModalOpen(false)}
-        title="Enable CleanSession flag?"
-        switchLabel="CleanSession flag enabled"
+        title={t('settings.mqttSettings.changeCleanSession.title')}
+        switchLabel={t(
+          'settings.mqttSettings.mqttConnection.enableCleanSessionFlag',
+        )}
       />
       <ChangeBooleanValueModal
         defaultValue={mqttSettings?.mqtt_retain}
@@ -876,8 +920,8 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         isOpen={changeRetainModalOpen}
         onClose={() => setChangeRetainModalOpen(false)}
-        title="Enable Retain?"
-        switchLabel="Retain enabled"
+        title={t('settings.mqttSettings.changeRetain.title')}
+        switchLabel={t('settings.mqttSettings.mqttConnection.enableRetainFlag')}
       />
       <ChangeBooleanValueModal
         defaultValue={mqttSettings?.mqtt_tls}
@@ -890,8 +934,8 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         isOpen={changeUseTlsModalOpen}
         onClose={() => setChangeUseTlsModalOpen(false)}
-        title="Enable TLS?"
-        switchLabel="TLS enabled"
+        title={t('settings.mqttSettings.changeEnableTls.title')}
+        switchLabel={t('settings.mqttSettings.transportEncryption.enableTls')}
       />
       <ChangeTextValueModal
         defaultValue={mqttSettings?.mqtt_root_ca_cert}
@@ -905,7 +949,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateMinMaxString(t, value, 0, 2560)}
         isOpen={changeRootCertModalOpen}
         onClose={() => setChangeRootCertModalOpen(false)}
-        title="Change CA-Root-Certificate"
+        title={t('settings.mqttSettings.changeCaRootCa.title')}
         inputProps={{
           multiline: true,
           numberOfLines: 10,
@@ -923,9 +967,11 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         isOpen={changeTlsLoginModalOpen}
         onClose={() => setChangeTlsLoginModalOpen(false)}
-        title="Enable TLS authentication?"
-        description="Enables the use of a Client Certificate/Key pair."
-        switchLabel="TLS authentication enabled"
+        title={t('settings.mqttSettings.changeEnableTlsAuth.title')}
+        description={t('settings.mqttSettings.changeEnableTlsAuth.description')}
+        switchLabel={t(
+          'settings.mqttSettings.transportEncryption.enableTlsAuth',
+        )}
       />
       <ChangeTextValueModal
         defaultValue={mqttSettings?.mqtt_client_cert}
@@ -939,7 +985,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateMinMaxString(t, value, 0, 2560)}
         isOpen={changeClientCertModalOpen}
         onClose={() => setChangeClientCertModalOpen(false)}
-        title="Change Client Certificate"
+        title={t('settings.mqttSettings.changeClientCert.title')}
         inputProps={{
           multiline: true,
           numberOfLines: 10,
@@ -959,7 +1005,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateMinMaxString(t, value, 0, 2560)}
         isOpen={changeClientKeyModalOpen}
         onClose={() => setChangeClientKeyModalOpen(false)}
-        title="Change Client Key"
+        title={t('settings.mqttSettings.changeClientKey.title')}
         inputProps={{
           multiline: true,
           numberOfLines: 10,
@@ -979,8 +1025,8 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateMinMaxString(t, value, 0, 32)}
         isOpen={changeLwtTopicModalOpen}
         onClose={() => setChangeLwtTopicModalOpen(false)}
-        title="Change LWT Topic"
-        description="The topic for the LWT message."
+        title={t('settings.mqttSettings.changeLwtTopic.title')}
+        description={t('settings.mqttSettings.changeLwtTopic.description')}
         inputProps={{
           left: <TextInput.Affix text={mqttSettings?.mqtt_topic} />,
         }}
@@ -997,7 +1043,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateMinMaxString(t, value, 0, 20)}
         isOpen={changeLwtOnlineMessageModalOpen}
         onClose={() => setChangeLwtOnlineMessageModalOpen(false)}
-        title="Change LWT online message"
+        title={t('settings.mqttSettings.changeLwtOnline.title')}
       />
       <ChangeTextValueModal
         defaultValue={mqttSettings?.mqtt_lwt_offline}
@@ -1011,10 +1057,9 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateMinMaxString(t, value, 0, 20)}
         isOpen={changeLwtOfflineMessageModalOpen}
         onClose={() => setChangeLwtOfflineMessageModalOpen(false)}
-        title="Change LWT offline message"
+        title={t('settings.mqttSettings.changeLwtOffline.title')}
       />
       <ChangeEnumValueModal
-        title="Change LWT QoS"
         possibleValues={cachedMqttQos.map(obj => ({
           ...obj,
           value: obj.value.toString(),
@@ -1032,6 +1077,7 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
             mqtt_lwt_qos: parseInt(value, 10) as MqttQosLevel,
           });
         }}
+        title={t('settings.mqttSettings.changeLwtQos.title')}
       />
       <ChangeBooleanValueModal
         defaultValue={mqttSettings?.mqtt_hass_enabled}
@@ -1044,9 +1090,13 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         isOpen={changeHassEnabledModalOpen}
         onClose={() => setChangeHassEnabledModalOpen(false)}
-        title="Enable Autodiscovery?"
-        description="Enable publishing messages according to the Homeassistant Autodiscovery spec."
-        switchLabel="Autodiscovery enabled"
+        title={t('settings.mqttSettings.changeEnableHassDiscovery.title')}
+        description={t(
+          'settings.mqttSettings.changeEnableHassDiscovery.description',
+        )}
+        switchLabel={t(
+          'settings.mqttSettings.homeassistant.enableAutodiscovery',
+        )}
       />
       <ChangeTextValueModal
         defaultValue={mqttSettings?.mqtt_hass_topic}
@@ -1060,8 +1110,8 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         validate={value => validateMinMaxString(t, value, 3, 32)}
         isOpen={changeHassTopicModalOpen}
         onClose={() => setChangeHassTopicModalOpen(false)}
-        title="Change autodiscovery topic prefix"
-        description="This typically does not need to be changed."
+        title={t('settings.mqttSettings.changeHassTopic.title')}
+        description={t('settings.mqttSettings.changeHassTopic.description')}
       />
       <ChangeBooleanValueModal
         defaultValue={mqttSettings?.mqtt_hass_retain}
@@ -1074,8 +1124,8 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         isOpen={changeHassRetainModalOpen}
         onClose={() => setChangeHassRetainModalOpen(false)}
-        title="Retain Autodiscovery?"
-        switchLabel="Retain Autodiscovery enabled"
+        title={t('settings.mqttSettings.changeEnableRetainHass.title')}
+        switchLabel={t('settings.mqttSettings.homeassistant.enableRetainFlag')}
       />
       <ChangeBooleanValueModal
         defaultValue={mqttSettings?.mqtt_hass_expire}
@@ -1088,8 +1138,8 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         isOpen={changeHassExpireModalOpen}
         onClose={() => setChangeHassExpireModalOpen(false)}
-        title="Enable Autodiscovery expiration?"
-        switchLabel="Autodiscovery expiration enabled"
+        title={t('settings.mqttSettings.changeEnableExpireHass.title')}
+        switchLabel={t('settings.mqttSettings.homeassistant.enableExpiration')}
       />
       <ChangeBooleanValueModal
         defaultValue={mqttSettings?.mqtt_hass_individualpanels}
@@ -1105,8 +1155,10 @@ const MqttSettingsScreen: FC<PropsWithNavigation> = ({ navigation }) => {
         }}
         isOpen={changeHassIndividualPanelsModalOpen}
         onClose={() => setChangeHassIndividualPanelsModalOpen(false)}
-        title="Publish as individual panels?"
-        switchLabel="Individual panels enabled"
+        title={t('settings.mqttSettings.changeEnableIndividualPanels.title')}
+        switchLabel={t(
+          'settings.mqttSettings.homeassistant.publishIndividually',
+        )}
       />
       <ConfirmUnsavedDataModal
         visible={confirmRefreshDataModalOpen}
