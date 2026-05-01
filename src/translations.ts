@@ -10,7 +10,13 @@ import it from './translations/it/translation.json';
 import 'intl-pluralrules';
 import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';
 
-export const supportedLanguages = ['en', 'de', 'fr', 'it'];
+export const supportedLanguages = [
+  'en',
+  'de',
+  'fr',
+  'it',
+  ...(__DEV__ ? ['dev'] : []),
+];
 
 export const defaultLanguage = 'en';
 
@@ -36,7 +42,7 @@ if (!i18n.isInitialized) {
         },
       },
       defaultNS: 'translation',
-      fallbackLng: defaultLanguage,
+      fallbackLng: __DEV__ ? undefined : defaultLanguage,
       fallbackNS: 'translation',
       interpolation: {
         escapeValue: false,

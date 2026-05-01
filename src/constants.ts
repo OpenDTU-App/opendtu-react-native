@@ -52,3 +52,7 @@ export const databaseInformationUrl =
 
 export const allowInAppUpdates =
   Config.DISABLE_IN_APP_UPDATES !== 'true' || __DEV__;
+
+export const overrideInitialRoute = __DEV__
+  ? (Config.OVERRIDE_INITIAL_ROUTE ?? null)
+  : null;

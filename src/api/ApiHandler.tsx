@@ -13,6 +13,7 @@ import {
   setLimitStatus,
   setLiveDataFromStatus,
   setLiveDataFromWebsocket,
+  setMqttSettings,
   setMqttStatus,
   setNetworkSettings,
   setNetworkStatus,
@@ -189,6 +190,10 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
 
       api.registerOnDtuSettingsHandler((data, index) => {
         dispatch(setDtuSettings({ data, index }));
+      });
+
+      api.registerOnMqttSettingsHandler((data, index) => {
+        dispatch(setMqttSettings({ data, index }));
       });
 
       log.debug('Connecting API Handler');

@@ -32,11 +32,11 @@ export const validateIntNumber = (
   }
 
   if (value.length > 0 && parseInt(value) < min) {
-    throw new Error(t('errors.invalidNumber'));
+    throw new Error(t('errors.invalidNumberRange', { min, max }));
   }
 
   if (value.length > 0 && parseInt(value) > max) {
-    throw new Error(t('errors.invalidNumber'));
+    throw new Error(t('errors.invalidNumberRange', { min, max }));
   }
 
   return true;
@@ -53,11 +53,11 @@ export const validateFloatNumber = (
   }
 
   if (value.length > 0 && parseFloat(value) < min) {
-    throw new Error(t('errors.invalidNumber'));
+    throw new Error(t('errors.invalidNumberRange', { min, max }));
   }
 
   if (value.length > 0 && parseFloat(value) > max) {
-    throw new Error(t('errors.invalidNumber'));
+    throw new Error(t('errors.invalidNumberRange', { min, max }));
   }
 
   return true;

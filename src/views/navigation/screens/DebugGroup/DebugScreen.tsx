@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Config from 'react-native-config';
 import { Box } from 'react-native-flex-layout';
 import { Appbar, IconButton, List, Text, useTheme } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
@@ -79,8 +80,7 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
       <StyledView theme={theme}>
         <Box style={{ width: '100%', flex: 1 }}>
           <ScrollView>
-            <List.Section>
-              <List.Subheader>{t('debug.cache')}</List.Subheader>
+            <List.Section title={t('debug.cache')}>
               <List.Item
                 title={t('debug.latestAppReleaseCacheCreated')}
                 description={`${
@@ -130,8 +130,7 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 )}
               />
             </List.Section>
-            <List.Section>
-              <List.Subheader>{t('debug.websocket')}</List.Subheader>
+            <List.Section title={t('debug.websocket')}>
               {apiDebugInfo
                 ? Object.entries(apiDebugInfo).map(([key, value]) => (
                     <List.Item
@@ -142,8 +141,7 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                   ))
                 : null}
             </List.Section>
-            <List.Section>
-              <List.Subheader>{t('debug.other')}</List.Subheader>
+            <List.Section title={t('debug.other')}>
               <List.Item
                 title={t('debug.disableDebugMode')}
                 onPress={handleDisableDebugMode}
@@ -155,8 +153,28 @@ const DebugScreen: FC<PropsWithNavigation> = ({ navigation }) => {
                 left={props => <List.Icon {...props} icon="palette" />}
               />
             </List.Section>
-            <List.Section>
-              <List.Subheader>{t('debug.toast')}</List.Subheader>
+            <List.Section title="App config">
+              {Object.entries(Config)
+                .filter(
+                  ([, value]) => !['function', 'symbol'].includes(typeof value),
+                )
+                .map(([key, value]) => (
+                  <List.Item
+                    key={`app-config-key-${key}`}
+                    title={key}
+                    description={
+                      value === null
+                        ? '<null>'
+                        : value === true
+                          ? '<true>'
+                          : value === false
+                            ? '<false>'
+                            : JSON.stringify(value)
+                    }
+                  />
+                ))}
+            </List.Section>
+            <List.Section title={t('debug.toast')}>
               <List.Item
                 title={t('debug.showInfoToast')}
                 onPress={() => {

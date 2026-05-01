@@ -51,7 +51,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
       return true;
     }
 
-    return result > 1000 * 60 * 10; // 10 minutes
+    return result > 1000 * 60 * 60; // 60 minutes
   });
 
   const allReleasesUpdateOk = useAppSelector(state => {
@@ -64,7 +64,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
       return true;
     }
 
-    return result > 1000 * 60 * 10; // 10 minutes
+    return result > 1000 * 60 * 60; // 60 minutes
   });
 
   const latestAppReleaseUpdateOk = useAppSelector(state => {
@@ -77,7 +77,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
       return true;
     }
 
-    return result > 1000 * 60 * 10; // 10 minutes
+    return result > 1000 * 60 * 60; // 60 minutes
   });
 
   const enableAppUpdates = useAppSelector(
@@ -137,6 +137,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
           );
         }
       } catch (e) {
+        dispatch(setLatestReleaseTimeout());
         log.error('GITHUB FETCH ERROR', e);
       }
 
@@ -175,6 +176,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
           );
         }
       } catch (e) {
+        dispatch(setReleasesTimeout());
         log.error('GITHUB FETCH ERROR', e);
       }
 
@@ -213,6 +215,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
           );
         }
       } catch (e) {
+        dispatch(setLatestAppReleaseTimeout());
         log.error('GITHUB FETCH ERROR', e);
       }
 
