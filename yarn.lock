@@ -4637,9 +4637,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/bottom-tabs@npm:^7.15.10":
-  version: 7.15.10
-  resolution: "@react-navigation/bottom-tabs@npm:7.15.10"
+"@react-navigation/bottom-tabs@npm:^7.15.11":
+  version: 7.15.11
+  resolution: "@react-navigation/bottom-tabs@npm:7.15.11"
   dependencies:
     "@react-navigation/elements": "npm:^2.9.15"
     color: "npm:^4.2.3"
@@ -4650,7 +4650,7 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: ">= 4.0.0"
     react-native-screens: ">= 4.0.0"
-  checksum: 10/92301d3eb053ec4dab545a705dd4cb812d4d2d617cca354aff9fec5f8379750112b0070fe2bffe334cabc300e40bf5119e72970e2c5710a9ae1eb70ea6e37d86
+  checksum: 10/8893fe626e55e888b74d0b8e6351b2ae17b3caaa6c9c4c74ca8ddb8f0c75d3faa0ef4fd38c47fdb46066645400e77da148a70a05f14e5f74b7989f3f7174791b
   languageName: node
   linkType: hard
 
@@ -12888,7 +12888,7 @@ __metadata:
     "@react-native/metro-config": "npm:0.81.4"
     "@react-native/new-app-screen": "npm:0.81.4"
     "@react-native/typescript-config": "npm:0.81.4"
-    "@react-navigation/bottom-tabs": "npm:^7.15.10"
+    "@react-navigation/bottom-tabs": "npm:^7.15.11"
     "@react-navigation/native": "npm:^7.2.2"
     "@react-navigation/native-stack": "npm:^7.14.12"
     "@reduxjs/toolkit": "npm:^2.11.2"
@@ -12931,7 +12931,7 @@ __metadata:
     react: "npm:19.1.0"
     react-i18next: "npm:^17.0.6"
     react-native: "npm:0.81.4"
-    react-native-charts-wrapper: "npm:^0.6.0"
+    react-native-charts-wrapper: "npm:^0.7.0"
     react-native-config: "npm:1.5.6"
     react-native-edge-to-edge: "npm:^1.8.1"
     react-native-fast-image: "npm:^8.6.3"
@@ -12948,7 +12948,7 @@ __metadata:
     react-native-reanimated: "npm:^4.3.0"
     react-native-safe-area-context: "npm:^5.7.0"
     react-native-screens: "npm:^4.24.0"
-    react-native-share: "npm:^12.2.6"
+    react-native-share: "npm:^12.3.1"
     react-native-simple-gauge: "npm:^0.3.1"
     react-native-skeleton-placeholder: "npm:^5.2.4"
     react-native-splash-screen: "npm:^3.3.0"
@@ -12958,7 +12958,7 @@ __metadata:
     react-native-uuid: "npm:^2.0.4"
     react-native-vector-icons: "npm:^10.3.0"
     react-native-version: "npm:4.0.0"
-    react-native-worklets: "npm:^0.8.1"
+    react-native-worklets: "npm:^0.8.3"
     react-native-zeroconf: "npm:^0.14.0"
     react-redux: "npm:^9.2.0"
     react-test-renderer: "npm:19.0.0"
@@ -13492,7 +13492,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:*, prop-types@npm:^15.5.10, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:*, prop-types@npm:^15.5.10, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -13682,14 +13682,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-charts-wrapper@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "react-native-charts-wrapper@npm:0.6.0"
+"react-native-charts-wrapper@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "react-native-charts-wrapper@npm:0.7.0"
   dependencies:
     deprecated-react-native-prop-types: "npm:^2.3.0"
     prop-types: "npm:^15.8.1"
-    react: "npm:16.13.1"
-  checksum: 10/5e91480b5af5aa1393ccd7f5eb83ac6df7183651283f980dc7398e5960fa3a764c457e9cbca121c134a8c548a1d9b9a98cee920f5eda392cae5ca27aafe80cbb
+  peerDependencies:
+    react: ">=16.0.0 || >=18.0.0 || >=19.0.0"
+    react-native: ">=0.60.0 || >=0.70.0 || >=0.80.0"
+  checksum: 10/fe95e235756337df493a8543cda13880d4faf8f87eb699e4a228bbde45f7d9dc46c2e9a84039125b2c2820570aea1448e2eea50d71f87cec980d87f27eeaded0
   languageName: node
   linkType: hard
 
@@ -13906,10 +13908,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-share@npm:^12.2.6":
-  version: 12.2.6
-  resolution: "react-native-share@npm:12.2.6"
-  checksum: 10/fdea43120ce6938d8857f4df4ab6171b69ec762ce0d6b4a45de533587c5eab40cb2f84b4837de141720d9b1195d733b412813f00d172fe58628b3ae13c98cfef
+"react-native-share@npm:^12.3.1":
+  version: 12.3.1
+  resolution: "react-native-share@npm:12.3.1"
+  checksum: 10/9ddd8048cc31b664df95215bcc4d29e406b63eee9137f41dbe4da3d2e078fffd6d8733bfc9492a7abc1fea51aab5a5058540249f4431a52f24c43fbcd34aa9b6
   languageName: node
   linkType: hard
 
@@ -14021,9 +14023,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-worklets@npm:^0.8.1":
-  version: 0.8.1
-  resolution: "react-native-worklets@npm:0.8.1"
+"react-native-worklets@npm:^0.8.3":
+  version: 0.8.3
+  resolution: "react-native-worklets@npm:0.8.3"
   dependencies:
     "@babel/plugin-transform-arrow-functions": "npm:^7.27.1"
     "@babel/plugin-transform-class-properties": "npm:^7.27.1"
@@ -14041,7 +14043,7 @@ __metadata:
     "@react-native/metro-config": "*"
     react: "*"
     react-native: 0.81 - 0.85
-  checksum: 10/4d01fc18a51c68cae24a928604c2bed62eef3b9521d21a7cbcadf92b141c4f73730917782824acd80e62e86e4bbfe5c850362b8c154103abe2c2f2ab6d2416b4
+  checksum: 10/7b200ec7f0a909e3fc4294721d5dc78e10beb5cb6280a3398dbd7df47db77f8130e605c475768659110b0a7355f4361ea9e85cac40176157d622b4b2060e447a
   languageName: node
   linkType: hard
 
@@ -14195,17 +14197,6 @@ __metadata:
   peerDependencies:
     react: ^19.0.0
   checksum: 10/b95a90331e1dedeff2bbdcdc57b9cd1cd8d7cd620f9b29a4efd31a961c8e5b660fe55129ffc72f2bbf0c21fec34e6a498b9f07b6c65c22bf10ae87b68e124f91
-  languageName: node
-  linkType: hard
-
-"react@npm:16.13.1":
-  version: 16.13.1
-  resolution: "react@npm:16.13.1"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-    object-assign: "npm:^4.1.1"
-    prop-types: "npm:^15.6.2"
-  checksum: 10/b907b97f3b1bf31abf691ea15bd2d674ab0ac9063e15b79e1a7dac0b75c0a0cd5728f69b55c687bd023af58ca586ab7794724ee466fc863d190954e7e1d3885e
   languageName: node
   linkType: hard
 
