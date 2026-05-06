@@ -12931,7 +12931,7 @@ __metadata:
     react: "npm:19.1.0"
     react-i18next: "npm:^17.0.6"
     react-native: "npm:0.81.4"
-    react-native-charts-wrapper: "npm:^0.6.0"
+    react-native-charts-wrapper: "npm:^0.7.0"
     react-native-config: "npm:1.5.6"
     react-native-edge-to-edge: "npm:^1.8.1"
     react-native-fast-image: "npm:^8.6.3"
@@ -13492,7 +13492,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:*, prop-types@npm:^15.5.10, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:*, prop-types@npm:^15.5.10, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -13682,14 +13682,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-charts-wrapper@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "react-native-charts-wrapper@npm:0.6.0"
+"react-native-charts-wrapper@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "react-native-charts-wrapper@npm:0.7.0"
   dependencies:
     deprecated-react-native-prop-types: "npm:^2.3.0"
     prop-types: "npm:^15.8.1"
-    react: "npm:16.13.1"
-  checksum: 10/5e91480b5af5aa1393ccd7f5eb83ac6df7183651283f980dc7398e5960fa3a764c457e9cbca121c134a8c548a1d9b9a98cee920f5eda392cae5ca27aafe80cbb
+  peerDependencies:
+    react: ">=16.0.0 || >=18.0.0 || >=19.0.0"
+    react-native: ">=0.60.0 || >=0.70.0 || >=0.80.0"
+  checksum: 10/fe95e235756337df493a8543cda13880d4faf8f87eb699e4a228bbde45f7d9dc46c2e9a84039125b2c2820570aea1448e2eea50d71f87cec980d87f27eeaded0
   languageName: node
   linkType: hard
 
@@ -14195,17 +14197,6 @@ __metadata:
   peerDependencies:
     react: ^19.0.0
   checksum: 10/b95a90331e1dedeff2bbdcdc57b9cd1cd8d7cd620f9b29a4efd31a961c8e5b660fe55129ffc72f2bbf0c21fec34e6a498b9f07b6c65c22bf10ae87b68e124f91
-  languageName: node
-  linkType: hard
-
-"react@npm:16.13.1":
-  version: 16.13.1
-  resolution: "react@npm:16.13.1"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-    object-assign: "npm:^4.1.1"
-    prop-types: "npm:^15.6.2"
-  checksum: 10/b907b97f3b1bf31abf691ea15bd2d674ab0ac9063e15b79e1a7dac0b75c0a0cd5728f69b55c687bd023af58ca586ab7794724ee466fc863d190954e7e1d3885e
   languageName: node
   linkType: hard
 
