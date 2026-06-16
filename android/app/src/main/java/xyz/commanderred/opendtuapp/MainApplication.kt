@@ -1,7 +1,7 @@
 package xyz.commanderred.opendtuapp
 import android.content.res.Configuration
 import expo.modules.ApplicationLifecycleDispatcher
-import expo.modules.ReactNativeHostWrapper
+import expo.modules.ExpoReactHostFactory
 
 import android.app.Application
 import com.facebook.react.PackageList
@@ -16,7 +16,7 @@ import com.facebook.soloader.SoLoader
 class MainApplication : Application(), ReactApplication {
 
   override val reactHost: ReactHost by lazy {
-    getDefaultReactHost(
+    ExpoReactHostFactory.getDefaultReactHost(
       context = applicationContext,
       packageList =
         PackageList(this).packages.apply {
