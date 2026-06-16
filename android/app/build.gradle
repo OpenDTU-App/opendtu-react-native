@@ -83,7 +83,6 @@ android {
     namespace "xyz.commanderred.opendtuapp"
     defaultConfig {
         applicationId "xyz.commanderred.opendtuapp"
-        setProperty("archivesBaseName", "OpenDTUApp")
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 48
@@ -168,4 +167,8 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+}
+
+base {
+    archivesName = "OpenDTUApp"
 }
