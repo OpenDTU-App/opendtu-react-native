@@ -20,7 +20,6 @@ const StyledSurface: FC<StyledSurfaceProps> = ({ children, ...props }) => {
         borderRadius: theme.roundness! * (props.roundness ?? 4),
         backgroundColor: theme.colors.elevation.level5,
         flex: 1,
-        //@ts-expect-error: 2698 because idk
         ...(props?.style ?? {}),
       }}
     >

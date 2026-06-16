@@ -1,5 +1,5 @@
 {
-    "extends": "@react-native/typescript-config/tsconfig.json",
+    "extends": "@react-native/typescript-config",
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
@@ -10,10 +10,7 @@
                 "*"
             ]
         },
-        "types": [
-            "react-native",
-            "node"
-        ],
+        "types": ["jest"],
         "skipLibCheck": true,
         "allowImportingTsExtensions": false,
         "resolvePackageJsonExports": true
