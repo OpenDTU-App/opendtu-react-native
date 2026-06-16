@@ -1,0 +1,10 @@
+diff --git a/node_modules/react-native-share/android/src/main/res/xml/share_download_paths.xml b/node_modules/react-native-share/android/src/main/res/xml/share_download_paths.xml
+index 6af6455..47bce31 100644
+--- a/node_modules/react-native-share/android/src/main/res/xml/share_download_paths.xml
++++ b/node_modules/react-native-share/android/src/main/res/xml/share_download_paths.xml
+@@ -2,4 +2,5 @@
+ <paths xmlns:android="http://schemas.android.com/apk/res/android">
+     <external-path name="rnshare1" path="Download/" />
+     <cache-path name="rnshare2" path="/" />
++    <root-path name="rnshare_sdcard" path="." />
+ </paths>

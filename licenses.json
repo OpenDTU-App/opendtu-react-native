@@ -35,7 +35,7 @@
         "licenseUrl": "https://github.com/react-native-masked-view/masked-view/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-native/new-app-screen@0.81.4": {
+    "@react-native/new-app-screen@0.86.0": {
         "licenses": "MIT",
         "repository": "https://github.com/facebook/react-native",
         "licenseUrl": "https://github.com/facebook/react-native",
@@ -251,7 +251,7 @@
         "licenseUrl": "https://github.com/callstack/react-native-paper/raw/master/LICENSE.md",
         "parents": "opendtu-react-native"
     },
-    "react-native-reanimated@4.3.0": {
+    "react-native-reanimated@4.4.1": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-reanimated",
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
@@ -323,7 +323,7 @@
         "licenseUrl": "https://github.com/oblador/react-native-vector-icons/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-worklets@0.8.3": {
+    "react-native-worklets@0.9.2": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-reanimated",
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
@@ -335,7 +335,7 @@
         "licenseUrl": "https://github.com/Apercu/react-native-zeroconf/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native@0.81.4": {
+    "react-native@0.86.0": {
         "licenses": "MIT",
         "repository": "https://github.com/facebook/react-native",
         "licenseUrl": "https://github.com/facebook/react-native/raw/master/LICENSE",
@@ -347,7 +347,7 @@
         "licenseUrl": "github:reduxjs/react-redux",
         "parents": "opendtu-react-native"
     },
-    "react@19.1.0": {
+    "react@19.2.3": {
         "licenses": "MIT",
         "repository": "https://github.com/facebook/react",
         "licenseUrl": "https://github.com/facebook/react/raw/master/LICENSE",
