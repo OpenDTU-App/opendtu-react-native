@@ -97,7 +97,7 @@
         "styled-components": "^6.4.3"
     },
     "devDependencies": {
-        "@babel/core": "^7.29.7",
+        "@babel/core": "^8.0.0",
         "@babel/plugin-transform-class-static-block": "^7.29.7",
         "@babel/plugin-transform-private-methods": "^7.29.7",
         "@babel/preset-env": "^7.29.7",
