@@ -21,6 +21,7 @@ updates:
       - dependency-name: "typescript"
       - dependency-name: "expo"
       - dependency-name: "react-native-config"
+      - dependency-name: "@babel/*"
     groups:
       production-dependencies:
         dependency-type: "production"
