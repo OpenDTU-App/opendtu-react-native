@@ -73,7 +73,7 @@ jobs:
       - name: Install Cocoapods Packages
         run: |
           pushd ios
-          pod install --repo-update
+          bundle run pod install --repo-update
           popd
           git checkout -- .bundle/config
 
