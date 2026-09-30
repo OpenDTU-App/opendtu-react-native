@@ -125,10 +125,10 @@
         "licenseUrl": "https://github.com/sindresorhus/ip-regex/raw/master/license",
         "parents": "opendtu-react-native"
     },
-    "moment@2.30.1": {
+    "moment@2.31.0": {
         "licenses": "MIT",
-        "repository": "https://github.com/moment/moment",
-        "licenseUrl": "https://github.com/moment/moment/raw/master/LICENSE",
+        "repository": "github:moment/moment",
+        "licenseUrl": "github:moment/moment",
         "parents": "opendtu-react-native"
     },
     "node-git-hooks@1.0.7": {
