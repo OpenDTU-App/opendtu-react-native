@@ -94,11 +94,9 @@ class OpenDtuApi {
       ) => void)
     | null = null;
   private onPowerStatusHandler:
-    | ((data: PowerStatusData, index: Index) => void)
-    | null = null;
+    ((data: PowerStatusData, index: Index) => void) | null = null;
   private onLimitStatusHandler:
-    | ((data: LimitStatusData, index: Index) => void)
-    | null = null;
+    ((data: LimitStatusData, index: Index) => void) | null = null;
   private onInverterDeviceHandler:
     | ((
         data: InverterDeviceData,
@@ -116,20 +114,15 @@ class OpenDtuApi {
 
   // settings
   private onNetworkSettingsHandler:
-    | ((data: NetworkSettings, index: Index) => void)
-    | null = null;
+    ((data: NetworkSettings, index: Index) => void) | null = null;
   private onNtpSettingsHandler:
-    | ((data: NTPSettings, index: Index) => void)
-    | null = null;
+    ((data: NTPSettings, index: Index) => void) | null = null;
   private onDtuSettingsHandler:
-    | ((data: DtuSettings, index: Index) => void)
-    | null = null;
+    ((data: DtuSettings, index: Index) => void) | null = null;
   private onMqttSettingsHandler:
-    | ((data: MqttSettings, index: Index) => void)
-    | null = null;
+    ((data: MqttSettings, index: Index) => void) | null = null;
   private onSecuritySettingsHandler:
-    | ((data: SecuritySettings, index: Index) => void)
-    | null = null;
+    ((data: SecuritySettings, index: Index) => void) | null = null;
 
   private ws: WebSocket | null = null;
   // communication
