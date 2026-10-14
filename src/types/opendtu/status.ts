@@ -89,8 +89,7 @@ export interface LiveDataFromStatusWithFrom extends LiveDataFromStatus {
 }
 
 export type LiveData =
-  | LiveDataFromWebsocketWithFrom
-  | LiveDataFromStatusWithFrom;
+  LiveDataFromWebsocketWithFrom | LiveDataFromStatusWithFrom;
 
 export interface SystemStatus {
   // HardwareInfo

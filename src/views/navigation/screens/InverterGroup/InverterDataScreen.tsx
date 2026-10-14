@@ -38,9 +38,7 @@ const InverterDataScreen: FC<PropsWithNavigation> = ({ navigation, route }) => {
   const livedataInverter = useLivedata(
     state =>
       state?.inverters.find(inv => inv.serial === inverterSerial) as
-        | Inverter
-        | InverterFromStatus
-        | undefined,
+        Inverter | InverterFromStatus | undefined,
   );
 
   useEffect(() => {

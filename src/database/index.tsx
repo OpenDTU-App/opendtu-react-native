@@ -47,9 +47,7 @@ export interface DatabaseLoading {
 }
 
 export type DatabaseAwaitReturnType =
-  | DatabaseSuccess
-  | DatabaseError
-  | DatabaseLoading;
+  DatabaseSuccess | DatabaseError | DatabaseLoading;
 
 export type DatabaseReturnType = Promise<DatabaseAwaitReturnType>;
 
