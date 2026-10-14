@@ -5096,12 +5096,12 @@ __metadata:
   linkType: hard
 
 "@types/markdown-it@npm:^14.0.1":
-  version: 14.1.2
-  resolution: "@types/markdown-it@npm:14.1.2"
+  version: 14.2.0
+  resolution: "@types/markdown-it@npm:14.2.0"
   dependencies:
     "@types/linkify-it": "npm:^5"
     "@types/mdurl": "npm:^2"
-  checksum: 10/ca2f239c8d59610b9f936fd40261a6ccf2fa1ae27a21816c031e5712542dcf9ee01e2fe29b31118df90716e11ade54e47d92a498e9b6488800e77ca8827255a2
+  checksum: 10/9376d449bd103c74853abf8abdc649354aca59c628fe431c75cae1c916dcef6a308ff4c30eb5f8477a6df875ecc8229d1ff5316652ce7c7070baf46d91e2b43e
   languageName: node
   linkType: hard
 
