@@ -1,11 +1,11 @@
 diff --git a/node_modules/react-native-fast-image/android/src/main/java/com/fastimage/FastImageSource.java b/node_modules/react-native-fast-image/android/src/main/java/com/fastimage/FastImageSource.java
-index 0a1d58c..afab2ba 100644
+index 0a1d58c..546c0a0 100644
 --- a/node_modules/react-native-fast-image/android/src/main/java/com/fastimage/FastImageSource.java
 +++ b/node_modules/react-native-fast-image/android/src/main/java/com/fastimage/FastImageSource.java
 @@ -11,7 +11,7 @@ import com.facebook.react.views.imagehelper.ImageSource;
- 
+
  import javax.annotation.Nullable;
- 
+
 -public class FastImageSource extends ImageSource {
 +public class FastImageSource {
      private static final String DATA_SCHEME = "data";
@@ -16,12 +16,12 @@ index 0a1d58c..afab2ba 100644
      private final Headers mHeaders;
      private Uri mUri;
 +    private final ImageSource imageSource; // Composition instead of inheritance
- 
+
      public static boolean isBase64Uri(Uri uri) {
          return DATA_SCHEME.equals(uri.getScheme());
 @@ -54,9 +55,9 @@ public class FastImageSource extends ImageSource {
      }
- 
+
      public FastImageSource(Context context, String source, double width, double height, @Nullable Headers headers) {
 -        super(context, source, width, height);
 +        imageSource = new ImageSource(context, source, width, height); // Create ImageSource instance
@@ -31,7 +31,15 @@ index 0a1d58c..afab2ba 100644
          if (mUri == null || TextUtils.isEmpty(mUri.toString())) {
              // A bundled image that release builds package as a raw resource
              // (e.g. an SVG, which isn't a drawable): React Native's
-@@ -181,4 +182,8 @@ public class FastImageSource extends ImageSource {
+@@ -125,7 +126,6 @@ public class FastImageSource extends ImageSource {
+         return new FastImageUrl(getGlideUrl());
+     }
+
+-    @Override
+     public Uri getUri() {
+         return mUri;
+     }
+@@ -181,4 +181,8 @@ public class FastImageSource extends ImageSource {
          }
          return new GlideUrl(url, getHeaders());
      }
