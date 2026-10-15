@@ -24,6 +24,7 @@ updates:
       - dependency-name: "react-native-config"
       - dependency-name: "@babel/*"
       - dependency-name: "react-native-reanimated"
+      - dependency-name: "react-native-worklets"
     groups:
       production-dependencies:
         dependency-type: "production"
