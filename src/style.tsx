@@ -104,16 +104,27 @@ const InternalStyledView = styled(View)<{
     props.enableSafeBottomMargin ? spacing * 2 : 0}px;
 `;
 
-export const StyledSafeAreaView: FC<StyledSafeAreaViewProps> = props => {
+export const StyledSafeAreaView: FC<StyledSafeAreaViewProps> = ({
+  style,
+  ...props
+}) => {
   const rnpTheme = useTheme();
   const theme = props.theme ?? rnpTheme;
 
-  return <InternalStyledSafeAreaView theme={theme} {...props} />;
+  return (
+    <InternalStyledSafeAreaView
+      theme={theme}
+      style={style ?? undefined}
+      {...props}
+    />
+  );
 };
 
-export const StyledView: FC<StyledViewProps> = props => {
+export const StyledView: FC<StyledViewProps> = ({ style, ...props }) => {
   const rnpTheme = useTheme();
   const theme = props.theme ?? rnpTheme;
 
-  return <InternalStyledView theme={theme} {...props} />;
+  return (
+    <InternalStyledView theme={theme} style={style ?? undefined} {...props} />
+  );
 };

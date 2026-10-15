@@ -24,6 +24,7 @@ const InternalSettingsSurface = styled(Surface)<SettingsSurfaceProps>`
 const SettingsSurface: FC<SettingsSurfaceProps> = ({
   children,
   disablePadding,
+  style,
   ...props
 }) => {
   const rnpTheme = useTheme();
@@ -32,6 +33,7 @@ const SettingsSurface: FC<SettingsSurfaceProps> = ({
   return (
     <InternalSettingsSurface
       theme={theme}
+      style={style ?? undefined}
       {...props}
       mode="flat"
       elevation={1}

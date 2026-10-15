@@ -1,0 +1,42 @@
+diff --git a/node_modules/react-native-fast-image/android/src/main/java/com/fastimage/FastImageSource.java b/node_modules/react-native-fast-image/android/src/main/java/com/fastimage/FastImageSource.java
+index 0a1d58c..afab2ba 100644
+--- a/node_modules/react-native-fast-image/android/src/main/java/com/fastimage/FastImageSource.java
++++ b/node_modules/react-native-fast-image/android/src/main/java/com/fastimage/FastImageSource.java
+@@ -11,7 +11,7 @@ import com.facebook.react.views.imagehelper.ImageSource;
+ 
+ import javax.annotation.Nullable;
+ 
+-public class FastImageSource extends ImageSource {
++public class FastImageSource {
+     private static final String DATA_SCHEME = "data";
+     private static final String LOCAL_RESOURCE_SCHEME = "res";
+     private static final String ANDROID_RESOURCE_SCHEME = "android.resource";
+@@ -20,6 +20,7 @@ public class FastImageSource extends ImageSource {
+     private static final String ASSET_SCHEME = "asset";
+     private final Headers mHeaders;
+     private Uri mUri;
++    private final ImageSource imageSource; // Composition instead of inheritance
+ 
+     public static boolean isBase64Uri(Uri uri) {
+         return DATA_SCHEME.equals(uri.getScheme());
+@@ -54,9 +55,9 @@ public class FastImageSource extends ImageSource {
+     }
+ 
+     public FastImageSource(Context context, String source, double width, double height, @Nullable Headers headers) {
+-        super(context, source, width, height);
++        imageSource = new ImageSource(context, source, width, height); // Create ImageSource instance
+         mHeaders = headers == null ? Headers.DEFAULT : headers;
+-        mUri = super.getUri();
++        mUri = imageSource.getUri();
+         if (mUri == null || TextUtils.isEmpty(mUri.toString())) {
+             // A bundled image that release builds package as a raw resource
+             // (e.g. an SVG, which isn't a drawable): React Native's
+@@ -181,4 +182,8 @@ public class FastImageSource extends ImageSource {
+         }
+         return new GlideUrl(url, getHeaders());
+     }
++
++    public String getSource() {
++        return imageSource.getSource(); // delegate to ImageSource
++    }
+ }
