@@ -1,0 +1,47 @@
+diff --git a/node_modules/react-native-paper-dates/src/Date/Swiper.tsx b/node_modules/react-native-paper-dates/src/Date/Swiper.tsx
+index db502e6..29ae131 100644
+--- a/node_modules/react-native-paper-dates/src/Date/Swiper.tsx
++++ b/node_modules/react-native-paper-dates/src/Date/Swiper.tsx
+@@ -32,6 +32,7 @@ import {
+ import { verticalScrollbarGutter } from './CalendarHeader'
+ 
+ const useIsomorphicLayoutEffect =
++  // @ts-ignore
+   typeof window !== 'undefined' ? useLayoutEffect : useEffect
+ 
+ function Swiper({
+@@ -204,6 +205,7 @@ function VerticalScroller({
+         effectiveEndYear
+       ) - montHeaderHeight
+ 
++    // @ts-ignore
+     element.scrollTo({
+       top,
+     })
+@@ -213,6 +215,7 @@ function VerticalScroller({
+ 
+   const onScroll = useCallback(
+     (e: UIEvent) => {
++      // @ts-ignore
+       const top = e.currentTarget?.scrollTop
+       if (top === 0) {
+         return
+@@ -326,6 +329,7 @@ export function useDebouncedCallback(callback: any): any {
+     return () => {
+       mounted.current = false
+       if (timerId.current) {
++        // @ts-ignore
+         window.cancelAnimationFrame(timerId.current)
+       }
+     }
+@@ -334,8 +338,10 @@ export function useDebouncedCallback(callback: any): any {
+   return useCallback(
+     (args: any) => {
+       if (timerId.current) {
++        // @ts-ignore
+         window.cancelAnimationFrame(timerId.current)
+       }
++      // @ts-ignore
+       timerId.current = window.requestAnimationFrame(function () {
+         if (mounted.current) {
+           latest.current(args)
