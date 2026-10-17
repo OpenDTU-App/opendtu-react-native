@@ -85,7 +85,7 @@ android {
         applicationId "xyz.commanderred.opendtuapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 49
+        versionCode 50
         versionName "0.14.0"
         externalNativeBuild {
               // For ndk-build, instead use the ndkBuild block.
