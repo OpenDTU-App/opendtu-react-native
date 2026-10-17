@@ -77,7 +77,7 @@
         "react-native-mmkv": "~3.3.3",
         "react-native-paper": "5.15.3",
         "react-native-paper-dates": "^0.24.1",
-        "react-native-reanimated": "^4.5.3",
+        "react-native-reanimated": "~4.5.3",
         "react-native-safe-area-context": "^5.10.1",
         "react-native-screens": "^4.29.0",
         "react-native-share": "^12.3.1",
@@ -89,7 +89,7 @@
         "react-native-url-polyfill": "^4.0.0",
         "react-native-uuid": "^2.0.4",
         "react-native-vector-icons": "^10.3.0",
-        "react-native-worklets": "^0.11.3",
+        "react-native-worklets": "^0.11.4",
         "react-native-zeroconf": "^0.17.4",
         "react-redux": "^9.3.0",
         "redux": "^5.0.1",
@@ -116,7 +116,7 @@
         "@types/jest": "^30.0.0",
         "@types/markdown-it": "^14.2.0",
         "@types/npm-license-crawler": "^0.2.3",
-        "@types/react": "^19.2.0",
+        "@types/react": "~19.2.0",
         "@types/react-native-charts-wrapper": "^0.5.11",
         "@types/react-native-zeroconf": "^0.13.1",
         "@types/react-test-renderer": "^19.1.0",
@@ -156,6 +156,7 @@
         "use-latest-callback": "0.2.3",
         "markdown-it": "^14.0.0",
         "@types/markdown-it": "^14.0.1",
-        "color": "^5"
+        "color": "^5",
+        "react-native": "0.85.3"
     }
 }

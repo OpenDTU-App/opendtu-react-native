@@ -23,7 +23,7 @@
         "licenseUrl": "https://github.com/react-native-clipboard/clipboard/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-native-community/netinfo@11.4.1": {
+    "@react-native-community/netinfo@11.5.2": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-netinfo/react-native-netinfo",
         "licenseUrl": "https://github.com/react-native-netinfo/react-native-netinfo/raw/master/LICENSE",
@@ -41,19 +41,19 @@
         "licenseUrl": "https://github.com/facebook/react-native",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/bottom-tabs@7.20.0": {
+    "@react-navigation/bottom-tabs@7.21.0": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native-stack@7.20.0": {
+    "@react-navigation/native-stack@7.21.0": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "@react-navigation/native@7.5.0": {
+    "@react-navigation/native@7.5.1": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
@@ -83,13 +83,13 @@
         "licenseUrl": "https://github.com/omichelsen/compare-versions/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "expo-modules-core@56.0.17": {
+    "expo-modules-core@56.0.27": {
         "licenses": "MIT",
         "repository": "https://github.com/expo/expo",
         "licenseUrl": "https://github.com/expo/expo/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "expo@56.0.12": {
+    "expo@56.0.23": {
         "licenses": "MIT",
         "repository": "https://github.com/expo/expo",
         "licenseUrl": "https://github.com/expo/expo/raw/master/LICENSE",
@@ -107,7 +107,7 @@
         "licenseUrl": "https://github.com/krisk/Fuse/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "i18next@26.4.4": {
+    "i18next@26.4.7": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
@@ -167,7 +167,7 @@
         "licenseUrl": "https://github.com/samber/prometheus-query-js/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-i18next@17.0.16": {
+    "react-i18next@17.0.20": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/react-i18next",
         "licenseUrl": "https://github.com/i18next/react-i18next/raw/master/LICENSE",
@@ -257,7 +257,7 @@
         "licenseUrl": "https://github.com/callstack/react-native-paper/raw/master/LICENSE.md",
         "parents": "opendtu-react-native"
     },
-    "react-native-reanimated@4.5.3": {
+    "react-native-reanimated@4.5.5": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-reanimated",
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
@@ -269,7 +269,7 @@
         "licenseUrl": "https://github.com/appandflow/react-native-safe-area-context/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-screens@4.29.0": {
+    "react-native-screens@4.30.0": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-screens",
         "licenseUrl": "https://github.com/software-mansion/react-native-screens/raw/master/LICENSE",
@@ -299,7 +299,7 @@
         "licenseUrl": "https://github.com/crazycodeboy/react-native-splash-screen/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-svg@15.15.5": {
+    "react-native-svg@15.16.0": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-svg",
         "licenseUrl": "https://github.com/software-mansion/react-native-svg/raw/master/LICENSE",
@@ -329,13 +329,13 @@
         "licenseUrl": "https://github.com/oblador/react-native-vector-icons/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-worklets@0.11.3": {
+    "react-native-worklets@0.11.4": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-reanimated",
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-zeroconf@0.17.4": {
+    "react-native-zeroconf@0.17.6": {
         "licenses": "MIT",
         "repository": "https://github.com/Apercu/react-native-zeroconf",
         "licenseUrl": "https://github.com/Apercu/react-native-zeroconf/raw/master/LICENSE",
