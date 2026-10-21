@@ -107,7 +107,7 @@
         "licenseUrl": "https://github.com/krisk/Fuse/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "i18next@26.4.7": {
+    "i18next@26.5.2": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/i18next",
         "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
@@ -167,7 +167,7 @@
         "licenseUrl": "https://github.com/samber/prometheus-query-js/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-i18next@17.0.20": {
+    "react-i18next@17.1.0": {
         "licenses": "MIT",
         "repository": "https://github.com/i18next/react-i18next",
         "licenseUrl": "https://github.com/i18next/react-i18next/raw/master/LICENSE",
@@ -191,7 +191,7 @@
         "licenseUrl": "https://github.com/zoontek/react-native-edge-to-edge/raw/master/LICENSE",
         "parents": "opendtu-react-native"
     },
-    "react-native-fast-image@10.0.0": {
+    "react-native-fast-image@10.1.1": {
         "licenses": "(MIT AND Apache-2.0)",
         "repository": "https://github.com/DylanVann/react-native-fast-image",
         "licenseUrl": "https://github.com/DylanVann/react-native-fast-image/raw/master/LICENSE",
