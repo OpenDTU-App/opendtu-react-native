@@ -151,9 +151,9 @@ android {
 
     splits {
         abi {
+            enable false
             reset()
-            enable true
-            universalApk true
+            universalApk false
             include "armeabi-v7a", "arm64-v8a"
         }
     }
