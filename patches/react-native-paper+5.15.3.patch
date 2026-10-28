@@ -28,6 +28,37 @@ index 4e749cb..376e71c 100644
  export {};
  //# sourceMappingURL=types.d.ts.map
 \ No newline at end of file
+diff --git a/node_modules/react-native-paper/src/components/TouchableRipple/TouchableRipple.native.tsx b/node_modules/react-native-paper/src/components/TouchableRipple/TouchableRipple.native.tsx
+index 2d81d2d..97123e5 100644
+--- a/node_modules/react-native-paper/src/components/TouchableRipple/TouchableRipple.native.tsx
++++ b/node_modules/react-native-paper/src/components/TouchableRipple/TouchableRipple.native.tsx
+@@ -73,12 +73,12 @@ const TouchableRipple = (
+       underlayColor,
+     });
+ 
+-  // A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
++  // Use foreground ripple on Android P+ to ensure visibility.
++  // Background ripple requires the view to have a background drawable,
++  // which isn't always present. Foreground ripple needs overflow: 'hidden'
++  // to stay within bounds.
+   // https://github.com/facebook/react-native/issues/6480
+-  const useForeground =
+-    Platform.OS === 'android' &&
+-    Platform.Version >= ANDROID_VERSION_PIE &&
+-    borderless;
++  const useForeground = Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_PIE;
+ 
+   if (TouchableRipple.supported) {
+     const androidRipple = rippleEffectEnabled
+@@ -94,7 +94,7 @@ const TouchableRipple = (
+         {...rest}
+         ref={ref}
+         disabled={disabled}
+-        style={[borderless && styles.overflowHidden, style]}
++        style={[useForeground && styles.overflowHidden, style]}
+         android_ripple={androidRipple}
+       >
+         {React.Children.only(children)}
 diff --git a/node_modules/react-native-paper/src/types.tsx b/node_modules/react-native-paper/src/types.tsx
 index 175131c..1c05b25 100644
 --- a/node_modules/react-native-paper/src/types.tsx
