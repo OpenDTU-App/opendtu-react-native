@@ -1,8 +1,8 @@
 diff --git a/node_modules/react-native/Libraries/Lists/FlatList.js b/node_modules/react-native/Libraries/Lists/FlatList.js
-index 721f053..bd0e4a4 100644
+index ff4563b..cbc270c 100644
 --- a/node_modules/react-native/Libraries/Lists/FlatList.js
 +++ b/node_modules/react-native/Libraries/Lists/FlatList.js
-@@ -421,6 +421,7 @@ class FlatList<ItemT = any> extends React.PureComponent<FlatListProps<ItemT>> {
+@@ -418,6 +418,7 @@ class FlatList<ItemT = any> extends React.PureComponent<FlatListProps<ItemT>> {
  
    constructor(props: FlatListProps<ItemT>) {
      super(props);

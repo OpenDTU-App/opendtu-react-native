@@ -5,8 +5,6 @@ import type {
 import { consoleTransport, logger } from 'react-native-logs';
 import type { ConsoleTransportOptions } from 'react-native-logs/dist/transports/consoleTransport';
 
-import { InteractionManager } from 'react-native';
-
 import moment from 'moment';
 
 let pushMessageFunction: transportFunctionType<ConsoleTransportOptions> | null =
@@ -42,6 +40,11 @@ export enum LogLevel {
   error,
 }
 
+const waitForNextFrame = () =>
+  new Promise<void>(resolve => {
+    requestAnimationFrame(() => resolve());
+  });
+
 const config: configLoggerType<
   transportFunctionType<object> | transportFunctionType<object>[],
   string
@@ -58,7 +61,7 @@ const config: configLoggerType<
   },
   dateFormat: date => moment(date).format('DD.MM.YYYY HH:mm:ss.SSS | '),
   async: true,
-  asyncFunc: InteractionManager.runAfterInteractions,
+  asyncFunc: waitForNextFrame,
 };
 
 export const rootLogging = logger.createLogger(config);
