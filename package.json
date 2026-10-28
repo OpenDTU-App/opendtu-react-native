@@ -156,6 +156,7 @@
         "markdown-it": "^14.0.0",
         "@types/markdown-it": "^14.0.1",
         "color": "^5",
-        "react-native": "0.88.1"
+        "react-native": "0.88.1",
+        "semver": ">=5.7.2"
     }
 }
