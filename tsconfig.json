@@ -3,17 +3,14 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@/*": [
-                "src/*"
-            ],
-            "@root/*": [
-                "*"
-            ]
+            "@/*": ["src/*"],
+            "@root/*": ["*"]
         },
         "types": ["node", "jest"],
         "skipLibCheck": true,
         "allowImportingTsExtensions": false,
-        "resolvePackageJsonExports": true
+        "resolvePackageJsonExports": true,
+        "ignoreDeprecations": "6.0"
     },
     "include": [
         "**/*.ts",
