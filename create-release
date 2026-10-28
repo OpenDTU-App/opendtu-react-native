@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  echo "Usage: $0 <major|minor|patch>"
+  exit 1
+}
+
+if [[ $# -ne 1 ]]; then
+  usage
+fi
+
+bump_type="$1"
+
+case "$bump_type" in
+  major|minor|patch) ;;
+  *)
+    echo "Invalid bump type: $bump_type"
+    usage
+    ;;
+esac
+
+repo_root="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+if [[ -z "$repo_root" ]]; then
+  echo "Error: not inside a git repository"
+  exit 1
+fi
+cd "$repo_root"
+
+if [[ -n "$(git status --porcelain)" ]]; then
+  echo "Error: working tree is not clean. Commit or stash changes first."
+  exit 1
+fi
+
+git checkout main
+git pull --ff-only
+git checkout develop
+git pull --ff-only
+
+yarn version "$bump_type"
+yarn postversion
+
+version="$(node -p "require('./package.json').version")"
+tag="v${version}"
+
+echo "New app version: $version"
+
+# Sync Expo app config if present
+if [[ -f app.json ]]; then
+  node <<'NODE'
+const fs = require('fs');
+const pkg = require('./package.json');
+const app = JSON.parse(fs.readFileSync('app.json', 'utf8'));
+app.expo = app.expo || {};
+app.expo.version = pkg.version;
+fs.writeFileSync('app.json', JSON.stringify(app, null, 2) + '\n');
+NODE
+  echo "Synced app.json expo.version to $version"
+fi
+
+# Log it before build
+echo "BUILD VERSION CHECK:"
+node -p "require('./package.json').version"
+if [[ -f app.json ]]; then
+  node -p "require('./app.json').expo?.version || 'no expo.version in app.json'"
+fi
+
+git add .
+git commit -m "Bump to ${tag}"
+git tag -a -m "Bump to ${tag}" "${tag}"
+
+git checkout main
+git merge --ff-only develop
+git push origin main
+
+git checkout develop
+git rebase main
+git push origin develop
+
+# Clear caches before Android build so stale JS version isn't used
+watchman watch-del-all || true
+rm -rf "$TMPDIR"/metro-* || true
+rm -rf "$TMPDIR"/react-native-packager-cache-* || true
+
+cd android
+./gradlew clean
+./gradlew bundleRelease
