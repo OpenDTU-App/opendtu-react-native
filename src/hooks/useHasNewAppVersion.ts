@@ -2,11 +2,11 @@ import { useMemo } from 'react';
 
 import { compare } from 'compare-versions';
 
+import { appVersion } from '@/appVersion';
 import { allowInAppUpdates } from '@/constants';
 import { useAppSelector } from '@/store';
 
 import type { Release } from '@octokit/webhooks-types';
-import packageJson from '@root/package.json';
 
 type UseHasNewAppVersion = (options?: {
   usedForIndicatorOnly: boolean;
@@ -26,7 +26,7 @@ const useHasNewAppVersion: UseHasNewAppVersion = options => {
 
     const newAppVersionAvailable = compare(
       appRelease.data.tag_name,
-      packageJson.version,
+      appVersion,
       '>',
     );
 

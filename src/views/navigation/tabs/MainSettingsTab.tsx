@@ -24,12 +24,12 @@ import useSettings from '@/hooks/useSettings';
 
 import { rootLogging } from '@/utils/log';
 
+import { appVersion } from '@/appVersion';
 import { bugreportUrl, spacing } from '@/constants';
 import { StyledView } from '@/style';
 
 import type { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
-import packageJson from '@root/package.json';
 
 const log = rootLogging.extend('MainSettingsTab');
 
@@ -349,7 +349,7 @@ const MainSettingsTab: FC = () => {
             ) : null}
           </List.Section>
           <Text style={{ textAlign: 'center' }} onPress={handleUnlockDebug}>
-            {t('version')} {packageJson.version}
+            {t('version')} {appVersion}
           </Text>
           <View style={{ height: spacing * 2 }} />
         </ScrollView>

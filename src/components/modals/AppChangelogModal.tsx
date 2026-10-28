@@ -14,11 +14,11 @@ import ReleaseChangelog from '@/components/ReleaseChangelog';
 
 import { rootLogging } from '@/utils/log';
 
+import { appVersion } from '@/appVersion';
 import { AppGithubBaseConfig, useGithub } from '@/github';
 import { useAppDispatch, useAppSelector } from '@/store';
 
 import type { Release } from '@octokit/webhooks-types';
-import packageJson from '@root/package.json';
 
 const log = rootLogging.extend('AppChangelogModal');
 
@@ -36,8 +36,6 @@ const AppChangelogModal: FC = () => {
   const appRelease = useAppSelector(
     state => state.github.latestAppRelease.data,
   );
-
-  const appVersion = packageJson.version;
 
   const isNewVersion = lastAppVersion !== appVersion;
   const appReleaseIsCorrectVersion =

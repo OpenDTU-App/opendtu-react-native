@@ -10,6 +10,7 @@ import { resetAllDismissedFlags } from '@/slices/settings';
 
 import OrientationContainer from '@/components/OrientationContainer';
 
+import { appVersion } from '@/appVersion';
 import { allowInAppUpdates } from '@/constants';
 import { useAppDispatch } from '@/store';
 import { StyledView } from '@/style';
@@ -53,7 +54,7 @@ const AboutAppScreen: FC<PropsWithNavigation> = ({ navigation }) => {
               <Box>
                 <Box mb={8}>
                   <Text style={{ textAlign: 'center' }} variant="titleLarge">
-                    {packageJson.name} v{packageJson.version}
+                    {packageJson.name} v{appVersion}
                   </Text>
                 </Box>
                 <Box>

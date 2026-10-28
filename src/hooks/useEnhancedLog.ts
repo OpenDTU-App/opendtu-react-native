@@ -7,9 +7,8 @@ import useDtuState from '@/hooks/useDtuState';
 
 import type { ExtendedLogProps, LogLevel } from '@/utils/log';
 
+import { appVersion } from '@/appVersion';
 import { useAppSelector } from '@/store';
-
-import packageJson from '@root/package.json';
 
 export interface EnhancedLog {
   meta: {
@@ -32,7 +31,7 @@ const useEnhancedLog = (
   return useMemo<EnhancedLog>(
     () => ({
       meta: {
-        appVersion: packageJson.version,
+        appVersion,
         platformOS: Platform.OS,
         platformVersion: Platform.Version,
         platformConstants: {

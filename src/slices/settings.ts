@@ -27,8 +27,9 @@ import { AppTheme, DidNotAskYet } from '@/types/settings';
 
 import { rootLogging } from '@/utils/log';
 
+import { appVersion } from '@/appVersion';
+
 import { createSlice } from '@reduxjs/toolkit';
-import packageJson from '@root/package.json';
 
 const initialState: SettingsState = {
   appTheme: AppTheme.System,
@@ -40,7 +41,7 @@ const initialState: SettingsState = {
   enableAppUpdates: DidNotAskYet,
   enableFetchOpenDTUReleases: DidNotAskYet,
   debugEnabled: false,
-  lastAppVersion: packageJson.version,
+  lastAppVersion: appVersion,
   feedbackInfoDismissed: false,
   bugreportInfoDismissed: false,
 };
@@ -264,7 +265,7 @@ const settingsSlice = createSlice({
       state.enableFetchOpenDTUReleases = action.payload.enable;
     },
     updateLastAppVersion: state => {
-      state.lastAppVersion = packageJson.version;
+      state.lastAppVersion = appVersion;
     },
     setLastAppVersion: (state, action: SetLastAppVersionAction) => {
       state.lastAppVersion = action.payload.version;
