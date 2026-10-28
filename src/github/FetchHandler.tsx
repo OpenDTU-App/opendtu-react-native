@@ -104,7 +104,7 @@ const FetchHandler: FC<PropsWithChildren> = ({ children }) => {
       return false;
     }
 
-    if (!AppState.currentState.match(/active/)) {
+    if (!AppState.currentState?.match(/active/)) {
       log.info('App is not active, skipping fetch...');
 
       return false;

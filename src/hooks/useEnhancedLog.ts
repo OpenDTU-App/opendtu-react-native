@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import type { PlatformConstants } from 'react-native/Libraries/Utilities/Platform';
 
 import { Platform } from 'react-native';
 
@@ -15,7 +14,15 @@ export interface EnhancedLog {
     appVersion: string;
     platformOS: string;
     platformVersion: string | number;
-    platformConstants: PlatformConstants;
+    platformConstants: {
+      isTesting: boolean;
+      reactNativeVersion: {
+        major: number;
+        minor: number;
+        patch: number;
+      };
+      isDisableAnimations: boolean;
+    };
     opendtuVersion: string | null;
   };
   logs: ExtendedLogProps[];
@@ -35,9 +42,9 @@ const useEnhancedLog = (
         platformOS: Platform.OS,
         platformVersion: Platform.Version,
         platformConstants: {
-          isTesting: Platform.constants.isTesting,
+          isTesting: Platform.isTesting,
           reactNativeVersion: Platform.constants.reactNativeVersion,
-          isDisableAnimations: Platform.constants.isDisableAnimations,
+          isDisableAnimations: Platform.isDisableAnimations,
         },
         opendtuVersion: opendtuVersion ?? null,
       },

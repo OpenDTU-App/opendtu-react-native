@@ -1,6 +1,6 @@
 import type { FC } from 'react';
+import React from 'react';
 import { Flex } from 'react-native-flex-layout';
-import type { TextProps } from 'react-native-paper';
 import { Text } from 'react-native-paper';
 
 import type { ValueObject } from '@/types/opendtu/status';
@@ -8,7 +8,7 @@ import type { ValueObject } from '@/types/opendtu/status';
 export interface OpenDTUValueProps {
   statusValue?: ValueObject | null;
   textWhenInvalid?: string;
-  textProps?: Omit<TextProps<unknown>, 'children'>;
+  textProps?: Omit<React.ComponentProps<typeof Text>, 'children'>;
 }
 
 export const getOpenDTUValueText = (
