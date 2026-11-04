@@ -51,18 +51,17 @@ if [[ -f app.json ]]; then
 const fs = require('fs');
 const pkg = require('./package.json');
 const app = JSON.parse(fs.readFileSync('app.json', 'utf8'));
-app.expo = app.expo || {};
-app.expo.version = pkg.version;
+app.version = pkg.version;
 fs.writeFileSync('app.json', JSON.stringify(app, null, 2) + '\n');
 NODE
-  echo "Synced app.json expo.version to $version"
+  echo "Synced app.json .version to $version"
 fi
 
 # Log it before build
 echo "BUILD VERSION CHECK:"
 node -p "require('./package.json').version"
 if [[ -f app.json ]]; then
-  node -p "require('./app.json').expo?.version || 'no expo.version in app.json'"
+  node -p "require('./app.json')?.version || 'no version in app.json'"
 fi
 
 git add .
