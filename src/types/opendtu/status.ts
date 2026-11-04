@@ -68,9 +68,9 @@ export interface StatusHints {
 }
 
 export interface LiveDataFromWebsocket {
-  inverters: Inverter[];
-  total: StatusTotal;
-  hints: StatusHints;
+  inverters: Partial<Inverter[]>;
+  total: Partial<StatusTotal>;
+  hints: Partial<StatusHints>;
   lastUpdate: Date | null;
 }
 

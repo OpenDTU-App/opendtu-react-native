@@ -22,6 +22,7 @@ import type {
 import type { Index } from '@/types/settings';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
+import {PartialDeep} from 'type-fest';
 
 export interface OpenDTUSettings {
   network?: NetworkSettings;
@@ -52,7 +53,7 @@ export type SetLiveDataFromStatusAction = PayloadAction<{
 export type SetLiveDataFromWebsocketAction = PayloadAction<{
   index: Index;
   valid: boolean;
-  data: LiveDataFromWebsocket;
+  data: Partial<LiveDataFromWebsocket>;
 }>;
 
 export type SetSystemStatusAction = PayloadAction<{

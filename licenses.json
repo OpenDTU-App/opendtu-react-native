@@ -370,5 +370,11 @@
         "repository": "https://github.com/styled-components/styled-components",
         "licenseUrl": "https://github.com/styled-components/styled-components/raw/master/LICENSE",
         "parents": "opendtu-react-native"
+    },
+    "type-fest@5.10.0": {
+        "licenses": "(MIT OR CC0-1.0)",
+        "repository": "https://github.com/sindresorhus/type-fest",
+        "licenseUrl": "https://github.com/sindresorhus/type-fest/raw/master/license-cc0",
+        "parents": "opendtu-react-native"
     }
 }

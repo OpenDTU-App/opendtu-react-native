@@ -70,21 +70,21 @@ const opendtuSlice = createSlice({
   initialState,
   reducers: {
     setLiveDataFromStatus: (state, action: SetLiveDataFromStatusAction) => {
-      if (action.payload.valid) {
-        if (!state.dtuStates[action.payload.index]) {
-          state.dtuStates[action.payload.index] = {};
+      const { index, data, valid } = action.payload;
+
+      if (valid) {
+        if (!state.dtuStates[index]) {
+          state.dtuStates[index] = {};
         }
 
-        (state.dtuStates[action.payload.index] as OpenDTUDeviceState).liveData =
-          {
-            ...action.payload.data,
-            from: 'status',
-          };
+        (state.dtuStates[index] as OpenDTUDeviceState).liveData = {
+          ...data,
+          from: 'status',
+        };
 
         // update from
         (
-          (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
-            .liveData as LiveData
+          (state.dtuStates[index] as OpenDTUDeviceState).liveData as LiveData
         ).from = 'status';
       }
     },
@@ -92,74 +92,94 @@ const opendtuSlice = createSlice({
       state,
       action: SetLiveDataFromWebsocketAction,
     ) => {
-      if (action.payload.valid) {
-        if (!state.dtuStates[action.payload.index]) {
-          state.dtuStates[action.payload.index] = {};
+      const { index, data, valid } = action.payload;
+
+      if (valid && typeof data !== 'undefined') {
+        if (!state.dtuStates[index]) {
+          state.dtuStates[index] = {};
         }
 
-        const currentStatus = state.dtuStates[action.payload.index]?.liveData;
+        const currentStatus = state.dtuStates[index]?.liveData;
 
-        if (!state.dtuStates[action.payload.index]?.liveData) {
-          (
-            state.dtuStates[action.payload.index] as OpenDTUDeviceState
-          ).liveData = { ...action.payload.data, from: 'websocket' };
+        if (
+          !state.dtuStates[index]?.liveData &&
+          typeof data.hints !== 'undefined' &&
+          typeof data.lastUpdate !== 'undefined' &&
+          typeof data.total !== 'undefined' &&
+          typeof data.inverters !== 'undefined'
+        ) {
+          (state.dtuStates[index] as OpenDTUDeviceState).liveData = {
+            hints: data.hints,
+            lastUpdate: data.lastUpdate,
+            total: data.total,
+            inverters: data.inverters,
+            from: 'websocket',
+          };
         }
 
         // update total
         (
-          (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
-            .liveData as LiveData
+          (state.dtuStates[index] as OpenDTUDeviceState).liveData as LiveData
         ).total = {
           ...currentStatus?.total,
-          ...action.payload.data.total,
+          ...data.total,
         };
 
         // update hints
-        (
-          (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
-            .liveData as LiveData
-        ).hints = {
-          ...currentStatus?.hints,
-          ...action.payload.data.hints,
-        };
+        if (typeof data.hints !== 'undefined') {
+          (
+            (state.dtuStates[index] as OpenDTUDeviceState).liveData as LiveData
+          ).hints = {
+            ...currentStatus?.hints,
+            ...data.hints,
+          };
+        }
 
         // update inverters
-        const newInverters = action.payload.data.inverters;
-        const oldInverters = currentStatus?.inverters ?? [];
+        const newInverters = data.inverters;
 
-        newInverters.forEach(newInverter => {
-          const foundIdx = oldInverters.findIndex(
-            element => element.serial === newInverter.serial,
-          );
+        if (newInverters) {
+          const oldInverters = currentStatus?.inverters ?? [];
 
-          if (foundIdx === -1) {
-            oldInverters.push(newInverter);
-          } else {
-            oldInverters[foundIdx] = newInverter;
+          for (const newInverter of newInverters) {
+            if (!newInverter) {
+              continue;
+            }
+
+            const foundIdx = oldInverters.findIndex(
+              element => element && element.serial === newInverter.serial,
+            );
+
+            if (foundIdx === -1) {
+              oldInverters.push(newInverter);
+            } else {
+              oldInverters[foundIdx] = newInverter;
+            }
           }
-        });
+        }
 
         // update lastUpdate
-        (
-          (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
-            .liveData as LiveDataFromWebsocket
-        ).lastUpdate = action.payload.data.lastUpdate;
+        if (typeof data.lastUpdate !== 'undefined') {
+          (
+            (state.dtuStates[index] as OpenDTUDeviceState)
+              .liveData as LiveDataFromWebsocket
+          ).lastUpdate = data.lastUpdate;
+        }
 
         // update from
         (
-          (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
-            .liveData as LiveData
+          (state.dtuStates[index] as OpenDTUDeviceState).liveData as LiveData
         ).from = 'websocket';
       }
     },
     setSystemStatus: (state, action: SetSystemStatusAction) => {
-      if (!state.dtuStates[action.payload.index]) {
-        state.dtuStates[action.payload.index] = {};
+      const { index, data } = action.payload;
+
+      if (!state.dtuStates[index]) {
+        state.dtuStates[index] = {};
       }
 
-      (
-        state.dtuStates[action.payload.index] as OpenDTUDeviceState
-      ).systemStatus = action.payload.data;
+      (state.dtuStates[index] as OpenDTUDeviceState).systemStatus = data;
     },
     setSetupUserString: (state, action: SetSetupUserStringAction) => {
       if (!state.setup) {
@@ -188,67 +208,73 @@ const opendtuSlice = createSlice({
       };
     },
     setIsConnected: (state, action: SetIsConnectedAction) => {
-      if (!state.dtuStates[action.payload.index]) {
-        state.dtuStates[action.payload.index] = {};
+      const { index } = action.payload;
+      if (!state.dtuStates[index]) {
+        state.dtuStates[index] = {};
       }
 
-      (
-        state.dtuStates[action.payload.index] as OpenDTUDeviceState
-      ).isConnected = action.payload.isConnected;
+      (state.dtuStates[index] as OpenDTUDeviceState).isConnected =
+        action.payload.isConnected;
     },
     setDeviceState: (state, action: SetDeviceStateAction) => {
+      const { index } = action.payload;
       if (!state.deviceState) {
         state.deviceState = {};
       }
 
-      state.deviceState[action.payload.index] = action.payload.deviceState;
+      state.deviceState[index] = action.payload.deviceState;
     },
     clearDeviceState: state => {
       state.deviceState = {};
     },
     setTriedToConnect: (state, action: SetTriedToConnectAction) => {
-      if (!state.dtuStates[action.payload.index]) {
-        state.dtuStates[action.payload.index] = {};
+      const { index } = action.payload;
+
+      if (!state.dtuStates[index]) {
+        state.dtuStates[index] = {};
       }
 
-      (
-        state.dtuStates[action.payload.index] as OpenDTUDeviceState
-      ).triedToConnect = action.payload.triedToConnect;
+      (state.dtuStates[index] as OpenDTUDeviceState).triedToConnect =
+        action.payload.triedToConnect;
     },
     clearOpenDtuState: (state, action: ClearOpenDtuStateAction) => {
-      state.dtuStates[action.payload.index] = {};
+      const { index } = action.payload;
+      state.dtuStates[index] = {};
     },
     setNetworkStatus: (state, action: SetNetworkStatusAction) => {
-      if (!state.dtuStates[action.payload.index]) {
-        state.dtuStates[action.payload.index] = {};
+      const { index, data } = action.payload;
+
+      if (!state.dtuStates[index]) {
+        state.dtuStates[index] = {};
       }
 
-      (
-        state.dtuStates[action.payload.index] as OpenDTUDeviceState
-      ).networkStatus = action.payload.data;
+      (state.dtuStates[index] as OpenDTUDeviceState).networkStatus = data;
     },
     setNtpStatus: (state, action: SetNtpStatusAction) => {
-      if (!state.dtuStates[action.payload.index]) {
-        state.dtuStates[action.payload.index] = {};
+      const { index, data } = action.payload;
+
+      if (!state.dtuStates[index]) {
+        state.dtuStates[index] = {};
       }
 
-      (state.dtuStates[action.payload.index] as OpenDTUDeviceState).ntpStatus =
-        action.payload.data;
+      (state.dtuStates[index] as OpenDTUDeviceState).ntpStatus = data;
     },
     setMqttStatus: (state, action: SetMqttStatusAction) => {
-      if (!state.dtuStates[action.payload.index]) {
-        state.dtuStates[action.payload.index] = {};
+      const { index, data } = action.payload;
+
+      if (!state.dtuStates[index]) {
+        state.dtuStates[index] = {};
       }
 
-      (state.dtuStates[action.payload.index] as OpenDTUDeviceState).mqttStatus =
-        action.payload.data;
+      (state.dtuStates[index] as OpenDTUDeviceState).mqttStatus = data;
     },
     setInverters: (state, action: SetInvertersAction) => {
-      if (!state.dtuStates[action.payload.index]) {
-        state.dtuStates[action.payload.index] = {};
+      const { index } = action.payload;
+      if (!state.dtuStates[index]) {
+        state.dtuStates[index] = {};
       }
 
-      (state.dtuStates[action.payload.index] as OpenDTUDeviceState).inverters =
+      (state.dtuStates[index] as OpenDTUDeviceState).inverters =
         action.payload.inverters;
     },
     setEventLog: (state, action: SetEventLogAction) => {
@@ -336,79 +362,84 @@ const opendtuSlice = createSlice({
       }
     },
     setNetworkSettings: (state, action: SetNetworkSettingsAction) => {
-      if (!state.dtuStates[action.payload.index]) {
-        state.dtuStates[action.payload.index] = {};
+      const { index, data } = action.payload;
+
+      if (!state.dtuStates[index]) {
+        state.dtuStates[index] = {};
       }
 
-      if (!state.dtuStates[action.payload.index]?.settings) {
-        (state.dtuStates[action.payload.index] as OpenDTUDeviceState).settings =
-          {};
+      if (!state.dtuStates[index]?.settings) {
+        (state.dtuStates[index] as OpenDTUDeviceState).settings = {};
       }
 
       (
-        (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
+        (state.dtuStates[index] as OpenDTUDeviceState)
           .settings as OpenDTUSettings
-      ).network = action.payload.data;
+      ).network = data;
     },
     setNTPSettings: (state, action: SetNTPSettingsAction) => {
-      if (!state.dtuStates[action.payload.index]) {
-        state.dtuStates[action.payload.index] = {};
+      const { index, data } = action.payload;
+
+      if (!state.dtuStates[index]) {
+        state.dtuStates[index] = {};
       }
 
-      if (!state.dtuStates[action.payload.index]?.settings) {
-        (state.dtuStates[action.payload.index] as OpenDTUDeviceState).settings =
-          {};
+      if (!state.dtuStates[index]?.settings) {
+        (state.dtuStates[index] as OpenDTUDeviceState).settings = {};
       }
 
       (
-        (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
+        (state.dtuStates[index] as OpenDTUDeviceState)
           .settings as OpenDTUSettings
-      ).ntp = action.payload.data;
+      ).ntp = data;
     },
     setDtuSettings: (state, action: SetDtuSettingsAction) => {
-      if (!state.dtuStates[action.payload.index]) {
-        state.dtuStates[action.payload.index] = {};
+      const { index, data } = action.payload;
+
+      if (!state.dtuStates[index]) {
+        state.dtuStates[index] = {};
       }
 
-      if (!state.dtuStates[action.payload.index]?.settings) {
-        (state.dtuStates[action.payload.index] as OpenDTUDeviceState).settings =
-          {};
+      if (!state.dtuStates[index]?.settings) {
+        (state.dtuStates[index] as OpenDTUDeviceState).settings = {};
       }
 
       (
-        (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
+        (state.dtuStates[index] as OpenDTUDeviceState)
           .settings as OpenDTUSettings
-      ).dtu = action.payload.data;
+      ).dtu = data;
     },
     setMqttSettings: (state, action: SetMqttSettingsAction) => {
-      if (!state.dtuStates[action.payload.index]) {
-        state.dtuStates[action.payload.index] = {};
+      const { index, data } = action.payload;
+
+      if (!state.dtuStates[index]) {
+        state.dtuStates[index] = {};
       }
 
-      if (!state.dtuStates[action.payload.index]?.settings) {
-        (state.dtuStates[action.payload.index] as OpenDTUDeviceState).settings =
-          {};
+      if (!state.dtuStates[index]?.settings) {
+        (state.dtuStates[index] as OpenDTUDeviceState).settings = {};
       }
 
       (
-        (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
+        (state.dtuStates[index] as OpenDTUDeviceState)
           .settings as OpenDTUSettings
-      ).mqtt = action.payload.data;
+      ).mqtt = data;
     },
     setSecuritySettings: (state, action: SetSecuritySettingsAction) => {
-      if (!state.dtuStates[action.payload.index]) {
-        state.dtuStates[action.payload.index] = {};
+      const { index, data } = action.payload;
+
+      if (!state.dtuStates[index]) {
+        state.dtuStates[index] = {};
       }
 
-      if (!state.dtuStates[action.payload.index]?.settings) {
-        (state.dtuStates[action.payload.index] as OpenDTUDeviceState).settings =
-          {};
+      if (!state.dtuStates[index]?.settings) {
+        (state.dtuStates[index] as OpenDTUDeviceState).settings = {};
       }
 
       (
-        (state.dtuStates[action.payload.index] as OpenDTUDeviceState)
+        (state.dtuStates[index] as OpenDTUDeviceState)
           .settings as OpenDTUSettings
-      ).security = action.payload.data;
+      ).security = data;
     },
   },
 });
