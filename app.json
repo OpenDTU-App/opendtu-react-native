@@ -1,6 +1,12 @@
 {
   "name": "opendtureactnative",
   "expo": {
-    "version": "0.14.3"
+    "version": "0.14.4",
+    "android": {
+      "versionCode": 1
+    },
+    "ios": {
+      "buildNumber": "1"
+    }
   }
 }
