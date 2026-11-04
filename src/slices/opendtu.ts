@@ -77,10 +77,18 @@ const opendtuSlice = createSlice({
           state.dtuStates[index] = {};
         }
 
-        (state.dtuStates[index] as OpenDTUDeviceState).liveData = {
-          ...data,
-          from: 'status',
-        };
+        if (
+          typeof data.hints !== 'undefined' &&
+          typeof data.total !== 'undefined' &&
+          typeof data.inverters !== 'undefined'
+        ) {
+          (state.dtuStates[index] as OpenDTUDeviceState).liveData = {
+            inverters: data.inverters,
+            total: data.total,
+            hints: data.hints,
+            from: 'status',
+          };
+        }
 
         // update from
         (
@@ -118,12 +126,14 @@ const opendtuSlice = createSlice({
         }
 
         // update total
-        (
-          (state.dtuStates[index] as OpenDTUDeviceState).liveData as LiveData
-        ).total = {
-          ...currentStatus?.total,
-          ...data.total,
-        };
+        if (typeof data.total !== 'undefined') {
+          (
+            (state.dtuStates[index] as OpenDTUDeviceState).liveData as LiveData
+          ).total = {
+            ...currentStatus?.total,
+            ...data.total,
+          };
+        }
 
         // update hints
         if (typeof data.hints !== 'undefined') {

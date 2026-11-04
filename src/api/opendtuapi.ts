@@ -27,6 +27,8 @@ import type {
   MqttStatus,
   NetworkStatus,
   NtpStatus,
+  PartialLiveDataFromStatus,
+  PartialLiveDataFromWebsocket,
   SystemStatus,
 } from '@/types/opendtu/status';
 import type { Index, OpenDTUConfig } from '@/types/settings';
@@ -41,13 +43,13 @@ import { downloadFirmware, uploadFirmware } from '@/firmware';
 const log = rootLogging.extend('OpenDtuApi');
 
 export type LiveDataHandler = (
-  data: LiveDataFromWebsocket,
+  data: PartialLiveDataFromWebsocket,
   valid: boolean,
   index: Index,
 ) => void;
 
 export type LiveDataFromStatusHandler = (
-  data: LiveDataFromStatus,
+  data: PartialLiveDataFromStatus,
   valid: boolean,
   index: Index,
 ) => void;

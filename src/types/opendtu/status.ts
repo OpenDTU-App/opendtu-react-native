@@ -67,11 +67,24 @@ export interface StatusHints {
   radio_problem: boolean;
 }
 
+export interface PartialLiveDataFromWebsocket {
+  inverters?: Inverter[];
+  total?: StatusTotal;
+  hints?: StatusHints;
+  lastUpdate?: Date | null;
+}
+
 export interface LiveDataFromWebsocket {
-  inverters: Partial<Inverter[]>;
-  total: Partial<StatusTotal>;
-  hints: Partial<StatusHints>;
+  inverters: Inverter[];
+  total: StatusTotal;
+  hints: StatusHints;
   lastUpdate: Date | null;
+}
+
+export interface PartialLiveDataFromStatus {
+  inverters?: InverterFromStatus[];
+  total?: StatusTotal;
+  hints?: StatusHints;
 }
 
 export interface LiveDataFromStatus {

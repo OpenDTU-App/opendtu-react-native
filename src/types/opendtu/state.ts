@@ -12,17 +12,16 @@ import type {
 import type {
   InverterSerial,
   LiveData,
-  LiveDataFromStatus,
-  LiveDataFromWebsocket,
   MqttStatus,
   NetworkStatus,
   NtpStatus,
+  PartialLiveDataFromStatus,
+  PartialLiveDataFromWebsocket,
   SystemStatus,
 } from '@/types/opendtu/status';
 import type { Index } from '@/types/settings';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
-import {PartialDeep} from 'type-fest';
 
 export interface OpenDTUSettings {
   network?: NetworkSettings;
@@ -47,13 +46,13 @@ export enum DeviceState {
 export type SetLiveDataFromStatusAction = PayloadAction<{
   index: Index;
   valid: boolean;
-  data: LiveDataFromStatus;
+  data: PartialLiveDataFromStatus;
 }>;
 
 export type SetLiveDataFromWebsocketAction = PayloadAction<{
   index: Index;
   valid: boolean;
-  data: Partial<LiveDataFromWebsocket>;
+  data: PartialLiveDataFromWebsocket;
 }>;
 
 export type SetSystemStatusAction = PayloadAction<{
